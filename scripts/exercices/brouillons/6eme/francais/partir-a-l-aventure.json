@@ -17,10 +17,8 @@
       "detail": "L'événement qui rompt l'équilibre du début et lance l'aventure.",
       "cartes": [
         "Un coffre du grenier révèle une carte au trésor",
-        "Une violente tempête jette le bateau sur une île inconnue",
         "Une caravane de pillards enlève le petit frère de Nina",
-        "L'oncle de Hugo disparaît mystérieusement dans la jungle",
-        "Une panne force Zoé à se poser sur la banquise"
+        "L'oncle de Hugo disparaît mystérieusement dans la jungle"
       ]
     },
     {
@@ -51,80 +49,76 @@
     {
       "consigne": "Quel est le rôle du personnage en couleur dans l'aventure ?",
       "texte": "Dans L'Odyssée, [la déesse Athéna] aide Ulysse à rentrer chez lui.",
-      "choix": ["Héros", "Adjuvant", "Opposant"],
+      "choix": [
+        "Héros",
+        "Adjuvant",
+        "Opposant"
+      ],
       "bonne": 1,
       "explication": "Athéna aide Ulysse à atteindre son but : c'est un adjuvant."
     },
     {
       "consigne": "Quel est le rôle du personnage en couleur dans l'aventure ?",
       "texte": "Dans L'Odyssée, [le Cyclope Polyphème] enferme Ulysse et dévore ses compagnons.",
-      "choix": ["Héros", "Adjuvant", "Opposant"],
+      "choix": [
+        "Héros",
+        "Adjuvant",
+        "Opposant"
+      ],
       "bonne": 2,
       "explication": "Polyphème s'oppose à Ulysse et met sa vie en danger : c'est un opposant."
     },
     {
       "consigne": "Quel est le rôle du personnage en couleur dans l'aventure ?",
       "texte": "Dans L'Île au trésor, [Jim Hawkins] part à la recherche d'un trésor.",
-      "choix": ["Héros", "Adjuvant", "Opposant"],
+      "choix": [
+        "Héros",
+        "Adjuvant",
+        "Opposant"
+      ],
       "bonne": 0,
       "explication": "Jim Hawkins est le personnage principal de l'aventure : c'est le héros."
     },
     {
       "consigne": "Quel est le rôle du personnage en couleur dans l'aventure ?",
       "texte": "Dans L'Île au trésor, [le pirate Long John Silver] s'oppose à Jim Hawkins.",
-      "choix": ["Héros", "Adjuvant", "Opposant"],
+      "choix": [
+        "Héros",
+        "Adjuvant",
+        "Opposant"
+      ],
       "bonne": 2,
       "explication": "Long John Silver essaie d'empêcher Jim d'atteindre son but : c'est un opposant."
     },
     {
       "consigne": "Quel est le rôle du personnage en couleur dans l'aventure ?",
       "texte": "Dans L'Odyssée, [Ulysse] erre dix ans sur la mer avant de rentrer à Ithaque.",
-      "choix": ["Héros", "Adjuvant", "Opposant"],
+      "choix": [
+        "Héros",
+        "Adjuvant",
+        "Opposant"
+      ],
       "bonne": 0,
       "explication": "Ulysse est le personnage principal de l'Odyssée : c'est le héros."
     },
     {
       "consigne": "Quel est le rôle du personnage en couleur dans l'aventure ?",
       "texte": "Perdu dans le désert, le héros est guidé par [un vieux berger] qui lui donne de l'eau.",
-      "choix": ["Héros", "Adjuvant", "Opposant"],
+      "choix": [
+        "Héros",
+        "Adjuvant",
+        "Opposant"
+      ],
       "bonne": 1,
       "explication": "Le berger aide le héros à poursuivre sa route : c'est un adjuvant."
     }
   ],
   "devinettes": [
     {
-      "reponse": "Ulysse",
-      "acceptees": [],
-      "indices": [
-        "Je suis un héros de la mythologie grecque.",
-        "Je reviens de la guerre de Troie et j'erre dix ans sur la mer.",
-        "Je rentre enfin à Ithaque, aidé par Athéna et menacé par le Cyclope."
-      ],
-      "explication": "Ulysse, héros de L'Odyssée d'Homère, rentre à Ithaque après dix ans d'errance."
-    },
-    {
-      "reponse": "Robinson Crusoé",
-      "acceptees": ["Robinson", "Crusoé", "Crusoe", "Robinson Crusoe"],
-      "indices": [
-        "Je suis le héros d'un roman de 1719.",
-        "Je fais naufrage et je survis vingt-huit ans sur une île.",
-        "Après des années de solitude, je rencontre Vendredi."
-      ],
-      "explication": "Robinson Crusoé est le héros du roman de Daniel Defoe : naufragé, il survit seul sur une île."
-    },
-    {
-      "reponse": "Phileas Fogg",
-      "acceptees": ["Fogg", "Phileas"],
-      "indices": [
-        "Je suis un personnage de Jules Verne.",
-        "Je fais le tour du monde en quatre-vingts jours.",
-        "Mon domestique s'appelle Passepartout."
-      ],
-      "explication": "Phileas Fogg, accompagné de Passepartout, fait le tour du monde dans le roman de Jules Verne (1872)."
-    },
-    {
       "reponse": "Suspense",
-      "acceptees": ["Le suspense"],
+      "acceptees": [
+        "Le suspense"
+      ],
       "indices": [
         "Je suis un effet que produit un récit sur le lecteur.",
         "Je tiens le lecteur en attente : il veut savoir ce qui va arriver.",

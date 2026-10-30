@@ -30,19 +30,16 @@
         "What's your name?",
         "How old are you?",
         "Where are you from?",
-        "Are you English?",
-        "Is she twelve years old?"
+        "Are you English?"
       ]
     },
     {
       "nom": "Dire que ce n'est pas vrai",
       "detail": "Des phrases négatives : be suivi de not (I'm not, isn't, aren't).",
       "cartes": [
-        "I'm not English",
         "She isn't from Paris",
         "He isn't twelve years old",
-        "They aren't from Scotland",
-        "We aren't French"
+        "They aren't from Scotland"
       ]
     }
   ],
@@ -51,60 +48,82 @@
     {
       "consigne": "Quel pronom sujet remplace le groupe en couleur ?",
       "texte": "[My brother] is twelve years old.",
-      "choix": ["he", "she", "it", "they"],
+      "choix": [
+        "he",
+        "she",
+        "it",
+        "they"
+      ],
       "bonne": 0,
       "explication": "« My brother » désigne un garçon : on le remplace par he."
     },
     {
       "consigne": "Quel pronom sujet remplace le groupe en couleur ?",
       "texte": "[My bag] is blue.",
-      "choix": ["he", "she", "it", "they"],
+      "choix": [
+        "he",
+        "she",
+        "it",
+        "they"
+      ],
       "bonne": 2,
       "explication": "Un sac est un objet : on le remplace par it."
     },
     {
       "consigne": "Quel pronom sujet remplace le groupe en couleur ?",
       "texte": "[My sister Léa] is from Lyon.",
-      "choix": ["he", "she", "it", "they"],
+      "choix": [
+        "he",
+        "she",
+        "it",
+        "they"
+      ],
       "bonne": 1,
       "explication": "« My sister Léa » désigne une fille : on la remplace par she."
     },
     {
       "consigne": "Quel pronom sujet remplace le groupe en couleur ?",
       "texte": "[Tom and Emma] are English.",
-      "choix": ["he", "she", "it", "they"],
+      "choix": [
+        "he",
+        "she",
+        "it",
+        "they"
+      ],
       "bonne": 3,
       "explication": "Tom et Emma font deux personnes : on les remplace par they, qui va avec are."
     },
     {
       "consigne": "Quel pronom sujet remplace le groupe en couleur ?",
       "texte": "[Mr Brown] is our English teacher.",
-      "choix": ["he", "she", "it", "they"],
+      "choix": [
+        "he",
+        "she",
+        "it",
+        "they"
+      ],
       "bonne": 0,
       "explication": "Mr Brown est un homme : on le remplace par he."
     },
     {
       "consigne": "Quel pronom sujet remplace le groupe en couleur ?",
       "texte": "[This pen] is red.",
-      "choix": ["he", "she", "it", "they"],
+      "choix": [
+        "he",
+        "she",
+        "it",
+        "they"
+      ],
       "bonne": 2,
       "explication": "Un stylo est un objet : on le remplace par it."
     }
   ],
   "devinettes": [
     {
-      "reponse": "She",
-      "acceptees": ["She"],
-      "indices": [
-        "Je suis un petit mot qui remplace un nom.",
-        "Je suis un pronom personnel sujet.",
-        "Je désigne une fille ou une femme."
-      ],
-      "explication": "She remplace une fille ou une femme et se construit avec is : She is twelve."
-    },
-    {
       "reponse": "It",
-      "acceptees": ["It"],
+      "acceptees": [
+        "It"
+      ],
       "indices": [
         "Je suis un pronom personnel sujet.",
         "Je ne désigne jamais une personne.",
@@ -114,7 +133,9 @@
     },
     {
       "reponse": "Good afternoon",
-      "acceptees": ["Good afternoon"],
+      "acceptees": [
+        "Good afternoon"
+      ],
       "indices": [
         "Je suis une façon de dire bonjour.",
         "Je suis formé de deux mots.",
@@ -124,7 +145,10 @@
     },
     {
       "reponse": "Am",
-      "acceptees": ["Am", "I am"],
+      "acceptees": [
+        "Am",
+        "I am"
+      ],
       "indices": [
         "Je suis une forme du verbe be.",
         "Je suis très court : deux lettres seulement.",
@@ -134,15 +158,5 @@
     }
   ],
   "calculs": [],
-  "etapes": [
-    {
-      "titre": "Les étapes pour construire une question avec be",
-      "etapes": [
-        "Repère le sujet et remplace-le par le bon pronom",
-        "Choisis la forme de be qui va avec ce pronom",
-        "Écris la phrase : sujet, be, puis le reste",
-        "Pour la question, place be devant le sujet"
-      ]
-    }
-  ]
+  "etapes": []
 }

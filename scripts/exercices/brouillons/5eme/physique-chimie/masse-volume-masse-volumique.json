@@ -41,7 +41,6 @@
         "Un glaçon reste à la surface d'un verre d'eau",
         "Une bille de fer lâchée dans l'eau va au fond",
         "L'huile versée dans l'eau forme une couche au-dessus",
-        "Un bateau d'acier tient sur l'eau car il est creux",
         "Une bulle d'air s'élève dans un verre d'eau"
       ]
     }
@@ -130,36 +129,6 @@
         "Pour l'eau liquide, je vaux environ 1 g/cm³ et on me note avec la lettre grecque rhô."
       ],
       "explication": "La masse volumique ρ = m ÷ V caractérise une substance ; celle de l'eau liquide vaut environ 1 g/cm³."
-    },
-    {
-      "reponse": "Éprouvette",
-      "acceptees": [
-        "Une éprouvette",
-        "L'éprouvette",
-        "Éprouvette graduée",
-        "Une éprouvette graduée"
-      ],
-      "indices": [
-        "Je fais partie du matériel de laboratoire.",
-        "Je suis un tube transparent avec des graduations en mL.",
-        "On me remplit d'un peu d'eau puis on y plonge un caillou pour connaître son volume."
-      ],
-      "explication": "L'éprouvette graduée mesure un volume, et le déplacement d'eau donne le volume d'un solide."
-    },
-    {
-      "reponse": "Glace",
-      "acceptees": [
-        "La glace",
-        "Un glaçon",
-        "Glaçon",
-        "Les glaçons"
-      ],
-      "indices": [
-        "Je flotte quand on me met dans un verre d'eau.",
-        "Je suis de l'eau à l'état solide.",
-        "Ma masse volumique est d'environ 0,92 g/cm³, plus petite que celle de l'eau liquide."
-      ],
-      "explication": "La glace (0,92 g/cm³) a une masse volumique plus petite que l'eau liquide (1 g/cm³) : elle flotte."
     }
   ],
   "calculs": [

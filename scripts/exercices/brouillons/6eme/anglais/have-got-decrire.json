@@ -39,9 +39,7 @@
       "detail": "On répond Yes ou No avec have ou has, sans reprendre got.",
       "cartes": [
         "Yes, I have",
-        "No, she hasn't",
         "Yes, they have",
-        "No, I haven't",
         "Yes, he has"
       ]
     }
@@ -51,42 +49,66 @@
     {
       "consigne": "Que signifie la contraction du passage en couleur ?",
       "texte": "[She's] got glasses.",
-      "choix": ["Is", "Has", "Have"],
+      "choix": [
+        "Is",
+        "Has",
+        "Have"
+      ],
       "bonne": 1,
       "explication": "« She's got » veut dire she has got. Le mot got montre qu'il s'agit de have."
     },
     {
       "consigne": "Que signifie la contraction du passage en couleur ?",
       "texte": "[They've] got two cats.",
-      "choix": ["Is", "Has", "Have"],
+      "choix": [
+        "Is",
+        "Has",
+        "Have"
+      ],
       "bonne": 2,
       "explication": "« They've » est la contraction de they have : 've remplace have."
     },
     {
       "consigne": "Que signifie la contraction du passage en couleur ?",
       "texte": "[He's] tall.",
-      "choix": ["Is", "Has", "Have"],
+      "choix": [
+        "Is",
+        "Has",
+        "Have"
+      ],
       "bonne": 0,
       "explication": "Il n'y a pas de got : « He's tall » veut dire he is tall."
     },
     {
       "consigne": "Que signifie la contraction du passage en couleur ?",
       "texte": "Look at my rabbit! [It's] got long ears.",
-      "choix": ["Is", "Has", "Have"],
+      "choix": [
+        "Is",
+        "Has",
+        "Have"
+      ],
       "bonne": 1,
       "explication": "« It's got » veut dire it has got : le sujet it va avec has."
     },
     {
       "consigne": "Que signifie la contraction du passage en couleur ?",
       "texte": "[We've] got a rabbit.",
-      "choix": ["Is", "Has", "Have"],
+      "choix": [
+        "Is",
+        "Has",
+        "Have"
+      ],
       "bonne": 2,
       "explication": "« We've » est la contraction de we have : we have got a rabbit."
     },
     {
       "consigne": "Que signifie la contraction du passage en couleur ?",
       "texte": "My sister is eleven. [She's] short.",
-      "choix": ["Is", "Has", "Have"],
+      "choix": [
+        "Is",
+        "Has",
+        "Have"
+      ],
       "bonne": 0,
       "explication": "Il n'y a pas de got : « She's short » veut dire she is short."
     }
@@ -94,7 +116,12 @@
   "devinettes": [
     {
       "reponse": "Hair",
-      "acceptees": ["Hair", "The hair", "Cheveux", "Les cheveux"],
+      "acceptees": [
+        "Hair",
+        "The hair",
+        "Cheveux",
+        "Les cheveux"
+      ],
       "indices": [
         "Je suis un nom anglais.",
         "Je désigne ce qui pousse sur la tête.",
@@ -104,7 +131,9 @@
     },
     {
       "reponse": "Mice",
-      "acceptees": ["Mice"],
+      "acceptees": [
+        "Mice"
+      ],
       "indices": [
         "Je suis un pluriel irrégulier.",
         "Je désigne de petits animaux.",
@@ -114,7 +143,11 @@
     },
     {
       "reponse": "Glasses",
-      "acceptees": ["Glasses", "Lunettes", "Les lunettes"],
+      "acceptees": [
+        "Glasses",
+        "Lunettes",
+        "Les lunettes"
+      ],
       "indices": [
         "Je suis un objet que certaines personnes portent.",
         "On me met sur le nez.",
@@ -124,7 +157,9 @@
     },
     {
       "reponse": "Tall",
-      "acceptees": ["Tall"],
+      "acceptees": [
+        "Tall"
+      ],
       "indices": [
         "Je suis un adjectif anglais.",
         "Je décris la taille d'une personne.",

@@ -51,42 +51,66 @@
     {
       "consigne": "Que désigne le passage en couleur ?",
       "texte": "Un stylo-bille sert à [écrire].",
-      "choix": ["La fonction d'usage", "La fonction d'estime", "La matière d'œuvre"],
+      "choix": [
+        "La fonction d'usage",
+        "La fonction d'estime",
+        "La matière d'œuvre"
+      ],
       "bonne": 0,
       "explication": "« Écrire » est un verbe à l'infinitif qui dit à quoi sert le stylo : c'est sa fonction d'usage."
     },
     {
       "consigne": "Que désigne le passage en couleur ?",
       "texte": "Un sèche-cheveux souffle de l'air chaud sur [les cheveux mouillés].",
-      "choix": ["La fonction d'usage", "La fonction d'estime", "La matière d'œuvre"],
+      "choix": [
+        "La fonction d'usage",
+        "La fonction d'estime",
+        "La matière d'œuvre"
+      ],
       "bonne": 2,
       "explication": "Les cheveux sont ce sur quoi l'objet agit : c'est la matière d'œuvre."
     },
     {
       "consigne": "Que désigne le passage en couleur ?",
       "texte": "Deux casques de vélo protègent aussi bien la tête, mais Inès choisit celui qui [a une jolie couleur et une marque à la mode].",
-      "choix": ["La fonction d'usage", "La fonction d'estime", "La matière d'œuvre"],
+      "choix": [
+        "La fonction d'usage",
+        "La fonction d'estime",
+        "La matière d'œuvre"
+      ],
       "bonne": 1,
       "explication": "Couleur et marque plaisent à l'utilisatrice sans changer l'utilité du casque : c'est la fonction d'estime."
     },
     {
       "consigne": "Que désigne le passage en couleur ?",
       "texte": "Une paire de ciseaux sert à [couper].",
-      "choix": ["La fonction d'usage", "La fonction d'estime", "La matière d'œuvre"],
+      "choix": [
+        "La fonction d'usage",
+        "La fonction d'estime",
+        "La matière d'œuvre"
+      ],
       "bonne": 0,
       "explication": "« Couper » dit à quoi servent les ciseaux : c'est leur fonction d'usage."
     },
     {
       "consigne": "Que désigne le passage en couleur ?",
       "texte": "Un taille-crayon agit sur [les crayons de bois].",
-      "choix": ["La fonction d'usage", "La fonction d'estime", "La matière d'œuvre"],
+      "choix": [
+        "La fonction d'usage",
+        "La fonction d'estime",
+        "La matière d'œuvre"
+      ],
       "bonne": 2,
       "explication": "Les crayons sont ce sur quoi le taille-crayon agit : c'est la matière d'œuvre."
     },
     {
       "consigne": "Que désigne le passage en couleur ?",
       "texte": "Deux montres indiquent l'heure, mais l'une [est dorée et porte le nom d'une grande marque].",
-      "choix": ["La fonction d'usage", "La fonction d'estime", "La matière d'œuvre"],
+      "choix": [
+        "La fonction d'usage",
+        "La fonction d'estime",
+        "La matière d'œuvre"
+      ],
       "bonne": 1,
       "explication": "La couleur dorée et la marque plaisent à l'utilisateur sans changer l'heure affichée : c'est la fonction d'estime."
     }
@@ -94,7 +118,10 @@
   "devinettes": [
     {
       "reponse": "Bête à cornes",
-      "acceptees": ["La bête à cornes", "Une bête à cornes"],
+      "acceptees": [
+        "La bête à cornes",
+        "Une bête à cornes"
+      ],
       "indices": [
         "Je suis un diagramme de technologie.",
         "Je pose trois questions sur un objet.",
@@ -104,7 +131,12 @@
     },
     {
       "reponse": "Matière d'œuvre",
-      "acceptees": ["La matière d'œuvre", "Matière d'oeuvre", "La matière d'oeuvre", "Matiere d'oeuvre"],
+      "acceptees": [
+        "La matière d'œuvre",
+        "Matière d'oeuvre",
+        "La matière d'oeuvre",
+        "Matiere d'oeuvre"
+      ],
       "indices": [
         "Je suis ce sur quoi un objet agit.",
         "Pour un sèche-cheveux, je suis les cheveux.",
@@ -114,23 +146,18 @@
     },
     {
       "reponse": "Fonction d'estime",
-      "acceptees": ["La fonction d'estime", "Estime", "L'estime", "Esthétique"],
+      "acceptees": [
+        "La fonction d'estime",
+        "Estime",
+        "L'estime",
+        "Esthétique"
+      ],
       "indices": [
         "Je concerne ce qui plaît à l'utilisateur.",
         "Je dépends de la couleur, de la forme ou de la marque.",
         "Je ne change pas l'utilité de l'objet."
       ],
       "explication": "La fonction d'estime rend l'objet agréable ou désirable, sans changer ce à quoi il sert."
-    },
-    {
-      "reponse": "Objet technique",
-      "acceptees": ["Un objet technique", "L'objet technique", "Objet fabriqué", "Un objet fabriqué"],
-      "indices": [
-        "Je suis fabriqué par l'être humain.",
-        "Je réponds à un besoin.",
-        "Un vélo en est un ; un galet n'en est pas un."
-      ],
-      "explication": "Un objet technique est fabriqué par l'être humain pour répondre à un besoin, contrairement à un objet naturel."
     }
   ],
   "calculs": [],

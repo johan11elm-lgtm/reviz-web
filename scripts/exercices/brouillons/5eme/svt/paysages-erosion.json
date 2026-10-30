@@ -39,7 +39,6 @@
       "detail": "Déboiser, laisser des sols nus ou imperméabiliser accélère l'érosion.",
       "cartes": [
         "Couper tous les arbres d'une pente",
-        "Trop de moutons broutent toute l'herbe d'une prairie",
         "Recouvrir un sol de béton ou de goudron",
         "Défricher une colline pour y cultiver",
         "Bétonner une prairie pour construire un lotissement"
@@ -82,73 +81,72 @@
     {
       "consigne": "Quelle étape décrit la phrase en couleur ?",
       "texte": "En montagne, [l'eau qui gèle dans les fissures fait éclater un bloc de roche].",
-      "choix": ["Altération physique", "Altération chimique", "Transport", "Dépôt"],
+      "choix": [
+        "Altération physique",
+        "Altération chimique",
+        "Transport",
+        "Dépôt"
+      ],
       "bonne": 0,
       "explication": "La roche se fragmente sur place sans changer de nature : c'est une altération physique."
     },
     {
       "consigne": "Quelle étape décrit la phrase en couleur ?",
       "texte": "Dans une forêt, [les racines d'un arbre écartent les fissures d'un rocher].",
-      "choix": ["Altération physique", "Altération chimique", "Transport", "Dépôt"],
+      "choix": [
+        "Altération physique",
+        "Altération chimique",
+        "Transport",
+        "Dépôt"
+      ],
       "bonne": 0,
       "explication": "Les racines fragmentent la roche sur place : c'est une altération physique."
     },
     {
       "consigne": "Quelle étape décrit la phrase en couleur ?",
       "texte": "En Bretagne, [l'eau de pluie transforme les feldspaths du granite en argile].",
-      "choix": ["Altération physique", "Altération chimique", "Transport", "Dépôt"],
+      "choix": [
+        "Altération physique",
+        "Altération chimique",
+        "Transport",
+        "Dépôt"
+      ],
       "bonne": 1,
       "explication": "Les feldspaths changent de nature, ils deviennent de l'argile : c'est une altération chimique."
     },
     {
       "consigne": "Quelle étape décrit la phrase en couleur ?",
       "texte": "Dans un torrent de montagne, [le courant rapide emporte des galets vers la vallée].",
-      "choix": ["Altération physique", "Altération chimique", "Transport", "Dépôt"],
+      "choix": [
+        "Altération physique",
+        "Altération chimique",
+        "Transport",
+        "Dépôt"
+      ],
       "bonne": 2,
       "explication": "Des particules sont emportées ailleurs par le courant : c'est le transport."
     },
     {
       "consigne": "Quelle étape décrit la phrase en couleur ?",
       "texte": "Quand la rivière ralentit dans la plaine, [les plus gros galets s'arrêtent au fond du lit].",
-      "choix": ["Altération physique", "Altération chimique", "Transport", "Dépôt"],
+      "choix": [
+        "Altération physique",
+        "Altération chimique",
+        "Transport",
+        "Dépôt"
+      ],
       "bonne": 3,
       "explication": "Quand le courant ralentit, les particules se déposent, les plus grosses d'abord."
     }
   ],
   "devinettes": [
     {
-      "reponse": "Gélifraction",
-      "acceptees": ["Gélifraction", "La gélifraction", "Gelifraction", "Le gel"],
-      "indices": [
-        "Je me produis surtout en montagne.",
-        "Je fais éclater les roches.",
-        "Je suis causée par l'eau qui gèle dans les fissures et augmente de volume."
-      ],
-      "explication": "La gélifraction est l'éclatement d'une roche par l'eau qui gèle dans ses fissures."
-    },
-    {
-      "reponse": "Arène granitique",
-      "acceptees": ["Arène granitique", "L'arène granitique", "Arène", "Une arène granitique", "Arene granitique"],
-      "indices": [
-        "Je suis un sable grossier.",
-        "Je viens de l'altération d'une roche dure riche en quartz.",
-        "Mes grains de quartz sont libérés quand l'eau transforme les feldspaths en argile."
-      ],
-      "explication": "L'arène granitique est le sable grossier qui résulte de l'altération du granite."
-    },
-    {
-      "reponse": "Sédiments",
-      "acceptees": ["Sédiments", "Sédiment", "Les sédiments", "Un sédiment"],
-      "indices": [
-        "Je suis un produit de l'érosion.",
-        "Je peux être un bloc, un galet, du sable ou de l'argile.",
-        "Je me dépose quand le courant ralentit."
-      ],
-      "explication": "Les sédiments sont les produits de l'érosion, déposés ailleurs."
-    },
-    {
       "reponse": "Calcaire",
-      "acceptees": ["Calcaire", "Le calcaire", "Un calcaire"],
+      "acceptees": [
+        "Calcaire",
+        "Le calcaire",
+        "Un calcaire"
+      ],
       "indices": [
         "Je suis une roche.",
         "L'eau de pluie légèrement acide me dissout.",

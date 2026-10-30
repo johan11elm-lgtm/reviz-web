@@ -28,7 +28,6 @@
       "detail": "L'énergie liée à la température d'un objet ou d'un liquide.",
       "cartes": [
         "Une soupe brûlante dans un bol",
-        "Un radiateur allumé qui chauffe la pièce",
         "Le sable brûlant d'une plage en plein été",
         "Le fer à repasser chaud posé sur son support",
         "Un bain rempli d'eau bien chaude"
@@ -51,42 +50,66 @@
     {
       "consigne": "De quel type de source d'énergie parle le groupe en couleur ?",
       "texte": "Sur la colline, les éoliennes tournent en utilisant [le vent].",
-      "choix": ["Renouvelable", "Combustible fossile", "Nucléaire"],
+      "choix": [
+        "Renouvelable",
+        "Combustible fossile",
+        "Nucléaire"
+      ],
       "bonne": 0,
       "explication": "Le vent se renouvelle sans cesse : c'est une source d'énergie renouvelable."
     },
     {
       "consigne": "De quel type de source d'énergie parle le groupe en couleur ?",
       "texte": "Cette ancienne centrale produit de l'électricité en brûlant [du charbon].",
-      "choix": ["Renouvelable", "Combustible fossile", "Nucléaire"],
+      "choix": [
+        "Renouvelable",
+        "Combustible fossile",
+        "Nucléaire"
+      ],
       "bonne": 1,
       "explication": "Le charbon est un combustible fossile, formé très lentement dans le sous-sol."
     },
     {
       "consigne": "De quel type de source d'énergie parle le groupe en couleur ?",
       "texte": "Cette centrale produit de la chaleur à partir de [l'uranium].",
-      "choix": ["Renouvelable", "Combustible fossile", "Nucléaire"],
+      "choix": [
+        "Renouvelable",
+        "Combustible fossile",
+        "Nucléaire"
+      ],
       "bonne": 2,
       "explication": "L'uranium est la matière de l'énergie nucléaire, stockée dans les noyaux des atomes."
     },
     {
       "consigne": "De quel type de source d'énergie parle le groupe en couleur ?",
       "texte": "Les panneaux posés sur le toit du collège captent [le Soleil].",
-      "choix": ["Renouvelable", "Combustible fossile", "Nucléaire"],
+      "choix": [
+        "Renouvelable",
+        "Combustible fossile",
+        "Nucléaire"
+      ],
       "bonne": 0,
       "explication": "Le Soleil brille chaque jour : c'est une source d'énergie renouvelable."
     },
     {
       "consigne": "De quel type de source d'énergie parle le groupe en couleur ?",
       "texte": "Le cargo traverse l'océan en consommant [du pétrole].",
-      "choix": ["Renouvelable", "Combustible fossile", "Nucléaire"],
+      "choix": [
+        "Renouvelable",
+        "Combustible fossile",
+        "Nucléaire"
+      ],
       "bonne": 1,
       "explication": "Le pétrole est un combustible fossile : il a mis des millions d'années à se former."
     },
     {
       "consigne": "De quel type de source d'énergie parle le groupe en couleur ?",
       "texte": "Le vieux moulin tourne grâce à [l'eau de la rivière en mouvement].",
-      "choix": ["Renouvelable", "Combustible fossile", "Nucléaire"],
+      "choix": [
+        "Renouvelable",
+        "Combustible fossile",
+        "Nucléaire"
+      ],
       "bonne": 0,
       "explication": "L'eau en mouvement se renouvelle en permanence : c'est une source renouvelable."
     }
@@ -94,7 +117,12 @@
   "devinettes": [
     {
       "reponse": "Joule",
-      "acceptees": ["Le joule", "Joules", "Les joules", "J"],
+      "acceptees": [
+        "Le joule",
+        "Joules",
+        "Les joules",
+        "J"
+      ],
       "indices": [
         "Je suis une unité de mesure.",
         "Je mesure ce que l'on peut produire : du mouvement, de la chaleur, de la lumière.",
@@ -104,7 +132,11 @@
     },
     {
       "reponse": "Convertisseur",
-      "acceptees": ["Un convertisseur", "Le convertisseur", "Les convertisseurs"],
+      "acceptees": [
+        "Un convertisseur",
+        "Le convertisseur",
+        "Les convertisseurs"
+      ],
       "indices": [
         "La lampe, le moteur et l'éolienne sont comme moi.",
         "Je change la forme de l'énergie qui me traverse.",
@@ -114,23 +146,17 @@
     },
     {
       "reponse": "Éolienne",
-      "acceptees": ["Une éolienne", "L'éolienne", "Les éoliennes"],
+      "acceptees": [
+        "Une éolienne",
+        "L'éolienne",
+        "Les éoliennes"
+      ],
       "indices": [
         "Je me dresse souvent sur une colline ou en mer.",
         "Mes pales se mettent à tourner quand il y a du vent.",
         "Je convertis l'énergie cinétique du vent en énergie électrique."
       ],
       "explication": "L'éolienne convertit l'énergie cinétique du vent en énergie électrique."
-    },
-    {
-      "reponse": "Panneau photovoltaïque",
-      "acceptees": ["Un panneau photovoltaïque", "Panneau solaire", "Un panneau solaire", "Cellule photovoltaïque", "Panneaux photovoltaïques"],
-      "indices": [
-        "On me place souvent sur un toit.",
-        "Je reçois de l'énergie lumineuse du Soleil.",
-        "Je la convertis en énergie électrique."
-      ],
-      "explication": "Le panneau photovoltaïque convertit l'énergie lumineuse en énergie électrique."
     }
   ],
   "calculs": [
@@ -171,16 +197,6 @@
     }
   ],
   "etapes": [
-    {
-      "titre": "Construire une chaîne énergétique",
-      "etapes": [
-        "On repère le réservoir d'énergie et le convertisseur",
-        "On les place dans des cases, de gauche à droite",
-        "On les relie par des flèches",
-        "On écrit sur chaque flèche la forme d'énergie transférée",
-        "On sépare l'énergie utile et l'énergie perdue en sortie"
-      ]
-    },
     {
       "titre": "Le trajet de l'énergie dans une lampe de poche",
       "etapes": [

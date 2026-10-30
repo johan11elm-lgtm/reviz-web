@@ -18,7 +18,6 @@
       "cartes": [
         "Comme ce paysage est beau !",
         "Quelle belle journée !",
-        "Tu as gagné la course !",
         "Que ce gâteau est délicieux !",
         "Je suis si content de te voir !"
       ]
@@ -27,7 +26,6 @@
       "nom": "Négative et exclamative",
       "detail": "Le verbe est encadré par deux mots de négation et la phrase se termine par un point d'exclamation.",
       "cartes": [
-        "Ne pars pas !",
         "Je ne veux plus te voir !",
         "Tu n'as rien compris !",
         "Il n'y a personne ici !",
@@ -51,42 +49,66 @@
     {
       "consigne": "Quel est le type de la phrase en couleur ?",
       "texte": "Le capitaine ordonne : « [Levez l'ancre.] »",
-      "choix": ["Déclarative", "Interrogative", "Impérative"],
+      "choix": [
+        "Déclarative",
+        "Interrogative",
+        "Impérative"
+      ],
       "bonne": 2,
       "explication": "La phrase donne un ordre, avec un verbe à l'impératif et sans sujet exprimé : elle est impérative."
     },
     {
       "consigne": "Quel est le type de la phrase en couleur ?",
       "texte": "Le soir, [le renard chasse dans la forêt.] Les poules dorment.",
-      "choix": ["Déclarative", "Interrogative", "Impérative"],
+      "choix": [
+        "Déclarative",
+        "Interrogative",
+        "Impérative"
+      ],
       "bonne": 0,
       "explication": "La phrase donne une information et se termine par un point : elle est déclarative."
     },
     {
       "consigne": "Quel est le type de la phrase en couleur ?",
       "texte": "Léa se retourne et demande : « [Où vas-tu ?] »",
-      "choix": ["Déclarative", "Interrogative", "Impérative"],
+      "choix": [
+        "Déclarative",
+        "Interrogative",
+        "Impérative"
+      ],
       "bonne": 1,
       "explication": "La phrase pose une question et se termine par un point d'interrogation : elle est interrogative."
     },
     {
       "consigne": "Quel est le type de la phrase en couleur ?",
       "texte": "Maman me dit : « [Prends ton manteau.] »",
-      "choix": ["Déclarative", "Interrogative", "Impérative"],
+      "choix": [
+        "Déclarative",
+        "Interrogative",
+        "Impérative"
+      ],
       "bonne": 2,
       "explication": "La phrase donne un conseil avec un verbe à l'impératif, sans sujet : elle est impérative."
     },
     {
       "consigne": "Quel est le type de la phrase en couleur ?",
       "texte": "Il fait nuit. [Les étoiles brillent au loin.]",
-      "choix": ["Déclarative", "Interrogative", "Impérative"],
+      "choix": [
+        "Déclarative",
+        "Interrogative",
+        "Impérative"
+      ],
       "bonne": 0,
       "explication": "La phrase informe sur ce qui se passe et se termine par un point : elle est déclarative."
     },
     {
       "consigne": "Quel est le type de la phrase en couleur ?",
       "texte": "Au bord de l'eau, le garçon demande : « [Sais-tu nager ?] »",
-      "choix": ["Déclarative", "Interrogative", "Impérative"],
+      "choix": [
+        "Déclarative",
+        "Interrogative",
+        "Impérative"
+      ],
       "bonne": 1,
       "explication": "La phrase pose une question et se termine par un point d'interrogation : elle est interrogative."
     }
@@ -94,7 +116,12 @@
   "devinettes": [
     {
       "reponse": "Sujet",
-      "acceptees": ["Le sujet", "Un sujet", "Groupe sujet", "Le groupe sujet"],
+      "acceptees": [
+        "Le sujet",
+        "Un sujet",
+        "Groupe sujet",
+        "Le groupe sujet"
+      ],
       "indices": [
         "Je suis une partie de la phrase.",
         "Je commande l'accord du verbe.",
@@ -104,7 +131,10 @@
     },
     {
       "reponse": "Groupe verbal",
-      "acceptees": ["Le groupe verbal", "GV"],
+      "acceptees": [
+        "Le groupe verbal",
+        "GV"
+      ],
       "indices": [
         "Je suis une partie de la phrase, à côté du groupe sujet.",
         "Je contiens toujours un verbe conjugué.",
@@ -114,35 +144,19 @@
     },
     {
       "reponse": "Phrase impérative",
-      "acceptees": ["Impérative", "La phrase impérative", "Une phrase impérative"],
+      "acceptees": [
+        "Impérative",
+        "La phrase impérative",
+        "Une phrase impérative"
+      ],
       "indices": [
         "Je suis un des trois types de phrases.",
         "Mon verbe est souvent à l'impératif, sans sujet exprimé.",
         "Je donne un ordre ou un conseil, comme « Ferme la porte »."
       ],
       "explication": "La phrase impérative donne un ordre ou un conseil, avec un verbe à l'impératif."
-    },
-    {
-      "reponse": "Phrase non verbale",
-      "acceptees": ["Non verbale", "La phrase non verbale", "Une phrase non verbale"],
-      "indices": [
-        "À l'écrit, on me reconnaît à ma majuscule et à ma ponctuation finale.",
-        "Je n'ai pas de verbe conjugué.",
-        "« Quelle belle journée ! » est un exemple de moi."
-      ],
-      "explication": "Une phrase non verbale n'a pas de verbe conjugué : « Quelle belle journée ! »."
     }
   ],
   "calculs": [],
-  "etapes": [
-    {
-      "titre": "Comment analyser une phrase",
-      "etapes": [
-        "Trouve le verbe conjugué en changeant le temps de la phrase",
-        "Trouve le sujet en posant « C'est… qui » devant le verbe",
-        "Délimite le groupe verbal : le verbe et ses compléments",
-        "Donne le type de la phrase, puis ses formes éventuelles"
-      ]
-    }
-  ]
+  "etapes": []
 }

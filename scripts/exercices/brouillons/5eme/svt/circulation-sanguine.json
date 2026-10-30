@@ -18,9 +18,7 @@
       "cartes": [
         "Les artères emportent le sang loin du cœur",
         "Les veines ramènent le sang vers le cœur",
-        "De très fins vaisseaux relient artères et veines",
-        "L'artère pulmonaire transporte du sang pauvre en dioxygène",
-        "L'aorte est l'artère qui part du ventricule gauche"
+        "De très fins vaisseaux relient artères et veines"
       ]
     },
     {
@@ -51,35 +49,55 @@
     {
       "consigne": "Quel type de vaisseau le groupe en couleur désigne-t-il ?",
       "texte": "Le sang riche en dioxygène sort du ventricule gauche par [l'aorte].",
-      "choix": ["Artère", "Veine", "Capillaire"],
+      "choix": [
+        "Artère",
+        "Veine",
+        "Capillaire"
+      ],
       "bonne": 0,
       "explication": "L'aorte part du cœur vers les organes : c'est une artère."
     },
     {
       "consigne": "Quel type de vaisseau le groupe en couleur désigne-t-il ?",
       "texte": "Des organes jusqu'à l'oreillette droite, le sang pauvre en dioxygène circule dans [les veines caves].",
-      "choix": ["Artère", "Veine", "Capillaire"],
+      "choix": [
+        "Artère",
+        "Veine",
+        "Capillaire"
+      ],
       "bonne": 1,
       "explication": "Les veines caves ramènent le sang des organes vers le cœur."
     },
     {
       "consigne": "Quel type de vaisseau le groupe en couleur désigne-t-il ?",
       "texte": "Le sang pauvre en dioxygène quitte le ventricule droit par [l'artère pulmonaire].",
-      "choix": ["Artère", "Veine", "Capillaire"],
+      "choix": [
+        "Artère",
+        "Veine",
+        "Capillaire"
+      ],
       "bonne": 0,
       "explication": "Une artère se définit parce qu'elle part du cœur, même si son sang est pauvre en dioxygène."
     },
     {
       "consigne": "Quel type de vaisseau le groupe en couleur désigne-t-il ?",
       "texte": "Le sang riche en dioxygène revient des poumons à l'oreillette gauche par [les veines pulmonaires].",
-      "choix": ["Artère", "Veine", "Capillaire"],
+      "choix": [
+        "Artère",
+        "Veine",
+        "Capillaire"
+      ],
       "bonne": 1,
       "explication": "Une veine ramène le sang vers le cœur, même si son sang est riche en dioxygène."
     },
     {
       "consigne": "Quel type de vaisseau le groupe en couleur désigne-t-il ?",
       "texte": "Dans un muscle, [les vaisseaux très fins] apportent le dioxygène et le glucose aux cellules.",
-      "choix": ["Artère", "Veine", "Capillaire"],
+      "choix": [
+        "Artère",
+        "Veine",
+        "Capillaire"
+      ],
       "bonne": 2,
       "explication": "Les échanges entre le sang et les cellules se font dans les capillaires, vaisseaux très fins."
     }
@@ -87,7 +105,10 @@
   "devinettes": [
     {
       "reponse": "Aorte",
-      "acceptees": ["L'aorte", "Une aorte"],
+      "acceptees": [
+        "L'aorte",
+        "Une aorte"
+      ],
       "indices": [
         "Je suis une artère.",
         "Je pars du ventricule gauche.",
@@ -97,7 +118,11 @@
     },
     {
       "reponse": "Capillaires",
-      "acceptees": ["Les capillaires", "Capillaire", "Un capillaire"],
+      "acceptees": [
+        "Les capillaires",
+        "Capillaire",
+        "Un capillaire"
+      ],
       "indices": [
         "Je suis un vaisseau sanguin.",
         "Je relie des artères à des veines.",
@@ -106,18 +131,10 @@
       "explication": "Les capillaires sont des vaisseaux très fins, dans les organes, où se font les échanges avec les cellules."
     },
     {
-      "reponse": "William Harvey",
-      "acceptees": ["Harvey"],
-      "indices": [
-        "Je suis un médecin anglais.",
-        "J'ai étudié la façon dont le sang se déplace dans le corps.",
-        "En 1628, j'ai démontré que le sang circule en circuit fermé."
-      ],
-      "explication": "En 1628, William Harvey démontre que le sang circule en circuit fermé, propulsé par le cœur."
-    },
-    {
       "reponse": "Ventricule gauche",
-      "acceptees": ["Le ventricule gauche"],
+      "acceptees": [
+        "Le ventricule gauche"
+      ],
       "indices": [
         "Je suis une cavité du cœur.",
         "Ma paroi est la plus épaisse.",

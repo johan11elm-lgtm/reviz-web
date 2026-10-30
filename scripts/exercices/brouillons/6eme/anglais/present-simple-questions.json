@@ -51,42 +51,72 @@
     {
       "consigne": "De quel type est le mot ou le groupe en couleur ?",
       "texte": "[Where] do you live? — I live in Rennes.",
-      "choix": ["Une négation", "Do ou does qui pose la question", "Un mot interrogatif", "Un adverbe de fréquence"],
+      "choix": [
+        "Une négation",
+        "Do ou does qui pose la question",
+        "Un mot interrogatif",
+        "Un adverbe de fréquence"
+      ],
       "bonne": 2,
       "explication": "Where (où) ouvre la question : c'est un mot interrogatif, suivi de do + sujet + verbe."
     },
     {
       "consigne": "De quel type est le mot ou le groupe en couleur ?",
       "texte": "I [often] go to the cinema at the weekend.",
-      "choix": ["Une négation", "Do ou does qui pose la question", "Un mot interrogatif", "Un adverbe de fréquence"],
+      "choix": [
+        "Une négation",
+        "Do ou does qui pose la question",
+        "Un mot interrogatif",
+        "Un adverbe de fréquence"
+      ],
       "bonne": 3,
       "explication": "Often (souvent) dit à quelle fréquence on va au cinéma : c'est un adverbe de fréquence, placé avant le verbe."
     },
     {
       "consigne": "De quel type est le mot ou le groupe en couleur ?",
       "texte": "She [doesn't] like maths.",
-      "choix": ["Une négation", "Do ou does qui pose la question", "Un mot interrogatif", "Un adverbe de fréquence"],
+      "choix": [
+        "Une négation",
+        "Do ou does qui pose la question",
+        "Un mot interrogatif",
+        "Un adverbe de fréquence"
+      ],
       "bonne": 0,
       "explication": "Doesn't (does not) rend la phrase négative ; le verbe qui suit, like, perd son -s."
     },
     {
       "consigne": "De quel type est le mot ou le groupe en couleur ?",
       "texte": "[Does] he live in London? — Yes, he does.",
-      "choix": ["Une négation", "Do ou does qui pose la question", "Un mot interrogatif", "Un adverbe de fréquence"],
+      "choix": [
+        "Une négation",
+        "Do ou does qui pose la question",
+        "Un mot interrogatif",
+        "Un adverbe de fréquence"
+      ],
       "bonne": 1,
       "explication": "Does placé devant le sujet he sert à poser la question ; c'est l'auxiliaire de la question."
     },
     {
       "consigne": "De quel type est le mot ou le groupe en couleur ?",
       "texte": "[What time] does she get up? — At seven.",
-      "choix": ["Une négation", "Do ou does qui pose la question", "Un mot interrogatif", "Un adverbe de fréquence"],
+      "choix": [
+        "Une négation",
+        "Do ou does qui pose la question",
+        "Un mot interrogatif",
+        "Un adverbe de fréquence"
+      ],
       "bonne": 2,
       "explication": "What time (à quelle heure) ouvre la question : c'est un mot interrogatif."
     },
     {
       "consigne": "De quel type est le mot ou le groupe en couleur ?",
       "texte": "He is [always] late for school.",
-      "choix": ["Une négation", "Do ou does qui pose la question", "Un mot interrogatif", "Un adverbe de fréquence"],
+      "choix": [
+        "Une négation",
+        "Do ou does qui pose la question",
+        "Un mot interrogatif",
+        "Un adverbe de fréquence"
+      ],
       "bonne": 3,
       "explication": "Always (toujours) est un adverbe de fréquence ; avec be, il se place après le verbe."
     }
@@ -94,7 +124,10 @@
   "devinettes": [
     {
       "reponse": "Never",
-      "acceptees": ["Never", "Jamais"],
+      "acceptees": [
+        "Never",
+        "Jamais"
+      ],
       "indices": [
         "Je suis un adverbe de fréquence.",
         "Je suis déjà négatif : on ne m'emploie pas avec don't.",
@@ -104,7 +137,9 @@
     },
     {
       "reponse": "Because",
-      "acceptees": ["Because"],
+      "acceptees": [
+        "Because"
+      ],
       "indices": [
         "Je suis un mot que l'on place au début d'une réponse.",
         "Je donne une raison.",
@@ -114,23 +149,15 @@
     },
     {
       "reponse": "Does",
-      "acceptees": ["Does"],
+      "acceptees": [
+        "Does"
+      ],
       "indices": [
         "Je suis un petit mot qui sert à poser une question.",
         "On m'emploie quand le sujet est he, she ou it.",
         "C'est moi qui porte le -s : le verbe qui me suit reste à la base verbale."
       ],
       "explication": "Avec he, she, it, la question se construit avec does : c'est lui qui porte le -s, comme dans Does she like tea?"
-    },
-    {
-      "reponse": "How often",
-      "acceptees": ["How often", "How often?"],
-      "indices": [
-        "Je commence une question.",
-        "Je suis un mot interrogatif.",
-        "Je demande à quelle fréquence on fait quelque chose."
-      ],
-      "explication": "How often…? (à quelle fréquence… ?) appelle une réponse comme once a week : How often do you go swimming? — Once a week."
     }
   ],
   "calculs": [],

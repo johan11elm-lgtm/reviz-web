@@ -38,7 +38,6 @@
       "nom": "Deux mots de la même famille",
       "detail": "Deux mots formés sur le même radical, avec un sens en commun.",
       "cartes": [
-        "terre et souterrain",
         "lait et laitier",
         "dent et dentiste",
         "fleur et fleuriste",
@@ -51,42 +50,66 @@
     {
       "consigne": "Quel est le rôle de l'élément en couleur dans ce mot ?",
       "texte": "Le mot « [re]faire » veut dire « faire à nouveau ».",
-      "choix": ["Préfixe", "Radical", "Suffixe"],
+      "choix": [
+        "Préfixe",
+        "Radical",
+        "Suffixe"
+      ],
       "bonne": 0,
       "explication": "« re- » est placé avant le radical « faire » : c'est un préfixe."
     },
     {
       "consigne": "Quel est le rôle de l'élément en couleur dans ce mot ?",
       "texte": "Le mot « chant[eur] » désigne celui qui chante.",
-      "choix": ["Préfixe", "Radical", "Suffixe"],
+      "choix": [
+        "Préfixe",
+        "Radical",
+        "Suffixe"
+      ],
       "bonne": 2,
       "explication": "« -eur » est placé après le radical « chant » : c'est un suffixe."
     },
     {
       "consigne": "Quel est le rôle de l'élément en couleur dans ce mot ?",
       "texte": "Le mot « in[utile] » veut dire « qui ne sert à rien ».",
-      "choix": ["Préfixe", "Radical", "Suffixe"],
+      "choix": [
+        "Préfixe",
+        "Radical",
+        "Suffixe"
+      ],
       "bonne": 1,
       "explication": "« utile » porte le sens principal du mot : c'est le radical. « in- », placé avant, est le préfixe."
     },
     {
       "consigne": "Quel est le rôle de l'élément en couleur dans ce mot ?",
       "texte": "Le mot « lav[able] » veut dire « qui peut être lavé ».",
-      "choix": ["Préfixe", "Radical", "Suffixe"],
+      "choix": [
+        "Préfixe",
+        "Radical",
+        "Suffixe"
+      ],
       "bonne": 2,
       "explication": "« -able » est ajouté après le radical « lav- » et exprime la possibilité : c'est un suffixe."
     },
     {
       "consigne": "Quel est le rôle de l'élément en couleur dans ce mot ?",
       "texte": "Le mot « [im]possible » exprime le contraire de « possible ».",
-      "choix": ["Préfixe", "Radical", "Suffixe"],
+      "choix": [
+        "Préfixe",
+        "Radical",
+        "Suffixe"
+      ],
       "bonne": 0,
       "explication": "« im- » est placé avant le radical et exprime le contraire : c'est un préfixe."
     },
     {
       "consigne": "Quel est le rôle de l'élément en couleur dans ce mot ?",
       "texte": "Le mot « [jardin]ier » désigne celui qui s'occupe d'un jardin.",
-      "choix": ["Préfixe", "Radical", "Suffixe"],
+      "choix": [
+        "Préfixe",
+        "Radical",
+        "Suffixe"
+      ],
       "bonne": 1,
       "explication": "« jardin » porte le sens principal du mot : c'est le radical. « -ier » est le suffixe."
     }
@@ -94,7 +117,11 @@
   "devinettes": [
     {
       "reponse": "Étymologie",
-      "acceptees": ["L'étymologie", "Origine d'un mot", "L'origine d'un mot"],
+      "acceptees": [
+        "L'étymologie",
+        "Origine d'un mot",
+        "L'origine d'un mot"
+      ],
       "indices": [
         "Je concerne l'histoire des mots.",
         "Je t'apprends que « hippodrome » vient du grec.",
@@ -104,7 +131,10 @@
     },
     {
       "reponse": "Polysémie",
-      "acceptees": ["La polysémie", "Mot polysémique"],
+      "acceptees": [
+        "La polysémie",
+        "Mot polysémique"
+      ],
       "indices": [
         "Je concerne le sens des mots.",
         "Grâce à moi, un seul mot peut avoir plusieurs sens selon le contexte.",
@@ -114,35 +144,19 @@
     },
     {
       "reponse": "Préfixe",
-      "acceptees": ["Un préfixe", "Le préfixe", "Les préfixes"],
+      "acceptees": [
+        "Un préfixe",
+        "Le préfixe",
+        "Les préfixes"
+      ],
       "indices": [
         "Je suis un élément ajouté à un radical pour former un mot dérivé.",
         "Je me place avant le radical.",
         "Re-, dé- et im- sont des exemples de moi."
       ],
       "explication": "Le préfixe se place avant le radical : re-, dé-, im-, in-, il-, ir-, pré-."
-    },
-    {
-      "reponse": "Registre de langue",
-      "acceptees": ["Registre", "Le registre de langue", "Registres de langue", "Niveau de langue"],
-      "indices": [
-        "Je change selon la personne à qui l'on parle et la situation.",
-        "Il en existe trois : familier, courant et soutenu.",
-        "Grâce à moi, une voiture peut s'appeler « bagnole » ou « automobile »."
-      ],
-      "explication": "Le registre de langue est la manière de s'exprimer adaptée à la situation : familier, courant ou soutenu."
     }
   ],
   "calculs": [],
-  "etapes": [
-    {
-      "titre": "Comment comprendre un mot inconnu",
-      "etapes": [
-        "Décompose le mot : repère le préfixe, le radical et le suffixe",
-        "Cherche un mot de la même famille que tu connais déjà",
-        "Relis la phrase pour vérifier que ce sens convient au contexte",
-        "Confirme dans le dictionnaire : classe, sens et étymologie"
-      ]
-    }
-  ]
+  "etapes": []
 }

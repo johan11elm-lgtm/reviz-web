@@ -51,42 +51,72 @@
     {
       "consigne": "Quelle indication de temps le passage en couleur donne-t-il ?",
       "texte": "I've got English [on Wednesday].",
-      "choix": ["Un jour de la semaine", "Une date précise", "Un mois", "Une année"],
+      "choix": [
+        "Un jour de la semaine",
+        "Une date précise",
+        "Un mois",
+        "Une année"
+      ],
       "bonne": 0,
       "explication": "Wednesday est un jour de la semaine, et on emploie on devant un jour."
     },
     {
       "consigne": "Quelle indication de temps le passage en couleur donne-t-il ?",
       "texte": "My birthday is [on 12th June].",
-      "choix": ["Un jour de la semaine", "Une date précise", "Un mois", "Une année"],
+      "choix": [
+        "Un jour de la semaine",
+        "Une date précise",
+        "Un mois",
+        "Une année"
+      ],
       "bonne": 1,
       "explication": "12th June donne le jour et le mois : c'est une date précise, avec on."
     },
     {
       "consigne": "Quelle indication de temps le passage en couleur donne-t-il ?",
       "texte": "We go skiing [in February].",
-      "choix": ["Un jour de la semaine", "Une date précise", "Un mois", "Une année"],
+      "choix": [
+        "Un jour de la semaine",
+        "Une date précise",
+        "Un mois",
+        "Une année"
+      ],
       "bonne": 2,
       "explication": "February est un mois seul : on emploie in devant un mois."
     },
     {
       "consigne": "Quelle indication de temps le passage en couleur donne-t-il ?",
       "texte": "My brother was born [in 2014].",
-      "choix": ["Un jour de la semaine", "Une date précise", "Un mois", "Une année"],
+      "choix": [
+        "Un jour de la semaine",
+        "Une date précise",
+        "Un mois",
+        "Une année"
+      ],
       "bonne": 3,
       "explication": "2014 est une année : on emploie in devant un mois ou une année."
     },
     {
       "consigne": "Quelle indication de temps le passage en couleur donne-t-il ?",
       "texte": "The concert is [on 3rd May].",
-      "choix": ["Un jour de la semaine", "Une date précise", "Un mois", "Une année"],
+      "choix": [
+        "Un jour de la semaine",
+        "Une date précise",
+        "Un mois",
+        "Une année"
+      ],
       "bonne": 1,
       "explication": "3rd May est une date précise (le jour et le mois) : on emploie on."
     },
     {
       "consigne": "Quelle indication de temps le passage en couleur donne-t-il ?",
       "texte": "It rains a lot [in November].",
-      "choix": ["Un jour de la semaine", "Une date précise", "Un mois", "Une année"],
+      "choix": [
+        "Un jour de la semaine",
+        "Une date précise",
+        "Un mois",
+        "Une année"
+      ],
       "bonne": 2,
       "explication": "November est un mois seul : on emploie in."
     }
@@ -94,7 +124,9 @@
   "devinettes": [
     {
       "reponse": "Double",
-      "acceptees": ["Double N"],
+      "acceptees": [
+        "Double N"
+      ],
       "indices": [
         "Je suis un mot qu'on utilise quand on épelle.",
         "Je sers à dire qu'une lettre est répétée.",
@@ -104,7 +136,9 @@
     },
     {
       "reponse": "Forty",
-      "acceptees": ["40"],
+      "acceptees": [
+        "40"
+      ],
       "indices": [
         "Je suis un nombre anglais qui se termine par -ty.",
         "On m'écrit sans u, contrairement au nombre 4.",
@@ -121,16 +155,6 @@
         "Je viens juste après January."
       ],
       "explication": "February est le deuxième mois de l'année et le plus court, avec une majuscule."
-    },
-    {
-      "reponse": "Ordinal",
-      "acceptees": ["Nombre ordinal", "Un nombre ordinal", "Un ordinal", "Ordinals", "Ordinaux"],
-      "indices": [
-        "Je suis un type de nombre.",
-        "Je sers à dire la date.",
-        "Mes trois premiers sont irréguliers : first, second et third."
-      ],
-      "explication": "Les nombres ordinaux indiquent un rang et servent à dire la date : first, second, third, puis -th."
     }
   ],
   "calculs": [],

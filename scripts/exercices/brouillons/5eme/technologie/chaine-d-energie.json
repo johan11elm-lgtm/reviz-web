@@ -51,42 +51,72 @@
     {
       "consigne": "Quelle fonction de la chaîne d'énergie remplit le composant en couleur ?",
       "texte": "Dans un ventilateur de bureau, [l'interrupteur] permet de mettre l'appareil en marche ou à l'arrêt.",
-      "choix": ["Alimenter", "Distribuer", "Convertir", "Transmettre"],
+      "choix": [
+        "Alimenter",
+        "Distribuer",
+        "Convertir",
+        "Transmettre"
+      ],
       "bonne": 1,
       "explication": "L'interrupteur laisse passer ou coupe l'énergie : il distribue."
     },
     {
       "consigne": "Quelle fonction de la chaîne d'énergie remplit le composant en couleur ?",
       "texte": "Dans un robot, [des engrenages] relient le moteur aux roues.",
-      "choix": ["Alimenter", "Distribuer", "Convertir", "Transmettre"],
+      "choix": [
+        "Alimenter",
+        "Distribuer",
+        "Convertir",
+        "Transmettre"
+      ],
       "bonne": 3,
       "explication": "Les engrenages transmettent le mouvement de rotation du moteur aux roues."
     },
     {
       "consigne": "Quelle fonction de la chaîne d'énergie remplit le composant en couleur ?",
       "texte": "Dans une lampe de poche, [la LED] produit la lumière.",
-      "choix": ["Alimenter", "Distribuer", "Convertir", "Transmettre"],
+      "choix": [
+        "Alimenter",
+        "Distribuer",
+        "Convertir",
+        "Transmettre"
+      ],
       "bonne": 2,
       "explication": "La LED convertit l'énergie électrique en lumière."
     },
     {
       "consigne": "Quelle fonction de la chaîne d'énergie remplit le composant en couleur ?",
       "texte": "Un vélo à assistance électrique possède [une batterie] rechargeable.",
-      "choix": ["Alimenter", "Distribuer", "Convertir", "Transmettre"],
+      "choix": [
+        "Alimenter",
+        "Distribuer",
+        "Convertir",
+        "Transmettre"
+      ],
       "bonne": 0,
       "explication": "La batterie fournit l'énergie électrique au moteur : elle alimente."
     },
     {
       "consigne": "Quelle fonction de la chaîne d'énergie remplit le composant en couleur ?",
       "texte": "Dans un grille-pain, [la résistance chauffante] fait chauffer le pain.",
-      "choix": ["Alimenter", "Distribuer", "Convertir", "Transmettre"],
+      "choix": [
+        "Alimenter",
+        "Distribuer",
+        "Convertir",
+        "Transmettre"
+      ],
       "bonne": 2,
       "explication": "La résistance chauffante convertit l'énergie électrique en énergie thermique."
     },
     {
       "consigne": "Quelle fonction de la chaîne d'énergie remplit le composant en couleur ?",
       "texte": "Dans une machine, [une courroie] relie deux poulies.",
-      "choix": ["Alimenter", "Distribuer", "Convertir", "Transmettre"],
+      "choix": [
+        "Alimenter",
+        "Distribuer",
+        "Convertir",
+        "Transmettre"
+      ],
       "bonne": 3,
       "explication": "Poulies et courroie transmettent le mouvement jusqu'à l'élément qui agit."
     }
@@ -94,7 +124,10 @@
   "devinettes": [
     {
       "reponse": "Interrupteur",
-      "acceptees": ["Un interrupteur", "L'interrupteur"],
+      "acceptees": [
+        "Un interrupteur",
+        "L'interrupteur"
+      ],
       "indices": [
         "Je fais partie de la chaîne d'énergie d'une lampe de poche.",
         "Je laisse passer ou je coupe le courant.",
@@ -104,33 +137,16 @@
     },
     {
       "reponse": "Moteur",
-      "acceptees": ["Un moteur", "Le moteur"],
+      "acceptees": [
+        "Un moteur",
+        "Le moteur"
+      ],
       "indices": [
         "Je suis un actionneur.",
         "Je transforme l'énergie électrique en mouvement.",
         "Dans un ventilateur de bureau, je fais tourner l'hélice grâce à un axe."
       ],
       "explication": "Le moteur convertit l'énergie électrique en mouvement de rotation."
-    },
-    {
-      "reponse": "Actionneur",
-      "acceptees": ["Un actionneur", "L'actionneur", "Actionneurs"],
-      "indices": [
-        "Je suis un composant de la chaîne d'énergie.",
-        "Je réalise une action physique : bouger, éclairer ou faire du bruit.",
-        "Un moteur, une lampe, un buzzer ou un vérin sont des exemples de moi."
-      ],
-      "explication": "Un actionneur est un composant qui réalise une action physique : moteur, lampe, buzzer, vérin."
-    },
-    {
-      "reponse": "Batterie",
-      "acceptees": ["Une batterie", "La batterie", "Pile rechargeable"],
-      "indices": [
-        "Je suis une source d'énergie.",
-        "Je peux être rechargée.",
-        "Dans un vélo à assistance électrique, je garde l'énergie et je la fournis au moteur."
-      ],
-      "explication": "La batterie stocke l'énergie électrique et la fournit à l'objet : elle alimente."
     }
   ],
   "calculs": [],

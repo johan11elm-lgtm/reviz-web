@@ -51,60 +51,84 @@
     {
       "consigne": "Quelle est la nature du mot en couleur ?",
       "texte": "Je [la] ferme avant de partir.",
-      "choix": ["Déterminant", "Pronom", "Adverbe", "Préposition"],
+      "choix": [
+        "Déterminant",
+        "Pronom",
+        "Adverbe",
+        "Préposition"
+      ],
       "bonne": 1,
       "explication": "« la » est placé devant le verbe « ferme » et remplace un nom (la porte) : c'est un pronom."
     },
     {
       "consigne": "Quelle est la nature du mot en couleur ?",
       "texte": "Elle ouvre [la] porte.",
-      "choix": ["Déterminant", "Pronom", "Adverbe", "Préposition"],
+      "choix": [
+        "Déterminant",
+        "Pronom",
+        "Adverbe",
+        "Préposition"
+      ],
       "bonne": 0,
       "explication": "« la » est placé devant le nom « porte » et s'accorde avec lui : c'est un déterminant."
     },
     {
       "consigne": "Quelle est la nature du mot en couleur ?",
       "texte": "Il court [très] vite.",
-      "choix": ["Déterminant", "Pronom", "Adverbe", "Préposition"],
+      "choix": [
+        "Déterminant",
+        "Pronom",
+        "Adverbe",
+        "Préposition"
+      ],
       "bonne": 2,
       "explication": "« très » est invariable et précise l'adverbe « vite » : c'est un adverbe."
     },
     {
       "consigne": "Quelle est la nature du mot en couleur ?",
       "texte": "Il part [avec] son frère.",
-      "choix": ["Déterminant", "Pronom", "Adverbe", "Préposition"],
+      "choix": [
+        "Déterminant",
+        "Pronom",
+        "Adverbe",
+        "Préposition"
+      ],
       "bonne": 3,
       "explication": "« avec » est invariable et introduit le groupe « son frère » : c'est une préposition."
     },
     {
       "consigne": "Quelle est la nature du mot en couleur ?",
       "texte": "Je [leur] parle souvent.",
-      "choix": ["Déterminant", "Pronom", "Adverbe", "Préposition"],
+      "choix": [
+        "Déterminant",
+        "Pronom",
+        "Adverbe",
+        "Préposition"
+      ],
       "bonne": 1,
       "explication": "« leur » est placé devant le verbe « parle » et remplace des personnes : c'est un pronom (COI)."
     },
     {
       "consigne": "Quelle est la nature du mot en couleur ?",
       "texte": "[Leur] maison est grande.",
-      "choix": ["Déterminant", "Pronom", "Adverbe", "Préposition"],
+      "choix": [
+        "Déterminant",
+        "Pronom",
+        "Adverbe",
+        "Préposition"
+      ],
       "bonne": 0,
       "explication": "« leur » est placé devant le nom « maison » : c'est un déterminant possessif."
     }
   ],
   "devinettes": [
     {
-      "reponse": "Antécédent",
-      "acceptees": ["Antécédent", "L'antécédent", "Un antécédent"],
-      "indices": [
-        "Je suis un mot ou un groupe de mots d'une phrase.",
-        "Un pronom est là pour me remplacer.",
-        "Dans « Le Cyclope dort. Ulysse l'aveugle. », je suis « le Cyclope »."
-      ],
-      "explication": "L'antécédent est le mot ou le groupe que le pronom remplace : « l' » a pour antécédent « le Cyclope »."
-    },
-    {
       "reponse": "Adverbe",
-      "acceptees": ["Adverbe", "Un adverbe", "L'adverbe"],
+      "acceptees": [
+        "Adverbe",
+        "Un adverbe",
+        "L'adverbe"
+      ],
       "indices": [
         "Je suis un mot invariable.",
         "Je précise un verbe, un adjectif ou un mot de ma propre classe.",
@@ -114,7 +138,11 @@
     },
     {
       "reponse": "Préposition",
-      "acceptees": ["Préposition", "Une préposition", "La préposition"],
+      "acceptees": [
+        "Préposition",
+        "Une préposition",
+        "La préposition"
+      ],
       "indices": [
         "Je suis un mot invariable.",
         "J'introduis un groupe de mots.",
@@ -124,7 +152,11 @@
     },
     {
       "reponse": "Déterminant",
-      "acceptees": ["Déterminant", "Un déterminant", "Le déterminant"],
+      "acceptees": [
+        "Déterminant",
+        "Un déterminant",
+        "Le déterminant"
+      ],
       "indices": [
         "Je suis un mot variable.",
         "Je me place devant le nom et je m'accorde avec lui.",

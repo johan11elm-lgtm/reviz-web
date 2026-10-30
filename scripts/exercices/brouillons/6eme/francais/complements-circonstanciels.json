@@ -51,98 +51,77 @@
     {
       "consigne": "De quelle sorte est le complément circonstanciel en couleur ?",
       "texte": "Les marins restèrent [au port] à cause de la tempête.",
-      "choix": ["Lieu", "Temps", "Cause", "Manière"],
+      "choix": [
+        "Lieu",
+        "Temps",
+        "Cause",
+        "Manière"
+      ],
       "bonne": 0,
       "explication": "« au port » répond à la question « où ? » : c'est un complément circonstanciel de lieu."
     },
     {
       "consigne": "De quelle sorte est le complément circonstanciel en couleur ?",
       "texte": "[Le lendemain], Jim quitta l'auberge.",
-      "choix": ["Lieu", "Temps", "Cause", "Manière"],
+      "choix": [
+        "Lieu",
+        "Temps",
+        "Cause",
+        "Manière"
+      ],
       "bonne": 1,
       "explication": "« Le lendemain » répond à la question « quand ? » : c'est un complément circonstanciel de temps."
     },
     {
       "consigne": "De quelle sorte est le complément circonstanciel en couleur ?",
       "texte": "Les enfants tremblaient [de peur].",
-      "choix": ["Lieu", "Temps", "Cause", "Manière"],
+      "choix": [
+        "Lieu",
+        "Temps",
+        "Cause",
+        "Manière"
+      ],
       "bonne": 2,
       "explication": "« Pourquoi tremblaient-ils ? De peur. » : c'est un complément circonstanciel de cause."
     },
     {
       "consigne": "De quelle sorte est le complément circonstanciel en couleur ?",
       "texte": "Il avançait [prudemment] dans la grotte.",
-      "choix": ["Lieu", "Temps", "Cause", "Manière"],
+      "choix": [
+        "Lieu",
+        "Temps",
+        "Cause",
+        "Manière"
+      ],
       "bonne": 3,
       "explication": "« prudemment » répond à la question « comment ? » : c'est un complément circonstanciel de manière."
     },
     {
       "consigne": "De quelle sorte est le complément circonstanciel en couleur ?",
       "texte": "Léa a manqué l'école [à cause de la grippe].",
-      "choix": ["Lieu", "Temps", "Cause", "Manière"],
+      "choix": [
+        "Lieu",
+        "Temps",
+        "Cause",
+        "Manière"
+      ],
       "bonne": 2,
       "explication": "« à cause de la grippe » répond à la question « pourquoi ? » : c'est un complément circonstanciel de cause."
     },
     {
       "consigne": "De quelle sorte est le complément circonstanciel en couleur ?",
       "texte": "Elle range sa chambre [avec soin].",
-      "choix": ["Lieu", "Temps", "Cause", "Manière"],
+      "choix": [
+        "Lieu",
+        "Temps",
+        "Cause",
+        "Manière"
+      ],
       "bonne": 3,
       "explication": "« avec soin » répond à la question « comment ? » : c'est un complément circonstanciel de manière."
     }
   ],
-  "devinettes": [
-    {
-      "reponse": "Complément circonstanciel",
-      "acceptees": ["Complément circonstanciel", "Un complément circonstanciel", "CC", "Circonstanciel"],
-      "indices": [
-        "Je donne des informations sur une action.",
-        "On peut me supprimer et me déplacer dans la phrase.",
-        "Je réponds aux questions « où ? », « quand ? », « pourquoi ? » ou « comment ? »."
-      ],
-      "explication": "Le complément circonstanciel précise les circonstances de l'action ; il est supprimable et déplaçable."
-    },
-    {
-      "reponse": "Manière",
-      "acceptees": ["Manière", "La manière", "De manière", "CC de manière"],
-      "indices": [
-        "Je suis une sorte de complément circonstanciel.",
-        "Je réponds à la question « comment ? ».",
-        "Je suis souvent un adverbe en -ment ou un groupe introduit par « avec », « en » ou « sans »."
-      ],
-      "explication": "Le CC de manière répond à « comment ? » : prudemment, avec prudence, en silence."
-    },
-    {
-      "reponse": "Cause",
-      "acceptees": ["Cause", "La cause", "De cause", "CC de cause"],
-      "indices": [
-        "Je suis une sorte de complément circonstanciel.",
-        "Je réponds à la question « pourquoi ? ».",
-        "On me reconnaît dans « par peur » ou « grâce à son courage »."
-      ],
-      "explication": "Le CC de cause répond à « pourquoi ? » : par peur, à cause de la tempête."
-    },
-    {
-      "reponse": "COI",
-      "acceptees": ["COI", "Le COI", "Complément d'objet indirect"],
-      "indices": [
-        "Je suis un complément du verbe.",
-        "Je ne peux pas être supprimé.",
-        "Dans « Il pense à sa mère », je suis « à sa mère »."
-      ],
-      "explication": "Le COI fait partie du groupe verbal et ne se supprime pas, contrairement au complément circonstanciel."
-    }
-  ],
+  "devinettes": [],
   "calculs": [],
-  "etapes": [
-    {
-      "titre": "Les étapes pour repérer et classer un complément circonstanciel",
-      "etapes": [
-        "Supprime le groupe : si la phrase reste correcte, il est peut-être circonstanciel",
-        "Déplace-le : s'il est mobile, c'est bien un complément circonstanciel",
-        "Pose la question : où, quand, pourquoi ou comment ?",
-        "Donne sa nature : groupe nominal prépositionnel, adverbe ou proposition"
-      ]
-    }
-  ]
+  "etapes": []
 }

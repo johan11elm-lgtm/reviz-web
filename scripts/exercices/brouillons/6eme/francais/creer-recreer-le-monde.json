@@ -28,7 +28,6 @@
       "detail": "Ce qui arrive et transforme les choses, avec souvent un personnage surnaturel ou un objet magique.",
       "cartes": [
         "Une feuille magique allonge le cou de la girafe",
-        "Le corbeau tombe dans un feu et ses plumes noircissent",
         "Un jour, le hibou insulte le soleil, qui le punit",
         "Un moulin à sel magique coule au fond de l'océan",
         "Pendant un orage, un dieu couvre la tortue d'une carapace"
@@ -51,42 +50,66 @@
     {
       "consigne": "De quel type de récit s'agit-il pour le passage en couleur ?",
       "texte": "Dans le mythe grec, [Pandore ouvre la jarre et les maux se répandent sur la Terre].",
-      "choix": ["Cosmogonie", "Récit étiologique", "Ni l'un ni l'autre"],
+      "choix": [
+        "Cosmogonie",
+        "Récit étiologique",
+        "Ni l'un ni l'autre"
+      ],
       "bonne": 1,
       "explication": "Le passage explique d'où viennent les malheurs des hommes : il répond à un « pourquoi », c'est un récit étiologique. Une cosmogonie raconterait la naissance de tout l'univers."
     },
     {
       "consigne": "De quel type de récit s'agit-il pour le passage en couleur ?",
       "texte": "Chez Hésiode, [au commencement est le Chaos, puis viennent Gaïa, la Terre, et Ouranos, le Ciel].",
-      "choix": ["Cosmogonie", "Récit étiologique", "Ni l'un ni l'autre"],
+      "choix": [
+        "Cosmogonie",
+        "Récit étiologique",
+        "Ni l'un ni l'autre"
+      ],
       "bonne": 0,
       "explication": "Le passage raconte la naissance de l'univers à partir du Chaos : c'est une cosmogonie."
     },
     {
       "consigne": "De quel type de récit s'agit-il pour le passage en couleur ?",
       "texte": "Hier soir, [Léa a fini ses devoirs, puis elle est allée se coucher].",
-      "choix": ["Cosmogonie", "Récit étiologique", "Ni l'un ni l'autre"],
+      "choix": [
+        "Cosmogonie",
+        "Récit étiologique",
+        "Ni l'un ni l'autre"
+      ],
       "bonne": 2,
       "explication": "Ce passage raconte une soirée ordinaire : il n'explique ni la naissance de l'univers (cosmogonie) ni l'origine d'une chose précise (récit étiologique)."
     },
     {
       "consigne": "De quel type de récit s'agit-il pour le passage en couleur ?",
       "texte": "Selon un mythe chinois, [le géant Pangu sépare le ciel de la terre et, à sa mort, son corps devient le monde].",
-      "choix": ["Cosmogonie", "Récit étiologique", "Ni l'un ni l'autre"],
+      "choix": [
+        "Cosmogonie",
+        "Récit étiologique",
+        "Ni l'un ni l'autre"
+      ],
       "bonne": 0,
       "explication": "Le passage raconte comment le monde entier prend forme : c'est une cosmogonie."
     },
     {
       "consigne": "De quel type de récit s'agit-il pour le passage en couleur ?",
       "texte": "Dans ses Histoires comme ça, Kipling raconte [comment le léopard a eu ses taches].",
-      "choix": ["Cosmogonie", "Récit étiologique", "Ni l'un ni l'autre"],
+      "choix": [
+        "Cosmogonie",
+        "Récit étiologique",
+        "Ni l'un ni l'autre"
+      ],
       "bonne": 1,
       "explication": "Le passage explique l'origine d'une chose précise, les taches du léopard : c'est un récit étiologique, pas une cosmogonie."
     },
     {
       "consigne": "De quel type de récit s'agit-il pour le passage en couleur ?",
       "texte": "Dans la Genèse, [Dieu brouille la langue des hommes, qui se mettent à parler des langues différentes].",
-      "choix": ["Cosmogonie", "Récit étiologique", "Ni l'un ni l'autre"],
+      "choix": [
+        "Cosmogonie",
+        "Récit étiologique",
+        "Ni l'un ni l'autre"
+      ],
       "bonne": 1,
       "explication": "L'épisode de la tour de Babel explique pourquoi il existe tant de langues : c'est un récit étiologique."
     }
@@ -111,26 +134,6 @@
         "Seule l'espérance est restée au fond de la jarre que j'ai ouverte."
       ],
       "explication": "Pandore ouvre la jarre qui libère les maux sur la Terre ; seule l'espérance reste à l'intérieur."
-    },
-    {
-      "reponse": "Pangu",
-      "acceptees": ["Pan Gu", "Pan-gu"],
-      "indices": [
-        "Je viens d'un mythe chinois sur la création du monde.",
-        "Je suis un géant et je sors d'un œuf cosmique.",
-        "Je sépare le ciel de la terre, puis, à ma mort, mon corps devient le monde."
-      ],
-      "explication": "Dans le mythe chinois, le géant Pangu sort d'un œuf cosmique et sépare le ciel de la terre ; à sa mort, son corps devient le monde."
-    },
-    {
-      "reponse": "Tour de Babel",
-      "acceptees": ["La tour de Babel", "Babel"],
-      "indices": [
-        "On me trouve dans la Genèse.",
-        "Des hommes me construisent pour atteindre le ciel.",
-        "Dieu brouille la langue de ceux qui me bâtissent : voilà pourquoi on parle tant de langues."
-      ],
-      "explication": "La tour de Babel est un épisode de la Genèse qui explique la diversité des langues."
     }
   ],
   "calculs": [],
@@ -143,15 +146,6 @@
         "Dieu crée les astres : soleil, lune et étoiles",
         "Dieu crée les poissons et les oiseaux",
         "Dieu crée les animaux terrestres, puis l'homme et la femme"
-      ]
-    },
-    {
-      "titre": "Les étapes pour écrire un récit étiologique",
-      "etapes": [
-        "Choisis une question qui commence par « Pourquoi »",
-        "Raconte la situation d'origine, avant le changement",
-        "Raconte l'événement qui transforme tout",
-        "Termine par la conséquence qui dure aujourd'hui"
       ]
     }
   ]

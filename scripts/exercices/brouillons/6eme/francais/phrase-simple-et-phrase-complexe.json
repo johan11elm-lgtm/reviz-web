@@ -51,42 +51,66 @@
     {
       "consigne": "Quelle est la nature du mot en couleur ?",
       "texte": "Il pleuvait, [mais] nous sommes sortis.",
-      "choix": ["Conjonction de coordination", "Conjonction de subordination", "Pronom relatif"],
+      "choix": [
+        "Conjonction de coordination",
+        "Conjonction de subordination",
+        "Pronom relatif"
+      ],
       "bonne": 0,
       "explication": "« mais » fait partie de la liste mais, ou, et, donc, or, ni, car : c'est une conjonction de coordination."
     },
     {
       "consigne": "Quelle est la nature du mot en couleur ?",
       "texte": "Le garçon [qui] court est mon cousin.",
-      "choix": ["Conjonction de coordination", "Conjonction de subordination", "Pronom relatif"],
+      "choix": [
+        "Conjonction de coordination",
+        "Conjonction de subordination",
+        "Pronom relatif"
+      ],
       "bonne": 2,
       "explication": "« qui » remplace « le garçon » et introduit la subordonnée « qui court » : c'est un pronom relatif."
     },
     {
       "consigne": "Quelle est la nature du mot en couleur ?",
       "texte": "Les marins chantaient [quand] le navire quitta le port.",
-      "choix": ["Conjonction de coordination", "Conjonction de subordination", "Pronom relatif"],
+      "choix": [
+        "Conjonction de coordination",
+        "Conjonction de subordination",
+        "Pronom relatif"
+      ],
       "bonne": 1,
       "explication": "« quand » introduit la subordonnée « quand le navire quitta le port », qui dépend de la principale : c'est une conjonction de subordination."
     },
     {
       "consigne": "Quelle est la nature du mot en couleur ?",
       "texte": "Léa a faim, [donc] elle prépare un sandwich.",
-      "choix": ["Conjonction de coordination", "Conjonction de subordination", "Pronom relatif"],
+      "choix": [
+        "Conjonction de coordination",
+        "Conjonction de subordination",
+        "Pronom relatif"
+      ],
       "bonne": 0,
       "explication": "« donc » relie deux propositions indépendantes : c'est une conjonction de coordination."
     },
     {
       "consigne": "Quelle est la nature du mot en couleur ?",
       "texte": "C'est la plage [où] nous jouons chaque été.",
-      "choix": ["Conjonction de coordination", "Conjonction de subordination", "Pronom relatif"],
+      "choix": [
+        "Conjonction de coordination",
+        "Conjonction de subordination",
+        "Pronom relatif"
+      ],
       "bonne": 2,
       "explication": "« où » reprend « la plage » et introduit la subordonnée « où nous jouons chaque été » : c'est un pronom relatif."
     },
     {
       "consigne": "Quelle est la nature du mot en couleur ?",
       "texte": "Nous sommes restés [parce qu']il pleuvait.",
-      "choix": ["Conjonction de coordination", "Conjonction de subordination", "Pronom relatif"],
+      "choix": [
+        "Conjonction de coordination",
+        "Conjonction de subordination",
+        "Pronom relatif"
+      ],
       "bonne": 1,
       "explication": "« parce que » rend la proposition « il pleuvait » dépendante de la principale : c'est une conjonction de subordination."
     }
@@ -94,7 +118,10 @@
   "devinettes": [
     {
       "reponse": "Phrase complexe",
-      "acceptees": ["La phrase complexe", "Une phrase complexe"],
+      "acceptees": [
+        "La phrase complexe",
+        "Une phrase complexe"
+      ],
       "indices": [
         "Je suis un type de phrase.",
         "Je contiens plusieurs verbes conjugués.",
@@ -104,7 +131,10 @@
     },
     {
       "reponse": "Juxtaposition",
-      "acceptees": ["La juxtaposition", "Propositions juxtaposées"],
+      "acceptees": [
+        "La juxtaposition",
+        "Propositions juxtaposées"
+      ],
       "indices": [
         "Je suis une façon de relier des propositions.",
         "Je n'utilise aucun mot de liaison.",
@@ -114,7 +144,12 @@
     },
     {
       "reponse": "Subordonnée",
-      "acceptees": ["La subordonnée", "Une subordonnée", "Proposition subordonnée", "La proposition subordonnée"],
+      "acceptees": [
+        "La subordonnée",
+        "Une subordonnée",
+        "Proposition subordonnée",
+        "La proposition subordonnée"
+      ],
       "indices": [
         "Je suis une proposition, mais je ne suis pas seule.",
         "Je ne peux pas former une phrase à moi toute seule.",
@@ -124,7 +159,10 @@
     },
     {
       "reponse": "Conjonction de coordination",
-      "acceptees": ["Une conjonction de coordination", "Mot de coordination"],
+      "acceptees": [
+        "Une conjonction de coordination",
+        "Mot de coordination"
+      ],
       "indices": [
         "Je suis un mot de liaison entre deux propositions.",
         "Les deux propositions que je relie restent indépendantes.",
@@ -134,15 +172,5 @@
     }
   ],
   "calculs": [],
-  "etapes": [
-    {
-      "titre": "Comment analyser une phrase complexe",
-      "etapes": [
-        "Souligne tous les verbes conjugués de la phrase",
-        "Délimite chaque proposition par des crochets",
-        "Repère ce qui relie les propositions : ponctuation ou mot de liaison",
-        "S'il y a subordination, nomme la principale et la subordonnée"
-      ]
-    }
-  ]
+  "etapes": []
 }

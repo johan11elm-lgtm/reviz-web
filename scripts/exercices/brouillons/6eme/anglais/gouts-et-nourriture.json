@@ -7,7 +7,6 @@
       "cartes": [
         "I'd like some water, please",
         "I'd like a sandwich, please",
-        "I'd like two eggs and some bread",
         "I'd like some chicken and rice, please",
         "I'd like some milk and a banana, please"
       ]
@@ -51,88 +50,71 @@
     {
       "consigne": "Quel type de nom est le passage en couleur ?",
       "texte": "I'd like some [bread], please.",
-      "choix": ["Dénombrable au singulier", "Dénombrable au pluriel", "Indénombrable"],
+      "choix": [
+        "Dénombrable au singulier",
+        "Dénombrable au pluriel",
+        "Indénombrable"
+      ],
       "bonne": 2,
       "explication": "Bread ne se compte pas : pas de a ni de -s, on dit some bread."
     },
     {
       "consigne": "Quel type de nom est le passage en couleur ?",
       "texte": "She eats [an apple] every day.",
-      "choix": ["Dénombrable au singulier", "Dénombrable au pluriel", "Indénombrable"],
+      "choix": [
+        "Dénombrable au singulier",
+        "Dénombrable au pluriel",
+        "Indénombrable"
+      ],
       "bonne": 0,
       "explication": "An apple se compte et il n'y en a qu'une : an devant le singulier."
     },
     {
       "consigne": "Quel type de nom est le passage en couleur ?",
       "texte": "He has [two eggs] for breakfast.",
-      "choix": ["Dénombrable au singulier", "Dénombrable au pluriel", "Indénombrable"],
+      "choix": [
+        "Dénombrable au singulier",
+        "Dénombrable au pluriel",
+        "Indénombrable"
+      ],
       "bonne": 1,
       "explication": "Eggs se compte et prend un -s : two eggs est un pluriel."
     },
     {
       "consigne": "Quel type de nom est le passage en couleur ?",
       "texte": "Would you like some [milk]?",
-      "choix": ["Dénombrable au singulier", "Dénombrable au pluriel", "Indénombrable"],
+      "choix": [
+        "Dénombrable au singulier",
+        "Dénombrable au pluriel",
+        "Indénombrable"
+      ],
       "bonne": 2,
       "explication": "Milk ne se compte pas : on dit some milk, jamais a milk ni milks."
     },
     {
       "consigne": "Quel type de nom est le passage en couleur ?",
       "texte": "I love [bananas].",
-      "choix": ["Dénombrable au singulier", "Dénombrable au pluriel", "Indénombrable"],
+      "choix": [
+        "Dénombrable au singulier",
+        "Dénombrable au pluriel",
+        "Indénombrable"
+      ],
       "bonne": 1,
       "explication": "Bananas porte un -s : c'est un nom dénombrable au pluriel."
     },
     {
       "consigne": "Quel type de nom est le passage en couleur ?",
       "texte": "I'd like [a banana], please.",
-      "choix": ["Dénombrable au singulier", "Dénombrable au pluriel", "Indénombrable"],
+      "choix": [
+        "Dénombrable au singulier",
+        "Dénombrable au pluriel",
+        "Indénombrable"
+      ],
       "bonne": 0,
       "explication": "A banana se compte et il n'y en a qu'une : a devant le singulier."
     }
   ],
-  "devinettes": [
-    {
-      "reponse": "I'd like",
-      "acceptees": ["I'd like", "I would like", "Id like"],
-      "indices": [
-        "Je suis une expression anglaise très utile au restaurant.",
-        "Je sers à demander poliment quelque chose.",
-        "Je veux dire « je voudrais »."
-      ],
-      "explication": "I'd like (I would like) veut dire « je voudrais » : c'est la formule polie pour demander."
-    },
-    {
-      "reponse": "Full English breakfast",
-      "acceptees": ["Full English breakfast", "A full English breakfast", "Full English", "English breakfast"],
-      "indices": [
-        "Je suis un repas britannique du matin.",
-        "Je suis chaud et salé.",
-        "On trouve en moi des œufs, du bacon et des saucisses."
-      ],
-      "explication": "Le full English breakfast est un petit-déjeuner chaud et salé : œufs, bacon, saucisses, baked beans, toast."
-    },
-    {
-      "reponse": "Baked beans",
-      "acceptees": ["Baked beans", "Beans"],
-      "indices": [
-        "On me trouve dans un petit-déjeuner britannique salé.",
-        "Je suis servi dans une sauce rouge.",
-        "Je suis un haricot à la sauce tomate."
-      ],
-      "explication": "Les baked beans sont des haricots à la sauce tomate, servis dans le full English breakfast."
-    },
-    {
-      "reponse": "Favourite",
-      "acceptees": ["Favourite", "Favorite"],
-      "indices": [
-        "Je suis un adjectif anglais.",
-        "Je décris ce que l'on aime le plus.",
-        "Dans « My ___ food is pasta », je suis le mot qui manque."
-      ],
-      "explication": "Favourite veut dire préféré (favorite aux États-Unis) : My favourite food is pasta."
-    }
-  ],
+  "devinettes": [],
   "calculs": [],
   "etapes": [
     {

@@ -76,42 +76,66 @@
     {
       "consigne": "De quel gaz de l'air s'agit-il ?",
       "texte": "Dans 100 L d'air, [le gaz majoritaire] occupe environ 78 L.",
-      "choix": ["Diazote", "Dioxygène", "Dioxyde de carbone"],
+      "choix": [
+        "Diazote",
+        "Dioxygène",
+        "Dioxyde de carbone"
+      ],
       "bonne": 0,
       "explication": "Le gaz majoritaire de l'air est le diazote, environ 78 % du volume."
     },
     {
       "consigne": "De quel gaz de l'air s'agit-il ?",
       "texte": "Sous le verre retourné, la bougie s'éteint quand [le gaz qui entretient la flamme] n'est plus assez présent.",
-      "choix": ["Diazote", "Dioxygène", "Dioxyde de carbone"],
+      "choix": [
+        "Diazote",
+        "Dioxygène",
+        "Dioxyde de carbone"
+      ],
       "bonne": 1,
       "explication": "La combustion a besoin de dioxygène : quand il manque, la flamme s'éteint."
     },
     {
       "consigne": "De quel gaz de l'air s'agit-il ?",
       "texte": "Dans le souffle de Nina, [le gaz qui trouble l'eau de chaux] est plus abondant que dans l'air inspiré.",
-      "choix": ["Diazote", "Dioxygène", "Dioxyde de carbone"],
+      "choix": [
+        "Diazote",
+        "Dioxygène",
+        "Dioxyde de carbone"
+      ],
       "bonne": 2,
       "explication": "L'eau de chaux se trouble en présence de dioxyde de carbone, rejeté par la respiration."
     },
     {
       "consigne": "De quel gaz de l'air s'agit-il ?",
       "texte": "Près de 4/5 de l'air sont formés de [ce gaz qui n'intervient ni dans la respiration ni dans la combustion].",
-      "choix": ["Diazote", "Dioxygène", "Dioxyde de carbone"],
+      "choix": [
+        "Diazote",
+        "Dioxygène",
+        "Dioxyde de carbone"
+      ],
       "bonne": 0,
       "explication": "Le diazote forme près de 4/5 de l'air, mais il n'est utilisé ni pour respirer ni pour brûler."
     },
     {
       "consigne": "De quel gaz de l'air s'agit-il ?",
       "texte": "Les êtres vivants respirent grâce à [ce gaz qui forme environ 1/5 de l'air].",
-      "choix": ["Diazote", "Dioxygène", "Dioxyde de carbone"],
+      "choix": [
+        "Diazote",
+        "Dioxygène",
+        "Dioxyde de carbone"
+      ],
       "bonne": 1,
       "explication": "Le dioxygène représente environ 21 % de l'air, soit 1/5, et il est indispensable à la respiration."
     },
     {
       "consigne": "De quel gaz de l'air s'agit-il ?",
       "texte": "L'air contient très peu de [ce gaz], environ 0,04 %, mais il joue un rôle dans l'effet de serre.",
-      "choix": ["Diazote", "Dioxygène", "Dioxyde de carbone"],
+      "choix": [
+        "Diazote",
+        "Dioxygène",
+        "Dioxyde de carbone"
+      ],
       "bonne": 2,
       "explication": "Le dioxyde de carbone ne représente qu'environ 0,04 % de l'air mais joue un rôle important dans l'effet de serre."
     }
@@ -119,7 +143,9 @@
   "devinettes": [
     {
       "reponse": "Eau de chaux",
-      "acceptees": ["L'eau de chaux"],
+      "acceptees": [
+        "L'eau de chaux"
+      ],
       "indices": [
         "Je suis un liquide limpide.",
         "Je sers à tester la présence d'un gaz précis.",
@@ -129,7 +155,10 @@
     },
     {
       "reponse": "Monoxyde de carbone",
-      "acceptees": ["Le monoxyde de carbone", "CO"],
+      "acceptees": [
+        "Le monoxyde de carbone",
+        "CO"
+      ],
       "indices": [
         "Je suis un gaz polluant.",
         "Je suis toxique et sans odeur.",
@@ -138,18 +167,12 @@
       "explication": "Le monoxyde de carbone est un gaz toxique et inodore, produit par une mauvaise combustion."
     },
     {
-      "reponse": "Atmosphère",
-      "acceptees": ["L'atmosphère"],
-      "indices": [
-        "Je suis une couche.",
-        "Je suis formée d'air.",
-        "J'entoure la Terre."
-      ],
-      "explication": "L'atmosphère est la couche d'air qui entoure la Terre."
-    },
-    {
       "reponse": "Diazote",
-      "acceptees": ["Le diazote", "Azote", "N2"],
+      "acceptees": [
+        "Le diazote",
+        "Azote",
+        "N2"
+      ],
       "indices": [
         "Je suis un gaz de l'air.",
         "Je suis le plus abondant de tous les gaz de l'air.",

@@ -48,114 +48,92 @@
   ],
   "causes": [
     {
-      "fait": "la saturation d'une solution de sel",
-      "carte": "On a versé plus de sel que l'eau ne peut en dissoudre",
-      "role": "cause",
-      "explication": "Quand le solvant ne peut plus dissoudre de soluté, la solution est saturée : il y avait trop de sel pour la quantité d'eau."
-    },
-    {
-      "fait": "la saturation d'une solution de sel",
-      "carte": "À 20 °C, 1 L d'eau ne dissout qu'environ 360 g de sel",
-      "role": "cause",
-      "explication": "La solubilité du sel est limitée : au-delà de cette masse, le sel ne se dissout plus."
-    },
-    {
       "fait": "la non-miscibilité de l'huile et de l'eau",
       "carte": "On voit deux couches séparées, même après avoir agité",
       "role": "consequence",
       "explication": "Des liquides non miscibles ne forment pas un mélange homogène : ils se séparent en deux couches."
-    },
-    {
-      "fait": "la non-miscibilité de l'huile et de l'eau",
-      "carte": "L'huile se place au-dessus de l'eau",
-      "role": "consequence",
-      "explication": "Les deux liquides restent séparés et l'huile, moins dense, flotte sur l'eau."
     }
   ],
   "etiquettes": [
     {
       "consigne": "Quel est le rôle du groupe en couleur dans la dissolution ?",
       "texte": "Léa remue [le sucre] dans un verre d'eau jusqu'à ce qu'il ne se voie plus.",
-      "choix": ["Soluté", "Solvant", "Solution"],
+      "choix": [
+        "Soluté",
+        "Solvant",
+        "Solution"
+      ],
       "bonne": 0,
       "explication": "Le sucre est l'espèce qui se dissout : c'est le soluté."
     },
     {
       "consigne": "Quel est le rôle du groupe en couleur dans la dissolution ?",
       "texte": "Pierre remue un morceau de sucre dans [l'eau chaude] jusqu'à ce qu'il disparaisse.",
-      "choix": ["Soluté", "Solvant", "Solution"],
+      "choix": [
+        "Soluté",
+        "Solvant",
+        "Solution"
+      ],
       "bonne": 1,
       "explication": "L'eau est le liquide qui dissout le sucre : c'est le solvant."
     },
     {
       "consigne": "Quel est le rôle du groupe en couleur dans la dissolution ?",
       "texte": "Après avoir bien remué, Léa boit [l'eau sucrée] obtenue.",
-      "choix": ["Soluté", "Solvant", "Solution"],
+      "choix": [
+        "Soluté",
+        "Solvant",
+        "Solution"
+      ],
       "bonne": 2,
       "explication": "L'eau sucrée est le mélange homogène obtenu, avec le sucre dissous dans l'eau : c'est la solution."
     },
     {
       "consigne": "Quel est le rôle du groupe en couleur dans la dissolution ?",
       "texte": "Dans une bouteille de soda, [le dioxyde de carbone] est dissous dans la boisson.",
-      "choix": ["Soluté", "Solvant", "Solution"],
+      "choix": [
+        "Soluté",
+        "Solvant",
+        "Solution"
+      ],
       "bonne": 0,
       "explication": "Le dioxyde de carbone est un gaz qui se dissout dans l'eau de la boisson : c'est le soluté."
     },
     {
       "consigne": "Quel est le rôle du groupe en couleur dans la dissolution ?",
       "texte": "Pour préparer de l'eau salée, Tom verse 10 g de sel dans [200 g d'eau].",
-      "choix": ["Soluté", "Solvant", "Solution"],
+      "choix": [
+        "Soluté",
+        "Solvant",
+        "Solution"
+      ],
       "bonne": 1,
       "explication": "Les 200 g d'eau sont le liquide qui dissout le sel : c'est le solvant."
     },
     {
       "consigne": "Quel est le rôle du groupe en couleur dans la dissolution ?",
       "texte": "Tom verse 10 g de sel dans 200 g d'eau et obtient [210 g d'eau salée].",
-      "choix": ["Soluté", "Solvant", "Solution"],
+      "choix": [
+        "Soluté",
+        "Solvant",
+        "Solution"
+      ],
       "bonne": 2,
       "explication": "L'eau salée est le mélange obtenu, sel dissous dans l'eau : c'est la solution. Sa masse est 200 + 10 = 210 g."
     }
   ],
   "devinettes": [
     {
-      "reponse": "Dioxyde de carbone",
-      "acceptees": ["Le dioxyde de carbone", "CO2", "Gaz carbonique"],
-      "indices": [
-        "Je suis un gaz invisible.",
-        "On me trouve dissous dans une bouteille de soda.",
-        "Je forme les bulles qui s'échappent à l'ouverture d'une boisson gazeuse."
-      ],
-      "explication": "Le dioxyde de carbone dissous dans une boisson gazeuse s'échappe en bulles à l'ouverture."
-    },
-    {
       "reponse": "Solubilité",
-      "acceptees": ["La solubilité"],
+      "acceptees": [
+        "La solubilité"
+      ],
       "indices": [
         "Je dépends de la température.",
         "Je suis une masse maximale.",
         "Je suis la masse maximale de soluté que l'on peut dissoudre dans 1 L de solvant."
       ],
       "explication": "La solubilité est la masse maximale de soluté que l'on peut dissoudre dans 1 L de solvant."
-    },
-    {
-      "reponse": "Solution saturée",
-      "acceptees": ["Saturée", "Une solution saturée", "La solution saturée"],
-      "indices": [
-        "Je suis un liquide dans lequel on a déjà dissous quelque chose.",
-        "On ne peut plus rien y dissoudre en plus.",
-        "Le soluté en excès reste solide au fond de moi."
-      ],
-      "explication": "Une solution saturée ne peut plus dissoudre de soluté : l'excès reste au fond."
-    },
-    {
-      "reponse": "Miscibles",
-      "acceptees": ["Miscible", "Liquides miscibles", "Deux liquides miscibles"],
-      "indices": [
-        "Je décris deux liquides.",
-        "L'eau et le sirop sont comme ça.",
-        "Quand on mélange deux liquides ainsi, on obtient une seule couche, un mélange homogène."
-      ],
-      "explication": "Deux liquides sont miscibles s'ils forment un mélange homogène, comme l'eau et le sirop."
     }
   ],
   "calculs": [

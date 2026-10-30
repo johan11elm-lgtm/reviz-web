@@ -7,7 +7,6 @@
       "cartes": [
         "Les muscles actifs consomment davantage de glucose",
         "Un muscle qui travaille consomme plus de dioxygène",
-        "Le muscle rejette du dioxyde de carbone comme déchet",
         "Dioxygène et glucose fournissent l'énergie de la contraction",
         "Un muscle au repos consomme moins qu'un muscle actif"
       ]
@@ -38,9 +37,7 @@
       "nom": "Limites et bonnes pratiques",
       "detail": "Ce que l'organisme ne peut pas dépasser et ce qui aide à pratiquer un sport sans danger.",
       "cartes": [
-        "La fréquence cardiaque ne peut pas dépasser une valeur maximale",
         "Il faut s'échauffer avant l'effort et s'hydrater",
-        "Un sportif entraîné récupère plus vite qu'une personne non entraînée",
         "Le dopage est interdit et dangereux pour la santé",
         "Bien manger et bien dormir aident le sportif"
       ]
@@ -82,53 +79,66 @@
     {
       "consigne": "Que mesure le groupe en couleur ?",
       "texte": "Léa prend son pouls pendant une minute et compte [72 battements].",
-      "choix": ["Fréquence cardiaque", "Fréquence respiratoire", "Débit sanguin"],
+      "choix": [
+        "Fréquence cardiaque",
+        "Fréquence respiratoire",
+        "Débit sanguin"
+      ],
       "bonne": 0,
       "explication": "Le nombre de battements du cœur par minute, mesuré avec le pouls, est la fréquence cardiaque."
     },
     {
       "consigne": "Que mesure le groupe en couleur ?",
       "texte": "Hugo observe sa poitrine pendant une minute : il compte [16 mouvements].",
-      "choix": ["Fréquence cardiaque", "Fréquence respiratoire", "Débit sanguin"],
+      "choix": [
+        "Fréquence cardiaque",
+        "Fréquence respiratoire",
+        "Débit sanguin"
+      ],
       "bonne": 1,
       "explication": "Le nombre de mouvements de la poitrine par minute est la fréquence respiratoire."
     },
     {
       "consigne": "Que mesure le groupe en couleur ?",
       "texte": "Pendant la course, [la quantité de sang qui traverse les muscles des jambes en une minute] augmente.",
-      "choix": ["Fréquence cardiaque", "Fréquence respiratoire", "Débit sanguin"],
+      "choix": [
+        "Fréquence cardiaque",
+        "Fréquence respiratoire",
+        "Débit sanguin"
+      ],
       "bonne": 2,
       "explication": "La quantité de sang qui circule dans un organe par minute est le débit sanguin."
     },
     {
       "consigne": "Que mesure le groupe en couleur ?",
       "texte": "Le cardiofréquencemètre de Samir affiche [150 battements par minute] en fin de course.",
-      "choix": ["Fréquence cardiaque", "Fréquence respiratoire", "Débit sanguin"],
+      "choix": [
+        "Fréquence cardiaque",
+        "Fréquence respiratoire",
+        "Débit sanguin"
+      ],
       "bonne": 0,
       "explication": "Un cardiofréquencemètre compte les battements du cœur par minute : c'est la fréquence cardiaque."
     },
     {
       "consigne": "Que mesure le groupe en couleur ?",
       "texte": "Après l'effort, Inès compte [25 mouvements de sa poitrine] en une minute.",
-      "choix": ["Fréquence cardiaque", "Fréquence respiratoire", "Débit sanguin"],
+      "choix": [
+        "Fréquence cardiaque",
+        "Fréquence respiratoire",
+        "Débit sanguin"
+      ],
       "bonne": 1,
       "explication": "Les mouvements de la poitrine comptés en une minute donnent la fréquence respiratoire."
     }
   ],
   "devinettes": [
     {
-      "reponse": "Pouls",
-      "acceptees": ["Le pouls", "Fréquence cardiaque", "La fréquence cardiaque"],
-      "indices": [
-        "Je me prends au poignet ou au cou.",
-        "On me compte pendant 15 secondes, puis on multiplie par 4.",
-        "Je correspond aux battements du cœur transmis dans les artères."
-      ],
-      "explication": "Le pouls correspond aux battements du cœur : en le comptant, on mesure la fréquence cardiaque."
-    },
-    {
       "reponse": "Récupération",
-      "acceptees": ["La récupération", "Phase de récupération"],
+      "acceptees": [
+        "La récupération",
+        "Phase de récupération"
+      ],
       "indices": [
         "Je viens après l'effort.",
         "Je ramène peu à peu le cœur et la respiration à leur valeur de repos.",
@@ -138,7 +148,9 @@
     },
     {
       "reponse": "Dopage",
-      "acceptees": ["Le dopage"],
+      "acceptees": [
+        "Le dopage"
+      ],
       "indices": [
         "Je suis dangereux pour la santé.",
         "Je suis interdit dans le sport.",
@@ -148,7 +160,9 @@
     },
     {
       "reponse": "Glucose",
-      "acceptees": ["Le glucose"],
+      "acceptees": [
+        "Le glucose"
+      ],
       "indices": [
         "Je suis un nutriment.",
         "Les muscles me consomment davantage pendant l'effort.",
@@ -202,15 +216,6 @@
         "On compte les battements pendant 15 secondes",
         "On multiplie le nombre trouvé par 4",
         "On obtient la fréquence en battements par minute"
-      ]
-    },
-    {
-      "titre": "Exploiter des mesures de fréquence cardiaque",
-      "etapes": [
-        "On mesure la fréquence au repos, pendant et après l'effort",
-        "On trace le graphique avec le temps en abscisse",
-        "On repère les phases : repos, effort, récupération",
-        "On interprète la hausse pendant l'effort"
       ]
     }
   ]

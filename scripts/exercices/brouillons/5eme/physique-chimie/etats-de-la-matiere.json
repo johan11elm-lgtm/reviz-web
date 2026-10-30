@@ -8,8 +8,7 @@
         "Un glaçon garde sa forme dans n'importe quel récipient",
         "Des particules serrées et rangées en un bloc régulier",
         "Chaque grain de sucre en poudre garde sa forme",
-        "Un caillou a une forme propre et un volume propre",
-        "Le sable qui s'écoule d'un seau"
+        "Un caillou a une forme propre et un volume propre"
       ]
     },
     {
@@ -39,7 +38,6 @@
       "detail": "Les gestes et les unités qui servent à lire un volume avec une éprouvette graduée.",
       "cartes": [
         "On place l'œil à la hauteur du bas du ménisque",
-        "Le niveau d'eau monte quand on y plonge une bille",
         "Des litres aux millilitres : on multiplie par 1 000",
         "L'éprouvette graduée se pose à plat sur la table",
         "Calculer la valeur d'une petite graduation"
@@ -64,54 +62,72 @@
       "carte": "Les particules d'un liquide glissent les unes sur les autres",
       "role": "cause",
       "explication": "Un liquide coule parce que ses particules, serrées mais désordonnées, glissent les unes sur les autres."
-    },
-    {
-      "fait": "l'écoulement d'un liquide",
-      "carte": "On peut verser un liquide d'une bouteille dans un verre",
-      "role": "consequence",
-      "explication": "Un liquide qui coule se transvase d'un récipient à un autre et en prend la forme."
     }
   ],
   "etiquettes": [
     {
       "consigne": "Dans quel état de la matière se trouve le groupe en couleur ?",
       "texte": "Au petit déjeuner, Nina verse [le lait] dans un bol : il prend la forme du bol.",
-      "choix": ["Solide", "Liquide", "Gaz"],
+      "choix": [
+        "Solide",
+        "Liquide",
+        "Gaz"
+      ],
       "bonne": 1,
       "explication": "Le lait prend la forme du récipient mais garde son volume : c'est un liquide."
     },
     {
       "consigne": "Dans quel état de la matière se trouve le groupe en couleur ?",
       "texte": "Dans un ballon de baudruche gonflé, [l'air] occupe tout l'espace disponible.",
-      "choix": ["Solide", "Liquide", "Gaz"],
+      "choix": [
+        "Solide",
+        "Liquide",
+        "Gaz"
+      ],
       "bonne": 2,
       "explication": "Une matière qui occupe tout l'espace disponible est un gaz."
     },
     {
       "consigne": "Dans quel état de la matière se trouve le groupe en couleur ?",
       "texte": "Sur la table, [le glaçon] garde sa forme, même quand on le change de place.",
-      "choix": ["Solide", "Liquide", "Gaz"],
+      "choix": [
+        "Solide",
+        "Liquide",
+        "Gaz"
+      ],
       "bonne": 0,
       "explication": "Le glaçon garde sa forme propre : c'est un solide, l'eau sous forme de glace."
     },
     {
       "consigne": "Dans quel état de la matière se trouve le groupe en couleur ?",
       "texte": "Quand on renverse un seau, [le sable] s'écoule, mais chaque grain garde sa forme.",
-      "choix": ["Solide", "Liquide", "Gaz"],
+      "choix": [
+        "Solide",
+        "Liquide",
+        "Gaz"
+      ],
       "bonne": 0,
       "explication": "Le sable coule, mais chaque grain garde sa forme : c'est un solide en poudre, pas un liquide."
     },
     {
       "consigne": "Dans quel état de la matière se trouve le groupe en couleur ?",
       "texte": "Au-dessus de la casserole qui bout, [la vapeur d'eau] reste invisible.",
-      "choix": ["Solide", "Liquide", "Gaz"],
+      "choix": [
+        "Solide",
+        "Liquide",
+        "Gaz"
+      ],
       "bonne": 2,
       "explication": "La vapeur d'eau est de l'eau à l'état gazeux ; elle est invisible. Le panache blanc qu'on voit est fait de gouttelettes d'eau liquide."
     },
     {
       "consigne": "Dans quel état de la matière se trouve le groupe en couleur ?",
       "texte": "Dans une éprouvette, [l'eau] a une surface libre plane et horizontale.",
-      "choix": ["Solide", "Liquide", "Gaz"],
+      "choix": [
+        "Solide",
+        "Liquide",
+        "Gaz"
+      ],
       "bonne": 1,
       "explication": "La surface libre plane et horizontale est une propriété des liquides au repos."
     }
@@ -119,7 +135,9 @@
   "devinettes": [
     {
       "reponse": "Ménisque",
-      "acceptees": ["Le ménisque"],
+      "acceptees": [
+        "Le ménisque"
+      ],
       "indices": [
         "Je suis une courbure.",
         "On me voit à la surface d'un liquide dans un tube étroit.",
@@ -129,7 +147,11 @@
     },
     {
       "reponse": "Surface libre",
-      "acceptees": ["Surface", "La surface libre", "Surface libre d'un liquide"],
+      "acceptees": [
+        "Surface",
+        "La surface libre",
+        "Surface libre d'un liquide"
+      ],
       "indices": [
         "Je suis en contact avec l'air.",
         "Je suis plane et horizontale quand le liquide est au repos.",
@@ -139,23 +161,16 @@
     },
     {
       "reponse": "Vapeur d'eau",
-      "acceptees": ["La vapeur d'eau", "Vapeur"],
+      "acceptees": [
+        "La vapeur d'eau",
+        "Vapeur"
+      ],
       "indices": [
         "Je suis un gaz que l'on ne voit pas.",
         "Je suis la forme gazeuse de ce qui fait la glace et la pluie.",
         "Je ne suis pas le panache blanc qui sort d'une casserole : lui est fait de fines gouttelettes."
       ],
       "explication": "La vapeur d'eau est de l'eau à l'état gazeux, invisible. La buée et les nuages sont faits de gouttelettes d'eau liquide."
-    },
-    {
-      "reponse": "Éprouvette graduée",
-      "acceptees": ["Éprouvette", "Une éprouvette", "Une éprouvette graduée"],
-      "indices": [
-        "Je suis un récipient en verre ou en plastique.",
-        "On me pose à plat sur la table pour lire un volume.",
-        "Je suis étroite, avec des traits et des nombres en mL sur ma paroi."
-      ],
-      "explication": "L'éprouvette graduée sert à mesurer le volume d'un liquide, posée à plat, l'œil au niveau du bas du ménisque."
     }
   ],
   "calculs": [

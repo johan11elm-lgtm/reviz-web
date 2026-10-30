@@ -60,12 +60,6 @@
       "explication": "La rouille est le signe visible de la corrosion de l'acier."
     },
     {
-      "fait": "la corrosion de l'acier ordinaire d'un banc",
-      "carte": "On doit le peindre ou choisir un acier inoxydable",
-      "role": "consequence",
-      "explication": "Comme l'acier ordinaire se corrode à l'humidité, on le protège par une peinture ou on choisit un matériau qui résiste à la corrosion."
-    },
-    {
       "fait": "la flottaison du liège sur l'eau",
       "carte": "Sa masse volumique est inférieure à celle de l'eau",
       "role": "cause",
@@ -76,42 +70,72 @@
     {
       "consigne": "Quelle propriété du matériau le passage en couleur décrit-il ?",
       "texte": "Pour comparer deux plaques, Inès [passe une pointe sur chacune : seule la plaque de plastique est rayée].",
-      "choix": ["Dureté", "Élasticité", "Conductivité", "Résistance à la corrosion"],
+      "choix": [
+        "Dureté",
+        "Élasticité",
+        "Conductivité",
+        "Résistance à la corrosion"
+      ],
       "bonne": 0,
       "explication": "Résister à la rayure, c'est la dureté : la plaque d'acier, non rayée, est plus dure que celle de plastique."
     },
     {
       "consigne": "Quelle propriété du matériau le passage en couleur décrit-il ?",
       "texte": "Quand on lâche le ressort du stylo, [il retrouve sa longueur de départ].",
-      "choix": ["Dureté", "Élasticité", "Conductivité", "Résistance à la corrosion"],
+      "choix": [
+        "Dureté",
+        "Élasticité",
+        "Conductivité",
+        "Résistance à la corrosion"
+      ],
       "bonne": 1,
       "explication": "Se déformer puis reprendre sa forme initiale, c'est l'élasticité."
     },
     {
       "consigne": "Quelle propriété du matériau le passage en couleur décrit-il ?",
       "texte": "Pour les fils du câble, on choisit le cuivre : [il laisse très bien passer le courant].",
-      "choix": ["Dureté", "Élasticité", "Conductivité", "Résistance à la corrosion"],
+      "choix": [
+        "Dureté",
+        "Élasticité",
+        "Conductivité",
+        "Résistance à la corrosion"
+      ],
       "bonne": 2,
       "explication": "Laisser passer le courant, c'est la conductivité électrique : le cuivre est un très bon conducteur."
     },
     {
       "consigne": "Quelle propriété du matériau le passage en couleur décrit-il ?",
       "texte": "Les couverts en acier inoxydable [ne rouillent pas] au lave-vaisselle.",
-      "choix": ["Dureté", "Élasticité", "Conductivité", "Résistance à la corrosion"],
+      "choix": [
+        "Dureté",
+        "Élasticité",
+        "Conductivité",
+        "Résistance à la corrosion"
+      ],
       "bonne": 3,
       "explication": "La rouille est une corrosion : ne pas rouiller, c'est bien résister à la corrosion."
     },
     {
       "consigne": "Quelle propriété du matériau le passage en couleur décrit-il ?",
       "texte": "Le plan de travail en granit [ne porte aucune rayure malgré les couteaux].",
-      "choix": ["Dureté", "Élasticité", "Conductivité", "Résistance à la corrosion"],
+      "choix": [
+        "Dureté",
+        "Élasticité",
+        "Conductivité",
+        "Résistance à la corrosion"
+      ],
       "bonne": 0,
       "explication": "Un matériau qui ne se raye pas est dur : c'est la dureté du granit."
     },
     {
       "consigne": "Quelle propriété du matériau le passage en couleur décrit-il ?",
       "texte": "Le manche de la poêle est en bois : [il reste froid pendant la cuisson].",
-      "choix": ["Dureté", "Élasticité", "Conductivité", "Résistance à la corrosion"],
+      "choix": [
+        "Dureté",
+        "Élasticité",
+        "Conductivité",
+        "Résistance à la corrosion"
+      ],
       "bonne": 2,
       "explication": "Le bois laisse mal passer la chaleur : c'est un isolant thermique, donc un matériau très peu conducteur."
     }
@@ -119,43 +143,17 @@
   "devinettes": [
     {
       "reponse": "Élasticité",
-      "acceptees": ["L'élasticité", "Elasticité", "Elasticite"],
+      "acceptees": [
+        "L'élasticité",
+        "Elasticité",
+        "Elasticite"
+      ],
       "indices": [
         "Je suis une propriété mécanique des matériaux.",
         "Le caoutchouc et les ressorts me possèdent.",
         "Grâce à moi, un matériau déformé retrouve sa forme initiale."
       ],
       "explication": "L'élasticité est la capacité à se déformer puis à reprendre sa forme initiale, comme le caoutchouc."
-    },
-    {
-      "reponse": "Masse volumique",
-      "acceptees": ["La masse volumique", "Masse volumique d'un matériau"],
-      "indices": [
-        "Je suis une propriété physique des matériaux.",
-        "On m'exprime en g/cm³ et on me calcule avec une division.",
-        "Mon symbole est la lettre grecque ρ, et pour l'eau je vaux 1 g/cm³."
-      ],
-      "explication": "La masse volumique se calcule par ρ = m ÷ V et s'exprime en g/cm³ ; celle de l'eau vaut 1 g/cm³."
-    },
-    {
-      "reponse": "Isolant",
-      "acceptees": ["Un isolant", "Isolants", "Matériau isolant", "Un matériau isolant"],
-      "indices": [
-        "Je suis un type de matériau.",
-        "Le plastique, le verre et le bois sec sont des exemples.",
-        "Je laisse mal passer le courant ou la chaleur."
-      ],
-      "explication": "Un isolant laisse mal passer le courant ou la chaleur, par exemple le plastique pour le manche d'une casserole."
-    },
-    {
-      "reponse": "Corrosion",
-      "acceptees": ["La corrosion", "Rouille", "La rouille", "Oxydation"],
-      "indices": [
-        "Je suis un phénomène qui abîme les matériaux.",
-        "L'air humide et l'eau me favorisent.",
-        "Sur l'acier ordinaire, je laisse une couche brune qu'on évite avec de la peinture."
-      ],
-      "explication": "La corrosion est la dégradation d'un matériau au contact de l'air ou de l'eau ; sur l'acier, elle forme de la rouille."
     }
   ],
   "calculs": [

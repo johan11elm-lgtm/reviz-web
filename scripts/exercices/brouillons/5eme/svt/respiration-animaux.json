@@ -16,7 +16,6 @@
       "nom": "Les organes selon l'animal",
       "detail": "Poumons, branchies, trachées ou peau : chaque groupe d'animaux a son organe respiratoire.",
       "cartes": [
-        "Le dauphin vit dans l'eau mais a des poumons",
         "Le poisson prélève le dioxygène avec ses branchies",
         "La sauterelle respire grâce à des trachées",
         "Le ver de terre respire à travers sa peau",
@@ -76,35 +75,60 @@
     {
       "consigne": "Quel organe respiratoire l'animal en couleur utilise-t-il ?",
       "texte": "Dans la rivière, [la truite] prélève le dioxygène dissous dans l'eau.",
-      "choix": ["Poumons", "Branchies", "Trachées", "Peau"],
+      "choix": [
+        "Poumons",
+        "Branchies",
+        "Trachées",
+        "Peau"
+      ],
       "bonne": 1,
       "explication": "La truite est un poisson : elle respire avec des branchies, lamelles fines baignées par l'eau."
     },
     {
       "consigne": "Quel organe respiratoire l'animal en couleur utilise-t-il ?",
       "texte": "[Le dauphin] vit dans la mer, mais il remonte régulièrement à la surface.",
-      "choix": ["Poumons", "Branchies", "Trachées", "Peau"],
+      "choix": [
+        "Poumons",
+        "Branchies",
+        "Trachées",
+        "Peau"
+      ],
       "bonne": 0,
       "explication": "Le dauphin est un mammifère : il respire avec des poumons et vient prendre l'air à la surface."
     },
     {
       "consigne": "Quel organe respiratoire l'animal en couleur utilise-t-il ?",
       "texte": "Dans l'herbe, [la sauterelle] saute de brin en brin.",
-      "choix": ["Poumons", "Branchies", "Trachées", "Peau"],
+      "choix": [
+        "Poumons",
+        "Branchies",
+        "Trachées",
+        "Peau"
+      ],
       "bonne": 2,
       "explication": "La sauterelle est un insecte : l'air entre par les stigmates et circule dans des trachées."
     },
     {
       "consigne": "Quel organe respiratoire l'animal en couleur utilise-t-il ?",
       "texte": "Dans le jardin, [le ver de terre] rampe sur la terre humide.",
-      "choix": ["Poumons", "Branchies", "Trachées", "Peau"],
+      "choix": [
+        "Poumons",
+        "Branchies",
+        "Trachées",
+        "Peau"
+      ],
       "bonne": 3,
       "explication": "Le ver de terre respire à travers sa peau fine et humide : c'est la respiration cutanée."
     },
     {
       "consigne": "Quel organe respiratoire l'animal en couleur utilise-t-il ?",
       "texte": "Dans la mare, [le têtard] nage avec sa queue.",
-      "choix": ["Poumons", "Branchies", "Trachées", "Peau"],
+      "choix": [
+        "Poumons",
+        "Branchies",
+        "Trachées",
+        "Peau"
+      ],
       "bonne": 1,
       "explication": "Le têtard vit dans l'eau et respire avec des branchies ; la grenouille adulte aura des poumons."
     }
@@ -112,7 +136,12 @@
   "devinettes": [
     {
       "reponse": "Branchies",
-      "acceptees": ["Les branchies", "Branchie", "La branchie", "Une branchie"],
+      "acceptees": [
+        "Les branchies",
+        "Branchie",
+        "La branchie",
+        "Une branchie"
+      ],
       "indices": [
         "Je suis un organe respiratoire.",
         "Je suis fait de lamelles fines et très irriguées.",
@@ -122,45 +151,18 @@
     },
     {
       "reponse": "Eau de chaux",
-      "acceptees": ["L'eau de chaux", "Chaux"],
+      "acceptees": [
+        "L'eau de chaux",
+        "Chaux"
+      ],
       "indices": [
         "Je suis un liquide utilisé en expérience.",
         "On me verse dans un bocal pour tester la présence d'un gaz.",
         "Je me trouble en présence de dioxyde de carbone."
       ],
       "explication": "L'eau de chaux se trouble en présence de dioxyde de carbone : elle sert à détecter ce gaz."
-    },
-    {
-      "reponse": "Stigmates",
-      "acceptees": ["Les stigmates", "Stigmate", "Un stigmate"],
-      "indices": [
-        "Je suis un petit orifice.",
-        "Je me trouve sur le corps d'un insecte.",
-        "L'air entre par moi avant de circuler dans les trachées."
-      ],
-      "explication": "Les stigmates sont les orifices par lesquels l'air entre dans les trachées des insectes."
-    },
-    {
-      "reponse": "Dioxyde de carbone",
-      "acceptees": ["Le dioxyde de carbone", "CO2", "CO₂"],
-      "indices": [
-        "Je suis un gaz.",
-        "Les animaux me rejettent en respirant.",
-        "Je trouble l'eau de chaux."
-      ],
-      "explication": "Les animaux rejettent du dioxyde de carbone en respirant, et ce gaz trouble l'eau de chaux."
     }
   ],
   "calculs": [],
-  "etapes": [
-    {
-      "titre": "Montrer qu'un animal respire",
-      "etapes": [
-        "On formule l'hypothèse que l'animal consomme du dioxygène",
-        "On prépare deux bocaux fermés, avec et sans l'animal",
-        "On mesure le dioxygène et on teste l'eau de chaux",
-        "On compare les deux bocaux et on conclut"
-      ]
-    }
-  ]
+  "etapes": []
 }

@@ -19,7 +19,6 @@
         "Rencontre des gamètes dans le corps de la femelle",
         "Les mammifères s'accouplent avant la rencontre des gamètes",
         "Les gamètes sont protégés du dessèchement par la femelle",
-        "Mode adapté à la vie en milieu aérien",
         "Les oiseaux s'accouplent avant de pondre leurs œufs"
       ]
     },
@@ -41,7 +40,6 @@
         "Une abeille dépose du pollen sur le pistil",
         "L'ovule devient la graine, l'ovaire devient le fruit",
         "Les étamines produisent le pollen",
-        "Le vent emporte les fruits de l'érable loin de l'arbre",
         "Le pistil contient l'ovaire, qui renferme les ovules"
       ]
     }
@@ -82,28 +80,44 @@
     {
       "consigne": "Par quel agent les graines de la plante en couleur sont-elles disséminées ?",
       "texte": "Les fruits ailés de [l'érable] tombent très loin de l'arbre.",
-      "choix": ["Le vent", "Les animaux", "L'eau"],
+      "choix": [
+        "Le vent",
+        "Les animaux",
+        "L'eau"
+      ],
       "bonne": 0,
       "explication": "Le vent emporte les fruits de l'érable."
     },
     {
       "consigne": "Par quel agent les graines en couleur sont-elles disséminées ?",
       "texte": "Un oiseau mange des baies : [leurs graines] sont rejetées plus loin.",
-      "choix": ["Le vent", "Les animaux", "L'eau"],
+      "choix": [
+        "Le vent",
+        "Les animaux",
+        "L'eau"
+      ],
       "bonne": 1,
       "explication": "Un animal disperse des graines en mangeant des fruits."
     },
     {
       "consigne": "Par quel agent les graines en couleur sont-elles disséminées ?",
       "texte": "[Des graines tombées dans une rivière] sont transportées en aval.",
-      "choix": ["Le vent", "Les animaux", "L'eau"],
+      "choix": [
+        "Le vent",
+        "Les animaux",
+        "L'eau"
+      ],
       "bonne": 2,
       "explication": "L'eau d'une rivière peut transporter des graines loin de la plante mère."
     },
     {
       "consigne": "Par quel agent les graines de la plante en couleur sont-elles disséminées ?",
       "texte": "Les fruits du [pissenlit] s'envolent loin de la plante mère.",
-      "choix": ["Le vent", "Les animaux", "L'eau"],
+      "choix": [
+        "Le vent",
+        "Les animaux",
+        "L'eau"
+      ],
       "bonne": 0,
       "explication": "Le vent emporte les fruits du pissenlit."
     }
@@ -111,7 +125,10 @@
   "devinettes": [
     {
       "reponse": "Pollinisation",
-      "acceptees": ["Pollinisation", "La pollinisation"],
+      "acceptees": [
+        "Pollinisation",
+        "La pollinisation"
+      ],
       "indices": [
         "Je suis une étape de la vie des plantes à fleurs.",
         "Je suis réalisée par le vent ou par des insectes.",
@@ -120,34 +137,19 @@
       "explication": "La pollinisation transporte le pollen des étamines vers le pistil."
     },
     {
-      "reponse": "Cellule-œuf",
-      "acceptees": ["Cellule-œuf", "Cellule œuf", "Cellule-oeuf", "Cellule oeuf", "La cellule-œuf"],
-      "indices": [
-        "Je suis une cellule.",
-        "Je suis formée par la fusion d'un gamète mâle et d'un gamète femelle.",
-        "Je me développe en un nouvel individu."
-      ],
-      "explication": "La cellule-œuf est issue de la fécondation et donne un nouvel individu."
-    },
-    {
       "reponse": "Stolon",
-      "acceptees": ["Stolon", "Stolons", "Un stolon", "Les stolons"],
+      "acceptees": [
+        "Stolon",
+        "Stolons",
+        "Un stolon",
+        "Les stolons"
+      ],
       "indices": [
         "Je permets une reproduction sans fécondation.",
         "Je suis un organe du fraisier.",
         "Je forme de nouveaux pieds identiques à la plante mère."
       ],
       "explication": "Les stolons du fraisier sont un mode de reproduction asexuée."
-    },
-    {
-      "reponse": "Dissémination",
-      "acceptees": ["Dissémination", "La dissémination", "Dissemination"],
-      "indices": [
-        "Je concerne les graines.",
-        "Je me fais par le vent, par les animaux ou par l'eau.",
-        "Grâce à moi, une espèce peut coloniser de nouveaux milieux."
-      ],
-      "explication": "La dissémination disperse les graines loin de la plante mère."
     }
   ],
   "calculs": [],

@@ -7,7 +7,6 @@
       "cartes": [
         "Le tube digestif va de la bouche à l'anus",
         "Les aliments ne traversent pas le foie",
-        "Les glandes digestives produisent les sucs digestifs",
         "Le pancréas est une glande située sous l'estomac",
         "Les aliments passent par l'œsophage puis par l'estomac"
       ]
@@ -28,8 +27,6 @@
       "detail": "Le passage des nutriments dans le sang et la structure qui le facilite.",
       "cartes": [
         "Les nutriments passent de l'intestin grêle vers le sang",
-        "Des replis couverts de villosités agrandissent la surface d'échange",
-        "La paroi fine est très irriguée par des capillaires",
         "Le sang distribue ensuite les nutriments à tous les organes",
         "L'eau et les vitamines passent directement dans le sang"
       ]
@@ -88,42 +85,66 @@
     {
       "consigne": "De quoi s'agit-il pour le groupe en couleur ?",
       "texte": "Au petit déjeuner, Lila mange [du pain] avec du beurre.",
-      "choix": ["Aliment", "Nutriment", "Enzyme digestive"],
+      "choix": [
+        "Aliment",
+        "Nutriment",
+        "Enzyme digestive"
+      ],
       "bonne": 0,
       "explication": "Le pain est un aliment : c'est ce que l'on mange, avant qu'il soit digéré."
     },
     {
       "consigne": "De quoi s'agit-il pour le groupe en couleur ?",
       "texte": "Après la digestion de l'amidon, [le glucose] passe dans le sang.",
-      "choix": ["Aliment", "Nutriment", "Enzyme digestive"],
+      "choix": [
+        "Aliment",
+        "Nutriment",
+        "Enzyme digestive"
+      ],
       "bonne": 1,
       "explication": "Le glucose est une petite molécule issue de la digestion qui passe dans le sang : c'est un nutriment."
     },
     {
       "consigne": "De quoi s'agit-il pour le groupe en couleur ?",
       "texte": "Dans la bouche, [l'amylase] transforme l'amidon en sucres plus simples.",
-      "choix": ["Aliment", "Nutriment", "Enzyme digestive"],
+      "choix": [
+        "Aliment",
+        "Nutriment",
+        "Enzyme digestive"
+      ],
       "bonne": 2,
       "explication": "L'amylase est l'enzyme digestive de la salive : elle découpe l'amidon."
     },
     {
       "consigne": "De quoi s'agit-il pour le groupe en couleur ?",
       "texte": "Le plat du midi est composé de [pâtes] et de légumes.",
-      "choix": ["Aliment", "Nutriment", "Enzyme digestive"],
+      "choix": [
+        "Aliment",
+        "Nutriment",
+        "Enzyme digestive"
+      ],
       "bonne": 0,
       "explication": "Les pâtes sont un aliment : on les mange, puis on les digère pour obtenir des nutriments."
     },
     {
       "consigne": "De quoi s'agit-il pour le groupe en couleur ?",
       "texte": "Les protéines du poisson sont découpées en [acides aminés].",
-      "choix": ["Aliment", "Nutriment", "Enzyme digestive"],
+      "choix": [
+        "Aliment",
+        "Nutriment",
+        "Enzyme digestive"
+      ],
       "bonne": 1,
       "explication": "Les acides aminés sont les petites molécules issues des protéines : ce sont des nutriments."
     },
     {
       "consigne": "De quoi s'agit-il pour le groupe en couleur ?",
       "texte": "La salive contient [une substance qui découpe l'amidon].",
-      "choix": ["Aliment", "Nutriment", "Enzyme digestive"],
+      "choix": [
+        "Aliment",
+        "Nutriment",
+        "Enzyme digestive"
+      ],
       "bonne": 2,
       "explication": "Une substance des sucs digestifs qui découpe les grosses molécules est une enzyme digestive."
     }
@@ -131,7 +152,10 @@
   "devinettes": [
     {
       "reponse": "Amylase",
-      "acceptees": ["L'amylase", "Une amylase"],
+      "acceptees": [
+        "L'amylase",
+        "Une amylase"
+      ],
       "indices": [
         "Je suis une substance qui agit dans la bouche.",
         "Je fais partie de la salive.",
@@ -140,34 +164,19 @@
       "explication": "L'amylase est l'enzyme digestive de la salive : elle transforme l'amidon en sucres."
     },
     {
-      "reponse": "Intestin grêle",
-      "acceptees": ["L'intestin grêle", "Le grêle"],
-      "indices": [
-        "Je fais partie du tube digestif, juste après l'estomac.",
-        "Ma paroi est fine et couverte de replis.",
-        "C'est chez moi que les nutriments passent dans le sang."
-      ],
-      "explication": "L'absorption des nutriments se fait au niveau de l'intestin grêle, dont la paroi est fine et très irriguée."
-    },
-    {
       "reponse": "Villosités",
-      "acceptees": ["Villosité", "Les villosités", "Une villosité", "Villosités intestinales"],
+      "acceptees": [
+        "Villosité",
+        "Les villosités",
+        "Une villosité",
+        "Villosités intestinales"
+      ],
       "indices": [
         "Je suis une toute petite saillie en forme de doigt.",
         "On me trouve sur les replis de la paroi de l'intestin grêle.",
         "Grâce à moi et à mes semblables, la surface d'échange est très grande."
       ],
       "explication": "Les villosités couvrent les replis de l'intestin grêle et augmentent beaucoup sa surface d'absorption."
-    },
-    {
-      "reponse": "Microbiote",
-      "acceptees": ["Le microbiote", "Microbiote intestinal", "Le microbiote intestinal", "Flore intestinale"],
-      "indices": [
-        "Je suis un ensemble de micro-organismes, surtout des bactéries.",
-        "Je vis dans l'intestin, surtout dans le gros intestin.",
-        "Je digère une partie des fibres et je fabrique certaines vitamines."
-      ],
-      "explication": "Le microbiote intestinal est l'ensemble des micro-organismes de l'intestin, qui aident la digestion."
     }
   ],
   "calculs": [],

@@ -51,70 +51,76 @@
     {
       "consigne": "Quel est le type de la phrase en couleur ?",
       "texte": "Look at my classroom! [There is a big map on the wall.]",
-      "choix": ["Affirmative", "Négative", "Interrogative"],
+      "choix": [
+        "Affirmative",
+        "Négative",
+        "Interrogative"
+      ],
       "bonne": 0,
       "explication": "Il n'y a ni négation ni inversion : c'est une phrase affirmative."
     },
     {
       "consigne": "Quel est le type de la phrase en couleur ?",
       "texte": "Let's describe the room. [Is there a clock on the wall?]",
-      "choix": ["Affirmative", "Négative", "Interrogative"],
+      "choix": [
+        "Affirmative",
+        "Négative",
+        "Interrogative"
+      ],
       "bonne": 2,
       "explication": "Is est placé devant there : c'est une question."
     },
     {
       "consigne": "Quel est le type de la phrase en couleur ?",
       "texte": "In my class, [there aren't any posters.]",
-      "choix": ["Affirmative", "Négative", "Interrogative"],
+      "choix": [
+        "Affirmative",
+        "Négative",
+        "Interrogative"
+      ],
       "bonne": 1,
       "explication": "There aren't any est la négation de there are : c'est une phrase négative."
     },
     {
       "consigne": "Quel est le type de la phrase en couleur ?",
       "texte": "Excuse me, [are there any rubbers in your pencil case?]",
-      "choix": ["Affirmative", "Négative", "Interrogative"],
+      "choix": [
+        "Affirmative",
+        "Négative",
+        "Interrogative"
+      ],
       "bonne": 2,
       "explication": "Are est placé devant there : c'est une question."
     },
     {
       "consigne": "Quel est le type de la phrase en couleur ?",
       "texte": "In my schoolbag, [there are two exercise books.]",
-      "choix": ["Affirmative", "Négative", "Interrogative"],
+      "choix": [
+        "Affirmative",
+        "Négative",
+        "Interrogative"
+      ],
       "bonne": 0,
       "explication": "Il n'y a ni négation ni inversion : c'est une phrase affirmative."
     },
     {
       "consigne": "Quel est le type de la phrase en couleur ?",
       "texte": "There is a board but [there isn't a computer.]",
-      "choix": ["Affirmative", "Négative", "Interrogative"],
+      "choix": [
+        "Affirmative",
+        "Négative",
+        "Interrogative"
+      ],
       "bonne": 1,
       "explication": "There isn't est la négation de there is : c'est une phrase négative."
     }
   ],
   "devinettes": [
     {
-      "reponse": "Pencil case",
-      "acceptees": ["Pencil case", "A pencil case", "Pencil-case", "Trousse", "Une trousse"],
-      "indices": [
-        "Je suis un objet de ton cartable.",
-        "On peut me fermer.",
-        "Je range tes stylos, tes crayons et ta règle."
-      ],
-      "explication": "Une trousse se dit a pencil case : My pencil case is in my schoolbag."
-    },
-    {
-      "reponse": "There is",
-      "acceptees": ["There is", "There's", "Theres"],
-      "indices": [
-        "Je suis une expression anglaise très utile pour décrire une salle de classe.",
-        "Je me traduis par « il y a ».",
-        "Je suis suivie d'un seul objet, jamais d'un pluriel."
-      ],
-      "explication": "There is veut dire il y a devant un singulier ; devant un pluriel, on dit there are."
-    },
-    {
       "reponse": "Any",
-      "acceptees": ["Any"],
+      "acceptees": [
+        "Any"
+      ],
       "indices": [
         "Je suis un petit mot anglais.",
         "Je me traduis souvent par « des » ou « de ».",
@@ -124,7 +130,9 @@
     },
     {
       "reponse": "Between",
-      "acceptees": ["Between"],
+      "acceptees": [
+        "Between"
+      ],
       "indices": [
         "Je suis une préposition de lieu.",
         "Je situe un objet par rapport à deux autres.",

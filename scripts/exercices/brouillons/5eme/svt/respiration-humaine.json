@@ -30,7 +30,6 @@
         "Le dioxygène passe de l'air des alvéoles au sang",
         "Le dioxyde de carbone passe du sang à l'air",
         "Les globules rouges transportent le dioxygène jusqu'aux organes",
-        "La surface totale des alvéoles atteint environ 100 mètres carrés",
         "Une paroi très mince sépare l'air du sang"
       ]
     },
@@ -40,7 +39,6 @@
       "cartes": [
         "Les goudrons de la fumée sont cancérigènes",
         "La nicotine rend dépendant",
-        "Le monoxyde de carbone des cigarettes remplace le dioxygène",
         "La fumée paralyse les cils des voies respiratoires",
         "Les particules fines peuvent aggraver l'asthme"
       ]
@@ -51,35 +49,60 @@
     {
       "consigne": "Quel organe le groupe en couleur désigne-t-il ?",
       "texte": "Pour inspirer, [le muscle situé sous les poumons] se contracte et s'abaisse.",
-      "choix": ["Diaphragme", "Trachée", "Bronches", "Alvéoles"],
+      "choix": [
+        "Diaphragme",
+        "Trachée",
+        "Bronches",
+        "Alvéoles"
+      ],
       "bonne": 0,
       "explication": "Le muscle situé sous les poumons est le diaphragme : en s'abaissant, il fait entrer l'air."
     },
     {
       "consigne": "Quel organe le groupe en couleur désigne-t-il ?",
       "texte": "L'air descend dans [le tube qui part du larynx] avant de se diviser en bronches.",
-      "choix": ["Diaphragme", "Trachée", "Bronches", "Alvéoles"],
+      "choix": [
+        "Diaphragme",
+        "Trachée",
+        "Bronches",
+        "Alvéoles"
+      ],
       "bonne": 1,
       "explication": "La trachée part du larynx, puis se divise en bronches."
     },
     {
       "consigne": "Quel organe le groupe en couleur désigne-t-il ?",
       "texte": "Après la trachée, [les tubes qui se divisent en bronchioles] amènent l'air vers les poumons.",
-      "choix": ["Diaphragme", "Trachée", "Bronches", "Alvéoles"],
+      "choix": [
+        "Diaphragme",
+        "Trachée",
+        "Bronches",
+        "Alvéoles"
+      ],
       "bonne": 2,
       "explication": "Les bronches prolongent la trachée et se divisent en bronchioles."
     },
     {
       "consigne": "Quel organe le groupe en couleur désigne-t-il ?",
       "texte": "Les échanges de gaz avec le sang se font dans [de minuscules sacs entourés de capillaires].",
-      "choix": ["Diaphragme", "Trachée", "Bronches", "Alvéoles"],
+      "choix": [
+        "Diaphragme",
+        "Trachée",
+        "Bronches",
+        "Alvéoles"
+      ],
       "bonne": 3,
       "explication": "Les alvéoles pulmonaires sont de minuscules sacs entourés de capillaires : c'est là que se font les échanges de gaz."
     },
     {
       "consigne": "Quel organe le groupe en couleur désigne-t-il ?",
       "texte": "À l'expiration, [le muscle situé sous les poumons] se relâche et remonte.",
-      "choix": ["Diaphragme", "Trachée", "Bronches", "Alvéoles"],
+      "choix": [
+        "Diaphragme",
+        "Trachée",
+        "Bronches",
+        "Alvéoles"
+      ],
       "bonne": 0,
       "explication": "Le diaphragme se relâche et remonte : la cage thoracique diminue de volume et l'air sort."
     }
@@ -87,7 +110,10 @@
   "devinettes": [
     {
       "reponse": "Diaphragme",
-      "acceptees": ["Le diaphragme", "Un diaphragme"],
+      "acceptees": [
+        "Le diaphragme",
+        "Un diaphragme"
+      ],
       "indices": [
         "Je suis un muscle.",
         "Je suis situé sous les poumons.",
@@ -97,33 +123,19 @@
     },
     {
       "reponse": "Alvéole pulmonaire",
-      "acceptees": ["Alvéole", "Alvéoles", "Les alvéoles", "Une alvéole", "Alvéoles pulmonaires"],
+      "acceptees": [
+        "Alvéole",
+        "Alvéoles",
+        "Les alvéoles",
+        "Une alvéole",
+        "Alvéoles pulmonaires"
+      ],
       "indices": [
         "Je suis minuscule, et nous sommes des centaines de millions.",
         "Je suis un petit sac au bout d'une bronchiole.",
         "C'est chez moi que le dioxygène passe de l'air au sang."
       ],
       "explication": "Les alvéoles pulmonaires sont de minuscules sacs où se font les échanges de gaz avec le sang."
-    },
-    {
-      "reponse": "Globule rouge",
-      "acceptees": ["Globules rouges", "Les globules rouges", "Un globule rouge"],
-      "indices": [
-        "Je circule dans le sang.",
-        "Je suis une cellule.",
-        "Je transporte le dioxygène jusqu'à tous les organes."
-      ],
-      "explication": "Les globules rouges sont les cellules du sang qui transportent le dioxygène."
-    },
-    {
-      "reponse": "Monoxyde de carbone",
-      "acceptees": ["Le monoxyde de carbone", "Monoxyde", "CO"],
-      "indices": [
-        "Je suis un gaz.",
-        "Je suis présent dans la fumée de cigarette.",
-        "Je prends la place du dioxygène dans le sang."
-      ],
-      "explication": "Le monoxyde de carbone de la fumée de tabac prend la place du dioxygène dans le sang."
     }
   ],
   "calculs": [],

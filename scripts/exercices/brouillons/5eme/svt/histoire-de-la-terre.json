@@ -51,74 +51,53 @@
     {
       "consigne": "Quel principe permet d'affirmer la phrase en couleur ?",
       "texte": "Dans une falaise, une couche de sable non déformée est sous une couche d'argile. [Le sable s'est déposé avant l'argile.]",
-      "choix": ["Superposition", "Recoupement", "Fossile stratigraphique", "Datation absolue"],
+      "choix": [
+        "Superposition",
+        "Recoupement",
+        "Fossile stratigraphique",
+        "Datation absolue"
+      ],
       "bonne": 0,
       "explication": "La couche du bas est la plus ancienne : c'est le principe de superposition."
     },
     {
       "consigne": "Quel principe permet d'affirmer la phrase en couleur ?",
       "texte": "Une faille traverse trois couches empilées. [La faille est plus récente que ces trois couches.]",
-      "choix": ["Superposition", "Recoupement", "Fossile stratigraphique", "Datation absolue"],
+      "choix": [
+        "Superposition",
+        "Recoupement",
+        "Fossile stratigraphique",
+        "Datation absolue"
+      ],
       "bonne": 1,
       "explication": "Ce qui recoupe des couches est plus récent qu'elles : c'est le principe de recoupement."
     },
     {
       "consigne": "Quel principe permet d'affirmer la phrase en couleur ?",
       "texte": "Des couches situées sur deux continents contiennent la même ammonite. [Ces couches ont le même âge.]",
-      "choix": ["Superposition", "Recoupement", "Fossile stratigraphique", "Datation absolue"],
+      "choix": [
+        "Superposition",
+        "Recoupement",
+        "Fossile stratigraphique",
+        "Datation absolue"
+      ],
       "bonne": 2,
       "explication": "Une espèce qui a vécu peu de temps sur une large zone date et relie des couches éloignées."
     },
     {
       "consigne": "Quelle méthode permet d'affirmer la phrase en couleur ?",
       "texte": "Un laboratoire mesure la radioactivité naturelle d'une roche. [Cette roche a 120 millions d'années.]",
-      "choix": ["Superposition", "Recoupement", "Fossile stratigraphique", "Datation absolue"],
+      "choix": [
+        "Superposition",
+        "Recoupement",
+        "Fossile stratigraphique",
+        "Datation absolue"
+      ],
       "bonne": 3,
       "explication": "Un âge donné en années s'obtient par la datation absolue, qui utilise la radioactivité."
     }
   ],
-  "devinettes": [
-    {
-      "reponse": "Ammonite",
-      "acceptees": ["Ammonite", "Ammonites", "Les ammonites", "Une ammonite"],
-      "indices": [
-        "Je suis un animal aujourd'hui disparu.",
-        "On me retrouve dans des couches de même âge, très éloignées les unes des autres.",
-        "J'ai disparu il y a 66 millions d'années, en même temps que les dinosaures non aviens."
-      ],
-      "explication": "Certaines ammonites sont de bons fossiles stratigraphiques et ont disparu à la fin du Crétacé."
-    },
-    {
-      "reponse": "Crise biologique",
-      "acceptees": ["Crise biologique", "Une crise biologique", "Extinction", "Extinction de masse", "Crise"],
-      "indices": [
-        "Je ne dure pas longtemps à l'échelle géologique.",
-        "Je fais disparaître un grand nombre d'espèces.",
-        "Je sers de limite entre deux ères."
-      ],
-      "explication": "Les crises biologiques, comme celles de 252 Ma et de 66 Ma, séparent les ères."
-    },
-    {
-      "reponse": "Paléozoïque",
-      "acceptees": ["Paléozoïque", "Le Paléozoïque", "Paleozoique"],
-      "indices": [
-        "Je suis une ère de l'histoire de la Terre.",
-        "Dans mes mers vivaient les trilobites et les premiers poissons.",
-        "Je me termine il y a 252 millions d'années, avant l'ère des dinosaures."
-      ],
-      "explication": "Le Paléozoïque s'étend d'environ 540 à 252 Ma, avant le Mésozoïque."
-    },
-    {
-      "reponse": "Datation absolue",
-      "acceptees": ["Datation absolue", "La datation absolue", "Absolue"],
-      "indices": [
-        "Je donne un âge en années.",
-        "Je m'appuie sur la radioactivité naturelle de certaines roches.",
-        "C'est grâce à moi qu'on sait que la Terre a environ 4,6 milliards d'années."
-      ],
-      "explication": "La datation absolue chiffre l'âge des roches, de la Terre et des limites entre les ères."
-    }
-  ],
+  "devinettes": [],
   "calculs": [
     {
       "question": "Le Mésozoïque commence il y a 252 Ma (millions d'années) et se termine il y a 66 Ma. Quelle est sa durée ?",

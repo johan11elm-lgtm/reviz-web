@@ -5,11 +5,9 @@
       "nom": "Les bassins et les strates",
       "detail": "Où et comment les sédiments s'empilent en couches dans un bassin de sédimentation.",
       "cartes": [
-        "Les sédiments se déposent là où le courant s'arrête",
         "Le fond d'un lac, d'une mer ou d'un delta",
         "Les couches ainsi formées sont à peu près horizontales",
-        "Chaque nouvelle couche recouvre la précédente",
-        "Des substances dissoutes dans l'eau peuvent former des sédiments"
+        "Chaque nouvelle couche recouvre la précédente"
       ]
     },
     {
@@ -19,8 +17,7 @@
         "Les couches enfouies se tassent et l'eau est chassée",
         "Un ciment naturel soude les grains entre eux",
         "Du sable enfoui puis cimenté donne du grès",
-        "Des galets cimentés forment un conglomérat",
-        "Le calcaire fait effervescence avec l'acide chlorhydrique"
+        "Des galets cimentés forment un conglomérat"
       ]
     },
     {
@@ -29,7 +26,6 @@
       "cartes": [
         "Un os ou une dent conservés dans la roche",
         "Une empreinte ou un terrier conservé dans la roche",
-        "Un enfouissement rapide, à l'abri du dioxygène et des décomposeurs",
         "Les parties dures se conservent le mieux",
         "Les ammonites, mollusques marins aujourd'hui disparus"
       ]
@@ -51,46 +47,60 @@
     {
       "consigne": "Quelle étape de la formation d'une roche sédimentaire est en couleur ?",
       "texte": "[Le vent et la pluie usent la roche] et libèrent des fragments.",
-      "choix": ["Érosion", "Dépôt", "Compaction", "Cimentation"],
+      "choix": [
+        "Érosion",
+        "Dépôt",
+        "Compaction",
+        "Cimentation"
+      ],
       "bonne": 0,
       "explication": "L'érosion use les roches et fournit les sédiments."
     },
     {
       "consigne": "Quelle étape de la formation d'une roche sédimentaire est en couleur ?",
       "texte": "Quand le courant ralentit, [le sable tombe au fond du lac].",
-      "choix": ["Érosion", "Dépôt", "Compaction", "Cimentation"],
+      "choix": [
+        "Érosion",
+        "Dépôt",
+        "Compaction",
+        "Cimentation"
+      ],
       "bonne": 1,
       "explication": "Les sédiments se déposent là où le courant s'arrête : c'est le dépôt."
     },
     {
       "consigne": "Quelle étape de la formation d'une roche sédimentaire est en couleur ?",
       "texte": "Sous le poids des nouvelles couches, [les grains se tassent] et l'eau est chassée.",
-      "choix": ["Érosion", "Dépôt", "Compaction", "Cimentation"],
+      "choix": [
+        "Érosion",
+        "Dépôt",
+        "Compaction",
+        "Cimentation"
+      ],
       "bonne": 2,
       "explication": "La compaction tasse les grains en chassant l'eau."
     },
     {
       "consigne": "Quelle étape de la formation d'une roche sédimentaire est en couleur ?",
       "texte": "[Un ciment naturel soude les grains] entre eux.",
-      "choix": ["Érosion", "Dépôt", "Compaction", "Cimentation"],
+      "choix": [
+        "Érosion",
+        "Dépôt",
+        "Compaction",
+        "Cimentation"
+      ],
       "bonne": 3,
       "explication": "La cimentation soude les grains entre eux : le sédiment meuble devient une roche."
     }
   ],
   "devinettes": [
     {
-      "reponse": "Strate",
-      "acceptees": ["Une strate", "La strate", "Strates", "Les strates", "Couche"],
-      "indices": [
-        "Je suis formée de sédiments ou de roche sédimentaire.",
-        "Je suis à peu près horizontale.",
-        "Plusieurs de mes semblables s'empilent dans un bassin de sédimentation."
-      ],
-      "explication": "Une strate est une couche de sédiments ou de roche sédimentaire, à peu près horizontale."
-    },
-    {
       "reponse": "Fossile",
-      "acceptees": ["Un fossile", "Fossiles", "Les fossiles"],
+      "acceptees": [
+        "Un fossile",
+        "Fossiles",
+        "Les fossiles"
+      ],
       "indices": [
         "Je suis conservé dans une roche.",
         "Je suis le reste ou la trace d'un être vivant.",
@@ -100,7 +110,11 @@
     },
     {
       "reponse": "Calcaire",
-      "acceptees": ["Le calcaire", "Craie", "La craie"],
+      "acceptees": [
+        "Le calcaire",
+        "Craie",
+        "La craie"
+      ],
       "indices": [
         "Je suis une roche sédimentaire.",
         "Les ammonites sont fréquentes chez moi.",
@@ -110,7 +124,9 @@
     },
     {
       "reponse": "Grès",
-      "acceptees": ["Le grès"],
+      "acceptees": [
+        "Le grès"
+      ],
       "indices": [
         "Je suis une roche sédimentaire.",
         "À l'origine, j'étais du sable meuble.",

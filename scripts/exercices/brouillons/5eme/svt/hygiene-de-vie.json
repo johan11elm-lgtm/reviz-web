@@ -38,7 +38,6 @@
       "nom": "Aliments riches en vitamines et fibres",
       "detail": "Les fruits et les légumes apportent des vitamines et des fibres.",
       "cartes": [
-        "Une orange",
         "Des carottes râpées",
         "Une salade verte",
         "Un bol de brocolis",
@@ -76,56 +75,59 @@
     {
       "consigne": "Quel est le rôle principal de ce qui est en couleur ?",
       "texte": "Le pain, les pâtes et le riz apportent surtout [des glucides].",
-      "choix": ["Fournir de l'énergie rapide", "Construire le corps", "Faciliter le transit intestinal", "Hydrater le corps"],
+      "choix": [
+        "Fournir de l'énergie rapide",
+        "Construire le corps",
+        "Faciliter le transit intestinal",
+        "Hydrater le corps"
+      ],
       "bonne": 0,
       "explication": "Les glucides sont la principale source d'énergie rapidement utilisable."
     },
     {
       "consigne": "Quel est le rôle principal de ce qui est en couleur ?",
       "texte": "La viande, le poisson et les œufs apportent [des protéines].",
-      "choix": ["Fournir de l'énergie rapide", "Construire le corps", "Faciliter le transit intestinal", "Hydrater le corps"],
+      "choix": [
+        "Fournir de l'énergie rapide",
+        "Construire le corps",
+        "Faciliter le transit intestinal",
+        "Hydrater le corps"
+      ],
       "bonne": 1,
       "explication": "Les protéines sont les matériaux de construction du corps, indispensables à la croissance."
     },
     {
       "consigne": "Quel est le rôle principal de ce qui est en couleur ?",
       "texte": "Les fruits, les légumes et les céréales complètes contiennent [des fibres].",
-      "choix": ["Fournir de l'énergie rapide", "Construire le corps", "Faciliter le transit intestinal", "Hydrater le corps"],
+      "choix": [
+        "Fournir de l'énergie rapide",
+        "Construire le corps",
+        "Faciliter le transit intestinal",
+        "Hydrater le corps"
+      ],
       "bonne": 2,
       "explication": "Les fibres facilitent le transit intestinal."
     },
     {
       "consigne": "Quel est le rôle principal de ce qui est en couleur ?",
       "texte": "La seule boisson indispensable à l'organisme est [l'eau].",
-      "choix": ["Fournir de l'énergie rapide", "Construire le corps", "Faciliter le transit intestinal", "Hydrater le corps"],
+      "choix": [
+        "Fournir de l'énergie rapide",
+        "Construire le corps",
+        "Faciliter le transit intestinal",
+        "Hydrater le corps"
+      ],
       "bonne": 3,
       "explication": "L'eau suffit à hydrater le corps."
     }
   ],
   "devinettes": [
     {
-      "reponse": "Sédentarité",
-      "acceptees": ["Sédentarité", "La sédentarité"],
-      "indices": [
-        "Je suis un mode de vie qui menace la santé.",
-        "Je suis fait de longues heures assises, souvent devant un écran.",
-        "Je suis l'opposé d'une activité physique régulière."
-      ],
-      "explication": "La sédentarité est un mode de vie avec peu d'activité physique."
-    },
-    {
-      "reponse": "Kilojoule",
-      "acceptees": ["Kilojoule", "Kilojoules", "Le kilojoule", "kJ"],
-      "indices": [
-        "Je suis une unité.",
-        "On me lit sur les étiquettes des aliments.",
-        "Je mesure l'énergie, et 1 kcal vaut environ 4,18 fois moi."
-      ],
-      "explication": "Le kilojoule (kJ) est l'unité d'énergie des étiquettes alimentaires ; 1 kcal ≈ 4,18 kJ."
-    },
-    {
       "reponse": "Nicotine",
-      "acceptees": ["Nicotine", "La nicotine"],
+      "acceptees": [
+        "Nicotine",
+        "La nicotine"
+      ],
       "indices": [
         "Je suis une substance contenue dans le tabac.",
         "Je rends très difficile le fait d'arrêter de fumer.",
@@ -135,7 +137,12 @@
     },
     {
       "reponse": "Fibres",
-      "acceptees": ["Fibres", "Les fibres", "Fibre", "Fibres alimentaires"],
+      "acceptees": [
+        "Fibres",
+        "Les fibres",
+        "Fibre",
+        "Fibres alimentaires"
+      ],
       "indices": [
         "On me trouve dans les végétaux.",
         "Je suis surtout présente dans les fruits, les légumes et les céréales complètes.",
@@ -181,15 +188,5 @@
       "explication": "60 × 7 = 420 minutes par semaine, soit 7 heures."
     }
   ],
-  "etapes": [
-    {
-      "titre": "Lire une étiquette alimentaire",
-      "etapes": [
-        "On repère la colonne « pour 100 g »",
-        "On relève l'énergie, puis glucides, lipides et protéines",
-        "On compare deux aliments à quantité égale",
-        "On rapporte les valeurs à la portion réellement mangée"
-      ]
-    }
-  ]
+  "etapes": []
 }

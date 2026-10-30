@@ -51,35 +51,55 @@
     {
       "consigne": "Dans quelle forme met-on le groupe en couleur ?",
       "texte": "Dans l'organigramme d'un jeu, on lit : [Début].",
-      "choix": ["Ovale", "Rectangle", "Losange"],
+      "choix": [
+        "Ovale",
+        "Rectangle",
+        "Losange"
+      ],
       "bonne": 0,
       "explication": "Le début et la fin d'un organigramme se placent dans des ovales."
     },
     {
       "consigne": "Dans quelle forme met-on le groupe en couleur ?",
       "texte": "Dans l'organigramme d'un jeu, on lit : [Avancer de 100 pas].",
-      "choix": ["Ovale", "Rectangle", "Losange"],
+      "choix": [
+        "Ovale",
+        "Rectangle",
+        "Losange"
+      ],
       "bonne": 1,
       "explication": "Une instruction à exécuter se place dans un rectangle."
     },
     {
       "consigne": "Dans quelle forme met-on le groupe en couleur ?",
       "texte": "Dans l'organigramme d'un labyrinthe, on lit : [Le lutin touche-t-il le mur ?]",
-      "choix": ["Ovale", "Rectangle", "Losange"],
+      "choix": [
+        "Ovale",
+        "Rectangle",
+        "Losange"
+      ],
       "bonne": 2,
       "explication": "Une question à réponse oui ou non est un test : elle se place dans un losange."
     },
     {
       "consigne": "Dans quelle forme met-on le groupe en couleur ?",
       "texte": "Dans l'organigramme d'un jeu, on lit : [Tourner de 90 degrés].",
-      "choix": ["Ovale", "Rectangle", "Losange"],
+      "choix": [
+        "Ovale",
+        "Rectangle",
+        "Losange"
+      ],
       "bonne": 1,
       "explication": "Tourner est une instruction à exécuter : elle se place dans un rectangle."
     },
     {
       "consigne": "Dans quelle forme met-on le groupe en couleur ?",
       "texte": "Dans l'organigramme d'un jeu, on lit : [La touche espace est-elle pressée ?]",
-      "choix": ["Ovale", "Rectangle", "Losange"],
+      "choix": [
+        "Ovale",
+        "Rectangle",
+        "Losange"
+      ],
       "bonne": 2,
       "explication": "C'est un test avec une réponse oui ou non : il se place dans un losange."
     }
@@ -87,43 +107,16 @@
   "devinettes": [
     {
       "reponse": "Algorithme",
-      "acceptees": ["Un algorithme", "L'algorithme"],
+      "acceptees": [
+        "Un algorithme",
+        "L'algorithme"
+      ],
       "indices": [
         "Je suis une suite d'étapes.",
         "Une recette de cuisine me ressemble.",
         "Quand on me traduit dans un langage compris par la machine, je deviens un programme."
       ],
       "explication": "Un algorithme est une suite finie et ordonnée d'instructions ; traduit pour la machine, il devient un programme."
-    },
-    {
-      "reponse": "Lutin",
-      "acceptees": ["Un lutin", "Le lutin", "Sprite"],
-      "indices": [
-        "Je suis un personnage ou un objet.",
-        "Je me déplace sur la scène.",
-        "Des scripts m'animent dans Scratch."
-      ],
-      "explication": "Le lutin est le personnage ou l'objet que l'on anime avec des scripts dans Scratch."
-    },
-    {
-      "reponse": "Organigramme",
-      "acceptees": ["Un organigramme", "L'organigramme"],
-      "indices": [
-        "Je suis un dessin.",
-        "J'utilise des ovales, des rectangles et des losanges.",
-        "Je représente un algorithme."
-      ],
-      "explication": "L'organigramme représente un algorithme avec des ovales, des rectangles et des losanges."
-    },
-    {
-      "reponse": "Bug",
-      "acceptees": ["Un bug", "Le bug", "Bugs"],
-      "indices": [
-        "Je suis une erreur.",
-        "Je me cache dans un programme.",
-        "On me cherche en testant, puis on me corrige."
-      ],
-      "explication": "Un bug est une erreur dans un programme : déboguer, c'est le trouver et le corriger."
     }
   ],
   "calculs": [

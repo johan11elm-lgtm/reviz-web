@@ -41,8 +41,7 @@
         "Un radiateur dans une chambre",
         "Une bouilloire qui chauffe l'eau",
         "Un grille-pain qui dore les tartines",
-        "Une plaque de cuisson allumée",
-        "Un fer à repasser branché"
+        "Une plaque de cuisson allumée"
       ]
     }
   ],
@@ -52,12 +51,6 @@
       "carte": "Leurs réserves sont limitées et ne se renouvellent pas vite",
       "role": "cause",
       "explication": "Le pétrole, le gaz et le charbon sont des sources non renouvelables : elles sont limitées."
-    },
-    {
-      "fait": "la limitation de l'usage des énergies fossiles",
-      "carte": "Leur combustion rejette du dioxyde de carbone",
-      "role": "cause",
-      "explication": "Brûler du pétrole, du gaz ou du charbon rejette du CO₂, qui contribue au réchauffement climatique."
     },
     {
       "fait": "le branchement d'un moteur électrique",
@@ -76,42 +69,72 @@
     {
       "consigne": "Que désigne le passage en couleur ?",
       "texte": "Sur le toit, des panneaux captent [le soleil] pour fournir de l'énergie à la maison.",
-      "choix": ["Source renouvelable", "Source non renouvelable", "Forme d'énergie", "Convertisseur d'énergie"],
+      "choix": [
+        "Source renouvelable",
+        "Source non renouvelable",
+        "Forme d'énergie",
+        "Convertisseur d'énergie"
+      ],
       "bonne": 0,
       "explication": "Le soleil est une source d'énergie qui se renouvelle sans cesse : une source renouvelable."
     },
     {
       "consigne": "Que désigne le passage en couleur ?",
       "texte": "Cette centrale produit de l'électricité en brûlant [du charbon].",
-      "choix": ["Source renouvelable", "Source non renouvelable", "Forme d'énergie", "Convertisseur d'énergie"],
+      "choix": [
+        "Source renouvelable",
+        "Source non renouvelable",
+        "Forme d'énergie",
+        "Convertisseur d'énergie"
+      ],
       "bonne": 1,
       "explication": "Le charbon est une énergie fossile : une source limitée, non renouvelable."
     },
     {
       "consigne": "Que désigne le passage en couleur ?",
       "texte": "Dans le ventilateur, [le moteur] fait tourner l'hélice.",
-      "choix": ["Source renouvelable", "Source non renouvelable", "Forme d'énergie", "Convertisseur d'énergie"],
+      "choix": [
+        "Source renouvelable",
+        "Source non renouvelable",
+        "Forme d'énergie",
+        "Convertisseur d'énergie"
+      ],
       "bonne": 3,
       "explication": "Le moteur transforme l'énergie électrique en énergie mécanique : c'est un convertisseur."
     },
     {
       "consigne": "Que désigne le passage en couleur ?",
       "texte": "Le fil apporte [l'énergie électrique] au ventilateur.",
-      "choix": ["Source renouvelable", "Source non renouvelable", "Forme d'énergie", "Convertisseur d'énergie"],
+      "choix": [
+        "Source renouvelable",
+        "Source non renouvelable",
+        "Forme d'énergie",
+        "Convertisseur d'énergie"
+      ],
       "bonne": 2,
       "explication": "L'énergie électrique est une forme d'énergie, comme l'énergie mécanique, thermique ou lumineuse."
     },
     {
       "consigne": "Que désigne le passage en couleur ?",
       "texte": "Sur la côte, [le vent] fait tourner les pales des éoliennes.",
-      "choix": ["Source renouvelable", "Source non renouvelable", "Forme d'énergie", "Convertisseur d'énergie"],
+      "choix": [
+        "Source renouvelable",
+        "Source non renouvelable",
+        "Forme d'énergie",
+        "Convertisseur d'énergie"
+      ],
       "bonne": 0,
       "explication": "Le vent se renouvelle sans cesse : c'est une source renouvelable."
     },
     {
       "consigne": "Que désigne le passage en couleur ?",
       "texte": "Ce vieux chauffage fonctionne avec [du gaz naturel].",
-      "choix": ["Source renouvelable", "Source non renouvelable", "Forme d'énergie", "Convertisseur d'énergie"],
+      "choix": [
+        "Source renouvelable",
+        "Source non renouvelable",
+        "Forme d'énergie",
+        "Convertisseur d'énergie"
+      ],
       "bonne": 1,
       "explication": "Le gaz naturel est une énergie fossile : une source non renouvelable."
     }
@@ -119,7 +142,10 @@
   "devinettes": [
     {
       "reponse": "Watt",
-      "acceptees": ["Le watt", "Watts"],
+      "acceptees": [
+        "Le watt",
+        "Watts"
+      ],
       "indices": [
         "Je suis une unité de mesure.",
         "Je mesure la puissance d'un appareil.",
@@ -129,23 +155,19 @@
     },
     {
       "reponse": "Renouvelable",
-      "acceptees": ["Énergie renouvelable", "Une énergie renouvelable", "Énergies renouvelables", "Source renouvelable", "Renouvelables"],
+      "acceptees": [
+        "Énergie renouvelable",
+        "Une énergie renouvelable",
+        "Énergies renouvelables",
+        "Source renouvelable",
+        "Renouvelables"
+      ],
       "indices": [
         "Je suis une qualité que partagent le soleil, le vent et l'eau.",
         "Ce que je décris se reconstitue vite à l'échelle humaine.",
         "Je suis le contraire de ce que sont le pétrole, le gaz et le charbon."
       ],
       "explication": "Une énergie renouvelable vient d'une source qui se reconstitue vite : soleil, vent, eau, biomasse."
-    },
-    {
-      "reponse": "Conversion d'énergie",
-      "acceptees": ["Conversion", "La conversion", "Une conversion", "Transformation d'énergie", "Transformation"],
-      "indices": [
-        "Je suis réalisée par un moteur, une pile ou un panneau photovoltaïque.",
-        "Je fais passer d'une forme à une autre, comme de la lumière à l'électricité.",
-        "Je ne suis jamais parfaite : une partie est toujours perdue en chaleur."
-      ],
-      "explication": "Une conversion d'énergie transforme une forme d'énergie en une autre, avec toujours des pertes en chaleur."
     }
   ],
   "calculs": [

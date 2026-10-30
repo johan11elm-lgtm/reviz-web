@@ -51,42 +51,55 @@
     {
       "consigne": "Que représente le passage en couleur ?",
       "texte": "Dans une mine, on extrait [du minerai de fer].",
-      "choix": ["Une matière première", "Un matériau", "Un objet"],
+      "choix": [
+        "Une matière première",
+        "Un matériau",
+        "Un objet"
+      ],
       "bonne": 0,
       "explication": "Le minerai est pris dans la nature sans transformation : c'est une matière première."
     },
     {
       "consigne": "Que représente le passage en couleur ?",
       "texte": "À l'usine, le minerai est transformé en [tôles d'acier] prêtes à l'emploi.",
-      "choix": ["Une matière première", "Un matériau", "Un objet"],
+      "choix": [
+        "Une matière première",
+        "Un matériau",
+        "Un objet"
+      ],
       "bonne": 1,
       "explication": "Les tôles sont de la matière transformée, prête à fabriquer des objets : c'est un matériau."
     },
     {
       "consigne": "Que représente le passage en couleur ?",
       "texte": "Avec ces tôles, un artisan fabrique [une boîte à outils].",
-      "choix": ["Une matière première", "Un matériau", "Un objet"],
+      "choix": [
+        "Une matière première",
+        "Un matériau",
+        "Un objet"
+      ],
       "bonne": 2,
       "explication": "La boîte à outils est le résultat final fabriqué avec le matériau : c'est un objet."
     },
     {
       "consigne": "Que représente le passage en couleur ?",
       "texte": "Une raffinerie reçoit [du pétrole] pour fabriquer des plastiques.",
-      "choix": ["Une matière première", "Un matériau", "Un objet"],
+      "choix": [
+        "Une matière première",
+        "Un matériau",
+        "Un objet"
+      ],
       "bonne": 0,
       "explication": "Le pétrole est prélevé dans la nature avant toute transformation : c'est une matière première."
     },
     {
       "consigne": "Que représente le passage en couleur ?",
-      "texte": "L'usine fait fondre [des granulés de plastique] pour mouler des jouets.",
-      "choix": ["Une matière première", "Un matériau", "Un objet"],
-      "bonne": 1,
-      "explication": "Les granulés sont du plastique déjà transformé, prêt à l'emploi : c'est un matériau."
-    },
-    {
-      "consigne": "Que représente le passage en couleur ?",
       "texte": "Avec ses planches, le menuisier a construit [une étagère].",
-      "choix": ["Une matière première", "Un matériau", "Un objet"],
+      "choix": [
+        "Une matière première",
+        "Un matériau",
+        "Un objet"
+      ],
       "bonne": 2,
       "explication": "L'étagère est fabriquée avec des planches, qui sont le matériau : c'est un objet."
     }
@@ -94,7 +107,10 @@
   "devinettes": [
     {
       "reponse": "Alliage",
-      "acceptees": ["Un alliage", "Alliages"],
+      "acceptees": [
+        "Un alliage",
+        "Alliages"
+      ],
       "indices": [
         "Je viens du monde des métaux.",
         "Je suis un mélange d'un métal avec un ou plusieurs autres éléments.",
@@ -104,33 +120,17 @@
     },
     {
       "reponse": "Matière première",
-      "acceptees": ["Une matière première", "La matière première", "Matières premières"],
+      "acceptees": [
+        "Une matière première",
+        "La matière première",
+        "Matières premières"
+      ],
       "indices": [
         "Je viens directement de la nature.",
         "Je n'ai encore subi aucune transformation.",
         "Le minerai de fer, le pétrole et le sable sont des exemples de moi."
       ],
       "explication": "Une matière première est prélevée dans la nature avant d'être transformée en matériau."
-    },
-    {
-      "reponse": "Composite",
-      "acceptees": ["Un composite", "Matériau composite", "Un matériau composite"],
-      "indices": [
-        "Je suis une catégorie de matériaux.",
-        "J'associe plusieurs matériaux pour cumuler leurs qualités.",
-        "Le béton armé, avec ses barres d'acier, est un exemple de moi."
-      ],
-      "explication": "Un composite associe plusieurs matériaux pour cumuler leurs qualités, comme le béton armé."
-    },
-    {
-      "reponse": "Céramique",
-      "acceptees": ["Une céramique", "Céramiques", "Les céramiques"],
-      "indices": [
-        "Je suis une famille de matériaux d'origine minérale.",
-        "On me fabrique en cuisant de l'argile à très haute température.",
-        "La porcelaine et la brique font partie de ma famille."
-      ],
-      "explication": "Les céramiques sont obtenues en cuisant de l'argile à haute température : porcelaine, brique, terre cuite."
     }
   ],
   "calculs": [],

@@ -51,35 +51,55 @@
     {
       "consigne": "Quel type de procédé le passage en couleur illustre-t-il ?",
       "texte": "Pour faire un trou dans la planche, l'élève [perce le bois avec une perceuse].",
-      "choix": ["Enlèvement de matière", "Déformation", "Ajout de matière"],
+      "choix": [
+        "Enlèvement de matière",
+        "Déformation",
+        "Ajout de matière"
+      ],
       "bonne": 0,
       "explication": "Percer retire de la matière pour faire le trou : c'est un enlèvement de matière."
     },
     {
       "consigne": "Quel type de procédé le passage en couleur illustre-t-il ?",
       "texte": "Le professeur [chauffe une feuille de plastique qui se plaque ensuite sur un moule].",
-      "choix": ["Enlèvement de matière", "Déformation", "Ajout de matière"],
+      "choix": [
+        "Enlèvement de matière",
+        "Déformation",
+        "Ajout de matière"
+      ],
       "bonne": 1,
       "explication": "C'est du thermoformage : la feuille change de forme sans qu'on retire ni qu'on ajoute de matière."
     },
     {
       "consigne": "Quel type de procédé le passage en couleur illustre-t-il ?",
       "texte": "L'imprimante 3D [dépose du plastique fondu couche après couche].",
-      "choix": ["Enlèvement de matière", "Déformation", "Ajout de matière"],
+      "choix": [
+        "Enlèvement de matière",
+        "Déformation",
+        "Ajout de matière"
+      ],
       "bonne": 2,
       "explication": "L'imprimante construit la pièce en superposant des couches : c'est un ajout de matière."
     },
     {
       "consigne": "Quel type de procédé le passage en couleur illustre-t-il ?",
       "texte": "Dans l'atelier, [la tôle est pliée à angle droit].",
-      "choix": ["Enlèvement de matière", "Déformation", "Ajout de matière"],
+      "choix": [
+        "Enlèvement de matière",
+        "Déformation",
+        "Ajout de matière"
+      ],
       "bonne": 1,
       "explication": "Plier change la forme de la tôle sans rien enlever : c'est une déformation."
     },
     {
       "consigne": "Quel type de procédé le passage en couleur illustre-t-il ?",
       "texte": "Avant de peindre, l'élève [ponce les bords de la pièce].",
-      "choix": ["Enlèvement de matière", "Déformation", "Ajout de matière"],
+      "choix": [
+        "Enlèvement de matière",
+        "Déformation",
+        "Ajout de matière"
+      ],
       "bonne": 0,
       "explication": "Poncer retire un peu de matière : c'est un enlèvement de matière."
     }
@@ -87,7 +107,10 @@
   "devinettes": [
     {
       "reponse": "Prototype",
-      "acceptees": ["Un prototype", "Le prototype"],
+      "acceptees": [
+        "Un prototype",
+        "Le prototype"
+      ],
       "indices": [
         "Je suis un objet fabriqué avant tous les autres.",
         "Je permets de tester la solution avant la production.",
@@ -96,28 +119,13 @@
       "explication": "Le prototype est un premier exemplaire qui sert à tester et à corriger la solution avant la production."
     },
     {
-      "reponse": "Gamme de fabrication",
-      "acceptees": ["La gamme de fabrication", "Une gamme de fabrication", "Gamme", "La gamme"],
-      "indices": [
-        "Je suis un document utilisé à l'atelier.",
-        "Je liste les étapes dans l'ordre.",
-        "Pour chaque étape, je note la machine, l'outil et le contrôle."
-      ],
-      "explication": "La gamme de fabrication donne l'ordre des étapes, avec la machine, l'outil et le contrôle de chacune."
-    },
-    {
-      "reponse": "Thermoformage",
-      "acceptees": ["Le thermoformage"],
-      "indices": [
-        "Je suis un procédé de fabrication.",
-        "Je change la forme de la matière sans en retirer ni en ajouter.",
-        "Une feuille de plastique chauffée se plaque sur un moule."
-      ],
-      "explication": "Dans le thermoformage, la feuille de plastique chauffée prend la forme du moule en refroidissant."
-    },
-    {
       "reponse": "Imprimante 3D",
-      "acceptees": ["Une imprimante 3D", "L'imprimante 3D", "Imprimante en 3D", "Imprimante"],
+      "acceptees": [
+        "Une imprimante 3D",
+        "L'imprimante 3D",
+        "Imprimante en 3D",
+        "Imprimante"
+      ],
       "indices": [
         "Je suis une machine d'atelier.",
         "Je fabrique une pièce sans rien enlever.",
