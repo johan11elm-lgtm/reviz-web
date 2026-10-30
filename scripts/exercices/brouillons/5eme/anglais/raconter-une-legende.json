@@ -28,7 +28,6 @@
       "detail": "Une phrase avec could ou couldn't, qui dit ce que quelqu'un pouvait ou ne pouvait pas faire dans le passé.",
       "cartes": [
         "The knight could fight with a sword",
-        "The fishermen couldn't believe their eyes",
         "The giant could carry a huge rock",
         "She could swim across the whole loch",
         "The boy couldn't open the heavy door"
@@ -51,42 +50,66 @@
     {
       "consigne": "À quoi sert le passage en couleur ?",
       "texte": "[Once upon a time], there was a giant in Scotland.",
-      "choix": ["Commencer le récit", "Enchaîner les événements", "Terminer le récit"],
+      "choix": [
+        "Commencer le récit",
+        "Enchaîner les événements",
+        "Terminer le récit"
+      ],
       "bonne": 0,
       "explication": "« Once upon a time » veut dire « il était une fois » : c'est la formule qui ouvre une légende."
     },
     {
       "consigne": "À quoi sert le passage en couleur ?",
       "texte": "[Finally], the knight went back home.",
-      "choix": ["Commencer le récit", "Enchaîner les événements", "Terminer le récit"],
+      "choix": [
+        "Commencer le récit",
+        "Enchaîner les événements",
+        "Terminer le récit"
+      ],
       "bonne": 2,
       "explication": "« Finally » veut dire « enfin » : il annonce la fin de l'histoire."
     },
     {
       "consigne": "À quoi sert le passage en couleur ?",
       "texte": "The boy found the cave. [Then] he lit a torch.",
-      "choix": ["Commencer le récit", "Enchaîner les événements", "Terminer le récit"],
+      "choix": [
+        "Commencer le récit",
+        "Enchaîner les événements",
+        "Terminer le récit"
+      ],
       "bonne": 1,
       "explication": "« Then » veut dire « ensuite » : il relie deux actions qui se suivent."
     },
     {
       "consigne": "À quoi sert le passage en couleur ?",
       "texte": "[Long, long ago], a dragon lived in a cave.",
-      "choix": ["Commencer le récit", "Enchaîner les événements", "Terminer le récit"],
+      "choix": [
+        "Commencer le récit",
+        "Enchaîner les événements",
+        "Terminer le récit"
+      ],
       "bonne": 0,
       "explication": "« Long, long ago » veut dire « il y a très, très longtemps » : c'est une autre façon d'ouvrir une légende."
     },
     {
       "consigne": "À quoi sert le passage en couleur ?",
       "texte": "[In the end], nobody saw the monster again.",
-      "choix": ["Commencer le récit", "Enchaîner les événements", "Terminer le récit"],
+      "choix": [
+        "Commencer le récit",
+        "Enchaîner les événements",
+        "Terminer le récit"
+      ],
       "bonne": 2,
       "explication": "« In the end » veut dire « à la fin » : il conclut l'histoire."
     },
     {
       "consigne": "À quoi sert le passage en couleur ?",
       "texte": "The fisherman looked at the water. [After that], he went home.",
-      "choix": ["Commencer le récit", "Enchaîner les événements", "Terminer le récit"],
+      "choix": [
+        "Commencer le récit",
+        "Enchaîner les événements",
+        "Terminer le récit"
+      ],
       "bonne": 1,
       "explication": "« After that » veut dire « après cela » : il relie deux actions qui se suivent."
     }
@@ -94,7 +117,9 @@
   "devinettes": [
     {
       "reponse": "Excalibur",
-      "acceptees": ["Excalibur"],
+      "acceptees": [
+        "Excalibur"
+      ],
       "indices": [
         "Je suis un objet de légende britannique.",
         "Je suis une épée.",
@@ -104,7 +129,12 @@
     },
     {
       "reponse": "Nessie",
-      "acceptees": ["Nessie", "Nessy", "Le monstre du Loch Ness", "Monstre du Loch Ness"],
+      "acceptees": [
+        "Nessie",
+        "Nessy",
+        "Le monstre du Loch Ness",
+        "Monstre du Loch Ness"
+      ],
       "indices": [
         "Je suis une créature légendaire.",
         "Je vivrais dans un lac très profond des Highlands, en Écosse.",
@@ -114,23 +144,15 @@
     },
     {
       "reponse": "Could",
-      "acceptees": ["Could"],
+      "acceptees": [
+        "Could"
+      ],
       "indices": [
         "Je suis une forme verbale.",
         "Je dis ce que quelqu'un pouvait faire dans le passé.",
         "Je suis le prétérit de can, et le verbe qui me suit n'a pas de to."
       ],
       "explication": "Could est le prétérit de can : He could see a strange shape. Il est suivi de la base verbale, sans to."
-    },
-    {
-      "reponse": "Fake",
-      "acceptees": ["Fake", "A fake"],
-      "indices": [
-        "Je suis un nom anglais.",
-        "Je veux dire « un faux » ou « un trucage ».",
-        "La célèbre photo de Nessie, prise en 1934, était un exemple de moi."
-      ],
-      "explication": "A fake est un faux, un trucage : la photo de Nessie de 1934 était un fake."
     }
   ],
   "calculs": [],

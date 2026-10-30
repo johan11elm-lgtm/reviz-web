@@ -7,9 +7,7 @@
       "cartes": [
         "En 1951, six pays mettent en commun charbon et acier",
         "Le traité de Rome crée la Communauté économique européenne",
-        "Le traité de Maastricht crée l'Union européenne",
-        "La Croatie adhère à l'UE en 2013",
-        "Le Royaume-Uni quitte l'UE en 2020"
+        "Le traité de Maastricht crée l'Union européenne"
       ]
     },
     {
@@ -19,8 +17,7 @@
         "Un ensemble de 27 États membres",
         "Environ 450 millions d'habitants",
         "La Suisse est dans Schengen mais pas dans l'UE",
-        "La Pologne est dans l'UE mais n'utilise pas l'euro",
-        "21 pays utilisent l'euro comme monnaie"
+        "La Pologne est dans l'UE mais n'utilise pas l'euro"
       ]
     },
     {
@@ -41,8 +38,7 @@
         "Un Français installé en Espagne vote aux municipales",
         "Un étudiant passe un semestre à l'étranger grâce à Erasmus",
         "On franchit les frontières intérieures sans contrôle systématique",
-        "Un citoyen peut travailler dans un autre État membre",
-        "Les Français élisent leurs députés européens"
+        "Un citoyen peut travailler dans un autre État membre"
       ]
     }
   ],
@@ -76,7 +72,10 @@
   "devinettes": [
     {
       "reponse": "Traité de Rome",
-      "acceptees": ["Le traité de Rome", "Rome"],
+      "acceptees": [
+        "Le traité de Rome",
+        "Rome"
+      ],
       "indices": [
         "Je suis un accord signé entre six États européens.",
         "Mon nom est celui d'une capitale.",
@@ -86,7 +85,10 @@
     },
     {
       "reponse": "Schengen",
-      "acceptees": ["L'espace Schengen", "Espace Schengen"],
+      "acceptees": [
+        "L'espace Schengen",
+        "Espace Schengen"
+      ],
       "indices": [
         "Je ne suis pas la même chose que l'UE.",
         "Mes accords datent de 1985 et sont appliqués à partir de 1995.",
@@ -96,7 +98,10 @@
     },
     {
       "reponse": "Parlement européen",
-      "acceptees": ["Le Parlement européen", "Parlement de l'UE"],
+      "acceptees": [
+        "Le Parlement européen",
+        "Parlement de l'UE"
+      ],
       "indices": [
         "Je suis une institution de l'UE.",
         "Je siège à Strasbourg.",
@@ -106,7 +111,10 @@
     },
     {
       "reponse": "Erasmus",
-      "acceptees": ["Le programme Erasmus", "Erasmus+"],
+      "acceptees": [
+        "Le programme Erasmus",
+        "Erasmus+"
+      ],
       "indices": [
         "Je suis un programme.",
         "J'ai été créé en 1987.",

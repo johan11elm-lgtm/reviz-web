@@ -40,7 +40,6 @@
       "cartes": [
         "En 2005, les Français rejettent par référendum la Constitution européenne",
         "En 2016, un référendum britannique donne la victoire au Brexit",
-        "La sortie du Royaume-Uni devient effective en 2020",
         "La crise de la dette fragilise l'Union",
         "Une méfiance ou une opposition envers la construction européenne"
       ]
@@ -73,12 +72,6 @@
     },
     {
       "fait": "le Brexit",
-      "carte": "Les Britanniques votent pour quitter l'UE par référendum en 2016",
-      "role": "cause",
-      "explication": "Le référendum de 2016 aboutit à la sortie du Royaume-Uni, effective le 31 janvier 2020."
-    },
-    {
-      "fait": "le Brexit",
       "carte": "L'Union européenne passe à 27 membres",
       "role": "consequence",
       "explication": "Après le départ du Royaume-Uni en 2020, l'UE compte 27 États membres."
@@ -88,7 +81,10 @@
   "devinettes": [
     {
       "reponse": "Robert Schuman",
-      "acceptees": ["Schuman", "Robert Schuman"],
+      "acceptees": [
+        "Schuman",
+        "Robert Schuman"
+      ],
       "indices": [
         "Je suis un homme politique français.",
         "Le 9 mai 1950, je fais une déclaration célèbre.",
@@ -98,7 +94,11 @@
     },
     {
       "reponse": "Schengen",
-      "acceptees": ["Schengen", "L'espace Schengen", "Espace Schengen"],
+      "acceptees": [
+        "Schengen",
+        "L'espace Schengen",
+        "Espace Schengen"
+      ],
       "indices": [
         "Je suis un espace de libre circulation des personnes.",
         "Mes accords datent de 1985.",
@@ -108,7 +108,11 @@
     },
     {
       "reponse": "La CECA",
-      "acceptees": ["CECA", "La CECA", "Communauté européenne du charbon et de l'acier"],
+      "acceptees": [
+        "CECA",
+        "La CECA",
+        "Communauté européenne du charbon et de l'acier"
+      ],
       "indices": [
         "Je suis la première communauté européenne.",
         "Six pays me créent en 1951.",
@@ -118,7 +122,10 @@
     },
     {
       "reponse": "Le Brexit",
-      "acceptees": ["Brexit", "Le Brexit"],
+      "acceptees": [
+        "Brexit",
+        "Le Brexit"
+      ],
       "indices": [
         "Je suis un événement qui touche l'Union européenne.",
         "Un référendum organisé en 2016 me décide.",

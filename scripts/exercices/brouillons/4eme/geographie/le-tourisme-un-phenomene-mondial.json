@@ -73,12 +73,6 @@
     },
     {
       "fait": "le développement du tourisme en France",
-      "carte": "La construction d'hôtels et d'aéroports",
-      "role": "consequence",
-      "explication": "Pour accueillir beaucoup de touristes, il faut construire des hôtels et des aéroports."
-    },
-    {
-      "fait": "le développement du tourisme en France",
       "carte": "Des devises qui entrent dans le pays",
       "role": "consequence",
       "explication": "Les dépenses des touristes étrangers rapportent des devises à la France."
@@ -88,35 +82,55 @@
     {
       "consigne": "De quel type de déplacement s'agit-il ?",
       "texte": "[Une famille de Lyon passe une semaine de vacances en Bretagne].",
-      "choix": ["Tourisme dans son pays", "Tourisme international", "Pas du tourisme"],
+      "choix": [
+        "Tourisme dans son pays",
+        "Tourisme international",
+        "Pas du tourisme"
+      ],
       "bonne": 0,
       "explication": "La famille dort hors de chez elle pendant plus d'une nuit, mais reste dans son pays."
     },
     {
       "consigne": "De quel type de déplacement s'agit-il ?",
       "texte": "[Une famille de Lyon passe une semaine de vacances en Espagne].",
-      "choix": ["Tourisme dans son pays", "Tourisme international", "Pas du tourisme"],
+      "choix": [
+        "Tourisme dans son pays",
+        "Tourisme international",
+        "Pas du tourisme"
+      ],
       "bonne": 1,
       "explication": "Elle séjourne plusieurs nuits dans un autre pays que le sien : ce sont des touristes internationaux."
     },
     {
       "consigne": "De quel type de déplacement s'agit-il ?",
       "texte": "[Une habitante de Lille passe la journée à Paris, puis rentre dormir chez elle].",
-      "choix": ["Tourisme dans son pays", "Tourisme international", "Pas du tourisme"],
+      "choix": [
+        "Tourisme dans son pays",
+        "Tourisme international",
+        "Pas du tourisme"
+      ],
       "bonne": 2,
       "explication": "Une sortie à la journée n'est pas du tourisme : il faut passer au moins une nuit hors de chez soi."
     },
     {
       "consigne": "De quel type de déplacement s'agit-il ?",
       "texte": "[Un cadre de Marseille passe deux nuits à Berlin pour assister à un congrès].",
-      "choix": ["Tourisme dans son pays", "Tourisme international", "Pas du tourisme"],
+      "choix": [
+        "Tourisme dans son pays",
+        "Tourisme international",
+        "Pas du tourisme"
+      ],
       "bonne": 1,
       "explication": "On voyage aussi pour ses affaires : deux nuits dans un autre pays, c'est du tourisme international."
     },
     {
       "consigne": "De quel type de déplacement s'agit-il ?",
       "texte": "[Un étudiant s'installe pendant deux ans à Montréal pour ses études].",
-      "choix": ["Tourisme dans son pays", "Tourisme international", "Pas du tourisme"],
+      "choix": [
+        "Tourisme dans son pays",
+        "Tourisme international",
+        "Pas du tourisme"
+      ],
       "bonne": 2,
       "explication": "Un séjour de plus d'un an n'est pas du tourisme : le touriste reste moins d'un an."
     }
@@ -124,7 +138,10 @@
   "devinettes": [
     {
       "reponse": "La France",
-      "acceptees": ["France", "La France"],
+      "acceptees": [
+        "France",
+        "La France"
+      ],
       "indices": [
         "Je suis un pays d'Europe.",
         "J'ai accueilli environ 100 millions de touristes internationaux en 2024.",
@@ -134,7 +151,12 @@
     },
     {
       "reponse": "Les congés payés",
-      "acceptees": ["Congés payés", "Les congés payés", "Conges payes", "Les conges payes"],
+      "acceptees": [
+        "Congés payés",
+        "Les congés payés",
+        "Conges payes",
+        "Les conges payes"
+      ],
       "indices": [
         "Je suis une mesure sociale française.",
         "Je donne du temps libre aux salariés sans leur retirer leur salaire.",
@@ -144,7 +166,14 @@
     },
     {
       "reponse": "Un pays émetteur",
-      "acceptees": ["Pays émetteur", "Un pays émetteur", "Émetteur", "Emetteur", "Pays émetteurs", "Les pays émetteurs"],
+      "acceptees": [
+        "Pays émetteur",
+        "Un pays émetteur",
+        "Émetteur",
+        "Emetteur",
+        "Pays émetteurs",
+        "Les pays émetteurs"
+      ],
       "indices": [
         "Je suis un pays.",
         "C'est de chez moi que partent les touristes.",
@@ -154,7 +183,10 @@
     },
     {
       "reponse": "Le tourisme de masse",
-      "acceptees": ["Tourisme de masse", "Le tourisme de masse"],
+      "acceptees": [
+        "Tourisme de masse",
+        "Le tourisme de masse"
+      ],
       "indices": [
         "Je suis une manière de voyager.",
         "Je concerne un très grand nombre de personnes.",

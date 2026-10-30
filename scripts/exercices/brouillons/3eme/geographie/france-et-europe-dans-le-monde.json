@@ -40,8 +40,6 @@
       "cartes": [
         "Des centaines de millions de personnes parlent français",
         "La gastronomie française est célèbre dans le monde entier",
-        "La mode et le luxe français sont connus partout",
-        "Paris a accueilli les Jeux olympiques de 2024",
         "La France séduit par sa langue et son image"
       ]
     }
@@ -51,7 +49,11 @@
   "devinettes": [
     {
       "reponse": "Conseil de sécurité",
-      "acceptees": ["Le Conseil de sécurité", "Conseil de sécurité de l'ONU", "Le Conseil de sécurité de l'ONU"],
+      "acceptees": [
+        "Le Conseil de sécurité",
+        "Conseil de sécurité de l'ONU",
+        "Le Conseil de sécurité de l'ONU"
+      ],
       "indices": [
         "Je suis un organe de l'ONU.",
         "Je suis chargé de veiller à la paix dans le monde.",
@@ -61,7 +63,12 @@
     },
     {
       "reponse": "La francophonie",
-      "acceptees": ["Francophonie", "Les francophones", "Le monde francophone", "OIF"],
+      "acceptees": [
+        "Francophonie",
+        "Les francophones",
+        "Le monde francophone",
+        "OIF"
+      ],
       "indices": [
         "Je désigne un ensemble de personnes et de pays.",
         "Ce qui nous unit, c'est une langue que nous avons en partage.",
@@ -71,7 +78,12 @@
     },
     {
       "reponse": "Le soft power",
-      "acceptees": ["Soft power", "Puissance douce", "Le rayonnement culturel", "Rayonnement culturel"],
+      "acceptees": [
+        "Soft power",
+        "Puissance douce",
+        "Le rayonnement culturel",
+        "Rayonnement culturel"
+      ],
       "indices": [
         "Mon nom vient de l'anglais.",
         "Je désigne une façon d'avoir de l'influence sans utiliser la force.",
@@ -81,7 +93,10 @@
     },
     {
       "reponse": "L'OTAN",
-      "acceptees": ["OTAN", "NATO"],
+      "acceptees": [
+        "OTAN",
+        "NATO"
+      ],
       "indices": [
         "Je suis une alliance militaire.",
         "Je rassemble des pays d'Amérique du Nord et d'Europe.",

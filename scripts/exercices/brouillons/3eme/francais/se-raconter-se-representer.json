@@ -7,7 +7,6 @@
       "cartes": [
         "Les Confessions de Rousseau, texte fondateur du genre",
         "« Je forme une entreprise qui n'eut jamais d'exemple »",
-        "Enfance de Nathalie Sarraute, qui dialogue avec son double",
         "Un récit qui retrace l'histoire de la personnalité de l'auteur",
         "Le genre défini par Philippe Lejeune en 1975"
       ]
@@ -51,42 +50,66 @@
     {
       "consigne": "Quel est le rôle du verbe en couleur dans ce récit autobiographique ?",
       "texte": "Ce matin-là, je [courus] jusqu'à la gare sans m'arrêter.",
-      "choix": ["Une action de l'enfant (passé simple)", "Un décor ou une habitude (imparfait)", "Un commentaire de l'adulte (présent)"],
+      "choix": [
+        "Une action de l'enfant (passé simple)",
+        "Un décor ou une habitude (imparfait)",
+        "Un commentaire de l'adulte (présent)"
+      ],
       "bonne": 0,
       "explication": "« courus » est au passé simple : il fait avancer le récit, c'est une action de premier plan de l'enfant."
     },
     {
       "consigne": "Quel est le rôle du verbe en couleur dans ce récit autobiographique ?",
       "texte": "Chaque été, nous [passions] les vacances chez ma grand-mère.",
-      "choix": ["Une action de l'enfant (passé simple)", "Un décor ou une habitude (imparfait)", "Un commentaire de l'adulte (présent)"],
+      "choix": [
+        "Une action de l'enfant (passé simple)",
+        "Un décor ou une habitude (imparfait)",
+        "Un commentaire de l'adulte (présent)"
+      ],
       "bonne": 1,
       "explication": "« passions » est à l'imparfait : « chaque été » indique une habitude, pas une action ponctuelle."
     },
     {
       "consigne": "Quel est le rôle du verbe en couleur dans ce récit autobiographique ?",
       "texte": "Mon père me tendit la main. Je [comprends] aujourd'hui qu'il avait peur.",
-      "choix": ["Une action de l'enfant (passé simple)", "Un décor ou une habitude (imparfait)", "Un commentaire de l'adulte (présent)"],
+      "choix": [
+        "Une action de l'enfant (passé simple)",
+        "Un décor ou une habitude (imparfait)",
+        "Un commentaire de l'adulte (présent)"
+      ],
       "bonne": 2,
       "explication": "« comprends » est au présent d'énonciation : c'est l'adulte qui écrit et qui juge, avec « aujourd'hui »."
     },
     {
       "consigne": "Quel est le rôle du verbe en couleur dans ce récit autobiographique ?",
       "texte": "Soudain, la porte [claqua], et tout le monde se tut.",
-      "choix": ["Une action de l'enfant (passé simple)", "Un décor ou une habitude (imparfait)", "Un commentaire de l'adulte (présent)"],
+      "choix": [
+        "Une action de l'enfant (passé simple)",
+        "Un décor ou une habitude (imparfait)",
+        "Un commentaire de l'adulte (présent)"
+      ],
       "bonne": 0,
       "explication": "« claqua » est au passé simple : un événement soudain qui fait avancer le récit."
     },
     {
       "consigne": "Quel est le rôle du verbe en couleur dans ce récit autobiographique ?",
       "texte": "La cuisine [sentait] le café et la cire.",
-      "choix": ["Une action de l'enfant (passé simple)", "Un décor ou une habitude (imparfait)", "Un commentaire de l'adulte (présent)"],
+      "choix": [
+        "Une action de l'enfant (passé simple)",
+        "Un décor ou une habitude (imparfait)",
+        "Un commentaire de l'adulte (présent)"
+      ],
       "bonne": 1,
       "explication": "« sentait » est à l'imparfait : le verbe décrit le décor, il ne raconte pas une action."
     },
     {
       "consigne": "Quel est le rôle du verbe en couleur dans ce récit autobiographique ?",
       "texte": "Aujourd'hui encore, [j'en souris].",
-      "choix": ["Une action de l'enfant (passé simple)", "Un décor ou une habitude (imparfait)", "Un commentaire de l'adulte (présent)"],
+      "choix": [
+        "Une action de l'enfant (passé simple)",
+        "Un décor ou une habitude (imparfait)",
+        "Un commentaire de l'adulte (présent)"
+      ],
       "bonne": 2,
       "explication": "« j'en souris » est au présent d'énonciation, avec « aujourd'hui encore » : c'est le regard de l'adulte au moment où il écrit."
     }
@@ -94,7 +117,10 @@
   "devinettes": [
     {
       "reponse": "Jean-Jacques Rousseau",
-      "acceptees": ["Rousseau", "Jean-Jacques Rousseau"],
+      "acceptees": [
+        "Rousseau",
+        "Jean-Jacques Rousseau"
+      ],
       "indices": [
         "Je suis un écrivain du XVIIIe siècle.",
         "J'ai rédigé un long récit de ma vie de 1765 à 1770, publié après ma mort.",
@@ -104,7 +130,11 @@
     },
     {
       "reponse": "Anne Frank",
-      "acceptees": ["Anne Frank", "Frank", "Anne"],
+      "acceptees": [
+        "Anne Frank",
+        "Frank",
+        "Anne"
+      ],
       "indices": [
         "Je suis une adolescente qui doit se cacher pendant la guerre.",
         "J'écris des notes datées, au jour le jour, sans savoir comment tout finira.",
@@ -113,18 +143,11 @@
       "explication": "Anne Frank tient son journal de 1942 à 1944 : des notes datées, écrites au jour le jour, sans recul."
     },
     {
-      "reponse": "Serge Doubrovsky",
-      "acceptees": ["Doubrovsky", "Serge Doubrovsky"],
-      "indices": [
-        "Je suis un écrivain du XXe siècle.",
-        "J'ai créé un mot en 1977 pour parler de mon livre Fils.",
-        "Mon mot désigne un récit qui mêle faits réels et éléments inventés."
-      ],
-      "explication": "Serge Doubrovsky crée le mot « autofiction » à propos de son livre Fils (1977)."
-    },
-    {
       "reponse": "Nathalie Sarraute",
-      "acceptees": ["Sarraute", "Nathalie Sarraute"],
+      "acceptees": [
+        "Sarraute",
+        "Nathalie Sarraute"
+      ],
       "indices": [
         "Je suis une écrivaine du XXe siècle.",
         "Mon livre Enfance a paru en 1983.",

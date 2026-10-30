@@ -6,7 +6,6 @@
       "detail": "Les trois auréoles du centre vers l'extérieur : ville-centre, banlieue et couronne périurbaine.",
       "cartes": [
         "Le centre historique de la ville",
-        "Le quartier des affaires, au cœur de la ville",
         "Un espace bâti en continuité avec la ville-centre",
         "Des communes séparées de la ville par des champs",
         "Des communes souvent pavillonnaires, avec des maisons individuelles"
@@ -41,8 +40,7 @@
         "Des allers-retours quotidiens entre le domicile et le travail",
         "Des flux surtout orientés de la couronne vers le pôle",
         "Des trajets faits surtout en voiture",
-        "Des embouteillages et de la pollution sur les routes",
-        "Peu de transports en commun dans les communes périurbaines"
+        "Des embouteillages et de la pollution sur les routes"
       ]
     }
   ],
@@ -76,7 +74,11 @@
   "devinettes": [
     {
       "reponse": "La macrocéphalie",
-      "acceptees": ["Macrocéphalie", "La macrocéphalie parisienne", "Macrocéphalie parisienne"],
+      "acceptees": [
+        "Macrocéphalie",
+        "La macrocéphalie parisienne",
+        "Macrocéphalie parisienne"
+      ],
       "indices": [
         "Je suis un mot de géographie qui décrit les villes d'un pays.",
         "Je désigne la domination écrasante d'une seule ville sur toutes les autres.",
@@ -85,18 +87,14 @@
       "explication": "La macrocéphalie est la domination écrasante d'une ville sur toutes les autres d'un pays : en France, c'est le cas de Paris."
     },
     {
-      "reponse": "La banlieue",
-      "acceptees": ["Banlieue", "Les banlieues"],
-      "indices": [
-        "Je suis un espace d'une aire urbaine.",
-        "Je me situe autour de la ville-centre.",
-        "Mon bâti est dans la continuité de celui de la ville, sans champs entre elle et moi."
-      ],
-      "explication": "La banlieue est un espace urbanisé en continuité avec le bâti de la ville-centre, à la différence de la couronne périurbaine."
-    },
-    {
       "reponse": "La couronne périurbaine",
-      "acceptees": ["Couronne périurbaine", "La couronne", "Couronne", "Espace périurbain", "Le périurbain"],
+      "acceptees": [
+        "Couronne périurbaine",
+        "La couronne",
+        "Couronne",
+        "Espace périurbain",
+        "Le périurbain"
+      ],
       "indices": [
         "Je fais partie d'une aire d'attraction.",
         "Mes communes sont souvent pavillonnaires.",
@@ -106,7 +104,11 @@
     },
     {
       "reponse": "La Défense",
-      "acceptees": ["Défense", "Quartier de la Défense", "Le quartier d'affaires de La Défense"],
+      "acceptees": [
+        "Défense",
+        "Quartier de la Défense",
+        "Le quartier d'affaires de La Défense"
+      ],
       "indices": [
         "Je suis un quartier.",
         "Je suis un quartier d'affaires.",

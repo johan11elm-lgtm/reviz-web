@@ -7,7 +7,6 @@
       "cartes": [
         "My sister can swim 400 metres",
         "I could read when I was five",
-        "One day, I will be able to play the piano",
         "My grandmother can speak three languages",
         "Penguins can swim but they can't fly"
       ]
@@ -51,42 +50,72 @@
     {
       "consigne": "Que dit le modal en couleur ?",
       "texte": "[May] I come in?",
-      "choix": ["Une permission", "Une obligation", "Une interdiction", "Une absence d'obligation"],
+      "choix": [
+        "Une permission",
+        "Une obligation",
+        "Une interdiction",
+        "Une absence d'obligation"
+      ],
       "bonne": 0,
       "explication": "May I…? demande poliment la permission."
     },
     {
       "consigne": "Que dit le modal en couleur ?",
       "texte": "Pupils [have to] wear a tie.",
-      "choix": ["Une permission", "Une obligation", "Une interdiction", "Une absence d'obligation"],
+      "choix": [
+        "Une permission",
+        "Une obligation",
+        "Une interdiction",
+        "Une absence d'obligation"
+      ],
       "bonne": 1,
       "explication": "Have to exprime une obligation : les élèves sont obligés de porter une cravate."
     },
     {
       "consigne": "Que dit le modal en couleur ?",
       "texte": "You [mustn't] use your phone in class.",
-      "choix": ["Une permission", "Une obligation", "Une interdiction", "Une absence d'obligation"],
+      "choix": [
+        "Une permission",
+        "Une obligation",
+        "Une interdiction",
+        "Une absence d'obligation"
+      ],
       "bonne": 2,
       "explication": "Mustn't exprime une interdiction : c'est défendu."
     },
     {
       "consigne": "Que dit le modal en couleur ?",
       "texte": "You [don't have to] come on Saturday.",
-      "choix": ["Une permission", "Une obligation", "Une interdiction", "Une absence d'obligation"],
+      "choix": [
+        "Une permission",
+        "Une obligation",
+        "Une interdiction",
+        "Une absence d'obligation"
+      ],
       "bonne": 3,
       "explication": "Don't have to signifie « tu n'es pas obligé » : ce n'est pas nécessaire, mais ce n'est pas interdit."
     },
     {
       "consigne": "Que dit le modal en couleur ?",
       "texte": "We [are not allowed to] run in the corridors.",
-      "choix": ["Une permission", "Une obligation", "Une interdiction", "Une absence d'obligation"],
+      "choix": [
+        "Une permission",
+        "Une obligation",
+        "Une interdiction",
+        "Une absence d'obligation"
+      ],
       "bonne": 2,
       "explication": "Be not allowed to signifie « ne pas avoir le droit de » : c'est une interdiction."
     },
     {
       "consigne": "Que dit le modal en couleur ?",
       "texte": "Last week, we [had to] stay at school until six.",
-      "choix": ["Une permission", "Une obligation", "Une interdiction", "Une absence d'obligation"],
+      "choix": [
+        "Une permission",
+        "Une obligation",
+        "Une interdiction",
+        "Une absence d'obligation"
+      ],
       "bonne": 1,
       "explication": "Had to est le passé de must et de have to : une obligation dans le passé."
     }
@@ -94,23 +123,16 @@
   "devinettes": [
     {
       "reponse": "Mustn't",
-      "acceptees": ["Must not", "Mustnt"],
+      "acceptees": [
+        "Must not",
+        "Mustnt"
+      ],
       "indices": [
         "Je suis un modal à la forme négative.",
         "Je dis qu'une action est interdite.",
         "Les francophones me confondent avec don't have to."
       ],
       "explication": "Mustn't exprime l'interdiction ; don't have to veut seulement dire « tu n'es pas obligé »."
-    },
-    {
-      "reponse": "Pledge of Allegiance",
-      "acceptees": ["The Pledge of Allegiance", "Pledge", "Serment au drapeau"],
-      "indices": [
-        "Je viens des États-Unis.",
-        "Je suis un serment au drapeau.",
-        "Les élèves américains me prononcent souvent en début de journée."
-      ],
-      "explication": "Aux États-Unis, les élèves prononcent souvent le Pledge of Allegiance, serment au drapeau, en début de journée."
     },
     {
       "reponse": "Should",

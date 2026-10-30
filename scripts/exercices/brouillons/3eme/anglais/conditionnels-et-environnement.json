@@ -37,13 +37,7 @@
     {
       "nom": "Condition avec « à moins que »",
       "detail": "Unless signifie « à moins que » (if … not) et est suivi du présent, jamais de will.",
-      "cartes": [
-        "Unless we act now, the planet will get warmer",
-        "Unless we recycle more, the waste will increase",
-        "The ice will keep melting unless we reduce pollution",
-        "We won't save energy unless we turn off the lights",
-        "Unless we protect nature, many animals will disappear"
-      ]
+      "cartes": []
     }
   ],
   "causes": [
@@ -82,42 +76,72 @@
     {
       "consigne": "Quelle est la forme du verbe en couleur ?",
       "texte": "If it [rains] tomorrow, we will stay at home.",
-      "choix": ["Présent simple", "Prétérit", "Will + base verbale", "Would + base verbale"],
+      "choix": [
+        "Présent simple",
+        "Prétérit",
+        "Will + base verbale",
+        "Would + base verbale"
+      ],
       "bonne": 0,
       "explication": "Au type 1, le verbe après if est au présent simple (rains), jamais au futur."
     },
     {
       "consigne": "Quelle est la forme du verbe en couleur ?",
       "texte": "If I [had] a garden, I would grow vegetables.",
-      "choix": ["Présent simple", "Prétérit", "Will + base verbale", "Would + base verbale"],
+      "choix": [
+        "Présent simple",
+        "Prétérit",
+        "Will + base verbale",
+        "Would + base verbale"
+      ],
       "bonne": 1,
       "explication": "Au type 2, le verbe après if est au prétérit (had)."
     },
     {
       "consigne": "Quelle est la forme du verbe en couleur ?",
       "texte": "If I were the president, I [would ban] plastic bags.",
-      "choix": ["Présent simple", "Prétérit", "Will + base verbale", "Would + base verbale"],
+      "choix": [
+        "Présent simple",
+        "Prétérit",
+        "Will + base verbale",
+        "Would + base verbale"
+      ],
       "bonne": 3,
       "explication": "Au type 2, la proposition principale est en would + base verbale (would ban)."
     },
     {
       "consigne": "Quelle est la forme du verbe en couleur ?",
       "texte": "If we recycle more, we [will reduce] waste.",
-      "choix": ["Présent simple", "Prétérit", "Will + base verbale", "Would + base verbale"],
+      "choix": [
+        "Présent simple",
+        "Prétérit",
+        "Will + base verbale",
+        "Would + base verbale"
+      ],
       "bonne": 2,
       "explication": "Au type 1, la proposition principale est en will + base verbale (will reduce)."
     },
     {
       "consigne": "Quelle est la forme du verbe en couleur ?",
       "texte": "If you heat ice, it [melts].",
-      "choix": ["Présent simple", "Prétérit", "Will + base verbale", "Would + base verbale"],
+      "choix": [
+        "Présent simple",
+        "Prétérit",
+        "Will + base verbale",
+        "Would + base verbale"
+      ],
       "bonne": 0,
       "explication": "Au type 0, les deux verbes sont au présent simple : « melts » est au présent, avec un -s à la 3e personne."
     },
     {
       "consigne": "Quelle est la forme du verbe en couleur ?",
       "texte": "If everyone [planted] a tree, the planet would be greener.",
-      "choix": ["Présent simple", "Prétérit", "Will + base verbale", "Would + base verbale"],
+      "choix": [
+        "Présent simple",
+        "Prétérit",
+        "Will + base verbale",
+        "Would + base verbale"
+      ],
       "bonne": 1,
       "explication": "« planted » est le prétérit de plant : c'est le verbe qui suit if au type 2."
     }
@@ -125,7 +149,11 @@
   "devinettes": [
     {
       "reponse": "Le réchauffement climatique",
-      "acceptees": ["Réchauffement climatique", "Global warming", "Le global warming"],
+      "acceptees": [
+        "Réchauffement climatique",
+        "Global warming",
+        "Le global warming"
+      ],
       "indices": [
         "Je concerne toute la planète.",
         "Je suis dû aux gaz à effet de serre, comme le CO₂.",
@@ -135,7 +163,13 @@
     },
     {
       "reponse": "L'accord de Paris",
-      "acceptees": ["Accord de Paris", "Paris Agreement", "The Paris Agreement", "Paris", "COP21"],
+      "acceptees": [
+        "Accord de Paris",
+        "Paris Agreement",
+        "The Paris Agreement",
+        "Paris",
+        "COP21"
+      ],
       "indices": [
         "Je suis un engagement international sur le climat.",
         "J'ai été adopté en 2015.",
@@ -155,7 +189,11 @@
     },
     {
       "reponse": "Empreinte carbone",
-      "acceptees": ["L'empreinte carbone", "Carbon footprint", "The carbon footprint"],
+      "acceptees": [
+        "L'empreinte carbone",
+        "Carbon footprint",
+        "The carbon footprint"
+      ],
       "indices": [
         "Je dépends de ce que chacun fait au quotidien.",
         "On peut me réduire en utilisant des énergies renouvelables.",

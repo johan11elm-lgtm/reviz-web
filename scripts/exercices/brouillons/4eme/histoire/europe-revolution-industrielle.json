@@ -18,7 +18,6 @@
       "cartes": [
         "Des puits de mine et des terrils dans un bassin minier",
         "Des cheminées d'usine qui couvrent le ciel de fumée",
-        "Des voies ferrées qui sillonnent les campagnes",
         "Les campagnes se vident et les villes grandissent très vite",
         "Des rangées de maisons identiques près des usines"
       ]
@@ -39,7 +38,6 @@
       "detail": "La condition ouvrière au XIXe siècle et la façon dont les ouvriers s'organisent pour améliorer leur sort.",
       "cartes": [
         "Des journées de 12 à 15 heures de travail",
-        "Des enfants travaillent en usine",
         "Des travailleurs arrêtent le travail pour de meilleurs salaires",
         "Des travailleurs fondent une association pour se défendre",
         "Marx et Engels appellent les prolétaires à s'unir"
@@ -82,35 +80,55 @@
     {
       "consigne": "À quelle époque correspond le passage en couleur ?",
       "texte": "Au XVIIIe siècle, [un forgeron fabrique des outils à la main dans son atelier].",
-      "choix": ["Économie agricole et artisanale", "Première phase : vapeur et charbon", "Seconde phase : électricité et pétrole"],
+      "choix": [
+        "Économie agricole et artisanale",
+        "Première phase : vapeur et charbon",
+        "Seconde phase : électricité et pétrole"
+      ],
       "bonne": 0,
       "explication": "Avant l'industrialisation, on produit surtout à la main, dans des ateliers : l'économie est agricole et artisanale."
     },
     {
       "consigne": "À quelle époque correspond le passage en couleur ?",
       "texte": "Vers 1800, dans une usine textile, [la machine à vapeur fait tourner les métiers grâce au charbon].",
-      "choix": ["Économie agricole et artisanale", "Première phase : vapeur et charbon", "Seconde phase : électricité et pétrole"],
+      "choix": [
+        "Économie agricole et artisanale",
+        "Première phase : vapeur et charbon",
+        "Seconde phase : électricité et pétrole"
+      ],
       "bonne": 1,
       "explication": "La machine à vapeur au charbon caractérise la première phase de l'industrialisation."
     },
     {
       "consigne": "À quelle époque correspond le passage en couleur ?",
       "texte": "En 1830, [une locomotive à vapeur relie Liverpool à Manchester].",
-      "choix": ["Économie agricole et artisanale", "Première phase : vapeur et charbon", "Seconde phase : électricité et pétrole"],
+      "choix": [
+        "Économie agricole et artisanale",
+        "Première phase : vapeur et charbon",
+        "Seconde phase : électricité et pétrole"
+      ],
       "bonne": 1,
       "explication": "La ligne Liverpool-Manchester utilise des locomotives à vapeur : c'est la première phase."
     },
     {
       "consigne": "À quelle époque correspond le passage en couleur ?",
       "texte": "Vers 1890, [des usines et des rues s'éclairent à l'électricité].",
-      "choix": ["Économie agricole et artisanale", "Première phase : vapeur et charbon", "Seconde phase : électricité et pétrole"],
+      "choix": [
+        "Économie agricole et artisanale",
+        "Première phase : vapeur et charbon",
+        "Seconde phase : électricité et pétrole"
+      ],
       "bonne": 2,
       "explication": "L'électricité se diffuse à la fin du XIXe siècle : c'est la seconde phase."
     },
     {
       "consigne": "À quelle époque correspond le passage en couleur ?",
       "texte": "Vers 1900, [les premières automobiles roulent grâce au moteur à explosion et au pétrole].",
-      "choix": ["Économie agricole et artisanale", "Première phase : vapeur et charbon", "Seconde phase : électricité et pétrole"],
+      "choix": [
+        "Économie agricole et artisanale",
+        "Première phase : vapeur et charbon",
+        "Seconde phase : électricité et pétrole"
+      ],
       "bonne": 2,
       "explication": "Le moteur à explosion et le pétrole appartiennent à la seconde phase de l'industrialisation."
     }
@@ -118,7 +136,10 @@
   "devinettes": [
     {
       "reponse": "James Watt",
-      "acceptees": ["James Watt", "Watt"],
+      "acceptees": [
+        "James Watt",
+        "Watt"
+      ],
       "indices": [
         "Je suis un inventeur du XVIIIe siècle.",
         "J'ai perfectionné une machine en 1769.",
@@ -128,7 +149,10 @@
     },
     {
       "reponse": "Karl Marx",
-      "acceptees": ["Karl Marx", "Marx"],
+      "acceptees": [
+        "Karl Marx",
+        "Marx"
+      ],
       "indices": [
         "Je suis un penseur majeur du socialisme.",
         "Je critique le capitalisme.",
@@ -138,7 +162,10 @@
     },
     {
       "reponse": "Le paternalisme",
-      "acceptees": ["Paternalisme", "Le paternalisme"],
+      "acceptees": [
+        "Paternalisme",
+        "Le paternalisme"
+      ],
       "indices": [
         "Je suis un système pratiqué par certains patrons.",
         "Le patron loge, soigne et éduque ses ouvriers.",
@@ -148,7 +175,11 @@
     },
     {
       "reponse": "L'exode rural",
-      "acceptees": ["Exode rural", "L'exode rural", "Lexode rural"],
+      "acceptees": [
+        "Exode rural",
+        "L'exode rural",
+        "Lexode rural"
+      ],
       "indices": [
         "Je suis un déplacement de population.",
         "Je vide les campagnes.",

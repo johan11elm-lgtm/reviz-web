@@ -41,8 +41,7 @@
         "She dances well",
         "He runs fast",
         "She works hard",
-        "The magician arrived late",
-        "The judges arrived early"
+        "The magician arrived late"
       ]
     }
   ],
@@ -51,42 +50,66 @@
     {
       "consigne": "Quelle est la nature du mot en couleur ?",
       "texte": "The music sounds [good].",
-      "choix": ["Adjectif", "Adverbe de manière", "Nom"],
+      "choix": [
+        "Adjectif",
+        "Adverbe de manière",
+        "Nom"
+      ],
       "bonne": 0,
       "explication": "Après sound, on emploie un adjectif, car il décrit la musique : good est un adjectif."
     },
     {
       "consigne": "Quelle est la nature du mot en couleur ?",
       "texte": "She sings [well].",
-      "choix": ["Adjectif", "Adverbe de manière", "Nom"],
+      "choix": [
+        "Adjectif",
+        "Adverbe de manière",
+        "Nom"
+      ],
       "bonne": 1,
       "explication": "Well décrit la façon de chanter : c'est l'adverbe de manière qui correspond à good."
     },
     {
       "consigne": "Quelle est la nature du mot en couleur ?",
       "texte": "He is a [friendly] boy.",
-      "choix": ["Adjectif", "Adverbe de manière", "Nom"],
+      "choix": [
+        "Adjectif",
+        "Adverbe de manière",
+        "Nom"
+      ],
       "bonne": 0,
       "explication": "Friendly finit par -ly mais c'est un adjectif : il décrit le nom boy."
     },
     {
       "consigne": "Quelle est la nature du mot en couleur ?",
       "texte": "He sang the song [beautifully].",
-      "choix": ["Adjectif", "Adverbe de manière", "Nom"],
+      "choix": [
+        "Adjectif",
+        "Adverbe de manière",
+        "Nom"
+      ],
       "bonne": 1,
       "explication": "Beautifully décrit la manière de chanter : c'est un adverbe de manière."
     },
     {
       "consigne": "Quelle est la nature du mot en couleur ?",
       "texte": "She is a [fast] runner.",
-      "choix": ["Adjectif", "Adverbe de manière", "Nom"],
+      "choix": [
+        "Adjectif",
+        "Adverbe de manière",
+        "Nom"
+      ],
       "bonne": 0,
       "explication": "Ici fast décrit le nom runner : c'est un adjectif, qui a la même forme que l'adverbe."
     },
     {
       "consigne": "Quelle est la nature du mot en couleur ?",
       "texte": "He runs [fast].",
-      "choix": ["Adjectif", "Adverbe de manière", "Nom"],
+      "choix": [
+        "Adjectif",
+        "Adverbe de manière",
+        "Nom"
+      ],
       "bonne": 1,
       "explication": "Ici fast décrit l'action de courir : c'est un adverbe, qui garde la même forme que l'adjectif."
     }
@@ -94,7 +117,9 @@
   "devinettes": [
     {
       "reponse": "Well",
-      "acceptees": ["Well"],
+      "acceptees": [
+        "Well"
+      ],
       "indices": [
         "Je suis un mot anglais qui décrit la manière de faire une action.",
         "Je viens d'un adjectif, mais je ne prends pas -ly.",
@@ -104,7 +129,11 @@
     },
     {
       "reponse": "Talent show",
-      "acceptees": ["A talent show", "The talent show", "Concours de talents"],
+      "acceptees": [
+        "A talent show",
+        "The talent show",
+        "Concours de talents"
+      ],
       "indices": [
         "Je suis un concours.",
         "Des chanteurs, des danseurs et des magiciens se produisent sur scène.",
@@ -113,18 +142,12 @@
       "explication": "Un talent show est un concours de talents devant un jury (the judges) et un public (the audience)."
     },
     {
-      "reponse": "The judges",
-      "acceptees": ["Judges", "The judge", "Le jury", "Jury"],
-      "indices": [
-        "Je suis un groupe de personnes assises face à la scène.",
-        "Je note les candidats d'un concours.",
-        "En français, on m'appelle le jury."
-      ],
-      "explication": "The judges est le jury d'un talent show : il évalue les candidats."
-    },
-    {
       "reponse": "The audience",
-      "acceptees": ["Audience", "Le public", "Public"],
+      "acceptees": [
+        "Audience",
+        "Le public",
+        "Public"
+      ],
       "indices": [
         "On me trouve dans une salle de spectacle.",
         "J'applaudis et je vote pour mon candidat préféré.",

@@ -18,7 +18,6 @@
       "cartes": [
         "L'URSS bloque l'accès à Berlin-Ouest en juin 1948",
         "Les Américains ravitaillent Berlin-Ouest par un pont aérien",
-        "La RFA et la RDA naissent en 1949",
         "Le 13 août 1961, un mur coupe Berlin en deux",
         "En 1963, Kennedy déclare « Je suis un Berlinois »"
       ]
@@ -30,8 +29,7 @@
         "L'URSS possède à son tour la bombe atomique en 1949",
         "Chaque camp sait qu'une attaque entraînerait sa propre destruction",
         "L'URSS installe des missiles à Cuba",
-        "Les États-Unis organisent un blocus de l'île de Cuba",
-        "Un téléphone rouge relie ensuite les deux grands"
+        "Les États-Unis organisent un blocus de l'île de Cuba"
       ]
     },
     {
@@ -41,7 +39,6 @@
         "Gorbatchev arrive au pouvoir en 1985",
         "La perestroïka restructure l'économie soviétique",
         "La glasnost impose la transparence",
-        "L'Allemagne est réunifiée le 3 octobre 1990",
         "L'URSS disparaît en décembre 1991"
       ]
     }
@@ -70,19 +67,17 @@
       "carte": "L'affaiblissement de l'URSS dans les années 1980",
       "role": "cause",
       "explication": "Dans les années 1980, l'URSS est affaiblie, ce qui conduit à sa disparition en décembre 1991."
-    },
-    {
-      "fait": "la disparition de l'URSS en 1991",
-      "carte": "La fin de la guerre froide",
-      "role": "consequence",
-      "explication": "Avec la disparition de l'URSS, le monde n'est plus divisé en deux blocs : c'est la fin de la guerre froide."
     }
   ],
   "etiquettes": [],
   "devinettes": [
     {
       "reponse": "Khrouchtchev",
-      "acceptees": ["Khrouchtchev", "Nikita Khrouchtchev", "Khrouchtchov"],
+      "acceptees": [
+        "Khrouchtchev",
+        "Nikita Khrouchtchev",
+        "Khrouchtchov"
+      ],
       "indices": [
         "Je dirige l'URSS au début des années 1960.",
         "En octobre 1962, j'installe des missiles à Cuba.",
@@ -92,7 +87,11 @@
     },
     {
       "reponse": "Gorbatchev",
-      "acceptees": ["Gorbatchev", "Mikhaïl Gorbatchev", "Mikhail Gorbatchev"],
+      "acceptees": [
+        "Gorbatchev",
+        "Mikhaïl Gorbatchev",
+        "Mikhail Gorbatchev"
+      ],
       "indices": [
         "Je dirige l'URSS à partir de 1985.",
         "Je lance des réformes appelées perestroïka et glasnost.",
@@ -102,7 +101,10 @@
     },
     {
       "reponse": "Le plan Marshall",
-      "acceptees": ["Plan Marshall", "Le plan Marshall"],
+      "acceptees": [
+        "Plan Marshall",
+        "Le plan Marshall"
+      ],
       "indices": [
         "Je suis une aide.",
         "Je viens des États-Unis et je finance la reconstruction de l'Europe.",
@@ -112,7 +114,12 @@
     },
     {
       "reponse": "Le mur de Berlin",
-      "acceptees": ["Mur de Berlin", "Le mur de Berlin", "Le mur", "Mur"],
+      "acceptees": [
+        "Mur de Berlin",
+        "Le mur de Berlin",
+        "Le mur",
+        "Mur"
+      ],
       "indices": [
         "Je suis une barrière.",
         "Je suis construit le 13 août 1961 par la RDA pour empêcher ses habitants de fuir.",

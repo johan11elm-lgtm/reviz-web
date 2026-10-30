@@ -51,7 +51,11 @@
   "devinettes": [
     {
       "reponse": "Calibre",
-      "acceptees": ["Calibre", "Le calibre", "Un calibre"],
+      "acceptees": [
+        "Calibre",
+        "Le calibre",
+        "Un calibre"
+      ],
       "indices": [
         "Je suis une valeur maximale que l'appareil peut afficher.",
         "Il y en a plusieurs sur le sélecteur du multimètre : 10 A, 200 mA, 20 mA.",
@@ -61,23 +65,18 @@
     },
     {
       "reponse": "Ampèremètre",
-      "acceptees": ["Ampèremètre", "L'ampèremètre", "Un ampèremètre", "Amperemetre"],
+      "acceptees": [
+        "Ampèremètre",
+        "L'ampèremètre",
+        "Un ampèremètre",
+        "Amperemetre"
+      ],
       "indices": [
         "Je suis un appareil de mesure.",
         "On me place en série : le courant doit me traverser.",
         "Mon symbole est un cercle contenant la lettre A."
       ],
       "explication": "L'ampèremètre mesure l'intensité du courant et se branche en série dans le circuit."
-    },
-    {
-      "reponse": "Disjoncteur",
-      "acceptees": ["Disjoncteur", "Le disjoncteur", "Un disjoncteur", "Disjoncteur différentiel"],
-      "indices": [
-        "Je protège une installation électrique.",
-        "Je coupe le courant quand l'intensité devient trop forte.",
-        "Dans les habitations, il existe un modèle différentiel de 30 mA qui me ressemble."
-      ],
-      "explication": "Le disjoncteur coupe le courant en cas de surintensité ; le disjoncteur différentiel 30 mA protège les personnes."
     }
   ],
   "calculs": [

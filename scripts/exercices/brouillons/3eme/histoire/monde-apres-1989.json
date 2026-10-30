@@ -19,7 +19,6 @@
         "Des avions détournés frappent New York et le Pentagone",
         "Oussama Ben Laden dirige l'organisation Al-Qaïda",
         "Des attentats islamistes frappent Madrid, Londres, puis Paris",
-        "Daech contrôle une partie de l'Irak et de la Syrie",
         "La violence contre des civils pour semer la peur"
       ]
     },
@@ -30,7 +29,6 @@
         "Une coalition américaine libère le Koweït avec l'accord de l'ONU",
         "En 2001, les États-Unis attaquent l'Afghanistan des talibans",
         "Les États-Unis attaquent l'Irak en 2003 sans l'accord de l'ONU",
-        "La France refuse de participer à la guerre en Irak",
         "Les troupes américaines quittent l'Afghanistan en 2021"
       ]
     },
@@ -38,8 +36,6 @@
       "nom": "Les nouvelles puissances",
       "detail": "L'émergence de puissances qui contestent la domination américaine et font revenir les tensions.",
       "cartes": [
-        "En 2014, la Russie annexe la Crimée, une région d'Ukraine",
-        "En février 2022, la Russie envahit l'Ukraine",
         "Les BRICS réunissent des puissances émergentes",
         "Depuis 2024, l'Égypte et l'Iran rejoignent les BRICS",
         "La Chine et l'Inde voient leur poids économique grandir"
@@ -82,7 +78,10 @@
   "devinettes": [
     {
       "reponse": "Ben Laden",
-      "acceptees": ["Ben Laden", "Oussama Ben Laden"],
+      "acceptees": [
+        "Ben Laden",
+        "Oussama Ben Laden"
+      ],
       "indices": [
         "Je dirige une organisation terroriste.",
         "Les talibans d'Afghanistan abritent mon organisation.",
@@ -92,7 +91,11 @@
     },
     {
       "reponse": "Saddam Hussein",
-      "acceptees": ["Saddam Hussein", "Saddam", "Hussein"],
+      "acceptees": [
+        "Saddam Hussein",
+        "Saddam",
+        "Hussein"
+      ],
       "indices": [
         "Je dirige l'Irak.",
         "En 1990, mon armée envahit le Koweït.",
@@ -102,7 +105,9 @@
     },
     {
       "reponse": "Srebrenica",
-      "acceptees": ["Srebrenica"],
+      "acceptees": [
+        "Srebrenica"
+      ],
       "indices": [
         "Je suis une ville de Bosnie.",
         "En juillet 1995, plus de 8 000 hommes et garçons musulmans y sont massacrés.",
@@ -112,7 +117,10 @@
     },
     {
       "reponse": "Les BRICS",
-      "acceptees": ["BRICS", "Les BRICS"],
+      "acceptees": [
+        "BRICS",
+        "Les BRICS"
+      ],
       "indices": [
         "Je suis un groupe de pays.",
         "Le Brésil, la Russie, l'Inde, la Chine et l'Afrique du Sud me forment.",

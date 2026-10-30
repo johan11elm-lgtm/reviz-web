@@ -40,7 +40,6 @@
       "cartes": [
         "Le Comité de salut public gouverne, avec Robespierre",
         "Les libertés sont suspendues et les exécutions nombreuses",
-        "Des paysans royalistes et catholiques se soulèvent en Vendée",
         "Un régime instable gouverne la France jusqu'en 1799",
         "Un général prend le pouvoir par un coup d'État"
       ]
@@ -88,35 +87,55 @@
     {
       "consigne": "De quel régime politique s'agit-il pour le passage en couleur ?",
       "texte": "Avant 1789, [le roi détient tous les pouvoirs et ne les partage pas].",
-      "choix": ["Monarchie absolue", "Monarchie constitutionnelle", "République"],
+      "choix": [
+        "Monarchie absolue",
+        "Monarchie constitutionnelle",
+        "République"
+      ],
       "bonne": 0,
       "explication": "Dans la monarchie absolue, le roi concentre tous les pouvoirs."
     },
     {
       "consigne": "De quel régime politique s'agit-il pour le passage en couleur ?",
       "texte": "Après 1791, [le roi garde sa couronne mais sa puissance est limitée par une Constitution].",
-      "choix": ["Monarchie absolue", "Monarchie constitutionnelle", "République"],
+      "choix": [
+        "Monarchie absolue",
+        "Monarchie constitutionnelle",
+        "République"
+      ],
       "bonne": 1,
       "explication": "Le pouvoir du roi est limité par une Constitution : c'est une monarchie constitutionnelle."
     },
     {
       "consigne": "De quel régime politique s'agit-il pour le passage en couleur ?",
       "texte": "En septembre 1792, [la France n'a plus de roi : le pouvoir vient du peuple].",
-      "choix": ["Monarchie absolue", "Monarchie constitutionnelle", "République"],
+      "choix": [
+        "Monarchie absolue",
+        "Monarchie constitutionnelle",
+        "République"
+      ],
       "bonne": 2,
       "explication": "La Convention proclame la République, un régime où le pouvoir n'est pas héréditaire."
     },
     {
       "consigne": "De quel régime politique s'agit-il pour le passage en couleur ?",
       "texte": "En 1791, [Louis XVI doit désormais respecter une Constitution et les lois votées par l'Assemblée].",
-      "choix": ["Monarchie absolue", "Monarchie constitutionnelle", "République"],
+      "choix": [
+        "Monarchie absolue",
+        "Monarchie constitutionnelle",
+        "République"
+      ],
       "bonne": 1,
       "explication": "Le roi règne encore mais il est soumis à la Constitution de 1791."
     },
     {
       "consigne": "De quel régime politique s'agit-il pour le passage en couleur ?",
       "texte": "Pendant la Terreur, [le pouvoir est exercé au nom du peuple, sans roi].",
-      "choix": ["Monarchie absolue", "Monarchie constitutionnelle", "République"],
+      "choix": [
+        "Monarchie absolue",
+        "Monarchie constitutionnelle",
+        "République"
+      ],
       "bonne": 2,
       "explication": "La Terreur a lieu sous la République, proclamée en septembre 1792."
     }
@@ -124,7 +143,11 @@
   "devinettes": [
     {
       "reponse": "Louis XVI",
-      "acceptees": ["Louis XVI", "Louis 16", "Louis seize"],
+      "acceptees": [
+        "Louis XVI",
+        "Louis 16",
+        "Louis seize"
+      ],
       "indices": [
         "Je suis roi de France quand la Révolution commence.",
         "En juin 1791, je tente de fuir mais je suis arrêté à Varennes.",
@@ -134,7 +157,10 @@
     },
     {
       "reponse": "Robespierre",
-      "acceptees": ["Robespierre", "Maximilien Robespierre"],
+      "acceptees": [
+        "Robespierre",
+        "Maximilien Robespierre"
+      ],
       "indices": [
         "Je suis un révolutionnaire.",
         "Je siège au Comité de salut public.",
@@ -144,7 +170,13 @@
     },
     {
       "reponse": "Napoléon Bonaparte",
-      "acceptees": ["Napoléon Bonaparte", "Bonaparte", "Napoléon", "Napoleon Bonaparte", "Napoleon"],
+      "acceptees": [
+        "Napoléon Bonaparte",
+        "Bonaparte",
+        "Napoléon",
+        "Napoleon Bonaparte",
+        "Napoleon"
+      ],
       "indices": [
         "Je suis un général.",
         "En 1799, je renverse le Directoire.",
@@ -154,7 +186,10 @@
     },
     {
       "reponse": "La Bastille",
-      "acceptees": ["Bastille", "La Bastille"],
+      "acceptees": [
+        "Bastille",
+        "La Bastille"
+      ],
       "indices": [
         "Je suis un bâtiment de Paris.",
         "Je symbolise l'arbitraire royal.",

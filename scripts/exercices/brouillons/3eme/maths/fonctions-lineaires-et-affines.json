@@ -51,42 +51,66 @@
     {
       "consigne": "D'après le nombre en couleur, que fait la droite qui représente la fonction ?",
       "texte": "La fonction f est définie par f(x) = [2]x + 3.",
-      "choix": ["Elle monte", "Elle descend", "Elle est horizontale"],
+      "choix": [
+        "Elle monte",
+        "Elle descend",
+        "Elle est horizontale"
+      ],
       "bonne": 0,
       "explication": "Le coefficient directeur 2 est positif : la droite monte."
     },
     {
       "consigne": "D'après le nombre en couleur, que fait la droite qui représente la fonction ?",
       "texte": "La fonction g est définie par g(x) = [−2]x + 4.",
-      "choix": ["Elle monte", "Elle descend", "Elle est horizontale"],
+      "choix": [
+        "Elle monte",
+        "Elle descend",
+        "Elle est horizontale"
+      ],
       "bonne": 1,
       "explication": "Le coefficient directeur −2 est négatif : la droite descend."
     },
     {
       "consigne": "D'après le nombre en couleur, que fait la droite qui représente la fonction ?",
       "texte": "La fonction h est définie par h(x) = [0]x + 6.",
-      "choix": ["Elle monte", "Elle descend", "Elle est horizontale"],
+      "choix": [
+        "Elle monte",
+        "Elle descend",
+        "Elle est horizontale"
+      ],
       "bonne": 2,
       "explication": "Le coefficient directeur est 0 : la droite est parallèle à l'axe des abscisses, donc horizontale."
     },
     {
       "consigne": "D'après le nombre en couleur, que fait la droite qui représente la fonction ?",
       "texte": "La fonction k est définie par k(x) = [−0,5]x.",
-      "choix": ["Elle monte", "Elle descend", "Elle est horizontale"],
+      "choix": [
+        "Elle monte",
+        "Elle descend",
+        "Elle est horizontale"
+      ],
       "bonne": 1,
       "explication": "Le coefficient directeur −0,5 est négatif : la droite descend."
     },
     {
       "consigne": "D'après le nombre en couleur, que fait la droite qui représente la fonction ?",
       "texte": "La fonction m est définie par m(x) = [4]x − 7.",
-      "choix": ["Elle monte", "Elle descend", "Elle est horizontale"],
+      "choix": [
+        "Elle monte",
+        "Elle descend",
+        "Elle est horizontale"
+      ],
       "bonne": 0,
       "explication": "Le coefficient directeur 4 est positif : la droite monte."
     },
     {
       "consigne": "D'après le nombre en couleur, que fait la droite qui représente la fonction ?",
       "texte": "La fonction p est définie par p(x) = [0,3]x.",
-      "choix": ["Elle monte", "Elle descend", "Elle est horizontale"],
+      "choix": [
+        "Elle monte",
+        "Elle descend",
+        "Elle est horizontale"
+      ],
       "bonne": 0,
       "explication": "Le coefficient directeur 0,3 est positif : la droite monte."
     }
@@ -94,7 +118,13 @@
   "devinettes": [
     {
       "reponse": "Coefficient directeur",
-      "acceptees": ["Coefficient directeur", "Le coefficient directeur", "Pente", "Coefficient", "a"],
+      "acceptees": [
+        "Coefficient directeur",
+        "Le coefficient directeur",
+        "Pente",
+        "Coefficient",
+        "a"
+      ],
       "indices": [
         "Je suis un nombre associé à une droite.",
         "Je suis ce dont on monte ou descend quand on avance de 1 vers la droite.",
@@ -104,7 +134,12 @@
     },
     {
       "reponse": "Ordonnée à l'origine",
-      "acceptees": ["Ordonnée à l'origine", "L'ordonnée à l'origine", "Ordonnée", "b"],
+      "acceptees": [
+        "Ordonnée à l'origine",
+        "L'ordonnée à l'origine",
+        "Ordonnée",
+        "b"
+      ],
       "indices": [
         "Je suis un nombre que l'on lit sur un axe du repère.",
         "Je suis la valeur de f(0).",
@@ -114,7 +149,11 @@
     },
     {
       "reponse": "Fonction linéaire",
-      "acceptees": ["Fonction linéaire", "Une fonction linéaire", "Linéaire"],
+      "acceptees": [
+        "Fonction linéaire",
+        "Une fonction linéaire",
+        "Linéaire"
+      ],
       "indices": [
         "Je modélise la proportionnalité.",
         "Ma représentation graphique est une droite qui passe par l'origine.",
@@ -124,7 +163,11 @@
     },
     {
       "reponse": "Fonction constante",
-      "acceptees": ["Fonction constante", "Une fonction constante", "Constante"],
+      "acceptees": [
+        "Fonction constante",
+        "Une fonction constante",
+        "Constante"
+      ],
       "indices": [
         "Je suis un cas particulier d'expression ax + b.",
         "Mon coefficient directeur vaut 0.",
@@ -178,15 +221,6 @@
     }
   ],
   "etapes": [
-    {
-      "titre": "Trouver f(x) = ax + b quand f(2) = 7 et f(5) = 13",
-      "etapes": [
-        "On calcule a = (13 − 7) / (5 − 2) = 2",
-        "On remplace dans f(x) = 2x + b avec f(2) = 7 : b = 3",
-        "On écrit la fonction : f(x) = 2x + 3",
-        "On vérifie avec l'autre valeur : f(5) = 13"
-      ]
-    },
     {
       "titre": "Comparer deux offres avec des fonctions",
       "etapes": [

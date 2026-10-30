@@ -41,7 +41,6 @@
         "Un sonar mesure la profondeur grâce à un écho",
         "On divise par 2 car le signal fait l'aller-retour",
         "Un télémètre laser envoie de la lumière vers l'obstacle",
-        "Elle se calcule avec d = v × t",
         "L'écho met 2 s à revenir de l'obstacle"
       ]
     }
@@ -76,42 +75,66 @@
     {
       "consigne": "Quel est le type de signal dont la fréquence est en couleur ?",
       "texte": "Un sonar émet des signaux de [50 000 Hz] dans l'eau.",
-      "choix": ["Infrason", "Son audible", "Ultrason"],
+      "choix": [
+        "Infrason",
+        "Son audible",
+        "Ultrason"
+      ],
       "bonne": 2,
       "explication": "50 000 Hz dépasse 20 000 Hz : c'est un ultrason."
     },
     {
       "consigne": "Quel est le type de signal dont la fréquence est en couleur ?",
       "texte": "Une personne parle avec une voix grave de [200 Hz].",
-      "choix": ["Infrason", "Son audible", "Ultrason"],
+      "choix": [
+        "Infrason",
+        "Son audible",
+        "Ultrason"
+      ],
       "bonne": 1,
       "explication": "200 Hz est compris entre 20 Hz et 20 000 Hz : c'est un son audible."
     },
     {
       "consigne": "Quel est le type de signal dont la fréquence est en couleur ?",
       "texte": "Un capteur mesure une vibration du sol de [5 Hz].",
-      "choix": ["Infrason", "Son audible", "Ultrason"],
+      "choix": [
+        "Infrason",
+        "Son audible",
+        "Ultrason"
+      ],
       "bonne": 0,
       "explication": "5 Hz est inférieur à 20 Hz : c'est un infrason, inaudible pour l'être humain."
     },
     {
       "consigne": "Quel est le type de signal dont la fréquence est en couleur ?",
       "texte": "Une corde de guitare vibre à [440 Hz].",
-      "choix": ["Infrason", "Son audible", "Ultrason"],
+      "choix": [
+        "Infrason",
+        "Son audible",
+        "Ultrason"
+      ],
       "bonne": 1,
       "explication": "440 Hz est compris entre 20 Hz et 20 000 Hz : c'est un son audible."
     },
     {
       "consigne": "Quel est le type de signal dont la fréquence est en couleur ?",
       "texte": "Une échographie utilise des signaux de [2 000 000 Hz].",
-      "choix": ["Infrason", "Son audible", "Ultrason"],
+      "choix": [
+        "Infrason",
+        "Son audible",
+        "Ultrason"
+      ],
       "bonne": 2,
       "explication": "2 000 000 Hz dépasse largement 20 000 Hz : c'est un ultrason."
     },
     {
       "consigne": "Quel est le type de signal dont la fréquence est en couleur ?",
       "texte": "Une machine fait vibrer le sol [12 fois par seconde].",
-      "choix": ["Infrason", "Son audible", "Ultrason"],
+      "choix": [
+        "Infrason",
+        "Son audible",
+        "Ultrason"
+      ],
       "bonne": 0,
       "explication": "12 vibrations par seconde, c'est 12 Hz, soit moins de 20 Hz : c'est un infrason."
     }
@@ -119,7 +142,12 @@
   "devinettes": [
     {
       "reponse": "Écho",
-      "acceptees": ["Écho", "L'écho", "Un écho", "Echo"],
+      "acceptees": [
+        "Écho",
+        "L'écho",
+        "Un écho",
+        "Echo"
+      ],
       "indices": [
         "Je suis un son.",
         "Je suis un son réfléchi par un obstacle.",
@@ -129,7 +157,10 @@
     },
     {
       "reponse": "Fréquence",
-      "acceptees": ["Fréquence", "La fréquence"],
+      "acceptees": [
+        "Fréquence",
+        "La fréquence"
+      ],
       "indices": [
         "Je suis une grandeur d'un son.",
         "Je me mesure en hertz.",
@@ -139,7 +170,11 @@
     },
     {
       "reponse": "Sonomètre",
-      "acceptees": ["Sonomètre", "Le sonomètre", "Un sonomètre"],
+      "acceptees": [
+        "Sonomètre",
+        "Le sonomètre",
+        "Un sonomètre"
+      ],
       "indices": [
         "Je suis un appareil de mesure.",
         "Je mesure un niveau sonore.",
@@ -149,7 +184,12 @@
     },
     {
       "reponse": "Ultrason",
-      "acceptees": ["Ultrason", "Ultrasons", "Les ultrasons", "Un ultrason"],
+      "acceptees": [
+        "Ultrason",
+        "Ultrasons",
+        "Les ultrasons",
+        "Un ultrason"
+      ],
       "indices": [
         "Je suis un son.",
         "Mon domaine commence au-dessus de 20 000 Hz.",

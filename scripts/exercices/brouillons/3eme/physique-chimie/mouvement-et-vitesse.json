@@ -51,42 +51,66 @@
     {
       "consigne": "Quelle est la trajectoire de l'objet en couleur, par rapport au sol ?",
       "texte": "Sur un long tronçon d'autoroute tout droit, [une voiture] roule à 110 km/h.",
-      "choix": ["Rectiligne", "Circulaire", "Curviligne"],
+      "choix": [
+        "Rectiligne",
+        "Circulaire",
+        "Curviligne"
+      ],
       "bonne": 0,
       "explication": "La route est une droite : par rapport au sol, la voiture a une trajectoire rectiligne."
     },
     {
       "consigne": "Quelle est la trajectoire de l'objet en couleur, par rapport au sol ?",
       "texte": "À la fête foraine, [la nacelle d'une grande roue] fait un tour complet.",
-      "choix": ["Rectiligne", "Circulaire", "Curviligne"],
+      "choix": [
+        "Rectiligne",
+        "Circulaire",
+        "Curviligne"
+      ],
       "bonne": 1,
       "explication": "La nacelle tourne autour de l'axe de la roue : sa trajectoire est circulaire."
     },
     {
       "consigne": "Quelle est la trajectoire de l'objet en couleur, par rapport au sol ?",
       "texte": "Au basket, [le ballon lancé par un joueur] retombe dans le panier.",
-      "choix": ["Rectiligne", "Circulaire", "Curviligne"],
+      "choix": [
+        "Rectiligne",
+        "Circulaire",
+        "Curviligne"
+      ],
       "bonne": 2,
       "explication": "Un ballon lancé décrit une courbe quelconque : sa trajectoire est curviligne."
     },
     {
       "consigne": "Quelle est la trajectoire de l'objet en couleur, par rapport au sol ?",
       "texte": "Sur une voie ferrée toute droite, [un train] approche de la gare.",
-      "choix": ["Rectiligne", "Circulaire", "Curviligne"],
+      "choix": [
+        "Rectiligne",
+        "Circulaire",
+        "Curviligne"
+      ],
       "bonne": 0,
       "explication": "La voie est une droite : par rapport au sol, le train a une trajectoire rectiligne."
     },
     {
       "consigne": "Quelle est la trajectoire de l'objet en couleur, par rapport au sol ?",
       "texte": "Sur le cadran d'une horloge murale, [le bout de l'aiguille des secondes] fait un tour en 60 s.",
-      "choix": ["Rectiligne", "Circulaire", "Curviligne"],
+      "choix": [
+        "Rectiligne",
+        "Circulaire",
+        "Curviligne"
+      ],
       "bonne": 1,
       "explication": "Le bout de l'aiguille tourne autour de l'axe de l'horloge : il décrit un cercle."
     },
     {
       "consigne": "Quelle est la trajectoire de l'objet en couleur, par rapport au sol ?",
       "texte": "[Une skieuse] descend une piste qui serpente dans la montagne.",
-      "choix": ["Rectiligne", "Circulaire", "Curviligne"],
+      "choix": [
+        "Rectiligne",
+        "Circulaire",
+        "Curviligne"
+      ],
       "bonne": 2,
       "explication": "La piste forme une courbe quelconque, ni droite ni circulaire : la trajectoire est curviligne."
     }
@@ -94,7 +118,11 @@
   "devinettes": [
     {
       "reponse": "Référentiel",
-      "acceptees": ["Référentiel", "Le référentiel", "Objet de référence"],
+      "acceptees": [
+        "Référentiel",
+        "Le référentiel",
+        "Objet de référence"
+      ],
       "indices": [
         "Je suis un objet choisi avant de décrire un mouvement.",
         "Le sol, un train ou la Terre peuvent me jouer.",
@@ -104,7 +132,10 @@
     },
     {
       "reponse": "Trajectoire",
-      "acceptees": ["Trajectoire", "La trajectoire"],
+      "acceptees": [
+        "Trajectoire",
+        "La trajectoire"
+      ],
       "indices": [
         "Je suis une ligne.",
         "Je suis formée par les positions successives d'un point de l'objet.",
@@ -114,23 +145,18 @@
     },
     {
       "reponse": "Chronophotographie",
-      "acceptees": ["Chronophotographie", "La chronophotographie", "Une chronophotographie", "Chronophoto"],
+      "acceptees": [
+        "Chronophotographie",
+        "La chronophotographie",
+        "Une chronophotographie",
+        "Chronophoto"
+      ],
       "indices": [
         "Je suis une image.",
         "Je montre les positions d'un objet à intervalles de temps égaux.",
         "Quand mes points sont régulièrement espacés, le mouvement est uniforme."
       ],
       "explication": "Une chronophotographie montre les positions d'un objet à intervalles de temps égaux et permet de reconnaître la nature du mouvement."
-    },
-    {
-      "reponse": "Vitesse moyenne",
-      "acceptees": ["Vitesse moyenne", "La vitesse moyenne"],
-      "indices": [
-        "Je me calcule avec une division.",
-        "Je suis le quotient de la distance parcourue par la durée du parcours.",
-        "Sur un trajet de 30 km en 1,5 h, je vaux 20 km/h."
-      ],
-      "explication": "La vitesse moyenne se calcule avec v = d / t : 30 / 1,5 = 20 km/h."
     }
   ],
   "calculs": [

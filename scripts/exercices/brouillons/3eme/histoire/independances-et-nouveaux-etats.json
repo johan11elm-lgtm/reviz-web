@@ -38,10 +38,8 @@
       "nom": "Les nouveaux États indépendants",
       "detail": "Comment les pays devenus indépendants s'affirment dans le monde et quelles difficultés ils rencontrent.",
       "cartes": [
-        "En 1955, 29 pays se réunissent à Bandung",
         "Alfred Sauvy invente l'expression « tiers-monde » en 1952",
         "Des pays refusent de choisir un camp à Belgrade",
-        "Des frontières tracées par les colonisateurs provoquent des conflits",
         "Une pauvreté durable et une dépendance envers l'ancienne métropole"
       ]
     }
@@ -88,7 +86,10 @@
   "devinettes": [
     {
       "reponse": "Gandhi",
-      "acceptees": ["Gandhi", "Mahatma Gandhi"],
+      "acceptees": [
+        "Gandhi",
+        "Mahatma Gandhi"
+      ],
       "indices": [
         "Je lutte contre une domination étrangère dans un grand pays d'Asie.",
         "Je mène le Parti du Congrès par la non-violence et la désobéissance civile.",
@@ -98,7 +99,12 @@
     },
     {
       "reponse": "Le FLN",
-      "acceptees": ["FLN", "Le FLN", "Front de libération nationale", "Le Front de libération nationale"],
+      "acceptees": [
+        "FLN",
+        "Le FLN",
+        "Front de libération nationale",
+        "Le Front de libération nationale"
+      ],
       "indices": [
         "Je suis un mouvement qui réclame l'indépendance d'un territoire français.",
         "Le 1er novembre 1954, je commets les attentats de la « Toussaint rouge ».",
@@ -108,7 +114,11 @@
     },
     {
       "reponse": "Bandung",
-      "acceptees": ["Bandung", "La conférence de Bandung", "Conférence de Bandung"],
+      "acceptees": [
+        "Bandung",
+        "La conférence de Bandung",
+        "Conférence de Bandung"
+      ],
       "indices": [
         "Je suis le lieu d'une réunion internationale en 1955.",
         "29 pays d'Asie et d'Afrique s'y réunissent.",
@@ -118,7 +128,12 @@
     },
     {
       "reponse": "Diên Biên Phu",
-      "acceptees": ["Diên Biên Phu", "Dien Bien Phu", "Bataille de Diên Biên Phu", "La bataille de Diên Biên Phu"],
+      "acceptees": [
+        "Diên Biên Phu",
+        "Dien Bien Phu",
+        "Bataille de Diên Biên Phu",
+        "La bataille de Diên Biên Phu"
+      ],
       "indices": [
         "Je suis le nom d'un lieu en Asie du Sud-Est.",
         "En mai 1954, une armée française y est battue.",

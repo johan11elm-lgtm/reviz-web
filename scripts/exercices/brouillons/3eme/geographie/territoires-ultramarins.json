@@ -29,9 +29,7 @@
       "cartes": [
         "Un chômage plus élevé qu'en métropole",
         "Un PIB par habitant plus faible",
-        "Une vie plus chère qu'en métropole",
-        "Un manque de logements et d'équipements",
-        "Une forte dépendance envers la métropole"
+        "Un manque de logements et d'équipements"
       ]
     },
     {
@@ -64,12 +62,6 @@
       "carte": "Des prix plus élevés qu'en métropole",
       "role": "consequence",
       "explication": "Le transport et le faible nombre de concurrents augmentent les prix."
-    },
-    {
-      "fait": "l'importation de nombreux produits en outre-mer",
-      "carte": "Des frais de transport par bateau ou par avion",
-      "role": "consequence",
-      "explication": "Faire venir les produits de loin oblige à payer leur transport."
     }
   ],
   "etiquettes": [],
@@ -86,7 +78,10 @@
     },
     {
       "reponse": "La Guyane",
-      "acceptees": ["Guyane", "Guyane française"],
+      "acceptees": [
+        "Guyane",
+        "Guyane française"
+      ],
       "indices": [
         "Je suis un territoire d'outre-mer.",
         "Je suis située en Amérique du Sud.",
@@ -96,7 +91,11 @@
     },
     {
       "reponse": "La ZEE",
-      "acceptees": ["ZEE", "Zone économique exclusive", "La zone économique exclusive"],
+      "acceptees": [
+        "ZEE",
+        "Zone économique exclusive",
+        "La zone économique exclusive"
+      ],
       "indices": [
         "Je suis un espace maritime.",
         "Je m'étends jusqu'à 200 milles marins des côtes d'un État.",
@@ -106,7 +105,9 @@
     },
     {
       "reponse": "Saint-Pierre-et-Miquelon",
-      "acceptees": ["Saint Pierre et Miquelon"],
+      "acceptees": [
+        "Saint Pierre et Miquelon"
+      ],
       "indices": [
         "Je suis une collectivité d'outre-mer.",
         "Je suis dans l'océan Atlantique.",

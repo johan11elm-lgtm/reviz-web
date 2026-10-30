@@ -76,42 +76,72 @@
     {
       "consigne": "Quel est le rôle de l'être vivant en couleur ?",
       "texte": "Dans la haie, [la chouette] mange des mulots, qui mangent des graines.",
-      "choix": ["Producteur primaire", "Consommateur primaire", "Consommateur secondaire", "Décomposeur"],
+      "choix": [
+        "Producteur primaire",
+        "Consommateur primaire",
+        "Consommateur secondaire",
+        "Décomposeur"
+      ],
       "bonne": 2,
       "explication": "La chouette mange le mulot, qui est lui-même un herbivore : c'est un consommateur secondaire."
     },
     {
       "consigne": "Quel est le rôle de l'être vivant en couleur ?",
       "texte": "Dans la haie, la chouette mange des [mulots], qui mangent des graines.",
-      "choix": ["Producteur primaire", "Consommateur primaire", "Consommateur secondaire", "Décomposeur"],
+      "choix": [
+        "Producteur primaire",
+        "Consommateur primaire",
+        "Consommateur secondaire",
+        "Décomposeur"
+      ],
       "bonne": 1,
       "explication": "Le mulot mange des graines, donc des végétaux : c'est un consommateur primaire."
     },
     {
       "consigne": "Quel est le rôle de l'être vivant en couleur ?",
       "texte": "Dans une prairie, le lapin broute [l'herbe].",
-      "choix": ["Producteur primaire", "Consommateur primaire", "Consommateur secondaire", "Décomposeur"],
+      "choix": [
+        "Producteur primaire",
+        "Consommateur primaire",
+        "Consommateur secondaire",
+        "Décomposeur"
+      ],
       "bonne": 0,
       "explication": "L'herbe est un végétal chlorophyllien : c'est un producteur primaire."
     },
     {
       "consigne": "Quel est le rôle de l'être vivant en couleur ?",
       "texte": "Sur le sol d'une forêt, [des champignons] se nourrissent de feuilles mortes.",
-      "choix": ["Producteur primaire", "Consommateur primaire", "Consommateur secondaire", "Décomposeur"],
+      "choix": [
+        "Producteur primaire",
+        "Consommateur primaire",
+        "Consommateur secondaire",
+        "Décomposeur"
+      ],
       "bonne": 3,
       "explication": "Des champignons qui se nourrissent de feuilles mortes sont des décomposeurs."
     },
     {
       "consigne": "Quel est le rôle de l'être vivant en couleur ?",
       "texte": "Un renard attrape [un lapin], qui broutait l'herbe de la prairie.",
-      "choix": ["Producteur primaire", "Consommateur primaire", "Consommateur secondaire", "Décomposeur"],
+      "choix": [
+        "Producteur primaire",
+        "Consommateur primaire",
+        "Consommateur secondaire",
+        "Décomposeur"
+      ],
       "bonne": 1,
       "explication": "Le lapin broute de l'herbe : c'est un herbivore, donc un consommateur primaire."
     },
     {
       "consigne": "Quel est le rôle de l'être vivant en couleur ?",
       "texte": "Dans un étang, des têtards mangent [des algues].",
-      "choix": ["Producteur primaire", "Consommateur primaire", "Consommateur secondaire", "Décomposeur"],
+      "choix": [
+        "Producteur primaire",
+        "Consommateur primaire",
+        "Consommateur secondaire",
+        "Décomposeur"
+      ],
       "bonne": 0,
       "explication": "Les algues fabriquent leur matière avec la lumière : ce sont des producteurs primaires."
     }
@@ -119,7 +149,12 @@
   "devinettes": [
     {
       "reponse": "Décomposeur",
-      "acceptees": ["Décomposeur", "Un décomposeur", "Décomposeurs", "Les décomposeurs"],
+      "acceptees": [
+        "Décomposeur",
+        "Un décomposeur",
+        "Décomposeurs",
+        "Les décomposeurs"
+      ],
       "indices": [
         "Je recycle la matière de tous les êtres vivants.",
         "Des champignons, des bactéries et des petits animaux du sol font partie de ma catégorie.",
@@ -129,7 +164,12 @@
     },
     {
       "reponse": "Parasite",
-      "acceptees": ["Parasite", "Un parasite", "Parasites", "Les parasites"],
+      "acceptees": [
+        "Parasite",
+        "Un parasite",
+        "Parasites",
+        "Les parasites"
+      ],
       "indices": [
         "J'ai besoin d'un hôte pour vivre.",
         "Je suis par exemple le gui sur un arbre ou le ténia.",
@@ -139,7 +179,12 @@
     },
     {
       "reponse": "Lichen",
-      "acceptees": ["Lichen", "Le lichen", "Lichens", "Les lichens"],
+      "acceptees": [
+        "Lichen",
+        "Le lichen",
+        "Lichens",
+        "Les lichens"
+      ],
       "indices": [
         "Je suis une association durable entre deux êtres vivants.",
         "Je réunis un champignon et une algue.",
@@ -149,7 +194,13 @@
     },
     {
       "reponse": "Pelote de réjection",
-      "acceptees": ["Pelote de réjection", "Une pelote de réjection", "Pelotes de réjection", "Pelote", "Pelotes"],
+      "acceptees": [
+        "Pelote de réjection",
+        "Une pelote de réjection",
+        "Pelotes de réjection",
+        "Pelote",
+        "Pelotes"
+      ],
       "indices": [
         "Je contiens des os et des poils.",
         "Une chouette me rejette par le bec.",
@@ -195,15 +246,5 @@
       "explication": "450 kg × 10 % = 450 × 0,10 = 45 kg de carnivores."
     }
   ],
-  "etapes": [
-    {
-      "titre": "Construire un réseau alimentaire",
-      "etapes": [
-        "Déterminer le régime alimentaire de chaque être vivant",
-        "Placer d'abord les producteurs primaires",
-        "Relier les êtres vivants par des flèches « est mangé par »",
-        "Relier les chaînes qui ont des êtres vivants en commun"
-      ]
-    }
-  ]
+  "etapes": []
 }

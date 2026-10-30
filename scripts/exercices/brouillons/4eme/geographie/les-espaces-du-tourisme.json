@@ -88,35 +88,60 @@
     {
       "consigne": "De quel type d'espace touristique s'agit-il ?",
       "texte": "Dans cette station, [des remontées mécaniques et des pistes ont été installées sur les pentes].",
-      "choix": ["Littoral", "Montagne", "Ville ou site culturel", "Espace naturel"],
+      "choix": [
+        "Littoral",
+        "Montagne",
+        "Ville ou site culturel",
+        "Espace naturel"
+      ],
       "bonne": 1,
       "explication": "Remontées mécaniques et pistes sont les aménagements d'une station de sports d'hiver, en montagne."
     },
     {
       "consigne": "De quel type d'espace touristique s'agit-il ?",
       "texte": "Cette ville est aménagée avec [un front de mer, des hôtels et une marina].",
-      "choix": ["Littoral", "Montagne", "Ville ou site culturel", "Espace naturel"],
+      "choix": [
+        "Littoral",
+        "Montagne",
+        "Ville ou site culturel",
+        "Espace naturel"
+      ],
       "bonne": 0,
       "explication": "Front de mer, hôtels et marina caractérisent une station balnéaire, sur le littoral."
     },
     {
       "consigne": "De quel type d'espace touristique s'agit-il ?",
       "texte": "Chaque année, [les visiteurs viennent admirer les monuments et le patrimoine] de cette grande ville.",
-      "choix": ["Littoral", "Montagne", "Ville ou site culturel", "Espace naturel"],
+      "choix": [
+        "Littoral",
+        "Montagne",
+        "Ville ou site culturel",
+        "Espace naturel"
+      ],
       "bonne": 2,
       "explication": "Les grandes villes et les sites culturels attirent les touristes par leur patrimoine."
     },
     {
       "consigne": "De quel type d'espace touristique s'agit-il ?",
       "texte": "Dans cette région, [les visiteurs viennent pour les paysages préservés d'un parc naturel].",
-      "choix": ["Littoral", "Montagne", "Ville ou site culturel", "Espace naturel"],
+      "choix": [
+        "Littoral",
+        "Montagne",
+        "Ville ou site culturel",
+        "Espace naturel"
+      ],
       "bonne": 3,
       "explication": "Les parcs naturels attirent par leurs paysages : ce sont des espaces naturels."
     },
     {
       "consigne": "De quel type d'espace touristique s'agit-il ?",
       "texte": "Tout l'été, [les touristes viennent profiter de la mer, du sable et du soleil].",
-      "choix": ["Littoral", "Montagne", "Ville ou site culturel", "Espace naturel"],
+      "choix": [
+        "Littoral",
+        "Montagne",
+        "Ville ou site culturel",
+        "Espace naturel"
+      ],
       "bonne": 0,
       "explication": "La mer, le sable et le soleil font l'attrait du tourisme balnéaire des littoraux."
     }
@@ -124,7 +149,12 @@
   "devinettes": [
     {
       "reponse": "Le surtourisme",
-      "acceptees": ["Surtourisme", "Le surtourisme", "Sur-tourisme", "Le sur-tourisme"],
+      "acceptees": [
+        "Surtourisme",
+        "Le surtourisme",
+        "Sur-tourisme",
+        "Le sur-tourisme"
+      ],
       "indices": [
         "Je suis un excès.",
         "Je gêne les habitants et j'abîme les sites.",
@@ -134,7 +164,12 @@
     },
     {
       "reponse": "La saisonnalité",
-      "acceptees": ["Saisonnalité", "La saisonnalité", "Saisonnalite", "La saisonnalite"],
+      "acceptees": [
+        "Saisonnalité",
+        "La saisonnalité",
+        "Saisonnalite",
+        "La saisonnalite"
+      ],
       "indices": [
         "Je suis un rythme.",
         "Je rends la fréquentation forte seulement l'été ou l'hiver.",
@@ -144,7 +179,13 @@
     },
     {
       "reponse": "Une station balnéaire",
-      "acceptees": ["Station balnéaire", "Une station balnéaire", "Balnéaire", "Station balneaire", "Une station balneaire"],
+      "acceptees": [
+        "Station balnéaire",
+        "Une station balnéaire",
+        "Balnéaire",
+        "Station balneaire",
+        "Une station balneaire"
+      ],
       "indices": [
         "Je suis une ville.",
         "Je suis installée sur le littoral.",
@@ -154,7 +195,12 @@
     },
     {
       "reponse": "L'écotourisme",
-      "acceptees": ["Écotourisme", "L'écotourisme", "Ecotourisme", "L'ecotourisme"],
+      "acceptees": [
+        "Écotourisme",
+        "L'écotourisme",
+        "Ecotourisme",
+        "L'ecotourisme"
+      ],
       "indices": [
         "Je suis une manière de voyager.",
         "Je me pratique dans des espaces naturels préservés.",
@@ -164,16 +210,5 @@
     }
   ],
   "calculs": [],
-  "etapes": [
-    {
-      "titre": "Décrire une station touristique et en faire un croquis",
-      "etapes": [
-        "Découpe la photo en plans et nomme ce qui attire",
-        "Relève les aménagements : front de mer, hôtels, marina",
-        "Trace le trait de côte et colore chaque espace",
-        "Ajoute les axes de transport et les équipements",
-        "Range la légende en deux parties et donne un titre"
-      ]
-    }
-  ]
+  "etapes": []
 }

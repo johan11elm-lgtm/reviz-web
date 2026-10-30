@@ -19,7 +19,6 @@
         "Transport de la chaleur de l'équateur vers les pôles",
         "Le Gulf Stream adoucit l'ouest de l'Europe",
         "L'air chaud, moins dense, s'élève",
-        "La vapeur d'eau se condense en nuages en altitude",
         "Les écarts de température mettent l'air et l'eau en mouvement"
       ]
     },
@@ -82,35 +81,55 @@
     {
       "consigne": "De quoi parle le passage en couleur ?",
       "texte": "Au journal du soir, on apprend que [demain, il pleuvra à Lyon].",
-      "choix": ["La météo", "Le climat", "L'effet de serre"],
+      "choix": [
+        "La météo",
+        "Le climat",
+        "L'effet de serre"
+      ],
       "bonne": 0,
       "explication": "Une prévision pour demain en un lieu précis relève de la météo, pas du climat."
     },
     {
       "consigne": "De quoi parle le passage en couleur ?",
       "texte": "Dans cette région, [les étés sont chauds et secs et les hivers sont doux].",
-      "choix": ["La météo", "Le climat", "L'effet de serre"],
+      "choix": [
+        "La météo",
+        "Le climat",
+        "L'effet de serre"
+      ],
       "bonne": 1,
       "explication": "Des conditions habituelles, observées sur de longues années dans une région, décrivent son climat."
     },
     {
       "consigne": "De quoi parle le passage en couleur ?",
       "texte": "Dans l'atmosphère, [des gaz comme le CO₂ et la vapeur d'eau retiennent une partie de la chaleur émise par la Terre].",
-      "choix": ["La météo", "Le climat", "L'effet de serre"],
+      "choix": [
+        "La météo",
+        "Le climat",
+        "L'effet de serre"
+      ],
       "bonne": 2,
       "explication": "Des gaz qui retiennent la chaleur de la Terre, c'est l'effet de serre."
     },
     {
       "consigne": "De quoi parle le passage en couleur ?",
       "texte": "En regardant par la fenêtre, on voit que [ce matin, il fait 12 °C et il pleut à Brest].",
-      "choix": ["La météo", "Le climat", "L'effet de serre"],
+      "choix": [
+        "La météo",
+        "Le climat",
+        "L'effet de serre"
+      ],
       "bonne": 0,
       "explication": "Le temps qu'il fait à un moment donné, en un lieu, c'est la météo."
     },
     {
       "consigne": "De quoi parle le passage en couleur ?",
       "texte": "Pour décrire une région, les climatologues calculent [la moyenne des températures et des pluies sur au moins 30 ans].",
-      "choix": ["La météo", "Le climat", "L'effet de serre"],
+      "choix": [
+        "La météo",
+        "Le climat",
+        "L'effet de serre"
+      ],
       "bonne": 1,
       "explication": "Le climat est la moyenne des conditions météorologiques d'une région sur au moins 30 ans."
     }
@@ -118,7 +137,12 @@
   "devinettes": [
     {
       "reponse": "Climatogramme",
-      "acceptees": ["Climatogramme", "Un climatogramme", "Le climatogramme", "Diagramme climatique"],
+      "acceptees": [
+        "Climatogramme",
+        "Un climatogramme",
+        "Le climatogramme",
+        "Diagramme climatique"
+      ],
       "indices": [
         "Je suis un graphique qui décrit un lieu.",
         "Je représente les douze mois de l'année, un par un.",
@@ -128,7 +152,12 @@
     },
     {
       "reponse": "Gulf Stream",
-      "acceptees": ["Gulf Stream", "Le Gulf Stream", "Gulfstream", "Le Gulfstream"],
+      "acceptees": [
+        "Gulf Stream",
+        "Le Gulf Stream",
+        "Gulfstream",
+        "Le Gulfstream"
+      ],
       "indices": [
         "Je suis un courant chaud de l'océan.",
         "Je viens des régions tropicales.",
@@ -138,7 +167,12 @@
     },
     {
       "reponse": "Effet de serre",
-      "acceptees": ["Effet de serre", "L'effet de serre", "Effet de serre naturel", "L'effet de serre naturel"],
+      "acceptees": [
+        "Effet de serre",
+        "L'effet de serre",
+        "Effet de serre naturel",
+        "L'effet de serre naturel"
+      ],
       "indices": [
         "Je suis un phénomène naturel.",
         "Je fais passer la température moyenne de la Terre de −18 °C à +15 °C.",
@@ -148,7 +182,10 @@
     },
     {
       "reponse": "Latitude",
-      "acceptees": ["Latitude", "La latitude"],
+      "acceptees": [
+        "Latitude",
+        "La latitude"
+      ],
       "indices": [
         "Je me mesure en degrés.",
         "Je vaux 0° à l'équateur.",

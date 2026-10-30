@@ -17,8 +17,6 @@
       "detail": "Les bombardements, les bombes atomiques et les massacres qui visent les populations.",
       "cartes": [
         "Londres, Dresde et Tokyo sont bombardées",
-        "Hiroshima est détruite par une bombe atomique le 6 août 1945",
-        "Nagasaki est frappée par une bombe atomique le 9 août 1945",
         "Une unité SS massacre le village d'Oradour-sur-Glane",
         "Les populations occupées subissent massacres et travail forcé"
       ]
@@ -39,7 +37,6 @@
       "detail": "Les pertes humaines de la guerre et le jugement des dirigeants nazis à Nuremberg.",
       "cartes": [
         "La guerre fait 50 à 60 millions de morts",
-        "L'URSS perd environ 26 millions de personnes",
         "Le tribunal de Nuremberg juge les dirigeants nazis",
         "La notion de crime contre l'humanité est définie en 1945",
         "Hermann Göring est condamné à mort"
@@ -82,35 +79,55 @@
     {
       "consigne": "De quel type de lieu s'agit-il ?",
       "texte": "Un convoi de déportés arrive à [Dachau].",
-      "choix": ["Camp de concentration", "Centre de mise à mort", "Les deux à la fois"],
+      "choix": [
+        "Camp de concentration",
+        "Centre de mise à mort",
+        "Les deux à la fois"
+      ],
       "bonne": 0,
       "explication": "Dachau est un camp de concentration : on y enferme les déportés et on les soumet au travail forcé."
     },
     {
       "consigne": "De quel type de lieu s'agit-il ?",
       "texte": "Un convoi de déportés arrive à [Treblinka].",
-      "choix": ["Camp de concentration", "Centre de mise à mort", "Les deux à la fois"],
+      "choix": [
+        "Camp de concentration",
+        "Centre de mise à mort",
+        "Les deux à la fois"
+      ],
       "bonne": 1,
       "explication": "Treblinka est un centre de mise à mort : les déportés y sont assassinés par le gaz dès leur arrivée."
     },
     {
       "consigne": "De quel type de lieu s'agit-il ?",
       "texte": "Un convoi de déportés arrive à [Auschwitz-Birkenau].",
-      "choix": ["Camp de concentration", "Centre de mise à mort", "Les deux à la fois"],
+      "choix": [
+        "Camp de concentration",
+        "Centre de mise à mort",
+        "Les deux à la fois"
+      ],
       "bonne": 2,
       "explication": "Auschwitz-Birkenau est à la fois un camp de concentration et un centre de mise à mort."
     },
     {
       "consigne": "De quel type de lieu s'agit-il ?",
       "texte": "Un convoi de déportés arrive à [Buchenwald].",
-      "choix": ["Camp de concentration", "Centre de mise à mort", "Les deux à la fois"],
+      "choix": [
+        "Camp de concentration",
+        "Centre de mise à mort",
+        "Les deux à la fois"
+      ],
       "bonne": 0,
       "explication": "Buchenwald est un camp de concentration : beaucoup de déportés y meurent d'épuisement, de faim ou de maladie."
     },
     {
       "consigne": "De quel type de lieu s'agit-il ?",
       "texte": "Un convoi de déportés arrive à [Sobibor].",
-      "choix": ["Camp de concentration", "Centre de mise à mort", "Les deux à la fois"],
+      "choix": [
+        "Camp de concentration",
+        "Centre de mise à mort",
+        "Les deux à la fois"
+      ],
       "bonne": 1,
       "explication": "Sobibor est un centre de mise à mort, comme Treblinka, Belzec et Chelmno."
     }
@@ -118,7 +135,11 @@
   "devinettes": [
     {
       "reponse": "Stalingrad",
-      "acceptees": ["Stalingrad", "La bataille de Stalingrad", "Bataille de Stalingrad"],
+      "acceptees": [
+        "Stalingrad",
+        "La bataille de Stalingrad",
+        "Bataille de Stalingrad"
+      ],
       "indices": [
         "Je suis une ville d'URSS.",
         "Je suis le théâtre d'un tournant de la guerre en 1942-1943.",
@@ -128,7 +149,12 @@
     },
     {
       "reponse": "Auschwitz-Birkenau",
-      "acceptees": ["Auschwitz-Birkenau", "Auschwitz", "Birkenau", "Auschwitz Birkenau"],
+      "acceptees": [
+        "Auschwitz-Birkenau",
+        "Auschwitz",
+        "Birkenau",
+        "Auschwitz Birkenau"
+      ],
       "indices": [
         "Je suis un lieu de la Seconde Guerre mondiale.",
         "Je suis à la fois un camp de concentration et un centre de mise à mort.",
@@ -138,7 +164,11 @@
     },
     {
       "reponse": "Oradour-sur-Glane",
-      "acceptees": ["Oradour-sur-Glane", "Oradour", "Oradour sur Glane"],
+      "acceptees": [
+        "Oradour-sur-Glane",
+        "Oradour",
+        "Oradour sur Glane"
+      ],
       "indices": [
         "Je suis un village de France.",
         "Le 10 juin 1944, une unité SS massacre ma population.",
@@ -148,7 +178,11 @@
     },
     {
       "reponse": "Nuremberg",
-      "acceptees": ["Nuremberg", "Le procès de Nuremberg", "Procès de Nuremberg"],
+      "acceptees": [
+        "Nuremberg",
+        "Le procès de Nuremberg",
+        "Procès de Nuremberg"
+      ],
       "indices": [
         "Je suis une ville d'Allemagne.",
         "De 1945 à 1946, un tribunal y juge les dirigeants nazis.",
@@ -159,16 +193,6 @@
   ],
   "calculs": [],
   "etapes": [
-    {
-      "titre": "Les grandes dates de la guerre jusqu'en 1943",
-      "etapes": [
-        "Le 1er septembre 1939, l'Allemagne envahit la Pologne",
-        "En juin 1940, la France est battue",
-        "Le 22 juin 1941, l'Allemagne attaque l'URSS",
-        "Le 7 décembre 1941, le Japon attaque Pearl Harbor",
-        "En février 1943, une armée allemande capitule à Stalingrad"
-      ]
-    },
     {
       "titre": "De la Normandie à la capitulation du Japon",
       "etapes": [

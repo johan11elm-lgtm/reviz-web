@@ -39,10 +39,7 @@
       "detail": "La grandeur qui s'exprime en ampères et qui, trop grande, fait chauffer les fils.",
       "cartes": [
         "Elle s'exprime en ampères",
-        "Elle augmente quand on branche plus d'appareils sur la multiprise",
-        "Trop grande, elle fait chauffer les fils par effet Joule",
-        "Elle vaut 10 A pour 2 300 W sous 230 V",
-        "On l'obtient en divisant la puissance par la tension"
+        "Elle vaut 10 A pour 2 300 W sous 230 V"
       ]
     }
   ],
@@ -82,42 +79,72 @@
     {
       "consigne": "De quelle grandeur la valeur en couleur est-elle la mesure ?",
       "texte": "La plaque d'une bouilloire indique 230 V et [2 000 W].",
-      "choix": ["Puissance", "Énergie", "Tension", "Intensité"],
+      "choix": [
+        "Puissance",
+        "Énergie",
+        "Tension",
+        "Intensité"
+      ],
       "bonne": 0,
       "explication": "Le watt est l'unité de puissance."
     },
     {
       "consigne": "De quelle grandeur la valeur en couleur est-elle la mesure ?",
       "texte": "Le compteur de la maison affiche [12 450 kWh].",
-      "choix": ["Puissance", "Énergie", "Tension", "Intensité"],
+      "choix": [
+        "Puissance",
+        "Énergie",
+        "Tension",
+        "Intensité"
+      ],
       "bonne": 1,
       "explication": "Le compteur mesure l'énergie consommée, en kilowattheures."
     },
     {
       "consigne": "De quelle grandeur la valeur en couleur est-elle la mesure ?",
       "texte": "Aux bornes d'une prise de la maison, il y a [230 V].",
-      "choix": ["Puissance", "Énergie", "Tension", "Intensité"],
+      "choix": [
+        "Puissance",
+        "Énergie",
+        "Tension",
+        "Intensité"
+      ],
       "bonne": 2,
       "explication": "Le volt est l'unité de tension."
     },
     {
       "consigne": "De quelle grandeur la valeur en couleur est-elle la mesure ?",
       "texte": "Cette multiprise est prévue pour [16 A].",
-      "choix": ["Puissance", "Énergie", "Tension", "Intensité"],
+      "choix": [
+        "Puissance",
+        "Énergie",
+        "Tension",
+        "Intensité"
+      ],
       "bonne": 3,
       "explication": "L'ampère est l'unité d'intensité du courant."
     },
     {
       "consigne": "De quelle grandeur la valeur en couleur est-elle la mesure ?",
       "texte": "Une lampe reste allumée 100 s et consomme [1 000 J].",
-      "choix": ["Puissance", "Énergie", "Tension", "Intensité"],
+      "choix": [
+        "Puissance",
+        "Énergie",
+        "Tension",
+        "Intensité"
+      ],
       "bonne": 1,
       "explication": "Le joule est une unité d'énergie."
     },
     {
       "consigne": "De quelle grandeur la valeur en couleur est-elle la mesure ?",
       "texte": "Le radiateur de la chambre a une valeur de [1,5 kW].",
-      "choix": ["Puissance", "Énergie", "Tension", "Intensité"],
+      "choix": [
+        "Puissance",
+        "Énergie",
+        "Tension",
+        "Intensité"
+      ],
       "bonne": 0,
       "explication": "Le kilowatt est un multiple du watt, l'unité de puissance."
     }
@@ -125,7 +152,12 @@
   "devinettes": [
     {
       "reponse": "Kilowattheure",
-      "acceptees": ["Kilowattheure", "Le kilowattheure", "Un kilowattheure", "kWh"],
+      "acceptees": [
+        "Kilowattheure",
+        "Le kilowattheure",
+        "Un kilowattheure",
+        "kWh"
+      ],
       "indices": [
         "Je suis une unité.",
         "Le compteur de la maison m'affiche et on me paie sur la facture.",
@@ -135,7 +167,11 @@
     },
     {
       "reponse": "Puissance",
-      "acceptees": ["Puissance", "La puissance", "Puissance nominale"],
+      "acceptees": [
+        "Puissance",
+        "La puissance",
+        "Puissance nominale"
+      ],
       "indices": [
         "Je suis une grandeur d'un appareil.",
         "Je me mesure en watts.",
@@ -145,7 +181,11 @@
     },
     {
       "reponse": "Effet Joule",
-      "acceptees": ["Effet Joule", "L'effet Joule", "Joule"],
+      "acceptees": [
+        "Effet Joule",
+        "L'effet Joule",
+        "Joule"
+      ],
       "indices": [
         "Je suis un phénomène lié au courant électrique.",
         "Je convertis de l'énergie électrique en énergie thermique.",
@@ -155,7 +195,12 @@
     },
     {
       "reponse": "Surintensité",
-      "acceptees": ["Surintensité", "La surintensité", "Une surintensité", "Surcharge"],
+      "acceptees": [
+        "Surintensité",
+        "La surintensité",
+        "Une surintensité",
+        "Surcharge"
+      ],
       "indices": [
         "Je suis un danger dans une installation électrique.",
         "Je me produis quand on branche trop d'appareils sur une même multiprise.",
@@ -209,15 +254,6 @@
     }
   ],
   "etapes": [
-    {
-      "titre": "Calculer le coût de l'énergie consommée",
-      "etapes": [
-        "Relever la puissance de l'appareil et sa durée de fonctionnement",
-        "Convertir la puissance en kW et la durée en h",
-        "Calculer l'énergie avec E = P × t",
-        "Multiplier l'énergie en kWh par le prix du kWh"
-      ]
-    },
     {
       "titre": "Ce qui arrive quand on surcharge une multiprise",
       "etapes": [

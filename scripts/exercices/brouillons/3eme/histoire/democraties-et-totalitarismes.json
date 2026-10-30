@@ -39,10 +39,7 @@
       "detail": "La crise née aux États-Unis qui touche l'Europe et affaiblit les démocraties.",
       "cartes": [
         "Les cours de la Bourse de New York s'effondrent en octobre",
-        "La crise américaine s'étend ensuite à l'Europe",
-        "Le chômage de masse touche des millions de familles",
-        "La misère fait perdre confiance dans la démocratie",
-        "Les partis extrémistes en profitent pour progresser"
+        "La crise américaine s'étend ensuite à l'Europe"
       ]
     }
   ],
@@ -76,7 +73,11 @@
   "devinettes": [
     {
       "reponse": "Staline",
-      "acceptees": ["Staline", "Joseph Staline", "Iossif Staline"],
+      "acceptees": [
+        "Staline",
+        "Joseph Staline",
+        "Iossif Staline"
+      ],
       "indices": [
         "Je dirige mon pays à partir de la fin des années 1920.",
         "Je m'impose après la mort de Lénine et j'élimine mes rivaux.",
@@ -86,7 +87,10 @@
     },
     {
       "reponse": "Léon Blum",
-      "acceptees": ["Léon Blum", "Blum"],
+      "acceptees": [
+        "Léon Blum",
+        "Blum"
+      ],
       "indices": [
         "Je suis un homme politique français des années 1930.",
         "Je dirige le gouvernement après la victoire de la gauche aux élections de 1936.",
@@ -96,7 +100,11 @@
     },
     {
       "reponse": "Le Goulag",
-      "acceptees": ["Goulag", "Le Goulag", "Les Goulags"],
+      "acceptees": [
+        "Goulag",
+        "Le Goulag",
+        "Les Goulags"
+      ],
       "indices": [
         "Je suis un ensemble de camps.",
         "Je me trouve en URSS et on y est forcé de travailler.",
@@ -106,7 +114,11 @@
     },
     {
       "reponse": "La nuit de Cristal",
-      "acceptees": ["Nuit de Cristal", "La nuit de Cristal", "Kristallnacht"],
+      "acceptees": [
+        "Nuit de Cristal",
+        "La nuit de Cristal",
+        "Kristallnacht"
+      ],
       "indices": [
         "Je suis un événement de l'automne 1938.",
         "Dans toute l'Allemagne, des synagogues et des magasins sont détruits.",

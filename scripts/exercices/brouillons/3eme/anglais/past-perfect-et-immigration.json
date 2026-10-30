@@ -51,42 +51,72 @@
     {
       "consigne": "Quel est le temps du verbe en couleur ?",
       "texte": "When they arrived in New York, they [had travelled] for ten days.",
-      "choix": ["Past perfect", "Prétérit simple", "Présent simple", "Present perfect"],
+      "choix": [
+        "Past perfect",
+        "Prétérit simple",
+        "Présent simple",
+        "Present perfect"
+      ],
       "bonne": 0,
       "explication": "« had travelled » : had + participe passé. Le voyage est antérieur à l'arrivée."
     },
     {
       "consigne": "Quel est le temps du verbe en couleur ?",
       "texte": "When they [arrived] in New York, they had travelled for ten days.",
-      "choix": ["Past perfect", "Prétérit simple", "Présent simple", "Present perfect"],
+      "choix": [
+        "Past perfect",
+        "Prétérit simple",
+        "Présent simple",
+        "Present perfect"
+      ],
       "bonne": 1,
       "explication": "« arrived » est au prétérit simple : c'est l'action la plus récente du récit."
     },
     {
       "consigne": "Quel est le temps du verbe en couleur ?",
       "texte": "They [hadn't seen] the sea before.",
-      "choix": ["Past perfect", "Prétérit simple", "Présent simple", "Present perfect"],
+      "choix": [
+        "Past perfect",
+        "Prétérit simple",
+        "Présent simple",
+        "Present perfect"
+      ],
       "bonne": 0,
       "explication": "« hadn't seen » est la forme négative du past perfect : hadn't + participe passé."
     },
     {
       "consigne": "Quel est le temps du verbe en couleur ?",
       "texte": "After they had passed the medical test, they [took] a ferry to New York.",
-      "choix": ["Past perfect", "Prétérit simple", "Présent simple", "Present perfect"],
+      "choix": [
+        "Past perfect",
+        "Prétérit simple",
+        "Présent simple",
+        "Present perfect"
+      ],
       "bonne": 1,
       "explication": "« took » est le prétérit de take : le ferry vient après le contrôle médical."
     },
     {
       "consigne": "Quel est le temps du verbe en couleur ?",
       "texte": "The American Dream [is] the idea that hard work leads to success.",
-      "choix": ["Past perfect", "Prétérit simple", "Présent simple", "Present perfect"],
+      "choix": [
+        "Past perfect",
+        "Prétérit simple",
+        "Présent simple",
+        "Present perfect"
+      ],
       "bonne": 2,
       "explication": "« is » est au présent simple : on définit une idée toujours vraie."
     },
     {
       "consigne": "Quel est le temps du verbe en couleur ?",
       "texte": "Many Irish families left because the potato crops [had failed].",
-      "choix": ["Past perfect", "Prétérit simple", "Présent simple", "Present perfect"],
+      "choix": [
+        "Past perfect",
+        "Prétérit simple",
+        "Présent simple",
+        "Present perfect"
+      ],
       "bonne": 0,
       "explication": "« had failed » : les récoltes avaient échoué avant le départ des familles, d'où le past perfect."
     }
@@ -94,7 +124,9 @@
   "devinettes": [
     {
       "reponse": "Ellis Island",
-      "acceptees": ["Ellis"],
+      "acceptees": [
+        "Ellis"
+      ],
       "indices": [
         "Je suis un lieu des États-Unis.",
         "Environ 12 millions de personnes sont passées par moi.",
@@ -104,7 +136,12 @@
     },
     {
       "reponse": "Statue de la Liberté",
-      "acceptees": ["La statue de la Liberté", "Statue of Liberty", "The Statue of Liberty", "Lady Liberty"],
+      "acceptees": [
+        "La statue de la Liberté",
+        "Statue of Liberty",
+        "The Statue of Liberty",
+        "Lady Liberty"
+      ],
       "indices": [
         "Je suis un monument.",
         "J'ai été offerte par la France.",
@@ -114,7 +151,10 @@
     },
     {
       "reponse": "Melting pot",
-      "acceptees": ["Le melting pot", "Melting-pot"],
+      "acceptees": [
+        "Le melting pot",
+        "Melting-pot"
+      ],
       "indices": [
         "Je suis une image.",
         "Mon nom signifie « creuset ».",
@@ -124,7 +164,11 @@
     },
     {
       "reponse": "American Dream",
-      "acceptees": ["The American Dream", "Le rêve américain", "Rêve américain"],
+      "acceptees": [
+        "The American Dream",
+        "Le rêve américain",
+        "Rêve américain"
+      ],
       "indices": [
         "Je suis une idée.",
         "Je suis célèbre aux États-Unis.",
@@ -134,15 +178,5 @@
     }
   ],
   "calculs": [],
-  "etapes": [
-    {
-      "titre": "Le voyage d'une famille d'immigrants",
-      "etapes": [
-        "La famille vend sa maison et quitte son pays",
-        "La famille voyage plusieurs jours en bateau",
-        "La famille passe le contrôle médical à Ellis Island",
-        "La famille prend un ferry pour New York"
-      ]
-    }
-  ]
+  "etapes": []
 }

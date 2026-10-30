@@ -18,8 +18,6 @@
       "cartes": [
         "Chez Madame Geoffrin, philosophes et artistes discutent",
         "On débat des idées nouvelles autour d'un café",
-        "Des savants se retrouvent dans des académies",
-        "Des savants de toute l'Europe s'écrivent des lettres",
         "Des journaux font connaître les idées nouvelles"
       ]
     },
@@ -96,30 +94,6 @@
       ],
       "bonne": 1,
       "explication": "Voltaire défend Jean Calas et dénonce l'intolérance religieuse."
-    },
-    {
-      "consigne": "Quel philosophe des Lumières est décrit par le passage en couleur ?",
-      "texte": "En 1762, un philosophe [affirme que la souveraineté appartient au peuple].",
-      "choix": [
-        "Montesquieu",
-        "Voltaire",
-        "Rousseau",
-        "Diderot"
-      ],
-      "bonne": 2,
-      "explication": "Dans Du contrat social (1762), Rousseau affirme la souveraineté du peuple."
-    },
-    {
-      "consigne": "Quel philosophe des Lumières est décrit par le passage en couleur ?",
-      "texte": "Entre 1751 et 1772, un philosophe [dirige l'Encyclopédie avec d'Alembert].",
-      "choix": [
-        "Montesquieu",
-        "Voltaire",
-        "Rousseau",
-        "Diderot"
-      ],
-      "bonne": 3,
-      "explication": "Diderot dirige l'Encyclopédie, qui rassemble les connaissances de l'époque."
     },
     {
       "consigne": "Quel philosophe des Lumières est décrit par le passage en couleur ?",

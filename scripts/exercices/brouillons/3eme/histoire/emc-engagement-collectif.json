@@ -50,18 +50,12 @@
   "etiquettes": [],
   "devinettes": [
     {
-      "reponse": "L'Arcom",
-      "acceptees": ["Arcom", "L'Arcom"],
-      "indices": [
-        "Je veille au bon déroulement des campagnes électorales.",
-        "Je régule la radio et la télévision.",
-        "Je contrôle le temps de parole de chaque candidat à l'antenne."
-      ],
-      "explication": "L'Arcom régule l'audiovisuel et contrôle les temps de parole pour garantir l'égalité entre les candidats."
-    },
-    {
       "reponse": "Le référendum",
-      "acceptees": ["Référendum", "Le référendum", "Un référendum"],
+      "acceptees": [
+        "Référendum",
+        "Le référendum",
+        "Un référendum"
+      ],
       "indices": [
         "Je suis une façon de consulter les citoyens.",
         "On me répond directement par oui ou par non.",
@@ -71,7 +65,12 @@
     },
     {
       "reponse": "Un syndicat",
-      "acceptees": ["Syndicat", "Un syndicat", "Le syndicat", "Les syndicats"],
+      "acceptees": [
+        "Syndicat",
+        "Un syndicat",
+        "Le syndicat",
+        "Les syndicats"
+      ],
       "indices": [
         "Je suis une organisation.",
         "Je défends les intérêts des salariés.",
@@ -81,7 +80,11 @@
     },
     {
       "reponse": "Le Sénat",
-      "acceptees": ["Sénat", "Le Sénat", "Senat"],
+      "acceptees": [
+        "Sénat",
+        "Le Sénat",
+        "Senat"
+      ],
       "indices": [
         "Je fais partie du Parlement.",
         "Mes membres sont élus pour 6 ans par de grands électeurs.",

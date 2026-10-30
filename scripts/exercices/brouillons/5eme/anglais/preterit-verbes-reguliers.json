@@ -7,7 +7,6 @@
       "cartes": [
         "We danced all evening",
         "She smiled at the camera",
-        "I phoned my grandmother",
         "They arrived at six o'clock",
         "I liked the new film"
       ]
@@ -51,42 +50,66 @@
     {
       "consigne": "Comment se prononce la terminaison -ed du verbe en couleur ?",
       "texte": "Last Saturday, we [walked] to the park.",
-      "choix": ["/t/", "/d/", "/ɪd/"],
+      "choix": [
+        "/t/",
+        "/d/",
+        "/ɪd/"
+      ],
       "bonne": 0,
       "explication": "Après le son sourd k de walk, le -ed se prononce /t/."
     },
     {
       "consigne": "Comment se prononce la terminaison -ed du verbe en couleur ?",
       "texte": "She [played] tennis with her cousin.",
-      "choix": ["/t/", "/d/", "/ɪd/"],
+      "choix": [
+        "/t/",
+        "/d/",
+        "/ɪd/"
+      ],
       "bonne": 1,
       "explication": "Play ne finit ni par t ou d, ni par un son sourd : le -ed se prononce /d/."
     },
     {
       "consigne": "Comment se prononce la terminaison -ed du verbe en couleur ?",
       "texte": "He [wanted] a new bike for his birthday.",
-      "choix": ["/t/", "/d/", "/ɪd/"],
+      "choix": [
+        "/t/",
+        "/d/",
+        "/ɪd/"
+      ],
       "bonne": 2,
       "explication": "Après le son t de want, le -ed se prononce /ɪd/ : on entend une syllabe de plus."
     },
     {
       "consigne": "Comment se prononce la terminaison -ed du verbe en couleur ?",
       "texte": "The bus [stopped] in front of the school.",
-      "choix": ["/t/", "/d/", "/ɪd/"],
+      "choix": [
+        "/t/",
+        "/d/",
+        "/ɪd/"
+      ],
       "bonne": 0,
       "explication": "Après le son sourd p de stop, le -ed se prononce /t/."
     },
     {
       "consigne": "Comment se prononce la terminaison -ed du verbe en couleur ?",
       "texte": "I [cleaned] my room yesterday.",
-      "choix": ["/t/", "/d/", "/ɪd/"],
+      "choix": [
+        "/t/",
+        "/d/",
+        "/ɪd/"
+      ],
       "bonne": 1,
       "explication": "Clean ne finit ni par t ou d, ni par un son sourd : le -ed se prononce /d/."
     },
     {
       "consigne": "Comment se prononce la terminaison -ed du verbe en couleur ?",
       "texte": "We [visited] our grandparents last weekend.",
-      "choix": ["/t/", "/d/", "/ɪd/"],
+      "choix": [
+        "/t/",
+        "/d/",
+        "/ɪd/"
+      ],
       "bonne": 2,
       "explication": "Après le son t de visit, le -ed se prononce /ɪd/ : on entend une syllabe de plus."
     }
@@ -94,7 +117,12 @@
   "devinettes": [
     {
       "reponse": "Didn't",
-      "acceptees": ["Didn't", "Didn’t", "Didnt", "Did not"],
+      "acceptees": [
+        "Didn't",
+        "Didn’t",
+        "Didnt",
+        "Did not"
+      ],
       "indices": [
         "Je suis un mot court, écrit avec une apostrophe.",
         "Je sers à faire la négation d'un verbe au passé.",
@@ -104,7 +132,12 @@
     },
     {
       "reponse": "Base verbale",
-      "acceptees": ["Base verbale", "La base verbale", "Base", "Infinitif"],
+      "acceptees": [
+        "Base verbale",
+        "La base verbale",
+        "Base",
+        "Infinitif"
+      ],
       "indices": [
         "Je suis la forme d'un verbe.",
         "On me trouve dans le dictionnaire, sans aucune terminaison.",
@@ -114,7 +147,12 @@
     },
     {
       "reponse": "Finally",
-      "acceptees": ["Finally", "At last", "In the end", "Lastly"],
+      "acceptees": [
+        "Finally",
+        "At last",
+        "In the end",
+        "Lastly"
+      ],
       "indices": [
         "Je suis un mot anglais.",
         "Je sers à relier les étapes d'un récit.",
@@ -124,7 +162,9 @@
     },
     {
       "reponse": "Did",
-      "acceptees": ["Did"],
+      "acceptees": [
+        "Did"
+      ],
       "indices": [
         "Je suis un auxiliaire du passé.",
         "Je commence la question : ___ you visit your grandparents ?",

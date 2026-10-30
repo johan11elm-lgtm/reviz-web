@@ -7,8 +7,6 @@
       "cartes": [
         "Compartiment de la cellule où se trouvent les chromosomes",
         "Greffé dans un ovule, il fixe les caractères de l'agneau",
-        "Changer celui d'une cellule change les caractères de l'être vivant",
-        "Dans un gamète, il ne renferme que 23 chromosomes",
         "Le cytoplasme l'entoure dans la cellule"
       ]
     },
@@ -28,9 +26,7 @@
       "detail": "Une portion d'ADN, à un endroit précis d'un chromosome, qui détermine un caractère héréditaire.",
       "cartes": [
         "Portion d'ADN qui détermine un caractère héréditaire",
-        "Il détermine par exemple le groupe sanguin",
         "Un chromosome en porte beaucoup, chacun pour un caractère",
-        "Il existe sous plusieurs versions",
         "Il occupe un endroit précis, son locus"
       ]
     },
@@ -82,35 +78,55 @@
     {
       "consigne": "Que représente le groupe en couleur ?",
       "texte": "Après un été à la plage, [la peau de Léa est plus foncée].",
-      "choix": ["Génotype", "Phénotype", "Environnement"],
+      "choix": [
+        "Génotype",
+        "Phénotype",
+        "Environnement"
+      ],
       "bonne": 1,
       "explication": "Un caractère observable, comme la couleur de la peau, fait partie du phénotype."
     },
     {
       "consigne": "Que représente le groupe en couleur ?",
       "texte": "Pour le groupe sanguin, Léa possède [les allèles A et O].",
-      "choix": ["Génotype", "Phénotype", "Environnement"],
+      "choix": [
+        "Génotype",
+        "Phénotype",
+        "Environnement"
+      ],
       "bonne": 0,
       "explication": "L'ensemble des allèles d'un individu forme son génotype."
     },
     {
       "consigne": "Que représente le groupe en couleur ?",
       "texte": "La peau de Léa a foncé à cause de [l'exposition au soleil].",
-      "choix": ["Génotype", "Phénotype", "Environnement"],
+      "choix": [
+        "Génotype",
+        "Phénotype",
+        "Environnement"
+      ],
       "bonne": 2,
       "explication": "Le soleil est un facteur de l'environnement : il modifie le phénotype sans changer le génotype."
     },
     {
       "consigne": "Que représente le groupe en couleur ?",
       "texte": "Deux vrais jumeaux ont [exactement les mêmes allèles].",
-      "choix": ["Génotype", "Phénotype", "Environnement"],
+      "choix": [
+        "Génotype",
+        "Phénotype",
+        "Environnement"
+      ],
       "bonne": 0,
       "explication": "Avoir les mêmes allèles, c'est avoir le même génotype."
     },
     {
       "consigne": "Que représente le groupe en couleur ?",
       "texte": "Théo grandit mieux grâce à [une bonne alimentation].",
-      "choix": ["Génotype", "Phénotype", "Environnement"],
+      "choix": [
+        "Génotype",
+        "Phénotype",
+        "Environnement"
+      ],
       "bonne": 2,
       "explication": "L'alimentation fait partie de l'environnement : elle aide à atteindre sa taille sans modifier les allèles."
     }
@@ -118,7 +134,12 @@
   "devinettes": [
     {
       "reponse": "Allèle",
-      "acceptees": ["Allèle", "Un allèle", "Les allèles", "Allèles"],
+      "acceptees": [
+        "Allèle",
+        "Un allèle",
+        "Les allèles",
+        "Allèles"
+      ],
       "indices": [
         "Je suis une version.",
         "Pour le groupe sanguin, il existe trois comme moi : A, B et O.",
@@ -128,7 +149,11 @@
     },
     {
       "reponse": "Caryotype",
-      "acceptees": ["Caryotype", "Un caryotype", "Le caryotype"],
+      "acceptees": [
+        "Caryotype",
+        "Un caryotype",
+        "Le caryotype"
+      ],
       "indices": [
         "Je suis une photographie.",
         "Je range des chromosomes par paires, selon leur taille.",
@@ -138,7 +163,11 @@
     },
     {
       "reponse": "ADN",
-      "acceptees": ["ADN", "L'ADN", "Acide désoxyribonucléique"],
+      "acceptees": [
+        "ADN",
+        "L'ADN",
+        "Acide désoxyribonucléique"
+      ],
       "indices": [
         "Je suis une molécule.",
         "Je porte l'information génétique.",
@@ -148,7 +177,11 @@
     },
     {
       "reponse": "Trisomie 21",
-      "acceptees": ["Trisomie 21", "La trisomie 21", "Trisomie"],
+      "acceptees": [
+        "Trisomie 21",
+        "La trisomie 21",
+        "Trisomie"
+      ],
       "indices": [
         "Je suis une anomalie du nombre de chromosomes.",
         "Avec moi, une cellule compte 47 chromosomes au lieu de 46.",

@@ -51,35 +51,44 @@
     {
       "consigne": "De quel type de nouveauté s'agit-il pour le passage en couleur ?",
       "texte": "Un fabricant sort le même smartphone que l'an dernier, mais [avec une batterie plus endurante].",
-      "choix": ["Invention non adoptée", "Innovation incrémentale", "Innovation de rupture"],
+      "choix": [
+        "Invention non adoptée",
+        "Innovation incrémentale",
+        "Innovation de rupture"
+      ],
       "bonne": 1,
       "explication": "L'objet existe déjà et son principe ne change pas : on l'améliore, c'est une innovation incrémentale."
     },
     {
       "consigne": "De quel type de nouveauté s'agit-il pour le passage en couleur ?",
-      "texte": "[L'ampoule LED] remplace l'ampoule à incandescence, et presque tous les foyers l'utilisent.",
-      "choix": ["Invention non adoptée", "Innovation incrémentale", "Innovation de rupture"],
-      "bonne": 2,
-      "explication": "Un nouveau principe remplace l'ancien et le public l'adopte : c'est une innovation de rupture."
-    },
-    {
-      "consigne": "De quel type de nouveauté s'agit-il pour le passage en couleur ?",
       "texte": "Un inventeur dépose un brevet pour [un cadenas qui s'ouvre avec la voix]. Aucun magasin ne le vend et personne ne l'utilise.",
-      "choix": ["Invention non adoptée", "Innovation incrémentale", "Innovation de rupture"],
+      "choix": [
+        "Invention non adoptée",
+        "Innovation incrémentale",
+        "Innovation de rupture"
+      ],
       "bonne": 0,
       "explication": "L'objet est nouveau, mais personne ne l'adopte : ce n'est qu'une invention, pas une innovation."
     },
     {
       "consigne": "De quel type de nouveauté s'agit-il pour le passage en couleur ?",
       "texte": "Pour sa nouvelle version, un casque audio offre [une meilleure réduction de bruit que le modèle précédent].",
-      "choix": ["Invention non adoptée", "Innovation incrémentale", "Innovation de rupture"],
+      "choix": [
+        "Invention non adoptée",
+        "Innovation incrémentale",
+        "Innovation de rupture"
+      ],
       "bonne": 1,
       "explication": "Le casque garde le même principe et gagne en performance : c'est une innovation incrémentale."
     },
     {
       "consigne": "De quel type de nouveauté s'agit-il pour le passage en couleur ?",
       "texte": "[La photographie numérique] remplace la pellicule : plus de films à développer, et tout le monde l'adopte.",
-      "choix": ["Invention non adoptée", "Innovation incrémentale", "Innovation de rupture"],
+      "choix": [
+        "Invention non adoptée",
+        "Innovation incrémentale",
+        "Innovation de rupture"
+      ],
       "bonne": 2,
       "explication": "Le numérique change complètement de principe et remplace la pellicule : c'est une innovation de rupture."
     }
@@ -87,7 +96,11 @@
   "devinettes": [
     {
       "reponse": "Brevet",
-      "acceptees": ["Brevet", "Un brevet", "Le brevet"],
+      "acceptees": [
+        "Brevet",
+        "Un brevet",
+        "Le brevet"
+      ],
       "indices": [
         "Je suis un document officiel.",
         "Je protège une invention.",
@@ -97,7 +110,12 @@
     },
     {
       "reponse": "Diagramme de Gantt",
-      "acceptees": ["Diagramme de Gantt", "Le diagramme de Gantt", "Un diagramme de Gantt", "Gantt"],
+      "acceptees": [
+        "Diagramme de Gantt",
+        "Le diagramme de Gantt",
+        "Un diagramme de Gantt",
+        "Gantt"
+      ],
       "indices": [
         "Je sers à organiser un projet.",
         "Je place chaque tâche sur une ligne de temps.",
@@ -107,7 +125,11 @@
     },
     {
       "reponse": "Prototype",
-      "acceptees": ["Prototype", "Un prototype", "Le prototype"],
+      "acceptees": [
+        "Prototype",
+        "Un prototype",
+        "Le prototype"
+      ],
       "indices": [
         "J'apparais au milieu d'un projet, une fois la solution choisie.",
         "Je suis un premier exemplaire, souvent simplifié, de l'objet.",
@@ -117,7 +139,12 @@
     },
     {
       "reponse": "Remue-méninges",
-      "acceptees": ["Remue-méninges", "Remue méninges", "Le remue-méninges", "Brainstorming"],
+      "acceptees": [
+        "Remue-méninges",
+        "Remue méninges",
+        "Le remue-méninges",
+        "Brainstorming"
+      ],
       "indices": [
         "Je suis une méthode de groupe.",
         "On me pratique au début de la recherche de solutions.",

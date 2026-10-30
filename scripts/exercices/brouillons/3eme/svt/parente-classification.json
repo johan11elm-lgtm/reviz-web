@@ -30,7 +30,6 @@
         "Bras humain, aile de chauve-souris : même plan d'os",
         "Des organes de même plan malgré des fonctions différentes",
         "Moins de différences d'ADN, des espèces plus proches",
-        "Tous les êtres vivants ont des cellules et de l'ADN",
         "On compare les protéines de deux espèces"
       ]
     },
@@ -39,9 +38,6 @@
       "detail": "L'espèce humaine, Homo sapiens, est un primate proche du chimpanzé.",
       "cartes": [
         "L'espèce humaine est classée parmi les primates",
-        "Notre pouce est opposable et nos ongles sont plats",
-        "Le chimpanzé est notre plus proche cousin actuel",
-        "Nous ne descendons pas du chimpanzé",
         "Notre espèce se nomme Homo sapiens"
       ]
     }
@@ -76,35 +72,60 @@
     {
       "consigne": "Dans quel groupe le plus précis classe-t-on l'animal en couleur ?",
       "texte": "[La truite] a une colonne vertébrale, mais pas de membres.",
-      "choix": ["Vertébré", "Tétrapode", "Mammifère", "Primate"],
+      "choix": [
+        "Vertébré",
+        "Tétrapode",
+        "Mammifère",
+        "Primate"
+      ],
       "bonne": 0,
       "explication": "Elle a une colonne vertébrale mais pas quatre membres : c'est un vertébré, sans être un tétrapode."
     },
     {
       "consigne": "Dans quel groupe le plus précis classe-t-on l'animal en couleur ?",
       "texte": "[La grenouille] a une colonne vertébrale et quatre membres, mais ni poils ni mamelles.",
-      "choix": ["Vertébré", "Tétrapode", "Mammifère", "Primate"],
+      "choix": [
+        "Vertébré",
+        "Tétrapode",
+        "Mammifère",
+        "Primate"
+      ],
       "bonne": 1,
       "explication": "Quatre membres : c'est un tétrapode. Sans poils ni mamelles, ce n'est pas un mammifère."
     },
     {
       "consigne": "Dans quel groupe le plus précis classe-t-on l'animal en couleur ?",
       "texte": "[Le chat] a une colonne vertébrale, quatre membres, des poils et des mamelles.",
-      "choix": ["Vertébré", "Tétrapode", "Mammifère", "Primate"],
+      "choix": [
+        "Vertébré",
+        "Tétrapode",
+        "Mammifère",
+        "Primate"
+      ],
       "bonne": 2,
       "explication": "Poils et mamelles sont les attributs des mammifères."
     },
     {
       "consigne": "Dans quel groupe le plus précis classe-t-on l'animal en couleur ?",
       "texte": "[Le chimpanzé] a des poils, des mamelles, un pouce opposable et des ongles plats.",
-      "choix": ["Vertébré", "Tétrapode", "Mammifère", "Primate"],
+      "choix": [
+        "Vertébré",
+        "Tétrapode",
+        "Mammifère",
+        "Primate"
+      ],
       "bonne": 3,
       "explication": "Le pouce opposable et les ongles plats sont les attributs des primates."
     },
     {
       "consigne": "Dans quel groupe le plus précis classe-t-on l'animal en couleur ?",
       "texte": "[La chauve-souris] a des ailes, des poils et des mamelles.",
-      "choix": ["Vertébré", "Tétrapode", "Mammifère", "Primate"],
+      "choix": [
+        "Vertébré",
+        "Tétrapode",
+        "Mammifère",
+        "Primate"
+      ],
       "bonne": 2,
       "explication": "Poils et mamelles en font un mammifère : ses ailes ne suffisent pas à en faire un oiseau."
     }
@@ -112,7 +133,13 @@
   "devinettes": [
     {
       "reponse": "Ancêtre commun",
-      "acceptees": ["Ancêtre commun", "Un ancêtre commun", "L'ancêtre commun", "Ancêtre", "Ancetre commun"],
+      "acceptees": [
+        "Ancêtre commun",
+        "Un ancêtre commun",
+        "L'ancêtre commun",
+        "Ancêtre",
+        "Ancetre commun"
+      ],
       "indices": [
         "Je suis une espèce disparue.",
         "Plusieurs espèces actuelles descendent de moi.",
@@ -122,7 +149,13 @@
     },
     {
       "reponse": "Organes homologues",
-      "acceptees": ["Organes homologues", "Des organes homologues", "Les organes homologues", "Organe homologue", "Homologues"],
+      "acceptees": [
+        "Organes homologues",
+        "Des organes homologues",
+        "Les organes homologues",
+        "Organe homologue",
+        "Homologues"
+      ],
       "indices": [
         "Nous existons chez des espèces différentes.",
         "Nous avons le même plan d'organisation, même si nous servons à autre chose.",
@@ -132,7 +165,12 @@
     },
     {
       "reponse": "Primates",
-      "acceptees": ["Primates", "Les primates", "Primate", "Un primate"],
+      "acceptees": [
+        "Primates",
+        "Les primates",
+        "Primate",
+        "Un primate"
+      ],
       "indices": [
         "Nous sommes un groupe de mammifères.",
         "Nous avons un pouce opposable et des ongles plats.",
@@ -142,7 +180,13 @@
     },
     {
       "reponse": "Tétrapodes",
-      "acceptees": ["Tétrapodes", "Tétrapode", "Les tétrapodes", "Un tétrapode", "Tetrapodes"],
+      "acceptees": [
+        "Tétrapodes",
+        "Tétrapode",
+        "Les tétrapodes",
+        "Un tétrapode",
+        "Tetrapodes"
+      ],
       "indices": [
         "Je suis un groupe de vertébrés.",
         "Je réunis les espèces à quatre membres.",
@@ -152,15 +196,5 @@
     }
   ],
   "calculs": [],
-  "etapes": [
-    {
-      "titre": "Construire une classification",
-      "etapes": [
-        "On fait un tableau : espèces en lignes, attributs en colonnes",
-        "On repère l'attribut partagé par le plus d'espèces",
-        "On trace les ensembles suivants, du plus grand au plus petit",
-        "On construit l'arbre avec un nœud par attribut"
-      ]
-    }
-  ]
+  "etapes": []
 }

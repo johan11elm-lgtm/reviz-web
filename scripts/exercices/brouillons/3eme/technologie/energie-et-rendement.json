@@ -141,21 +141,6 @@
       "explication": "Le wattheure (Wh) est l'énergie consommée par un appareil de 1 W en 1 heure ; 1 Wh = 3 600 J."
     },
     {
-      "reponse": "Convertisseur",
-      "acceptees": [
-        "Convertisseur",
-        "Un convertisseur",
-        "Le convertisseur",
-        "Convertisseur d'énergie"
-      ],
-      "indices": [
-        "Je suis un élément d'un objet technique.",
-        "Un moteur, une pile ou un panneau photovoltaïque sont des exemples de ce que je suis.",
-        "Je transforme une forme d'énergie en une autre, avec des pertes."
-      ],
-      "explication": "Un convertisseur transforme une forme d'énergie en une autre, avec des pertes surtout sous forme de chaleur."
-    },
-    {
       "reponse": "Puissance",
       "acceptees": [
         "Puissance",

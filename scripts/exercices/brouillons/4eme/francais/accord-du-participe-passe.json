@@ -30,7 +30,6 @@
         "Elles ont mangé des cerises",
         "Les filles ont fini leurs devoirs",
         "Nous avons chanté ensemble",
-        "Des pommes, j'en ai acheté",
         "Mes amies ont regardé un film"
       ]
     },
@@ -51,42 +50,72 @@
     {
       "consigne": "Quel est le rôle du mot en couleur ?",
       "texte": "Les fleurs [que] j'ai cueillies sentent bon.",
-      "choix": ["Le sujet", "Le COD", "L'auxiliaire", "Le participe passé"],
+      "choix": [
+        "Le sujet",
+        "Le COD",
+        "L'auxiliaire",
+        "Le participe passé"
+      ],
       "bonne": 1,
       "explication": "« que » est le COD de « j'ai cueillies » : on cueille quoi ? les fleurs. Il est placé avant le verbe, donc le participe s'accorde."
     },
     {
       "consigne": "Quel est le rôle du mot en couleur ?",
       "texte": "[Les filles] ont fini leurs devoirs.",
-      "choix": ["Le sujet", "Le COD", "L'auxiliaire", "Le participe passé"],
+      "choix": [
+        "Le sujet",
+        "Le COD",
+        "L'auxiliaire",
+        "Le participe passé"
+      ],
       "bonne": 0,
       "explication": "« Les filles » est le sujet : ce sont elles qui ont fini. Avec avoir, le participe ne s'accorde jamais avec le sujet."
     },
     {
       "consigne": "Quel est le rôle du mot en couleur ?",
       "texte": "Elles ont [mangé] des cerises.",
-      "choix": ["Le sujet", "Le COD", "L'auxiliaire", "Le participe passé"],
+      "choix": [
+        "Le sujet",
+        "Le COD",
+        "L'auxiliaire",
+        "Le participe passé"
+      ],
       "bonne": 3,
       "explication": "« mangé » est le participe passé du verbe manger, placé après l'auxiliaire « ont »."
     },
     {
       "consigne": "Quel est le rôle du mot en couleur ?",
       "texte": "Cette chanson, je [l']ai entendue cent fois.",
-      "choix": ["Le sujet", "Le COD", "L'auxiliaire", "Le participe passé"],
+      "choix": [
+        "Le sujet",
+        "Le COD",
+        "L'auxiliaire",
+        "Le participe passé"
+      ],
       "bonne": 1,
       "explication": "« l' » remplace « cette chanson » : c'est le COD, placé avant le verbe. Le participe s'accorde donc : entendue."
     },
     {
       "consigne": "Quel est le rôle du mot en couleur ?",
       "texte": "Léa [a] choisi cette robe.",
-      "choix": ["Le sujet", "Le COD", "L'auxiliaire", "Le participe passé"],
+      "choix": [
+        "Le sujet",
+        "Le COD",
+        "L'auxiliaire",
+        "Le participe passé"
+      ],
       "bonne": 2,
       "explication": "« a » est le verbe avoir employé comme auxiliaire, pour former le passé composé de « choisir »."
     },
     {
       "consigne": "Quel est le rôle du mot en couleur ?",
       "texte": "Mes amies ont acheté [ce livre].",
-      "choix": ["Le sujet", "Le COD", "L'auxiliaire", "Le participe passé"],
+      "choix": [
+        "Le sujet",
+        "Le COD",
+        "L'auxiliaire",
+        "Le participe passé"
+      ],
       "bonne": 1,
       "explication": "« ce livre » répond à la question « elles ont acheté quoi ? » : c'est le COD. Il est après le verbe, donc pas d'accord."
     }
@@ -94,7 +123,11 @@
   "devinettes": [
     {
       "reponse": "COD",
-      "acceptees": ["Le COD", "Complément d'objet direct", "Le complément d'objet direct"],
+      "acceptees": [
+        "Le COD",
+        "Complément d'objet direct",
+        "Le complément d'objet direct"
+      ],
       "indices": [
         "Je suis un élément de la phrase, lié au verbe.",
         "Je réponds à la question « quoi ? » ou « qui ? » posée après le verbe, sans préposition.",
@@ -104,7 +137,10 @@
     },
     {
       "reponse": "Antécédent",
-      "acceptees": ["L'antécédent", "Un antécédent"],
+      "acceptees": [
+        "L'antécédent",
+        "Un antécédent"
+      ],
       "indices": [
         "Je suis un mot de la phrase.",
         "Je suis repris par un pronom relatif comme « que ».",
@@ -114,7 +150,10 @@
     },
     {
       "reponse": "Auxiliaire",
-      "acceptees": ["L'auxiliaire", "Un auxiliaire"],
+      "acceptees": [
+        "L'auxiliaire",
+        "Un auxiliaire"
+      ],
       "indices": [
         "Je suis un verbe qui en aide un autre.",
         "Je sers à former les temps composés.",
@@ -124,7 +163,10 @@
     },
     {
       "reponse": "Participe passé",
-      "acceptees": ["Le participe passé", "Un participe passé"],
+      "acceptees": [
+        "Le participe passé",
+        "Un participe passé"
+      ],
       "indices": [
         "Je suis une forme du verbe.",
         "Je sers à former les temps composés, comme le passé composé.",

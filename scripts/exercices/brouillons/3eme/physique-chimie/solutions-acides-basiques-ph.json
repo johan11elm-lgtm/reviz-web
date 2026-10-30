@@ -51,42 +51,66 @@
     {
       "consigne": "Comment qualifier la solution décrite par le passage en couleur ?",
       "texte": "Le jus de citron a [un pH de 2].",
-      "choix": ["Acide", "Neutre", "Basique"],
+      "choix": [
+        "Acide",
+        "Neutre",
+        "Basique"
+      ],
       "bonne": 0,
       "explication": "Un pH de 2 est inférieur à 7 : la solution est acide."
     },
     {
       "consigne": "Comment qualifier la solution décrite par le passage en couleur ?",
       "texte": "L'eau pure a [un pH de 7].",
-      "choix": ["Acide", "Neutre", "Basique"],
+      "choix": [
+        "Acide",
+        "Neutre",
+        "Basique"
+      ],
       "bonne": 1,
       "explication": "Un pH égal à 7 correspond à une solution neutre."
     },
     {
       "consigne": "Comment qualifier la solution décrite par le passage en couleur ?",
       "texte": "Le déboucheur à la soude a [un pH de 14].",
-      "choix": ["Acide", "Neutre", "Basique"],
+      "choix": [
+        "Acide",
+        "Neutre",
+        "Basique"
+      ],
       "bonne": 2,
       "explication": "Un pH de 14 est supérieur à 7 : la solution est basique."
     },
     {
       "consigne": "Comment qualifier la solution décrite par le passage en couleur ?",
       "texte": "Un élève prépare [une solution qui contient plus d'ions HO⁻ que d'ions H⁺].",
-      "choix": ["Acide", "Neutre", "Basique"],
+      "choix": [
+        "Acide",
+        "Neutre",
+        "Basique"
+      ],
       "bonne": 2,
       "explication": "Un excès d'ions HO⁻ rend la solution basique."
     },
     {
       "consigne": "Comment qualifier la solution décrite par le passage en couleur ?",
       "texte": "Après avoir dilué du vinaigre, on mesure [un pH de 4].",
-      "choix": ["Acide", "Neutre", "Basique"],
+      "choix": [
+        "Acide",
+        "Neutre",
+        "Basique"
+      ],
       "bonne": 0,
       "explication": "Un pH de 4 est inférieur à 7 : le vinaigre dilué reste acide."
     },
     {
       "consigne": "Comment qualifier la solution décrite par le passage en couleur ?",
       "texte": "Un élève prépare [une solution qui contient autant d'ions H⁺ que d'ions HO⁻].",
-      "choix": ["Acide", "Neutre", "Basique"],
+      "choix": [
+        "Acide",
+        "Neutre",
+        "Basique"
+      ],
       "bonne": 1,
       "explication": "Autant d'ions H⁺ que d'ions HO⁻ : la solution est neutre, comme l'eau pure."
     }
@@ -94,7 +118,10 @@
   "devinettes": [
     {
       "reponse": "pH",
-      "acceptees": ["pH", "Le pH"],
+      "acceptees": [
+        "pH",
+        "Le pH"
+      ],
       "indices": [
         "Je suis un nombre sans unité.",
         "Je vais de 0 à 14.",
@@ -104,7 +131,11 @@
     },
     {
       "reponse": "Dilution",
-      "acceptees": ["Dilution", "La dilution", "Diluer"],
+      "acceptees": [
+        "Dilution",
+        "La dilution",
+        "Diluer"
+      ],
       "indices": [
         "Je suis une opération simple de chimie.",
         "On ajoute de l'eau pour me réaliser.",
@@ -114,23 +145,19 @@
     },
     {
       "reponse": "pH-mètre",
-      "acceptees": ["pH-mètre", "Le pH-mètre", "pH mètre", "phmètre", "pHmètre"],
+      "acceptees": [
+        "pH-mètre",
+        "Le pH-mètre",
+        "pH mètre",
+        "phmètre",
+        "pHmètre"
+      ],
       "indices": [
         "Je suis un appareil de mesure.",
         "Contrairement au papier, je donne une valeur précise.",
         "On doit m'étalonner avant de me servir."
       ],
       "explication": "Le pH-mètre donne une valeur précise du pH, mais il faut l'étalonner avant de s'en servir."
-    },
-    {
-      "reponse": "Corrosif",
-      "acceptees": ["Corrosif", "Le corrosif", "Pictogramme corrosif", "Produit corrosif"],
-      "indices": [
-        "Je suis un danger signalé sur une étiquette.",
-        "Mon pictogramme montre un liquide qui attaque une main.",
-        "On me trouve sur les acides et les bases concentrés, car ils brûlent la peau."
-      ],
-      "explication": "Le pictogramme « corrosif » signale un produit qui peut brûler la peau et les yeux."
     }
   ],
   "calculs": [],

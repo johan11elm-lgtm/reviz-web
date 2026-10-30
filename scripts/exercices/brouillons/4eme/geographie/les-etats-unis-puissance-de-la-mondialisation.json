@@ -51,35 +51,60 @@
     {
       "consigne": "Quelle notion le passage en couleur illustre-t-il ?",
       "texte": "Dans le monde entier, [le cinéma, la musique et les séries américaines font aimer le mode de vie des États-Unis].",
-      "choix": ["Soft power", "Hard power", "Technopôle", "Firme transnationale"],
+      "choix": [
+        "Soft power",
+        "Hard power",
+        "Technopôle",
+        "Firme transnationale"
+      ],
       "bonne": 0,
       "explication": "Influencer le monde par la culture et le mode de vie, c'est le soft power."
     },
     {
       "consigne": "Quelle notion le passage en couleur illustre-t-il ?",
       "texte": "Les États-Unis disposent [du premier budget militaire du monde et de bases dans de nombreux pays].",
-      "choix": ["Soft power", "Hard power", "Technopôle", "Firme transnationale"],
+      "choix": [
+        "Soft power",
+        "Hard power",
+        "Technopôle",
+        "Firme transnationale"
+      ],
       "bonne": 1,
       "explication": "La puissance militaire, c'est le hard power."
     },
     {
       "consigne": "Quelle notion le passage en couleur illustre-t-il ?",
       "texte": "En Californie, [des universités, des laboratoires de recherche et des entreprises de haute technologie sont réunis au même endroit].",
-      "choix": ["Soft power", "Hard power", "Technopôle", "Firme transnationale"],
+      "choix": [
+        "Soft power",
+        "Hard power",
+        "Technopôle",
+        "Firme transnationale"
+      ],
       "bonne": 2,
       "explication": "Un lieu qui réunit universités, recherche et entreprises de pointe est un technopôle, comme la Silicon Valley."
     },
     {
       "consigne": "Quelle notion le passage en couleur illustre-t-il ?",
       "texte": "[Apple, Amazon et Walmart ont des activités dans de nombreux pays].",
-      "choix": ["Soft power", "Hard power", "Technopôle", "Firme transnationale"],
+      "choix": [
+        "Soft power",
+        "Hard power",
+        "Technopôle",
+        "Firme transnationale"
+      ],
       "bonne": 3,
       "explication": "Une grande entreprise implantée dans plusieurs pays est une firme transnationale."
     },
     {
       "consigne": "Quelle notion le passage en couleur illustre-t-il ?",
       "texte": "Hollywood est connue partout : [ses films diffusent le mode de vie américain auprès de spectateurs du monde entier].",
-      "choix": ["Soft power", "Hard power", "Technopôle", "Firme transnationale"],
+      "choix": [
+        "Soft power",
+        "Hard power",
+        "Technopôle",
+        "Firme transnationale"
+      ],
       "bonne": 0,
       "explication": "Les films d'Hollywood influencent le monde par la culture : c'est du soft power."
     }
@@ -87,7 +112,10 @@
   "devinettes": [
     {
       "reponse": "La Silicon Valley",
-      "acceptees": ["Silicon Valley", "La Silicon Valley"],
+      "acceptees": [
+        "Silicon Valley",
+        "La Silicon Valley"
+      ],
       "indices": [
         "Je suis un lieu des États-Unis connu dans le monde entier.",
         "Je suis en Californie, tout près de San Francisco.",
@@ -97,7 +125,12 @@
     },
     {
       "reponse": "Le soft power",
-      "acceptees": ["Soft power", "Le soft power", "Soft-power", "Le soft-power"],
+      "acceptees": [
+        "Soft power",
+        "Le soft power",
+        "Soft-power",
+        "Le soft-power"
+      ],
       "indices": [
         "Je suis une forme de puissance.",
         "Je ne repose pas sur la force armée.",
@@ -106,18 +139,12 @@
       "explication": "Le soft power est la capacité d'influencer le monde par la culture et le mode de vie."
     },
     {
-      "reponse": "L'ACEUM",
-      "acceptees": ["ACEUM", "L'ACEUM", "Aceum"],
-      "indices": [
-        "Je suis un accord de libre-échange.",
-        "Je lie les États-Unis au Canada et au Mexique.",
-        "J'ai remplacé l'ALENA en 2020."
-      ],
-      "explication": "L'ACEUM associe les États-Unis, le Canada et le Mexique depuis 2020 et remplace l'ALENA de 1994."
-    },
-    {
       "reponse": "Washington",
-      "acceptees": ["Washington", "Washington DC", "Washington D.C."],
+      "acceptees": [
+        "Washington",
+        "Washington DC",
+        "Washington D.C."
+      ],
       "indices": [
         "Je suis une ville du nord-est des États-Unis.",
         "Je suis un peu plus au sud que New York.",

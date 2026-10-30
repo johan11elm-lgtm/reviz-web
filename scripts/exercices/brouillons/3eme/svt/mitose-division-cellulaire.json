@@ -28,7 +28,6 @@
       "detail": "Le résultat d'une mitose : des cellules conformes à la cellule mère.",
       "cartes": [
         "Elles ont 46 chromosomes chez l'humain",
-        "Chaque chromosome n'a plus qu'une seule chromatide",
         "Elles ont la même information génétique que leur mère",
         "Une cellule mère en donne deux, pas quatre",
         "Elles forment un clone"
@@ -82,7 +81,11 @@
   "devinettes": [
     {
       "reponse": "Chromatide",
-      "acceptees": ["Chromatide", "Une chromatide", "Chromatides"],
+      "acceptees": [
+        "Chromatide",
+        "Une chromatide",
+        "Chromatides"
+      ],
       "indices": [
         "Je fais partie d'un chromosome.",
         "Je suis relié à ma jumelle identique par un centromère.",
@@ -92,7 +95,17 @@
     },
     {
       "reponse": "Cellule-œuf",
-      "acceptees": ["Cellule-œuf", "Cellule œuf", "Cellule-oeuf", "Cellule oeuf", "La cellule-œuf", "Une cellule-œuf", "Œuf", "Oeuf", "Zygote"],
+      "acceptees": [
+        "Cellule-œuf",
+        "Cellule œuf",
+        "Cellule-oeuf",
+        "Cellule oeuf",
+        "La cellule-œuf",
+        "Une cellule-œuf",
+        "Œuf",
+        "Oeuf",
+        "Zygote"
+      ],
       "indices": [
         "Je suis le tout début d'un être humain.",
         "Je suis issue de la fécondation.",
@@ -102,7 +115,12 @@
     },
     {
       "reponse": "Duplication",
-      "acceptees": ["Duplication", "La duplication", "Réplication", "La réplication"],
+      "acceptees": [
+        "Duplication",
+        "La duplication",
+        "Réplication",
+        "La réplication"
+      ],
       "indices": [
         "Je prépare la division d'une cellule.",
         "Je copie l'ADN de chaque chromosome.",
@@ -112,7 +130,10 @@
     },
     {
       "reponse": "Mitose",
-      "acceptees": ["Mitose", "La mitose"],
+      "acceptees": [
+        "Mitose",
+        "La mitose"
+      ],
       "indices": [
         "Je suis une division de cellule.",
         "Je donne deux cellules filles identiques à leur cellule mère.",

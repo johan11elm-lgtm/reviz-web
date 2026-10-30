@@ -18,7 +18,6 @@
       "cartes": [
         "Hommes et activités regroupés au bord de la mer",
         "Abidjan, Tema, Lomé et Dakar, villes portuaires",
-        "Des corridors routiers et ferroviaires partant des ports",
         "Un climat plus humide que dans le nord",
         "Une ouverture sur l'Atlantique et le reste du monde"
       ]
@@ -76,43 +75,47 @@
     {
       "consigne": "Quel pays le passage en couleur décrit-il ?",
       "texte": "Chaque année, [le premier producteur mondial de cacao] exporte ses fèves vers le monde entier.",
-      "choix": ["Nigeria", "Côte d'Ivoire", "Sénégal", "Mali"],
+      "choix": [
+        "Nigeria",
+        "Côte d'Ivoire",
+        "Sénégal",
+        "Mali"
+      ],
       "bonne": 1,
       "explication": "La Côte d'Ivoire est le premier producteur mondial de cacao, devant le Ghana."
     },
     {
       "consigne": "Quel pays le passage en couleur décrit-il ?",
       "texte": "Avec plus de 220 millions d'habitants, [ce pays est le plus peuplé d'Afrique].",
-      "choix": ["Nigeria", "Côte d'Ivoire", "Sénégal", "Mali"],
+      "choix": [
+        "Nigeria",
+        "Côte d'Ivoire",
+        "Sénégal",
+        "Mali"
+      ],
       "bonne": 0,
       "explication": "Le Nigeria est le pays le plus peuplé d'Afrique, avec plus de 220 millions d'habitants."
     },
     {
       "consigne": "Quel pays le passage en couleur décrit-il ?",
       "texte": "[Dakar, sa capitale, est un grand port ouvert sur l'Atlantique].",
-      "choix": ["Nigeria", "Côte d'Ivoire", "Sénégal", "Mali"],
+      "choix": [
+        "Nigeria",
+        "Côte d'Ivoire",
+        "Sénégal",
+        "Mali"
+      ],
       "bonne": 2,
       "explication": "Dakar est la capitale du Sénégal et l'un des grands ports de la région."
-    },
-    {
-      "consigne": "Quel pays le passage en couleur décrit-il ?",
-      "texte": "Ce pays du Sahel, [sans accès à la mer, exporte de l'or et du coton].",
-      "choix": ["Nigeria", "Côte d'Ivoire", "Sénégal", "Mali"],
-      "bonne": 3,
-      "explication": "Parmi ces quatre pays, seul le Mali est enclavé : il exporte notamment de l'or et du coton."
-    },
-    {
-      "consigne": "Quel pays le passage en couleur décrit-il ?",
-      "texte": "Lagos est la plus grande ville, mais [la capitale est Abuja] ; le pétrole y est exporté dans le monde entier.",
-      "choix": ["Nigeria", "Côte d'Ivoire", "Sénégal", "Mali"],
-      "bonne": 0,
-      "explication": "Abuja est la capitale du Nigeria, dont la plus grande ville est Lagos."
     }
   ],
   "devinettes": [
     {
       "reponse": "Le Sahel",
-      "acceptees": ["Sahel", "Le Sahel"],
+      "acceptees": [
+        "Sahel",
+        "Le Sahel"
+      ],
       "indices": [
         "Je suis une zone d'Afrique de l'Ouest.",
         "Je suis semi-aride et je borde le sud du Sahara.",
@@ -122,7 +125,9 @@
     },
     {
       "reponse": "Lagos",
-      "acceptees": ["Lagos"],
+      "acceptees": [
+        "Lagos"
+      ],
       "indices": [
         "Je suis une ville d'Afrique de l'Ouest.",
         "Je suis la plus grande agglomération de la région, mais pas la capitale de mon pays.",
@@ -132,7 +137,11 @@
     },
     {
       "reponse": "La CEDEAO",
-      "acceptees": ["CEDEAO", "La CEDEAO", "Communauté économique des États de l'Afrique de l'Ouest"],
+      "acceptees": [
+        "CEDEAO",
+        "La CEDEAO",
+        "Communauté économique des États de l'Afrique de l'Ouest"
+      ],
       "indices": [
         "Je suis une organisation régionale.",
         "J'ai été créée en 1975 pour favoriser les échanges et la libre circulation.",
@@ -142,7 +151,10 @@
     },
     {
       "reponse": "Le cacao",
-      "acceptees": ["Cacao", "Le cacao"],
+      "acceptees": [
+        "Cacao",
+        "Le cacao"
+      ],
       "indices": [
         "Je suis une matière première exportée par l'Afrique de l'Ouest.",
         "Quand mon prix baisse sur les marchés mondiaux, les revenus des planteurs chutent.",

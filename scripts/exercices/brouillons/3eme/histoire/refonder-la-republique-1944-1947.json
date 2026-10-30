@@ -5,7 +5,6 @@
       "nom": "La Libération et l'État de droit",
       "detail": "Le retour de la légalité républicaine et la punition des collaborateurs en 1944-1945.",
       "cartes": [
-        "Un gouvernement provisoire est créé en juin 1944",
         "Les actes du régime de Vichy sont déclarés nuls",
         "Une ordonnance d'août 1944 proclame que la République existe toujours",
         "L'épuration est d'abord « sauvage » : exécutions sommaires, femmes tondues",
@@ -39,7 +38,6 @@
       "detail": "Les étapes qui mènent à la Constitution de 1946, après le départ de de Gaulle.",
       "cartes": [
         "Les Français refusent par référendum de revenir à la IIIe République",
-        "Le général de Gaulle démissionne en janvier 1946",
         "Un premier projet de Constitution est rejeté en mai 1946",
         "La Constitution est adoptée par référendum le 13 octobre 1946",
         "Un régime parlementaire où l'Assemblée nationale domine"
@@ -82,7 +80,12 @@
   "devinettes": [
     {
       "reponse": "De Gaulle",
-      "acceptees": ["De Gaulle", "Charles de Gaulle", "Le général de Gaulle", "Général de Gaulle"],
+      "acceptees": [
+        "De Gaulle",
+        "Charles de Gaulle",
+        "Le général de Gaulle",
+        "Général de Gaulle"
+      ],
       "indices": [
         "Je suis un général français.",
         "Je dirige le gouvernement provisoire de 1944 à 1946.",
@@ -92,7 +95,12 @@
     },
     {
       "reponse": "La Sécurité sociale",
-      "acceptees": ["Sécurité sociale", "La Sécurité sociale", "La Sécu", "Sécu"],
+      "acceptees": [
+        "Sécurité sociale",
+        "La Sécurité sociale",
+        "La Sécu",
+        "Sécu"
+      ],
       "indices": [
         "Je suis une création de 1945.",
         "Je suis mise en place avec Pierre Laroque et Ambroise Croizat.",
@@ -102,7 +110,12 @@
     },
     {
       "reponse": "L'épuration",
-      "acceptees": ["Épuration", "L'épuration", "Epuration", "L'Épuration"],
+      "acceptees": [
+        "Épuration",
+        "L'épuration",
+        "Epuration",
+        "L'Épuration"
+      ],
       "indices": [
         "Je suis un mouvement de la Libération.",
         "Je punis les collaborateurs, d'abord par des actes de vengeance.",
@@ -112,7 +125,12 @@
     },
     {
       "reponse": "Pétain",
-      "acceptees": ["Pétain", "Philippe Pétain", "Le maréchal Pétain", "Maréchal Pétain"],
+      "acceptees": [
+        "Pétain",
+        "Philippe Pétain",
+        "Le maréchal Pétain",
+        "Maréchal Pétain"
+      ],
       "indices": [
         "Je suis un maréchal français.",
         "Je dirige le régime de Vichy pendant l'Occupation.",

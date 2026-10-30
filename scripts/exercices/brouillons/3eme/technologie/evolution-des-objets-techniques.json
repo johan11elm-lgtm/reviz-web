@@ -88,42 +88,66 @@
     {
       "consigne": "Que représente le passage en couleur ?",
       "texte": "Dans cette ville, les habitants veulent [traverser le centre rapidement sans polluer].",
-      "choix": ["Un besoin", "Un principe technique", "Une solution technique"],
+      "choix": [
+        "Un besoin",
+        "Un principe technique",
+        "Une solution technique"
+      ],
       "bonne": 0,
       "explication": "Ce que les utilisateurs cherchent à obtenir est un besoin."
     },
     {
       "consigne": "Que représente le passage en couleur ?",
       "texte": "Le moteur d'une voiture thermique fonctionne grâce à [la combustion du carburant].",
-      "choix": ["Un besoin", "Un principe technique", "Une solution technique"],
+      "choix": [
+        "Un besoin",
+        "Un principe technique",
+        "Une solution technique"
+      ],
       "bonne": 1,
       "explication": "La combustion est le phénomène scientifique qui fait fonctionner le moteur : c'est son principe technique."
     },
     {
       "consigne": "Que représente le passage en couleur ?",
       "texte": "Pour freiner, ce vélo utilise [un frein à disque].",
-      "choix": ["Un besoin", "Un principe technique", "Une solution technique"],
+      "choix": [
+        "Un besoin",
+        "Un principe technique",
+        "Une solution technique"
+      ],
       "bonne": 2,
       "explication": "Le frein à disque est le moyen concret choisi pour réaliser la fonction « freiner » : c'est une solution technique."
     },
     {
       "consigne": "Que représente le passage en couleur ?",
       "texte": "Léa veut [parler avec son amie qui habite à l'autre bout du monde].",
-      "choix": ["Un besoin", "Un principe technique", "Une solution technique"],
+      "choix": [
+        "Un besoin",
+        "Un principe technique",
+        "Une solution technique"
+      ],
       "bonne": 0,
       "explication": "Léa exprime ce qu'elle cherche à faire : c'est un besoin."
     },
     {
       "consigne": "Que représente le passage en couleur ?",
       "texte": "Un moteur électrique fonctionne grâce à [l'électromagnétisme].",
-      "choix": ["Un besoin", "Un principe technique", "Une solution technique"],
+      "choix": [
+        "Un besoin",
+        "Un principe technique",
+        "Une solution technique"
+      ],
       "bonne": 1,
       "explication": "L'électromagnétisme est le phénomène scientifique qui fait tourner le moteur : c'est son principe technique."
     },
     {
       "consigne": "Que représente le passage en couleur ?",
       "texte": "Pour la fonction « éclairer », l'équipe choisit [une ampoule LED].",
-      "choix": ["Un besoin", "Un principe technique", "Une solution technique"],
+      "choix": [
+        "Un besoin",
+        "Un principe technique",
+        "Une solution technique"
+      ],
       "bonne": 2,
       "explication": "L'ampoule LED est le moyen concret retenu pour réaliser la fonction : c'est une solution technique."
     }
@@ -131,7 +155,11 @@
   "devinettes": [
     {
       "reponse": "Transistor",
-      "acceptees": ["Transistor", "Le transistor", "Un transistor"],
+      "acceptees": [
+        "Transistor",
+        "Le transistor",
+        "Un transistor"
+      ],
       "indices": [
         "Je suis un composant minuscule.",
         "J'ai été mis au point en 1947 dans les laboratoires Bell.",
@@ -141,7 +169,12 @@
     },
     {
       "reponse": "Tim Berners-Lee",
-      "acceptees": ["Tim Berners-Lee", "Berners-Lee", "Tim Berners Lee", "Berners Lee"],
+      "acceptees": [
+        "Tim Berners-Lee",
+        "Berners-Lee",
+        "Tim Berners Lee",
+        "Berners Lee"
+      ],
       "indices": [
         "Je suis un scientifique qui travaillait dans un laboratoire de recherche européen.",
         "Mon laboratoire s'appelle le CERN.",
@@ -150,18 +183,13 @@
       "explication": "Tim Berners-Lee a proposé le Web au CERN en 1989."
     },
     {
-      "reponse": "Lignée",
-      "acceptees": ["Lignée", "Une lignée", "La lignée", "Lignée d'objets", "Lignée d'objets techniques"],
-      "indices": [
-        "Je suis un ensemble d'objets d'une même famille.",
-        "Les objets que je regroupe se succèdent dans le temps.",
-        "Ils gardent tous le même principe technique."
-      ],
-      "explication": "Une lignée regroupe des objets d'une même famille qui utilisent le même principe technique."
-    },
-    {
       "reponse": "Rupture technologique",
-      "acceptees": ["Rupture technologique", "Une rupture technologique", "La rupture technologique", "Rupture"],
+      "acceptees": [
+        "Rupture technologique",
+        "Une rupture technologique",
+        "La rupture technologique",
+        "Rupture"
+      ],
       "indices": [
         "Je suis un événement dans l'histoire des techniques.",
         "Je change le principe technique d'un objet.",

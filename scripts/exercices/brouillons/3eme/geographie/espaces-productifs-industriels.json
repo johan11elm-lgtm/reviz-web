@@ -30,7 +30,6 @@
         "Entreprises de haute technologie, universités et laboratoires réunis",
         "Sophia Antipolis, près de Nice, depuis 1969",
         "Une main-d'œuvre très qualifiée à proximité",
-        "Un aéroport et une ligne à grande vitesse proches",
         "Des entreprises voisines qui s'associent autour d'un projet innovant"
       ]
     },
@@ -40,9 +39,7 @@
       "cartes": [
         "Airbus, qui assemble des avions",
         "La capitale européenne de l'aéronautique et du spatial",
-        "Un réseau de sous-traitants dans tout le Sud-Ouest",
-        "Des éléments d'avions fabriqués dans plusieurs pays d'Europe",
-        "Des appareils livrés à des compagnies du monde entier"
+        "Un réseau de sous-traitants dans tout le Sud-Ouest"
       ]
     }
   ],
@@ -88,28 +85,48 @@
     {
       "consigne": "De quoi s'agit-il dans le passage en couleur ?",
       "texte": "Cette entreprise [ferme son usine du Nord et transfère sa production dans un pays où la main-d'œuvre coûte moins cher].",
-      "choix": ["Délocalisation", "Reconversion", "Littoralisation", "Technopôle"],
+      "choix": [
+        "Délocalisation",
+        "Reconversion",
+        "Littoralisation",
+        "Technopôle"
+      ],
       "bonne": 0,
       "explication": "Transférer une production vers un autre pays, souvent à main-d'œuvre moins chère, est une délocalisation."
     },
     {
       "consigne": "De quoi s'agit-il dans le passage en couleur ?",
       "texte": "[Un ancien site minier du Nord devient un musée], le Louvre-Lens.",
-      "choix": ["Délocalisation", "Reconversion", "Littoralisation", "Technopôle"],
+      "choix": [
+        "Délocalisation",
+        "Reconversion",
+        "Littoralisation",
+        "Technopôle"
+      ],
       "bonne": 1,
       "explication": "Remplacer des activités en déclin par de nouvelles activités, comme la culture, est une reconversion."
     },
     {
       "consigne": "De quoi s'agit-il dans le passage en couleur ?",
       "texte": "[Les raffineries et les usines sidérurgiques s'installent dans les grands ports], où leurs matières premières arrivent par bateau.",
-      "choix": ["Délocalisation", "Reconversion", "Littoralisation", "Technopôle"],
+      "choix": [
+        "Délocalisation",
+        "Reconversion",
+        "Littoralisation",
+        "Technopôle"
+      ],
       "bonne": 2,
       "explication": "L'installation de l'industrie lourde sur les littoraux s'appelle la littoralisation."
     },
     {
       "consigne": "De quoi s'agit-il dans le passage en couleur ?",
       "texte": "À Sophia Antipolis, près de Nice, [des entreprises de haute technologie, des universités et des laboratoires sont réunis dans un même espace].",
-      "choix": ["Délocalisation", "Reconversion", "Littoralisation", "Technopôle"],
+      "choix": [
+        "Délocalisation",
+        "Reconversion",
+        "Littoralisation",
+        "Technopôle"
+      ],
       "bonne": 3,
       "explication": "Un espace qui rassemble entreprises de haute technologie, universités et laboratoires est un technopôle."
     }
@@ -117,7 +134,13 @@
   "devinettes": [
     {
       "reponse": "Une délocalisation",
-      "acceptees": ["Délocalisation", "Une délocalisation", "La délocalisation", "Les délocalisations", "Délocalisations"],
+      "acceptees": [
+        "Délocalisation",
+        "Une délocalisation",
+        "La délocalisation",
+        "Les délocalisations",
+        "Délocalisations"
+      ],
       "indices": [
         "Je suis une décision d'entreprise.",
         "Je transfère la production d'une usine vers un autre pays.",
@@ -127,7 +150,11 @@
     },
     {
       "reponse": "Sophia Antipolis",
-      "acceptees": ["Sophia Antipolis", "Sophia-Antipolis", "Sophia"],
+      "acceptees": [
+        "Sophia Antipolis",
+        "Sophia-Antipolis",
+        "Sophia"
+      ],
       "indices": [
         "Je suis un espace de haute technologie.",
         "Je suis situé près de Nice.",
@@ -137,7 +164,9 @@
     },
     {
       "reponse": "Toulouse",
-      "acceptees": ["Toulouse"],
+      "acceptees": [
+        "Toulouse"
+      ],
       "indices": [
         "Je suis une métropole du Sud-Ouest.",
         "Airbus assemble des avions chez moi.",
@@ -147,7 +176,14 @@
     },
     {
       "reponse": "Une ZIP",
-      "acceptees": ["ZIP", "Une ZIP", "Les ZIP", "Zone industrialo-portuaire", "Une zone industrialo-portuaire", "Un port industriel"],
+      "acceptees": [
+        "ZIP",
+        "Une ZIP",
+        "Les ZIP",
+        "Zone industrialo-portuaire",
+        "Une zone industrialo-portuaire",
+        "Un port industriel"
+      ],
       "indices": [
         "Je suis un lieu où l'on fabrique de l'acier et où l'on raffine du pétrole.",
         "Mes matières premières arrivent par la mer.",
@@ -158,15 +194,6 @@
   ],
   "calculs": [],
   "etapes": [
-    {
-      "titre": "Lire une carte des espaces industriels",
-      "etapes": [
-        "D'abord, lis le titre et la légende de la carte",
-        "Ensuite, localise les régions industrielles en difficulté du Nord-Est",
-        "Puis, localise les espaces dynamiques : métropoles, technopôles, ZIP",
-        "Enfin, oppose les deux ensembles et explique-les"
-      ]
-    },
     {
       "titre": "Du déclin à la reconversion d'un bassin minier",
       "etapes": [

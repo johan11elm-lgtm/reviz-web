@@ -29,7 +29,6 @@
       "cartes": [
         "Des quartiers aisés à côté de quartiers défavorisés",
         "Une zone aux faibles revenus qui reçoit des aides publiques",
-        "Des ménages aisés qui s'installent dans un quartier populaire",
         "Des habitants séparés dans la ville selon leurs revenus",
         "Des habitants modestes poussés à partir par la hausse des prix"
       ]
@@ -88,28 +87,48 @@
     {
       "consigne": "Quel phénomène décrit le passage en couleur ?",
       "texte": "Dans ce quartier populaire, [des familles aisées rachètent des logements et les prix augmentent], si bien que des habitants modestes partent.",
-      "choix": ["Périurbanisation", "Artificialisation des sols", "Gentrification", "Ségrégation socio-spatiale"],
+      "choix": [
+        "Périurbanisation",
+        "Artificialisation des sols",
+        "Gentrification",
+        "Ségrégation socio-spatiale"
+      ],
       "bonne": 2,
       "explication": "L'arrivée de ménages aisés dans un quartier populaire, qui fait monter les prix et chasse les plus modestes, c'est la gentrification."
     },
     {
       "consigne": "Quel phénomène décrit le passage en couleur ?",
       "texte": "Dans cette ville, [les habitants riches et les habitants pauvres vivent dans des quartiers séparés], selon le prix des logements.",
-      "choix": ["Périurbanisation", "Artificialisation des sols", "Gentrification", "Ségrégation socio-spatiale"],
+      "choix": [
+        "Périurbanisation",
+        "Artificialisation des sols",
+        "Gentrification",
+        "Ségrégation socio-spatiale"
+      ],
       "bonne": 3,
       "explication": "La séparation des habitants dans des quartiers différents selon leurs revenus est la ségrégation socio-spatiale."
     },
     {
       "consigne": "Quel phénomène décrit le passage en couleur ?",
       "texte": "Pour construire un lotissement, [un champ est transformé en terrain bâti et goudronné].",
-      "choix": ["Périurbanisation", "Artificialisation des sols", "Gentrification", "Ségrégation socio-spatiale"],
+      "choix": [
+        "Périurbanisation",
+        "Artificialisation des sols",
+        "Gentrification",
+        "Ségrégation socio-spatiale"
+      ],
       "bonne": 1,
       "explication": "Transformer une terre agricole ou naturelle en surface bâtie ou goudronnée, c'est l'artificialisation des sols."
     },
     {
       "consigne": "Quel phénomène décrit le passage en couleur ?",
       "texte": "Depuis les années 1970, [les villes s'étendent sur les communes voisines, avec un bâti séparé de celui de la ville-centre].",
-      "choix": ["Périurbanisation", "Artificialisation des sols", "Gentrification", "Ségrégation socio-spatiale"],
+      "choix": [
+        "Périurbanisation",
+        "Artificialisation des sols",
+        "Gentrification",
+        "Ségrégation socio-spatiale"
+      ],
       "bonne": 0,
       "explication": "L'extension des espaces urbanisés autour des villes, en discontinuité du bâti, est la périurbanisation."
     }
@@ -117,7 +136,10 @@
   "devinettes": [
     {
       "reponse": "La gentrification",
-      "acceptees": ["Gentrification", "La gentrification"],
+      "acceptees": [
+        "Gentrification",
+        "La gentrification"
+      ],
       "indices": [
         "Je touche certains quartiers des grandes villes.",
         "Avec moi, des habitants plus riches arrivent dans un quartier populaire.",
@@ -127,7 +149,16 @@
     },
     {
       "reponse": "La périurbanisation",
-      "acceptees": ["Périurbanisation", "La périurbanisation", "Le périurbain", "Périurbain", "Étalement urbain", "L'étalement urbain", "Étalement", "L'étalement"],
+      "acceptees": [
+        "Périurbanisation",
+        "La périurbanisation",
+        "Le périurbain",
+        "Périurbain",
+        "Étalement urbain",
+        "L'étalement urbain",
+        "Étalement",
+        "L'étalement"
+      ],
       "indices": [
         "Je suis un phénomène qui touche les villes depuis les années 1970.",
         "Je pousse des ménages à chercher une maison avec jardin loin du centre.",
@@ -137,7 +168,12 @@
     },
     {
       "reponse": "Zéro artificialisation nette",
-      "acceptees": ["Zéro artificialisation nette", "ZAN", "Le zéro artificialisation nette", "Le ZAN"],
+      "acceptees": [
+        "Zéro artificialisation nette",
+        "ZAN",
+        "Le zéro artificialisation nette",
+        "Le ZAN"
+      ],
       "indices": [
         "Je suis un objectif pour les villes de France.",
         "La loi Climat et résilience de 2021 me fixe pour 2050.",

@@ -17,7 +17,6 @@
       "detail": "Les équipements qui relient les métropoles entre elles : aéroports, ports, lignes à grande vitesse, câbles sous-marins, Internet.",
       "cartes": [
         "Un aéroport international aux vols vers tous les continents",
-        "Un grand port où accostent d'énormes porte-conteneurs",
         "Une ligne à grande vitesse reliant deux métropoles",
         "Un câble sous-marin qui transporte des données",
         "Internet, qui transmet l'information en un instant"
@@ -28,7 +27,6 @@
       "detail": "Des villes qui montent dans la hiérarchie mondiale : Shanghai, Singapour, Dubaï, São Paulo, Mumbai.",
       "cartes": [
         "Shanghai, grande métropole de la Chine",
-        "Singapour, ville-État d'Asie du Sud-Est",
         "Dubaï, aux Émirats arabes unis",
         "São Paulo, au Brésil",
         "Mumbai, en Inde"
@@ -38,7 +36,6 @@
       "nom": "Les marges de la mondialisation",
       "detail": "Les villes et les quartiers peu connectés aux réseaux, même quand ils sont très peuplés.",
       "cartes": [
-        "Lagos, mégapole du Nigeria qui pèse peu face à Londres",
         "Kano, grande ville du Nigeria peu connectée",
         "Les quartiers pauvres d'une métropole, à l'écart des réseaux",
         "Une région du planisphère presque sans métropole",
@@ -51,42 +48,72 @@
     {
       "consigne": "Quelle notion le passage en couleur illustre-t-il ?",
       "texte": "[Des marchandises, des capitaux, des informations et des personnes circulent entre toutes les parties du monde].",
-      "choix": ["Mondialisation", "Métropolisation", "Hub", "Archipel métropolitain mondial"],
+      "choix": [
+        "Mondialisation",
+        "Métropolisation",
+        "Hub",
+        "Archipel métropolitain mondial"
+      ],
       "bonne": 0,
       "explication": "La mise en relation des différentes parties du monde par des échanges de marchandises, de capitaux, d'informations et de personnes, c'est la mondialisation."
     },
     {
       "consigne": "Quelle notion le passage en couleur illustre-t-il ?",
       "texte": "[La population, les richesses et les pouvoirs de décision se concentrent dans les plus grandes villes].",
-      "choix": ["Mondialisation", "Métropolisation", "Hub", "Archipel métropolitain mondial"],
+      "choix": [
+        "Mondialisation",
+        "Métropolisation",
+        "Hub",
+        "Archipel métropolitain mondial"
+      ],
       "bonne": 1,
       "explication": "La concentration de la population, des richesses et des activités de commandement dans les plus grandes villes, c'est la métropolisation."
     },
     {
       "consigne": "Quelle notion le passage en couleur illustre-t-il ?",
       "texte": "L'aéroport de Dubaï est [un point de correspondance où les flux se concentrent avant d'être redistribués].",
-      "choix": ["Mondialisation", "Métropolisation", "Hub", "Archipel métropolitain mondial"],
+      "choix": [
+        "Mondialisation",
+        "Métropolisation",
+        "Hub",
+        "Archipel métropolitain mondial"
+      ],
       "bonne": 2,
       "explication": "Une plateforme de correspondance qui concentre puis redistribue les flux est un hub."
     },
     {
       "consigne": "Quelle notion le passage en couleur illustre-t-il ?",
       "texte": "[Un réseau de grandes métropoles reliées entre elles, comme des îles] dirige l'économie de la planète.",
-      "choix": ["Mondialisation", "Métropolisation", "Hub", "Archipel métropolitain mondial"],
+      "choix": [
+        "Mondialisation",
+        "Métropolisation",
+        "Hub",
+        "Archipel métropolitain mondial"
+      ],
       "bonne": 3,
       "explication": "Les grandes métropoles reliées en réseau comme des îles forment l'archipel métropolitain mondial."
     },
     {
       "consigne": "Quelle notion le passage en couleur illustre-t-il ?",
       "texte": "Un jean est cousu en Asie, expédié par bateau et vendu en Europe : [des territoires lointains sont reliés par des échanges à l'échelle de la planète].",
-      "choix": ["Mondialisation", "Métropolisation", "Hub", "Archipel métropolitain mondial"],
+      "choix": [
+        "Mondialisation",
+        "Métropolisation",
+        "Hub",
+        "Archipel métropolitain mondial"
+      ],
       "bonne": 0,
       "explication": "Des territoires lointains reliés par des échanges à l'échelle de la planète : c'est la mondialisation."
     },
     {
       "consigne": "Quelle notion le passage en couleur illustre-t-il ?",
       "texte": "En quelques décennies, [les habitants, les entreprises et l'argent ont afflué vers les très grandes villes].",
-      "choix": ["Mondialisation", "Métropolisation", "Hub", "Archipel métropolitain mondial"],
+      "choix": [
+        "Mondialisation",
+        "Métropolisation",
+        "Hub",
+        "Archipel métropolitain mondial"
+      ],
       "bonne": 1,
       "explication": "Les hommes, les richesses et les pouvoirs qui se concentrent dans les très grandes villes : c'est la métropolisation."
     }
@@ -94,7 +121,10 @@
   "devinettes": [
     {
       "reponse": "Hub",
-      "acceptees": ["Un hub", "Le hub"],
+      "acceptees": [
+        "Un hub",
+        "Le hub"
+      ],
       "indices": [
         "Je suis un lieu qui relie beaucoup d'autres lieux.",
         "Les flux se concentrent chez moi, puis repartent vers d'autres destinations.",
@@ -104,7 +134,14 @@
     },
     {
       "reponse": "Firme transnationale",
-      "acceptees": ["Une firme transnationale", "Entreprise transnationale", "Multinationale", "Une multinationale", "Firme multinationale", "Entreprise multinationale"],
+      "acceptees": [
+        "Une firme transnationale",
+        "Entreprise transnationale",
+        "Multinationale",
+        "Une multinationale",
+        "Firme multinationale",
+        "Entreprise multinationale"
+      ],
       "indices": [
         "Je suis une grande entreprise.",
         "J'ai des usines, des bureaux ou des magasins dans plusieurs pays.",
@@ -114,7 +151,9 @@
     },
     {
       "reponse": "Métropolisation",
-      "acceptees": ["La métropolisation"],
+      "acceptees": [
+        "La métropolisation"
+      ],
       "indices": [
         "Je suis un phénomène qui touche les villes.",
         "Avec moi, les habitants, les richesses et les pouvoirs se concentrent au même endroit.",
@@ -124,7 +163,12 @@
     },
     {
       "reponse": "Archipel métropolitain mondial",
-      "acceptees": ["L'archipel métropolitain mondial", "Archipel métropolitain", "Archipel", "AMM"],
+      "acceptees": [
+        "L'archipel métropolitain mondial",
+        "Archipel métropolitain",
+        "Archipel",
+        "AMM"
+      ],
       "indices": [
         "Je suis un réseau.",
         "Mes éléments sont les plus grandes villes du monde, reliées entre elles.",

@@ -51,42 +51,72 @@
     {
       "consigne": "Quel est le rôle du passage en couleur dans ce texte argumentatif ?",
       "texte": "Il faut limiter les écrans le soir. En effet, [ils nuisent au sommeil]. Ainsi, un élève qui joue jusqu'à minuit s'endort en classe.",
-      "choix": ["Thème", "Thèse", "Argument", "Exemple"],
+      "choix": [
+        "Thème",
+        "Thèse",
+        "Argument",
+        "Exemple"
+      ],
       "bonne": 2,
       "explication": "« Ils nuisent au sommeil » est une idée générale qui justifie la thèse : c'est un argument. L'élève qui s'endort en classe est l'exemple."
     },
     {
       "consigne": "Quel est le rôle du passage en couleur dans ce texte argumentatif ?",
       "texte": "[Il faut limiter les écrans le soir.] En effet, ils nuisent au sommeil.",
-      "choix": ["Thème", "Thèse", "Argument", "Exemple"],
+      "choix": [
+        "Thème",
+        "Thèse",
+        "Argument",
+        "Exemple"
+      ],
       "bonne": 1,
       "explication": "C'est l'opinion défendue sur le sujet des écrans : c'est la thèse. « Ils nuisent au sommeil » vient la justifier."
     },
     {
       "consigne": "Quel est le rôle du passage en couleur dans ce texte argumentatif ?",
       "texte": "Il faut limiter les écrans, car ils fatiguent. [Léa, 13 ans, s'est endormie en classe après une nuit de jeux vidéo.]",
-      "choix": ["Thème", "Thèse", "Argument", "Exemple"],
+      "choix": [
+        "Thème",
+        "Thèse",
+        "Argument",
+        "Exemple"
+      ],
       "bonne": 3,
       "explication": "C'est un fait précis et concret qui illustre l'argument « ils fatiguent » : c'est un exemple."
     },
     {
       "consigne": "Quel est le rôle du passage en couleur dans ce texte argumentatif ?",
       "texte": "Aujourd'hui, nous débattons de [l'usage des téléphones au collège]. Pour ma part, je pense qu'il faut le limiter.",
-      "choix": ["Thème", "Thèse", "Argument", "Exemple"],
+      "choix": [
+        "Thème",
+        "Thèse",
+        "Argument",
+        "Exemple"
+      ],
       "bonne": 0,
       "explication": "C'est le sujet dont on parle, sans prise de position : c'est le thème. La thèse est « il faut le limiter »."
     },
     {
       "consigne": "Quel est le rôle du passage en couleur dans ce texte argumentatif ?",
       "texte": "Je pense que les devoirs sont inutiles. En effet, [ils fatiguent les élèves sans les faire progresser].",
-      "choix": ["Thème", "Thèse", "Argument", "Exemple"],
+      "choix": [
+        "Thème",
+        "Thèse",
+        "Argument",
+        "Exemple"
+      ],
       "bonne": 2,
       "explication": "Cette idée générale explique pourquoi la thèse « les devoirs sont inutiles » est juste : c'est un argument."
     },
     {
       "consigne": "Quel est le rôle du passage en couleur dans ce texte argumentatif ?",
       "texte": "Voici mon opinion : [les devoirs doivent être supprimés].",
-      "choix": ["Thème", "Thèse", "Argument", "Exemple"],
+      "choix": [
+        "Thème",
+        "Thèse",
+        "Argument",
+        "Exemple"
+      ],
       "bonne": 1,
       "explication": "C'est l'opinion défendue sur le sujet des devoirs : c'est la thèse."
     }
@@ -94,7 +124,10 @@
   "devinettes": [
     {
       "reponse": "Concession",
-      "acceptees": ["La concession", "Une concession"],
+      "acceptees": [
+        "La concession",
+        "Une concession"
+      ],
       "indices": [
         "Je suis une manière de tenir compte de l'adversaire.",
         "Je reconnais qu'une partie de ce que dit l'autre est vraie.",
@@ -104,7 +137,10 @@
     },
     {
       "reponse": "Réfutation",
-      "acceptees": ["La réfutation", "Une réfutation"],
+      "acceptees": [
+        "La réfutation",
+        "Une réfutation"
+      ],
       "indices": [
         "Je réponds à un adversaire.",
         "Je montre qu'un argument de l'adversaire ne tient pas.",
@@ -114,7 +150,11 @@
     },
     {
       "reponse": "Modalisateur",
-      "acceptees": ["Un modalisateur", "Le modalisateur", "Modalisateurs"],
+      "acceptees": [
+        "Un modalisateur",
+        "Le modalisateur",
+        "Modalisateurs"
+      ],
       "indices": [
         "Je suis un mot ou une expression dans une phrase.",
         "Je montre le degré de certitude de celui qui parle.",
@@ -124,7 +164,12 @@
     },
     {
       "reponse": "Connecteur logique",
-      "acceptees": ["Un connecteur logique", "Connecteur", "Un connecteur", "Mot de liaison"],
+      "acceptees": [
+        "Un connecteur logique",
+        "Connecteur",
+        "Un connecteur",
+        "Mot de liaison"
+      ],
       "indices": [
         "Je suis un mot ou une expression de liaison.",
         "Je montre le lien entre deux idées : addition, cause, opposition.",
@@ -134,15 +179,5 @@
     }
   ],
   "calculs": [],
-  "etapes": [
-    {
-      "titre": "Les étapes d'un paragraphe argumentatif",
-      "etapes": [
-        "On commence par un alinéa et on annonce l'argument",
-        "On explique pourquoi cet argument soutient la thèse",
-        "On l'illustre par un exemple précis",
-        "On termine par une phrase de bilan"
-      ]
-    }
-  ]
+  "etapes": []
 }

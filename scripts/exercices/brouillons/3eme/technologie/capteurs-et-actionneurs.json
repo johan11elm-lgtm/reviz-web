@@ -7,7 +7,6 @@
       "cartes": [
         "Allumer un lampadaire quand la nuit tombe",
         "Régler l'écran selon la lumière de la pièce",
-        "Fermer les volets quand le soleil est trop fort",
         "Mesurer la lumière reçue par une plante",
         "Allumer les phares d'une voiture à l'entrée d'un tunnel"
       ]
@@ -51,42 +50,66 @@
     {
       "consigne": "Quel type de composant est le groupe en couleur ?",
       "texte": "Dans un lampadaire, [la photorésistance] mesure la luminosité.",
-      "choix": ["Capteur de mesure", "Détecteur tout ou rien", "Actionneur"],
+      "choix": [
+        "Capteur de mesure",
+        "Détecteur tout ou rien",
+        "Actionneur"
+      ],
       "bonne": 0,
       "explication": "La photorésistance mesure une grandeur qui varie, la luminosité : c'est un capteur de mesure."
     },
     {
       "consigne": "Quel type de composant est le groupe en couleur ?",
       "texte": "Sur un portail, [l'interrupteur de fin de course] indique seulement si le portail est arrivé ou non.",
-      "choix": ["Capteur de mesure", "Détecteur tout ou rien", "Actionneur"],
+      "choix": [
+        "Capteur de mesure",
+        "Détecteur tout ou rien",
+        "Actionneur"
+      ],
       "bonne": 1,
       "explication": "Il ne donne que deux états, arrivé ou non : c'est un détecteur tout ou rien."
     },
     {
       "consigne": "Quel type de composant est le groupe en couleur ?",
       "texte": "Dans un robot, [le servomoteur] oriente une pince à un angle précis.",
-      "choix": ["Capteur de mesure", "Détecteur tout ou rien", "Actionneur"],
+      "choix": [
+        "Capteur de mesure",
+        "Détecteur tout ou rien",
+        "Actionneur"
+      ],
       "bonne": 2,
       "explication": "Le servomoteur convertit l'énergie en mouvement : c'est un actionneur."
     },
     {
       "consigne": "Quel type de composant est le groupe en couleur ?",
       "texte": "Dans un robot, [le module à ultrasons] mesure la distance jusqu'au mur.",
-      "choix": ["Capteur de mesure", "Détecteur tout ou rien", "Actionneur"],
+      "choix": [
+        "Capteur de mesure",
+        "Détecteur tout ou rien",
+        "Actionneur"
+      ],
       "bonne": 0,
       "explication": "Il fournit une valeur qui varie, la distance : c'est un capteur de mesure."
     },
     {
       "consigne": "Quel type de composant est le groupe en couleur ?",
       "texte": "Dans une alarme, [le module PIR] indique seulement s'il y a un mouvement ou non.",
-      "choix": ["Capteur de mesure", "Détecteur tout ou rien", "Actionneur"],
+      "choix": [
+        "Capteur de mesure",
+        "Détecteur tout ou rien",
+        "Actionneur"
+      ],
       "bonne": 1,
       "explication": "Il ne donne que deux états, mouvement ou pas de mouvement : c'est un détecteur tout ou rien."
     },
     {
       "consigne": "Quel type de composant est le groupe en couleur ?",
       "texte": "Dans une alarme, [le buzzer] émet un son quand quelqu'un entre.",
-      "choix": ["Capteur de mesure", "Détecteur tout ou rien", "Actionneur"],
+      "choix": [
+        "Capteur de mesure",
+        "Détecteur tout ou rien",
+        "Actionneur"
+      ],
       "bonne": 2,
       "explication": "Le buzzer convertit l'énergie électrique en son : c'est un actionneur."
     }
@@ -94,7 +117,12 @@
   "devinettes": [
     {
       "reponse": "Photorésistance",
-      "acceptees": ["Photorésistance", "Une photorésistance", "La photorésistance", "LDR"],
+      "acceptees": [
+        "Photorésistance",
+        "Une photorésistance",
+        "La photorésistance",
+        "LDR"
+      ],
       "indices": [
         "Je suis un composant électronique.",
         "Ma résistance change avec la lumière.",
@@ -104,7 +132,12 @@
     },
     {
       "reponse": "Servomoteur",
-      "acceptees": ["Servomoteur", "Un servomoteur", "Le servomoteur", "Servo"],
+      "acceptees": [
+        "Servomoteur",
+        "Un servomoteur",
+        "Le servomoteur",
+        "Servo"
+      ],
       "indices": [
         "Je suis un actionneur.",
         "Je transforme l'énergie électrique en mouvement.",
@@ -114,7 +147,11 @@
     },
     {
       "reponse": "Vérin",
-      "acceptees": ["Vérin", "Un vérin", "Le vérin"],
+      "acceptees": [
+        "Vérin",
+        "Un vérin",
+        "Le vérin"
+      ],
       "indices": [
         "Je suis un actionneur.",
         "Je produis un mouvement de translation.",
@@ -124,7 +161,11 @@
     },
     {
       "reponse": "Seuil",
-      "acceptees": ["Seuil", "Un seuil", "Le seuil"],
+      "acceptees": [
+        "Seuil",
+        "Un seuil",
+        "Le seuil"
+      ],
       "indices": [
         "Je suis une valeur que l'on choisit dans un programme.",
         "On me choisit après avoir relevé les valeurs du capteur dans des situations connues.",

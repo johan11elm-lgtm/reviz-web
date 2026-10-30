@@ -51,42 +51,72 @@
     {
       "consigne": "Que dit le groupe en couleur ?",
       "texte": "These trousers are [too long].",
-      "choix": ["Trop", "Assez", "Pas assez", "Si, tellement"],
+      "choix": [
+        "Trop",
+        "Assez",
+        "Pas assez",
+        "Si, tellement"
+      ],
       "bonne": 0,
       "explication": "Too + adjectif veut dire « trop » : c'est un excès."
     },
     {
       "consigne": "Que dit le groupe en couleur ?",
       "texte": "She is [old enough] to go to school alone.",
-      "choix": ["Trop", "Assez", "Pas assez", "Si, tellement"],
+      "choix": [
+        "Trop",
+        "Assez",
+        "Pas assez",
+        "Si, tellement"
+      ],
       "bonne": 1,
       "explication": "Adjectif + enough veut dire « assez » : elle a l'âge qu'il faut."
     },
     {
       "consigne": "Que dit le groupe en couleur ?",
       "texte": "This coat [isn't warm enough].",
-      "choix": ["Trop", "Assez", "Pas assez", "Si, tellement"],
+      "choix": [
+        "Trop",
+        "Assez",
+        "Pas assez",
+        "Si, tellement"
+      ],
       "bonne": 2,
       "explication": "La forme négative avec enough veut dire « pas assez » : le manteau ne tient pas assez chaud."
     },
     {
       "consigne": "Que dit le groupe en couleur ?",
       "texte": "The uniform is [so smart]!",
-      "choix": ["Trop", "Assez", "Pas assez", "Si, tellement"],
+      "choix": [
+        "Trop",
+        "Assez",
+        "Pas assez",
+        "Si, tellement"
+      ],
       "bonne": 3,
       "explication": "So + adjectif veut dire « si, tellement » : il renforce la description."
     },
     {
       "consigne": "Que dit le groupe en couleur ?",
       "texte": "We have [too many rules].",
-      "choix": ["Trop", "Assez", "Pas assez", "Si, tellement"],
+      "choix": [
+        "Trop",
+        "Assez",
+        "Pas assez",
+        "Si, tellement"
+      ],
       "bonne": 0,
       "explication": "Too many + nom pluriel veut dire « trop de » : c'est un excès."
     },
     {
       "consigne": "Que dit le groupe en couleur ?",
       "texte": "It's [such a nice tie]!",
-      "choix": ["Trop", "Assez", "Pas assez", "Si, tellement"],
+      "choix": [
+        "Trop",
+        "Assez",
+        "Pas assez",
+        "Si, tellement"
+      ],
       "bonne": 3,
       "explication": "Such a + adjectif + nom veut dire « si, tellement » : il renforce la description."
     }
@@ -103,16 +133,6 @@
       "explication": "Enough veut dire « assez » : big enough, mais enough money."
     },
     {
-      "reponse": "Too much",
-      "acceptees": [],
-      "indices": [
-        "Je me place devant un nom.",
-        "Je ne m'emploie qu'avec un nom indénombrable, comme homework ou noise.",
-        "Je veux dire « trop de »."
-      ],
-      "explication": "Too much se met devant un nom indénombrable : too much homework. Avec un pluriel, on dit too many."
-    },
-    {
       "reponse": "Such",
       "acceptees": [],
       "indices": [
@@ -124,7 +144,10 @@
     },
     {
       "reponse": "Blazer",
-      "acceptees": ["A blazer", "Jacket"],
+      "acceptees": [
+        "A blazer",
+        "Jacket"
+      ],
       "indices": [
         "Je suis un vêtement.",
         "On me porte dans beaucoup d'écoles britanniques, avec une cravate.",

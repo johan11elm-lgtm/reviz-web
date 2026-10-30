@@ -18,9 +18,7 @@
       "cartes": [
         "Environ 2,5 % de l'eau de la Terre",
         "On la capte dans une rivière ou une nappe",
-        "On la filtre lors de son traitement",
-        "On la désinfecte avant de la distribuer",
-        "Les eaux usées sont épurées en station d'épuration"
+        "On la filtre lors de son traitement"
       ]
     },
     {
@@ -76,35 +74,55 @@
     {
       "consigne": "Quelle source d'énergie le passage en couleur décrit-il ?",
       "texte": "Voici une source d'énergie : [elle est renouvelable, émet peu de CO₂, mais modifie le paysage].",
-      "choix": ["Charbon", "Éolien", "Nucléaire"],
+      "choix": [
+        "Charbon",
+        "Éolien",
+        "Nucléaire"
+      ],
       "bonne": 1,
       "explication": "L'éolien est renouvelable et émet peu de CO₂, mais les éoliennes modifient le paysage."
     },
     {
       "consigne": "Quelle source d'énergie le passage en couleur décrit-il ?",
       "texte": "Voici une source d'énergie : [elle n'est pas renouvelable et émet beaucoup de CO₂].",
-      "choix": ["Charbon", "Éolien", "Nucléaire"],
+      "choix": [
+        "Charbon",
+        "Éolien",
+        "Nucléaire"
+      ],
       "bonne": 0,
       "explication": "Le charbon est un combustible fossile non renouvelable : sa combustion émet beaucoup de CO₂."
     },
     {
       "consigne": "Quelle source d'énergie le passage en couleur décrit-il ?",
       "texte": "Voici une source d'énergie : [elle émet peu de CO₂, mais utilise de l'uranium non renouvelable et produit des déchets radioactifs].",
-      "choix": ["Charbon", "Éolien", "Nucléaire"],
+      "choix": [
+        "Charbon",
+        "Éolien",
+        "Nucléaire"
+      ],
       "bonne": 2,
       "explication": "Le nucléaire émet peu de CO₂, mais l'uranium n'est pas renouvelable et les déchets sont radioactifs."
     },
     {
       "consigne": "Quelle source d'énergie le passage en couleur décrit-il ?",
       "texte": "Une centrale produit de l'électricité en brûlant [une roche formée de végétaux enfouis pendant des millions d'années].",
-      "choix": ["Charbon", "Éolien", "Nucléaire"],
+      "choix": [
+        "Charbon",
+        "Éolien",
+        "Nucléaire"
+      ],
       "bonne": 0,
       "explication": "Le charbon provient de végétaux accumulés dans des marécages puis enfouis."
     },
     {
       "consigne": "Quelle source d'énergie le passage en couleur décrit-il ?",
       "texte": "Sur la colline, des pales tournent quand [le vent souffle] et produisent de l'électricité.",
-      "choix": ["Charbon", "Éolien", "Nucléaire"],
+      "choix": [
+        "Charbon",
+        "Éolien",
+        "Nucléaire"
+      ],
       "bonne": 1,
       "explication": "Une éolienne transforme l'énergie du vent, une ressource renouvelable, en électricité."
     }
@@ -112,7 +130,11 @@
   "devinettes": [
     {
       "reponse": "Érosion",
-      "acceptees": ["Érosion", "L'érosion", "Erosion"],
+      "acceptees": [
+        "Érosion",
+        "L'érosion",
+        "Erosion"
+      ],
       "indices": [
         "Je menace les sols.",
         "L'eau ou le vent me provoquent.",
@@ -122,7 +144,11 @@
     },
     {
       "reponse": "Pétrole",
-      "acceptees": ["Pétrole", "Le pétrole", "Petrole"],
+      "acceptees": [
+        "Pétrole",
+        "Le pétrole",
+        "Petrole"
+      ],
       "indices": [
         "Je suis un combustible fossile.",
         "Je viens surtout de plancton enfoui dans des sédiments marins.",
@@ -132,7 +158,13 @@
     },
     {
       "reponse": "Station d'épuration",
-      "acceptees": ["Station d'épuration", "Une station d'épuration", "La station d'épuration", "Station d'épuration des eaux", "Station épuration"],
+      "acceptees": [
+        "Station d'épuration",
+        "Une station d'épuration",
+        "La station d'épuration",
+        "Station d'épuration des eaux",
+        "Station épuration"
+      ],
       "indices": [
         "Je suis une installation.",
         "Je retire une grande partie des polluants des eaux usées.",
@@ -142,7 +174,11 @@
     },
     {
       "reponse": "Développement durable",
-      "acceptees": ["Développement durable", "Le développement durable", "Developpement durable"],
+      "acceptees": [
+        "Développement durable",
+        "Le développement durable",
+        "Developpement durable"
+      ],
       "indices": [
         "Je suis un principe pour gérer les ressources.",
         "Je réponds aux besoins du présent.",

@@ -38,7 +38,6 @@
       "nom": "Refuser poliment",
       "detail": "Pour refuser poliment, on adoucit la réponse : I'm not sure, Maybe another time, I'd rather + base verbale.",
       "cartes": [
-        "I'm not sure about that",
         "Maybe another time",
         "I don't really feel like it",
         "I'd rather stay at the hostel",
@@ -51,42 +50,72 @@
     {
       "consigne": "Quelle est la fonction de la réplique en couleur ?",
       "texte": "— [Shall we take the train?] — Good idea!",
-      "choix": ["Proposer une activité", "Proposer son aide", "Accepter", "Refuser poliment"],
+      "choix": [
+        "Proposer une activité",
+        "Proposer son aide",
+        "Accepter",
+        "Refuser poliment"
+      ],
       "bonne": 0,
       "explication": "Shall we…? propose de faire quelque chose ensemble : c'est une proposition d'activité."
     },
     {
       "consigne": "Quelle est la fonction de la réplique en couleur ?",
       "texte": "— Shall we go to the festival? — [I'd rather stay here.]",
-      "choix": ["Proposer une activité", "Proposer son aide", "Accepter", "Refuser poliment"],
+      "choix": [
+        "Proposer une activité",
+        "Proposer son aide",
+        "Accepter",
+        "Refuser poliment"
+      ],
       "bonne": 3,
       "explication": "I'd rather + base verbale (je préférerais) est une façon polie de refuser."
     },
     {
       "consigne": "Quelle est la fonction de la réplique en couleur ?",
       "texte": "— How about a picnic? — [That sounds great!]",
-      "choix": ["Proposer une activité", "Proposer son aide", "Accepter", "Refuser poliment"],
+      "choix": [
+        "Proposer une activité",
+        "Proposer son aide",
+        "Accepter",
+        "Refuser poliment"
+      ],
       "bonne": 2,
       "explication": "That sounds great! (ça me semble super) accepte la proposition."
     },
     {
       "consigne": "Quelle est la fonction de la réplique en couleur ?",
       "texte": "— [Shall I book the tickets?] — Yes, please.",
-      "choix": ["Proposer une activité", "Proposer son aide", "Accepter", "Refuser poliment"],
+      "choix": [
+        "Proposer une activité",
+        "Proposer son aide",
+        "Accepter",
+        "Refuser poliment"
+      ],
       "bonne": 1,
       "explication": "Shall I…? propose de faire l'action soi-même : c'est une proposition d'aide."
     },
     {
       "consigne": "Quelle est la fonction de la réplique en couleur ?",
       "texte": "— Why don't we climb Arthur's Seat? — [Maybe another time.]",
-      "choix": ["Proposer une activité", "Proposer son aide", "Accepter", "Refuser poliment"],
+      "choix": [
+        "Proposer une activité",
+        "Proposer son aide",
+        "Accepter",
+        "Refuser poliment"
+      ],
       "bonne": 3,
       "explication": "Maybe another time (peut-être une autre fois) adoucit un refus."
     },
     {
       "consigne": "Quelle est la fonction de la réplique en couleur ?",
       "texte": "— What about a guided tour? — [Good idea!]",
-      "choix": ["Proposer une activité", "Proposer son aide", "Accepter", "Refuser poliment"],
+      "choix": [
+        "Proposer une activité",
+        "Proposer son aide",
+        "Accepter",
+        "Refuser poliment"
+      ],
       "bonne": 2,
       "explication": "Good idea! accepte la proposition de visite guidée."
     }
@@ -94,7 +123,10 @@
   "devinettes": [
     {
       "reponse": "Édimbourg",
-      "acceptees": ["Edimbourg", "Edinburgh"],
+      "acceptees": [
+        "Edimbourg",
+        "Edinburgh"
+      ],
       "indices": [
         "Je suis une ville du nord du Royaume-Uni.",
         "Un château domine mes toits depuis un rocher volcanique.",
@@ -104,7 +136,9 @@
     },
     {
       "reponse": "Hogmanay",
-      "acceptees": ["Le Hogmanay"],
+      "acceptees": [
+        "Le Hogmanay"
+      ],
       "indices": [
         "Je suis une fête écossaise.",
         "Je tombe en hiver, à la fin de l'année.",
@@ -114,7 +148,10 @@
     },
     {
       "reponse": "Royal Mile",
-      "acceptees": ["The Royal Mile", "Le Royal Mile"],
+      "acceptees": [
+        "The Royal Mile",
+        "Le Royal Mile"
+      ],
       "indices": [
         "Je suis une rue.",
         "Je traverse la vieille ville d'Édimbourg.",
@@ -124,7 +161,12 @@
     },
     {
       "reponse": "Bagpipes",
-      "acceptees": ["Bagpipe", "The bagpipes", "La cornemuse", "Cornemuse"],
+      "acceptees": [
+        "Bagpipe",
+        "The bagpipes",
+        "La cornemuse",
+        "Cornemuse"
+      ],
       "indices": [
         "Je suis un instrument de musique.",
         "Je suis un symbole de l'Écosse, comme le kilt et le tartan.",
@@ -134,15 +176,5 @@
     }
   ],
   "calculs": [],
-  "etapes": [
-    {
-      "titre": "Organiser une sortie dans un dialogue",
-      "etapes": [
-        "Propose une activité : Shall we… ? / How about… ?",
-        "Réponds à la proposition : accepte ou refuse poliment",
-        "Propose ton aide : Shall I book the tickets ?",
-        "Conclus ensemble : OK, let's do that !"
-      ]
-    }
-  ]
+  "etapes": []
 }

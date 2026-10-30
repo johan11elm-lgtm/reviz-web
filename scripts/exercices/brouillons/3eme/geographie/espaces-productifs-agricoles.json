@@ -41,8 +41,7 @@
         "Une culture qui se passe de produits chimiques de synthèse",
         "Un produit lié à un territoire et à un savoir-faire",
         "Des légumes vendus directement à la ferme",
-        "Un producteur qui vend ses produits sur le marché",
-        "Au plus un intermédiaire entre le producteur et le client"
+        "Un producteur qui vend ses produits sur le marché"
       ]
     }
   ],
@@ -76,28 +75,48 @@
     {
       "consigne": "De quoi s'agit-il dans le passage en couleur ?",
       "texte": "Dans cette ferme, [on se passe de pesticides et d'engrais chimiques de synthèse].",
-      "choix": ["Agriculture productiviste", "Agriculture biologique", "Circuit court", "Label AOP"],
+      "choix": [
+        "Agriculture productiviste",
+        "Agriculture biologique",
+        "Circuit court",
+        "Label AOP"
+      ],
       "bonne": 1,
       "explication": "Une agriculture qui se passe de pesticides et d'engrais chimiques de synthèse est une agriculture biologique."
     },
     {
       "consigne": "De quoi s'agit-il dans le passage en couleur ?",
       "texte": "Ce maraîcher [vend ses légumes directement sur le marché, sans intermédiaire].",
-      "choix": ["Agriculture productiviste", "Agriculture biologique", "Circuit court", "Label AOP"],
+      "choix": [
+        "Agriculture productiviste",
+        "Agriculture biologique",
+        "Circuit court",
+        "Label AOP"
+      ],
       "bonne": 2,
       "explication": "Une vente avec au plus un intermédiaire entre le producteur et le consommateur est un circuit court."
     },
     {
       "consigne": "De quoi s'agit-il dans le passage en couleur ?",
       "texte": "Ce fromage de comté [vient d'un territoire précis et respecte un savoir-faire].",
-      "choix": ["Agriculture productiviste", "Agriculture biologique", "Circuit court", "Label AOP"],
+      "choix": [
+        "Agriculture productiviste",
+        "Agriculture biologique",
+        "Circuit court",
+        "Label AOP"
+      ],
       "bonne": 3,
       "explication": "Le label AOP lie un produit à un territoire précis et à un savoir-faire, comme le comté."
     },
     {
       "consigne": "De quoi s'agit-il dans le passage en couleur ?",
       "texte": "Depuis 1950, cet agriculteur [cherche à produire le plus possible avec des machines, des engrais et des pesticides].",
-      "choix": ["Agriculture productiviste", "Agriculture biologique", "Circuit court", "Label AOP"],
+      "choix": [
+        "Agriculture productiviste",
+        "Agriculture biologique",
+        "Circuit court",
+        "Label AOP"
+      ],
       "bonne": 0,
       "explication": "Produire le plus possible grâce aux machines, aux engrais et aux pesticides, c'est l'agriculture productiviste."
     }
@@ -105,7 +124,12 @@
   "devinettes": [
     {
       "reponse": "La PAC",
-      "acceptees": ["PAC", "La PAC", "La politique agricole commune", "Politique agricole commune"],
+      "acceptees": [
+        "PAC",
+        "La PAC",
+        "La politique agricole commune",
+        "Politique agricole commune"
+      ],
       "indices": [
         "Je suis née en 1962.",
         "Je suis une aide de l'Union européenne pour les agriculteurs.",
@@ -115,7 +139,14 @@
     },
     {
       "reponse": "Un circuit court",
-      "acceptees": ["Circuit court", "Un circuit court", "Les circuits courts", "Circuits courts", "Vente directe", "La vente directe"],
+      "acceptees": [
+        "Circuit court",
+        "Un circuit court",
+        "Les circuits courts",
+        "Circuits courts",
+        "Vente directe",
+        "La vente directe"
+      ],
       "indices": [
         "Je suis une façon de vendre des produits.",
         "Je comporte au plus un intermédiaire entre le producteur et le consommateur.",
@@ -125,7 +156,15 @@
     },
     {
       "reponse": "Le productivisme",
-      "acceptees": ["Productivisme", "Le productivisme", "L'agriculture productiviste", "Agriculture productiviste", "Une agriculture productiviste", "Agriculture intensive", "L'agriculture intensive"],
+      "acceptees": [
+        "Productivisme",
+        "Le productivisme",
+        "L'agriculture productiviste",
+        "Agriculture productiviste",
+        "Une agriculture productiviste",
+        "Agriculture intensive",
+        "L'agriculture intensive"
+      ],
       "indices": [
         "Je suis un modèle agricole né après 1950.",
         "J'utilise des machines, des engrais, des pesticides et des semences sélectionnées.",
@@ -135,7 +174,11 @@
     },
     {
       "reponse": "Rouen",
-      "acceptees": ["Rouen", "Le port de Rouen", "Port de Rouen"],
+      "acceptees": [
+        "Rouen",
+        "Le port de Rouen",
+        "Port de Rouen"
+      ],
       "indices": [
         "Je suis un port français.",
         "Je suis relié aux champs du Bassin parisien.",

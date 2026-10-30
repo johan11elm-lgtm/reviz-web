@@ -7,7 +7,6 @@
       "cartes": [
         "Des monuments anciens et des ruelles étroites",
         "Le quartier le plus ancien de la ville",
-        "La mairie et les pouvoirs politiques de la ville",
         "Des musées, des théâtres et des commerces regroupés",
         "Une vieille cathédrale entourée de maisons anciennes"
       ]
@@ -82,42 +81,72 @@
     {
       "consigne": "Quel phénomène le passage en couleur illustre-t-il ?",
       "texte": "Dans ce vieux quartier populaire, [des cadres aisés rachètent les appartements et les prix des logements montent].",
-      "choix": ["Gentrification", "Périurbanisation", "Artificialisation des sols", "Mobilités pendulaires"],
+      "choix": [
+        "Gentrification",
+        "Périurbanisation",
+        "Artificialisation des sols",
+        "Mobilités pendulaires"
+      ],
       "bonne": 0,
       "explication": "Des habitants plus aisés arrivent dans un quartier ancien et populaire, et les prix montent : c'est la gentrification."
     },
     {
       "consigne": "Quel phénomène le passage en couleur illustre-t-il ?",
       "texte": "Le matin, les routes sont bouchées : [des milliers de salariés font l'aller-retour entre leur domicile et leur travail].",
-      "choix": ["Gentrification", "Périurbanisation", "Artificialisation des sols", "Mobilités pendulaires"],
+      "choix": [
+        "Gentrification",
+        "Périurbanisation",
+        "Artificialisation des sols",
+        "Mobilités pendulaires"
+      ],
       "bonne": 3,
       "explication": "Ces trajets quotidiens entre domicile et travail sont les mobilités pendulaires : elles provoquent embouteillages et pollution."
     },
     {
       "consigne": "Quel phénomène le passage en couleur illustre-t-il ?",
       "texte": "Depuis quelques années, [des citadins s'installent dans des villages proches de la ville].",
-      "choix": ["Gentrification", "Périurbanisation", "Artificialisation des sols", "Mobilités pendulaires"],
+      "choix": [
+        "Gentrification",
+        "Périurbanisation",
+        "Artificialisation des sols",
+        "Mobilités pendulaires"
+      ],
       "bonne": 1,
       "explication": "Des citadins qui s'installent dans des communes rurales proches de la ville : c'est la périurbanisation."
     },
     {
       "consigne": "Quel phénomène le passage en couleur illustre-t-il ?",
       "texte": "Des champs de blé ont disparu : [à leur place, il y a maintenant des routes, des parkings et des entrepôts].",
-      "choix": ["Gentrification", "Périurbanisation", "Artificialisation des sols", "Mobilités pendulaires"],
+      "choix": [
+        "Gentrification",
+        "Périurbanisation",
+        "Artificialisation des sols",
+        "Mobilités pendulaires"
+      ],
       "bonne": 2,
       "explication": "Des sols agricoles remplacés par des routes et des bâtiments : c'est l'artificialisation des sols."
     },
     {
       "consigne": "Quel phénomène le passage en couleur illustre-t-il ?",
       "texte": "Une famille quitte son appartement : [elle a acheté une maison dans une commune rurale proche de la ville].",
-      "choix": ["Gentrification", "Périurbanisation", "Artificialisation des sols", "Mobilités pendulaires"],
+      "choix": [
+        "Gentrification",
+        "Périurbanisation",
+        "Artificialisation des sols",
+        "Mobilités pendulaires"
+      ],
       "bonne": 1,
       "explication": "La famille s'installe dans une commune rurale proche de la ville : c'est la périurbanisation."
     },
     {
       "consigne": "Quel phénomène le passage en couleur illustre-t-il ?",
       "texte": "[Chaque année, des hectares de terres agricoles sont recouverts de lotissements et de routes].",
-      "choix": ["Gentrification", "Périurbanisation", "Artificialisation des sols", "Mobilités pendulaires"],
+      "choix": [
+        "Gentrification",
+        "Périurbanisation",
+        "Artificialisation des sols",
+        "Mobilités pendulaires"
+      ],
       "bonne": 2,
       "explication": "Des terres agricoles recouvertes de lotissements et de routes : c'est l'artificialisation des sols."
     }
@@ -125,7 +154,12 @@
   "devinettes": [
     {
       "reponse": "CBD",
-      "acceptees": ["Le CBD", "Quartier d'affaires", "Le quartier d'affaires", "Central Business District"],
+      "acceptees": [
+        "Le CBD",
+        "Quartier d'affaires",
+        "Le quartier d'affaires",
+        "Central Business District"
+      ],
       "indices": [
         "Je me trouve dans une grande ville.",
         "Je rassemble des sièges sociaux, des banques et une bourse.",
@@ -135,7 +169,9 @@
     },
     {
       "reponse": "Gentrification",
-      "acceptees": ["La gentrification"],
+      "acceptees": [
+        "La gentrification"
+      ],
       "indices": [
         "Je suis un changement qui touche un quartier.",
         "Avec moi, des habitants plus aisés arrivent dans un quartier ancien et populaire.",
@@ -145,23 +181,15 @@
     },
     {
       "reponse": "Périurbanisation",
-      "acceptees": ["La périurbanisation"],
+      "acceptees": [
+        "La périurbanisation"
+      ],
       "indices": [
         "Je suis un phénomène qui touche les villes et leurs environs.",
         "Avec moi, des citadins vont habiter à la campagne, près de la ville.",
         "Grâce à moi, une commune rurale accueille des habitants qui continuent de travailler en ville."
       ],
       "explication": "La périurbanisation est l'installation de citadins dans des communes rurales proches de la ville."
-    },
-    {
-      "reponse": "Mobilités pendulaires",
-      "acceptees": ["Les mobilités pendulaires", "Mobilité pendulaire", "Migrations pendulaires", "Les migrations pendulaires", "Déplacements pendulaires", "Navette", "Navettes"],
-      "indices": [
-        "Je suis un déplacement.",
-        "Je me répète chaque jour, aux mêmes heures.",
-        "Je relie le domicile et le lieu de travail : un aller le matin, un retour le soir."
-      ],
-      "explication": "Les mobilités pendulaires sont les allers-retours quotidiens entre le domicile et le lieu de travail."
     }
   ],
   "calculs": [],

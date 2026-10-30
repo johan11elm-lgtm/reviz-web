@@ -30,7 +30,6 @@
         "Une agglomération de plus de 10 millions d'habitants",
         "Plus de 30 agglomérations géantes, surtout en Asie",
         "Tokyo, Delhi, Mumbai et Lagos",
-        "Une ville définie par le nombre de ses habitants",
         "Shanghai, Mexico, São Paulo et Le Caire"
       ]
     },
@@ -82,35 +81,60 @@
     {
       "consigne": "Quelle notion le passage en couleur désigne-t-il ?",
       "texte": "Dans le monde, [la part des habitants qui vivent en ville augmente] d'année en année.",
-      "choix": ["Urbanisation", "Exode rural", "Mégapole", "Métropole"],
+      "choix": [
+        "Urbanisation",
+        "Exode rural",
+        "Mégapole",
+        "Métropole"
+      ],
       "bonne": 0,
       "explication": "L'urbanisation est l'augmentation de la part de la population qui vit en ville."
     },
     {
       "consigne": "Quelle notion le passage en couleur désigne-t-il ?",
       "texte": "Dans ce pays, [de nombreux habitants quittent la campagne pour trouver du travail en ville].",
-      "choix": ["Urbanisation", "Exode rural", "Mégapole", "Métropole"],
+      "choix": [
+        "Urbanisation",
+        "Exode rural",
+        "Mégapole",
+        "Métropole"
+      ],
       "bonne": 1,
       "explication": "Le départ des habitants des campagnes vers les villes s'appelle l'exode rural."
     },
     {
       "consigne": "Quelle notion le passage en couleur désigne-t-il ?",
       "texte": "Cette agglomération compte [plus de 10 millions d'habitants].",
-      "choix": ["Urbanisation", "Exode rural", "Mégapole", "Métropole"],
+      "choix": [
+        "Urbanisation",
+        "Exode rural",
+        "Mégapole",
+        "Métropole"
+      ],
       "bonne": 2,
       "explication": "Une mégapole est une agglomération de plus de 10 millions d'habitants."
     },
     {
       "consigne": "Quelle notion le passage en couleur désigne-t-il ?",
       "texte": "[Londres, avec ses sièges sociaux, sa bourse et ses institutions, influence le monde entier].",
-      "choix": ["Urbanisation", "Exode rural", "Mégapole", "Métropole"],
+      "choix": [
+        "Urbanisation",
+        "Exode rural",
+        "Mégapole",
+        "Métropole"
+      ],
       "bonne": 3,
       "explication": "Une métropole se mesure à son influence : elle concentre pouvoirs et activités de commandement."
     },
     {
       "consigne": "Quelle notion le passage en couleur désigne-t-il ?",
       "texte": "Avec [25 millions d'habitants dans son agglomération], cette ville fait partie des plus peuplées du monde.",
-      "choix": ["Urbanisation", "Exode rural", "Mégapole", "Métropole"],
+      "choix": [
+        "Urbanisation",
+        "Exode rural",
+        "Mégapole",
+        "Métropole"
+      ],
       "bonne": 2,
       "explication": "Au-delà de 10 millions d'habitants, une agglomération est une mégapole."
     }
@@ -118,7 +142,11 @@
   "devinettes": [
     {
       "reponse": "L'exode rural",
-      "acceptees": ["Exode rural", "L'exode rural", "Exode"],
+      "acceptees": [
+        "Exode rural",
+        "L'exode rural",
+        "Exode"
+      ],
       "indices": [
         "Je suis un mouvement d'habitants.",
         "Je fais quitter leur village à ceux qui cherchent du travail, des écoles et des soins.",
@@ -128,7 +156,13 @@
     },
     {
       "reponse": "Une mégapole",
-      "acceptees": ["Mégapole", "Une mégapole", "Megapole", "Les mégapoles", "Mégapoles"],
+      "acceptees": [
+        "Mégapole",
+        "Une mégapole",
+        "Megapole",
+        "Les mégapoles",
+        "Mégapoles"
+      ],
       "indices": [
         "Je suis une agglomération.",
         "Tokyo, Delhi et Lagos en font partie.",
@@ -138,7 +172,13 @@
     },
     {
       "reponse": "Une métropole",
-      "acceptees": ["Métropole", "Une métropole", "Metropole", "Les métropoles", "Métropoles"],
+      "acceptees": [
+        "Métropole",
+        "Une métropole",
+        "Metropole",
+        "Les métropoles",
+        "Métropoles"
+      ],
       "indices": [
         "Je suis une grande ville.",
         "Je concentre la population, les pouvoirs et les activités de commandement.",

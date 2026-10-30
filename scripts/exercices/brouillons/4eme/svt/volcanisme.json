@@ -8,8 +8,7 @@
         "Le réservoir profond où le magma est stocké",
         "Le conduit par lequel le magma monte jusqu'au sommet",
         "L'ouverture au sommet par où sort le magma",
-        "Le cône, formé par l'accumulation des produits émis",
-        "Le magma est moins dense que les roches voisines"
+        "Le cône, formé par l'accumulation des produits émis"
       ]
     },
     {
@@ -41,8 +40,7 @@
         "Le long des dorsales océaniques",
         "Dans les zones de subduction",
         "Au-dessus d'une remontée de matériel chaud du manteau",
-        "En plein milieu d'une plaque, loin de ses limites",
-        "La chaîne des Puys, des volcans endormis de France"
+        "En plein milieu d'une plaque, loin de ses limites"
       ]
     }
   ],
@@ -88,7 +86,11 @@
   "devinettes": [
     {
       "reponse": "Nuée ardente",
-      "acceptees": ["Nuée ardente", "Nuées ardentes", "Une nuée ardente"],
+      "acceptees": [
+        "Nuée ardente",
+        "Nuées ardentes",
+        "Une nuée ardente"
+      ],
       "indices": [
         "Je suis un danger pour les habitants des volcans.",
         "Je dévale les pentes à grande vitesse.",
@@ -98,7 +100,10 @@
     },
     {
       "reponse": "Basalte",
-      "acceptees": ["Basalte", "Le basalte"],
+      "acceptees": [
+        "Basalte",
+        "Le basalte"
+      ],
       "indices": [
         "Je suis une roche sombre.",
         "Je me suis formé quand de la lave a refroidi rapidement en surface.",
@@ -108,7 +113,11 @@
     },
     {
       "reponse": "Point chaud",
-      "acceptees": ["Point chaud", "Points chauds", "Un point chaud"],
+      "acceptees": [
+        "Point chaud",
+        "Points chauds",
+        "Un point chaud"
+      ],
       "indices": [
         "Je suis à l'origine de certains volcans.",
         "Je suis une remontée de matière venue du manteau, loin des limites de plaques.",
@@ -118,7 +127,10 @@
     },
     {
       "reponse": "Chambre magmatique",
-      "acceptees": ["Chambre magmatique", "La chambre magmatique"],
+      "acceptees": [
+        "Chambre magmatique",
+        "La chambre magmatique"
+      ],
       "indices": [
         "Je me trouve en profondeur, sous le volcan.",
         "Une roche fondue chargée de gaz s'accumule en moi.",

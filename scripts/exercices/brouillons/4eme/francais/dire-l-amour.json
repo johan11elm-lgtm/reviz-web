@@ -17,8 +17,6 @@
       "detail": "« Je vis, je meurs » (1555) : la passion fait vivre des sentiments contraires, que disent les antithèses.",
       "cartes": [
         "Une poétesse qui décrit sa propre passion",
-        "Un vers qui oppose vivre et mourir",
-        "Le feu et l'eau dans un même vers",
         "« J'ai chaud extrême en endurant froidure »",
         "Une amoureuse ballottée entre des états opposés"
       ]
@@ -30,8 +28,7 @@
         "Un poème du recueil Les Contemplations",
         "Un père qui part à pied dès l'aube",
         "Une jeune fille noyée en 1843",
-        "« Vois-tu, je sais que tu m'attends »",
-        "Un faux rendez-vous d'amour qui mène à une tombe"
+        "« Vois-tu, je sais que tu m'attends »"
       ]
     },
     {
@@ -39,9 +36,7 @@
       "detail": "« Le Pont Mirabeau » (1913) : l'amour passe comme l'eau de la Seine, alors que le poète demeure.",
       "cartes": [
         "Un poème du recueil Alcools",
-        "Un amour qui s'écoule comme l'eau",
         "« Les jours s'en vont je demeure »",
-        "Un refrain répété après chaque strophe",
         "Un pont sous lequel coule la Seine"
       ]
     }
@@ -51,35 +46,60 @@
     {
       "consigne": "Quelle marque du lyrisme est en couleur ?",
       "texte": "[Je] marche vers toi, le cœur lourd.",
-      "choix": ["Première personne", "Apostrophe", "Exclamation", "Champ lexical des sentiments"],
+      "choix": [
+        "Première personne",
+        "Apostrophe",
+        "Exclamation",
+        "Champ lexical des sentiments"
+      ],
       "bonne": 0,
       "explication": "« Je » montre que le poète parle de lui : c'est la première personne, première marque du lyrisme."
     },
     {
       "consigne": "Quelle marque du lyrisme est en couleur ?",
       "texte": "[Ô toi que j'aime], entends ma voix !",
-      "choix": ["Première personne", "Apostrophe", "Exclamation", "Champ lexical des sentiments"],
+      "choix": [
+        "Première personne",
+        "Apostrophe",
+        "Exclamation",
+        "Champ lexical des sentiments"
+      ],
       "bonne": 1,
       "explication": "« Ô toi » interpelle directement l'être aimé : c'est une apostrophe."
     },
     {
       "consigne": "Quelle marque du lyrisme est en couleur ?",
       "texte": "Le poète s'écrie : [Quelle nuit merveilleuse !]",
-      "choix": ["Première personne", "Apostrophe", "Exclamation", "Champ lexical des sentiments"],
+      "choix": [
+        "Première personne",
+        "Apostrophe",
+        "Exclamation",
+        "Champ lexical des sentiments"
+      ],
       "bonne": 2,
       "explication": "Cette phrase exprime une émotion forte et se termine par un point d'exclamation : c'est une exclamation."
     },
     {
       "consigne": "Quelle marque du lyrisme est en couleur ?",
       "texte": "Dans ce poème, on lit les mots [aimer, cœur, passion, désir].",
-      "choix": ["Première personne", "Apostrophe", "Exclamation", "Champ lexical des sentiments"],
+      "choix": [
+        "Première personne",
+        "Apostrophe",
+        "Exclamation",
+        "Champ lexical des sentiments"
+      ],
       "bonne": 3,
       "explication": "Ces mots renvoient tous à l'amour : ils forment le champ lexical des sentiments."
     },
     {
       "consigne": "Quelle marque du lyrisme est en couleur ?",
       "texte": "Reviens, [ma douce], reviens !",
-      "choix": ["Première personne", "Apostrophe", "Exclamation", "Champ lexical des sentiments"],
+      "choix": [
+        "Première personne",
+        "Apostrophe",
+        "Exclamation",
+        "Champ lexical des sentiments"
+      ],
       "bonne": 1,
       "explication": "« ma douce » est le nom par lequel le poète interpelle l'être aimé : c'est une apostrophe."
     }
@@ -87,7 +107,10 @@
   "devinettes": [
     {
       "reponse": "Sonnet",
-      "acceptees": ["Le sonnet", "Un sonnet"],
+      "acceptees": [
+        "Le sonnet",
+        "Un sonnet"
+      ],
       "indices": [
         "Je suis une forme de poème.",
         "Je suis une forme fixe, faite de strophes de longueurs différentes.",
@@ -97,7 +120,10 @@
     },
     {
       "reponse": "Alexandrin",
-      "acceptees": ["L'alexandrin", "Un alexandrin"],
+      "acceptees": [
+        "L'alexandrin",
+        "Un alexandrin"
+      ],
       "indices": [
         "Je suis un type de vers.",
         "Je suis plus long que le décasyllabe.",
@@ -117,7 +143,10 @@
     },
     {
       "reponse": "Léopoldine",
-      "acceptees": ["Léopoldine Hugo", "Leopoldine"],
+      "acceptees": [
+        "Léopoldine Hugo",
+        "Leopoldine"
+      ],
       "indices": [
         "Je suis une jeune femme du XIXe siècle.",
         "Je suis morte noyée en 1843.",

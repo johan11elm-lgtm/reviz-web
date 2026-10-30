@@ -41,7 +41,6 @@
         "Napoléon III devient empereur en 1852",
         "Les candidats du gouvernement sont soutenus par les préfets",
         "Les Français approuvent l'empereur par des plébiscites",
-        "La presse est surveillée par le pouvoir",
         "L'empereur est fait prisonnier à Sedan en 1870"
       ]
     }
@@ -88,28 +87,44 @@
     {
       "consigne": "De quel type de suffrage parle le passage en couleur ?",
       "texte": "Vers 1820, [seuls les hommes assez riches pour payer un impôt minimum peuvent voter].",
-      "choix": ["Suffrage censitaire", "Suffrage universel masculin", "Suffrage universel (hommes et femmes)"],
+      "choix": [
+        "Suffrage censitaire",
+        "Suffrage universel masculin",
+        "Suffrage universel (hommes et femmes)"
+      ],
       "bonne": 0,
       "explication": "Quand seuls votent les hommes qui paient le cens, un impôt minimum, c'est le suffrage censitaire."
     },
     {
       "consigne": "De quel type de suffrage parle le passage en couleur ?",
       "texte": "En 1848, [tous les hommes de 21 ans et plus ont le droit de voter].",
-      "choix": ["Suffrage censitaire", "Suffrage universel masculin", "Suffrage universel (hommes et femmes)"],
+      "choix": [
+        "Suffrage censitaire",
+        "Suffrage universel masculin",
+        "Suffrage universel (hommes et femmes)"
+      ],
       "bonne": 1,
       "explication": "Tous les hommes adultes votent, mais pas les femmes : c'est le suffrage universel masculin."
     },
     {
       "consigne": "De quel type de suffrage parle le passage en couleur ?",
       "texte": "Vers 1846, [seuls 240 000 hommes, les plus riches, ont le droit de voter].",
-      "choix": ["Suffrage censitaire", "Suffrage universel masculin", "Suffrage universel (hommes et femmes)"],
+      "choix": [
+        "Suffrage censitaire",
+        "Suffrage universel masculin",
+        "Suffrage universel (hommes et femmes)"
+      ],
       "bonne": 0,
       "explication": "Le droit de vote dépend de la richesse : c'est le suffrage censitaire de la monarchie de Juillet."
     },
     {
       "consigne": "De quel type de suffrage parle le passage en couleur ?",
       "texte": "Sous Napoléon III, [tous les hommes de 21 ans et plus votent, mais le gouvernement soutient ses candidats].",
-      "choix": ["Suffrage censitaire", "Suffrage universel masculin", "Suffrage universel (hommes et femmes)"],
+      "choix": [
+        "Suffrage censitaire",
+        "Suffrage universel masculin",
+        "Suffrage universel (hommes et femmes)"
+      ],
       "bonne": 1,
       "explication": "Le Second Empire garde le suffrage universel masculin, mais il le contrôle."
     }
@@ -117,7 +132,10 @@
   "devinettes": [
     {
       "reponse": "Louis-Philippe",
-      "acceptees": ["Louis Philippe", "Louis-Philippe Ier"],
+      "acceptees": [
+        "Louis Philippe",
+        "Louis-Philippe Ier"
+      ],
       "indices": [
         "Je suis un roi du XIXe siècle.",
         "Je deviens roi en 1830, après trois journées de révolution à Paris.",
@@ -127,7 +145,13 @@
     },
     {
       "reponse": "Napoléon III",
-      "acceptees": ["Napoléon 3", "Napoleon 3", "Louis-Napoléon Bonaparte", "Louis Napoléon Bonaparte", "Louis-Napoléon"],
+      "acceptees": [
+        "Napoléon 3",
+        "Napoleon 3",
+        "Louis-Napoléon Bonaparte",
+        "Louis Napoléon Bonaparte",
+        "Louis-Napoléon"
+      ],
       "indices": [
         "Je suis le neveu d'un célèbre empereur.",
         "Je suis élu président de la République en décembre 1848.",
@@ -137,7 +161,9 @@
     },
     {
       "reponse": "Charles X",
-      "acceptees": ["Charles 10"],
+      "acceptees": [
+        "Charles 10"
+      ],
       "indices": [
         "Je suis un roi de la famille des Bourbons.",
         "Je veux limiter la liberté de la presse et le droit de vote en 1830.",
@@ -147,13 +173,6 @@
     }
   ],
   "calculs": [
-    {
-      "question": "Vers 1846, environ 240 000 hommes ont le droit de voter. En 1848, environ 9 millions d'hommes peuvent voter. Combien de fois plus d'électeurs y a-t-il en 1848 ?",
-      "reponse": 37.5,
-      "unite": "fois",
-      "tolerance": 0,
-      "explication": "9 000 000 ÷ 240 000 = 37,5 : le corps électoral est multiplié par près de 40."
-    },
     {
       "question": "Vers 1846, environ 240 000 hommes votent. En 1848, environ 9 millions d'hommes votent. De combien de millions le nombre d'électeurs augmente-t-il ?",
       "reponse": 8.76,

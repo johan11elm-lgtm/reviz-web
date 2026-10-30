@@ -29,8 +29,6 @@
       "cartes": [
         "Un thermostat réglable depuis une application",
         "Une caméra de surveillance consultable sur Internet",
-        "Une montre qui envoie ses pas à un smartphone",
-        "Une serrure qui s'ouvre avec une application",
         "Une enceinte qui diffuse la musique d'Internet par Wi-Fi"
       ]
     },
@@ -76,42 +74,66 @@
     {
       "consigne": "Quel est le rôle de l'élément en couleur ?",
       "texte": "Dans un arrosage automatique, [la sonde d'humidité] indique à la carte que la terre est sèche.",
-      "choix": ["Capteur", "Actionneur", "Carte programmable"],
+      "choix": [
+        "Capteur",
+        "Actionneur",
+        "Carte programmable"
+      ],
       "bonne": 0,
       "explication": "La sonde mesure l'humidité et envoie l'information à une entrée de la carte : c'est un capteur."
     },
     {
       "consigne": "Quel est le rôle de l'élément en couleur ?",
       "texte": "Pour ouvrir le portail, la carte commande [le servomoteur] qui pousse le battant.",
-      "choix": ["Capteur", "Actionneur", "Carte programmable"],
+      "choix": [
+        "Capteur",
+        "Actionneur",
+        "Carte programmable"
+      ],
       "bonne": 1,
       "explication": "Le servomoteur reçoit un ordre d'une sortie de la carte et produit un mouvement : c'est un actionneur."
     },
     {
       "consigne": "Quel est le rôle de l'élément en couleur ?",
       "texte": "Dans une alarme, [la carte Arduino] lit le détecteur de mouvement puis décide de faire sonner le buzzer.",
-      "choix": ["Capteur", "Actionneur", "Carte programmable"],
+      "choix": [
+        "Capteur",
+        "Actionneur",
+        "Carte programmable"
+      ],
       "bonne": 2,
       "explication": "La carte Arduino, pilotée par son microcontrôleur, lit les entrées, décide et commande les sorties."
     },
     {
       "consigne": "Quel est le rôle de l'élément en couleur ?",
       "texte": "Quand la terre est sèche, la carte met en marche [la pompe] qui arrose les plantes.",
-      "choix": ["Capteur", "Actionneur", "Carte programmable"],
+      "choix": [
+        "Capteur",
+        "Actionneur",
+        "Carte programmable"
+      ],
       "bonne": 1,
       "explication": "La pompe agit sur ordre de la carte : c'est un actionneur relié à une sortie."
     },
     {
       "consigne": "Quel est le rôle de l'élément en couleur ?",
       "texte": "Dans un lampadaire, [la photorésistance] mesure la lumière du jour et prévient la carte.",
-      "choix": ["Capteur", "Actionneur", "Carte programmable"],
+      "choix": [
+        "Capteur",
+        "Actionneur",
+        "Carte programmable"
+      ],
       "bonne": 0,
       "explication": "La photorésistance envoie à la carte une valeur qui varie avec la lumière : c'est un capteur."
     },
     {
       "consigne": "Quel est le rôle de l'élément en couleur ?",
       "texte": "Sur la maquette d'un feu tricolore, [la carte micro:bit] fait changer les LED toutes les dix secondes.",
-      "choix": ["Capteur", "Actionneur", "Carte programmable"],
+      "choix": [
+        "Capteur",
+        "Actionneur",
+        "Carte programmable"
+      ],
       "bonne": 2,
       "explication": "La carte micro:bit exécute le programme et commande les LED : c'est la carte programmable."
     }
@@ -119,7 +141,12 @@
   "devinettes": [
     {
       "reponse": "Microcontrôleur",
-      "acceptees": ["Le microcontrôleur", "Un microcontrôleur", "Micro-contrôleur", "Microcontroleur"],
+      "acceptees": [
+        "Le microcontrôleur",
+        "Un microcontrôleur",
+        "Micro-contrôleur",
+        "Microcontroleur"
+      ],
       "indices": [
         "Je suis un circuit électronique caché dans de nombreux objets.",
         "Je contiens un processeur, de la mémoire et des entrées-sorties.",
@@ -129,7 +156,11 @@
     },
     {
       "reponse": "RGPD",
-      "acceptees": ["Le RGPD", "GDPR", "Règlement général sur la protection des données"],
+      "acceptees": [
+        "Le RGPD",
+        "GDPR",
+        "Règlement général sur la protection des données"
+      ],
       "indices": [
         "Je suis un texte qui s'applique dans toute l'Europe.",
         "On m'applique depuis 2018.",
@@ -139,7 +170,9 @@
     },
     {
       "reponse": "Bluetooth",
-      "acceptees": ["Le Bluetooth"],
+      "acceptees": [
+        "Le Bluetooth"
+      ],
       "indices": [
         "Je suis une technique de communication sans fil.",
         "Ma portée est de quelques mètres seulement.",

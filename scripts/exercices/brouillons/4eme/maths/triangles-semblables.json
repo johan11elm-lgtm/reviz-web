@@ -51,60 +51,78 @@
     {
       "consigne": "Quel mot décrit le passage en couleur ?",
       "texte": "On passe du triangle ABC au triangle A'B'C' : [toutes les longueurs sont multipliées par 3].",
-      "choix": ["Un agrandissement", "Une réduction", "Deux triangles égaux"],
+      "choix": [
+        "Un agrandissement",
+        "Une réduction",
+        "Deux triangles égaux"
+      ],
       "bonne": 0,
       "explication": "Le rapport k = 3 est supérieur à 1 : les longueurs augmentent, c'est un agrandissement."
     },
     {
       "consigne": "Quel mot décrit le passage en couleur ?",
       "texte": "On passe du triangle ABC au triangle A'B'C' : [toutes les longueurs sont multipliées par 0,4].",
-      "choix": ["Un agrandissement", "Une réduction", "Deux triangles égaux"],
+      "choix": [
+        "Un agrandissement",
+        "Une réduction",
+        "Deux triangles égaux"
+      ],
       "bonne": 1,
       "explication": "Le rapport k = 0,4 est compris entre 0 et 1 : les longueurs diminuent, c'est une réduction."
     },
     {
       "consigne": "Quel mot décrit le passage en couleur ?",
       "texte": "On passe du triangle ABC au triangle A'B'C' : [toutes les longueurs sont multipliées par 1].",
-      "choix": ["Un agrandissement", "Une réduction", "Deux triangles égaux"],
+      "choix": [
+        "Un agrandissement",
+        "Une réduction",
+        "Deux triangles égaux"
+      ],
       "bonne": 2,
       "explication": "Le rapport k = 1 ne change aucune longueur : les triangles sont égaux, c'est-à-dire superposables."
     },
     {
       "consigne": "Quel mot décrit le passage en couleur ?",
       "texte": "On passe du triangle ABC, de côtés 6 cm, 9 cm et 12 cm, au triangle A'B'C' : [ses côtés mesurent maintenant 2 cm, 3 cm et 4 cm].",
-      "choix": ["Un agrandissement", "Une réduction", "Deux triangles égaux"],
+      "choix": [
+        "Un agrandissement",
+        "Une réduction",
+        "Deux triangles égaux"
+      ],
       "bonne": 1,
       "explication": "Chaque longueur est divisée par 3 : le rapport k = 1/3 est compris entre 0 et 1, c'est une réduction."
     },
     {
       "consigne": "Quel mot décrit le passage en couleur ?",
       "texte": "On passe du triangle ABC au triangle A'B'C' avec [un rapport k = 1,5].",
-      "choix": ["Un agrandissement", "Une réduction", "Deux triangles égaux"],
+      "choix": [
+        "Un agrandissement",
+        "Une réduction",
+        "Deux triangles égaux"
+      ],
       "bonne": 0,
       "explication": "Le rapport k = 1,5 est supérieur à 1 : les longueurs augmentent, c'est un agrandissement."
     },
     {
       "consigne": "Quel mot décrit le passage en couleur ?",
       "texte": "On passe du triangle ABC, de côtés 3 cm, 4 cm et 5 cm, au triangle A'B'C' : [ses côtés mesurent maintenant 4,5 cm, 6 cm et 7,5 cm].",
-      "choix": ["Un agrandissement", "Une réduction", "Deux triangles égaux"],
+      "choix": [
+        "Un agrandissement",
+        "Une réduction",
+        "Deux triangles égaux"
+      ],
       "bonne": 0,
       "explication": "4,5 ÷ 3 = 6 ÷ 4 = 7,5 ÷ 5 = 1,5 : le rapport est supérieur à 1, c'est un agrandissement."
     }
   ],
   "devinettes": [
     {
-      "reponse": "Rapport",
-      "acceptees": ["Rapport", "Le rapport", "Rapport k", "Le rapport k", "k", "Coefficient", "Le coefficient"],
-      "indices": [
-        "Je suis un nombre.",
-        "Je multiplie les longueurs d'un triangle pour obtenir celles de l'autre.",
-        "On me note k."
-      ],
-      "explication": "Le rapport k est le nombre par lequel on multiplie les longueurs d'un triangle semblable pour obtenir celles de l'autre."
-    },
-    {
       "reponse": "Agrandissement",
-      "acceptees": ["Agrandissement", "Un agrandissement", "L'agrandissement"],
+      "acceptees": [
+        "Agrandissement",
+        "Un agrandissement",
+        "L'agrandissement"
+      ],
       "indices": [
         "Je change la taille d'une figure sans changer sa forme.",
         "Mon rapport k est supérieur à 1.",
@@ -114,7 +132,11 @@
     },
     {
       "reponse": "Réduction",
-      "acceptees": ["Réduction", "Une réduction", "La réduction"],
+      "acceptees": [
+        "Réduction",
+        "Une réduction",
+        "La réduction"
+      ],
       "indices": [
         "Je change la taille d'une figure sans changer sa forme.",
         "Mon rapport k est compris entre 0 et 1.",
@@ -124,7 +146,13 @@
     },
     {
       "reponse": "Homologues",
-      "acceptees": ["Homologues", "Les homologues", "Côtés homologues", "Les côtés homologues", "Sommets homologues"],
+      "acceptees": [
+        "Homologues",
+        "Les homologues",
+        "Côtés homologues",
+        "Les côtés homologues",
+        "Sommets homologues"
+      ],
       "indices": [
         "Nous sommes des côtés ou des sommets qui se correspondent.",
         "Nous apparaissons dans deux triangles semblables, en face d'angles égaux.",
@@ -171,15 +199,6 @@
     }
   ],
   "etapes": [
-    {
-      "titre": "Calculer une longueur avec des triangles semblables",
-      "etapes": [
-        "Montrer que deux angles sont égaux, donc que les triangles sont semblables",
-        "Repérer les sommets et les côtés homologues",
-        "Calculer le rapport k avec deux côtés homologues connus",
-        "Multiplier ou diviser par k pour trouver la longueur cherchée"
-      ]
-    },
     {
       "titre": "Reconnaître des triangles semblables avec les longueurs",
       "etapes": [

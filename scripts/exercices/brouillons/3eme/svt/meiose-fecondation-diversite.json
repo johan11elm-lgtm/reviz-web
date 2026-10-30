@@ -30,7 +30,6 @@
         "Les cellules reproductrices de l'être humain",
         "Produits dans les testicules et dans les ovaires",
         "Cellules qui ne possèdent que 23 chromosomes",
-        "L'ovule porte toujours un chromosome X",
         "Le spermatozoïde porte soit un X, soit un Y"
       ]
     },
@@ -76,7 +75,11 @@
   "devinettes": [
     {
       "reponse": "Méiose",
-      "acceptees": ["Méiose", "La méiose", "Meiose"],
+      "acceptees": [
+        "Méiose",
+        "La méiose",
+        "Meiose"
+      ],
       "indices": [
         "Je suis une division de cellule.",
         "Je me déroule dans les testicules et dans les ovaires.",
@@ -86,7 +89,11 @@
     },
     {
       "reponse": "Fécondation",
-      "acceptees": ["Fécondation", "La fécondation", "Fecondation"],
+      "acceptees": [
+        "Fécondation",
+        "La fécondation",
+        "Fecondation"
+      ],
       "indices": [
         "Je suis une rencontre entre deux cellules.",
         "Un spermatozoïde et un ovule fusionnent en moi.",
@@ -96,23 +103,18 @@
     },
     {
       "reponse": "Spermatozoïde",
-      "acceptees": ["Spermatozoïde", "Un spermatozoïde", "Le spermatozoïde", "Spermatozoïdes"],
+      "acceptees": [
+        "Spermatozoïde",
+        "Un spermatozoïde",
+        "Le spermatozoïde",
+        "Spermatozoïdes"
+      ],
       "indices": [
         "Je suis une cellule reproductrice.",
         "Je suis produit dans les testicules.",
         "Je porte un chromosome X ou Y et je décide du sexe de l'enfant."
       ],
       "explication": "Le spermatozoïde porte un X ou un Y : c'est lui qui détermine le sexe de l'enfant."
-    },
-    {
-      "reponse": "Cellule-œuf",
-      "acceptees": ["Cellule-œuf", "Cellule œuf", "Cellule-oeuf", "Cellule oeuf", "La cellule-œuf", "Une cellule-œuf", "Œuf", "Oeuf", "Zygote"],
-      "indices": [
-        "J'ai 46 chromosomes, répartis en 23 paires.",
-        "Je viens de la fusion de deux gamètes.",
-        "Je suis XX pour une fille, XY pour un garçon."
-      ],
-      "explication": "La cellule-œuf, formée à la fécondation, a 46 chromosomes : 23 du père et 23 de la mère."
     }
   ],
   "calculs": [

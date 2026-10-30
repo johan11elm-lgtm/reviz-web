@@ -18,7 +18,6 @@
       "cartes": [
         "Les pays de l'Est entrés dans l'UE en 2004-2007",
         "Le Portugal, le sud de l'Italie et la Grèce",
-        "La Guyane, la Réunion et d'autres régions très lointaines",
         "Un espace dominé, plus pauvre ou mal relié au centre",
         "Une région éloignée du centre, même riche"
       ]
@@ -55,12 +54,6 @@
     },
     {
       "fait": "les aides européennes versées aux pays de l'Est",
-      "carte": "L'entrée de ces pays dans l'UE en 2004-2007",
-      "role": "cause",
-      "explication": "C'est depuis leur adhésion que les régions d'Europe de l'Est reçoivent d'importants financements."
-    },
-    {
-      "fait": "les aides européennes versées aux pays de l'Est",
       "carte": "Le rattrapage économique de pays comme la Pologne",
       "role": "consequence",
       "explication": "Ces financements ont aidé le rattrapage de pays comme la Pologne."
@@ -88,35 +81,60 @@
     {
       "consigne": "Dans quel espace de l'UE se trouve le lieu en couleur ?",
       "texte": "Une entreprise installe son siège à [Amsterdam], aux Pays-Bas.",
-      "choix": ["Sur la dorsale", "Périphérie de l'Est", "Périphérie du Sud", "Région ultrapériphérique"],
+      "choix": [
+        "Sur la dorsale",
+        "Périphérie de l'Est",
+        "Périphérie du Sud",
+        "Région ultrapériphérique"
+      ],
       "bonne": 0,
       "explication": "Amsterdam est l'une des grandes villes de la dorsale européenne, avec Bruxelles et la vallée du Rhin."
     },
     {
       "consigne": "Dans quel espace de l'UE se trouve le lieu en couleur ?",
       "texte": "Depuis 2004, des fonds européens financent des routes en [Pologne].",
-      "choix": ["Sur la dorsale", "Périphérie de l'Est", "Périphérie du Sud", "Région ultrapériphérique"],
+      "choix": [
+        "Sur la dorsale",
+        "Périphérie de l'Est",
+        "Périphérie du Sud",
+        "Région ultrapériphérique"
+      ],
       "bonne": 1,
       "explication": "La Pologne fait partie des pays de l'Est entrés dans l'UE en 2004-2007 : c'est une périphérie."
     },
     {
       "consigne": "Dans quel espace de l'UE se trouve le lieu en couleur ?",
       "texte": "De nombreux touristes passent leurs vacances en [Grèce].",
-      "choix": ["Sur la dorsale", "Périphérie de l'Est", "Périphérie du Sud", "Région ultrapériphérique"],
+      "choix": [
+        "Sur la dorsale",
+        "Périphérie de l'Est",
+        "Périphérie du Sud",
+        "Région ultrapériphérique"
+      ],
       "bonne": 2,
       "explication": "La Grèce, comme le Portugal et le sud de l'Italie, est une périphérie du Sud de l'UE."
     },
     {
       "consigne": "Dans quel espace de l'UE se trouve le lieu en couleur ?",
       "texte": "Le centre spatial de Kourou se trouve en [Guyane].",
-      "choix": ["Sur la dorsale", "Périphérie de l'Est", "Périphérie du Sud", "Région ultrapériphérique"],
+      "choix": [
+        "Sur la dorsale",
+        "Périphérie de l'Est",
+        "Périphérie du Sud",
+        "Région ultrapériphérique"
+      ],
       "bonne": 3,
       "explication": "La Guyane est une région ultrapériphérique (RUP) : elle fait partie de l'UE mais se trouve loin du continent."
     },
     {
       "consigne": "Dans quel espace de l'UE se trouve le lieu en couleur ?",
       "texte": "Un journaliste travaille à [Bruxelles], capitale de la Belgique.",
-      "choix": ["Sur la dorsale", "Périphérie de l'Est", "Périphérie du Sud", "Région ultrapériphérique"],
+      "choix": [
+        "Sur la dorsale",
+        "Périphérie de l'Est",
+        "Périphérie du Sud",
+        "Région ultrapériphérique"
+      ],
       "bonne": 0,
       "explication": "Bruxelles est sur la dorsale européenne, l'axe le plus riche et le plus peuplé d'Europe."
     }
@@ -124,7 +142,14 @@
   "devinettes": [
     {
       "reponse": "La dorsale européenne",
-      "acceptees": ["Dorsale", "La dorsale", "Dorsale européenne", "La dorsale européenne", "La banane bleue", "Banane bleue"],
+      "acceptees": [
+        "Dorsale",
+        "La dorsale",
+        "Dorsale européenne",
+        "La dorsale européenne",
+        "La banane bleue",
+        "Banane bleue"
+      ],
       "indices": [
         "Je suis un axe urbain d'Europe.",
         "Je commence au sud-est de l'Angleterre et je finis au nord de l'Italie.",
@@ -134,7 +159,11 @@
     },
     {
       "reponse": "Interreg",
-      "acceptees": ["Interreg", "Le programme Interreg", "Programme Interreg"],
+      "acceptees": [
+        "Interreg",
+        "Le programme Interreg",
+        "Programme Interreg"
+      ],
       "indices": [
         "Je suis un programme européen.",
         "Je soutiens des projets communs entre régions situées de part et d'autre d'une frontière.",
@@ -144,7 +173,15 @@
     },
     {
       "reponse": "Un travailleur frontalier",
-      "acceptees": ["Travailleur frontalier", "Un travailleur frontalier", "Frontalier", "Un frontalier", "Travailleurs frontaliers", "Les travailleurs frontaliers", "Les frontaliers"],
+      "acceptees": [
+        "Travailleur frontalier",
+        "Un travailleur frontalier",
+        "Frontalier",
+        "Un frontalier",
+        "Travailleurs frontaliers",
+        "Les travailleurs frontaliers",
+        "Les frontaliers"
+      ],
       "indices": [
         "Je suis une personne qui se déplace chaque jour.",
         "J'habite dans un pays, mais mon emploi est dans le pays voisin.",
@@ -154,16 +191,5 @@
     }
   ],
   "calculs": [],
-  "etapes": [
-    {
-      "titre": "Réaliser un croquis des contrastes de l'UE",
-      "etapes": [
-        "Dessine la dorsale européenne en foncé",
-        "Colore d'une deuxième couleur les périphéries riches et bien reliées",
-        "Colore d'une troisième couleur les périphéries à l'Est et au Sud",
-        "Ajoute les grandes métropoles par des points",
-        "Range la légende en parties et donne un titre"
-      ]
-    }
-  ]
+  "etapes": []
 }

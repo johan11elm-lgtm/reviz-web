@@ -60,12 +60,6 @@
       "explication": "Moins mangés, les papillons sombres survivent plus souvent."
     },
     {
-      "fait": "la forme sombre majoritaire chez les phalènes",
-      "carte": "Des papillons sombres qui laissent plus de descendants",
-      "role": "cause",
-      "explication": "Ils transmettent leurs allèles à plus de descendants : la forme sombre devient de plus en plus fréquente."
-    },
-    {
       "fait": "la crise biologique d'il y a 66 millions d'années",
       "carte": "La disparition des dinosaures non aviens",
       "role": "consequence",
@@ -82,42 +76,66 @@
     {
       "consigne": "Quel phénomène le groupe en couleur décrit-il ?",
       "texte": "Dans une population de quelques individus, [un allèle disparaît parce que ses rares porteurs meurent par accident].",
-      "choix": ["Mutation", "Sélection naturelle", "Dérive génétique"],
+      "choix": [
+        "Mutation",
+        "Sélection naturelle",
+        "Dérive génétique"
+      ],
       "bonne": 2,
       "explication": "L'allèle disparaît par hasard, sans désavantage : c'est la dérive génétique."
     },
     {
       "consigne": "Quel phénomène le groupe en couleur décrit-il ?",
       "texte": "[Une modification de l'ADN d'une bactérie] la rend résistante à un antibiotique.",
-      "choix": ["Mutation", "Sélection naturelle", "Dérive génétique"],
+      "choix": [
+        "Mutation",
+        "Sélection naturelle",
+        "Dérive génétique"
+      ],
       "bonne": 0,
       "explication": "Une modification rare et aléatoire de l'ADN qui crée un nouvel allèle est une mutation."
     },
     {
       "consigne": "Quel phénomène le groupe en couleur décrit-il ?",
       "texte": "Sur les troncs noircis par la pollution, [les papillons sombres sont moins mangés] par les oiseaux et se reproduisent davantage.",
-      "choix": ["Mutation", "Sélection naturelle", "Dérive génétique"],
+      "choix": [
+        "Mutation",
+        "Sélection naturelle",
+        "Dérive génétique"
+      ],
       "bonne": 1,
       "explication": "Le milieu avantage les papillons sombres, qui survivent et se reproduisent davantage : c'est la sélection naturelle."
     },
     {
       "consigne": "Quel phénomène le groupe en couleur décrit-il ?",
       "texte": "[L'antibiotique tue les bactéries sensibles] : les résistantes survivent et se multiplient.",
-      "choix": ["Mutation", "Sélection naturelle", "Dérive génétique"],
+      "choix": [
+        "Mutation",
+        "Sélection naturelle",
+        "Dérive génétique"
+      ],
       "bonne": 1,
       "explication": "L'antibiotique trie les bactéries : seules les résistantes survivent. C'est de la sélection naturelle."
     },
     {
       "consigne": "Quel phénomène le groupe en couleur décrit-il ?",
       "texte": "Dans une petite population isolée, [la fréquence d'un allèle augmente] alors qu'il n'apporte aucun avantage.",
-      "choix": ["Mutation", "Sélection naturelle", "Dérive génétique"],
+      "choix": [
+        "Mutation",
+        "Sélection naturelle",
+        "Dérive génétique"
+      ],
       "bonne": 2,
       "explication": "Sans avantage, la fréquence d'un allèle ne varie que par hasard : c'est la dérive génétique."
     },
     {
       "consigne": "Quel phénomène le groupe en couleur décrit-il ?",
       "texte": "Chez un papillon, [un nouvel allèle apparaît] dans une cellule, sans que l'animal en ait eu besoin.",
-      "choix": ["Mutation", "Sélection naturelle", "Dérive génétique"],
+      "choix": [
+        "Mutation",
+        "Sélection naturelle",
+        "Dérive génétique"
+      ],
       "bonne": 0,
       "explication": "Les nouveaux allèles apparaissent par mutation, au hasard : le besoin de l'animal n'y change rien."
     }
@@ -125,7 +143,10 @@
   "devinettes": [
     {
       "reponse": "Charles Darwin",
-      "acceptees": ["Charles Darwin", "Darwin"],
+      "acceptees": [
+        "Charles Darwin",
+        "Darwin"
+      ],
       "indices": [
         "Je suis un scientifique du XIXe siècle.",
         "J'ai écrit De l'origine des espèces.",
@@ -135,7 +156,11 @@
     },
     {
       "reponse": "Mutation",
-      "acceptees": ["Mutation", "Une mutation", "Les mutations"],
+      "acceptees": [
+        "Mutation",
+        "Une mutation",
+        "Les mutations"
+      ],
       "indices": [
         "Je suis rare.",
         "Je suis une modification de l'ADN.",
@@ -145,7 +170,11 @@
     },
     {
       "reponse": "Dérive génétique",
-      "acceptees": ["Dérive génétique", "La dérive génétique", "Dérive"],
+      "acceptees": [
+        "Dérive génétique",
+        "La dérive génétique",
+        "Dérive"
+      ],
       "indices": [
         "Je dépends du hasard.",
         "Je modifie la fréquence des allèles.",
@@ -155,7 +184,12 @@
     },
     {
       "reponse": "Fossile",
-      "acceptees": ["Fossile", "Un fossile", "Fossiles", "Les fossiles"],
+      "acceptees": [
+        "Fossile",
+        "Un fossile",
+        "Fossiles",
+        "Les fossiles"
+      ],
       "indices": [
         "Je suis un reste ou une trace d'être vivant.",
         "Je suis conservé dans les roches.",

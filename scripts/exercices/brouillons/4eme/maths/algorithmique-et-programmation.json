@@ -51,28 +51,48 @@
     {
       "consigne": "De quel type de bloc s'agit-il pour le passage en couleur ?",
       "texte": "Quand le drapeau vert est cliqué → [répéter 4 fois] → avancer de 100 → tourner de 90°",
-      "choix": ["Événement", "Variable", "Boucle", "Condition"],
+      "choix": [
+        "Événement",
+        "Variable",
+        "Boucle",
+        "Condition"
+      ],
       "bonne": 2,
       "explication": "« Répéter 4 fois » est une boucle : elle exécute les blocs qu'elle contient exactement 4 fois."
     },
     {
       "consigne": "De quel type de bloc s'agit-il pour le passage en couleur ?",
       "texte": "Quand ce lutin est cliqué → [mettre score à 0] → dire « Nouvelle partie »",
-      "choix": ["Événement", "Variable", "Boucle", "Condition"],
+      "choix": [
+        "Événement",
+        "Variable",
+        "Boucle",
+        "Condition"
+      ],
       "bonne": 1,
       "explication": "« Mettre score à 0 » donne sa valeur de départ à la variable score."
     },
     {
       "consigne": "De quel type de bloc s'agit-il pour le passage en couleur ?",
       "texte": "[Quand ce lutin est cliqué] → dire « Bonjour » pendant 2 secondes",
-      "choix": ["Événement", "Variable", "Boucle", "Condition"],
+      "choix": [
+        "Événement",
+        "Variable",
+        "Boucle",
+        "Condition"
+      ],
       "bonne": 0,
       "explication": "« Quand ce lutin est cliqué » est un événement : c'est lui qui déclenche le script."
     },
     {
       "consigne": "De quel type de bloc s'agit-il pour le passage en couleur ?",
       "texte": "Quand le drapeau vert est cliqué → [si réponse = 42 alors dire « Bravo » sinon dire « Perdu »]",
-      "choix": ["Événement", "Variable", "Boucle", "Condition"],
+      "choix": [
+        "Événement",
+        "Variable",
+        "Boucle",
+        "Condition"
+      ],
       "bonne": 3,
       "explication": "« Si … alors … sinon » est une condition : un seul des deux blocs est exécuté selon que le test est vrai ou faux."
     }
@@ -80,7 +100,10 @@
   "devinettes": [
     {
       "reponse": "Algorithme",
-      "acceptees": ["Un algorithme", "Algorithmes"],
+      "acceptees": [
+        "Un algorithme",
+        "Algorithmes"
+      ],
       "indices": [
         "Je suis une suite finie d'instructions.",
         "Je permets de résoudre un problème.",
@@ -90,23 +113,16 @@
     },
     {
       "reponse": "Variable",
-      "acceptees": ["Une variable", "Variables"],
+      "acceptees": [
+        "Une variable",
+        "Variables"
+      ],
       "indices": [
         "Je suis une case mémoire.",
         "Je porte un nom, comme score.",
         "On m'initialise au début du programme, puis on me modifie."
       ],
       "explication": "Une variable est une case mémoire nommée dont la valeur peut changer au fil du programme."
-    },
-    {
-      "reponse": "Bloc personnalisé",
-      "acceptees": ["Un bloc personnalisé", "Bloc personnalise", "Mes blocs"],
-      "indices": [
-        "Je suis un sous-programme que l'on définit une fois.",
-        "On me réutilise autant de fois qu'on veut sans tout recopier.",
-        "Je peux avoir des paramètres, comme la taille du côté d'un carré."
-      ],
-      "explication": "Un bloc personnalisé est un sous-programme défini une fois, avec ou sans paramètres, et réutilisable."
     }
   ],
   "calculs": [

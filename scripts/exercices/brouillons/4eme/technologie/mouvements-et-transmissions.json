@@ -82,46 +82,60 @@
     {
       "consigne": "Quel mécanisme est décrit par le passage en couleur ?",
       "texte": "Pour ouvrir un portail coulissant, [un pignon motorisé fait avancer une barre dentée fixée au portail].",
-      "choix": ["Poulies et courroie", "Pignon-crémaillère", "Vis-écrou", "Bielle-manivelle"],
+      "choix": [
+        "Poulies et courroie",
+        "Pignon-crémaillère",
+        "Vis-écrou",
+        "Bielle-manivelle"
+      ],
       "bonne": 1,
       "explication": "Un pignon qui fait avancer une barre dentée, c'est un système pignon-crémaillère : la rotation devient translation."
     },
     {
       "consigne": "Quel mécanisme est décrit par le passage en couleur ?",
       "texte": "Dans l'étau de l'atelier, [le mors avance en ligne droite quand on tourne la poignée].",
-      "choix": ["Poulies et courroie", "Pignon-crémaillère", "Vis-écrou", "Bielle-manivelle"],
+      "choix": [
+        "Poulies et courroie",
+        "Pignon-crémaillère",
+        "Vis-écrou",
+        "Bielle-manivelle"
+      ],
       "bonne": 2,
       "explication": "Dans un étau, tourner la vis fait avancer le mors : c'est un système vis-écrou."
     },
     {
       "consigne": "Quel mécanisme est décrit par le passage en couleur ?",
       "texte": "Dans un moteur à pistons, [le va-et-vient du piston est transformé en rotation].",
-      "choix": ["Poulies et courroie", "Pignon-crémaillère", "Vis-écrou", "Bielle-manivelle"],
+      "choix": [
+        "Poulies et courroie",
+        "Pignon-crémaillère",
+        "Vis-écrou",
+        "Bielle-manivelle"
+      ],
       "bonne": 3,
       "explication": "Le système bielle-manivelle transforme le va-et-vient du piston en rotation."
     },
     {
       "consigne": "Quel mécanisme est décrit par le passage en couleur ?",
       "texte": "Sur une perceuse à colonne, [le moteur entraîne l'axe grâce à deux roues reliées par une bande souple qui peut glisser].",
-      "choix": ["Poulies et courroie", "Pignon-crémaillère", "Vis-écrou", "Bielle-manivelle"],
+      "choix": [
+        "Poulies et courroie",
+        "Pignon-crémaillère",
+        "Vis-écrou",
+        "Bielle-manivelle"
+      ],
       "bonne": 0,
       "explication": "Deux poulies reliées par une courroie tournent dans le même sens, et la courroie peut glisser."
     }
   ],
   "devinettes": [
     {
-      "reponse": "Réducteur",
-      "acceptees": ["Réducteur", "Un réducteur", "Le réducteur"],
-      "indices": [
-        "Je suis un système de transmission.",
-        "Mon rapport de transmission est inférieur à 1.",
-        "Ma sortie tourne moins vite que l'entrée, mais avec plus de force."
-      ],
-      "explication": "Un réducteur a un rapport r < 1 : il diminue la vitesse et augmente la force."
-    },
-    {
       "reponse": "Crémaillère",
-      "acceptees": ["Crémaillère", "Une crémaillère", "La crémaillère"],
+      "acceptees": [
+        "Crémaillère",
+        "Une crémaillère",
+        "La crémaillère"
+      ],
       "indices": [
         "Je suis une pièce d'un mécanisme.",
         "Je suis une barre qui porte des dents.",
@@ -131,7 +145,12 @@
     },
     {
       "reponse": "Bielle-manivelle",
-      "acceptees": ["Bielle-manivelle", "Bielle manivelle", "Le système bielle-manivelle", "Bielle et manivelle"],
+      "acceptees": [
+        "Bielle-manivelle",
+        "Bielle manivelle",
+        "Le système bielle-manivelle",
+        "Bielle et manivelle"
+      ],
       "indices": [
         "Je suis un mécanisme.",
         "On me trouve dans les moteurs à pistons.",

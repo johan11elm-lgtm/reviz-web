@@ -54,64 +54,76 @@
       "explication": "L'attraction de la Terre courbe la trajectoire du satellite et le maintient sur son orbite."
     },
     {
-      "fait": "le maintien d'un satellite sur son orbite autour de la Terre",
-      "carte": "Le satellite se déplace à grande vitesse",
-      "role": "cause",
-      "explication": "Grâce à sa grande vitesse, le satellite « tombe » autour de la Terre sans s'en rapprocher."
-    },
-    {
       "fait": "le passage d'un astronaute de la Terre à la Lune",
       "carte": "Son poids diminue",
       "role": "consequence",
       "explication": "g vaut 1,6 N/kg sur la Lune contre 9,8 N/kg sur Terre : avec P = m × g, le poids diminue."
-    },
-    {
-      "fait": "le passage d'un astronaute de la Terre à la Lune",
-      "carte": "La valeur de g qui s'applique à lui est plus petite",
-      "role": "consequence",
-      "explication": "g dépend de l'astre : il vaut environ 9,8 N/kg sur Terre et 1,6 N/kg sur la Lune."
     }
   ],
   "etiquettes": [
     {
       "consigne": "Quelle grandeur est donnée dans le passage en couleur ?",
       "texte": "La balance indique [80 kg] pour l'astronaute.",
-      "choix": ["Masse", "Poids", "Intensité de pesanteur"],
+      "choix": [
+        "Masse",
+        "Poids",
+        "Intensité de pesanteur"
+      ],
       "bonne": 0,
       "explication": "Une balance mesure une masse, exprimée en kilogrammes."
     },
     {
       "consigne": "Quelle grandeur est donnée dans le passage en couleur ?",
       "texte": "Un astronaute est attiré par la Terre avec une force de [784 N].",
-      "choix": ["Masse", "Poids", "Intensité de pesanteur"],
+      "choix": [
+        "Masse",
+        "Poids",
+        "Intensité de pesanteur"
+      ],
       "bonne": 1,
       "explication": "La force d'attraction exercée par la Terre sur un objet est son poids, exprimé en newtons."
     },
     {
       "consigne": "Quelle grandeur est donnée dans le passage en couleur ?",
       "texte": "Sur la Lune, pour calculer le poids d'un objet, on utilise [1,6 N/kg].",
-      "choix": ["Masse", "Poids", "Intensité de pesanteur"],
+      "choix": [
+        "Masse",
+        "Poids",
+        "Intensité de pesanteur"
+      ],
       "bonne": 2,
       "explication": "Le coefficient en N/kg qui relie le poids à la masse est l'intensité de pesanteur g."
     },
     {
       "consigne": "Quelle grandeur est donnée dans le passage en couleur ?",
       "texte": "Le sac de l'astronaute contient [500 g] de matériel.",
-      "choix": ["Masse", "Poids", "Intensité de pesanteur"],
+      "choix": [
+        "Masse",
+        "Poids",
+        "Intensité de pesanteur"
+      ],
       "bonne": 0,
       "explication": "Les grammes sont une unité de masse : 500 g = 0,5 kg."
     },
     {
       "consigne": "Quelle grandeur est donnée dans le passage en couleur ?",
       "texte": "Un dynamomètre accroché à une pierre sur la Lune indique [16 N].",
-      "choix": ["Masse", "Poids", "Intensité de pesanteur"],
+      "choix": [
+        "Masse",
+        "Poids",
+        "Intensité de pesanteur"
+      ],
       "bonne": 1,
       "explication": "Un dynamomètre mesure une force en newtons : ici, le poids de la pierre sur la Lune."
     },
     {
       "consigne": "Quelle grandeur est donnée dans le passage en couleur ?",
       "texte": "Sur Mars, le rapport entre le poids et la masse vaut [3,7 N/kg].",
-      "choix": ["Masse", "Poids", "Intensité de pesanteur"],
+      "choix": [
+        "Masse",
+        "Poids",
+        "Intensité de pesanteur"
+      ],
       "bonne": 2,
       "explication": "Le rapport poids ÷ masse, en N/kg, est l'intensité de pesanteur g de l'astre."
     }
@@ -119,7 +131,10 @@
   "devinettes": [
     {
       "reponse": "Poids",
-      "acceptees": ["Poids", "Le poids"],
+      "acceptees": [
+        "Poids",
+        "Le poids"
+      ],
       "indices": [
         "Je suis une force.",
         "Je suis exercé par un astre sur un objet proche.",
@@ -129,7 +144,10 @@
     },
     {
       "reponse": "Masse",
-      "acceptees": ["Masse", "La masse"],
+      "acceptees": [
+        "Masse",
+        "La masse"
+      ],
       "indices": [
         "Je suis une grandeur physique.",
         "Je ne change pas quand on va sur la Lune.",
@@ -139,7 +157,12 @@
     },
     {
       "reponse": "Gravitation",
-      "acceptees": ["Gravitation", "La gravitation", "Attraction gravitationnelle", "Interaction gravitationnelle"],
+      "acceptees": [
+        "Gravitation",
+        "La gravitation",
+        "Attraction gravitationnelle",
+        "Interaction gravitationnelle"
+      ],
       "indices": [
         "Je suis une interaction.",
         "Je m'exerce à distance, sans contact, entre deux objets qui ont une masse.",
@@ -149,7 +172,11 @@
     },
     {
       "reponse": "Orbite",
-      "acceptees": ["Orbite", "Une orbite", "L'orbite"],
+      "acceptees": [
+        "Orbite",
+        "Une orbite",
+        "L'orbite"
+      ],
       "indices": [
         "Je suis une trajectoire.",
         "La Lune me suit autour de la Terre.",

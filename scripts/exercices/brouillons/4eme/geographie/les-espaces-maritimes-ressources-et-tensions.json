@@ -30,8 +30,7 @@
         "La Chine face au Vietnam et aux Philippines",
         "Le contrôle du détroit d'Ormuz",
         "L'Arctique, convoité pour ses routes et ses hydrocarbures",
-        "Des navires attaqués au large de la Somalie",
-        "Des îles disputées avec les ZEE qui les entourent"
+        "Des navires attaqués au large de la Somalie"
       ]
     },
     {
@@ -76,35 +75,55 @@
     {
       "consigne": "Quelle zone maritime le passage en couleur désigne-t-il ?",
       "texte": "Un cargo navigue [à 8 milles marins de la côte].",
-      "choix": ["Eaux territoriales", "ZEE", "Haute mer"],
+      "choix": [
+        "Eaux territoriales",
+        "ZEE",
+        "Haute mer"
+      ],
       "bonne": 0,
       "explication": "8 milles marins, c'est moins de 12 milles : le cargo est dans les eaux territoriales."
     },
     {
       "consigne": "Quelle zone maritime le passage en couleur désigne-t-il ?",
       "texte": "Un chalutier pêche [à 150 milles marins de la côte].",
-      "choix": ["Eaux territoriales", "ZEE", "Haute mer"],
+      "choix": [
+        "Eaux territoriales",
+        "ZEE",
+        "Haute mer"
+      ],
       "bonne": 1,
       "explication": "150 milles marins se situent entre 12 et 200 milles : le chalutier est dans la ZEE."
     },
     {
       "consigne": "Quelle zone maritime le passage en couleur désigne-t-il ?",
       "texte": "Un pétrolier croise [à 300 milles marins de toute côte].",
-      "choix": ["Eaux territoriales", "ZEE", "Haute mer"],
+      "choix": [
+        "Eaux territoriales",
+        "ZEE",
+        "Haute mer"
+      ],
       "bonne": 2,
       "explication": "Au-delà de 200 milles marins commence la haute mer."
     },
     {
       "consigne": "Quelle zone maritime le passage en couleur désigne-t-il ?",
       "texte": "[L'État y exploite seul la pêche et le pétrole, mais les navires étrangers y passent librement].",
-      "choix": ["Eaux territoriales", "ZEE", "Haute mer"],
+      "choix": [
+        "Eaux territoriales",
+        "ZEE",
+        "Haute mer"
+      ],
       "bonne": 1,
       "explication": "L'exclusivité des ressources avec libre circulation des navires étrangers, c'est la ZEE."
     },
     {
       "consigne": "Quelle zone maritime le passage en couleur désigne-t-il ?",
       "texte": "[L'État y est souverain, comme sur son propre territoire].",
-      "choix": ["Eaux territoriales", "ZEE", "Haute mer"],
+      "choix": [
+        "Eaux territoriales",
+        "ZEE",
+        "Haute mer"
+      ],
       "bonne": 0,
       "explication": "Dans les eaux territoriales, jusqu'à 12 milles marins, l'État est souverain comme sur sa terre."
     }
@@ -112,7 +131,12 @@
   "devinettes": [
     {
       "reponse": "La ZEE",
-      "acceptees": ["ZEE", "La ZEE", "Zone économique exclusive", "La zone économique exclusive"],
+      "acceptees": [
+        "ZEE",
+        "La ZEE",
+        "Zone économique exclusive",
+        "La zone économique exclusive"
+      ],
       "indices": [
         "Je suis un espace de mer.",
         "Je m'étends jusqu'à 200 milles marins des côtes.",
@@ -122,7 +146,12 @@
     },
     {
       "reponse": "Les eaux territoriales",
-      "acceptees": ["Eaux territoriales", "Les eaux territoriales", "Mer territoriale", "La mer territoriale"],
+      "acceptees": [
+        "Eaux territoriales",
+        "Les eaux territoriales",
+        "Mer territoriale",
+        "La mer territoriale"
+      ],
       "indices": [
         "Je suis une bande le long des côtes.",
         "Je m'étends jusqu'à 12 milles marins.",
@@ -132,7 +161,10 @@
     },
     {
       "reponse": "La haute mer",
-      "acceptees": ["Haute mer", "La haute mer"],
+      "acceptees": [
+        "Haute mer",
+        "La haute mer"
+      ],
       "indices": [
         "Je suis un espace immense.",
         "Je commence au-delà de 200 milles marins des côtes.",
@@ -142,7 +174,11 @@
     },
     {
       "reponse": "La piraterie",
-      "acceptees": ["Piraterie", "La piraterie", "Les pirates"],
+      "acceptees": [
+        "Piraterie",
+        "La piraterie",
+        "Les pirates"
+      ],
       "indices": [
         "Je suis un danger pour les navires.",
         "Je sévis dans le golfe d'Aden et le golfe de Guinée.",

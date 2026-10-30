@@ -8,8 +8,7 @@
         "Le programme Action cœur de ville, lancé en 2018",
         "Le programme Petites villes de demain, lancé en 2020",
         "Des commerces qui ferment au profit d'une zone commerciale",
-        "Revitaliser commerces, logements et espaces publics du centre",
-        "Des petites villes qui servent de centres aux campagnes voisines"
+        "Revitaliser commerces, logements et espaces publics du centre"
       ]
     },
     {
@@ -82,7 +81,11 @@
   "devinettes": [
     {
       "reponse": "Zone blanche",
-      "acceptees": ["Une zone blanche", "La zone blanche", "Zones blanches"],
+      "acceptees": [
+        "Une zone blanche",
+        "La zone blanche",
+        "Zones blanches"
+      ],
       "indices": [
         "Je suis un type de territoire mal desservi.",
         "Mon nom contient une couleur.",
@@ -92,7 +95,9 @@
     },
     {
       "reponse": "Action cœur de ville",
-      "acceptees": ["Action coeur de ville"],
+      "acceptees": [
+        "Action coeur de ville"
+      ],
       "indices": [
         "Je suis un programme de l'État.",
         "J'ai été lancé en 2018.",
@@ -102,7 +107,12 @@
     },
     {
       "reponse": "France Services",
-      "acceptees": ["Une maison France Services", "Maison France Services", "Les maisons France Services", "Maisons France Services"],
+      "acceptees": [
+        "Une maison France Services",
+        "Maison France Services",
+        "Les maisons France Services",
+        "Maisons France Services"
+      ],
       "indices": [
         "Je suis un lieu ouvert au public.",
         "On me trouve dans les territoires ruraux et les quartiers prioritaires.",
@@ -112,7 +122,11 @@
     },
     {
       "reponse": "La fibre optique",
-      "acceptees": ["Fibre optique", "La fibre", "Fibre"],
+      "acceptees": [
+        "Fibre optique",
+        "La fibre",
+        "Fibre"
+      ],
       "indices": [
         "Je suis un câble.",
         "Je permets un accès à Internet très rapide.",

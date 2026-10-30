@@ -8,7 +8,6 @@
         "Une batterie de 12 V pour un store électrique",
         "La prise électrique du mur",
         "Un boîtier de quatre piles",
-        "Un panneau solaire sur le toit",
         "L'origine du courant dont tout a besoin"
       ]
     },
@@ -17,9 +16,7 @@
       "detail": "La fonction qui laisse passer ou coupe l'énergie vers l'actionneur selon les ordres reçus.",
       "cartes": [
         "Un relais commandé par le microcontrôleur",
-        "Une carte de commande du moteur",
         "Laisser passer ou couper le courant vers le moteur",
-        "Le lien entre les ordres du programme et le moteur",
         "Le composant placé entre la batterie et le moteur"
       ]
     },
@@ -30,8 +27,7 @@
         "Un moteur électrique qui fait tourner un axe",
         "Une résistance chauffante qui produit de la chaleur",
         "Une LED qui produit de la lumière",
-        "Un buzzer qui produit un son",
-        "Un servomoteur qui tourne jusqu'à un angle donné"
+        "Un buzzer qui produit un son"
       ]
     },
     {
@@ -51,50 +47,74 @@
     {
       "consigne": "Quelle fonction réalise le groupe en couleur ?",
       "texte": "Dans un portail automatique, [la télécommande et son récepteur] captent la demande de l'utilisateur.",
-      "choix": ["Acquérir", "Traiter", "Distribuer", "Convertir"],
+      "choix": [
+        "Acquérir",
+        "Traiter",
+        "Distribuer",
+        "Convertir"
+      ],
       "bonne": 0,
       "explication": "Ils captent une information venant de l'utilisateur : c'est la fonction acquérir."
     },
     {
       "consigne": "Quelle fonction réalise le groupe en couleur ?",
       "texte": "Dans un portail automatique, [le microcontrôleur] décide d'ouvrir ou non selon son programme.",
-      "choix": ["Acquérir", "Traiter", "Distribuer", "Convertir"],
+      "choix": [
+        "Acquérir",
+        "Traiter",
+        "Distribuer",
+        "Convertir"
+      ],
       "bonne": 1,
       "explication": "Le microcontrôleur décide selon un programme : c'est la fonction traiter."
     },
     {
       "consigne": "Quelle fonction réalise le groupe en couleur ?",
       "texte": "Quand l'ordre d'ouvrir arrive, [le relais] laisse passer le courant vers le moteur du portail.",
-      "choix": ["Acquérir", "Traiter", "Distribuer", "Convertir"],
+      "choix": [
+        "Acquérir",
+        "Traiter",
+        "Distribuer",
+        "Convertir"
+      ],
       "bonne": 2,
       "explication": "Le relais laisse passer ou coupe le courant vers l'actionneur : c'est la fonction distribuer."
     },
     {
       "consigne": "Quelle fonction réalise le groupe en couleur ?",
       "texte": "Une fois alimenté, [le moteur] produit un mouvement de rotation.",
-      "choix": ["Acquérir", "Traiter", "Distribuer", "Convertir"],
+      "choix": [
+        "Acquérir",
+        "Traiter",
+        "Distribuer",
+        "Convertir"
+      ],
       "bonne": 3,
       "explication": "Le moteur est l'actionneur : il convertit l'énergie électrique en énergie mécanique."
     },
     {
       "consigne": "Quelle fonction réalise le groupe en couleur ?",
       "texte": "Dans une serre, [la thermistance] relève la température de l'air.",
-      "choix": ["Acquérir", "Traiter", "Distribuer", "Convertir"],
+      "choix": [
+        "Acquérir",
+        "Traiter",
+        "Distribuer",
+        "Convertir"
+      ],
       "bonne": 0,
       "explication": "Le capteur prélève une information sur une grandeur physique : c'est la fonction acquérir."
-    },
-    {
-      "consigne": "Quelle fonction réalise le groupe en couleur ?",
-      "texte": "Dans un store, [la carte de commande du moteur] reçoit l'ordre de monter et envoie le courant au moteur.",
-      "choix": ["Acquérir", "Traiter", "Distribuer", "Convertir"],
-      "bonne": 2,
-      "explication": "La carte de commande du moteur laisse passer le courant selon les ordres reçus : c'est la fonction distribuer."
     }
   ],
   "devinettes": [
     {
       "reponse": "Microcontrôleur",
-      "acceptees": ["Microcontrôleur", "Un microcontrôleur", "Le microcontrôleur", "Carte programmable", "Une carte programmable"],
+      "acceptees": [
+        "Microcontrôleur",
+        "Un microcontrôleur",
+        "Le microcontrôleur",
+        "Carte programmable",
+        "Une carte programmable"
+      ],
       "indices": [
         "Je suis un circuit électronique.",
         "On me programme.",
@@ -104,33 +124,17 @@
     },
     {
       "reponse": "Relais",
-      "acceptees": ["Relais", "Un relais", "Le relais"],
+      "acceptees": [
+        "Relais",
+        "Un relais",
+        "Le relais"
+      ],
       "indices": [
         "Je fais partie de la chaîne d'énergie.",
         "Je laisse passer ou je coupe le courant.",
         "Un microcontrôleur me commande pour mettre un moteur en marche."
       ],
       "explication": "Le relais réalise la fonction distribuer : il laisse passer ou coupe l'énergie vers l'actionneur."
-    },
-    {
-      "reponse": "Signal logique",
-      "acceptees": ["Signal logique", "Un signal logique", "Le signal logique"],
-      "indices": [
-        "Je suis un signal.",
-        "Je n'ai que deux états.",
-        "Je vaux 0 ou 1, comme un bouton appuyé ou relâché."
-      ],
-      "explication": "Un signal logique n'a que deux états, 0 ou 1."
-    },
-    {
-      "reponse": "Actionneur",
-      "acceptees": ["Actionneur", "Un actionneur", "L'actionneur"],
-      "indices": [
-        "Je fais partie de la chaîne d'énergie.",
-        "Je convertis l'énergie que je reçois en action.",
-        "Un moteur, une LED ou un buzzer sont des exemples de ce que je suis."
-      ],
-      "explication": "L'actionneur réalise la fonction convertir : il transforme l'énergie reçue en mouvement, lumière, son ou chaleur."
     }
   ],
   "calculs": [],

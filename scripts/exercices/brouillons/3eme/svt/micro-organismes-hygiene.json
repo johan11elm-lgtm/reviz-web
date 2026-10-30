@@ -30,8 +30,7 @@
         "Se laver les mains avant de cuisiner",
         "Porter un masque pour limiter la transmission",
         "Stériliser le matériel avant de s'en servir",
-        "Désinfecter un genou écorché",
-        "Utiliser un préservatif contre les infections sexuellement transmissibles"
+        "Désinfecter un genou écorché"
       ]
     },
     {
@@ -82,35 +81,60 @@
     {
       "consigne": "Quelle notion illustre le passage en couleur ?",
       "texte": "Léa se coupe avec une boîte de conserve sale : [des bactéries entrent dans la plaie].",
-      "choix": ["Contamination", "Infection", "Asepsie", "Antisepsie"],
+      "choix": [
+        "Contamination",
+        "Infection",
+        "Asepsie",
+        "Antisepsie"
+      ],
       "bonne": 0,
       "explication": "L'entrée de micro-organismes dans le corps est une contamination."
     },
     {
       "consigne": "Quelle notion illustre le passage en couleur ?",
       "texte": "Les jours suivants, [les bactéries se multiplient dans la plaie de Léa].",
-      "choix": ["Contamination", "Infection", "Asepsie", "Antisepsie"],
+      "choix": [
+        "Contamination",
+        "Infection",
+        "Asepsie",
+        "Antisepsie"
+      ],
       "bonne": 1,
       "explication": "La multiplication de micro-organismes dans le corps est une infection."
     },
     {
       "consigne": "Quelle notion illustre le passage en couleur ?",
       "texte": "Avant de cuisiner, Tom [se lave les mains] pour ne pas apporter de microbes sur les aliments.",
-      "choix": ["Contamination", "Infection", "Asepsie", "Antisepsie"],
+      "choix": [
+        "Contamination",
+        "Infection",
+        "Asepsie",
+        "Antisepsie"
+      ],
       "bonne": 2,
       "explication": "Se laver les mains empêche les microbes d'arriver : c'est de l'asepsie."
     },
     {
       "consigne": "Quelle notion illustre le passage en couleur ?",
       "texte": "Tom s'est écorché le genou : sa mère [le désinfecte avec un antiseptique].",
-      "choix": ["Contamination", "Infection", "Asepsie", "Antisepsie"],
+      "choix": [
+        "Contamination",
+        "Infection",
+        "Asepsie",
+        "Antisepsie"
+      ],
       "bonne": 3,
       "explication": "Détruire les microbes déjà présents sur une plaie avec un antiseptique, c'est de l'antisepsie."
     },
     {
       "consigne": "Quelle notion illustre le passage en couleur ?",
       "texte": "Avant une opération, [le chirurgien se lave les mains et porte un masque].",
-      "choix": ["Contamination", "Infection", "Asepsie", "Antisepsie"],
+      "choix": [
+        "Contamination",
+        "Infection",
+        "Asepsie",
+        "Antisepsie"
+      ],
       "bonne": 2,
       "explication": "Le lavage des mains et le port du masque empêchent la contamination : c'est de l'asepsie."
     }
@@ -118,7 +142,13 @@
   "devinettes": [
     {
       "reponse": "Microbiote",
-      "acceptees": ["Microbiote", "Le microbiote", "Microbiote intestinal", "Le microbiote intestinal", "Flore intestinale"],
+      "acceptees": [
+        "Microbiote",
+        "Le microbiote",
+        "Microbiote intestinal",
+        "Le microbiote intestinal",
+        "Flore intestinale"
+      ],
       "indices": [
         "Je suis un ensemble de bactéries.",
         "Je vis dans ton intestin.",
@@ -128,7 +158,10 @@
     },
     {
       "reponse": "Asepsie",
-      "acceptees": ["Asepsie", "L'asepsie"],
+      "acceptees": [
+        "Asepsie",
+        "L'asepsie"
+      ],
       "indices": [
         "Je regroupe des mesures d'hygiène.",
         "Je te fais laver les mains, porter un masque ou stériliser le matériel.",
@@ -138,7 +171,12 @@
     },
     {
       "reponse": "Antibiotique",
-      "acceptees": ["Antibiotique", "Un antibiotique", "Les antibiotiques", "Antibiotiques"],
+      "acceptees": [
+        "Antibiotique",
+        "Un antibiotique",
+        "Les antibiotiques",
+        "Antibiotiques"
+      ],
       "indices": [
         "Je suis un médicament.",
         "Je détruis les bactéries ou je bloque leur multiplication.",
@@ -148,7 +186,11 @@
     },
     {
       "reponse": "Virus",
-      "acceptees": ["Virus", "Un virus", "Les virus"],
+      "acceptees": [
+        "Virus",
+        "Un virus",
+        "Les virus"
+      ],
       "indices": [
         "Je suis bien plus petit qu'une bactérie, environ 0,1 µm.",
         "Je ne suis pas une cellule.",

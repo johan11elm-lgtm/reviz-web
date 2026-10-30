@@ -28,7 +28,6 @@
       "detail": "Les mesures et les violences qui frappent les Juifs de France entre 1940 et 1944.",
       "cartes": [
         "Le statut d'octobre 1940 exclut les Juifs de nombreux métiers",
-        "Une politique antisémite décidée sans que l'Allemagne l'exige",
         "La police française arrête des milliers de Juifs à Paris",
         "Environ 75 000 Juifs sont déportés de France",
         "Très peu de Juifs déportés de France reviennent"
@@ -76,7 +75,12 @@
   "devinettes": [
     {
       "reponse": "Charles de Gaulle",
-      "acceptees": ["De Gaulle", "Charles de Gaulle", "Le général de Gaulle", "Général de Gaulle"],
+      "acceptees": [
+        "De Gaulle",
+        "Charles de Gaulle",
+        "Le général de Gaulle",
+        "Général de Gaulle"
+      ],
       "indices": [
         "Je suis un général français.",
         "Le 18 juin 1940, j'appelle à continuer la guerre depuis Londres.",
@@ -86,7 +90,12 @@
     },
     {
       "reponse": "Philippe Pétain",
-      "acceptees": ["Pétain", "Philippe Pétain", "Le maréchal Pétain", "Maréchal Pétain"],
+      "acceptees": [
+        "Pétain",
+        "Philippe Pétain",
+        "Le maréchal Pétain",
+        "Maréchal Pétain"
+      ],
       "indices": [
         "Je suis un maréchal.",
         "Le 17 juin 1940, je demande l'armistice.",
@@ -96,7 +105,10 @@
     },
     {
       "reponse": "Jean Moulin",
-      "acceptees": ["Moulin", "Jean Moulin"],
+      "acceptees": [
+        "Moulin",
+        "Jean Moulin"
+      ],
       "indices": [
         "Je suis un résistant français.",
         "De Gaulle m'envoie en France pour unifier la Résistance.",
@@ -106,7 +118,14 @@
     },
     {
       "reponse": "Le Vél d'Hiv",
-      "acceptees": ["Vél d'Hiv", "Vel d'Hiv", "Le Vél d'Hiv", "Le Vel d'Hiv", "La rafle du Vél d'Hiv", "Rafle du Vel d'Hiv"],
+      "acceptees": [
+        "Vél d'Hiv",
+        "Vel d'Hiv",
+        "Le Vél d'Hiv",
+        "Le Vel d'Hiv",
+        "La rafle du Vél d'Hiv",
+        "Rafle du Vel d'Hiv"
+      ],
       "indices": [
         "Je suis une opération de police menée à Paris.",
         "Je me déroule les 16 et 17 juillet 1942.",

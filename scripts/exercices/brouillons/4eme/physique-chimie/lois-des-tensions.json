@@ -76,35 +76,55 @@
     {
       "consigne": "Dans quel état est la lampe ?",
       "texte": "Une lampe 6 V – 0,1 A est branchée seule sur [une pile de 12 V].",
-      "choix": ["Sous-tension", "Fonctionnement normal", "Surtension"],
+      "choix": [
+        "Sous-tension",
+        "Fonctionnement normal",
+        "Surtension"
+      ],
       "bonne": 2,
       "explication": "12 V est bien plus que la tension nominale de 6 V : la lampe est en surtension et risque de griller."
     },
     {
       "consigne": "Dans quel état est la lampe ?",
       "texte": "Une lampe 6 V – 0,1 A est branchée seule sur [une pile de 1,5 V].",
-      "choix": ["Sous-tension", "Fonctionnement normal", "Surtension"],
+      "choix": [
+        "Sous-tension",
+        "Fonctionnement normal",
+        "Surtension"
+      ],
       "bonne": 0,
       "explication": "1,5 V est bien moins que la tension nominale de 6 V : la lampe est en sous-tension et brille à peine."
     },
     {
       "consigne": "Dans quel état est chaque lampe ?",
       "texte": "Deux lampes 6 V identiques sont montées en série sur [une alimentation de 12 V].",
-      "choix": ["Sous-tension", "Fonctionnement normal", "Surtension"],
+      "choix": [
+        "Sous-tension",
+        "Fonctionnement normal",
+        "Surtension"
+      ],
       "bonne": 1,
       "explication": "En série, 12 V se partagent : chaque lampe a 6 V, sa tension nominale. Elle fonctionne normalement."
     },
     {
       "consigne": "Dans quel état est chaque lampe ?",
       "texte": "Deux lampes 6 V identiques sont montées en série sur [une pile de 6 V].",
-      "choix": ["Sous-tension", "Fonctionnement normal", "Surtension"],
+      "choix": [
+        "Sous-tension",
+        "Fonctionnement normal",
+        "Surtension"
+      ],
       "bonne": 0,
       "explication": "En série, 6 V se partagent : chaque lampe a 3 V, bien moins que 6 V. Elle est en sous-tension."
     },
     {
       "consigne": "Dans quel état est la lampe ?",
       "texte": "Une lampe 230 V est branchée sur [le secteur de la maison].",
-      "choix": ["Sous-tension", "Fonctionnement normal", "Surtension"],
+      "choix": [
+        "Sous-tension",
+        "Fonctionnement normal",
+        "Surtension"
+      ],
       "bonne": 1,
       "explication": "Le secteur fournit 230 V, la tension nominale de la lampe : elle fonctionne normalement."
     }
@@ -112,7 +132,12 @@
   "devinettes": [
     {
       "reponse": "Dérivation",
-      "acceptees": ["Dérivation", "En dérivation", "Montage en dérivation", "La dérivation"],
+      "acceptees": [
+        "Dérivation",
+        "En dérivation",
+        "Montage en dérivation",
+        "La dérivation"
+      ],
       "indices": [
         "Je suis un type de montage.",
         "Dans une maison, tous les appareils sont montés ainsi.",
@@ -122,23 +147,17 @@
     },
     {
       "reponse": "Surtension",
-      "acceptees": ["Surtension", "La surtension", "Une surtension"],
+      "acceptees": [
+        "Surtension",
+        "La surtension",
+        "Une surtension"
+      ],
       "indices": [
         "Je peux détruire une lampe.",
         "Je me produis quand la tension à ses bornes dépasse ce qui est prévu.",
         "Dans ce cas, la lampe brille très fort et risque de griller."
       ],
       "explication": "Une surtension est une tension supérieure à la tension nominale : la lampe brille très fort et peut griller."
-    },
-    {
-      "reponse": "Valeurs nominales",
-      "acceptees": ["Valeurs nominales", "Valeur nominale", "Tension nominale", "Les valeurs nominales"],
-      "indices": [
-        "Nous sommes écrites sur le culot d'une lampe.",
-        "Nous indiquons une tension et une intensité, par exemple 6 V – 0,1 A.",
-        "Nous disent comment la lampe brille normalement."
-      ],
-      "explication": "Les valeurs nominales (tension et intensité) sont celles d'un fonctionnement normal de la lampe."
     }
   ],
   "calculs": [

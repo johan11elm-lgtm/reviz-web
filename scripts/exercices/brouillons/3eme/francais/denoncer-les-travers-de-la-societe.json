@@ -19,7 +19,6 @@
         "Un extrait de L'Esprit des lois",
         "Un texte qui feint de défendre l'esclavage",
         "Un argument absurde : le sucre deviendrait trop cher",
-        "Une ironie qu'il faut lire au second degré",
         "Un texte du XVIIIe siècle"
       ]
     },
@@ -29,7 +28,6 @@
       "cartes": [
         "Un poème extrait des Contemplations",
         "Un texte intitulé « Melancholia »",
-        "Des enfants épuisés par le travail en usine",
         "« Où vont tous ces enfants… »",
         "Un texte publié en 1856"
       ]
@@ -51,42 +49,72 @@
     {
       "consigne": "Quel procédé est en couleur ?",
       "texte": "Un journaliste écrit en première page : [« J'accuse les chefs de l'armée d'avoir fait condamner un innocent ! »]",
-      "choix": ["Accusation directe", "Ironie", "Caricature", "Apologue"],
+      "choix": [
+        "Accusation directe",
+        "Ironie",
+        "Caricature",
+        "Apologue"
+      ],
       "bonne": 0,
       "explication": "L'auteur accuse ouvertement, sans détour : c'est une dénonciation directe, comme celle de Zola dans « J'accuse…! »."
     },
     {
       "consigne": "Quel procédé est en couleur ?",
       "texte": "Sous une pluie battante, il s'écrie : [« Quel temps magnifique ! »]",
-      "choix": ["Accusation directe", "Ironie", "Caricature", "Apologue"],
+      "choix": [
+        "Accusation directe",
+        "Ironie",
+        "Caricature",
+        "Apologue"
+      ],
       "bonne": 1,
       "explication": "Il dit le contraire de ce qu'il pense en laissant comprendre sa vraie pensée : c'est de l'ironie (une antiphrase)."
     },
     {
       "consigne": "Quel procédé est en couleur ?",
       "texte": "Dans un journal, un dessinateur montre un roi avec [une tête minuscule et un ventre énorme].",
-      "choix": ["Accusation directe", "Ironie", "Caricature", "Apologue"],
+      "choix": [
+        "Accusation directe",
+        "Ironie",
+        "Caricature",
+        "Apologue"
+      ],
       "bonne": 2,
       "explication": "Le dessin exagère les traits du roi pour se moquer de lui : c'est une caricature, comme chez Daumier."
     },
     {
       "consigne": "Quel procédé est en couleur ?",
       "texte": "La Fontaine [met en scène des animaux et termine par une morale] pour critiquer la justice.",
-      "choix": ["Accusation directe", "Ironie", "Caricature", "Apologue"],
+      "choix": [
+        "Accusation directe",
+        "Ironie",
+        "Caricature",
+        "Apologue"
+      ],
       "bonne": 3,
       "explication": "Un court récit qui illustre une leçon morale est un apologue : la fable en est un."
     },
     {
       "consigne": "Quel procédé est en couleur ?",
       "texte": "Montesquieu [feint de défendre l'esclavage avec des arguments absurdes] pour mieux le condamner.",
-      "choix": ["Accusation directe", "Ironie", "Caricature", "Apologue"],
+      "choix": [
+        "Accusation directe",
+        "Ironie",
+        "Caricature",
+        "Apologue"
+      ],
       "bonne": 1,
       "explication": "Montesquieu ne pense pas ce qu'il écrit : l'absurdité des arguments révèle sa vraie pensée. C'est de l'ironie."
     },
     {
       "consigne": "Quel procédé est en couleur ?",
       "texte": "Dans une lettre ouverte, Zola [accuse nommément les responsables d'une erreur judiciaire].",
-      "choix": ["Accusation directe", "Ironie", "Caricature", "Apologue"],
+      "choix": [
+        "Accusation directe",
+        "Ironie",
+        "Caricature",
+        "Apologue"
+      ],
       "bonne": 0,
       "explication": "Zola nomme ouvertement les coupables, sans fiction ni ironie : c'est une dénonciation directe."
     }
@@ -94,7 +122,10 @@
   "devinettes": [
     {
       "reponse": "Candide",
-      "acceptees": ["Candide, ou l'Optimisme", "Candide ou l'optimisme"],
+      "acceptees": [
+        "Candide, ou l'Optimisme",
+        "Candide ou l'optimisme"
+      ],
       "indices": [
         "Je suis un conte philosophique.",
         "Au chapitre 19, on y rencontre un esclave de Surinam, mutilé.",
@@ -104,7 +135,9 @@
     },
     {
       "reponse": "Daumier",
-      "acceptees": ["Honoré Daumier"],
+      "acceptees": [
+        "Honoré Daumier"
+      ],
       "indices": [
         "Je suis un artiste français du XIXe siècle.",
         "Je dessine des caricatures qui se moquent des puissants de mon temps.",
@@ -114,7 +147,9 @@
     },
     {
       "reponse": "Ironie",
-      "acceptees": ["L'ironie"],
+      "acceptees": [
+        "L'ironie"
+      ],
       "indices": [
         "Je suis un procédé qui permet de critiquer en faisant sourire.",
         "Je fais dire le contraire de ce que l'on pense, en laissant deviner la vraie pensée.",
@@ -124,7 +159,10 @@
     },
     {
       "reponse": "Apologue",
-      "acceptees": ["Un apologue", "L'apologue"],
+      "acceptees": [
+        "Un apologue",
+        "L'apologue"
+      ],
       "indices": [
         "Je suis un court récit.",
         "Je cache une leçon morale derrière une histoire.",

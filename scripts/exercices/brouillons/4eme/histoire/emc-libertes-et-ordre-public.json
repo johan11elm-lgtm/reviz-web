@@ -8,8 +8,7 @@
         "Voyager librement d'une ville à l'autre",
         "Choisir librement la personne que l'on épouse",
         "Avoir ses propres opinions politiques",
-        "Choisir sa religion, ou ne pas en avoir",
-        "Dire ce que l'on pense autour de soi"
+        "Choisir sa religion, ou ne pas en avoir"
       ]
     },
     {
@@ -41,8 +40,7 @@
         "Le calme des habitants, par exemple la nuit",
         "L'hygiène des lieux publics, comme l'eau et les déchets",
         "La santé de toute la population",
-        "La protection de chacun contre la violence et les accidents",
-        "Un spectacle de « lancer de nains » contraire à la dignité"
+        "La protection de chacun contre la violence et les accidents"
       ]
     }
   ],
@@ -167,16 +165,6 @@
   ],
   "calculs": [],
   "etapes": [
-    {
-      "titre": "Identifier une liberté et ses limites",
-      "etapes": [
-        "On repère qui agit et ce qu'il veut faire",
-        "On nomme la liberté en jeu : individuelle ou collective",
-        "On cite le texte qui la protège",
-        "On cherche ce qui peut la limiter : autrui ou l'ordre public",
-        "On conclut : la limite est-elle prévue par la loi et proportionnée ?"
-      ]
-    },
     {
       "titre": "Les textes sur les libertés, du plus ancien au plus récent",
       "etapes": [
