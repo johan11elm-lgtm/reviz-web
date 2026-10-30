@@ -16,8 +16,6 @@
       "nom": "Les pays émergents",
       "detail": "Des pays en forte croissance qui s'intègrent à la mondialisation, mais où les inégalités restent fortes.",
       "cartes": [
-        "Une forte croissance économique",
-        "Des inégalités qui restent fortes malgré la croissance",
         "La Chine et l'Inde, géants très peuplés",
         "Le Brésil, l'Afrique du Sud et le Mexique",
         "Une entrée rapide dans la mondialisation"
@@ -27,7 +25,6 @@
       "nom": "Les pays les moins avancés",
       "detail": "Une quarantaine de pays parmi les plus pauvres du monde selon l'ONU, surtout en Afrique subsaharienne.",
       "cartes": [
-        "Un petit groupe d'environ quarante pays",
         "Des pays situés surtout en Afrique subsaharienne",
         "Haïti et l'Afghanistan, en dehors de l'Afrique",
         "Des pays dont fait partie le Niger",
@@ -51,35 +48,55 @@
     {
       "consigne": "De quel type de pays parle le passage en couleur ?",
       "texte": "Le Brésil connaît [une forte croissance économique mais garde de fortes inégalités].",
-      "choix": ["Pays développé", "Pays émergent", "PMA"],
+      "choix": [
+        "Pays développé",
+        "Pays émergent",
+        "PMA"
+      ],
       "bonne": 1,
       "explication": "Une forte croissance qui garde de fortes inégalités caractérise un pays émergent."
     },
     {
       "consigne": "De quel type de pays parle le passage en couleur ?",
       "texte": "La Norvège a [un niveau de vie et un IDH très élevés].",
-      "choix": ["Pays développé", "Pays émergent", "PMA"],
+      "choix": [
+        "Pays développé",
+        "Pays émergent",
+        "PMA"
+      ],
       "bonne": 0,
       "explication": "Un niveau de vie et un IDH élevés caractérisent un pays développé, comme la Norvège."
     },
     {
       "consigne": "De quel type de pays parle le passage en couleur ?",
       "texte": "Haïti figure parmi [les pays les plus pauvres du monde selon l'ONU].",
-      "choix": ["Pays développé", "Pays émergent", "PMA"],
+      "choix": [
+        "Pays développé",
+        "Pays émergent",
+        "PMA"
+      ],
       "bonne": 2,
       "explication": "Les PMA sont les pays les moins avancés, les plus pauvres du monde selon l'ONU."
     },
     {
       "consigne": "De quel type de pays parle le passage en couleur ?",
       "texte": "L'Afrique du Sud est [un pays en forte croissance qui s'intègre à la mondialisation].",
-      "choix": ["Pays développé", "Pays émergent", "PMA"],
+      "choix": [
+        "Pays développé",
+        "Pays émergent",
+        "PMA"
+      ],
       "bonne": 1,
       "explication": "Un pays en forte croissance qui s'intègre à la mondialisation est un pays émergent."
     },
     {
       "consigne": "De quel type de pays parle le passage en couleur ?",
       "texte": "Au Japon, [le niveau de vie et l'IDH sont élevés].",
-      "choix": ["Pays développé", "Pays émergent", "PMA"],
+      "choix": [
+        "Pays développé",
+        "Pays émergent",
+        "PMA"
+      ],
       "bonne": 0,
       "explication": "Le Japon est un pays développé : son niveau de vie et son IDH sont élevés."
     }
@@ -87,7 +104,11 @@
   "devinettes": [
     {
       "reponse": "IDH",
-      "acceptees": ["IDH", "L'IDH", "Indice de développement humain"],
+      "acceptees": [
+        "IDH",
+        "L'IDH",
+        "Indice de développement humain"
+      ],
       "indices": [
         "Je suis une note comprise entre 0 et 1.",
         "Je combine la santé, l'éducation et le niveau de vie.",
@@ -97,7 +118,10 @@
     },
     {
       "reponse": "Banque mondiale",
-      "acceptees": ["Banque mondiale", "La Banque mondiale"],
+      "acceptees": [
+        "Banque mondiale",
+        "La Banque mondiale"
+      ],
       "indices": [
         "Je suis une institution internationale.",
         "C'est moi qui fixe le seuil de l'extrême pauvreté.",
@@ -107,7 +131,10 @@
     },
     {
       "reponse": "Brésil",
-      "acceptees": ["Brésil", "Le Brésil"],
+      "acceptees": [
+        "Brésil",
+        "Le Brésil"
+      ],
       "indices": [
         "Je suis un pays émergent.",
         "Je suis situé en Amérique du Sud.",
@@ -117,7 +144,12 @@
     },
     {
       "reponse": "PMA",
-      "acceptees": ["PMA", "Les PMA", "Pays les moins avancés", "Les pays les moins avancés"],
+      "acceptees": [
+        "PMA",
+        "Les PMA",
+        "Pays les moins avancés",
+        "Les pays les moins avancés"
+      ],
       "indices": [
         "Je regroupe une quarantaine de pays.",
         "On me trouve surtout en Afrique subsaharienne, mais aussi avec Haïti et l'Afghanistan.",

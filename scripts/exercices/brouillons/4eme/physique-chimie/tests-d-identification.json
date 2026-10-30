@@ -30,8 +30,7 @@
         "Il utilise un bout de bois qui rougeoie sans flamme",
         "Il est positif quand la bûchette se rallume",
         "On plonge la bûchette dans un flacon du gaz testé",
-        "Il réussit parce que ce gaz entretient les combustions",
-        "Il échoue si le gaz n'est pas assez pur"
+        "Il réussit parce que ce gaz entretient les combustions"
       ]
     },
     {
@@ -41,7 +40,6 @@
         "Il utilise une flamme approchée de l'ouverture d'un tube",
         "Il est positif quand on entend un « pop »",
         "Le gaz testé est très inflammable",
-        "On le fait avec de petites quantités, sous surveillance",
         "Une petite quantité d'eau se forme pendant la détonation"
       ]
     }
@@ -75,44 +73,50 @@
   "etiquettes": [
     {
       "consigne": "Quelle espèce chimique ce résultat met-il en évidence ?",
-      "texte": "Au-dessus de la bougie, [la poudre blanche devient bleue].",
-      "choix": ["De l'eau", "Du dioxyde de carbone", "Du dioxygène", "Du dihydrogène"],
-      "bonne": 0,
-      "explication": "Le sulfate de cuivre anhydre passe du blanc au bleu au contact de l'eau."
-    },
-    {
-      "consigne": "Quelle espèce chimique ce résultat met-il en évidence ?",
       "texte": "Dans le flacon où le carbone a brûlé, [l'eau de chaux se trouble].",
-      "choix": ["De l'eau", "Du dioxyde de carbone", "Du dioxygène", "Du dihydrogène"],
+      "choix": [
+        "De l'eau",
+        "Du dioxyde de carbone",
+        "Du dioxygène",
+        "Du dihydrogène"
+      ],
       "bonne": 1,
       "explication": "L'eau de chaux se trouble en présence de dioxyde de carbone."
     },
     {
       "consigne": "Quelle espèce chimique ce résultat met-il en évidence ?",
       "texte": "Plongée dans un flacon de gaz pur, [la bûchette incandescente se rallume].",
-      "choix": ["De l'eau", "Du dioxyde de carbone", "Du dioxygène", "Du dihydrogène"],
+      "choix": [
+        "De l'eau",
+        "Du dioxyde de carbone",
+        "Du dioxygène",
+        "Du dihydrogène"
+      ],
       "bonne": 2,
       "explication": "Une bûchette incandescente se rallume au contact du dioxygène pur."
     },
     {
       "consigne": "Quelle espèce chimique ce résultat met-il en évidence ?",
       "texte": "Quand on approche une flamme de l'ouverture du tube, [on entend une petite détonation].",
-      "choix": ["De l'eau", "Du dioxyde de carbone", "Du dioxygène", "Du dihydrogène"],
+      "choix": [
+        "De l'eau",
+        "Du dioxyde de carbone",
+        "Du dioxygène",
+        "Du dihydrogène"
+      ],
       "bonne": 3,
       "explication": "Une petite détonation, un « pop », est le test du dihydrogène."
-    },
-    {
-      "consigne": "Quelle espèce chimique ce résultat met-il en évidence ?",
-      "texte": "On souffle avec une paille dans le liquide limpide : [il devient blanchâtre].",
-      "choix": ["De l'eau", "Du dioxyde de carbone", "Du dioxygène", "Du dihydrogène"],
-      "bonne": 1,
-      "explication": "L'eau de chaux devient blanchâtre en présence du dioxyde de carbone de l'air expiré."
     }
   ],
   "devinettes": [
     {
       "reponse": "Sulfate de cuivre anhydre",
-      "acceptees": ["Sulfate de cuivre anhydre", "Le sulfate de cuivre anhydre", "Sulfate de cuivre", "Le sulfate de cuivre"],
+      "acceptees": [
+        "Sulfate de cuivre anhydre",
+        "Le sulfate de cuivre anhydre",
+        "Sulfate de cuivre",
+        "Le sulfate de cuivre"
+      ],
       "indices": [
         "Je suis une poudre.",
         "Je suis blanche au départ.",
@@ -122,7 +126,12 @@
     },
     {
       "reponse": "Bûchette incandescente",
-      "acceptees": ["Bûchette incandescente", "Une bûchette incandescente", "La bûchette incandescente", "Bûchette"],
+      "acceptees": [
+        "Bûchette incandescente",
+        "Une bûchette incandescente",
+        "La bûchette incandescente",
+        "Bûchette"
+      ],
       "indices": [
         "Je suis un petit morceau de bois.",
         "Je rougeoie, mais sans flamme.",
@@ -132,7 +141,13 @@
     },
     {
       "reponse": "Dihydrogène",
-      "acceptees": ["Dihydrogène", "Le dihydrogène", "Hydrogène", "H2", "H₂"],
+      "acceptees": [
+        "Dihydrogène",
+        "Le dihydrogène",
+        "Hydrogène",
+        "H2",
+        "H₂"
+      ],
       "indices": [
         "Je suis un gaz.",
         "Je suis très inflammable : on ne me teste qu'en petite quantité.",

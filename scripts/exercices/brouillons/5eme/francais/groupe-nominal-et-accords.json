@@ -51,60 +51,78 @@
     {
       "consigne": "Quelle est l'expansion du nom en couleur ?",
       "texte": "Le chevalier [courageux] traverse la forêt.",
-      "choix": ["Adjectif épithète", "Complément du nom", "Proposition relative"],
+      "choix": [
+        "Adjectif épithète",
+        "Complément du nom",
+        "Proposition relative"
+      ],
       "bonne": 0,
       "explication": "« courageux » est un adjectif placé à côté du nom « chevalier » : c'est un adjectif épithète."
     },
     {
       "consigne": "Quelle est l'expansion du nom en couleur ?",
       "texte": "Le forgeron répare l'armure [du chevalier].",
-      "choix": ["Adjectif épithète", "Complément du nom", "Proposition relative"],
+      "choix": [
+        "Adjectif épithète",
+        "Complément du nom",
+        "Proposition relative"
+      ],
       "bonne": 1,
       "explication": "« du chevalier » est introduit par la préposition « de » et complète le nom « armure » : c'est un complément du nom."
     },
     {
       "consigne": "Quelle est l'expansion du nom en couleur ?",
       "texte": "Le roi remercie le chevalier [qui a vaincu le dragon].",
-      "choix": ["Adjectif épithète", "Complément du nom", "Proposition relative"],
+      "choix": [
+        "Adjectif épithète",
+        "Complément du nom",
+        "Proposition relative"
+      ],
       "bonne": 2,
       "explication": "Ce groupe est introduit par le pronom « qui » et contient un verbe conjugué (« a vaincu ») : c'est une proposition relative."
     },
     {
       "consigne": "Quelle est l'expansion du nom en couleur ?",
       "texte": "Perceval rencontre un [vieux] sage dans la forêt.",
-      "choix": ["Adjectif épithète", "Complément du nom", "Proposition relative"],
+      "choix": [
+        "Adjectif épithète",
+        "Complément du nom",
+        "Proposition relative"
+      ],
       "bonne": 0,
       "explication": "« vieux » est un adjectif placé à côté du nom « sage » : c'est un adjectif épithète, même placé avant le nom."
     },
     {
       "consigne": "Quelle est l'expansion du nom en couleur ?",
       "texte": "Le garçon range sa boîte [de crayons] dans son sac.",
-      "choix": ["Adjectif épithète", "Complément du nom", "Proposition relative"],
+      "choix": [
+        "Adjectif épithète",
+        "Complément du nom",
+        "Proposition relative"
+      ],
       "bonne": 1,
       "explication": "« de crayons » est introduit par la préposition « de » et complète le nom « boîte » : c'est un complément du nom."
     },
     {
       "consigne": "Quelle est l'expansion du nom en couleur ?",
       "texte": "La fée [que Perceval rencontre] lui donne un conseil.",
-      "choix": ["Adjectif épithète", "Complément du nom", "Proposition relative"],
+      "choix": [
+        "Adjectif épithète",
+        "Complément du nom",
+        "Proposition relative"
+      ],
       "bonne": 2,
       "explication": "Ce groupe est introduit par le pronom « que » et contient un verbe conjugué (« rencontre ») : c'est une proposition relative."
     }
   ],
   "devinettes": [
     {
-      "reponse": "Nom noyau",
-      "acceptees": ["Le nom noyau", "Noyau", "Le noyau"],
-      "indices": [
-        "Je suis le mot autour duquel tout un groupe de mots s'organise.",
-        "Les autres mots du groupe s'accordent avec moi.",
-        "Dans « un chevalier à l'armure rouge », je suis « chevalier »."
-      ],
-      "explication": "Le nom noyau est le nom principal du groupe nominal : le déterminant et les adjectifs s'accordent avec lui."
-    },
-    {
       "reponse": "Adjectif épithète",
-      "acceptees": ["Épithète", "L'épithète", "Un adjectif épithète"],
+      "acceptees": [
+        "Épithète",
+        "L'épithète",
+        "Un adjectif épithète"
+      ],
       "indices": [
         "Je suis un mot qui décrit.",
         "Je suis placé juste à côté du nom que je qualifie, sans préposition.",
@@ -114,7 +132,11 @@
     },
     {
       "reponse": "Complément du nom",
-      "acceptees": ["Le complément du nom", "CDN", "Complément de nom"],
+      "acceptees": [
+        "Le complément du nom",
+        "CDN",
+        "Complément de nom"
+      ],
       "indices": [
         "Je suis une expansion que l'on peut supprimer.",
         "Une préposition m'introduit : à, de, en…",
@@ -124,7 +146,12 @@
     },
     {
       "reponse": "Proposition relative",
-      "acceptees": ["La proposition relative", "Relative", "Subordonnée relative", "Proposition subordonnée relative"],
+      "acceptees": [
+        "La proposition relative",
+        "Relative",
+        "Subordonnée relative",
+        "Proposition subordonnée relative"
+      ],
       "indices": [
         "Je suis une expansion qui contient un verbe conjugué.",
         "Un pronom comme « qui », « que » ou « dont » m'introduit.",
@@ -134,15 +161,5 @@
     }
   ],
   "calculs": [],
-  "etapes": [
-    {
-      "titre": "Accorder un groupe nominal",
-      "etapes": [
-        "Repérer le nom noyau en remplaçant le groupe par un pronom",
-        "Trouver le genre et le nombre du nom noyau",
-        "Tracer une flèche vers chaque mot qui en dépend",
-        "Vérifier chaque accord sans toucher au complément du nom"
-      ]
-    }
-  ]
+  "etapes": []
 }

@@ -19,7 +19,6 @@
         "L'uranium, un minerai utilisé comme combustible",
         "Source de 65 à 70 % de l'électricité française",
         "Une production qui laisse des déchets radioactifs",
-        "Des risques d'accident dans les centrales",
         "Peu de CO₂ rejeté, mais une ressource non renouvelable"
       ]
     },
@@ -51,53 +50,68 @@
     {
       "consigne": "De quelle famille d'énergie parle-t-on dans le passage en couleur ?",
       "texte": "Les voitures roulent surtout grâce au [pétrole].",
-      "choix": ["Énergie fossile", "Énergie nucléaire", "Énergie renouvelable"],
+      "choix": [
+        "Énergie fossile",
+        "Énergie nucléaire",
+        "Énergie renouvelable"
+      ],
       "bonne": 0,
       "explication": "Le pétrole, comme le charbon et le gaz naturel, est une énergie fossile."
     },
     {
       "consigne": "De quelle famille d'énergie parle-t-on dans le passage en couleur ?",
       "texte": "En France, environ 65 à 70 % de l'électricité vient de [centrales qui utilisent l'uranium].",
-      "choix": ["Énergie fossile", "Énergie nucléaire", "Énergie renouvelable"],
+      "choix": [
+        "Énergie fossile",
+        "Énergie nucléaire",
+        "Énergie renouvelable"
+      ],
       "bonne": 1,
       "explication": "Les centrales qui utilisent l'uranium produisent de l'énergie nucléaire."
     },
     {
       "consigne": "De quelle famille d'énergie parle-t-on dans le passage en couleur ?",
       "texte": "En Chine, [le barrage des Trois-Gorges] produit une énorme quantité d'électricité.",
-      "choix": ["Énergie fossile", "Énergie nucléaire", "Énergie renouvelable"],
+      "choix": [
+        "Énergie fossile",
+        "Énergie nucléaire",
+        "Énergie renouvelable"
+      ],
       "bonne": 2,
       "explication": "Un barrage utilise la force de l'eau : c'est une énergie renouvelable (hydraulique)."
     },
     {
       "consigne": "De quelle famille d'énergie parle-t-on dans le passage en couleur ?",
       "texte": "Sur ce toit, des [panneaux solaires] fournissent de l'électricité les jours de soleil.",
-      "choix": ["Énergie fossile", "Énergie nucléaire", "Énergie renouvelable"],
+      "choix": [
+        "Énergie fossile",
+        "Énergie nucléaire",
+        "Énergie renouvelable"
+      ],
       "bonne": 2,
       "explication": "Le soleil se renouvelle sans cesse : l'énergie solaire est renouvelable."
     },
     {
       "consigne": "De quelle famille d'énergie parle-t-on dans le passage en couleur ?",
       "texte": "Au Qatar, on extrait beaucoup de [gaz naturel].",
-      "choix": ["Énergie fossile", "Énergie nucléaire", "Énergie renouvelable"],
+      "choix": [
+        "Énergie fossile",
+        "Énergie nucléaire",
+        "Énergie renouvelable"
+      ],
       "bonne": 0,
       "explication": "Le gaz naturel est une énergie fossile, comme le pétrole et le charbon."
     }
   ],
   "devinettes": [
     {
-      "reponse": "Trois-Gorges",
-      "acceptees": ["Trois-Gorges", "Les Trois-Gorges", "Trois Gorges", "Barrage des Trois-Gorges", "Le barrage des Trois-Gorges", "Barrage des Trois Gorges"],
-      "indices": [
-        "Je produis une énorme quantité d'électricité sans rejeter de CO₂.",
-        "On m'a construit en Chine, sur le Yangzi.",
-        "Mon lac de retenue a inondé des vallées entières et plus d'un million de personnes ont dû partir."
-      ],
-      "explication": "Le barrage des Trois-Gorges, en Chine, produit beaucoup d'électricité mais a déplacé plus d'un million de personnes."
-    },
-    {
       "reponse": "Le nucléaire",
-      "acceptees": ["Nucléaire", "Le nucléaire", "L'énergie nucléaire", "Énergie nucléaire"],
+      "acceptees": [
+        "Nucléaire",
+        "Le nucléaire",
+        "L'énergie nucléaire",
+        "Énergie nucléaire"
+      ],
       "indices": [
         "Je rejette très peu de CO₂, mais je ne suis pas renouvelable.",
         "J'utilise l'uranium, un minerai en quantité limitée.",
@@ -107,7 +121,10 @@
     },
     {
       "reponse": "Géothermie",
-      "acceptees": ["Géothermie", "La géothermie"],
+      "acceptees": [
+        "Géothermie",
+        "La géothermie"
+      ],
       "indices": [
         "Je suis une énergie qui se renouvelle rapidement.",
         "Je ne dépends ni du vent ni du soleil.",

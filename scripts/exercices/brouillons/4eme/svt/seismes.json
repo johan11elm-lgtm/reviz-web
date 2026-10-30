@@ -8,8 +8,7 @@
         "Des forces appelées contraintes déforment lentement les roches",
         "Les roches se déforment sans encore casser",
         "Une règle en bois qu'on plie lentement",
-        "Les forces agissent pendant très longtemps",
-        "On pousse lentement les couches de pâte à modeler"
+        "Les forces agissent pendant très longtemps"
       ]
     },
     {
@@ -19,8 +18,7 @@
         "Les roches cassent brutalement le long d'une faille",
         "Les deux blocs se décalent : c'est le rejet",
         "La limite de résistance des roches est dépassée",
-        "L'énergie est libérée d'un seul coup",
-        "La pâte à modeler casse d'un coup"
+        "L'énergie est libérée d'un seul coup"
       ]
     },
     {
@@ -76,35 +74,60 @@
     {
       "consigne": "Quel mot désigne le passage en couleur ?",
       "texte": "En comparant l'heure d'arrivée des ondes dans trois stations, on retrouve [le point de la surface placé à la verticale de la rupture].",
-      "choix": ["Foyer", "Épicentre", "Faille", "Sismogramme"],
+      "choix": [
+        "Foyer",
+        "Épicentre",
+        "Faille",
+        "Sismogramme"
+      ],
       "bonne": 1,
       "explication": "Le point de la surface situé à la verticale du foyer est l'épicentre."
     },
     {
       "consigne": "Quel mot désigne le passage en couleur ?",
       "texte": "Après le séisme, on observe [une cassure des roches le long de laquelle deux blocs se sont déplacés].",
-      "choix": ["Foyer", "Épicentre", "Faille", "Sismogramme"],
+      "choix": [
+        "Foyer",
+        "Épicentre",
+        "Faille",
+        "Sismogramme"
+      ],
       "bonne": 2,
       "explication": "Une cassure des roches avec déplacement de deux blocs est une faille."
     },
     {
       "consigne": "Quel mot désigne le passage en couleur ?",
       "texte": "Sous la surface, les roches cassent d'abord en un point, [le point où commence la rupture], avant que les ondes ne partent.",
-      "choix": ["Foyer", "Épicentre", "Faille", "Sismogramme"],
+      "choix": [
+        "Foyer",
+        "Épicentre",
+        "Faille",
+        "Sismogramme"
+      ],
       "bonne": 0,
       "explication": "Le point en profondeur où commence la rupture est le foyer (ou hypocentre)."
     },
     {
       "consigne": "Quel mot désigne le passage en couleur ?",
       "texte": "Le sismomètre de la station fournit [un enregistrement des vibrations du sol].",
-      "choix": ["Foyer", "Épicentre", "Faille", "Sismogramme"],
+      "choix": [
+        "Foyer",
+        "Épicentre",
+        "Faille",
+        "Sismogramme"
+      ],
       "bonne": 3,
       "explication": "L'enregistrement des vibrations du sol par un sismomètre s'appelle un sismogramme."
     },
     {
       "consigne": "Quel mot désigne le passage en couleur ?",
       "texte": "Les deux blocs de roche se sont déplacés l'un par rapport à l'autre le long de [la cassure].",
-      "choix": ["Foyer", "Épicentre", "Faille", "Sismogramme"],
+      "choix": [
+        "Foyer",
+        "Épicentre",
+        "Faille",
+        "Sismogramme"
+      ],
       "bonne": 2,
       "explication": "La cassure le long de laquelle deux blocs se déplacent est une faille."
     }
@@ -112,7 +135,11 @@
   "devinettes": [
     {
       "reponse": "Épicentre",
-      "acceptees": ["Épicentre", "L'épicentre", "Un épicentre"],
+      "acceptees": [
+        "Épicentre",
+        "L'épicentre",
+        "Un épicentre"
+      ],
       "indices": [
         "Je suis un point que l'on place sur une carte.",
         "Je me trouve à la surface de la Terre.",
@@ -122,7 +149,10 @@
     },
     {
       "reponse": "Magnitude",
-      "acceptees": ["Magnitude", "La magnitude"],
+      "acceptees": [
+        "Magnitude",
+        "La magnitude"
+      ],
       "indices": [
         "Je suis une mesure liée aux séismes.",
         "Un séisme n'en a qu'une seule.",
@@ -132,7 +162,11 @@
     },
     {
       "reponse": "Sismogramme",
-      "acceptees": ["Sismogramme", "Le sismogramme", "Un sismogramme"],
+      "acceptees": [
+        "Sismogramme",
+        "Le sismogramme",
+        "Un sismogramme"
+      ],
       "indices": [
         "Je suis un enregistrement.",
         "Je suis obtenu avec un sismomètre.",
@@ -142,7 +176,12 @@
     },
     {
       "reponse": "Tsunami",
-      "acceptees": ["Tsunami", "Un tsunami", "Le tsunami", "Raz-de-marée"],
+      "acceptees": [
+        "Tsunami",
+        "Un tsunami",
+        "Le tsunami",
+        "Raz-de-marée"
+      ],
       "indices": [
         "Je suis un danger lié à certains séismes.",
         "Je peux apparaître après un séisme sous la mer.",

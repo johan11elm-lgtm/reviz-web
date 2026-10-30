@@ -75,36 +75,49 @@
   "etiquettes": [
     {
       "consigne": "Comment appelle-t-on la situation décrite dans le passage en couleur ?",
-      "texte": "Dans cette famille, [les enfants ne mangent pas assez de calories chaque jour].",
-      "choix": ["Sous-nutrition", "Malnutrition", "Famine", "Sécurité alimentaire"],
-      "bonne": 0,
-      "explication": "Un apport insuffisant en calories, c'est de la sous-nutrition : le problème est la quantité."
-    },
-    {
-      "consigne": "Comment appelle-t-on la situation décrite dans le passage en couleur ?",
       "texte": "Dans ce pays riche, [une alimentation trop riche en graisses et en sucres] provoque de l'obésité.",
-      "choix": ["Sous-nutrition", "Malnutrition", "Famine", "Sécurité alimentaire"],
+      "choix": [
+        "Sous-nutrition",
+        "Malnutrition",
+        "Famine",
+        "Sécurité alimentaire"
+      ],
       "bonne": 1,
       "explication": "Une alimentation déséquilibrée par excès est de la malnutrition, comme l'obésité."
     },
     {
       "consigne": "Comment appelle-t-on la situation décrite dans le passage en couleur ?",
       "texte": "Après des mois de guerre, [toute la population manque de nourriture et des milliers de personnes meurent].",
-      "choix": ["Sous-nutrition", "Malnutrition", "Famine", "Sécurité alimentaire"],
+      "choix": [
+        "Sous-nutrition",
+        "Malnutrition",
+        "Famine",
+        "Sécurité alimentaire"
+      ],
       "bonne": 2,
       "explication": "Un manque extrême de nourriture qui touche toute une population et fait de nombreux morts, c'est une famine."
     },
     {
       "consigne": "Comment appelle-t-on la situation décrite dans le passage en couleur ?",
       "texte": "Dans ce pays, [chacun peut à tout moment se procurer une nourriture suffisante, saine et nutritive].",
-      "choix": ["Sous-nutrition", "Malnutrition", "Famine", "Sécurité alimentaire"],
+      "choix": [
+        "Sous-nutrition",
+        "Malnutrition",
+        "Famine",
+        "Sécurité alimentaire"
+      ],
       "bonne": 3,
       "explication": "Quand tous ont accès à tout moment à une nourriture suffisante et saine, il y a sécurité alimentaire."
     },
     {
       "consigne": "Comment appelle-t-on la situation décrite dans le passage en couleur ?",
       "texte": "Malgré des repas copieux, cet enfant souffre de [carences en vitamines et en fer].",
-      "choix": ["Sous-nutrition", "Malnutrition", "Famine", "Sécurité alimentaire"],
+      "choix": [
+        "Sous-nutrition",
+        "Malnutrition",
+        "Famine",
+        "Sécurité alimentaire"
+      ],
       "bonne": 1,
       "explication": "Des repas copieux mais déséquilibrés, avec des carences en vitamines et en fer, c'est de la malnutrition."
     }
@@ -112,7 +125,11 @@
   "devinettes": [
     {
       "reponse": "FAO",
-      "acceptees": ["FAO", "La FAO", "Organisation des Nations unies pour l'alimentation et l'agriculture"],
+      "acceptees": [
+        "FAO",
+        "La FAO",
+        "Organisation des Nations unies pour l'alimentation et l'agriculture"
+      ],
       "indices": [
         "Je suis une organisation rattachée à l'ONU.",
         "Chaque année, je compte combien de personnes souffrent de la faim.",
@@ -122,23 +139,16 @@
     },
     {
       "reponse": "Commerce équitable",
-      "acceptees": ["Commerce équitable", "Le commerce équitable"],
+      "acceptees": [
+        "Commerce équitable",
+        "Le commerce équitable"
+      ],
       "indices": [
         "Je concerne les petits producteurs du Sud.",
         "Je concerne surtout le café, le cacao et les bananes.",
         "Je garantis un prix juste et stable à ceux qui produisent."
       ],
       "explication": "Le commerce équitable garantit aux petits producteurs du Sud un prix juste et stable."
-    },
-    {
-      "reponse": "Agroécologie",
-      "acceptees": ["Agroécologie", "L'agroécologie", "Agro-écologie", "L'agro-écologie"],
-      "indices": [
-        "Je suis une manière de cultiver la terre et d'élever des animaux.",
-        "Je m'appuie sur le fonctionnement de la nature.",
-        "Je pratique la rotation des cultures et je plante des haies."
-      ],
-      "explication": "L'agroécologie s'appuie sur le fonctionnement de la nature : rotation des cultures, haies, association avec l'élevage."
     }
   ],
   "calculs": [],

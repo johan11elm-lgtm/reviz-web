@@ -51,42 +51,72 @@
     {
       "consigne": "Que signifie la racine en couleur ?",
       "texte": "Au collège, on étudie la [bio]logie.",
-      "choix": ["La vie", "Le temps", "La terre", "Le son"],
+      "choix": [
+        "La vie",
+        "Le temps",
+        "La terre",
+        "Le son"
+      ],
       "bonne": 0,
       "explication": "La racine grecque « bio » signifie la vie : la biologie est la science du vivant."
     },
     {
       "consigne": "Que signifie la racine en couleur ?",
       "texte": "Le coureur regarde son [chrono]mètre.",
-      "choix": ["La vie", "Le temps", "La terre", "Le son"],
+      "choix": [
+        "La vie",
+        "Le temps",
+        "La terre",
+        "Le son"
+      ],
       "bonne": 1,
       "explication": "La racine grecque « chrono » signifie le temps : un chronomètre mesure une durée."
     },
     {
       "consigne": "Que signifie la racine en couleur ?",
       "texte": "Nous étudions la [géo]graphie des continents.",
-      "choix": ["La vie", "Le temps", "La terre", "Le son"],
+      "choix": [
+        "La vie",
+        "Le temps",
+        "La terre",
+        "Le son"
+      ],
       "bonne": 2,
       "explication": "La racine grecque « géo » signifie la terre : la géographie décrit la Terre."
     },
     {
       "consigne": "Que signifie la racine en couleur ?",
       "texte": "Elle répond au télé[phone].",
-      "choix": ["La vie", "Le temps", "La terre", "Le son"],
+      "choix": [
+        "La vie",
+        "Le temps",
+        "La terre",
+        "Le son"
+      ],
       "bonne": 3,
       "explication": "La racine grecque « phone » signifie le son, la voix : le téléphone transmet la voix au loin."
     },
     {
       "consigne": "Que signifie la racine en couleur ?",
       "texte": "J'ai lu une [bio]graphie de Napoléon.",
-      "choix": ["La vie", "Le temps", "La terre", "Le son"],
+      "choix": [
+        "La vie",
+        "Le temps",
+        "La terre",
+        "Le son"
+      ],
       "bonne": 0,
       "explication": "« Bio » signifie la vie et « graph » écrire : une biographie écrit la vie de quelqu'un."
     },
     {
       "consigne": "Que signifie la racine en couleur ?",
       "texte": "Elle apprend la [chrono]logie de la Révolution.",
-      "choix": ["La vie", "Le temps", "La terre", "Le son"],
+      "choix": [
+        "La vie",
+        "Le temps",
+        "La terre",
+        "Le son"
+      ],
       "bonne": 1,
       "explication": "« Chrono » signifie le temps et « logie » science, discours : la chronologie range les événements dans le temps."
     }
@@ -94,7 +124,11 @@
   "devinettes": [
     {
       "reponse": "Préfixe",
-      "acceptees": ["Un préfixe", "Le préfixe", "Préfixes"],
+      "acceptees": [
+        "Un préfixe",
+        "Le préfixe",
+        "Préfixes"
+      ],
       "indices": [
         "Je suis un élément qui sert à former des mots nouveaux.",
         "Je me place avant le radical.",
@@ -104,7 +138,10 @@
     },
     {
       "reponse": "Polysémie",
-      "acceptees": ["La polysémie", "Polysémique"],
+      "acceptees": [
+        "La polysémie",
+        "Polysémique"
+      ],
       "indices": [
         "Je suis une propriété de certains mots.",
         "Grâce à moi, « feuille » peut désigner une feuille d'arbre ou une feuille de papier.",
@@ -114,7 +151,11 @@
     },
     {
       "reponse": "Paronymes",
-      "acceptees": ["Les paronymes", "Paronyme", "Un paronyme"],
+      "acceptees": [
+        "Les paronymes",
+        "Paronyme",
+        "Un paronyme"
+      ],
       "indices": [
         "Je désigne des mots qu'on risque de confondre.",
         "Mes mots ont une forme proche mais un sens différent.",
@@ -124,7 +165,11 @@
     },
     {
       "reponse": "Famille de mots",
-      "acceptees": ["Une famille de mots", "La famille de mots", "Famille"],
+      "acceptees": [
+        "Une famille de mots",
+        "La famille de mots",
+        "Famille"
+      ],
       "indices": [
         "Je réunis des mots.",
         "Mes mots partagent le même radical.",
@@ -134,15 +179,5 @@
     }
   ],
   "calculs": [],
-  "etapes": [
-    {
-      "titre": "Les étapes pour deviner le sens d'un mot inconnu",
-      "etapes": [
-        "On découpe le mot en préfixe, radical et suffixe",
-        "On cherche un mot de la même famille ou une racine connue",
-        "On assemble les sens des éléments",
-        "On vérifie que ce sens convient à la phrase"
-      ]
-    }
-  ]
+  "etapes": []
 }

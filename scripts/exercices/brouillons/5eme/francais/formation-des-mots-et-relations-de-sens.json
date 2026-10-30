@@ -51,42 +51,66 @@
     {
       "consigne": "Comment le mot en couleur est-il formé ?",
       "texte": "Les ouvriers vont [replanter] des arbres dans le parc.",
-      "choix": ["Dérivation avec un préfixe", "Dérivation avec un suffixe", "Composition"],
+      "choix": [
+        "Dérivation avec un préfixe",
+        "Dérivation avec un suffixe",
+        "Composition"
+      ],
       "bonne": 0,
       "explication": "« replanter » = le préfixe re- (de nouveau) + le verbe « planter » : on a ajouté un préfixe avant le radical."
     },
     {
       "consigne": "Comment le mot en couleur est-il formé ?",
       "texte": "La [fillette] chante dans la cour de l'école.",
-      "choix": ["Dérivation avec un préfixe", "Dérivation avec un suffixe", "Composition"],
+      "choix": [
+        "Dérivation avec un préfixe",
+        "Dérivation avec un suffixe",
+        "Composition"
+      ],
       "bonne": 1,
       "explication": "« fillette » = le nom « fille » + le suffixe -ette (petitesse) : on a ajouté un suffixe après le radical."
     },
     {
       "consigne": "Comment le mot en couleur est-il formé ?",
       "texte": "Maman range ses pièces dans son [porte-monnaie].",
-      "choix": ["Dérivation avec un préfixe", "Dérivation avec un suffixe", "Composition"],
+      "choix": [
+        "Dérivation avec un préfixe",
+        "Dérivation avec un suffixe",
+        "Composition"
+      ],
       "bonne": 2,
       "explication": "« porte-monnaie » assemble deux mots, « porte » et « monnaie » : c'est une composition."
     },
     {
       "consigne": "Comment le mot en couleur est-il formé ?",
       "texte": "Ce pull en laine est [lavable] en machine.",
-      "choix": ["Dérivation avec un préfixe", "Dérivation avec un suffixe", "Composition"],
+      "choix": [
+        "Dérivation avec un préfixe",
+        "Dérivation avec un suffixe",
+        "Composition"
+      ],
       "bonne": 1,
       "explication": "« lavable » = le radical « lav- » + le suffixe -able (qui peut être) : on a ajouté un suffixe."
     },
     {
       "consigne": "Comment le mot en couleur est-il formé ?",
       "texte": "Il doit [défaire] son sac avant le dîner.",
-      "choix": ["Dérivation avec un préfixe", "Dérivation avec un suffixe", "Composition"],
+      "choix": [
+        "Dérivation avec un préfixe",
+        "Dérivation avec un suffixe",
+        "Composition"
+      ],
       "bonne": 0,
       "explication": "« défaire » = le préfixe dé- (action inverse) + le verbe « faire » : on a ajouté un préfixe."
     },
     {
       "consigne": "Comment le mot en couleur est-il formé ?",
       "texte": "Au marché, j'ai acheté un [chou-fleur].",
-      "choix": ["Dérivation avec un préfixe", "Dérivation avec un suffixe", "Composition"],
+      "choix": [
+        "Dérivation avec un préfixe",
+        "Dérivation avec un suffixe",
+        "Composition"
+      ],
       "bonne": 2,
       "explication": "« chou-fleur » assemble deux mots, « chou » et « fleur » : c'est une composition."
     }
@@ -94,7 +118,9 @@
   "devinettes": [
     {
       "reponse": "Préfixe",
-      "acceptees": ["Préfixes"],
+      "acceptees": [
+        "Préfixes"
+      ],
       "indices": [
         "Je fais partie d'un mot.",
         "Je suis placé avant le radical.",
@@ -103,18 +129,11 @@
       "explication": "Le préfixe est placé avant le radical et modifie le sens du mot : re- signifie « de nouveau »."
     },
     {
-      "reponse": "Étymologie",
-      "acceptees": ["L'étymologie"],
-      "indices": [
-        "Je m'intéresse à l'histoire des mots.",
-        "Je cherche souvent du côté du latin ou du grec.",
-        "Je t'apprends que « chronos » signifie « temps » en grec."
-      ],
-      "explication": "L'étymologie est l'origine et l'histoire d'un mot : chronos (temps) donne chronologie."
-    },
-    {
       "reponse": "Champ lexical",
-      "acceptees": ["Le champ lexical", "Champs lexicaux"],
+      "acceptees": [
+        "Le champ lexical",
+        "Champs lexicaux"
+      ],
       "indices": [
         "Je suis un ensemble de mots d'un texte.",
         "Je réunis les mots qui se rapportent au même thème.",
@@ -124,7 +143,9 @@
     },
     {
       "reponse": "Polysémie",
-      "acceptees": ["La polysémie"],
+      "acceptees": [
+        "La polysémie"
+      ],
       "indices": [
         "Je suis une particularité de certains mots.",
         "Je permets à un même mot d'avoir plusieurs sens selon le contexte.",
@@ -134,15 +155,5 @@
     }
   ],
   "calculs": [],
-  "etapes": [
-    {
-      "titre": "Comprendre un mot inconnu",
-      "etapes": [
-        "Relire la phrase pour deviner le sens grâce au contexte",
-        "Décomposer le mot en préfixe, radical et suffixe",
-        "Chercher un mot de la même famille que l'on connaît",
-        "Vérifier dans le dictionnaire le sens qui convient"
-      ]
-    }
-  ]
+  "etapes": []
 }

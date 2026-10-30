@@ -123,19 +123,6 @@
   ],
   "devinettes": [
     {
-      "reponse": "However",
-      "acceptees": [
-        "However,",
-        "Nevertheless"
-      ],
-      "indices": [
-        "Je suis un mot anglais qui sert à argumenter.",
-        "Je marque l'opposition entre deux idées.",
-        "Je me place en début de phrase, suivi d'une virgule, et je veux dire « cependant »."
-      ],
-      "explication": "However (cependant) oppose deux idées et se place en début de phrase, suivi d'une virgule."
-    },
-    {
       "reponse": "That's why",
       "acceptees": [
         "That is why",
@@ -147,32 +134,10 @@
         "Je veux dire « c'est pourquoi »."
       ],
       "explication": "That's why (c'est pourquoi) introduit la conséquence dans une nouvelle phrase."
-    },
-    {
-      "reponse": "Because of",
-      "acceptees": [
-        "Due to",
-        "Owing to"
-      ],
-      "indices": [
-        "Je suis une expression qui explique pourquoi quelque chose arrive.",
-        "Je suis suivi d'un nom, pas d'un verbe conjugué.",
-        "Je veux dire « à cause de »."
-      ],
-      "explication": "Because of (à cause de) est suivi d'un nom : because of my phone."
     }
   ],
   "calculs": [],
   "etapes": [
-    {
-      "titre": "Rédiger un court paragraphe argumenté",
-      "etapes": [
-        "Annonce ton opinion : In my opinion…",
-        "Donne deux arguments dans l'ordre : Firstly… Secondly…",
-        "Nuance avec un argument contraire : However…",
-        "Conclus avec Finally… ou That's why…"
-      ]
-    },
     {
       "titre": "Un paragraphe sur les écrans",
       "etapes": [

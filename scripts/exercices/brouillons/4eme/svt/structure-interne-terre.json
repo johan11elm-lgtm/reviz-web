@@ -8,8 +8,7 @@
         "Roches de type granite sous les continents",
         "Épaisse d'environ 7 km sous les océans",
         "Peut atteindre 70 km d'épaisseur sous les montagnes",
-        "Enveloppe la plus superficielle de la Terre",
-        "Trop fine pour être dessinée sur un modèle à l'échelle"
+        "Enveloppe la plus superficielle de la Terre"
       ]
     },
     {
@@ -19,8 +18,7 @@
         "Formé surtout de péridotite",
         "Contient l'asthénosphère, plus chaude et plus déformable",
         "S'étend du Moho jusqu'à 2 900 km de profondeur",
-        "Sa partie haute forme la lithosphère avec la croûte",
-        "Siège de mouvements très lents dus à la chaleur interne"
+        "Sa partie haute forme la lithosphère avec la croûte"
       ]
     },
     {
@@ -51,42 +49,66 @@
     {
       "consigne": "Quel est l'état physique de l'enveloppe en couleur ?",
       "texte": "À 1 500 km de profondeur, on traverse [le manteau].",
-      "choix": ["Solide", "Liquide", "Gazeux"],
+      "choix": [
+        "Solide",
+        "Liquide",
+        "Gazeux"
+      ],
       "bonne": 0,
       "explication": "Le manteau est solide : il se déforme très lentement mais il n'est pas liquide."
     },
     {
       "consigne": "Quel est l'état physique de l'enveloppe en couleur ?",
       "texte": "À 4 000 km de profondeur, on traverse [le noyau externe].",
-      "choix": ["Solide", "Liquide", "Gazeux"],
+      "choix": [
+        "Solide",
+        "Liquide",
+        "Gazeux"
+      ],
       "bonne": 1,
       "explication": "Le noyau externe, entre 2 900 et 5 150 km de profondeur, est la seule enveloppe liquide."
     },
     {
       "consigne": "Quel est l'état physique de l'enveloppe en couleur ?",
       "texte": "Tout au centre de la Terre se trouve [la graine].",
-      "choix": ["Solide", "Liquide", "Gazeux"],
+      "choix": [
+        "Solide",
+        "Liquide",
+        "Gazeux"
+      ],
       "bonne": 0,
       "explication": "La graine, ou noyau interne, est solide."
     },
     {
       "consigne": "Quel est l'état physique de l'enveloppe en couleur ?",
       "texte": "Sous la lithosphère, [l'asthénosphère] est plus chaude et plus déformable.",
-      "choix": ["Solide", "Liquide", "Gazeux"],
+      "choix": [
+        "Solide",
+        "Liquide",
+        "Gazeux"
+      ],
       "bonne": 0,
       "explication": "L'asthénosphère fait partie du manteau : elle est plus déformable, mais elle reste solide."
     },
     {
       "consigne": "Quel est l'état physique de l'enveloppe en couleur ?",
       "texte": "Sous l'océan, [la croûte océanique] forme une pellicule d'environ 7 km.",
-      "choix": ["Solide", "Liquide", "Gazeux"],
+      "choix": [
+        "Solide",
+        "Liquide",
+        "Gazeux"
+      ],
       "bonne": 0,
       "explication": "La croûte est solide, qu'elle soit continentale ou océanique."
     },
     {
       "consigne": "Quel est l'état physique de l'enveloppe en couleur ?",
       "texte": "Les ondes S ne traversent pas [le noyau externe].",
-      "choix": ["Solide", "Liquide", "Gazeux"],
+      "choix": [
+        "Solide",
+        "Liquide",
+        "Gazeux"
+      ],
       "bonne": 1,
       "explication": "Les ondes S ne traversent pas les liquides : leur blocage montre que le noyau externe est liquide."
     }
@@ -94,7 +116,11 @@
   "devinettes": [
     {
       "reponse": "Moho",
-      "acceptees": ["Le Moho", "Mohorovicic", "Discontinuité de Mohorovičić"],
+      "acceptees": [
+        "Le Moho",
+        "Mohorovicic",
+        "Discontinuité de Mohorovičić"
+      ],
       "indices": [
         "Je suis une limite, pas une enveloppe.",
         "Les ondes sismiques changent de vitesse quand elles me traversent.",
@@ -104,7 +130,9 @@
     },
     {
       "reponse": "Lithosphère",
-      "acceptees": ["La lithosphère"],
+      "acceptees": [
+        "La lithosphère"
+      ],
       "indices": [
         "Je suis une enveloppe rigide.",
         "Je suis épaisse d'environ 100 km et découpée en plaques.",
@@ -114,7 +142,11 @@
     },
     {
       "reponse": "Ondes S",
-      "acceptees": ["Onde S", "Les ondes S", "Ondes secondaires"],
+      "acceptees": [
+        "Onde S",
+        "Les ondes S",
+        "Ondes secondaires"
+      ],
       "indices": [
         "Je suis produite par un séisme et je traverse l'intérieur de la Terre.",
         "Je ne traverse pas les liquides.",

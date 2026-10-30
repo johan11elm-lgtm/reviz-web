@@ -30,7 +30,6 @@
         "30 naissances moins 10 décès, soit +20 pour 1 000 habitants",
         "La différence entre le nombre de naissances et de décès",
         "Un résultat négatif si les décès dépassent les naissances",
-        "Sur 1 000 habitants : 12 naissances et 8 décès dans l'année",
         "L'écart qui grandit après 1950, car les décès baissent"
       ]
     },
@@ -82,35 +81,60 @@
     {
       "consigne": "Que représente le passage en couleur ?",
       "texte": "Dans ce pays, [35 bébés sont nés pour 1 000 habitants] cette année.",
-      "choix": ["Un taux de natalité", "Un taux de mortalité", "Un accroissement naturel", "Une densité"],
+      "choix": [
+        "Un taux de natalité",
+        "Un taux de mortalité",
+        "Un accroissement naturel",
+        "Une densité"
+      ],
       "bonne": 0,
       "explication": "Le nombre de naissances pour 1 000 habitants en un an est le taux de natalité."
     },
     {
       "consigne": "Que représente le passage en couleur ?",
       "texte": "Cette année, [9 personnes sont mortes pour 1 000 habitants].",
-      "choix": ["Un taux de natalité", "Un taux de mortalité", "Un accroissement naturel", "Une densité"],
+      "choix": [
+        "Un taux de natalité",
+        "Un taux de mortalité",
+        "Un accroissement naturel",
+        "Une densité"
+      ],
       "bonne": 1,
       "explication": "Le nombre de décès pour 1 000 habitants en un an est le taux de mortalité."
     },
     {
       "consigne": "Que représente le passage en couleur ?",
       "texte": "Ce pays compte 25 naissances et 9 décès pour 1 000 habitants : [la différence est de 16 pour 1 000].",
-      "choix": ["Un taux de natalité", "Un taux de mortalité", "Un accroissement naturel", "Une densité"],
+      "choix": [
+        "Un taux de natalité",
+        "Un taux de mortalité",
+        "Un accroissement naturel",
+        "Une densité"
+      ],
       "bonne": 2,
       "explication": "La différence entre les naissances et les décès est l'accroissement naturel : 25 − 9 = 16 pour 1 000."
     },
     {
       "consigne": "Que représente le passage en couleur ?",
       "texte": "Sur cette île, [100 habitants vivent sur chaque km²] en moyenne.",
-      "choix": ["Un taux de natalité", "Un taux de mortalité", "Un accroissement naturel", "Une densité"],
+      "choix": [
+        "Un taux de natalité",
+        "Un taux de mortalité",
+        "Un accroissement naturel",
+        "Une densité"
+      ],
       "bonne": 3,
       "explication": "Un nombre moyen d'habitants par km² est une densité."
     },
     {
       "consigne": "Que représente le passage en couleur ?",
       "texte": "Dans cette ville, [on compte 6 naissances de moins que de décès pour 1 000 habitants].",
-      "choix": ["Un taux de natalité", "Un taux de mortalité", "Un accroissement naturel", "Une densité"],
+      "choix": [
+        "Un taux de natalité",
+        "Un taux de mortalité",
+        "Un accroissement naturel",
+        "Une densité"
+      ],
       "bonne": 2,
       "explication": "Avec moins de naissances que de décès, l'accroissement naturel est négatif : ici −6 pour 1 000."
     }
@@ -118,7 +142,12 @@
   "devinettes": [
     {
       "reponse": "Nigeria",
-      "acceptees": ["Nigeria", "Le Nigeria", "Nigéria", "Le Nigéria"],
+      "acceptees": [
+        "Nigeria",
+        "Le Nigeria",
+        "Nigéria",
+        "Le Nigéria"
+      ],
       "indices": [
         "Je suis un pays d'Afrique, près du golfe de Guinée.",
         "Je suis le pays le plus peuplé d'Afrique.",
@@ -128,7 +157,10 @@
     },
     {
       "reponse": "Inde",
-      "acceptees": ["Inde", "L'Inde"],
+      "acceptees": [
+        "Inde",
+        "L'Inde"
+      ],
       "indices": [
         "Je suis un pays d'Asie du Sud.",
         "Je compte plus de 1,4 milliard d'habitants.",
@@ -138,7 +170,13 @@
     },
     {
       "reponse": "ONU",
-      "acceptees": ["ONU", "L'ONU", "Nations unies", "Les Nations unies", "Organisation des Nations unies"],
+      "acceptees": [
+        "ONU",
+        "L'ONU",
+        "Nations unies",
+        "Les Nations unies",
+        "Organisation des Nations unies"
+      ],
       "indices": [
         "Je suis une organisation internationale.",
         "J'ai annoncé que la Terre comptait 8 milliards d'habitants en novembre 2022.",

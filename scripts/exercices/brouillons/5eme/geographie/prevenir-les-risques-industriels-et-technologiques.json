@@ -7,16 +7,13 @@
       "cartes": [
         "Une fuite de gaz toxique dans une usine de pesticides",
         "Un accident survenu en Inde, en décembre 1984",
-        "Des milliers de morts parmi les habitants voisins",
-        "Des contrôles insuffisants dans l'usine",
-        "Des quartiers pauvres bâtis tout près de l'usine"
+        "Des milliers de morts parmi les habitants voisins"
       ]
     },
     {
       "nom": "La catastrophe de Tchernobyl",
       "detail": "Le 26 avril 1986, en Ukraine alors soviétique, un réacteur nucléaire explose et un nuage radioactif passe sur l'Europe.",
       "cartes": [
-        "Un réacteur de centrale nucléaire explose",
         "Un nuage radioactif passe sur l'Europe",
         "Une zone d'exclusion de 30 km entoure la centrale",
         "Un accident survenu en Ukraine, alors en URSS",
@@ -76,35 +73,60 @@
     {
       "consigne": "Quelle notion le passage en couleur désigne-t-il ?",
       "texte": "Dans cette usine chimique, [une explosion] peut se produire à tout moment.",
-      "choix": ["Aléa", "Enjeux", "Vulnérabilité", "Risque"],
+      "choix": [
+        "Aléa",
+        "Enjeux",
+        "Vulnérabilité",
+        "Risque"
+      ],
       "bonne": 0,
       "explication": "Un aléa est un phénomène dangereux qui peut se produire : explosion, incendie, fuite toxique."
     },
     {
       "consigne": "Quelle notion le passage en couleur désigne-t-il ?",
       "texte": "Autour de l'usine, [les habitants, l'école et la route voisine] sont exposés au danger.",
-      "choix": ["Aléa", "Enjeux", "Vulnérabilité", "Risque"],
+      "choix": [
+        "Aléa",
+        "Enjeux",
+        "Vulnérabilité",
+        "Risque"
+      ],
       "bonne": 1,
       "explication": "Les enjeux sont les personnes, les biens et les activités exposés à un aléa."
     },
     {
       "consigne": "Quelle notion le passage en couleur désigne-t-il ?",
       "texte": "Les maisons touchent l'usine et personne ne connaît les consignes : [la fragilité des habitants face à l'explosion] est très forte.",
-      "choix": ["Aléa", "Enjeux", "Vulnérabilité", "Risque"],
+      "choix": [
+        "Aléa",
+        "Enjeux",
+        "Vulnérabilité",
+        "Risque"
+      ],
       "bonne": 2,
       "explication": "La vulnérabilité est la fragilité des enjeux face à un aléa."
     },
     {
       "consigne": "Quelle notion le passage en couleur désigne-t-il ?",
       "texte": "Quand une usine dangereuse est tout près d'un quartier, [la possibilité qu'une explosion fasse des victimes] est élevée.",
-      "choix": ["Aléa", "Enjeux", "Vulnérabilité", "Risque"],
+      "choix": [
+        "Aléa",
+        "Enjeux",
+        "Vulnérabilité",
+        "Risque"
+      ],
       "bonne": 3,
       "explication": "Le risque est la possibilité qu'un aléa touche des enjeux et provoque des dégâts."
     },
     {
       "consigne": "Quelle notion le passage en couleur désigne-t-il ?",
       "texte": "Dans la zone de danger, [les logements, les commerces et les salariés de l'usine] sont exposés.",
-      "choix": ["Aléa", "Enjeux", "Vulnérabilité", "Risque"],
+      "choix": [
+        "Aléa",
+        "Enjeux",
+        "Vulnérabilité",
+        "Risque"
+      ],
       "bonne": 1,
       "explication": "Les logements, les commerces et les salariés sont des enjeux : des biens, des activités et des personnes exposés à l'aléa."
     }
@@ -112,7 +134,10 @@
   "devinettes": [
     {
       "reponse": "Tchernobyl",
-      "acceptees": ["Tchernobyl", "Chernobyl"],
+      "acceptees": [
+        "Tchernobyl",
+        "Chernobyl"
+      ],
       "indices": [
         "Mon nom reste associé à une catastrophe de 1986.",
         "Un nuage radioactif est parti de chez moi et a traversé l'Europe.",
@@ -122,7 +147,9 @@
     },
     {
       "reponse": "Bhopal",
-      "acceptees": ["Bhopal"],
+      "acceptees": [
+        "Bhopal"
+      ],
       "indices": [
         "Je suis une ville d'Inde.",
         "En décembre 1984, une usine de pesticides a laissé échapper un gaz toxique chez moi.",
@@ -132,7 +159,12 @@
     },
     {
       "reponse": "PPRT",
-      "acceptees": ["PPRT", "Les PPRT", "Plan de prévention des risques technologiques", "Plans de prévention des risques technologiques"],
+      "acceptees": [
+        "PPRT",
+        "Les PPRT",
+        "Plan de prévention des risques technologiques",
+        "Plans de prévention des risques technologiques"
+      ],
       "indices": [
         "Je suis une mesure créée en France par une loi de 2003.",
         "Je suis né après une explosion qui a eu lieu à Toulouse.",
@@ -142,7 +174,10 @@
     },
     {
       "reponse": "Résilience",
-      "acceptees": ["Résilience", "La résilience"],
+      "acceptees": [
+        "Résilience",
+        "La résilience"
+      ],
       "indices": [
         "Je suis plus forte dans les pays riches et préparés que dans les pays pauvres.",
         "Je dépends des moyens de secours et de reconstruction d'une société.",

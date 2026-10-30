@@ -88,7 +88,11 @@
   "devinettes": [
     {
       "reponse": "Mer d'Aral",
-      "acceptees": ["Aral", "La mer d'Aral", "Lac d'Aral"],
+      "acceptees": [
+        "Aral",
+        "La mer d'Aral",
+        "Lac d'Aral"
+      ],
       "indices": [
         "Je me trouve en Asie centrale.",
         "J'ai perdu la plus grande partie de ma surface depuis les années 1960.",
@@ -98,7 +102,9 @@
     },
     {
       "reponse": "Stress hydrique",
-      "acceptees": ["Le stress hydrique"],
+      "acceptees": [
+        "Le stress hydrique"
+      ],
       "indices": [
         "Je suis une situation qui touche l'Afrique du Nord, le Moyen-Orient ou l'Asie centrale.",
         "Je commence quand les besoins en eau dépassent les ressources disponibles.",
@@ -108,23 +114,15 @@
     },
     {
       "reponse": "Dessalement",
-      "acceptees": ["Le dessalement"],
+      "acceptees": [
+        "Le dessalement"
+      ],
       "indices": [
         "Je suis un procédé qui fournit de l'eau douce.",
         "On m'utilise surtout dans des pays riches et arides, comme l'Arabie saoudite ou Israël.",
         "Dans une usine, je retire le sel de l'eau de mer, mais je consomme beaucoup d'énergie."
       ],
       "explication": "Le dessalement transforme l'eau de mer en eau douce dans une usine ; il est coûteux en énergie."
-    },
-    {
-      "reponse": "Irrigation",
-      "acceptees": ["L'irrigation"],
-      "indices": [
-        "Je suis une activité liée à l'agriculture.",
-        "J'apporte de l'eau aux cultures de façon artificielle.",
-        "Je représente environ 70 % des prélèvements d'eau dans le monde, et le goutte-à-goutte permet de me pratiquer en économisant l'eau."
-      ],
-      "explication": "L'irrigation apporte de l'eau aux cultures : c'est elle qui fait de l'agriculture le premier usage de l'eau, avec environ 70 % des prélèvements."
     }
   ],
   "calculs": [

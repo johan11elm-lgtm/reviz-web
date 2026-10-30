@@ -29,9 +29,7 @@
       "cartes": [
         "Un fil relie directement les deux bornes d'une lampe",
         "Le courant passe par le fil plutôt que par la lampe",
-        "Un fil joint les deux bornes de la pile",
-        "Le courant devient très intense dans les fils",
-        "La pile et les fils chauffent fortement"
+        "Un fil joint les deux bornes de la pile"
       ]
     },
     {
@@ -76,35 +74,55 @@
     {
       "consigne": "Que décrit le passage en couleur ?",
       "texte": "Une pile et deux lampes forment [une seule boucle, sans aucun nœud].",
-      "choix": ["Un montage en série", "Un montage en dérivation", "Un court-circuit"],
+      "choix": [
+        "Un montage en série",
+        "Un montage en dérivation",
+        "Un court-circuit"
+      ],
       "bonne": 0,
       "explication": "Une seule boucle et aucun nœud : tous les dipôles sont en série."
     },
     {
       "consigne": "Que décrit le passage en couleur ?",
       "texte": "Une pile alimente [deux lampes placées chacune dans une branche entre les mêmes nœuds].",
-      "choix": ["Un montage en série", "Un montage en dérivation", "Un court-circuit"],
+      "choix": [
+        "Un montage en série",
+        "Un montage en dérivation",
+        "Un court-circuit"
+      ],
       "bonne": 1,
       "explication": "Deux branches dérivées entre les mêmes nœuds : les lampes sont en dérivation."
     },
     {
       "consigne": "Que décrit le passage en couleur ?",
       "texte": "Dans la maison, [la télévision et le réfrigérateur fonctionnent séparément].",
-      "choix": ["Un montage en série", "Un montage en dérivation", "Un court-circuit"],
+      "choix": [
+        "Un montage en série",
+        "Un montage en dérivation",
+        "Un court-circuit"
+      ],
       "bonne": 1,
       "explication": "Les appareils de la maison sont branchés en dérivation : chacun fonctionne indépendamment des autres."
     },
     {
       "consigne": "Que décrit le passage en couleur ?",
       "texte": "[Le moteur, la lampe et la pile sont placés à la suite les uns des autres] : si on dévisse la lampe, le moteur s'arrête.",
-      "choix": ["Un montage en série", "Un montage en dérivation", "Un court-circuit"],
+      "choix": [
+        "Un montage en série",
+        "Un montage en dérivation",
+        "Un court-circuit"
+      ],
       "bonne": 0,
       "explication": "Les dipôles sont à la suite dans une seule boucle : en retirer un ouvre le circuit, c'est un montage en série."
     },
     {
       "consigne": "Que décrit le passage en couleur ?",
       "texte": "[Un fil relie directement les deux bornes de la lampe] : elle s'éteint.",
-      "choix": ["Un montage en série", "Un montage en dérivation", "Un court-circuit"],
+      "choix": [
+        "Un montage en série",
+        "Un montage en dérivation",
+        "Un court-circuit"
+      ],
       "bonne": 2,
       "explication": "Un fil entre les deux bornes d'un dipôle est un court-circuit : le courant passe par le fil et la lampe s'éteint."
     }
@@ -112,7 +130,10 @@
   "devinettes": [
     {
       "reponse": "Court-circuit",
-      "acceptees": ["Un court-circuit", "Le court-circuit"],
+      "acceptees": [
+        "Un court-circuit",
+        "Le court-circuit"
+      ],
       "indices": [
         "Je suis une liaison par un simple fil.",
         "Je relie les deux bornes d'un dipôle, qui ne fonctionne plus.",
@@ -122,7 +143,11 @@
     },
     {
       "reponse": "Nœud",
-      "acceptees": ["Un nœud", "Le nœud", "Noeud"],
+      "acceptees": [
+        "Un nœud",
+        "Le nœud",
+        "Noeud"
+      ],
       "indices": [
         "Je suis un point d'un circuit.",
         "Je suis relié à au moins trois fils.",
@@ -132,7 +157,10 @@
     },
     {
       "reponse": "Fusible",
-      "acceptees": ["Un fusible", "Le fusible"],
+      "acceptees": [
+        "Un fusible",
+        "Le fusible"
+      ],
       "indices": [
         "Je protège une installation électrique.",
         "Je suis un fil.",
@@ -142,7 +170,9 @@
     },
     {
       "reponse": "Branche principale",
-      "acceptees": ["La branche principale"],
+      "acceptees": [
+        "La branche principale"
+      ],
       "indices": [
         "Je suis une partie d'un circuit en dérivation.",
         "Je contiens le générateur.",

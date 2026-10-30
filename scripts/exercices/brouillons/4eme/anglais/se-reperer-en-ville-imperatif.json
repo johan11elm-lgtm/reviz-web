@@ -6,7 +6,6 @@
       "detail": "Un impératif positif qui dit où aller, comme Turn left ou Go straight on.",
       "cartes": [
         "Turn left at the traffic lights",
-        "Go straight on until the church",
         "Cross the bridge, then turn right",
         "Take the second street on the right",
         "Go along the river to the station"
@@ -40,7 +39,6 @@
       "cartes": [
         "Excuse me, how can I get to Trafalgar Square?",
         "Where is the nearest Tube station?",
-        "Is it far from here?",
         "How can I get to the London Eye?",
         "Excuse me, where is the bank?"
       ]
@@ -71,18 +69,6 @@
       ],
       "bonne": 2,
       "explication": "« between … and … » veut dire « entre … et … »."
-    },
-    {
-      "consigne": "Que fait la phrase en couleur ?",
-      "texte": "[Go straight on until the traffic lights], then turn left.",
-      "choix": [
-        "Elle donne un itinéraire",
-        "Elle interdit quelque chose",
-        "Elle propose quelque chose à plusieurs",
-        "Elle demande son chemin"
-      ],
-      "bonne": 0,
-      "explication": "C'est un impératif sans sujet qui dit où aller : une consigne d'itinéraire."
     },
     {
       "consigne": "Que fait la phrase en couleur ?",
@@ -161,15 +147,6 @@
   ],
   "calculs": [],
   "etapes": [
-    {
-      "titre": "Donner un itinéraire en anglais",
-      "etapes": [
-        "Repère le départ et l'arrivée sur le plan",
-        "Découpe le trajet et donne un impératif par étape",
-        "Relie les étapes avec and, then ou until",
-        "Situe l'arrivée avec une préposition de lieu"
-      ]
-    },
     {
       "titre": "Une demande de chemin, du début à la fin",
       "etapes": [

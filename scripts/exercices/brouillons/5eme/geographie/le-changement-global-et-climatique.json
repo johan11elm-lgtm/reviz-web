@@ -88,35 +88,55 @@
     {
       "consigne": "Que représente l'action en couleur ?",
       "texte": "Pour se protéger de la montée de la mer, une ville [construit une digue].",
-      "choix": ["Une cause du réchauffement", "Une mesure d'atténuation", "Une mesure d'adaptation"],
+      "choix": [
+        "Une cause du réchauffement",
+        "Une mesure d'atténuation",
+        "Une mesure d'adaptation"
+      ],
       "bonne": 2,
       "explication": "Une digue ne réduit pas les émissions : elle aide à faire face à un effet déjà là, c'est de l'adaptation."
     },
     {
       "consigne": "Que représente l'action en couleur ?",
       "texte": "Pour réduire ses émissions, un pays [remplace ses centrales à charbon par des éoliennes].",
-      "choix": ["Une cause du réchauffement", "Une mesure d'atténuation", "Une mesure d'adaptation"],
+      "choix": [
+        "Une cause du réchauffement",
+        "Une mesure d'atténuation",
+        "Une mesure d'adaptation"
+      ],
       "bonne": 1,
       "explication": "Passer du charbon à l'éolien réduit les émissions de gaz à effet de serre : c'est de l'atténuation."
     },
     {
       "consigne": "Que représente l'action en couleur ?",
       "texte": "Dans cette région de plus en plus sèche, [les agriculteurs cultivent des plantes résistantes à la sécheresse].",
-      "choix": ["Une cause du réchauffement", "Une mesure d'atténuation", "Une mesure d'adaptation"],
+      "choix": [
+        "Une cause du réchauffement",
+        "Une mesure d'atténuation",
+        "Une mesure d'adaptation"
+      ],
       "bonne": 2,
       "explication": "Se préparer aux effets du réchauffement, comme la sécheresse, c'est de l'adaptation."
     },
     {
       "consigne": "Que représente l'action en couleur ?",
       "texte": "Pour produire de l'électricité, cette centrale [brûle du charbon].",
-      "choix": ["Une cause du réchauffement", "Une mesure d'atténuation", "Une mesure d'adaptation"],
+      "choix": [
+        "Une cause du réchauffement",
+        "Une mesure d'atténuation",
+        "Une mesure d'adaptation"
+      ],
       "bonne": 0,
       "explication": "Brûler du charbon rejette du CO₂ : c'est une cause du réchauffement."
     },
     {
       "consigne": "Que représente l'action en couleur ?",
       "texte": "Pour absorber du CO₂, une commune [replante une forêt].",
-      "choix": ["Une cause du réchauffement", "Une mesure d'atténuation", "Une mesure d'adaptation"],
+      "choix": [
+        "Une cause du réchauffement",
+        "Une mesure d'atténuation",
+        "Une mesure d'adaptation"
+      ],
       "bonne": 1,
       "explication": "Le reboisement absorbe du CO₂ et aide à réduire l'effet de serre : c'est de l'atténuation."
     }
@@ -124,7 +144,11 @@
   "devinettes": [
     {
       "reponse": "GIEC",
-      "acceptees": ["GIEC", "Le GIEC", "Groupe d'experts intergouvernemental sur l'évolution du climat"],
+      "acceptees": [
+        "GIEC",
+        "Le GIEC",
+        "Groupe d'experts intergouvernemental sur l'évolution du climat"
+      ],
       "indices": [
         "Je rassemble les travaux de scientifiques du monde entier.",
         "J'ai été créé en 1988.",
@@ -134,7 +158,12 @@
     },
     {
       "reponse": "Accord de Paris",
-      "acceptees": ["Accord de Paris", "L'accord de Paris", "COP21", "La COP21"],
+      "acceptees": [
+        "Accord de Paris",
+        "L'accord de Paris",
+        "COP21",
+        "La COP21"
+      ],
       "indices": [
         "Je suis un engagement pris par presque tous les États.",
         "J'ai été adopté en décembre 2015.",
@@ -144,7 +173,10 @@
     },
     {
       "reponse": "Effet de serre",
-      "acceptees": ["Effet de serre", "L'effet de serre"],
+      "acceptees": [
+        "Effet de serre",
+        "L'effet de serre"
+      ],
       "indices": [
         "Je suis un phénomène naturel.",
         "Sans moi, il ferait environ −18 °C en moyenne sur la Terre.",
@@ -183,16 +215,5 @@
       "explication": "25 % de 80 = 80 ÷ 4 = 20 millions de tonnes."
     }
   ],
-  "etapes": [
-    {
-      "titre": "Lire une courbe des températures moyennes",
-      "etapes": [
-        "Lis le titre et les axes : années en bas, température à gauche",
-        "Repère le début et la fin de la période étudiée",
-        "Décris la tendance d'ensemble, pas une année isolée",
-        "Donne un chiffre précis sur l'évolution de la température",
-        "Explique par les activités humaines qui renforcent l'effet de serre"
-      ]
-    }
-  ]
+  "etapes": []
 }

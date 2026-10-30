@@ -51,7 +51,11 @@
   "devinettes": [
     {
       "reponse": "Sécante",
-      "acceptees": ["Sécante", "La sécante", "Une sécante"],
+      "acceptees": [
+        "Sécante",
+        "La sécante",
+        "Une sécante"
+      ],
       "indices": [
         "Je suis une droite.",
         "Je coupe deux autres droites.",
@@ -61,7 +65,12 @@
     },
     {
       "reponse": "Complémentaires",
-      "acceptees": ["Complémentaires", "Complémentaire", "Angles complémentaires", "Deux angles complémentaires"],
+      "acceptees": [
+        "Complémentaires",
+        "Complémentaire",
+        "Angles complémentaires",
+        "Deux angles complémentaires"
+      ],
       "indices": [
         "Je qualifie deux angles.",
         "La somme de leurs mesures vaut 90°.",
@@ -71,7 +80,12 @@
     },
     {
       "reponse": "Supplémentaires",
-      "acceptees": ["Supplémentaires", "Supplémentaire", "Angles supplémentaires", "Deux angles supplémentaires"],
+      "acceptees": [
+        "Supplémentaires",
+        "Supplémentaire",
+        "Angles supplémentaires",
+        "Deux angles supplémentaires"
+      ],
       "indices": [
         "Je qualifie deux angles.",
         "La somme de leurs mesures vaut 180°.",
@@ -81,7 +95,12 @@
     },
     {
       "reponse": "Triangle équilatéral",
-      "acceptees": ["Triangle équilatéral", "Équilatéral", "Un triangle équilatéral", "Le triangle équilatéral"],
+      "acceptees": [
+        "Triangle équilatéral",
+        "Équilatéral",
+        "Un triangle équilatéral",
+        "Le triangle équilatéral"
+      ],
       "indices": [
         "Mes trois côtés ont la même longueur.",
         "Mes trois angles sont égaux.",
@@ -128,15 +147,6 @@
     }
   ],
   "etapes": [
-    {
-      "titre": "Rédiger le calcul d'un angle dans un triangle",
-      "etapes": [
-        "On écrit les données de l'énoncé",
-        "On cite la propriété utilisée",
-        "On écrit le calcul",
-        "On vérifie que le résultat est possible"
-      ]
-    },
     {
       "titre": "Démontrer que la somme des angles d'un triangle ABC vaut 180°",
       "etapes": [

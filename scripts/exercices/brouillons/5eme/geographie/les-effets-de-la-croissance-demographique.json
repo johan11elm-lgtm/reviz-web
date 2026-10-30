@@ -6,7 +6,6 @@
       "detail": "Plus d'habitants, c'est plus de nourriture, de logements, d'écoles, d'hôpitaux et d'emplois à fournir.",
       "cartes": [
         "Produire assez de nourriture pour tous",
-        "Construire davantage de logements",
         "Ouvrir de nouvelles écoles pour les enfants",
         "Ouvrir des hôpitaux pour soigner tous les habitants",
         "Créer assez d'emplois pour tous ceux qui cherchent du travail"
@@ -19,7 +18,6 @@
         "Le départ des habitants des campagnes vers les villes",
         "Des villes de plus de 10 millions d'habitants",
         "Plus de la moitié de l'humanité vit en ville",
-        "Des quartiers précaires sans eau courante ni électricité",
         "Lagos, où quartiers aisés et bidonvilles se côtoient"
       ]
     },
@@ -27,7 +25,6 @@
       "nom": "L'environnement sous pression",
       "detail": "Une population nombreuse sollicite davantage l'eau, les sols et les forêts, et augmente la pollution.",
       "cartes": [
-        "Des réserves d'eau de plus en plus sollicitées",
         "Des sols cultivés de plus en plus intensément",
         "Des forêts abattues pour obtenir du bois et des terres",
         "Un air pollué par les voitures et les usines",
@@ -39,7 +36,6 @@
       "detail": "Une population jeune fournit de la main-d'œuvre et des consommateurs, et peut dynamiser l'économie.",
       "cartes": [
         "Une main-d'œuvre nombreuse pour les entreprises",
-        "Un grand marché de consommateurs",
         "Une économie qui gagne en dynamisme",
         "Une part d'adultes en âge de travailler qui augmente",
         "Une chance économique quand la natalité commence à baisser"
@@ -82,35 +78,60 @@
     {
       "consigne": "De quoi s'agit-il dans le passage en couleur ?",
       "texte": "Chaque année, [des milliers de paysans quittent leur village] pour s'installer à Lagos.",
-      "choix": ["Exode rural", "Urbanisation", "Bidonville", "Secteur informel"],
+      "choix": [
+        "Exode rural",
+        "Urbanisation",
+        "Bidonville",
+        "Secteur informel"
+      ],
       "bonne": 0,
       "explication": "Le départ des habitants des campagnes vers les villes s'appelle l'exode rural."
     },
     {
       "consigne": "De quoi s'agit-il dans le passage en couleur ?",
       "texte": "À Makoko, [des maisons sur pilotis, sans eau courante ni électricité,] abritent des familles.",
-      "choix": ["Exode rural", "Urbanisation", "Bidonville", "Secteur informel"],
+      "choix": [
+        "Exode rural",
+        "Urbanisation",
+        "Bidonville",
+        "Secteur informel"
+      ],
       "bonne": 2,
       "explication": "Un quartier d'habitat précaire, sans eau courante ni électricité, est un bidonville."
     },
     {
       "consigne": "De quoi s'agit-il dans le passage en couleur ?",
       "texte": "Ce chauffeur de moto-taxi exerce son métier [sans contrat ni déclaration].",
-      "choix": ["Exode rural", "Urbanisation", "Bidonville", "Secteur informel"],
+      "choix": [
+        "Exode rural",
+        "Urbanisation",
+        "Bidonville",
+        "Secteur informel"
+      ],
       "bonne": 3,
       "explication": "Les emplois non déclarés forment le secteur informel."
     },
     {
       "consigne": "De quoi s'agit-il dans le passage en couleur ?",
       "texte": "Depuis 2007-2008, [plus de la moitié des humains vivent en ville].",
-      "choix": ["Exode rural", "Urbanisation", "Bidonville", "Secteur informel"],
+      "choix": [
+        "Exode rural",
+        "Urbanisation",
+        "Bidonville",
+        "Secteur informel"
+      ],
       "bonne": 1,
       "explication": "L'urbanisation est la hausse de la part de la population qui vit en ville."
     },
     {
       "consigne": "De quoi s'agit-il dans le passage en couleur ?",
       "texte": "Faute de terres, [cette famille quitte la campagne pour la capitale].",
-      "choix": ["Exode rural", "Urbanisation", "Bidonville", "Secteur informel"],
+      "choix": [
+        "Exode rural",
+        "Urbanisation",
+        "Bidonville",
+        "Secteur informel"
+      ],
       "bonne": 0,
       "explication": "Quitter la campagne pour la ville est un cas d'exode rural."
     }
@@ -118,7 +139,10 @@
   "devinettes": [
     {
       "reponse": "Mégapole",
-      "acceptees": ["Mégapole", "Une mégapole"],
+      "acceptees": [
+        "Mégapole",
+        "Une mégapole"
+      ],
       "indices": [
         "Je suis une très grande ville.",
         "Delhi, Mumbai et Le Caire en sont des exemples.",
@@ -128,7 +152,10 @@
     },
     {
       "reponse": "Exode rural",
-      "acceptees": ["Exode rural", "L'exode rural"],
+      "acceptees": [
+        "Exode rural",
+        "L'exode rural"
+      ],
       "indices": [
         "Je suis un mouvement de population.",
         "Je vide peu à peu les campagnes.",
@@ -138,7 +165,9 @@
     },
     {
       "reponse": "Lagos",
-      "acceptees": ["Lagos"],
+      "acceptees": [
+        "Lagos"
+      ],
       "indices": [
         "Je suis une ville d'Afrique.",
         "Je suis la plus grande ville du Nigeria.",
@@ -177,15 +206,5 @@
       "explication": "Un quart de 2 000 000 = 2 000 000 ÷ 4 = 500 000 habitants."
     }
   ],
-  "etapes": [
-    {
-      "titre": "Faire le schéma des effets de la croissance urbaine",
-      "etapes": [
-        "Choisis une ville du Sud et écris au centre sa forte croissance",
-        "Place autour les difficultés et les atouts de cette croissance",
-        "Relie la cause à chaque effet par une flèche",
-        "Donne un titre précis à ton schéma"
-      ]
-    }
-  ]
+  "etapes": []
 }

@@ -19,8 +19,7 @@
         "Valeur transmise à un bloc quand on l'appelle",
         "Adapte le comportement du bloc à chaque situation",
         "La lettre n dans le bloc « polygone (n) »",
-        "Intervient dans le calcul de l'angle : 360 ÷ n",
-        "Sa valeur change à chaque appel du bloc"
+        "Intervient dans le calcul de l'angle : 360 ÷ n"
       ]
     },
     {
@@ -51,35 +50,60 @@
     {
       "consigne": "Que représente l'élément en couleur ?",
       "texte": "Dans « polygone (5) », [le nombre 5] indique le nombre de côtés à tracer.",
-      "choix": ["Appel d'un sous-programme", "Valeur d'un paramètre", "Envoi d'un message", "Réception d'un message"],
+      "choix": [
+        "Appel d'un sous-programme",
+        "Valeur d'un paramètre",
+        "Envoi d'un message",
+        "Réception d'un message"
+      ],
       "bonne": 1,
       "explication": "Le nombre 5 est la valeur transmise au sous-programme quand on l'appelle : c'est la valeur du paramètre."
     },
     {
       "consigne": "Que représente l'élément en couleur ?",
       "texte": "Pour dessiner un carré, le script utilise [le bloc « polygone »] avec la valeur 4.",
-      "choix": ["Appel d'un sous-programme", "Valeur d'un paramètre", "Envoi d'un message", "Réception d'un message"],
+      "choix": [
+        "Appel d'un sous-programme",
+        "Valeur d'un paramètre",
+        "Envoi d'un message",
+        "Réception d'un message"
+      ],
       "bonne": 0,
       "explication": "Utiliser un bloc personnalisé dans un script, c'est appeler un sous-programme."
     },
     {
       "consigne": "Que représente l'élément en couleur ?",
       "texte": "Quand la balle touche le sol, le lutin « Balle » exécute [« envoyer à tous rebond »].",
-      "choix": ["Appel d'un sous-programme", "Valeur d'un paramètre", "Envoi d'un message", "Réception d'un message"],
+      "choix": [
+        "Appel d'un sous-programme",
+        "Valeur d'un paramètre",
+        "Envoi d'un message",
+        "Réception d'un message"
+      ],
       "bonne": 2,
       "explication": "« Envoyer à tous » émet un message qui déclenche les scripts des autres lutins."
     },
     {
       "consigne": "Que représente l'élément en couleur ?",
       "texte": "Le lutin « Public » commence son script par [« quand je reçois rebond »].",
-      "choix": ["Appel d'un sous-programme", "Valeur d'un paramètre", "Envoi d'un message", "Réception d'un message"],
+      "choix": [
+        "Appel d'un sous-programme",
+        "Valeur d'un paramètre",
+        "Envoi d'un message",
+        "Réception d'un message"
+      ],
       "bonne": 3,
       "explication": "« Quand je reçois » démarre un script dès que le message est reçu."
     },
     {
       "consigne": "Que représente l'élément en couleur ?",
       "texte": "Le lutin « Chef » exécute [« envoyer à tous départ et attendre »], puis attend la fin des scripts déclenchés.",
-      "choix": ["Appel d'un sous-programme", "Valeur d'un paramètre", "Envoi d'un message", "Réception d'un message"],
+      "choix": [
+        "Appel d'un sous-programme",
+        "Valeur d'un paramètre",
+        "Envoi d'un message",
+        "Réception d'un message"
+      ],
       "bonne": 2,
       "explication": "« Envoyer à tous et attendre » envoie un message, puis le script patiente jusqu'à la fin des scripts déclenchés."
     }
@@ -87,7 +111,10 @@
   "devinettes": [
     {
       "reponse": "Sous-programme",
-      "acceptees": ["Un sous-programme", "Bloc personnalisé"],
+      "acceptees": [
+        "Un sous-programme",
+        "Bloc personnalisé"
+      ],
       "indices": [
         "Je suis une suite d'instructions qui porte un nom.",
         "On me crée avec le bouton « Créer un bloc ».",
@@ -97,7 +124,10 @@
     },
     {
       "reponse": "Paramètre",
-      "acceptees": ["Un paramètre", "Le paramètre"],
+      "acceptees": [
+        "Un paramètre",
+        "Le paramètre"
+      ],
       "indices": [
         "Je suis une valeur.",
         "On me transmet à un bloc quand on l'appelle.",
@@ -107,7 +137,10 @@
     },
     {
       "reponse": "Parallélisme",
-      "acceptees": ["Le parallélisme", "En parallèle"],
+      "acceptees": [
+        "Le parallélisme",
+        "En parallèle"
+      ],
       "indices": [
         "Je concerne plusieurs scripts à la fois.",
         "Je me produis quand plusieurs scripts partent du même événement.",
@@ -117,7 +150,11 @@
     },
     {
       "reponse": "Débogage",
-      "acceptees": ["Le débogage", "Déboguer", "Debogage"],
+      "acceptees": [
+        "Le débogage",
+        "Déboguer",
+        "Debogage"
+      ],
       "indices": [
         "Je consiste à chercher ce qui ne va pas dans un programme.",
         "On me pratique en testant le programme pas à pas.",

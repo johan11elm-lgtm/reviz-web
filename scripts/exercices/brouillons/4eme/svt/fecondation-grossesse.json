@@ -5,7 +5,6 @@
       "nom": "La fécondation",
       "detail": "Un spermatozoïde et un ovocyte s'unissent dans une trompe pour former la cellule-œuf.",
       "cartes": [
-        "Des millions de spermatozoïdes remontent dans les trompes",
         "Un seul spermatozoïde pénètre dans l'ovocyte",
         "Les noyaux des deux cellules s'unissent",
         "Formation de la cellule-œuf",
@@ -18,9 +17,7 @@
       "cartes": [
         "La cellule-œuf se divise en 2, 4, 8 cellules",
         "Descente de l'embryon vers l'utérus",
-        "Implantation dans la muqueuse utérine",
-        "Environ 7 jours après la fécondation",
-        "La grossesse commence et les règles s'arrêtent"
+        "Implantation dans la muqueuse utérine"
       ]
     },
     {
@@ -38,7 +35,6 @@
       "nom": "L'accouchement",
       "detail": "Au terme de la grossesse : contractions de l'utérus, ouverture du col, sortie du bébé, puis délivrance.",
       "cartes": [
-        "Contractions de l'utérus",
         "Ouverture du col de l'utérus",
         "Sortie du bébé par le vagin",
         "Dernière étape : la délivrance",
@@ -76,35 +72,55 @@
     {
       "consigne": "Comment appelle-t-on ce qui est en couleur à ce moment-là ?",
       "texte": "Dans une trompe, le noyau du spermatozoïde et celui de l'ovocyte s'unissent. Il se forme [la première cellule de l'individu].",
-      "choix": ["Cellule-œuf", "Embryon", "Fœtus"],
+      "choix": [
+        "Cellule-œuf",
+        "Embryon",
+        "Fœtus"
+      ],
       "bonne": 0,
       "explication": "La première cellule d'un individu, issue de la fécondation, s'appelle la cellule-œuf."
     },
     {
       "consigne": "Comment appelle-t-on ce qui est en couleur à ce moment-là ?",
       "texte": "Cinq semaines après la fécondation, [l'enfant à naître] est en train de mettre en place ses organes.",
-      "choix": ["Cellule-œuf", "Embryon", "Fœtus"],
+      "choix": [
+        "Cellule-œuf",
+        "Embryon",
+        "Fœtus"
+      ],
       "bonne": 1,
       "explication": "Pendant les 2 premiers mois, les organes se mettent en place : on parle d'embryon."
     },
     {
       "consigne": "Comment appelle-t-on ce qui est en couleur à ce moment-là ?",
       "texte": "Au cinquième mois de grossesse, [l'enfant à naître] grandit et ses organes sont devenus fonctionnels.",
-      "choix": ["Cellule-œuf", "Embryon", "Fœtus"],
+      "choix": [
+        "Cellule-œuf",
+        "Embryon",
+        "Fœtus"
+      ],
       "bonne": 2,
       "explication": "À partir du 3e mois, les organes grandissent et deviennent fonctionnels : on parle de fœtus."
     },
     {
       "consigne": "Comment appelle-t-on ce qui est en couleur à ce moment-là ?",
       "texte": "Une semaine après la fécondation, [l'enfant à naître, formé de plusieurs cellules,] s'implante dans la muqueuse utérine.",
-      "choix": ["Cellule-œuf", "Embryon", "Fœtus"],
+      "choix": [
+        "Cellule-œuf",
+        "Embryon",
+        "Fœtus"
+      ],
       "bonne": 1,
       "explication": "Les divisions de la cellule-œuf donnent le début de l'embryon, qui s'implante lors de la nidation."
     },
     {
       "consigne": "Comment appelle-t-on ce qui est en couleur à ce moment-là ?",
       "texte": "Au septième mois, [l'enfant à naître] baigne dans le liquide amniotique et ses organes grandissent.",
-      "choix": ["Cellule-œuf", "Embryon", "Fœtus"],
+      "choix": [
+        "Cellule-œuf",
+        "Embryon",
+        "Fœtus"
+      ],
       "bonne": 2,
       "explication": "Après les 2 premiers mois, quand les organes grandissent, on parle de fœtus."
     }
@@ -112,7 +128,11 @@
   "devinettes": [
     {
       "reponse": "Placenta",
-      "acceptees": ["Placenta", "Le placenta", "Un placenta"],
+      "acceptees": [
+        "Placenta",
+        "Le placenta",
+        "Un placenta"
+      ],
       "indices": [
         "Je suis un organe que seule une femme enceinte possède.",
         "Je suis relié au fœtus par le cordon ombilical.",
@@ -122,7 +142,10 @@
     },
     {
       "reponse": "Nidation",
-      "acceptees": ["Nidation", "La nidation"],
+      "acceptees": [
+        "Nidation",
+        "La nidation"
+      ],
       "indices": [
         "Je suis un événement qui marque le début de la grossesse.",
         "J'ai lieu environ 7 jours après la fécondation.",
@@ -132,7 +155,13 @@
     },
     {
       "reponse": "Fœtus",
-      "acceptees": ["Fœtus", "Foetus", "Fetus", "Le fœtus", "Un fœtus"],
+      "acceptees": [
+        "Fœtus",
+        "Foetus",
+        "Fetus",
+        "Le fœtus",
+        "Un fœtus"
+      ],
       "indices": [
         "Je suis l'enfant à naître.",
         "On m'appelle ainsi à partir du 3e mois.",
@@ -142,7 +171,11 @@
     },
     {
       "reponse": "Liquide amniotique",
-      "acceptees": ["Liquide amniotique", "Le liquide amniotique", "Amniotique"],
+      "acceptees": [
+        "Liquide amniotique",
+        "Le liquide amniotique",
+        "Amniotique"
+      ],
       "indices": [
         "Je suis présent dans l'utérus pendant la grossesse.",
         "Le fœtus baigne en moi.",

@@ -19,8 +19,7 @@
         "Une molécule de formule O₂",
         "Un modèle fait de deux boules rouges",
         "Une molécule de seulement 2 atomes en tout",
-        "Un corps pur simple, formé d'une seule sorte d'atome",
-        "Une molécule de l'air, avec celle du diazote"
+        "Un corps pur simple, formé d'une seule sorte d'atome"
       ]
     },
     {
@@ -30,7 +29,6 @@
         "Une molécule de formule CO₂",
         "Une molécule d'un atome de carbone et deux d'oxygène",
         "Un modèle : une boule noire entre deux boules rouges",
-        "Une formule où le 2 ne s'applique pas au C",
         "Une molécule de 3 atomes dont un seul de carbone"
       ]
     },
@@ -51,35 +49,55 @@
     {
       "consigne": "De quel type de matière s'agit-il ?",
       "texte": "L'air contient surtout du dioxygène et du diazote, de formule [N₂].",
-      "choix": ["Un corps pur simple", "Un corps pur composé", "Un mélange"],
+      "choix": [
+        "Un corps pur simple",
+        "Un corps pur composé",
+        "Un mélange"
+      ],
       "bonne": 0,
       "explication": "N₂ ne contient qu'une seule sorte d'atome (l'azote) : c'est un corps pur simple."
     },
     {
       "consigne": "De quel type de matière s'agit-il ?",
       "texte": "Quand le carbone brûle, il se forme [CO₂].",
-      "choix": ["Un corps pur simple", "Un corps pur composé", "Un mélange"],
+      "choix": [
+        "Un corps pur simple",
+        "Un corps pur composé",
+        "Un mélange"
+      ],
       "bonne": 1,
       "explication": "CO₂ contient deux sortes d'atomes (carbone et oxygène) : c'est un corps pur composé."
     },
     {
       "consigne": "De quel type de matière s'agit-il ?",
       "texte": "Autour de toi, tu respires [l'air].",
-      "choix": ["Un corps pur simple", "Un corps pur composé", "Un mélange"],
+      "choix": [
+        "Un corps pur simple",
+        "Un corps pur composé",
+        "Un mélange"
+      ],
       "bonne": 2,
       "explication": "L'air contient plusieurs sortes de molécules, surtout N₂ et O₂ : c'est un mélange."
     },
     {
       "consigne": "De quel type de matière s'agit-il ?",
       "texte": "Les fils électriques sont faits de [cuivre].",
-      "choix": ["Un corps pur simple", "Un corps pur composé", "Un mélange"],
+      "choix": [
+        "Un corps pur simple",
+        "Un corps pur composé",
+        "Un mélange"
+      ],
       "bonne": 0,
       "explication": "Le cuivre est formé d'une seule sorte d'atome, le cuivre Cu : c'est un corps pur simple."
     },
     {
       "consigne": "De quel type de matière s'agit-il ?",
       "texte": "Le gaz de ville est surtout du méthane, de formule [CH₄].",
-      "choix": ["Un corps pur simple", "Un corps pur composé", "Un mélange"],
+      "choix": [
+        "Un corps pur simple",
+        "Un corps pur composé",
+        "Un mélange"
+      ],
       "bonne": 1,
       "explication": "CH₄ contient deux sortes d'atomes (carbone et hydrogène) : c'est un corps pur composé."
     }
@@ -87,7 +105,11 @@
   "devinettes": [
     {
       "reponse": "Indice",
-      "acceptees": ["Indice", "L'indice", "Un indice"],
+      "acceptees": [
+        "Indice",
+        "L'indice",
+        "Un indice"
+      ],
       "indices": [
         "Je suis un nombre.",
         "On m'écrit tout petit, en bas à droite d'un symbole.",
@@ -97,7 +119,11 @@
     },
     {
       "reponse": "Corps pur simple",
-      "acceptees": ["Corps pur simple", "Un corps pur simple", "Corps simple"],
+      "acceptees": [
+        "Corps pur simple",
+        "Un corps pur simple",
+        "Corps simple"
+      ],
       "indices": [
         "Je suis une catégorie de matière.",
         "Mes molécules, si j'en ai, ne contiennent qu'une seule sorte d'atome.",
@@ -107,7 +133,12 @@
     },
     {
       "reponse": "Molécule",
-      "acceptees": ["Molécule", "Une molécule", "La molécule", "Molécules"],
+      "acceptees": [
+        "Molécule",
+        "Une molécule",
+        "La molécule",
+        "Molécules"
+      ],
       "indices": [
         "Je suis extrêmement petite.",
         "Je suis un assemblage d'atomes liés entre eux.",
@@ -160,15 +191,5 @@
       "explication": "Chaque molécule O₂ contient 2 atomes d'oxygène, donc 14 ÷ 2 = 7 molécules."
     }
   ],
-  "etapes": [
-    {
-      "titre": "Écrire une formule à partir d'un modèle moléculaire",
-      "etapes": [
-        "On reconnaît chaque atome à la couleur de sa boule",
-        "On compte les boules de chaque couleur",
-        "On écrit les symboles côte à côte",
-        "On place chaque nombre en indice, sans écrire l'indice 1"
-      ]
-    }
-  ]
+  "etapes": []
 }

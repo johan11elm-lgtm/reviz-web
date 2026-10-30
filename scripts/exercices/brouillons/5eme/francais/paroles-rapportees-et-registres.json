@@ -51,42 +51,66 @@
     {
       "consigne": "Quelle est la nature du passage en couleur ?",
       "texte": "Perceval demanda : [« Qui êtes-vous ? »]",
-      "choix": ["Discours direct", "Discours indirect", "Proposition incise"],
+      "choix": [
+        "Discours direct",
+        "Discours indirect",
+        "Proposition incise"
+      ],
       "bonne": 0,
       "explication": "Les paroles sont rapportées telles qu'elles ont été prononcées, après deux-points et entre guillemets : c'est du discours direct."
     },
     {
       "consigne": "Quelle est la nature du passage en couleur ?",
       "texte": "Perceval demanda [qui il était].",
-      "choix": ["Discours direct", "Discours indirect", "Proposition incise"],
+      "choix": [
+        "Discours direct",
+        "Discours indirect",
+        "Proposition incise"
+      ],
       "bonne": 1,
       "explication": "La question est intégrée au récit dans une subordonnée, sans guillemets ni point d'interrogation : c'est du discours indirect."
     },
     {
       "consigne": "Quelle est la nature du passage en couleur ?",
       "texte": "« Je partirai, [dit-il], demain matin. »",
-      "choix": ["Discours direct", "Discours indirect", "Proposition incise"],
+      "choix": [
+        "Discours direct",
+        "Discours indirect",
+        "Proposition incise"
+      ],
       "bonne": 2,
       "explication": "« dit-il » est une courte proposition insérée dans les paroles, avec le sujet inversé : une incise. Elle indique qui parle."
     },
     {
       "consigne": "Quelle est la nature du passage en couleur ?",
       "texte": "Le chevalier déclara [qu'il partirait le lendemain].",
-      "choix": ["Discours direct", "Discours indirect", "Proposition incise"],
+      "choix": [
+        "Discours direct",
+        "Discours indirect",
+        "Proposition incise"
+      ],
       "bonne": 1,
       "explication": "Les paroles sont intégrées au récit dans une subordonnée, sans guillemets, avec un conditionnel et « le lendemain » : c'est du discours indirect."
     },
     {
       "consigne": "Quelle est la nature du passage en couleur ?",
       "texte": "Le roi s'écria : [« Qu'on m'apporte mon épée ! »]",
-      "choix": ["Discours direct", "Discours indirect", "Proposition incise"],
+      "choix": [
+        "Discours direct",
+        "Discours indirect",
+        "Proposition incise"
+      ],
       "bonne": 0,
       "explication": "Après les deux-points, les paroles du roi sont entre guillemets, telles qu'il les a prononcées : c'est du discours direct."
     },
     {
       "consigne": "Quelle est la nature du passage en couleur ?",
       "texte": "« Partons maintenant, [murmura-t-elle], avant l'aube. »",
-      "choix": ["Discours direct", "Discours indirect", "Proposition incise"],
+      "choix": [
+        "Discours direct",
+        "Discours indirect",
+        "Proposition incise"
+      ],
       "bonne": 2,
       "explication": "« murmura-t-elle » est insérée au milieu des paroles et son sujet est inversé : c'est une proposition incise."
     }
@@ -94,7 +118,12 @@
   "devinettes": [
     {
       "reponse": "Incise",
-      "acceptees": ["Une incise", "La proposition incise", "Proposition incise", "Une proposition incise"],
+      "acceptees": [
+        "Une incise",
+        "La proposition incise",
+        "Proposition incise",
+        "Une proposition incise"
+      ],
       "indices": [
         "Je suis une courte proposition.",
         "On me glisse au milieu ou à la fin des paroles d'un personnage pour dire qui parle.",
@@ -104,7 +133,10 @@
     },
     {
       "reponse": "Discours indirect",
-      "acceptees": ["Le discours indirect", "Style indirect"],
+      "acceptees": [
+        "Le discours indirect",
+        "Style indirect"
+      ],
       "indices": [
         "Je rapporte les paroles de quelqu'un.",
         "Je les intègre au récit dans une subordonnée, après un verbe de parole, sans guillemets.",
@@ -113,18 +145,13 @@
       "explication": "Le discours indirect intègre les paroles au récit dans une subordonnée : les pronoms, les temps et les repères de temps changent."
     },
     {
-      "reponse": "Conditionnel",
-      "acceptees": ["Le conditionnel", "Conditionnel présent", "Le conditionnel présent"],
-      "indices": [
-        "Je suis un mode verbal.",
-        "Je ressemble au futur, mais mes terminaisons sont celles de l'imparfait.",
-        "Au discours indirect, après un verbe au passé, je remplace le futur : « Je partirai » devient « il partirait »."
-      ],
-      "explication": "Après un verbe introducteur au passé, le futur du discours direct devient un conditionnel au discours indirect."
-    },
-    {
       "reponse": "Registre familier",
-      "acceptees": ["Familier", "Le registre familier", "Langue familière", "Langage familier"],
+      "acceptees": [
+        "Familier",
+        "Le registre familier",
+        "Langue familière",
+        "Langage familier"
+      ],
       "indices": [
         "Je suis une manière de parler adaptée à la situation.",
         "On m'emploie entre proches, surtout à l'oral.",

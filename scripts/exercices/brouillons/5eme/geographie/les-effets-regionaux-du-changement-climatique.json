@@ -17,9 +17,6 @@
       "detail": "Un pays de delta très peuplé, frappé par les inondations et les cyclones, qui s'équipe pour protéger sa population.",
       "cartes": [
         "Un delta très peuplé du Gange et du Brahmapoutre",
-        "Un pays frappé par les inondations et les cyclones",
-        "Des abris surélevés accueillent la population pendant les cyclones",
-        "Des systèmes d'alerte limitent le nombre de victimes des cyclones",
         "Un pays pauvre, bien plus vulnérable que les Pays-Bas"
       ]
     },
@@ -28,9 +25,6 @@
       "detail": "Une région au sud du Sahara où les pluies se font rares, les sols se dégradent et la faim menace.",
       "cartes": [
         "Une région au sud du Sahara",
-        "Des pluies irrégulières et des sécheresses",
-        "Des sols qui se dégradent et deviennent stériles",
-        "Une insécurité alimentaire qui augmente",
         "Un projet de reboisement du Sénégal à Djibouti"
       ]
     },
@@ -40,7 +34,6 @@
       "cartes": [
         "Tuvalu et Kiribati, dans l'océan Pacifique",
         "Les Maldives, dans l'océan Indien",
-        "Des terres qui culminent à quelques mètres seulement",
         "Des États entiers qui risquent d'être submergés",
         "Petits États menacés par la mer et les tempêtes"
       ]
@@ -55,21 +48,9 @@
     },
     {
       "fait": "les sécheresses au Sahel",
-      "carte": "La désertification",
-      "role": "consequence",
-      "explication": "Sécheresses et pluies irrégulières favorisent la désertification : les sols se dégradent et deviennent stériles."
-    },
-    {
-      "fait": "les sécheresses au Sahel",
       "carte": "L'insécurité alimentaire",
       "role": "consequence",
       "explication": "Quand les sols se dégradent, l'insécurité alimentaire augmente."
-    },
-    {
-      "fait": "la fonte de la banquise",
-      "carte": "Le réchauffement très rapide de l'Arctique",
-      "role": "cause",
-      "explication": "L'Arctique se réchauffe trois à quatre fois plus vite que la moyenne mondiale : la banquise fond en été."
     },
     {
       "fait": "la fonte de la banquise",
@@ -88,7 +69,10 @@
   "devinettes": [
     {
       "reponse": "Vulnérabilité",
-      "acceptees": ["Vulnérabilité", "La vulnérabilité"],
+      "acceptees": [
+        "Vulnérabilité",
+        "La vulnérabilité"
+      ],
       "indices": [
         "Je ne suis pas la même d'un territoire à l'autre.",
         "Je suis plus forte dans les pays pauvres, qui ont moins de moyens pour se protéger.",
@@ -98,7 +82,10 @@
     },
     {
       "reponse": "Sahel",
-      "acceptees": ["Sahel", "Le Sahel"],
+      "acceptees": [
+        "Sahel",
+        "Le Sahel"
+      ],
       "indices": [
         "Je suis une région d'Afrique située au sud du Sahara.",
         "Chez moi, les pluies sont irrégulières et les sécheresses reviennent.",
@@ -108,7 +95,10 @@
     },
     {
       "reponse": "Bangladesh",
-      "acceptees": ["Bangladesh", "Le Bangladesh"],
+      "acceptees": [
+        "Bangladesh",
+        "Le Bangladesh"
+      ],
       "indices": [
         "Je suis un pays d'Asie du Sud.",
         "Je suis un delta très peuplé, formé par le Gange et le Brahmapoutre.",
@@ -118,7 +108,10 @@
     },
     {
       "reponse": "Banquise",
-      "acceptees": ["Banquise", "La banquise"],
+      "acceptees": [
+        "Banquise",
+        "La banquise"
+      ],
       "indices": [
         "Je me trouve dans le Grand Nord et je fonds chaque été.",
         "Ma fonte menace la chasse des Inuits et la vie des ours polaires.",
@@ -128,15 +121,5 @@
     }
   ],
   "calculs": [],
-  "etapes": [
-    {
-      "titre": "Comment légender une carte des régions exposées",
-      "etapes": [
-        "Repérer les continents, les océans et l'équateur",
-        "Localiser chaque espace exposé sur la carte",
-        "Choisir un figuré pour chaque type d'effet",
-        "Organiser la légende par menace et titrer la carte"
-      ]
-    }
-  ]
+  "etapes": []
 }

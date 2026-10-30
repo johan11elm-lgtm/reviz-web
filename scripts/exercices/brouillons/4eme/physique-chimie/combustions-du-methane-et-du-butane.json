@@ -40,7 +40,6 @@
       "cartes": [
         "Un gaz incolore, inodore et très toxique",
         "Sa formule s'écrit CO",
-        "Seul un détecteur peut signaler sa présence",
         "Il empêche le sang de transporter correctement le dioxygène",
         "Il se forme quand le dioxygène manque pendant la combustion"
       ]
@@ -88,35 +87,60 @@
     {
       "consigne": "Que représente le passage en couleur ?",
       "texte": "Le gaz naturel est surtout fait de [méthane].",
-      "choix": ["Un combustible", "Un produit de combustion complète", "Un produit de combustion incomplète", "Un geste de prévention"],
+      "choix": [
+        "Un combustible",
+        "Un produit de combustion complète",
+        "Un produit de combustion incomplète",
+        "Un geste de prévention"
+      ],
       "bonne": 0,
       "explication": "Le méthane est le gaz qui brûle : c'est le combustible."
     },
     {
       "consigne": "Que représente le passage en couleur ?",
       "texte": "La flamme est bleue : le gaz brûle en formant du dioxyde de carbone et de [l'eau].",
-      "choix": ["Un combustible", "Un produit de combustion complète", "Un produit de combustion incomplète", "Un geste de prévention"],
+      "choix": [
+        "Un combustible",
+        "Un produit de combustion complète",
+        "Un produit de combustion incomplète",
+        "Un geste de prévention"
+      ],
       "bonne": 1,
       "explication": "Une flamme bleue indique une combustion complète, qui forme du dioxyde de carbone et de l'eau."
     },
     {
       "consigne": "Que représente le passage en couleur ?",
       "texte": "La virole est fermée : la flamme devient jaune et une soucoupe se couvre de [suie noire].",
-      "choix": ["Un combustible", "Un produit de combustion complète", "Un produit de combustion incomplète", "Un geste de prévention"],
+      "choix": [
+        "Un combustible",
+        "Un produit de combustion complète",
+        "Un produit de combustion incomplète",
+        "Un geste de prévention"
+      ],
       "bonne": 2,
       "explication": "La flamme jaune signale une combustion incomplète, qui dépose de la suie."
     },
     {
       "consigne": "Que représente le passage en couleur ?",
       "texte": "Pour éviter les intoxications au monoxyde de carbone, on [fait entretenir la chaudière chaque année].",
-      "choix": ["Un combustible", "Un produit de combustion complète", "Un produit de combustion incomplète", "Un geste de prévention"],
+      "choix": [
+        "Un combustible",
+        "Un produit de combustion complète",
+        "Un produit de combustion incomplète",
+        "Un geste de prévention"
+      ],
       "bonne": 3,
       "explication": "Faire entretenir la chaudière chaque année est un geste de prévention contre l'intoxication."
     },
     {
       "consigne": "Que représente le passage en couleur ?",
       "texte": "Dans un camping-gaz, la flamme est alimentée par [le butane] de la bouteille.",
-      "choix": ["Un combustible", "Un produit de combustion complète", "Un produit de combustion incomplète", "Un geste de prévention"],
+      "choix": [
+        "Un combustible",
+        "Un produit de combustion complète",
+        "Un produit de combustion incomplète",
+        "Un geste de prévention"
+      ],
       "bonne": 0,
       "explication": "Le butane est le gaz qui brûle : c'est le combustible."
     }
@@ -124,7 +148,11 @@
   "devinettes": [
     {
       "reponse": "Hydrocarbure",
-      "acceptees": ["Hydrocarbure", "Un hydrocarbure", "Hydrocarbures"],
+      "acceptees": [
+        "Hydrocarbure",
+        "Un hydrocarbure",
+        "Hydrocarbures"
+      ],
       "indices": [
         "Je désigne une famille de molécules.",
         "Mes molécules ne contiennent que deux sortes d'atomes.",
@@ -134,7 +162,10 @@
     },
     {
       "reponse": "Suie",
-      "acceptees": ["Suie", "La suie"],
+      "acceptees": [
+        "Suie",
+        "La suie"
+      ],
       "indices": [
         "Je suis un dépôt.",
         "Je suis noire et je salis ce qui se trouve au-dessus d'une flamme jaune.",
@@ -144,7 +175,12 @@
     },
     {
       "reponse": "Monoxyde de carbone",
-      "acceptees": ["Monoxyde de carbone", "Le monoxyde de carbone", "Monoxyde", "CO"],
+      "acceptees": [
+        "Monoxyde de carbone",
+        "Le monoxyde de carbone",
+        "Monoxyde",
+        "CO"
+      ],
       "indices": [
         "Je suis un gaz que l'on ne peut ni voir ni sentir.",
         "Je me forme quand une combustion manque de dioxygène.",

@@ -51,42 +51,72 @@
     {
       "consigne": "Quel lien le mot en couleur exprime-t-il ?",
       "texte": "Il appela, [mais] personne ne répondit.",
-      "choix": ["Cause", "Conséquence", "Opposition", "Temps"],
+      "choix": [
+        "Cause",
+        "Conséquence",
+        "Opposition",
+        "Temps"
+      ],
       "bonne": 2,
       "explication": "« mais » oppose deux idées contraires : il appelle, et pourtant personne ne répond. Il exprime l'opposition."
     },
     {
       "consigne": "Quel lien le mot en couleur exprime-t-il ?",
       "texte": "Il pleut, [donc] nous restons à la maison.",
-      "choix": ["Cause", "Conséquence", "Opposition", "Temps"],
+      "choix": [
+        "Cause",
+        "Conséquence",
+        "Opposition",
+        "Temps"
+      ],
       "bonne": 1,
       "explication": "« donc » introduit le résultat de la pluie : rester à la maison est la conséquence. Il exprime la conséquence."
     },
     {
       "consigne": "Quel lien le mot en couleur exprime-t-il ?",
       "texte": "Elle reste au lit, [car] elle est malade.",
-      "choix": ["Cause", "Conséquence", "Opposition", "Temps"],
+      "choix": [
+        "Cause",
+        "Conséquence",
+        "Opposition",
+        "Temps"
+      ],
       "bonne": 0,
       "explication": "« car » explique pourquoi elle reste au lit : la maladie est la raison. Il exprime la cause."
     },
     {
       "consigne": "Quel lien le mot en couleur exprime-t-il ?",
       "texte": "Il partit [quand] le jour se leva.",
-      "choix": ["Cause", "Conséquence", "Opposition", "Temps"],
+      "choix": [
+        "Cause",
+        "Conséquence",
+        "Opposition",
+        "Temps"
+      ],
       "bonne": 3,
       "explication": "« quand » situe le départ au moment où le jour se lève : il exprime le temps."
     },
     {
       "consigne": "Quel lien le mot en couleur exprime-t-il ?",
       "texte": "La porte était fermée, [pourtant] il entra.",
-      "choix": ["Cause", "Conséquence", "Opposition", "Temps"],
+      "choix": [
+        "Cause",
+        "Conséquence",
+        "Opposition",
+        "Temps"
+      ],
       "bonne": 2,
       "explication": "On s'attendrait à ce qu'il n'entre pas : « pourtant » oppose le fait qu'il entre à la porte fermée. Il exprime l'opposition."
     },
     {
       "consigne": "Quel lien le mot en couleur exprime-t-il ?",
       "texte": "Nous avons annulé la sortie [parce que] la tempête approchait.",
-      "choix": ["Cause", "Conséquence", "Opposition", "Temps"],
+      "choix": [
+        "Cause",
+        "Conséquence",
+        "Opposition",
+        "Temps"
+      ],
       "bonne": 0,
       "explication": "« parce que » donne la raison de l'annulation : la tempête qui approche. Il exprime la cause."
     }
@@ -94,7 +124,11 @@
   "devinettes": [
     {
       "reponse": "Juxtaposition",
-      "acceptees": ["La juxtaposition", "Juxtaposées", "Propositions juxtaposées"],
+      "acceptees": [
+        "La juxtaposition",
+        "Juxtaposées",
+        "Propositions juxtaposées"
+      ],
       "indices": [
         "Je suis une manière de relier des propositions.",
         "Je n'utilise aucun mot de liaison.",
@@ -104,7 +138,12 @@
     },
     {
       "reponse": "Coordination",
-      "acceptees": ["La coordination", "Coordonnées", "Propositions coordonnées", "Conjonction de coordination"],
+      "acceptees": [
+        "La coordination",
+        "Coordonnées",
+        "Propositions coordonnées",
+        "Conjonction de coordination"
+      ],
       "indices": [
         "Je relie des propositions en rendant leur lien logique explicite.",
         "Je m'appuie sur un petit mot de liaison, comme « mais » ou « donc ».",
@@ -113,18 +152,11 @@
       "explication": "La coordination relie des propositions par une conjonction de coordination : mais, ou, et, donc, or, ni, car."
     },
     {
-      "reponse": "Phrase non verbale",
-      "acceptees": ["Une phrase non verbale", "La phrase non verbale", "Phrase nominale"],
-      "indices": [
-        "Je suis fréquente à l'oral, dans les titres et dans les didascalies.",
-        "Je ne contiens aucun mot conjugué.",
-        "« Silence ! » et « Quelle aventure ! » sont de bons exemples de moi."
-      ],
-      "explication": "Une phrase non verbale ne contient aucun verbe conjugué : « Silence ! », « Quelle aventure ! »."
-    },
-    {
       "reponse": "Proposition",
-      "acceptees": ["Une proposition", "La proposition"],
+      "acceptees": [
+        "Une proposition",
+        "La proposition"
+      ],
       "indices": [
         "Je suis une partie de phrase.",
         "Je suis organisée autour d'un verbe conjugué.",
@@ -134,15 +166,5 @@
     }
   ],
   "calculs": [],
-  "etapes": [
-    {
-      "titre": "Les étapes pour analyser une phrase complexe",
-      "etapes": [
-        "Souligner les verbes conjugués de la phrase",
-        "Délimiter chaque proposition avec des crochets",
-        "Repérer ce qui relie les propositions entre elles",
-        "Dire l'effet produit par ce lien"
-      ]
-    }
-  ]
+  "etapes": []
 }

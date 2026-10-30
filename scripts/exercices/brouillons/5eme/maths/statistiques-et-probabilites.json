@@ -19,8 +19,7 @@
         "Des barres plus hautes pour les valeurs plus nombreuses",
         "Un disque partagé en secteurs",
         "Un secteur qui représente 25 % mesure 90°",
-        "La somme des angles de tous les secteurs vaut 360°",
-        "Montrer comment un tout se répartit en parties"
+        "La somme des angles de tous les secteurs vaut 360°"
       ]
     },
     {
@@ -30,7 +29,6 @@
         "Additionner toutes les valeurs, puis diviser par leur nombre",
         "(12 + 15 + 9 + 14) ÷ 4",
         "(8 + 10 + 18) ÷ 3 = 12",
-        "(50 + 20) ÷ 5 = 14",
         "Les notes 10, 10 et 13 donnent 11"
       ]
     },
@@ -51,35 +49,60 @@
     {
       "consigne": "Quel nombre le passage en couleur désigne-t-il ?",
       "texte": "Sur les 24 élèves interrogés, [6] viennent à pied.",
-      "choix": ["Un effectif", "Une fréquence", "Une moyenne", "Une probabilité"],
+      "choix": [
+        "Un effectif",
+        "Une fréquence",
+        "Une moyenne",
+        "Une probabilité"
+      ],
       "bonne": 0,
       "explication": "6 est le nombre de fois où la valeur « à pied » apparaît : c'est un effectif."
     },
     {
       "consigne": "Quel nombre le passage en couleur désigne-t-il ?",
       "texte": "Sur les 24 élèves interrogés, [25 %] viennent à pied.",
-      "choix": ["Un effectif", "Une fréquence", "Une moyenne", "Une probabilité"],
+      "choix": [
+        "Un effectif",
+        "Une fréquence",
+        "Une moyenne",
+        "Une probabilité"
+      ],
       "bonne": 1,
       "explication": "25 % = 6 ÷ 24 : c'est l'effectif de la valeur divisé par l'effectif total, donc une fréquence."
     },
     {
       "consigne": "Quel nombre le passage en couleur désigne-t-il ?",
       "texte": "Les notes 12, 15, 9 et 14 sont additionnées, puis la somme est divisée par 4 : on obtient [12,5].",
-      "choix": ["Un effectif", "Une fréquence", "Une moyenne", "Une probabilité"],
+      "choix": [
+        "Un effectif",
+        "Une fréquence",
+        "Une moyenne",
+        "Une probabilité"
+      ],
       "bonne": 2,
       "explication": "On additionne les valeurs puis on divise par l'effectif total : 50 ÷ 4 = 12,5, c'est la moyenne."
     },
     {
       "consigne": "Quel nombre le passage en couleur désigne-t-il ?",
       "texte": "Avec un dé équilibré, la chance d'obtenir un nombre pair est de [1/2].",
-      "choix": ["Un effectif", "Une fréquence", "Une moyenne", "Une probabilité"],
+      "choix": [
+        "Un effectif",
+        "Une fréquence",
+        "Une moyenne",
+        "Une probabilité"
+      ],
       "bonne": 3,
       "explication": "3 issues favorables sur 6 possibles, en équiprobabilité : 3/6 = 1/2 est une probabilité."
     },
     {
       "consigne": "Quel nombre le passage en couleur désigne-t-il ?",
       "texte": "Sur les 20 élèves interrogés, la part de ceux qui viennent en vélo est de [0,4].",
-      "choix": ["Un effectif", "Une fréquence", "Une moyenne", "Une probabilité"],
+      "choix": [
+        "Un effectif",
+        "Une fréquence",
+        "Une moyenne",
+        "Une probabilité"
+      ],
       "bonne": 1,
       "explication": "0,4 est la part des élèves à vélo dans la série (8 ÷ 20) : c'est une fréquence."
     }
@@ -87,7 +110,10 @@
   "devinettes": [
     {
       "reponse": "Moyenne",
-      "acceptees": ["La moyenne", "Une moyenne"],
+      "acceptees": [
+        "La moyenne",
+        "Une moyenne"
+      ],
       "indices": [
         "Je résume une série de nombres par un seul nombre.",
         "Pour me calculer, on additionne toutes les valeurs.",
@@ -97,7 +123,10 @@
     },
     {
       "reponse": "Fréquence",
-      "acceptees": ["La fréquence", "Une fréquence"],
+      "acceptees": [
+        "La fréquence",
+        "Une fréquence"
+      ],
       "indices": [
         "Je suis un nombre qui compare une partie au total.",
         "Je me calcule en divisant l'effectif d'une valeur par l'effectif total.",
@@ -107,7 +136,10 @@
     },
     {
       "reponse": "Probabilité",
-      "acceptees": ["La probabilité", "Une probabilité"],
+      "acceptees": [
+        "La probabilité",
+        "Une probabilité"
+      ],
       "indices": [
         "Je suis un nombre compris entre 0 et 1.",
         "Je vaux 0 pour un événement impossible et 1 pour un événement certain.",
@@ -117,7 +149,11 @@
     },
     {
       "reponse": "Diagramme circulaire",
-      "acceptees": ["Diagramme en secteurs", "Graphique circulaire", "Camembert"],
+      "acceptees": [
+        "Diagramme en secteurs",
+        "Graphique circulaire",
+        "Camembert"
+      ],
       "indices": [
         "Je représente une série de données.",
         "L'angle de chacun de mes secteurs dépend de la fréquence de la valeur.",
@@ -170,15 +206,5 @@
       "explication": "Moyenne = somme ÷ effectif total, donc somme = 6 × 11 = 66."
     }
   ],
-  "etapes": [
-    {
-      "titre": "Les étapes pour construire un diagramme circulaire",
-      "etapes": [
-        "Calcule la fréquence de chaque valeur",
-        "Multiplie chaque fréquence par 360° pour trouver l'angle",
-        "Vérifie que la somme des angles fait 360°",
-        "Trace le cercle, puis les secteurs au rapporteur"
-      ]
-    }
-  ]
+  "etapes": []
 }

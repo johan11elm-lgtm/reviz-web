@@ -29,7 +29,6 @@
       "cartes": [
         "Une grande ville ronde fondée sur le Tigre en 762",
         "Une capitale où l'on traduit les textes grecs",
-        "Des savants étudient les mathématiques, l'astronomie et la médecine",
         "Lieu de travail du savant al-Khwarizmi au IXe siècle",
         "La capitale des Abbassides est prise et pillée en 1258"
       ]
@@ -76,7 +75,12 @@
   "devinettes": [
     {
       "reponse": "Mahomet",
-      "acceptees": ["Mahomet", "Le prophète Mahomet", "Muhammad", "Mohammed"],
+      "acceptees": [
+        "Mahomet",
+        "Le prophète Mahomet",
+        "Muhammad",
+        "Mohammed"
+      ],
       "indices": [
         "Je suis un marchand d'une ville d'Arabie.",
         "J'annonce qu'il n'existe qu'un seul Dieu, Allah.",
@@ -86,7 +90,10 @@
     },
     {
       "reponse": "Saladin",
-      "acceptees": ["Saladin", "Le sultan Saladin"],
+      "acceptees": [
+        "Saladin",
+        "Le sultan Saladin"
+      ],
       "indices": [
         "Je suis un chef musulman.",
         "Je combats les chrétiens venus d'Occident en Terre sainte.",
@@ -96,7 +103,11 @@
     },
     {
       "reponse": "Bagdad",
-      "acceptees": ["Bagdad", "Baghdad", "La ville de Bagdad"],
+      "acceptees": [
+        "Bagdad",
+        "Baghdad",
+        "La ville de Bagdad"
+      ],
       "indices": [
         "Je suis une grande ville de forme ronde.",
         "Je suis la capitale des califes abbassides, sur le Tigre.",
@@ -106,7 +117,12 @@
     },
     {
       "reponse": "Calife",
-      "acceptees": ["Calife", "Le calife", "Un calife", "Califes"],
+      "acceptees": [
+        "Calife",
+        "Le calife",
+        "Un calife",
+        "Califes"
+      ],
       "indices": [
         "Je dirige une communauté de croyants.",
         "Je suis le successeur de Mahomet.",

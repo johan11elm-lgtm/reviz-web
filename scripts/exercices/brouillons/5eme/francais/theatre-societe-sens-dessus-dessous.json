@@ -16,7 +16,6 @@
       "nom": "Le comique de gestes",
       "detail": "Le rire vient de ce que font les corps : coups de bâton, chutes, grimaces, maladresses.",
       "cartes": [
-        "Un valet donne des coups de bâton à son maître",
         "Un personnage glisse sur une peau de banane",
         "Un comédien se cogne contre la porte en entrant",
         "Un acteur fait des grimaces exagérées",
@@ -51,42 +50,66 @@
     {
       "consigne": "Que représente le passage en couleur ?",
       "texte": "GÉRONTE. — Que ce valet est fidèle ! SCAPIN, à part. — [Le pauvre homme ne se doute de rien.]",
-      "choix": ["Didascalie", "Aparté", "Monologue"],
+      "choix": [
+        "Didascalie",
+        "Aparté",
+        "Monologue"
+      ],
       "bonne": 1,
       "explication": "Scapin parle de Géronte, qui est présent mais n'est pas censé l'entendre, alors que le public l'entend : c'est un aparté."
     },
     {
       "consigne": "Que représente le passage en couleur ?",
       "texte": "SCAPIN, [en changeant de voix]. — Où est-il, ce coquin de Géronte ?",
-      "choix": ["Didascalie", "Aparté", "Monologue"],
+      "choix": [
+        "Didascalie",
+        "Aparté",
+        "Monologue"
+      ],
       "bonne": 0,
       "explication": "« en changeant de voix » est une indication de jeu donnée par l'auteur : elle n'est pas prononcée, c'est une didascalie."
     },
     {
       "consigne": "Que représente le passage en couleur ?",
       "texte": "SCAPIN, seul. — [Il me faut de l'argent avant ce soir. Mais comment en trouver ?]",
-      "choix": ["Didascalie", "Aparté", "Monologue"],
+      "choix": [
+        "Didascalie",
+        "Aparté",
+        "Monologue"
+      ],
       "bonne": 2,
       "explication": "Scapin est seul en scène et parle pour lui-même : c'est un monologue. Dans un aparté, d'autres personnages seraient présents."
     },
     {
       "consigne": "Que représente le passage en couleur ?",
       "texte": "ARGANTE, [furieux, entrant à grands pas]. — Où est mon fils ?",
-      "choix": ["Didascalie", "Aparté", "Monologue"],
+      "choix": [
+        "Didascalie",
+        "Aparté",
+        "Monologue"
+      ],
       "bonne": 0,
       "explication": "« furieux, entrant à grands pas » indique le ton et le déplacement d'Argante : ce sont des didascalies, que les acteurs ne prononcent pas."
     },
     {
       "consigne": "Que représente le passage en couleur ?",
       "texte": "ARGANTE. — Je te crois, Scapin. SCAPIN, à part. — [Quel bon tour je lui joue !]",
-      "choix": ["Didascalie", "Aparté", "Monologue"],
+      "choix": [
+        "Didascalie",
+        "Aparté",
+        "Monologue"
+      ],
       "bonne": 1,
       "explication": "Argante est présent mais n'entend pas cette réplique, que seul le public entend : c'est un aparté."
     },
     {
       "consigne": "Que représente le passage en couleur ?",
       "texte": "LÉANDRE, seul sur la scène. — [Que faire ? Mon père arrive et je n'ai pas un sou !]",
-      "choix": ["Didascalie", "Aparté", "Monologue"],
+      "choix": [
+        "Didascalie",
+        "Aparté",
+        "Monologue"
+      ],
       "bonne": 2,
       "explication": "Léandre est seul sur la scène : il parle pour lui-même devant le public, c'est un monologue."
     }
@@ -94,7 +117,11 @@
   "devinettes": [
     {
       "reponse": "Molière",
-      "acceptees": ["Moliere", "Jean-Baptiste Poquelin", "Poquelin"],
+      "acceptees": [
+        "Moliere",
+        "Jean-Baptiste Poquelin",
+        "Poquelin"
+      ],
       "indices": [
         "Je suis né en 1622 et je suis mort en 1673.",
         "Je suis à la fois comédien et auteur de théâtre.",
@@ -104,7 +131,11 @@
     },
     {
       "reponse": "Aparté",
-      "acceptees": ["Un aparté", "L'aparté", "À part"],
+      "acceptees": [
+        "Un aparté",
+        "L'aparté",
+        "À part"
+      ],
       "indices": [
         "Je suis une réplique de théâtre.",
         "Un personnage me dit pour lui-même, alors que d'autres personnages sont sur scène.",
@@ -114,7 +145,10 @@
     },
     {
       "reponse": "Quiproquo",
-      "acceptees": ["Un quiproquo", "Le quiproquo"],
+      "acceptees": [
+        "Un quiproquo",
+        "Le quiproquo"
+      ],
       "indices": [
         "Je suis un ressort du comique de situation.",
         "Je repose sur une confusion qui fait rire le public.",
@@ -124,7 +158,11 @@
     },
     {
       "reponse": "Commedia dell'arte",
-      "acceptees": ["La commedia dell'arte", "Commedia dell arte", "Commedia"],
+      "acceptees": [
+        "La commedia dell'arte",
+        "Commedia dell arte",
+        "Commedia"
+      ],
       "indices": [
         "Je suis un type de théâtre né en Italie au XVIe siècle.",
         "Mes acteurs jouent masqués et improvisent à partir d'un canevas.",

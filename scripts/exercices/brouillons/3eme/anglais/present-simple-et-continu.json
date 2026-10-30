@@ -135,20 +135,6 @@
         "Je suis le nom spécial que les Américains donnent à un élève de 9th grade."
       ],
       "explication": "Aux États-Unis, un élève de 9th grade, première année de high school, est un freshman."
-    },
-    {
-      "reponse": "GCSE",
-      "acceptees": [
-        "GCSE",
-        "The GCSE",
-        "GCSEs"
-      ],
-      "indices": [
-        "Je suis un examen, pas un cours.",
-        "Je concerne les élèves du Royaume-Uni, pas ceux de France.",
-        "Les élèves de 14-15 ans, en Year 10, me passeront à 16 ans."
-      ],
-      "explication": "Les élèves britanniques passent les examens du GCSE à 16 ans."
     }
   ],
   "calculs": [],

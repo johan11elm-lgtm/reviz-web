@@ -41,8 +41,7 @@
         "Un conflit entre catholiques et protestants de 1562 à 1598",
         "Le massacre de milliers de protestants à Paris en 1572",
         "Un roi protestant devenu catholique en 1593",
-        "Un édit de 1598 qui apaise le royaume",
-        "Le catholicisme reste la religion du royaume"
+        "Un édit de 1598 qui apaise le royaume"
       ]
     }
   ],
@@ -82,35 +81,55 @@
     {
       "consigne": "De qui parle-t-on dans le passage en couleur ?",
       "texte": "Pour eux, [seule la foi sauve et seule la Bible fait autorité].",
-      "choix": ["Les catholiques", "Les protestants", "Les humanistes"],
+      "choix": [
+        "Les catholiques",
+        "Les protestants",
+        "Les humanistes"
+      ],
       "bonne": 1,
       "explication": "Pour les protestants, seule la foi sauve et seule la Bible fait autorité."
     },
     {
       "consigne": "De qui parle-t-on dans le passage en couleur ?",
       "texte": "Pour eux, [le pape reste le chef de l'Église et il existe sept sacrements].",
-      "choix": ["Les catholiques", "Les protestants", "Les humanistes"],
+      "choix": [
+        "Les catholiques",
+        "Les protestants",
+        "Les humanistes"
+      ],
       "bonne": 0,
       "explication": "Les catholiques gardent le pape et les sept sacrements."
     },
     {
       "consigne": "De qui parle-t-on dans le passage en couleur ?",
       "texte": "Ils [placent l'être humain au centre et redécouvrent les textes de l'Antiquité].",
-      "choix": ["Les catholiques", "Les protestants", "Les humanistes"],
+      "choix": [
+        "Les catholiques",
+        "Les protestants",
+        "Les humanistes"
+      ],
       "bonne": 2,
       "explication": "Les humanistes placent l'être humain au centre et s'inspirent des textes antiques."
     },
     {
       "consigne": "De qui parle-t-on dans le passage en couleur ?",
       "texte": "Ils [refusent l'autorité du pape et ne gardent que le baptême et la Cène].",
-      "choix": ["Les catholiques", "Les protestants", "Les humanistes"],
+      "choix": [
+        "Les catholiques",
+        "Les protestants",
+        "Les humanistes"
+      ],
       "bonne": 1,
       "explication": "Les protestants refusent l'autorité du pape et ne gardent que deux sacrements."
     },
     {
       "consigne": "De qui parle-t-on dans le passage en couleur ?",
       "texte": "Au concile de Trente, ils [réaffirment leurs dogmes et l'autorité du pape].",
-      "choix": ["Les catholiques", "Les protestants", "Les humanistes"],
+      "choix": [
+        "Les catholiques",
+        "Les protestants",
+        "Les humanistes"
+      ],
       "bonne": 0,
       "explication": "Le concile de Trente (1545-1563) est la réponse des catholiques à la Réforme."
     }
@@ -118,7 +137,11 @@
   "devinettes": [
     {
       "reponse": "Gutenberg",
-      "acceptees": ["Gutenberg", "Johannes Gutenberg", "Johann Gutenberg"],
+      "acceptees": [
+        "Gutenberg",
+        "Johannes Gutenberg",
+        "Johann Gutenberg"
+      ],
       "indices": [
         "Je suis un inventeur du XVe siècle.",
         "Je travaille à Mayence.",
@@ -128,7 +151,10 @@
     },
     {
       "reponse": "Luther",
-      "acceptees": ["Luther", "Martin Luther"],
+      "acceptees": [
+        "Luther",
+        "Martin Luther"
+      ],
       "indices": [
         "Je suis un moine allemand.",
         "En 1517, je publie 95 thèses contre les indulgences.",
@@ -138,7 +164,11 @@
     },
     {
       "reponse": "Le concile de Trente",
-      "acceptees": ["Concile de Trente", "Le concile de Trente", "Trente"],
+      "acceptees": [
+        "Concile de Trente",
+        "Le concile de Trente",
+        "Trente"
+      ],
       "indices": [
         "Je suis une grande réunion.",
         "Je réaffirme les dogmes de l'Église catholique.",
@@ -148,7 +178,11 @@
     },
     {
       "reponse": "Henri IV",
-      "acceptees": ["Henri IV", "Henri 4", "Henri quatre"],
+      "acceptees": [
+        "Henri IV",
+        "Henri 4",
+        "Henri quatre"
+      ],
       "indices": [
         "Je suis un roi de France.",
         "Je suis protestant, puis je deviens catholique en 1593.",

@@ -28,10 +28,7 @@
       "detail": "Répéter les mêmes instructions un nombre fixé de fois, par exemple pour tracer un polygone régulier.",
       "cartes": [
         "Le bloc « répéter 10 fois : avancer de 20 »",
-        "Un carré : 4 fois avancer, puis tourner de 90°",
-        "Les mêmes blocs exécutés plusieurs fois de suite",
-        "Polygone régulier à 5 côtés : tourner de 72°",
-        "Un triangle équilatéral : tourner de 120° à chaque sommet"
+        "Les mêmes blocs exécutés plusieurs fois de suite"
       ]
     },
     {
@@ -51,35 +48,60 @@
     {
       "consigne": "Que représente le passage en couleur ?",
       "texte": "Le programme commence par [demander Quel est ton âge ? et attendre].",
-      "choix": ["Une entrée", "Une affectation", "Une boucle", "Une condition"],
+      "choix": [
+        "Une entrée",
+        "Une affectation",
+        "Une boucle",
+        "Une condition"
+      ],
       "bonne": 0,
       "explication": "« demander … et attendre » fournit au programme une donnée de l'utilisateur : c'est une entrée."
     },
     {
       "consigne": "Que représente le passage en couleur ?",
       "texte": "Pour partir de zéro, le programme lance [mettre score à 0].",
-      "choix": ["Une entrée", "Une affectation", "Une boucle", "Une condition"],
+      "choix": [
+        "Une entrée",
+        "Une affectation",
+        "Une boucle",
+        "Une condition"
+      ],
       "bonne": 1,
       "explication": "« mettre … à » donne une valeur à une variable : c'est une affectation."
     },
     {
       "consigne": "Que représente le passage en couleur ?",
       "texte": "Pour tracer le carré, le lutin exécute [répéter 4 fois : avancer de 100, tourner de 90°].",
-      "choix": ["Une entrée", "Une affectation", "Une boucle", "Une condition"],
+      "choix": [
+        "Une entrée",
+        "Une affectation",
+        "Une boucle",
+        "Une condition"
+      ],
       "bonne": 2,
       "explication": "« répéter 4 fois » exécute quatre fois de suite les mêmes instructions : c'est une boucle."
     },
     {
       "consigne": "Que représente le passage en couleur ?",
       "texte": "Le lutin dit grand ou petit grâce à [si réponse > 10 alors dire grand sinon dire petit].",
-      "choix": ["Une entrée", "Une affectation", "Une boucle", "Une condition"],
+      "choix": [
+        "Une entrée",
+        "Une affectation",
+        "Une boucle",
+        "Une condition"
+      ],
       "bonne": 3,
       "explication": "« si … alors … sinon » exécute un bloc ou l'autre selon un test vrai ou faux : c'est une condition."
     },
     {
       "consigne": "Que représente le passage en couleur ?",
       "texte": "Pour dessiner l'hexagone, le programme contient [répéter 6 fois : avancer de 50, tourner de 60°].",
-      "choix": ["Une entrée", "Une affectation", "Une boucle", "Une condition"],
+      "choix": [
+        "Une entrée",
+        "Une affectation",
+        "Une boucle",
+        "Une condition"
+      ],
       "bonne": 2,
       "explication": "Les mêmes instructions sont exécutées 6 fois de suite : c'est une boucle, et 360° ÷ 6 = 60°."
     }
@@ -87,7 +109,10 @@
   "devinettes": [
     {
       "reponse": "Variable",
-      "acceptees": ["Une variable", "La variable"],
+      "acceptees": [
+        "Une variable",
+        "La variable"
+      ],
       "indices": [
         "Dans un programme, je porte un nom choisi par le programmeur.",
         "Je suis comme une boîte qui contient une valeur.",
@@ -97,7 +122,10 @@
     },
     {
       "reponse": "Boucle",
-      "acceptees": ["Une boucle", "La boucle"],
+      "acceptees": [
+        "Une boucle",
+        "La boucle"
+      ],
       "indices": [
         "Je permets de ne pas recopier plusieurs fois les mêmes blocs.",
         "Je fais exécuter plusieurs fois de suite les mêmes instructions.",
@@ -107,7 +135,10 @@
     },
     {
       "reponse": "Algorithme",
-      "acceptees": ["Un algorithme", "L'algorithme"],
+      "acceptees": [
+        "Un algorithme",
+        "L'algorithme"
+      ],
       "indices": [
         "Une recette de cuisine me ressemble.",
         "Je suis une suite finie d'instructions qui résout un problème.",

@@ -41,8 +41,7 @@
         "Autre nom de la distance à zéro",
         "Elle est toujours positive",
         "Elle vaut 7 pour −7 comme pour 7",
-        "Elle est la même pour deux nombres opposés",
-        "Elle mesure la distance entre un point et l'origine"
+        "Elle est la même pour deux nombres opposés"
       ]
     }
   ],
@@ -51,35 +50,55 @@
     {
       "consigne": "Que peut-on dire du nombre en couleur ?",
       "texte": "Ce matin, le thermomètre affichait [−4] °C.",
-      "choix": ["Strictement positif", "Strictement négatif", "Ni strictement positif ni strictement négatif"],
+      "choix": [
+        "Strictement positif",
+        "Strictement négatif",
+        "Ni strictement positif ni strictement négatif"
+      ],
       "bonne": 1,
       "explication": "−4 est inférieur à 0 et différent de 0 : il est strictement négatif."
     },
     {
       "consigne": "Que peut-on dire du nombre en couleur ?",
       "texte": "Le point A a pour abscisse [+5].",
-      "choix": ["Strictement positif", "Strictement négatif", "Ni strictement positif ni strictement négatif"],
+      "choix": [
+        "Strictement positif",
+        "Strictement négatif",
+        "Ni strictement positif ni strictement négatif"
+      ],
       "bonne": 0,
       "explication": "+5 est supérieur à 0 et différent de 0 : il est strictement positif."
     },
     {
       "consigne": "Que peut-on dire du nombre en couleur ?",
       "texte": "Le solde du compte de Léa est de [0] €.",
-      "choix": ["Strictement positif", "Strictement négatif", "Ni strictement positif ni strictement négatif"],
+      "choix": [
+        "Strictement positif",
+        "Strictement négatif",
+        "Ni strictement positif ni strictement négatif"
+      ],
       "bonne": 2,
       "explication": "0 est à la fois positif et négatif, mais il n'est ni strictement positif ni strictement négatif."
     },
     {
       "consigne": "Que peut-on dire du nombre en couleur ?",
       "texte": "Au sommet de la colline, l'altitude est de [+120] m.",
-      "choix": ["Strictement positif", "Strictement négatif", "Ni strictement positif ni strictement négatif"],
+      "choix": [
+        "Strictement positif",
+        "Strictement négatif",
+        "Ni strictement positif ni strictement négatif"
+      ],
       "bonne": 0,
       "explication": "+120 est supérieur à 0 et différent de 0 : il est strictement positif."
     },
     {
       "consigne": "Que peut-on dire du nombre en couleur ?",
       "texte": "Le sous-marin plonge à l'altitude [−35] m.",
-      "choix": ["Strictement positif", "Strictement négatif", "Ni strictement positif ni strictement négatif"],
+      "choix": [
+        "Strictement positif",
+        "Strictement négatif",
+        "Ni strictement positif ni strictement négatif"
+      ],
       "bonne": 1,
       "explication": "−35 est inférieur à 0 et différent de 0 : il est strictement négatif."
     }
@@ -87,7 +106,11 @@
   "devinettes": [
     {
       "reponse": "Abscisse",
-      "acceptees": ["Abscisse", "L'abscisse", "Une abscisse"],
+      "acceptees": [
+        "Abscisse",
+        "L'abscisse",
+        "Une abscisse"
+      ],
       "indices": [
         "Je fais partie des coordonnées d'un point.",
         "Je suis écrite en premier, avant le point-virgule.",
@@ -97,7 +120,13 @@
     },
     {
       "reponse": "Valeur absolue",
-      "acceptees": ["Valeur absolue", "La valeur absolue", "Distance à zéro", "La distance à zéro", "Distance"],
+      "acceptees": [
+        "Valeur absolue",
+        "La valeur absolue",
+        "Distance à zéro",
+        "La distance à zéro",
+        "Distance"
+      ],
       "indices": [
         "Je suis un nombre qui n'est jamais négatif.",
         "Je mesure la distance entre un point et l'origine d'une droite graduée.",
@@ -107,7 +136,13 @@
     },
     {
       "reponse": "Opposé",
-      "acceptees": ["Opposé", "L'opposé", "Un opposé", "Nombre opposé", "Le nombre opposé"],
+      "acceptees": [
+        "Opposé",
+        "L'opposé",
+        "Un opposé",
+        "Nombre opposé",
+        "Le nombre opposé"
+      ],
       "indices": [
         "Je suis lié à un autre nombre.",
         "J'ai la même distance à zéro que lui.",
@@ -117,7 +152,12 @@
     },
     {
       "reponse": "Origine",
-      "acceptees": ["Origine", "L'origine", "Origine du repère", "L'origine du repère"],
+      "acceptees": [
+        "Origine",
+        "L'origine",
+        "Origine du repère",
+        "L'origine du repère"
+      ],
       "indices": [
         "Je suis un point du repère.",
         "Les deux axes gradués se coupent en moi.",

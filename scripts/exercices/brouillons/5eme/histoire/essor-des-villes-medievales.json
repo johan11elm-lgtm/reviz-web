@@ -7,7 +7,6 @@
       "cartes": [
         "Des foires de plusieurs semaines à Troyes et à Provins",
         "La lettre de change, qui évite de transporter des pièces",
-        "Des banquiers, souvent italiens",
         "Les villes de la Hanse, comme Lübeck",
         "Venise, Gênes et Florence, grands centres marchands"
       ]
@@ -41,18 +40,11 @@
         "Des voûtes sur croisée d'ogives et des arcs-boutants",
         "Notre-Dame de Paris, Chartres et Amiens",
         "Des religieux qui prêchent et vivent de dons",
-        "Des universités nées à Bologne, Paris et Oxford",
         "Un enseignement en latin de la théologie et du droit"
       ]
     }
   ],
   "causes": [
-    {
-      "fait": "l'essor des villes à partir du XIe siècle",
-      "carte": "La hausse de la population",
-      "role": "cause",
-      "explication": "La population augmente à partir du XIe siècle : il y a plus d'habitants et les villes grandissent."
-    },
     {
       "fait": "l'essor des villes à partir du XIe siècle",
       "carte": "Des campagnes qui produisent davantage",
@@ -64,12 +56,6 @@
       "carte": "Le désir des bourgeois de gérer eux-mêmes leurs affaires",
       "role": "cause",
       "explication": "Les bourgeois veulent gérer eux-mêmes leurs affaires : ils obtiennent donc une charte de franchise."
-    },
-    {
-      "fait": "une charte de franchise accordée à une ville",
-      "carte": "L'argent versé au seigneur par les bourgeois",
-      "role": "cause",
-      "explication": "Les bourgeois obtiennent la charte du seigneur, souvent contre de l'argent : ce n'est pas un cadeau."
     },
     {
       "fait": "une charte de franchise accordée à une ville",
@@ -88,35 +74,60 @@
     {
       "consigne": "À quel grand espace du commerce appartient la ville en couleur ?",
       "texte": "Au Moyen Âge, [Gênes] est un grand port marchand de la Méditerranée.",
-      "choix": ["L'Italie", "La Flandre", "La Champagne", "La Hanse"],
+      "choix": [
+        "L'Italie",
+        "La Flandre",
+        "La Champagne",
+        "La Hanse"
+      ],
       "bonne": 0,
       "explication": "Gênes, comme Venise et Florence, est une ville marchande d'Italie."
     },
     {
       "consigne": "À quel grand espace du commerce appartient la ville en couleur ?",
       "texte": "Les marchands de [Lübeck] commercent en mer du Nord et en mer Baltique.",
-      "choix": ["L'Italie", "La Flandre", "La Champagne", "La Hanse"],
+      "choix": [
+        "L'Italie",
+        "La Flandre",
+        "La Champagne",
+        "La Hanse"
+      ],
       "bonne": 3,
       "explication": "Lübeck fait partie de la Hanse, qui commerce en mer du Nord et en mer Baltique."
     },
     {
       "consigne": "À quel grand espace du commerce appartient la ville en couleur ?",
       "texte": "Aux XIIe-XIIIe siècles, de grandes foires ont lieu à [Provins].",
-      "choix": ["L'Italie", "La Flandre", "La Champagne", "La Hanse"],
+      "choix": [
+        "L'Italie",
+        "La Flandre",
+        "La Champagne",
+        "La Hanse"
+      ],
       "bonne": 2,
       "explication": "Provins et Troyes accueillent les foires de Champagne."
     },
     {
       "consigne": "À quel grand espace du commerce appartient la ville en couleur ?",
       "texte": "À [Bruges], les marchands vendent des draps de laine.",
-      "choix": ["L'Italie", "La Flandre", "La Champagne", "La Hanse"],
+      "choix": [
+        "L'Italie",
+        "La Flandre",
+        "La Champagne",
+        "La Hanse"
+      ],
       "bonne": 1,
       "explication": "Bruges est un grand centre marchand de Flandre, connue pour ses draps de laine."
     },
     {
       "consigne": "À quel grand espace du commerce appartient la ville en couleur ?",
       "texte": "[Venise] vend en Europe les épices et la soie d'Orient.",
-      "choix": ["L'Italie", "La Flandre", "La Champagne", "La Hanse"],
+      "choix": [
+        "L'Italie",
+        "La Flandre",
+        "La Champagne",
+        "La Hanse"
+      ],
       "bonne": 0,
       "explication": "Les marchands italiens, dont ceux de Venise, apportent les épices et la soie d'Orient."
     }
@@ -124,7 +135,12 @@
   "devinettes": [
     {
       "reponse": "Les bourgeois",
-      "acceptees": ["Bourgeois", "Les bourgeois", "Un bourgeois", "Bourgeoisie"],
+      "acceptees": [
+        "Bourgeois",
+        "Les bourgeois",
+        "Un bourgeois",
+        "Bourgeoisie"
+      ],
       "indices": [
         "Nous sommes des habitants d'une ville du Moyen Âge.",
         "Les plus riches parmi nous sont des marchands.",
@@ -134,7 +150,12 @@
     },
     {
       "reponse": "Une charte de franchise",
-      "acceptees": ["Charte de franchise", "Une charte de franchise", "La charte de franchise", "Charte"],
+      "acceptees": [
+        "Charte de franchise",
+        "Une charte de franchise",
+        "La charte de franchise",
+        "Charte"
+      ],
       "indices": [
         "Je suis un texte.",
         "Le seigneur m'accorde aux habitants d'une ville, souvent contre de l'argent.",
@@ -144,7 +165,11 @@
     },
     {
       "reponse": "Le beffroi",
-      "acceptees": ["Beffroi", "Le beffroi", "Un beffroi"],
+      "acceptees": [
+        "Beffroi",
+        "Le beffroi",
+        "Un beffroi"
+      ],
       "indices": [
         "Je suis une tour.",
         "Je domine la ville et j'abrite la cloche.",
@@ -154,7 +179,11 @@
     },
     {
       "reponse": "La lettre de change",
-      "acceptees": ["Lettre de change", "La lettre de change", "Une lettre de change"],
+      "acceptees": [
+        "Lettre de change",
+        "La lettre de change",
+        "Une lettre de change"
+      ],
       "indices": [
         "Je suis un papier.",
         "Les marchands m'utilisent pour leurs affaires.",

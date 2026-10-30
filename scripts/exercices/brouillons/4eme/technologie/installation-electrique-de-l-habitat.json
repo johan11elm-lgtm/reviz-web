@@ -27,7 +27,6 @@
       "nom": "Les dangers du courant",
       "detail": "Les risques pour l'installation et pour les personnes : court-circuit, surcharge, électrisation, incendie.",
       "cartes": [
-        "Courant très intense quand un fil relie les deux bornes",
         "Trop d'appareils puissants sur une même multiprise",
         "Un courant qui traverse le corps d'une personne",
         "Des fils qui chauffent trop et provoquent un incendie",
@@ -88,53 +87,66 @@
     {
       "consigne": "Quel montage le passage en couleur décrit-il ?",
       "texte": "Dans un escalier, [la lampe s'allume ou s'éteint depuis le bas comme depuis le haut].",
-      "choix": ["En série", "En dérivation", "En va-et-vient"],
+      "choix": [
+        "En série",
+        "En dérivation",
+        "En va-et-vient"
+      ],
       "bonne": 2,
       "explication": "Commander une même lampe depuis deux endroits demande un montage va-et-vient."
     },
     {
       "consigne": "Quel montage le passage en couleur décrit-il ?",
       "texte": "Dans un logement, [chaque prise reçoit 230 V et fonctionne seule].",
-      "choix": ["En série", "En dérivation", "En va-et-vient"],
+      "choix": [
+        "En série",
+        "En dérivation",
+        "En va-et-vient"
+      ],
       "bonne": 1,
       "explication": "Les appareils d'un logement sont en dérivation : chacun reçoit 230 V et fonctionne indépendamment."
     },
     {
       "consigne": "Quel montage le passage en couleur décrit-il ?",
       "texte": "Quand on dévisse une lampe, [toutes les autres s'éteignent].",
-      "choix": ["En série", "En dérivation", "En va-et-vient"],
+      "choix": [
+        "En série",
+        "En dérivation",
+        "En va-et-vient"
+      ],
       "bonne": 0,
       "explication": "En série, retirer un appareil coupe le circuit et arrête tous les autres."
     },
     {
       "consigne": "Quel montage le passage en couleur décrit-il ?",
       "texte": "Dans un couloir, [deux commutateurs commandent la même lampe].",
-      "choix": ["En série", "En dérivation", "En va-et-vient"],
+      "choix": [
+        "En série",
+        "En dérivation",
+        "En va-et-vient"
+      ],
       "bonne": 2,
       "explication": "Deux commutateurs pour une même lampe : c'est le montage va-et-vient."
     },
     {
       "consigne": "Quel montage le passage en couleur décrit-il ?",
       "texte": "Le four et le lave-linge fonctionnent séparément : [chacun est sur sa propre branche].",
-      "choix": ["En série", "En dérivation", "En va-et-vient"],
+      "choix": [
+        "En série",
+        "En dérivation",
+        "En va-et-vient"
+      ],
       "bonne": 1,
       "explication": "Chaque appareil sur sa propre branche : c'est le montage en dérivation."
     }
   ],
   "devinettes": [
     {
-      "reponse": "Disjoncteur",
-      "acceptees": ["Le disjoncteur", "Disjoncteur divisionnaire"],
-      "indices": [
-        "Je suis installé dans le tableau électrique.",
-        "Je coupe le circuit en cas de court-circuit ou de surcharge.",
-        "Je protège surtout l'installation, pas directement les personnes."
-      ],
-      "explication": "Le disjoncteur protège l'installation en coupant le circuit en cas de surcharge ou de court-circuit."
-    },
-    {
       "reponse": "Court-circuit",
-      "acceptees": ["Un court-circuit", "Court circuit"],
+      "acceptees": [
+        "Un court-circuit",
+        "Court circuit"
+      ],
       "indices": [
         "Je suis un danger pour une installation électrique.",
         "Je relie les deux bornes du générateur par un fil, sans appareil.",
@@ -144,7 +156,10 @@
     },
     {
       "reponse": "Va-et-vient",
-      "acceptees": ["Le va-et-vient", "Montage va-et-vient"],
+      "acceptees": [
+        "Le va-et-vient",
+        "Montage va-et-vient"
+      ],
       "indices": [
         "Je suis un montage qui sert à commander.",
         "J'utilise deux commutateurs.",
@@ -154,7 +169,11 @@
     },
     {
       "reponse": "Prise de terre",
-      "acceptees": ["La terre", "Terre", "Fil de terre"],
+      "acceptees": [
+        "La terre",
+        "Terre",
+        "Fil de terre"
+      ],
       "indices": [
         "Je suis reliée aux carcasses métalliques des appareils.",
         "Mon fil est vert et jaune.",

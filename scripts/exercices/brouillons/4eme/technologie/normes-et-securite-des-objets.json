@@ -6,7 +6,6 @@
       "detail": "Des documents de référence qui fixent des règles techniques communes, en général appliquées volontairement.",
       "cartes": [
         "Document de référence qui fixe des règles techniques communes",
-        "Application en général volontaire",
         "Rédigée en France par l'AFNOR, dans le monde par l'ISO",
         "Rend compatibles des produits de marques différentes",
         "Définit par exemple le format des piles"
@@ -18,8 +17,6 @@
       "cartes": [
         "Règles obligatoires fixées par les pouvoirs publics",
         "Texte qui rend une norme obligatoire",
-        "Le fabricant déclare seul que son produit est conforme",
-        "Obligatoire pour vendre certains produits dans l'Union européenne",
         "Impose un connecteur de charge commun aux téléphones neufs"
       ]
     },
@@ -27,7 +24,6 @@
       "nom": "Marques et labels",
       "detail": "Des signes qui attestent un contrôle indépendant (marque NF) ou une qualité (label).",
       "cartes": [
-        "Un organisme indépendant a contrôlé la conformité du produit",
         "Atteste le respect d'une norme après vérification",
         "Le sigle NF affiché sur un produit",
         "Un label met en avant une qualité du produit",
@@ -51,79 +47,78 @@
     {
       "consigne": "Que signifie le signe en couleur ?",
       "texte": "Sur un vieux grille-pain, on voit [une poubelle barrée].",
-      "choix": ["Appareil à rapporter en point de collecte", "Danger chimique", "Conformité déclarée par le fabricant", "Conformité contrôlée par un organisme indépendant"],
+      "choix": [
+        "Appareil à rapporter en point de collecte",
+        "Danger chimique",
+        "Conformité déclarée par le fabricant",
+        "Conformité contrôlée par un organisme indépendant"
+      ],
       "bonne": 0,
       "explication": "La poubelle barrée indique un déchet électrique ou électronique à rapporter en point de collecte."
     },
     {
       "consigne": "Que signifie le signe en couleur ?",
       "texte": "Sur un flacon de produit ménager, on voit [un losange à bord rouge].",
-      "choix": ["Appareil à rapporter en point de collecte", "Danger chimique", "Conformité déclarée par le fabricant", "Conformité contrôlée par un organisme indépendant"],
+      "choix": [
+        "Appareil à rapporter en point de collecte",
+        "Danger chimique",
+        "Conformité déclarée par le fabricant",
+        "Conformité contrôlée par un organisme indépendant"
+      ],
       "bonne": 1,
       "explication": "Un losange à bord rouge signale un danger : inflammable, corrosif, toxique…"
     },
     {
       "consigne": "Que signifie le signe en couleur ?",
       "texte": "Sur un chargeur vendu en Europe, on lit [le marquage CE].",
-      "choix": ["Appareil à rapporter en point de collecte", "Danger chimique", "Conformité déclarée par le fabricant", "Conformité contrôlée par un organisme indépendant"],
+      "choix": [
+        "Appareil à rapporter en point de collecte",
+        "Danger chimique",
+        "Conformité déclarée par le fabricant",
+        "Conformité contrôlée par un organisme indépendant"
+      ],
       "bonne": 2,
       "explication": "Le marquage CE est une déclaration de conformité du fabricant, pas un contrôle indépendant."
     },
     {
       "consigne": "Que signifie le signe en couleur ?",
       "texte": "Sur une multiprise, on voit [le sigle NF].",
-      "choix": ["Appareil à rapporter en point de collecte", "Danger chimique", "Conformité déclarée par le fabricant", "Conformité contrôlée par un organisme indépendant"],
+      "choix": [
+        "Appareil à rapporter en point de collecte",
+        "Danger chimique",
+        "Conformité déclarée par le fabricant",
+        "Conformité contrôlée par un organisme indépendant"
+      ],
       "bonne": 3,
       "explication": "La marque NF suppose un contrôle de conformité par un organisme indépendant."
     },
     {
       "consigne": "Que signifie le signe en couleur ?",
       "texte": "Sur une lampe vendue dans l'Union européenne, on lit [le marquage CE].",
-      "choix": ["Appareil à rapporter en point de collecte", "Danger chimique", "Conformité déclarée par le fabricant", "Conformité contrôlée par un organisme indépendant"],
+      "choix": [
+        "Appareil à rapporter en point de collecte",
+        "Danger chimique",
+        "Conformité déclarée par le fabricant",
+        "Conformité contrôlée par un organisme indépendant"
+      ],
       "bonne": 2,
       "explication": "Le fabricant déclare lui-même que sa lampe respecte les exigences européennes : c'est le marquage CE."
     }
   ],
   "devinettes": [
     {
-      "reponse": "AFNOR",
-      "acceptees": ["L'AFNOR", "Afnor"],
-      "indices": [
-        "Je suis un organisme qui s'occupe de normalisation.",
-        "Je rédige et je publie des normes.",
-        "Je suis l'organisme français de normalisation, à la différence de l'ISO qui agit dans le monde entier."
-      ],
-      "explication": "L'AFNOR publie les normes en France ; l'ISO le fait au niveau mondial."
-    },
-    {
-      "reponse": "ISO",
-      "acceptees": ["L'ISO", "Iso"],
-      "indices": [
-        "Je suis un organisme qui publie des normes.",
-        "Mes normes sont reconnues dans le monde entier.",
-        "Mon sigle de trois lettres désigne l'équivalent mondial de l'AFNOR."
-      ],
-      "explication": "L'ISO publie les normes internationales, alors que l'AFNOR est l'organisme français."
-    },
-    {
       "reponse": "Marquage CE",
-      "acceptees": ["CE", "Le marquage CE", "Marque CE"],
+      "acceptees": [
+        "CE",
+        "Le marquage CE",
+        "Marque CE"
+      ],
       "indices": [
         "On me trouve sur de nombreux produits vendus en Europe.",
         "Le fabricant me pose lui-même sur son produit.",
         "Je suis obligatoire pour vendre certains produits dans l'Union européenne, mais je n'indique pas la qualité."
       ],
       "explication": "Le marquage CE est une déclaration de conformité du fabricant, obligatoire pour certains produits ; ce n'est pas un label de qualité."
-    },
-    {
-      "reponse": "Triman",
-      "acceptees": ["Le Triman", "Logo Triman"],
-      "indices": [
-        "Je suis un logo présent sur des produits et des emballages.",
-        "Je donne une consigne de tri.",
-        "Avec moi, le produit doit être trié ou rapporté, mais je ne dis pas qu'il est déjà recyclé."
-      ],
-      "explication": "Le logo Triman donne une consigne de tri ; il ne signifie pas que le produit est déjà recyclé."
     }
   ],
   "calculs": [],

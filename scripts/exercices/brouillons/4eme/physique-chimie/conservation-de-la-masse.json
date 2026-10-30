@@ -55,12 +55,6 @@
     },
     {
       "fait": "la conservation de la masse lors d'une transformation chimique",
-      "carte": "Tous les atomes des réactifs se retrouvent dans les produits",
-      "role": "cause",
-      "explication": "Les atomes se réarrangent seulement : ceux des réactifs sont tous dans les produits, donc la masse totale ne change pas."
-    },
-    {
-      "fait": "la conservation de la masse lors d'une transformation chimique",
       "carte": "12 g de carbone et 32 g de dioxygène donnent 44 g de dioxyde de carbone",
       "role": "consequence",
       "explication": "La masse des produits est égale à celle des réactifs consommés : 12 + 32 = 44 g."
@@ -82,35 +76,55 @@
     {
       "consigne": "Quel est le rôle du passage en couleur dans la transformation ?",
       "texte": "En brûlant, 12 g de carbone consomment [32 g de dioxygène].",
-      "choix": ["Un réactif consommé", "Un produit formé", "Un réactif en excès"],
+      "choix": [
+        "Un réactif consommé",
+        "Un produit formé",
+        "Un réactif en excès"
+      ],
       "bonne": 0,
       "explication": "Le dioxygène est consommé pendant la combustion : c'est un réactif consommé."
     },
     {
       "consigne": "Quel est le rôle du passage en couleur dans la transformation ?",
       "texte": "Quand 12 g de carbone et 32 g de dioxygène réagissent, il se forme [44 g de dioxyde de carbone].",
-      "choix": ["Un réactif consommé", "Un produit formé", "Un réactif en excès"],
+      "choix": [
+        "Un réactif consommé",
+        "Un produit formé",
+        "Un réactif en excès"
+      ],
       "bonne": 1,
       "explication": "Le dioxyde de carbone n'existait pas au départ : il se forme, c'est un produit."
     },
     {
       "consigne": "Quel est le rôle du passage en couleur dans la transformation ?",
       "texte": "On met 10 g de carbone avec 16 g de dioxygène : 6 g de carbone réagissent et [4 g de carbone] ne réagissent pas.",
-      "choix": ["Un réactif consommé", "Un produit formé", "Un réactif en excès"],
+      "choix": [
+        "Un réactif consommé",
+        "Un produit formé",
+        "Un réactif en excès"
+      ],
       "bonne": 2,
       "explication": "Les 4 g de carbone n'ont pas réagi : ils restent à la fin, c'est le réactif en excès."
     },
     {
       "consigne": "Quel est le rôle du passage en couleur dans la transformation ?",
       "texte": "Pour former de l'eau, on consomme [du dihydrogène] et du dioxygène.",
-      "choix": ["Un réactif consommé", "Un produit formé", "Un réactif en excès"],
+      "choix": [
+        "Un réactif consommé",
+        "Un produit formé",
+        "Un réactif en excès"
+      ],
       "bonne": 0,
       "explication": "Le dihydrogène disparaît pendant la transformation : c'est un réactif consommé."
     },
     {
       "consigne": "Quel est le rôle du passage en couleur dans la transformation ?",
       "texte": "Après la combustion du méthane, on récupère [de l'eau] et du dioxyde de carbone.",
-      "choix": ["Un réactif consommé", "Un produit formé", "Un réactif en excès"],
+      "choix": [
+        "Un réactif consommé",
+        "Un produit formé",
+        "Un réactif en excès"
+      ],
       "bonne": 1,
       "explication": "L'eau et le dioxyde de carbone se forment pendant la combustion : ce sont des produits."
     }
@@ -118,7 +132,11 @@
   "devinettes": [
     {
       "reponse": "Lavoisier",
-      "acceptees": ["Lavoisier", "Antoine Lavoisier", "Antoine"],
+      "acceptees": [
+        "Lavoisier",
+        "Antoine Lavoisier",
+        "Antoine"
+      ],
       "indices": [
         "Je suis un chimiste français du XVIIIe siècle.",
         "J'ai fait des pesées précises en récipient fermé.",
@@ -128,7 +146,12 @@
     },
     {
       "reponse": "Atome",
-      "acceptees": ["Atome", "Un atome", "L'atome", "Atomes"],
+      "acceptees": [
+        "Atome",
+        "Un atome",
+        "L'atome",
+        "Atomes"
+      ],
       "indices": [
         "Je suis une particule extrêmement petite de la matière.",
         "Mon nombre est le même avant et après une transformation chimique.",
@@ -138,7 +161,12 @@
     },
     {
       "reponse": "Réactif en excès",
-      "acceptees": ["Réactif en excès", "Le réactif en excès", "Un réactif en excès", "Excès"],
+      "acceptees": [
+        "Réactif en excès",
+        "Le réactif en excès",
+        "Un réactif en excès",
+        "Excès"
+      ],
       "indices": [
         "Je suis une espèce chimique présente au départ d'une transformation.",
         "À la fin, il m'en reste : je n'ai pas été entièrement consommé.",

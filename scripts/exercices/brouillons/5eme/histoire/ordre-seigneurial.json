@@ -39,10 +39,7 @@
       "detail": "Du XIe au XIIIe siècle : plus d'habitants, plus de terres et de meilleures récoltes.",
       "cartes": [
         "La population augmente fortement du XIe au XIIIe siècle",
-        "Des forêts et des marais deviennent des terres cultivées",
-        "Une charrue qui retourne la terre en profondeur",
-        "Un collier posé sur les épaules du cheval",
-        "Une rotation sur trois ans avec une année de jachère"
+        "Des forêts et des marais deviennent des terres cultivées"
       ]
     }
   ],
@@ -76,7 +73,11 @@
   "devinettes": [
     {
       "reponse": "Dîme",
-      "acceptees": ["Dîme", "La dîme", "Dime"],
+      "acceptees": [
+        "Dîme",
+        "La dîme",
+        "Dime"
+      ],
       "indices": [
         "Je suis une part des récoltes.",
         "Je représente environ un dixième de ce que produisent les paysans.",
@@ -86,7 +87,11 @@
     },
     {
       "reponse": "Serf",
-      "acceptees": ["Serf", "Un serf", "Le serf"],
+      "acceptees": [
+        "Serf",
+        "Un serf",
+        "Le serf"
+      ],
       "indices": [
         "Je travaille la terre.",
         "Je ne suis pas libre.",
@@ -96,7 +101,11 @@
     },
     {
       "reponse": "Vassal",
-      "acceptees": ["Vassal", "Un vassal", "Le vassal"],
+      "acceptees": [
+        "Vassal",
+        "Un vassal",
+        "Le vassal"
+      ],
       "indices": [
         "Je suis un seigneur.",
         "J'ai prêté hommage à un seigneur plus puissant.",
@@ -106,7 +115,12 @@
     },
     {
       "reponse": "Banalités",
-      "acceptees": ["Banalités", "Les banalités", "Banalité", "Une banalité"],
+      "acceptees": [
+        "Banalités",
+        "Les banalités",
+        "Banalité",
+        "Une banalité"
+      ],
       "indices": [
         "Je suis une taxe.",
         "Les paysans me paient au seigneur.",

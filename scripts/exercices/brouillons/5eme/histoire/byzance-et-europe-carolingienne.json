@@ -8,7 +8,6 @@
         "Un empereur au pouvoir de 527 à 565",
         "La reconquête de l'Italie et de l'Afrique du Nord",
         "La rédaction d'un grand recueil de lois",
-        "La reconstruction de la basilique Sainte-Sophie, achevée en 537",
         "Une mosaïque de Ravenne où l'empereur porte une auréole"
       ]
     },
@@ -61,12 +60,6 @@
     },
     {
       "fait": "le schisme de 1054",
-      "carte": "Les chrétiens d'Orient et d'Occident s'éloignent peu à peu",
-      "role": "cause",
-      "explication": "Peu à peu, les chrétiens d'Orient et d'Occident s'éloignent, jusqu'à la rupture de 1054."
-    },
-    {
-      "fait": "le schisme de 1054",
       "carte": "Un désaccord sur l'autorité du pape ou du patriarche",
       "role": "cause",
       "explication": "Les deux Églises se séparent notamment sur l'autorité : celle du pape ou celle du patriarche."
@@ -82,35 +75,60 @@
     {
       "consigne": "Quelle fonction le passage en couleur désigne-t-il ?",
       "texte": "Le 25 décembre 800, à Rome, [le chef de l'Église catholique, Léon III,] couronne Charlemagne empereur.",
-      "choix": ["Basileus", "Pape", "Patriarche", "Comte"],
+      "choix": [
+        "Basileus",
+        "Pape",
+        "Patriarche",
+        "Comte"
+      ],
       "bonne": 1,
       "explication": "Le chef de l'Église catholique, à Rome, est le pape : Léon III couronne Charlemagne."
     },
     {
       "consigne": "Quelle fonction le passage en couleur désigne-t-il ?",
       "texte": "À Constantinople, [l'empereur, représentant de Dieu sur terre,] dirige l'État et intervient dans l'Église.",
-      "choix": ["Basileus", "Pape", "Patriarche", "Comte"],
+      "choix": [
+        "Basileus",
+        "Pape",
+        "Patriarche",
+        "Comte"
+      ],
       "bonne": 0,
       "explication": "L'empereur byzantin porte le titre de basileus : il est vu comme le représentant de Dieu sur terre."
     },
     {
       "consigne": "Quelle fonction le passage en couleur désigne-t-il ?",
       "texte": "En 1054, [le chef de l'Église orthodoxe, installé à Constantinople,] rompt avec Rome.",
-      "choix": ["Basileus", "Pape", "Patriarche", "Comte"],
+      "choix": [
+        "Basileus",
+        "Pape",
+        "Patriarche",
+        "Comte"
+      ],
       "bonne": 2,
       "explication": "L'Église orthodoxe suit le patriarche de Constantinople, qui rompt avec le pape en 1054."
     },
     {
       "consigne": "Quelle fonction le passage en couleur désigne-t-il ?",
       "texte": "Charlemagne confie chaque comté à [un responsable surveillé par les missi dominici].",
-      "choix": ["Basileus", "Pape", "Patriarche", "Comte"],
+      "choix": [
+        "Basileus",
+        "Pape",
+        "Patriarche",
+        "Comte"
+      ],
       "bonne": 3,
       "explication": "Les comtes dirigent les comtés et sont contrôlés par les missi dominici."
     },
     {
       "consigne": "Quelle fonction le passage en couleur désigne-t-il ?",
       "texte": "À Ravenne, une mosaïque montre [Justinien, la tête entourée d'une auréole].",
-      "choix": ["Basileus", "Pape", "Patriarche", "Comte"],
+      "choix": [
+        "Basileus",
+        "Pape",
+        "Patriarche",
+        "Comte"
+      ],
       "bonne": 0,
       "explication": "Justinien est un empereur byzantin, un basileus : l'auréole montre que son pouvoir vient de Dieu."
     }
@@ -118,7 +136,11 @@
   "devinettes": [
     {
       "reponse": "Justinien",
-      "acceptees": ["Justinien", "Justinien Ier", "L'empereur Justinien"],
+      "acceptees": [
+        "Justinien",
+        "Justinien Ier",
+        "L'empereur Justinien"
+      ],
       "indices": [
         "Je suis un empereur du VIe siècle.",
         "J'ai reconquis l'Italie et l'Afrique du Nord et j'ai fait rédiger un grand recueil de lois.",
@@ -128,7 +150,10 @@
     },
     {
       "reponse": "Charlemagne",
-      "acceptees": ["Charlemagne", "Charles le Grand"],
+      "acceptees": [
+        "Charlemagne",
+        "Charles le Grand"
+      ],
       "indices": [
         "Je suis roi des Francs depuis 768.",
         "J'échange des ambassades avec le calife de Bagdad, qui m'offre un éléphant.",
@@ -138,7 +163,10 @@
     },
     {
       "reponse": "Basileus",
-      "acceptees": ["Basileus", "Le basileus"],
+      "acceptees": [
+        "Basileus",
+        "Le basileus"
+      ],
       "indices": [
         "Je suis un titre.",
         "Celui qui me porte est considéré comme le représentant de Dieu sur terre.",
@@ -148,7 +176,11 @@
     },
     {
       "reponse": "Missi dominici",
-      "acceptees": ["Missi dominici", "Les missi dominici", "Missi"],
+      "acceptees": [
+        "Missi dominici",
+        "Les missi dominici",
+        "Missi"
+      ],
       "indices": [
         "Nous voyageons souvent par deux dans l'empire.",
         "Nous contrôlons les comtes au nom de l'empereur.",

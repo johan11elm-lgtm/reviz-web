@@ -51,7 +51,11 @@
   "devinettes": [
     {
       "reponse": "Équation",
-      "acceptees": ["Équation", "Une équation", "L'équation"],
+      "acceptees": [
+        "Équation",
+        "Une équation",
+        "L'équation"
+      ],
       "indices": [
         "Je suis une égalité.",
         "Je contiens un nombre inconnu à trouver.",
@@ -61,7 +65,11 @@
     },
     {
       "reponse": "Solution",
-      "acceptees": ["Solution", "La solution", "Une solution"],
+      "acceptees": [
+        "Solution",
+        "La solution",
+        "Une solution"
+      ],
       "indices": [
         "Je suis un nombre.",
         "Quand on me met à la place de l'inconnue, l'égalité devient vraie.",
@@ -71,7 +79,10 @@
     },
     {
       "reponse": "Distributivité",
-      "acceptees": ["Distributivité", "La distributivité"],
+      "acceptees": [
+        "Distributivité",
+        "La distributivité"
+      ],
       "indices": [
         "Je suis une propriété du calcul.",
         "Je permets de transformer un produit en somme, et inversement.",
@@ -81,7 +92,11 @@
     },
     {
       "reponse": "Factoriser",
-      "acceptees": ["Factoriser", "Factorisation", "Factoriser une expression"],
+      "acceptees": [
+        "Factoriser",
+        "Factorisation",
+        "Factoriser une expression"
+      ],
       "indices": [
         "Je suis une transformation d'une expression.",
         "Je transforme une somme en produit.",
@@ -134,15 +149,5 @@
       "explication": "4c = 4 × 7,5 = 30 cm."
     }
   ],
-  "etapes": [
-    {
-      "titre": "Résoudre l'équation x + 7 = 15",
-      "etapes": [
-        "On repère la forme de l'équation : x + 7 = 15",
-        "On calcule : x = 15 − 7 = 8",
-        "On vérifie en remplaçant : 8 + 7 = 15",
-        "On conclut : « La solution est 8. »"
-      ]
-    }
-  ]
+  "etapes": []
 }

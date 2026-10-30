@@ -76,53 +76,71 @@
     {
       "consigne": "Quel changement d'état le passage en couleur décrit-il ?",
       "texte": "Après la douche, [la vapeur d'eau se change en gouttes] sur le carrelage froid.",
-      "choix": ["Fusion", "Solidification", "Vaporisation", "Liquéfaction"],
+      "choix": [
+        "Fusion",
+        "Solidification",
+        "Vaporisation",
+        "Liquéfaction"
+      ],
       "bonne": 3,
       "explication": "La vapeur d'eau (gaz) redevient liquide au contact du carrelage froid : c'est une liquéfaction."
     },
     {
       "consigne": "Quel changement d'état le passage en couleur décrit-il ?",
       "texte": "Quand la température dépasse 0 °C, [la glace du lac devient de l'eau].",
-      "choix": ["Fusion", "Solidification", "Vaporisation", "Liquéfaction"],
+      "choix": [
+        "Fusion",
+        "Solidification",
+        "Vaporisation",
+        "Liquéfaction"
+      ],
       "bonne": 0,
       "explication": "La glace (solide) devient de l'eau liquide à 0 °C : c'est une fusion."
     },
     {
       "consigne": "Quel changement d'état le passage en couleur décrit-il ?",
       "texte": "Pendant la nuit, [l'eau de la flaque devient de la glace].",
-      "choix": ["Fusion", "Solidification", "Vaporisation", "Liquéfaction"],
+      "choix": [
+        "Fusion",
+        "Solidification",
+        "Vaporisation",
+        "Liquéfaction"
+      ],
       "bonne": 1,
       "explication": "L'eau liquide devient de la glace solide : c'est une solidification."
     },
     {
       "consigne": "Quel changement d'état le passage en couleur décrit-il ?",
       "texte": "Dans la casserole, [l'eau liquide devient gaz] en faisant de grosses bulles.",
-      "choix": ["Fusion", "Solidification", "Vaporisation", "Liquéfaction"],
+      "choix": [
+        "Fusion",
+        "Solidification",
+        "Vaporisation",
+        "Liquéfaction"
+      ],
       "bonne": 2,
       "explication": "Le liquide passe à l'état gazeux : c'est une vaporisation, ici une ébullition puisqu'il y a des bulles."
     },
     {
       "consigne": "Quel changement d'état le passage en couleur décrit-il ?",
       "texte": "Sur la terrasse, [l'eau de la serpillière passe peu à peu à l'état gazeux].",
-      "choix": ["Fusion", "Solidification", "Vaporisation", "Liquéfaction"],
+      "choix": [
+        "Fusion",
+        "Solidification",
+        "Vaporisation",
+        "Liquéfaction"
+      ],
       "bonne": 2,
       "explication": "Le liquide passe lentement à l'état gazeux, sans bulles : c'est une vaporisation, ici une évaporation."
     }
   ],
   "devinettes": [
     {
-      "reponse": "Ébullition",
-      "acceptees": ["L'ébullition", "Ebullition"],
-      "indices": [
-        "Je suis un changement d'état de l'eau.",
-        "Je suis une vaporisation rapide.",
-        "Je fais apparaître des bulles dans tout le liquide, à 100 °C pour l'eau pure."
-      ],
-      "explication": "L'ébullition est une vaporisation rapide, avec des bulles de vapeur dans tout le liquide."
-    },
-    {
       "reponse": "Évaporation",
-      "acceptees": ["L'évaporation", "Evaporation"],
+      "acceptees": [
+        "L'évaporation",
+        "Evaporation"
+      ],
       "indices": [
         "Je suis une forme de vaporisation.",
         "Je suis lente et je n'ai pas besoin d'atteindre 100 °C.",
@@ -131,18 +149,12 @@
       "explication": "L'évaporation est une vaporisation lente, à la surface du liquide et à toute température."
     },
     {
-      "reponse": "Palier",
-      "acceptees": ["Le palier", "Un palier"],
-      "indices": [
-        "Je suis visible sur une courbe température-temps.",
-        "Je suis une partie horizontale de la courbe.",
-        "Sur moi, la température d'un corps pur reste constante pendant le changement d'état."
-      ],
-      "explication": "Le palier est la partie horizontale de la courbe : la température d'un corps pur reste constante."
-    },
-    {
       "reponse": "Liquéfaction",
-      "acceptees": ["La liquéfaction", "Condensation", "La condensation"],
+      "acceptees": [
+        "La liquéfaction",
+        "Condensation",
+        "La condensation"
+      ],
       "indices": [
         "Je suis un passage d'un état à un autre.",
         "La buée sur une vitre froide est un exemple de moi.",
@@ -196,15 +208,6 @@
         "Repère la partie horizontale de la courbe : le palier",
         "Lis la température du palier sur l'axe vertical",
         "Conclus : un palier net indique un corps pur"
-      ]
-    },
-    {
-      "titre": "Les étapes du cycle de l'eau",
-      "etapes": [
-        "L'eau des océans s'évapore",
-        "La vapeur d'eau se liquéfie en nuages",
-        "L'eau retombe en pluie",
-        "L'eau de pluie ruisselle sur le sol"
       ]
     }
   ]

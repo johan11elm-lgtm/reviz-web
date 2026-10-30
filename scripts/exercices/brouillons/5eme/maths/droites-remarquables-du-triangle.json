@@ -19,8 +19,7 @@
         "Issue d'un sommet, perpendiculaire au côté opposé",
         "Dans un triangle obtus, deux d'entre elles sont à l'extérieur",
         "Dans ABC rectangle en A, (AB) et (AC) en font partie",
-        "Elle ne passe pas forcément par le milieu du côté opposé",
-        "Son pied est le point où elle coupe le côté opposé"
+        "Elle ne passe pas forcément par le milieu du côté opposé"
       ]
     },
     {
@@ -51,42 +50,66 @@
     {
       "consigne": "Quelle droite remarquable est la droite en couleur ?",
       "texte": "Dans le triangle ABC, I est le milieu du côté BC et on trace [la droite (AI)].",
-      "choix": ["Médiatrice", "Hauteur", "Médiane"],
+      "choix": [
+        "Médiatrice",
+        "Hauteur",
+        "Médiane"
+      ],
       "bonne": 2,
       "explication": "(AI) passe par le sommet A et par le milieu I du côté opposé BC : c'est une médiane."
     },
     {
       "consigne": "Quelle droite remarquable est la droite en couleur ?",
       "texte": "Dans le triangle ABC, on trace [la droite passant par A et perpendiculaire à (BC)].",
-      "choix": ["Médiatrice", "Hauteur", "Médiane"],
+      "choix": [
+        "Médiatrice",
+        "Hauteur",
+        "Médiane"
+      ],
       "bonne": 1,
       "explication": "Elle part du sommet A et est perpendiculaire au côté opposé BC : c'est la hauteur issue de A."
     },
     {
       "consigne": "Quelle droite remarquable est la droite en couleur ?",
       "texte": "Dans le triangle ABC, on trace [la droite perpendiculaire au côté BC en son milieu].",
-      "choix": ["Médiatrice", "Hauteur", "Médiane"],
+      "choix": [
+        "Médiatrice",
+        "Hauteur",
+        "Médiane"
+      ],
       "bonne": 0,
       "explication": "Une droite perpendiculaire à un côté en son milieu est la médiatrice de ce côté."
     },
     {
       "consigne": "Quelle droite remarquable est la droite en couleur ?",
       "texte": "Dans le triangle ABC obtus en B, [la droite passant par A et perpendiculaire à (BC)] tombe à l'extérieur du triangle.",
-      "choix": ["Médiatrice", "Hauteur", "Médiane"],
+      "choix": [
+        "Médiatrice",
+        "Hauteur",
+        "Médiane"
+      ],
       "bonne": 1,
       "explication": "Elle part de A et est perpendiculaire à (BC) : c'est une hauteur, qui coupe ici le prolongement du côté."
     },
     {
       "consigne": "Quelles droites remarquables sont tracées en couleur ?",
       "texte": "Pour trouver le centre du cercle circonscrit à ABC, on trace [deux droites perpendiculaires aux côtés en leur milieu].",
-      "choix": ["Médiatrices", "Hauteurs", "Médianes"],
+      "choix": [
+        "Médiatrices",
+        "Hauteurs",
+        "Médianes"
+      ],
       "bonne": 0,
       "explication": "Les droites perpendiculaires aux côtés en leur milieu sont des médiatrices ; elles se coupent au centre du cercle circonscrit."
     },
     {
       "consigne": "Quelle droite remarquable est la droite en couleur ?",
       "texte": "Pour partager ABC en deux triangles de même aire, on trace [la droite qui joint B au milieu de AC].",
-      "choix": ["Médiatrice", "Hauteur", "Médiane"],
+      "choix": [
+        "Médiatrice",
+        "Hauteur",
+        "Médiane"
+      ],
       "bonne": 2,
       "explication": "Elle joint le sommet B au milieu du côté opposé AC : c'est une médiane, qui partage le triangle en deux triangles de même aire."
     }
@@ -94,7 +117,11 @@
   "devinettes": [
     {
       "reponse": "Médiane",
-      "acceptees": ["Médiane", "La médiane", "Une médiane"],
+      "acceptees": [
+        "Médiane",
+        "La médiane",
+        "Une médiane"
+      ],
       "indices": [
         "Je suis une droite du triangle.",
         "Je pars toujours d'un sommet.",
@@ -104,7 +131,11 @@
     },
     {
       "reponse": "Médiatrice",
-      "acceptees": ["Médiatrice", "La médiatrice", "Une médiatrice"],
+      "acceptees": [
+        "Médiatrice",
+        "La médiatrice",
+        "Une médiatrice"
+      ],
       "indices": [
         "Je suis une droite, mais je ne passe pas forcément par un sommet.",
         "Je suis perpendiculaire à un côté.",
@@ -114,7 +145,11 @@
     },
     {
       "reponse": "Hauteur",
-      "acceptees": ["Hauteur", "La hauteur", "Une hauteur"],
+      "acceptees": [
+        "Hauteur",
+        "La hauteur",
+        "Une hauteur"
+      ],
       "indices": [
         "Je suis une droite qui part d'un sommet du triangle.",
         "Je suis perpendiculaire au côté opposé.",
@@ -124,7 +159,12 @@
     },
     {
       "reponse": "Cercle circonscrit",
-      "acceptees": ["Cercle circonscrit", "Le cercle circonscrit", "Cercle circonscrit au triangle", "Le cercle circonscrit au triangle"],
+      "acceptees": [
+        "Cercle circonscrit",
+        "Le cercle circonscrit",
+        "Cercle circonscrit au triangle",
+        "Le cercle circonscrit au triangle"
+      ],
       "indices": [
         "On me trace avec un compas.",
         "Je passe par les trois sommets d'un triangle.",

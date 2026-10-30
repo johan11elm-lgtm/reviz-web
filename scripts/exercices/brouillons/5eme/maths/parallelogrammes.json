@@ -27,11 +27,8 @@
       "nom": "Rectangle, losange et carré",
       "detail": "Les parallélogrammes particuliers et ce qui les définit.",
       "cartes": [
-        "Avec un angle droit, il devient un rectangle",
-        "Avec deux côtés consécutifs égaux, il devient un losange",
         "Il est à la fois un rectangle et un losange",
-        "Tout rectangle est aussi un parallélogramme",
-        "Un carré a un angle droit et deux côtés consécutifs égaux"
+        "Tout rectangle est aussi un parallélogramme"
       ]
     },
     {
@@ -40,9 +37,7 @@
       "cartes": [
         "Base × hauteur",
         "Base 6 cm et hauteur 4 cm : 24 cm²",
-        "La hauteur est la distance entre la base et le côté opposé",
-        "On ne multiplie pas deux côtés consécutifs",
-        "Un triangle découpé puis recollé de l'autre côté donne un rectangle"
+        "La hauteur est la distance entre la base et le côté opposé"
       ]
     }
   ],
@@ -51,42 +46,66 @@
     {
       "consigne": "Quel est le rôle de la phrase en couleur dans cette démonstration ?",
       "texte": "On sait que [O est le milieu des deux diagonales AC et BD]. Or, si les diagonales d'un quadrilatère ont le même milieu, alors c'est un parallélogramme. Donc ABCD est un parallélogramme.",
-      "choix": ["Donnée de l'énoncé", "Propriété du cours", "Conclusion"],
+      "choix": [
+        "Donnée de l'énoncé",
+        "Propriété du cours",
+        "Conclusion"
+      ],
       "bonne": 0,
       "explication": "« On sait que » introduit ce que l'énoncé donne : ici, O est le milieu des deux diagonales."
     },
     {
       "consigne": "Quel est le rôle de la phrase en couleur dans cette démonstration ?",
       "texte": "On sait que O est le milieu des deux diagonales AC et BD. Or, [si les diagonales d'un quadrilatère ont le même milieu, alors c'est un parallélogramme]. Donc ABCD est un parallélogramme.",
-      "choix": ["Donnée de l'énoncé", "Propriété du cours", "Conclusion"],
+      "choix": [
+        "Donnée de l'énoncé",
+        "Propriété du cours",
+        "Conclusion"
+      ],
       "bonne": 1,
       "explication": "« Or » introduit la propriété du cours, ici la propriété caractéristique du parallélogramme."
     },
     {
       "consigne": "Quel est le rôle de la phrase en couleur dans cette démonstration ?",
       "texte": "On sait que ABCD est un parallélogramme et que son angle Â est droit. Or, si un parallélogramme a un angle droit, alors c'est un rectangle. [Donc ABCD est un rectangle.]",
-      "choix": ["Donnée de l'énoncé", "Propriété du cours", "Conclusion"],
+      "choix": [
+        "Donnée de l'énoncé",
+        "Propriété du cours",
+        "Conclusion"
+      ],
       "bonne": 2,
       "explication": "« Donc » introduit la conclusion de la démonstration : ABCD est un rectangle."
     },
     {
       "consigne": "Quel est le rôle de la phrase en couleur dans cette démonstration ?",
       "texte": "On sait que ABCD est un parallélogramme et que son angle Â est droit. Or, [si un parallélogramme a un angle droit, alors c'est un rectangle]. Donc ABCD est un rectangle.",
-      "choix": ["Donnée de l'énoncé", "Propriété du cours", "Conclusion"],
+      "choix": [
+        "Donnée de l'énoncé",
+        "Propriété du cours",
+        "Conclusion"
+      ],
       "bonne": 1,
       "explication": "Cette phrase est la propriété du cours utilisée : un parallélogramme avec un angle droit est un rectangle."
     },
     {
       "consigne": "Quel est le rôle de la phrase en couleur dans cette démonstration ?",
       "texte": "On sait que [ABCD est un parallélogramme et que AB = BC]. Or, si un parallélogramme a deux côtés consécutifs de même longueur, alors c'est un losange. Donc ABCD est un losange.",
-      "choix": ["Donnée de l'énoncé", "Propriété du cours", "Conclusion"],
+      "choix": [
+        "Donnée de l'énoncé",
+        "Propriété du cours",
+        "Conclusion"
+      ],
       "bonne": 0,
       "explication": "« On sait que » introduit les données de l'énoncé : ABCD est un parallélogramme et AB = BC."
     },
     {
       "consigne": "Quel est le rôle de la phrase en couleur dans cette démonstration ?",
       "texte": "On sait que ABCD est un parallélogramme et que AB = BC. Or, si un parallélogramme a deux côtés consécutifs de même longueur, alors c'est un losange. [Donc ABCD est un losange.]",
-      "choix": ["Donnée de l'énoncé", "Propriété du cours", "Conclusion"],
+      "choix": [
+        "Donnée de l'énoncé",
+        "Propriété du cours",
+        "Conclusion"
+      ],
       "bonne": 2,
       "explication": "« Donc » introduit la conclusion : ABCD est un losange."
     }
@@ -94,7 +113,11 @@
   "devinettes": [
     {
       "reponse": "Losange",
-      "acceptees": ["Losange", "Le losange", "Un losange"],
+      "acceptees": [
+        "Losange",
+        "Le losange",
+        "Un losange"
+      ],
       "indices": [
         "Je suis un quadrilatère.",
         "Mes diagonales ont le même milieu et sont perpendiculaires.",
@@ -104,7 +127,11 @@
     },
     {
       "reponse": "Rectangle",
-      "acceptees": ["Rectangle", "Le rectangle", "Un rectangle"],
+      "acceptees": [
+        "Rectangle",
+        "Le rectangle",
+        "Un rectangle"
+      ],
       "indices": [
         "Je suis un parallélogramme.",
         "J'ai un angle droit.",
@@ -114,7 +141,13 @@
     },
     {
       "reponse": "Diagonale",
-      "acceptees": ["Diagonale", "Une diagonale", "La diagonale", "Diagonales", "Les diagonales"],
+      "acceptees": [
+        "Diagonale",
+        "Une diagonale",
+        "La diagonale",
+        "Diagonales",
+        "Les diagonales"
+      ],
       "indices": [
         "Je suis un segment.",
         "Je joins deux sommets opposés d'un quadrilatère.",
@@ -124,7 +157,10 @@
     },
     {
       "reponse": "Centre de symétrie",
-      "acceptees": ["Centre de symétrie", "Le centre de symétrie"],
+      "acceptees": [
+        "Centre de symétrie",
+        "Le centre de symétrie"
+      ],
       "indices": [
         "Je suis un point.",
         "Un demi-tour autour de moi superpose la figure à elle-même.",

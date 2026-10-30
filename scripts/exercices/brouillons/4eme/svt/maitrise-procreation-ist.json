@@ -6,9 +6,7 @@
       "detail": "Les méthodes utilisées au quotidien ou posées durablement pour éviter une grossesse non désirée.",
       "cartes": [
         "Pilule à prendre chaque jour",
-        "Hormones de synthèse qui bloquent en général l'ovulation",
         "Implant, patch ou anneau vaginal à base d'hormones",
-        "Stérilet posé dans l'utérus par un professionnel de santé",
         "Barrière qui empêche les spermatozoïdes d'atteindre l'ovocyte"
       ]
     },
@@ -16,9 +14,6 @@
       "nom": "La contraception d'urgence",
       "detail": "Une pilule à prendre le plus tôt possible après un rapport non ou mal protégé : ce n'est pas une méthode régulière.",
       "cartes": [
-        "À prendre le plus tôt possible",
-        "Délivrée en pharmacie sans ordonnance",
-        "Gratuite et anonyme pour les mineures",
         "Ne remplace pas une méthode de tous les jours",
         "À prendre une seule fois après un rapport mal protégé"
       ]
@@ -51,35 +46,36 @@
     {
       "consigne": "Quelle méthode est décrite par le passage en couleur ?",
       "texte": "Camille choisit [un dispositif placé dans l'utérus par un professionnel de santé] pour éviter une grossesse.",
-      "choix": ["Préservatif", "Pilule", "Stérilet", "Contraception d'urgence"],
+      "choix": [
+        "Préservatif",
+        "Pilule",
+        "Stérilet",
+        "Contraception d'urgence"
+      ],
       "bonne": 2,
       "explication": "Le stérilet est placé dans l'utérus par un professionnel de santé : il empêche la fécondation ou la nidation."
     },
     {
       "consigne": "Quelle méthode est décrite par le passage en couleur ?",
-      "texte": "Après un rapport mal protégé, Inès va en pharmacie : sans ordonnance, elle obtient [une pilule à prendre le plus tôt possible].",
-      "choix": ["Préservatif", "Pilule", "Stérilet", "Contraception d'urgence"],
-      "bonne": 3,
-      "explication": "Une pilule à prendre le plus tôt possible après un rapport mal protégé, c'est la contraception d'urgence."
-    },
-    {
-      "consigne": "Quelle méthode est décrite par le passage en couleur ?",
-      "texte": "Pour éviter une grossesse, Noa utilise [une méthode qui empêche les spermatozoïdes d'atteindre l'ovocyte].",
-      "choix": ["Préservatif", "Pilule", "Stérilet", "Contraception d'urgence"],
-      "bonne": 0,
-      "explication": "Le préservatif forme une barrière qui empêche les spermatozoïdes d'atteindre l'ovocyte."
-    },
-    {
-      "consigne": "Quelle méthode est décrite par le passage en couleur ?",
       "texte": "Chaque jour, Emma prend [un comprimé d'hormones de synthèse qui bloquent en général l'ovulation].",
-      "choix": ["Préservatif", "Pilule", "Stérilet", "Contraception d'urgence"],
+      "choix": [
+        "Préservatif",
+        "Pilule",
+        "Stérilet",
+        "Contraception d'urgence"
+      ],
       "bonne": 1,
       "explication": "La pilule contraceptive, prise chaque jour, contient des hormones de synthèse qui bloquent en général l'ovulation."
     },
     {
       "consigne": "Quelle méthode est décrite par le passage en couleur ?",
       "texte": "Avant un rapport, Mehdi met [une protection qui forme une barrière contre le sperme et les sécrétions].",
-      "choix": ["Préservatif", "Pilule", "Stérilet", "Contraception d'urgence"],
+      "choix": [
+        "Préservatif",
+        "Pilule",
+        "Stérilet",
+        "Contraception d'urgence"
+      ],
       "bonne": 0,
       "explication": "Le préservatif est une barrière : il empêche le contact avec le sperme et les sécrétions, donc protège aussi des IST."
     }
@@ -87,7 +83,12 @@
   "devinettes": [
     {
       "reponse": "Préservatif",
-      "acceptees": ["Préservatif", "Le préservatif", "Un préservatif", "Condom"],
+      "acceptees": [
+        "Préservatif",
+        "Le préservatif",
+        "Un préservatif",
+        "Condom"
+      ],
       "indices": [
         "Je suis une méthode de contraception.",
         "Je peux être masculin ou féminin.",
@@ -97,7 +98,13 @@
     },
     {
       "reponse": "Stérilet",
-      "acceptees": ["Stérilet", "Le stérilet", "Un stérilet", "DIU", "Dispositif intra-utérin"],
+      "acceptees": [
+        "Stérilet",
+        "Le stérilet",
+        "Un stérilet",
+        "DIU",
+        "Dispositif intra-utérin"
+      ],
       "indices": [
         "Je suis posé une fois par un professionnel de santé.",
         "Je me trouve dans l'utérus.",
@@ -106,18 +113,14 @@
       "explication": "Le stérilet, ou dispositif intra-utérin, est placé dans l'utérus par un professionnel de santé."
     },
     {
-      "reponse": "Papillomavirus",
-      "acceptees": ["Papillomavirus", "Le papillomavirus", "HPV", "Un papillomavirus"],
-      "indices": [
-        "Je suis responsable d'une IST.",
-        "On peut se vacciner contre moi.",
-        "Mon vaccin est recommandé de 11 à 14 ans, aux filles comme aux garçons."
-      ],
-      "explication": "Le vaccin contre le papillomavirus (HPV) est recommandé de 11 à 14 ans, filles et garçons."
-    },
-    {
       "reponse": "Fécondation in vitro",
-      "acceptees": ["Fécondation in vitro", "La fécondation in vitro", "Une fécondation in vitro", "FIV", "La FIV"],
+      "acceptees": [
+        "Fécondation in vitro",
+        "La fécondation in vitro",
+        "Une fécondation in vitro",
+        "FIV",
+        "La FIV"
+      ],
       "indices": [
         "Je suis une technique d'aide médicale à la procréation.",
         "Je réunis des ovocytes et des spermatozoïdes hors du corps.",

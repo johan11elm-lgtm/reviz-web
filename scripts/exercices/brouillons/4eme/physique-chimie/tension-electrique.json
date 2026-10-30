@@ -41,8 +41,7 @@
         "On commence par le plus grand calibre",
         "On vise le plus petit calibre supérieur à la valeur",
         "4,6 V lus sur 200 V : on choisit 20 V",
-        "Le calibre 2 V est trop petit pour 4,6 V",
-        "La valeur maximale que l'appareil peut afficher"
+        "Le calibre 2 V est trop petit pour 4,6 V"
       ]
     }
   ],
@@ -82,35 +81,55 @@
     {
       "consigne": "Quelle valeur le voltmètre affiche-t-il ?",
       "texte": "Un circuit en série contient une pile de 4,5 V, une lampe et un interrupteur ouvert. Le voltmètre est branché aux bornes de [l'interrupteur].",
-      "choix": ["0 V", "4,5 V", "12 V"],
+      "choix": [
+        "0 V",
+        "4,5 V",
+        "12 V"
+      ],
       "bonne": 1,
       "explication": "Un interrupteur ouvert a à ses bornes toute la tension du générateur : 4,5 V."
     },
     {
       "consigne": "Quelle valeur le voltmètre affiche-t-il ?",
       "texte": "Un circuit en série contient une pile de 4,5 V, une lampe et un interrupteur ouvert. Le voltmètre est branché aux bornes de [la lampe].",
-      "choix": ["0 V", "4,5 V", "12 V"],
+      "choix": [
+        "0 V",
+        "4,5 V",
+        "12 V"
+      ],
       "bonne": 0,
       "explication": "Quand l'interrupteur est ouvert, la lampe a une tension nulle à ses bornes : 0 V."
     },
     {
       "consigne": "Quelle valeur le voltmètre affiche-t-il ?",
       "texte": "La lampe d'un circuit en série brille, l'interrupteur est fermé. Le voltmètre est branché aux bornes de [l'interrupteur].",
-      "choix": ["0 V", "4,5 V", "12 V"],
+      "choix": [
+        "0 V",
+        "4,5 V",
+        "12 V"
+      ],
       "bonne": 0,
       "explication": "La tension aux bornes d'un interrupteur fermé est nulle : 0 V."
     },
     {
       "consigne": "Quelle valeur le voltmètre affiche-t-il ?",
       "texte": "Une batterie de voiture est reliée à un phare par un interrupteur ouvert. Le voltmètre est branché aux bornes de [l'interrupteur].",
-      "choix": ["0 V", "4,5 V", "12 V"],
+      "choix": [
+        "0 V",
+        "4,5 V",
+        "12 V"
+      ],
       "bonne": 2,
       "explication": "L'interrupteur ouvert reçoit toute la tension de la batterie : environ 12 V."
     },
     {
       "consigne": "Quelle valeur le voltmètre affiche-t-il ?",
       "texte": "Un voltmètre est branché aux bornes d'[une pile plate] posée sur la table, reliée à rien.",
-      "choix": ["0 V", "4,5 V", "12 V"],
+      "choix": [
+        "0 V",
+        "4,5 V",
+        "12 V"
+      ],
       "bonne": 1,
       "explication": "Une pile a une tension à ses bornes même non branchée : environ 4,5 V pour une pile plate."
     }
@@ -118,7 +137,12 @@
   "devinettes": [
     {
       "reponse": "Tension",
-      "acceptees": ["Tension", "La tension", "Une tension", "Tension électrique"],
+      "acceptees": [
+        "Tension",
+        "La tension",
+        "Une tension",
+        "Tension électrique"
+      ],
       "indices": [
         "Je suis une grandeur électrique.",
         "Je suis notée U.",
@@ -128,7 +152,11 @@
     },
     {
       "reponse": "Voltmètre",
-      "acceptees": ["Voltmètre", "Le voltmètre", "Un voltmètre"],
+      "acceptees": [
+        "Voltmètre",
+        "Le voltmètre",
+        "Un voltmètre"
+      ],
       "indices": [
         "Je suis un appareil de mesure.",
         "Mon symbole est un cercle contenant la lettre V.",
@@ -138,7 +166,11 @@
     },
     {
       "reponse": "Calibre",
-      "acceptees": ["Calibre", "Le calibre", "Un calibre"],
+      "acceptees": [
+        "Calibre",
+        "Le calibre",
+        "Un calibre"
+      ],
       "indices": [
         "Je suis une valeur écrite autour du sélecteur d'un multimètre.",
         "Je suis la valeur maximale que l'appareil peut afficher sur la position choisie.",

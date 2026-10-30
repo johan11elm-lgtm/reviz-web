@@ -17,7 +17,6 @@
       "detail": "Les techniques et les pays qui ont fait grimper les rendements à partir des années 1960.",
       "cartes": [
         "Des semences sélectionnées à haut rendement",
-        "Des engrais, des pesticides et l'irrigation",
         "Une forte hausse des récoltes de riz et de blé",
         "Un mouvement qui démarre dans les années 1960",
         "Surtout l'Inde, le Mexique et l'Asie du Sud-Est"
@@ -49,12 +48,6 @@
   "causes": [
     {
       "fait": "la déforestation en Amazonie",
-      "carte": "L'extension des cultures de soja",
-      "role": "cause",
-      "explication": "On défriche l'Amazonie pour étendre les surfaces de soja."
-    },
-    {
-      "fait": "la déforestation en Amazonie",
       "carte": "Le besoin de pâturages pour l'élevage",
       "role": "cause",
       "explication": "On déboise aussi pour créer des pâturages destinés à l'élevage."
@@ -76,55 +69,65 @@
       "carte": "La pollution des eaux",
       "role": "consequence",
       "explication": "Les engrais et les pesticides polluent les rivières et les nappes."
-    },
-    {
-      "fait": "l'usage massif d'engrais et de pesticides",
-      "carte": "L'épuisement des sols",
-      "role": "consequence",
-      "explication": "L'usage massif de produits chimiques et d'eau épuise les sols."
     }
   ],
   "etiquettes": [
     {
       "consigne": "Quelle notion le passage en couleur décrit-il ?",
       "texte": "Au Sahel, [un paysan cultive du mil pour nourrir sa famille].",
-      "choix": ["Agriculture vivrière", "Agriculture commerciale", "Agriculture productiviste", "Agrobusiness"],
+      "choix": [
+        "Agriculture vivrière",
+        "Agriculture commerciale",
+        "Agriculture productiviste",
+        "Agrobusiness"
+      ],
       "bonne": 0,
       "explication": "La récolte sert d'abord à nourrir la famille : c'est de l'agriculture vivrière."
     },
     {
       "consigne": "Quelle notion le passage en couleur décrit-il ?",
       "texte": "Dans cette plantation, [la récolte de cacao est vendue à l'étranger].",
-      "choix": ["Agriculture vivrière", "Agriculture commerciale", "Agriculture productiviste", "Agrobusiness"],
+      "choix": [
+        "Agriculture vivrière",
+        "Agriculture commerciale",
+        "Agriculture productiviste",
+        "Agrobusiness"
+      ],
       "bonne": 1,
       "explication": "La production est faite pour être vendue, souvent exportée : c'est de l'agriculture commerciale."
     },
     {
       "consigne": "Quelle notion le passage en couleur décrit-il ?",
       "texte": "Dans les Grandes Plaines, [des machines et beaucoup d'engrais servent à obtenir les rendements les plus élevés].",
-      "choix": ["Agriculture vivrière", "Agriculture commerciale", "Agriculture productiviste", "Agrobusiness"],
+      "choix": [
+        "Agriculture vivrière",
+        "Agriculture commerciale",
+        "Agriculture productiviste",
+        "Agrobusiness"
+      ],
       "bonne": 2,
       "explication": "Une agriculture intensive, très mécanisée, qui cherche les plus hauts rendements est productiviste."
     },
     {
       "consigne": "Quelle notion le passage en couleur décrit-il ?",
       "texte": "Dans les grands pays exportateurs, [de grandes entreprises contrôlent la production, la transformation et la vente des produits agricoles].",
-      "choix": ["Agriculture vivrière", "Agriculture commerciale", "Agriculture productiviste", "Agrobusiness"],
+      "choix": [
+        "Agriculture vivrière",
+        "Agriculture commerciale",
+        "Agriculture productiviste",
+        "Agrobusiness"
+      ],
       "bonne": 3,
       "explication": "L'agrobusiness regroupe les grandes entreprises qui contrôlent toute la filière agricole."
-    },
-    {
-      "consigne": "Quelle notion le passage en couleur décrit-il ?",
-      "texte": "En Afrique subsaharienne, [les récoltes servent d'abord à nourrir la population locale].",
-      "choix": ["Agriculture vivrière", "Agriculture commerciale", "Agriculture productiviste", "Agrobusiness"],
-      "bonne": 0,
-      "explication": "Une production destinée d'abord à la population locale est de l'agriculture vivrière."
     }
   ],
   "devinettes": [
     {
       "reponse": "Révolution verte",
-      "acceptees": ["Révolution verte", "La révolution verte"],
+      "acceptees": [
+        "Révolution verte",
+        "La révolution verte"
+      ],
       "indices": [
         "Je change les campagnes à partir des années 1960.",
         "Je repose sur des semences sélectionnées, des engrais, des pesticides et l'irrigation.",
@@ -134,7 +137,12 @@
     },
     {
       "reponse": "Agrobusiness",
-      "acceptees": ["Agrobusiness", "L'agrobusiness", "Agro-business", "Agribusiness"],
+      "acceptees": [
+        "Agrobusiness",
+        "L'agrobusiness",
+        "Agro-business",
+        "Agribusiness"
+      ],
       "indices": [
         "Je ne suis pas une personne, mais un ensemble d'acteurs de l'agriculture.",
         "Je suis très présent dans les grands pays qui dominent les ventes agricoles.",
@@ -144,7 +152,11 @@
     },
     {
       "reponse": "Rendement",
-      "acceptees": ["Rendement", "Le rendement", "Rendement agricole"],
+      "acceptees": [
+        "Rendement",
+        "Le rendement",
+        "Rendement agricole"
+      ],
       "indices": [
         "Je me calcule avec une division.",
         "On m'exprime par exemple en quintaux par hectare.",

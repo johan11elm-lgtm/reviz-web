@@ -51,7 +51,12 @@
   "devinettes": [
     {
       "reponse": "Opposé",
-      "acceptees": ["Opposé", "L'opposé", "Un opposé", "Opposés"],
+      "acceptees": [
+        "Opposé",
+        "L'opposé",
+        "Un opposé",
+        "Opposés"
+      ],
       "indices": [
         "Je suis un nombre lié à un autre nombre.",
         "J'ai la même distance à zéro que lui, mais le signe contraire.",
@@ -61,23 +66,17 @@
     },
     {
       "reponse": "Différence",
-      "acceptees": ["Différence", "La différence", "Une différence"],
+      "acceptees": [
+        "Différence",
+        "La différence",
+        "Une différence"
+      ],
       "indices": [
         "Je suis le résultat d'une opération.",
         "Pour me calculer, on retire un nombre à un autre.",
         "Je suis le résultat d'une soustraction, comme 9 − 4."
       ],
       "explication": "La différence est le résultat d'une soustraction : 9 − 4 = 5."
-    },
-    {
-      "reponse": "Écriture simplifiée",
-      "acceptees": ["Écriture simplifiée", "L'écriture simplifiée", "Une écriture simplifiée"],
-      "indices": [
-        "Je suis une façon d'écrire un calcul.",
-        "Je supprime les parenthèses et les signes + des additions.",
-        "Avec moi, (+5) + (−3) − (+2) s'écrit 5 − 3 − 2."
-      ],
-      "explication": "En écriture simplifiée, on supprime les parenthèses et le signe + des additions : (+5) + (−3) − (+2) s'écrit 5 − 3 − 2."
     }
   ],
   "calculs": [
@@ -124,15 +123,5 @@
       "explication": "Distance = plus grande abscisse − plus petite abscisse = 9 − (−5) = 9 + 5 = 14."
     }
   ],
-  "etapes": [
-    {
-      "titre": "Calculer la distance entre les points d'abscisses −3 et 5",
-      "etapes": [
-        "On repère la plus grande abscisse (5) et la plus petite (−3)",
-        "On écrit : plus grande abscisse moins plus petite abscisse",
-        "On remplace par les valeurs : 5 − (−3)",
-        "On transforme en addition et on calcule : 5 + 3 = 8"
-      ]
-    }
-  ]
+  "etapes": []
 }

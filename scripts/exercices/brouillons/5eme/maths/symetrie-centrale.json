@@ -18,7 +18,6 @@
       "cartes": [
         "Tracer la demi-droite [MO) pour un point M",
         "Reporter OM au compas de l'autre côté de O",
-        "Sur quadrillage, refaire à partir de O le même déplacement",
         "Placer les images des deux extrémités d'un segment",
         "Relier les images des sommets dans le même ordre"
       ]
@@ -51,28 +50,48 @@
     {
       "consigne": "Quelle propriété de la symétrie centrale le passage en couleur illustre-t-il ?",
       "texte": "A' et B' sont les symétriques de A et B par rapport à O, donc [A'B' = AB].",
-      "choix": ["Les longueurs", "Les angles", "Les aires", "Le parallélisme"],
+      "choix": [
+        "Les longueurs",
+        "Les angles",
+        "Les aires",
+        "Le parallélisme"
+      ],
       "bonne": 0,
       "explication": "Un segment et son symétrique ont la même longueur : la symétrie centrale conserve les longueurs."
     },
     {
       "consigne": "Quelle propriété de la symétrie centrale le passage en couleur illustre-t-il ?",
       "texte": "L'angle ABC mesure 50°, donc [l'angle A'B'C' mesure aussi 50°].",
-      "choix": ["Les longueurs", "Les angles", "Les aires", "Le parallélisme"],
+      "choix": [
+        "Les longueurs",
+        "Les angles",
+        "Les aires",
+        "Le parallélisme"
+      ],
       "bonne": 1,
       "explication": "Un angle et son symétrique ont la même mesure : la symétrie centrale conserve les angles."
     },
     {
       "consigne": "Quelle propriété de la symétrie centrale le passage en couleur illustre-t-il ?",
       "texte": "Le triangle ABC a une aire de 12 cm², donc [son symétrique a aussi une aire de 12 cm²].",
-      "choix": ["Les longueurs", "Les angles", "Les aires", "Le parallélisme"],
+      "choix": [
+        "Les longueurs",
+        "Les angles",
+        "Les aires",
+        "Le parallélisme"
+      ],
       "bonne": 2,
       "explication": "Une figure et son symétrique sont superposables : la symétrie centrale conserve les aires."
     },
     {
       "consigne": "Quelle propriété de la symétrie centrale le passage en couleur illustre-t-il ?",
       "texte": "Le symétrique de la droite (d) est la droite (d'), et [(d') est parallèle à (d)].",
-      "choix": ["Les longueurs", "Les angles", "Les aires", "Le parallélisme"],
+      "choix": [
+        "Les longueurs",
+        "Les angles",
+        "Les aires",
+        "Le parallélisme"
+      ],
       "bonne": 3,
       "explication": "Le symétrique d'une droite est une droite qui lui est parallèle : c'est la conservation du parallélisme."
     }
@@ -80,7 +99,11 @@
   "devinettes": [
     {
       "reponse": "Centre de symétrie",
-      "acceptees": ["Le centre de symétrie", "Centre", "Le centre"],
+      "acceptees": [
+        "Le centre de symétrie",
+        "Centre",
+        "Le centre"
+      ],
       "indices": [
         "Je suis un point.",
         "Un demi-tour autour de moi superpose une figure à elle-même.",
@@ -90,7 +113,11 @@
     },
     {
       "reponse": "Symétrie centrale",
-      "acceptees": ["La symétrie centrale", "Demi-tour", "Rotation de 180°"],
+      "acceptees": [
+        "La symétrie centrale",
+        "Demi-tour",
+        "Rotation de 180°"
+      ],
       "indices": [
         "Je ne déforme jamais les figures : longueurs et angles sont conservés.",
         "Pour passer d'une figure à son image, on la fait tourner de 180°.",
@@ -100,7 +127,10 @@
     },
     {
       "reponse": "Symétrie axiale",
-      "acceptees": ["La symétrie axiale", "Symétrie par rapport à une droite"],
+      "acceptees": [
+        "La symétrie axiale",
+        "Symétrie par rapport à une droite"
+      ],
       "indices": [
         "Je ne déforme pas les figures.",
         "Je suis un pliage le long d'une droite.",

@@ -39,7 +39,6 @@
       "detail": "Les inconvénients et les risques d'une maison connectée : coût, réseau, piratage, données personnelles.",
       "cartes": [
         "Le matériel et son installation coûtent cher",
-        "Sans Internet, on ne peut plus commander à distance",
         "Un pirate informatique peut prendre le contrôle du système",
         "Les horaires de présence des habitants sont collectés",
         "Les équipements connectés consomment eux-mêmes de l'électricité"
@@ -51,42 +50,66 @@
     {
       "consigne": "Quel est le rôle du composant en couleur dans le système ?",
       "texte": "Quand le vent dépasse 50 km/h, [l'anémomètre] envoie l'information à la box, qui fait remonter le store.",
-      "choix": ["Capteur", "Unité de traitement", "Actionneur"],
+      "choix": [
+        "Capteur",
+        "Unité de traitement",
+        "Actionneur"
+      ],
       "bonne": 0,
       "explication": "L'anémomètre mesure la vitesse du vent : il acquiert une information, c'est un capteur."
     },
     {
       "consigne": "Quel est le rôle du composant en couleur dans le système ?",
       "texte": "La nuit tombe : [la box domotique] reçoit l'information et décide de fermer les volets.",
-      "choix": ["Capteur", "Unité de traitement", "Actionneur"],
+      "choix": [
+        "Capteur",
+        "Unité de traitement",
+        "Actionneur"
+      ],
       "bonne": 1,
       "explication": "La box traite l'information reçue et commande les actionneurs : c'est l'unité de traitement."
     },
     {
       "consigne": "Quel est le rôle du composant en couleur dans le système ?",
       "texte": "Un mouvement est détecté dans l'entrée, donc [la lampe] s'allume.",
-      "choix": ["Capteur", "Unité de traitement", "Actionneur"],
+      "choix": [
+        "Capteur",
+        "Unité de traitement",
+        "Actionneur"
+      ],
       "bonne": 2,
       "explication": "La lampe produit une action (de la lumière) : c'est un actionneur."
     },
     {
       "consigne": "Quel est le rôle du composant en couleur dans le système ?",
       "texte": "[Un détecteur de fumée] repère un début d'incendie et prévient la box.",
-      "choix": ["Capteur", "Unité de traitement", "Actionneur"],
+      "choix": [
+        "Capteur",
+        "Unité de traitement",
+        "Actionneur"
+      ],
       "bonne": 0,
       "explication": "Le détecteur de fumée acquiert une information et la transmet à la box : c'est un capteur."
     },
     {
       "consigne": "Quel est le rôle du composant en couleur dans le système ?",
       "texte": "[Un microcontrôleur] programmé reçoit la température mesurée et commande le radiateur.",
-      "choix": ["Capteur", "Unité de traitement", "Actionneur"],
+      "choix": [
+        "Capteur",
+        "Unité de traitement",
+        "Actionneur"
+      ],
       "bonne": 1,
       "explication": "Comme la box, un microcontrôleur traite les informations et commande les actionneurs."
     },
     {
       "consigne": "Quel est le rôle du composant en couleur dans le système ?",
       "texte": "La box envoie un ordre et [le moteur du volet roulant] fait descendre le volet.",
-      "choix": ["Capteur", "Unité de traitement", "Actionneur"],
+      "choix": [
+        "Capteur",
+        "Unité de traitement",
+        "Actionneur"
+      ],
       "bonne": 2,
       "explication": "Le moteur produit le mouvement du volet : c'est un actionneur."
     }
@@ -94,7 +117,11 @@
   "devinettes": [
     {
       "reponse": "Capteur",
-      "acceptees": ["Un capteur", "Les capteurs", "Détecteur"],
+      "acceptees": [
+        "Un capteur",
+        "Les capteurs",
+        "Détecteur"
+      ],
       "indices": [
         "Je fais partie d'un système automatisé.",
         "Je repère ou je mesure une information : une température, une présence, de la fumée.",
@@ -104,7 +131,10 @@
     },
     {
       "reponse": "Actionneur",
-      "acceptees": ["Un actionneur", "Les actionneurs"],
+      "acceptees": [
+        "Un actionneur",
+        "Les actionneurs"
+      ],
       "indices": [
         "Je suis un composant d'une maison connectée.",
         "Je reçois mes ordres de la box domotique.",
@@ -114,7 +144,10 @@
     },
     {
       "reponse": "Scénario",
-      "acceptees": ["Un scénario", "Les scénarios"],
+      "acceptees": [
+        "Un scénario",
+        "Les scénarios"
+      ],
       "indices": [
         "Je suis une règle programmée dans une maison connectée.",
         "Je peux être déclenché par un événement ou par une heure.",
@@ -124,7 +157,10 @@
     },
     {
       "reponse": "Domotique",
-      "acceptees": ["La domotique", "Maison connectée"],
+      "acceptees": [
+        "La domotique",
+        "Maison connectée"
+      ],
       "indices": [
         "Je transforme un logement en maison connectée.",
         "Je regroupe des techniques qui gèrent et commandent les équipements d'un logement.",
@@ -140,20 +176,6 @@
       "unite": "€",
       "tolerance": 0,
       "explication": "7 % de 800 € = 800 × 7 ÷ 100 = 56 €."
-    },
-    {
-      "question": "On admet qu'on économise environ 7 % d'énergie par degré en moins. Quel pourcentage d'énergie économise-t-on en baissant le chauffage de 3 °C ?",
-      "reponse": 21,
-      "unite": "%",
-      "tolerance": 0,
-      "explication": "3 × 7 % = 21 %."
-    },
-    {
-      "question": "On admet qu'on économise environ 7 % par degré en moins. Une facture de chauffage est de 1 200 €. Quelle économie, en euros, fait-on en baissant le chauffage de 2 °C ?",
-      "reponse": 168,
-      "unite": "€",
-      "tolerance": 0,
-      "explication": "2 °C donnent 2 × 7 = 14 %. 14 % de 1 200 € = 1 200 × 14 ÷ 100 = 168 €."
     },
     {
       "question": "En baissant le chauffage de 1 °C, une famille économise 63 € sur une facture de 900 €. À quel pourcentage de sa facture cela correspond-il ?",

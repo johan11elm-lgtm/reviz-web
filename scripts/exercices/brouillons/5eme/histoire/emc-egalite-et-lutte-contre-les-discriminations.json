@@ -76,42 +76,66 @@
     {
       "consigne": "De quoi s'agit-il dans le passage en couleur ?",
       "texte": "Lina répète que [« les filles sont nulles en maths »].",
-      "choix": ["Un stéréotype", "Une discrimination", "Une réaction possible"],
+      "choix": [
+        "Un stéréotype",
+        "Une discrimination",
+        "Une réaction possible"
+      ],
       "bonne": 0,
       "explication": "C'est une idée toute faite et caricaturale sur un groupe : un stéréotype."
     },
     {
       "consigne": "De quoi s'agit-il dans le passage en couleur ?",
       "texte": "Une agence [refuse de louer un logement à une famille à cause de son origine].",
-      "choix": ["Un stéréotype", "Une discrimination", "Une réaction possible"],
+      "choix": [
+        "Un stéréotype",
+        "Une discrimination",
+        "Une réaction possible"
+      ],
       "bonne": 1,
       "explication": "Traiter une famille moins bien à cause de son origine, un critère interdit par la loi, est une discrimination."
     },
     {
       "consigne": "De quoi s'agit-il dans le passage en couleur ?",
       "texte": "Harcelé sur un réseau social, un élève [appelle le 3018 avec l'aide d'un adulte].",
-      "choix": ["Un stéréotype", "Une discrimination", "Une réaction possible"],
+      "choix": [
+        "Un stéréotype",
+        "Une discrimination",
+        "Une réaction possible"
+      ],
       "bonne": 2,
       "explication": "Le 3018 est le numéro national gratuit contre le harcèlement : c'est une façon de réagir."
     },
     {
       "consigne": "De quoi s'agit-il dans le passage en couleur ?",
       "texte": "Un club de danse [refuse d'inscrire un garçon parce que c'est un garçon].",
-      "choix": ["Un stéréotype", "Une discrimination", "Une réaction possible"],
+      "choix": [
+        "Un stéréotype",
+        "Une discrimination",
+        "Une réaction possible"
+      ],
       "bonne": 1,
       "explication": "Refuser quelqu'un à cause de son sexe est un acte de discrimination."
     },
     {
       "consigne": "De quoi s'agit-il dans le passage en couleur ?",
       "texte": "Selon Hugo, [« les garçons ne savent pas cuisiner »].",
-      "choix": ["Un stéréotype", "Une discrimination", "Une réaction possible"],
+      "choix": [
+        "Un stéréotype",
+        "Une discrimination",
+        "Une réaction possible"
+      ],
       "bonne": 0,
       "explication": "C'est une idée toute faite sur un groupe, pas un acte : un stéréotype."
     },
     {
       "consigne": "De quoi s'agit-il dans le passage en couleur ?",
       "texte": "Écartée d'un emploi à cause de son handicap, une candidate [saisit le Défenseur des droits].",
-      "choix": ["Un stéréotype", "Une discrimination", "Une réaction possible"],
+      "choix": [
+        "Un stéréotype",
+        "Une discrimination",
+        "Une réaction possible"
+      ],
       "bonne": 2,
       "explication": "Saisir le Défenseur des droits est un recours pour faire valoir ses droits."
     }
@@ -119,7 +143,12 @@
   "devinettes": [
     {
       "reponse": "Le Défenseur des droits",
-      "acceptees": ["Défenseur des droits", "Le Défenseur des droits", "Defenseur des droits", "Le Defenseur des droits"],
+      "acceptees": [
+        "Défenseur des droits",
+        "Le Défenseur des droits",
+        "Defenseur des droits",
+        "Le Defenseur des droits"
+      ],
       "indices": [
         "Je suis une autorité de la République.",
         "J'aide gratuitement les personnes victimes de discriminations.",
@@ -129,23 +158,18 @@
     },
     {
       "reponse": "La parité",
-      "acceptees": ["Parité", "La parité", "Parite", "La parite"],
+      "acceptees": [
+        "Parité",
+        "La parité",
+        "Parite",
+        "La parite"
+      ],
       "indices": [
         "Je suis un principe d'égalité entre les femmes et les hommes.",
         "Une loi de 2000 m'impose en politique.",
         "Grâce à moi, chaque canton élit un binôme formé d'une femme et d'un homme."
       ],
       "explication": "La parité est l'égal accès des femmes et des hommes aux responsabilités, imposée en politique par une loi de 2000."
-    },
-    {
-      "reponse": "3018",
-      "acceptees": ["3018", "Le 3018", "Numéro 3018", "Le numéro 3018"],
-      "indices": [
-        "Je suis un numéro de téléphone.",
-        "Je suis gratuit et j'aide les élèves moqués ou insultés.",
-        "Je suis le numéro national contre le harcèlement, y compris en ligne."
-      ],
-      "explication": "Le 3018 est le numéro national gratuit contre le harcèlement, y compris en ligne."
     }
   ],
   "calculs": [],

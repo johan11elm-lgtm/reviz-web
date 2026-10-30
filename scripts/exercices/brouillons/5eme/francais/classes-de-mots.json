@@ -8,7 +8,6 @@
         "Mon, ma, mes",
         "Cette, cet, ces",
         "Un, une, des",
-        "Deux, trois, quatre",
         "Notre, votre, leurs"
       ]
     },
@@ -51,42 +50,72 @@
     {
       "consigne": "Quelle est la classe du mot en couleur ?",
       "texte": "Perceval rencontre des chevaliers. Il [les] admire.",
-      "choix": ["Déterminant", "Pronom", "Adverbe", "Préposition"],
+      "choix": [
+        "Déterminant",
+        "Pronom",
+        "Adverbe",
+        "Préposition"
+      ],
       "bonne": 1,
       "explication": "« les » est placé devant le verbe « admire » et remplace « des chevaliers » : c'est un pronom, pas un déterminant."
     },
     {
       "consigne": "Quelle est la classe du mot en couleur ?",
       "texte": "Les chevaliers rangent [leurs] épées avant la fête.",
-      "choix": ["Déterminant", "Pronom", "Adverbe", "Préposition"],
+      "choix": [
+        "Déterminant",
+        "Pronom",
+        "Adverbe",
+        "Préposition"
+      ],
       "bonne": 0,
       "explication": "« leurs » est placé devant le nom « épées » et prend un -s avec lui : c'est un déterminant."
     },
     {
       "consigne": "Quelle est la classe du mot en couleur ?",
       "texte": "Les chevaliers arrivent au château. Le roi [leur] confie une mission.",
-      "choix": ["Déterminant", "Pronom", "Adverbe", "Préposition"],
+      "choix": [
+        "Déterminant",
+        "Pronom",
+        "Adverbe",
+        "Préposition"
+      ],
       "bonne": 1,
       "explication": "« leur » est placé devant le verbe « confie » et remplace « aux chevaliers » : c'est un pronom, et il reste invariable."
     },
     {
       "consigne": "Quelle est la classe du mot en couleur ?",
       "texte": "Le jeune chevalier se bat [courageusement] contre le dragon.",
-      "choix": ["Déterminant", "Pronom", "Adverbe", "Préposition"],
+      "choix": [
+        "Déterminant",
+        "Pronom",
+        "Adverbe",
+        "Préposition"
+      ],
       "bonne": 2,
       "explication": "« courageusement » est invariable et précise le verbe « se bat » : c'est un adverbe."
     },
     {
       "consigne": "Quelle est la classe du mot en couleur ?",
       "texte": "Le roi dort [dans] son château.",
-      "choix": ["Déterminant", "Pronom", "Adverbe", "Préposition"],
+      "choix": [
+        "Déterminant",
+        "Pronom",
+        "Adverbe",
+        "Préposition"
+      ],
       "bonne": 3,
       "explication": "« dans » est un mot invariable qui introduit le complément « son château » : c'est une préposition."
     },
     {
       "consigne": "Quelle est la classe du mot en couleur ?",
       "texte": "Perceval hésite, [car] il a très peur.",
-      "choix": ["Adverbe", "Préposition", "Pronom", "Conjonction de coordination"],
+      "choix": [
+        "Adverbe",
+        "Préposition",
+        "Pronom",
+        "Conjonction de coordination"
+      ],
       "bonne": 3,
       "explication": "« car » relie deux propositions de même niveau (« Perceval hésite » et « il a très peur ») : c'est une conjonction de coordination."
     }
@@ -94,7 +123,9 @@
   "devinettes": [
     {
       "reponse": "Adverbe",
-      "acceptees": ["Adverbes"],
+      "acceptees": [
+        "Adverbes"
+      ],
       "indices": [
         "Je suis un mot qui ne change jamais de forme.",
         "Je précise le sens d'un verbe, d'un adjectif ou d'un autre mot de ma classe.",
@@ -104,7 +135,9 @@
     },
     {
       "reponse": "Préposition",
-      "acceptees": ["Prépositions"],
+      "acceptees": [
+        "Prépositions"
+      ],
       "indices": [
         "Je ne varie ni en genre ni en nombre.",
         "Je me place devant un complément pour l'introduire.",
@@ -114,7 +147,9 @@
     },
     {
       "reponse": "Déterminant",
-      "acceptees": ["Déterminants"],
+      "acceptees": [
+        "Déterminants"
+      ],
       "indices": [
         "Je suis un mot variable.",
         "Je me place devant un nom et je forme avec lui un groupe nominal.",
@@ -124,7 +159,9 @@
     },
     {
       "reponse": "Conjonction de coordination",
-      "acceptees": ["Conjonctions de coordination"],
+      "acceptees": [
+        "Conjonctions de coordination"
+      ],
       "indices": [
         "Je suis un petit mot invariable qui sert de liaison.",
         "Je relie deux mots, deux groupes ou deux propositions de même fonction.",

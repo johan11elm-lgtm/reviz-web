@@ -61,17 +61,6 @@
     },
     {
       "consigne": "Que demande la question en couleur ?",
-      "texte": "We have a new student in class. [What is he like?]",
-      "choix": [
-        "Le physique",
-        "Le caractère",
-        "Les goûts"
-      ],
-      "bonne": 1,
-      "explication": "What is he like? demande comment est la personne : on répond sur son caractère (friendly, funny…)."
-    },
-    {
-      "consigne": "Que demande la question en couleur ?",
       "texte": "Sam is coming to dinner tonight. [What does he like?]",
       "choix": [
         "Le physique",
@@ -80,17 +69,6 @@
       ],
       "bonne": 2,
       "explication": "What does he like? demande ce qu'il aime : on répond sur ses goûts."
-    },
-    {
-      "consigne": "Que demande la question en couleur ?",
-      "texte": "Tell me about your best friend. [What is she like?]",
-      "choix": [
-        "Le physique",
-        "Le caractère",
-        "Les goûts"
-      ],
-      "bonne": 1,
-      "explication": "What is she like? porte sur la personnalité : on répond avec des adjectifs de caractère."
     },
     {
       "consigne": "Que demande la question en couleur ?",

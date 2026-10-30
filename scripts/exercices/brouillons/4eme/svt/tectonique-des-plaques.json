@@ -19,8 +19,7 @@
         "Du magma remonte et forme une nouvelle lithosphère océanique",
         "L'océan Atlantique s'agrandit d'environ 2 cm par an",
         "Un volcanisme effusif et des séismes peu profonds",
-        "Roches plus âgées à mesure qu'on s'éloigne de la dorsale",
-        "Un relief sous-marin au milieu d'un océan"
+        "Roches plus âgées à mesure qu'on s'éloigne de la dorsale"
       ]
     },
     {
@@ -38,9 +37,7 @@
       "nom": "La rencontre de deux continents",
       "detail": "Les collisions : après la fermeture d'un océan, la croûte se plisse et forme une chaîne de montagnes.",
       "cartes": [
-        "La croûte se plisse et s'épaissit",
         "Le choc de l'Inde contre l'Asie",
-        "Aucun des deux continents ne s'enfonce vraiment",
         "Exemple en Europe : la chaîne des Alpes",
         "Naissance d'une chaîne de montagnes comme l'Himalaya"
       ]
@@ -76,35 +73,60 @@
     {
       "consigne": "Quel type de limite entre plaques le passage en couleur décrit-il ?",
       "texte": "Au milieu de l'Atlantique, [deux plaques s'éloignent l'une de l'autre] et du magma remonte entre elles.",
-      "choix": ["Écartement", "Subduction", "Collision", "Coulissement"],
+      "choix": [
+        "Écartement",
+        "Subduction",
+        "Collision",
+        "Coulissement"
+      ],
       "bonne": 0,
       "explication": "Quand deux plaques s'éloignent, c'est un écartement : on le trouve aux dorsales."
     },
     {
       "consigne": "Quel type de limite entre plaques le passage en couleur décrit-il ?",
       "texte": "Au Japon, [une plaque océanique s'enfonce sous une autre plaque] et provoque des séismes profonds.",
-      "choix": ["Écartement", "Subduction", "Collision", "Coulissement"],
+      "choix": [
+        "Écartement",
+        "Subduction",
+        "Collision",
+        "Coulissement"
+      ],
       "bonne": 1,
       "explication": "Le plongement d'une plaque océanique sous une autre plaque est une subduction."
     },
     {
       "consigne": "Quel type de limite entre plaques le passage en couleur décrit-il ?",
       "texte": "L'Inde a rejoint l'Asie : [les deux continents se rapprochent et la croûte se plisse].",
-      "choix": ["Écartement", "Subduction", "Collision", "Coulissement"],
+      "choix": [
+        "Écartement",
+        "Subduction",
+        "Collision",
+        "Coulissement"
+      ],
       "bonne": 2,
       "explication": "Quand deux continents se rencontrent, la croûte se plisse et s'épaissit : c'est une collision."
     },
     {
       "consigne": "Quel type de limite entre plaques le passage en couleur décrit-il ?",
       "texte": "En Californie, [les deux plaques glissent l'une contre l'autre] le long de la faille de San Andreas.",
-      "choix": ["Écartement", "Subduction", "Collision", "Coulissement"],
+      "choix": [
+        "Écartement",
+        "Subduction",
+        "Collision",
+        "Coulissement"
+      ],
       "bonne": 3,
       "explication": "Deux plaques qui glissent côte à côte coulissent : c'est le cas de la faille de San Andreas."
     },
     {
       "consigne": "Quel type de limite entre plaques le passage en couleur décrit-il ?",
       "texte": "Dans les Andes, [la plaque océanique plonge sous l'Amérique du Sud] et des volcans explosifs se forment.",
-      "choix": ["Écartement", "Subduction", "Collision", "Coulissement"],
+      "choix": [
+        "Écartement",
+        "Subduction",
+        "Collision",
+        "Coulissement"
+      ],
       "bonne": 1,
       "explication": "Les Andes sont un exemple de subduction : la plaque océanique plonge et des volcans explosifs apparaissent."
     }
@@ -112,7 +134,9 @@
   "devinettes": [
     {
       "reponse": "Alfred Wegener",
-      "acceptees": ["Wegener"],
+      "acceptees": [
+        "Wegener"
+      ],
       "indices": [
         "En 1912, j'ai proposé une idée que la plupart des scientifiques ont rejetée.",
         "J'ai remarqué que les côtes de l'Afrique et de l'Amérique du Sud s'emboîtent.",
@@ -122,7 +146,9 @@
     },
     {
       "reponse": "Pangée",
-      "acceptees": ["La Pangée"],
+      "acceptees": [
+        "La Pangée"
+      ],
       "indices": [
         "J'ai existé il y a très longtemps, mais je n'existe plus.",
         "J'étais un bloc unique regroupant tous les continents actuels.",
@@ -132,7 +158,10 @@
     },
     {
       "reponse": "Dorsale",
-      "acceptees": ["La dorsale", "Dorsale océanique"],
+      "acceptees": [
+        "La dorsale",
+        "Dorsale océanique"
+      ],
       "indices": [
         "Je suis un relief du fond des océans.",
         "Deux plaques s'écartent à mon niveau.",
@@ -142,7 +171,9 @@
     },
     {
       "reponse": "Subduction",
-      "acceptees": ["La subduction"],
+      "acceptees": [
+        "La subduction"
+      ],
       "indices": [
         "Je me produis là où deux plaques se rapprochent.",
         "Je creuse une fosse océanique et je déclenche des séismes profonds.",
