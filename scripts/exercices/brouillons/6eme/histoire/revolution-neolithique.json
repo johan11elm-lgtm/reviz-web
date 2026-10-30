@@ -7,9 +7,7 @@
       "cartes": [
         "Le Croissant fertile, au Proche-Orient",
         "Un début vers 10 000 av. J.-C. au Proche-Orient",
-        "Une arrivée vers 6000 à 5000 av. J.-C. en France",
-        "Des foyers indépendants en Chine, en Amérique et ailleurs",
-        "Il se diffuse lentement depuis ses foyers"
+        "Une arrivée vers 6000 à 5000 av. J.-C. en France"
       ]
     },
     {
@@ -82,35 +80,55 @@
     {
       "consigne": "À quelle période correspond le passage en couleur ?",
       "texte": "[Les humains vivent de chasse et de cueillette et se déplacent de campement en campement].",
-      "choix": ["Paléolithique", "Néolithique", "Après le Néolithique"],
+      "choix": [
+        "Paléolithique",
+        "Néolithique",
+        "Après le Néolithique"
+      ],
       "bonne": 0,
       "explication": "Les chasseurs-cueilleurs nomades vivent au Paléolithique, avant l'agriculture."
     },
     {
       "consigne": "À quelle période correspond le passage en couleur ?",
       "texte": "Dans le village, [on sème du blé et on élève des chèvres et des moutons].",
-      "choix": ["Paléolithique", "Néolithique", "Après le Néolithique"],
+      "choix": [
+        "Paléolithique",
+        "Néolithique",
+        "Après le Néolithique"
+      ],
       "bonne": 1,
       "explication": "Semer et élever des animaux, c'est l'agriculture et l'élevage, qui apparaissent au Néolithique."
     },
     {
       "consigne": "À quelle période correspond le passage en couleur ?",
       "texte": "Pour défricher la forêt, [on utilise des haches en pierre polie].",
-      "choix": ["Paléolithique", "Néolithique", "Après le Néolithique"],
+      "choix": [
+        "Paléolithique",
+        "Néolithique",
+        "Après le Néolithique"
+      ],
       "bonne": 1,
       "explication": "La pierre polie est une technique du Néolithique, l'âge de la pierre nouvelle."
     },
     {
       "consigne": "À quelle période correspond le passage en couleur ?",
       "texte": "Pour chasser, les humains utilisent [un biface et un propulseur].",
-      "choix": ["Paléolithique", "Néolithique", "Après le Néolithique"],
+      "choix": [
+        "Paléolithique",
+        "Néolithique",
+        "Après le Néolithique"
+      ],
       "bonne": 0,
       "explication": "Le biface et le propulseur sont des outils de chasseurs du Paléolithique."
     },
     {
       "consigne": "À quelle période correspond le passage en couleur ?",
       "texte": "[On mélange du cuivre et de l'étain pour fabriquer du bronze].",
-      "choix": ["Paléolithique", "Néolithique", "Après le Néolithique"],
+      "choix": [
+        "Paléolithique",
+        "Néolithique",
+        "Après le Néolithique"
+      ],
       "bonne": 2,
       "explication": "Le bronze (cuivre et étain) apparaît après le Néolithique, puis vient le fer."
     }
@@ -118,7 +136,10 @@
   "devinettes": [
     {
       "reponse": "Croissant fertile",
-      "acceptees": ["Le Croissant fertile", "Croissant fertile"],
+      "acceptees": [
+        "Le Croissant fertile",
+        "Croissant fertile"
+      ],
       "indices": [
         "Je suis une région du Proche-Orient.",
         "Ma forme ressemble à un arc.",
@@ -128,7 +149,11 @@
     },
     {
       "reponse": "Dolmen",
-      "acceptees": ["Un dolmen", "Le dolmen", "Dolmen"],
+      "acceptees": [
+        "Un dolmen",
+        "Le dolmen",
+        "Dolmen"
+      ],
       "indices": [
         "Je suis un monument de grandes pierres, construit au Néolithique.",
         "On m'a bâti avec de grandes dalles de pierre posées ensemble.",
@@ -138,23 +163,16 @@
     },
     {
       "reponse": "Carnac",
-      "acceptees": ["Carnac", "Les alignements de Carnac"],
+      "acceptees": [
+        "Carnac",
+        "Les alignements de Carnac"
+      ],
       "indices": [
         "Je suis un site de France.",
         "On voit chez moi des milliers de pierres dressées.",
         "Je suis en Bretagne et mes alignements de menhirs datent d'environ 4500 av. J.-C."
       ],
       "explication": "Les alignements de Carnac, en Bretagne, sont des milliers de menhirs dressés vers 4500 av. J.-C."
-    },
-    {
-      "reponse": "Domestication",
-      "acceptees": ["La domestication", "Domestication"],
-      "indices": [
-        "Je suis un processus très lent qui commence au Néolithique.",
-        "Je transforme des plantes et des animaux sauvages.",
-        "Grâce à moi, des animaux sauvages deviennent des animaux d'élevage."
-      ],
-      "explication": "La domestication transforme peu à peu des plantes et des animaux sauvages que les humains cultivent ou élèvent."
     }
   ],
   "calculs": [
@@ -188,16 +206,6 @@
     }
   ],
   "etapes": [
-    {
-      "titre": "Du chasseur nomade aux premières inégalités",
-      "etapes": [
-        "Les humains chassent et cueillent en se déplaçant",
-        "Ils sèment, récoltent et élèvent des animaux",
-        "Ils s'installent toute l'année dans des villages",
-        "La nourriture stockée devient abondante et la population augmente",
-        "Des chefs et des inégalités apparaissent"
-      ]
-    },
     {
       "titre": "Le Néolithique, de la plus ancienne à la plus récente",
       "etapes": [

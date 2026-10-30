@@ -4,22 +4,46 @@
     {
       "nom": "Égale à un nombre entier",
       "detail": "Les fractions dont la division tombe juste : leur valeur est un entier, sans chiffre après la virgule.",
-      "cartes": ["La fraction 12/4", "La fraction 20/5", "La fraction 35/7", "La fraction 18/3", "La fraction 56/8"]
+      "cartes": [
+        "La fraction 12/4",
+        "La fraction 20/5",
+        "La fraction 35/7",
+        "La fraction 18/3",
+        "La fraction 56/8"
+      ]
     },
     {
       "nom": "Un seul chiffre après la virgule",
       "detail": "Les fractions dont la valeur décimale s'écrit avec un seul chiffre après la virgule.",
-      "cartes": ["La fraction 3/2", "La fraction 1/5", "La fraction 9/10", "La fraction 7/5", "La fraction 4/5"]
+      "cartes": [
+        "La fraction 3/2",
+        "La fraction 1/5",
+        "La fraction 9/10",
+        "La fraction 7/5",
+        "La fraction 4/5"
+      ]
     },
     {
       "nom": "Deux chiffres après la virgule",
       "detail": "Les fractions dont la valeur décimale s'écrit avec deux chiffres après la virgule.",
-      "cartes": ["La fraction 7/4", "La fraction 3/4", "La fraction 1/4", "La fraction 37/100", "La fraction 9/4"]
+      "cartes": [
+        "La fraction 7/4",
+        "La fraction 3/4",
+        "La fraction 1/4",
+        "La fraction 37/100",
+        "La fraction 9/4"
+      ]
     },
     {
       "nom": "Nombre non décimal",
       "detail": "Les fractions dont la division ne s'arrête jamais : on ne peut pas les écrire exactement avec une virgule.",
-      "cartes": ["La fraction 1/3", "La fraction 2/3", "La fraction 5/3", "La fraction 4/9", "La fraction 1/6"]
+      "cartes": [
+        "La fraction 1/3",
+        "La fraction 2/3",
+        "La fraction 5/3",
+        "La fraction 4/9",
+        "La fraction 1/6"
+      ]
     }
   ],
   "causes": [],
@@ -27,42 +51,66 @@
     {
       "consigne": "Comment appelle-t-on le nombre en couleur ?",
       "texte": "Dans la fraction 5/8, on regarde le nombre [5].",
-      "choix": ["Numérateur", "Dénominateur", "Quotient"],
+      "choix": [
+        "Numérateur",
+        "Dénominateur",
+        "Quotient"
+      ],
       "bonne": 0,
       "explication": "Le nombre du haut est le numérateur : il dit combien de parts on prend."
     },
     {
       "consigne": "Comment appelle-t-on le nombre en couleur ?",
       "texte": "Dans la fraction 11/3, on regarde le nombre [3].",
-      "choix": ["Numérateur", "Dénominateur", "Quotient"],
+      "choix": [
+        "Numérateur",
+        "Dénominateur",
+        "Quotient"
+      ],
       "bonne": 1,
       "explication": "Le nombre du bas est le dénominateur : il dit en combien de parts égales on partage l'unité."
     },
     {
       "consigne": "Comment appelle-t-on le nombre en couleur ?",
       "texte": "Le nombre [3/4] est le résultat exact de la division de 3 par 4.",
-      "choix": ["Numérateur", "Dénominateur", "Quotient"],
+      "choix": [
+        "Numérateur",
+        "Dénominateur",
+        "Quotient"
+      ],
       "bonne": 2,
       "explication": "Le résultat exact d'une division est le quotient : 3/4 est le quotient de 3 par 4."
     },
     {
       "consigne": "Comment appelle-t-on le nombre en couleur ?",
       "texte": "Une tarte est coupée en 8 parts égales et Lou en mange 3. Dans la fraction 3/8, on regarde le nombre [3].",
-      "choix": ["Numérateur", "Dénominateur", "Quotient"],
+      "choix": [
+        "Numérateur",
+        "Dénominateur",
+        "Quotient"
+      ],
       "bonne": 0,
       "explication": "Le nombre 3 est au-dessus de la barre : c'est le numérateur, le nombre de parts mangées."
     },
     {
       "consigne": "Comment appelle-t-on le nombre en couleur ?",
       "texte": "On partage 2 pizzas entre 5 enfants : chaque enfant reçoit [2/5] de pizza.",
-      "choix": ["Numérateur", "Dénominateur", "Quotient"],
+      "choix": [
+        "Numérateur",
+        "Dénominateur",
+        "Quotient"
+      ],
       "bonne": 2,
       "explication": "La part de chaque enfant est le résultat exact de 2 ÷ 5 : 2/5 est un quotient."
     },
     {
       "consigne": "Comment appelle-t-on le nombre en couleur ?",
       "texte": "La fraction 1/6 représente une part d'un gâteau coupé en 6 parts égales. On regarde le nombre [6].",
-      "choix": ["Numérateur", "Dénominateur", "Quotient"],
+      "choix": [
+        "Numérateur",
+        "Dénominateur",
+        "Quotient"
+      ],
       "bonne": 1,
       "explication": "Le nombre 6 est au-dessous de la barre : c'est le dénominateur, le nombre de parts égales."
     }
@@ -70,7 +118,10 @@
   "devinettes": [
     {
       "reponse": "Dénominateur",
-      "acceptees": ["Dénominateur", "Le dénominateur"],
+      "acceptees": [
+        "Dénominateur",
+        "Le dénominateur"
+      ],
       "indices": [
         "Je suis un nombre que l'on trouve dans une fraction.",
         "Je dis en combien de parts égales on partage l'unité.",
@@ -80,7 +131,10 @@
     },
     {
       "reponse": "Numérateur",
-      "acceptees": ["Numérateur", "Le numérateur"],
+      "acceptees": [
+        "Numérateur",
+        "Le numérateur"
+      ],
       "indices": [
         "Je suis un nombre que l'on trouve dans une fraction.",
         "Je dis combien de parts on prend.",
@@ -90,23 +144,18 @@
     },
     {
       "reponse": "Guide-âne",
-      "acceptees": ["Guide-âne", "Guide âne", "Guide-ane", "Un guide-âne"],
+      "acceptees": [
+        "Guide-âne",
+        "Guide âne",
+        "Guide-ane",
+        "Un guide-âne"
+      ],
       "indices": [
         "Je suis un outil que l'on trace sur une feuille.",
         "Je suis un réseau de droites parallèles à égale distance les unes des autres.",
         "Je sers à partager un segment en 5, 7 ou 11 parts égales."
       ],
       "explication": "Un guide-âne est un réseau de droites parallèles équidistantes : il permet de partager un segment en parts égales."
-    },
-    {
-      "reponse": "Nombre mixte",
-      "acceptees": ["Nombre mixte", "Un nombre mixte", "Mixte"],
-      "indices": [
-        "Je suis une écriture possible pour certaines quantités plus grandes que 1.",
-        "Je suis la somme d'un entier et d'une fraction plus petite que 1.",
-        "L'écriture 1 + 3/4 est la mienne pour la fraction 7/4."
-      ],
-      "explication": "Un nombre mixte s'écrit comme un entier plus une fraction plus petite que 1 : 7/4 = 1 + 3/4."
     }
   ],
   "calculs": [

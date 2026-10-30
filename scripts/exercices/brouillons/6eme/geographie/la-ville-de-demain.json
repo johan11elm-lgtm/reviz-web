@@ -30,8 +30,7 @@
         "Des panneaux solaires installés sur un toit",
         "Une éolienne qui tourne grâce au vent",
         "Un barrage qui produit de l'électricité avec l'eau",
-        "De la chaleur puisée dans le sous-sol pour chauffer des immeubles",
-        "Une énergie qui ne s'épuise pas"
+        "De la chaleur puisée dans le sous-sol pour chauffer des immeubles"
       ]
     },
     {
@@ -82,35 +81,55 @@
     {
       "consigne": "À quel pilier du développement durable répond le passage en couleur ?",
       "texte": "Dans l'écoquartier, [des familles aux revenus très différents habitent les mêmes rues].",
-      "choix": ["Pilier environnemental", "Pilier social", "Pilier économique"],
+      "choix": [
+        "Pilier environnemental",
+        "Pilier social",
+        "Pilier économique"
+      ],
       "bonne": 1,
       "explication": "Mêler des habitants aux revenus variés, c'est la mixité sociale : elle réduit les inégalités, donc c'est le pilier social."
     },
     {
       "consigne": "À quel pilier du développement durable répond le passage en couleur ?",
       "texte": "Pour le nouveau quartier, la mairie [protège les arbres et les oiseaux du parc voisin].",
-      "choix": ["Pilier environnemental", "Pilier social", "Pilier économique"],
+      "choix": [
+        "Pilier environnemental",
+        "Pilier social",
+        "Pilier économique"
+      ],
       "bonne": 0,
       "explication": "Protéger les arbres et les oiseaux, c'est protéger la nature : c'est le pilier environnemental."
     },
     {
       "consigne": "À quel pilier du développement durable répond le passage en couleur ?",
       "texte": "La construction du tramway [crée des centaines d'emplois] dans la région.",
-      "choix": ["Pilier environnemental", "Pilier social", "Pilier économique"],
+      "choix": [
+        "Pilier environnemental",
+        "Pilier social",
+        "Pilier économique"
+      ],
       "bonne": 2,
       "explication": "Créer des emplois et des richesses, c'est le pilier économique."
     },
     {
       "consigne": "À quel pilier du développement durable répond le passage en couleur ?",
       "texte": "La mairie veut [réduire les inégalités entre les quartiers de la ville].",
-      "choix": ["Pilier environnemental", "Pilier social", "Pilier économique"],
+      "choix": [
+        "Pilier environnemental",
+        "Pilier social",
+        "Pilier économique"
+      ],
       "bonne": 1,
       "explication": "Réduire les inégalités entre habitants, c'est le pilier social."
     },
     {
       "consigne": "À quel pilier du développement durable répond le passage en couleur ?",
       "texte": "Grâce aux bus électriques, la ville [réduit la pollution de l'air].",
-      "choix": ["Pilier environnemental", "Pilier social", "Pilier économique"],
+      "choix": [
+        "Pilier environnemental",
+        "Pilier social",
+        "Pilier économique"
+      ],
       "bonne": 0,
       "explication": "Réduire la pollution, c'est protéger l'environnement : c'est le pilier environnemental."
     }
@@ -118,43 +137,18 @@
   "devinettes": [
     {
       "reponse": "Vauban",
-      "acceptees": ["Vauban", "Le Vauban", "Le quartier Vauban", "Quartier Vauban"],
+      "acceptees": [
+        "Vauban",
+        "Le Vauban",
+        "Le quartier Vauban",
+        "Quartier Vauban"
+      ],
       "indices": [
         "Je suis un morceau de ville pensé pour respecter l'environnement.",
         "Je suis construit à partir des années 1990, en Allemagne.",
         "Je me trouve à Fribourg-en-Brisgau, et beaucoup de mes habitants vivent sans voiture."
       ],
       "explication": "Le quartier Vauban, à Fribourg-en-Brisgau, est un écoquartier célèbre où beaucoup d'habitants vivent sans voiture."
-    },
-    {
-      "reponse": "Un îlot de chaleur",
-      "acceptees": ["Îlot de chaleur", "Un îlot de chaleur", "Ilot de chaleur", "Un ilot de chaleur", "Îlot de chaleur urbain", "Un îlot de chaleur urbain", "Les îlots de chaleur"],
-      "indices": [
-        "Je suis une zone de la ville.",
-        "En été, je suis plus chaud que la campagne voisine.",
-        "Le béton, le goudron et le manque d'arbres me créent."
-      ],
-      "explication": "Un îlot de chaleur urbain est une zone de la ville plus chaude que la campagne, à cause du béton et du manque de végétation."
-    },
-    {
-      "reponse": "Les mobilités douces",
-      "acceptees": ["Mobilités douces", "Les mobilités douces", "Mobilité douce", "Une mobilité douce", "Transports doux", "Les transports doux", "Déplacements doux", "Les déplacements doux"],
-      "indices": [
-        "Je suis une manière de se déplacer en ville.",
-        "Je n'utilise aucun moteur : seule l'énergie humaine me fait avancer.",
-        "Je comprends la marche, le vélo et la trottinette."
-      ],
-      "explication": "Les mobilités douces sont des déplacements sans moteur : marche, vélo, trottinette."
-    },
-    {
-      "reponse": "Une énergie renouvelable",
-      "acceptees": ["Énergie renouvelable", "Une énergie renouvelable", "Energie renouvelable", "Énergies renouvelables", "Les énergies renouvelables"],
-      "indices": [
-        "Je sers à produire de l'électricité ou de la chaleur.",
-        "Je ne m'épuise pas.",
-        "Le Soleil, le vent, l'eau et la chaleur du sous-sol me fournissent."
-      ],
-      "explication": "Une énergie renouvelable ne s'épuise pas : solaire, éolienne, hydraulique, géothermie."
     }
   ],
   "calculs": [],

@@ -7,9 +7,7 @@
       "cartes": [
         "Le nombre d'habitants divisé par la superficie",
         "Environ 60 habitants par km² dans le monde",
-        "Environ 120 habitants par km² en France",
-        "Sur une carte, une teinte claire indique peu d'habitants",
-        "Une moyenne qui cache de grandes différences"
+        "Environ 120 habitants par km² en France"
       ]
     },
     {
@@ -51,42 +49,66 @@
     {
       "consigne": "Que représente le groupe en couleur ?",
       "texte": "Au Sahara, [la sécheresse] gêne l'installation des hommes.",
-      "choix": ["Une contrainte naturelle", "Un facteur humain", "Une richesse convoitée"],
+      "choix": [
+        "Une contrainte naturelle",
+        "Un facteur humain",
+        "Une richesse convoitée"
+      ],
       "bonne": 0,
       "explication": "La sécheresse est un élément du milieu : c'est une contrainte naturelle."
     },
     {
       "consigne": "Que représente le groupe en couleur ?",
       "texte": "Ce village reste peu peuplé car [les routes qui y mènent sont rares].",
-      "choix": ["Une contrainte naturelle", "Un facteur humain", "Une richesse convoitée"],
+      "choix": [
+        "Une contrainte naturelle",
+        "Un facteur humain",
+        "Une richesse convoitée"
+      ],
       "bonne": 1,
       "explication": "Le manque de routes dépend des aménagements faits par les hommes : c'est un facteur humain."
     },
     {
       "consigne": "Que représente le groupe en couleur ?",
       "texte": "L'Amazonie attire des entreprises à cause de [son bois et de ses terres agricoles].",
-      "choix": ["Une contrainte naturelle", "Un facteur humain", "Une richesse convoitée"],
+      "choix": [
+        "Une contrainte naturelle",
+        "Un facteur humain",
+        "Une richesse convoitée"
+      ],
       "bonne": 2,
       "explication": "Le bois et les terres agricoles sont des richesses qui attirent : l'espace est convoité."
     },
     {
       "consigne": "Que représente le groupe en couleur ?",
       "texte": "Dans l'Himalaya, [l'altitude et la pente] limitent le peuplement.",
-      "choix": ["Une contrainte naturelle", "Un facteur humain", "Une richesse convoitée"],
+      "choix": [
+        "Une contrainte naturelle",
+        "Un facteur humain",
+        "Une richesse convoitée"
+      ],
       "bonne": 0,
       "explication": "L'altitude et la pente viennent du relief : ce sont des contraintes naturelles."
     },
     {
       "consigne": "Que représente le groupe en couleur ?",
       "texte": "Dans cette vallée, [les écoles, les hôpitaux et les commerces sont très loin] et peu de gens s'y installent.",
-      "choix": ["Une contrainte naturelle", "Un facteur humain", "Une richesse convoitée"],
+      "choix": [
+        "Une contrainte naturelle",
+        "Un facteur humain",
+        "Une richesse convoitée"
+      ],
       "bonne": 1,
       "explication": "Le manque de services est un facteur humain d'isolement."
     },
     {
       "consigne": "Que représente le groupe en couleur ?",
       "texte": "La Sibérie attire les entreprises avec [son pétrole et son gaz].",
-      "choix": ["Une contrainte naturelle", "Un facteur humain", "Une richesse convoitée"],
+      "choix": [
+        "Une contrainte naturelle",
+        "Un facteur humain",
+        "Une richesse convoitée"
+      ],
       "bonne": 2,
       "explication": "Le pétrole et le gaz sont des ressources qui rendent la Sibérie convoitée."
     }
@@ -94,7 +116,10 @@
   "devinettes": [
     {
       "reponse": "Sahara",
-      "acceptees": ["Sahara", "Le Sahara"],
+      "acceptees": [
+        "Sahara",
+        "Le Sahara"
+      ],
       "indices": [
         "Je suis un espace presque vide d'hommes.",
         "Ma contrainte principale est la sécheresse.",
@@ -104,7 +129,10 @@
     },
     {
       "reponse": "Himalaya",
-      "acceptees": ["Himalaya", "L'Himalaya"],
+      "acceptees": [
+        "Himalaya",
+        "L'Himalaya"
+      ],
       "indices": [
         "Je suis un espace très peu peuplé, en Asie.",
         "Mes contraintes sont l'altitude et la pente.",
@@ -114,23 +142,18 @@
     },
     {
       "reponse": "Amazonie",
-      "acceptees": ["Amazonie", "L'Amazonie", "La forêt amazonienne", "Forêt amazonienne"],
+      "acceptees": [
+        "Amazonie",
+        "L'Amazonie",
+        "La forêt amazonienne",
+        "Forêt amazonienne"
+      ],
       "indices": [
         "Je suis un espace peu peuplé d'Amérique du Sud.",
         "On me convoite pour mon bois et mes terres agricoles.",
         "Je suis la plus grande forêt tropicale du monde."
       ],
       "explication": "L'Amazonie est une immense forêt tropicale convoitée pour son bois et ses terres."
-    },
-    {
-      "reponse": "Densité",
-      "acceptees": ["Densité", "La densité", "Densité de population"],
-      "indices": [
-        "Je mesure le peuplement d'un espace.",
-        "On me calcule par une division.",
-        "Je m'exprime en habitants par km²."
-      ],
-      "explication": "La densité est le nombre moyen d'habitants par km²."
     }
   ],
   "calculs": [

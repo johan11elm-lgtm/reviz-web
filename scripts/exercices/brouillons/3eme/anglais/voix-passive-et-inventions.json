@@ -51,42 +51,72 @@
     {
       "consigne": "Quel est le rôle du passage en couleur dans la phrase passive ?",
       "texte": "Penicillin was discovered [by Fleming].",
-      "choix": ["Le sujet, qui subit l'action", "Le verbe be conjugué", "Le participe passé", "Le complément d'agent"],
+      "choix": [
+        "Le sujet, qui subit l'action",
+        "Le verbe be conjugué",
+        "Le participe passé",
+        "Le complément d'agent"
+      ],
       "bonne": 3,
       "explication": "« by Fleming » est le complément d'agent : il dit qui a fait l'action, il est introduit par by."
     },
     {
       "consigne": "Quel est le rôle du passage en couleur dans la phrase passive ?",
       "texte": "[The telephone] was patented in 1876.",
-      "choix": ["Le sujet, qui subit l'action", "Le verbe be conjugué", "Le participe passé", "Le complément d'agent"],
+      "choix": [
+        "Le sujet, qui subit l'action",
+        "Le verbe be conjugué",
+        "Le participe passé",
+        "Le complément d'agent"
+      ],
       "bonne": 0,
       "explication": "« The telephone » est le sujet de la phrase passive : c'est lui qui subit l'action (le brevet est déposé)."
     },
     {
       "consigne": "Quel est le rôle du passage en couleur dans la phrase passive ?",
       "texte": "English [is] spoken all over the world.",
-      "choix": ["Le sujet, qui subit l'action", "Le verbe be conjugué", "Le participe passé", "Le complément d'agent"],
+      "choix": [
+        "Le sujet, qui subit l'action",
+        "Le verbe be conjugué",
+        "Le participe passé",
+        "Le complément d'agent"
+      ],
       "bonne": 1,
       "explication": "« is » est le verbe be conjugué au présent : seul be se conjugue au passif."
     },
     {
       "consigne": "Quel est le rôle du passage en couleur dans la phrase passive ?",
       "texte": "The World Wide Web was [invented] by Tim Berners-Lee.",
-      "choix": ["Le sujet, qui subit l'action", "Le verbe be conjugué", "Le participe passé", "Le complément d'agent"],
+      "choix": [
+        "Le sujet, qui subit l'action",
+        "Le verbe be conjugué",
+        "Le participe passé",
+        "Le complément d'agent"
+      ],
       "bonne": 2,
       "explication": "« invented » est le participe passé du verbe invent, placé après be."
     },
     {
       "consigne": "Quel est le rôle du passage en couleur dans la phrase passive ?",
       "texte": "The World Wide Web was invented [by Tim Berners-Lee] in 1989.",
-      "choix": ["Le sujet, qui subit l'action", "Le verbe be conjugué", "Le participe passé", "Le complément d'agent"],
+      "choix": [
+        "Le sujet, qui subit l'action",
+        "Le verbe be conjugué",
+        "Le participe passé",
+        "Le complément d'agent"
+      ],
       "bonne": 3,
       "explication": "« by Tim Berners-Lee » est le complément d'agent : c'est l'auteur de l'invention."
     },
     {
       "consigne": "Quel est le rôle du passage en couleur dans la phrase passive ?",
       "texte": "[A new museum] has been built.",
-      "choix": ["Le sujet, qui subit l'action", "Le verbe be conjugué", "Le participe passé", "Le complément d'agent"],
+      "choix": [
+        "Le sujet, qui subit l'action",
+        "Le verbe be conjugué",
+        "Le participe passé",
+        "Le complément d'agent"
+      ],
       "bonne": 0,
       "explication": "« A new museum » est le sujet de la phrase passive : c'est lui qui subit l'action (il est construit)."
     }
@@ -94,7 +124,12 @@
   "devinettes": [
     {
       "reponse": "Alexander Graham Bell",
-      "acceptees": ["Bell", "Graham Bell", "Alexander Bell", "Alexander Graham Bell"],
+      "acceptees": [
+        "Bell",
+        "Graham Bell",
+        "Alexander Bell",
+        "Alexander Graham Bell"
+      ],
       "indices": [
         "Je suis un inventeur du XIXe siècle.",
         "Mon invention permet de parler à distance.",
@@ -104,7 +139,10 @@
     },
     {
       "reponse": "Alexander Fleming",
-      "acceptees": ["Fleming", "Alexander Fleming"],
+      "acceptees": [
+        "Fleming",
+        "Alexander Fleming"
+      ],
       "indices": [
         "Je suis un scientifique écossais.",
         "J'ai fait ma découverte à Londres.",
@@ -114,23 +152,18 @@
     },
     {
       "reponse": "Tim Berners-Lee",
-      "acceptees": ["Berners-Lee", "Berners Lee", "Tim Berners Lee", "Tim Berners-Lee"],
+      "acceptees": [
+        "Berners-Lee",
+        "Berners Lee",
+        "Tim Berners Lee",
+        "Tim Berners-Lee"
+      ],
       "indices": [
         "Je suis britannique.",
         "J'ai travaillé au CERN.",
         "J'ai inventé le World Wide Web en 1989."
       ],
       "explication": "Le Britannique Tim Berners-Lee a inventé le World Wide Web en 1989, au CERN."
-    },
-    {
-      "reponse": "James Watt",
-      "acceptees": ["Watt", "James Watt"],
-      "indices": [
-        "Je suis un ingénieur écossais.",
-        "J'ai perfectionné une machine à partir de 1769.",
-        "Ma machine à vapeur est au cœur de la révolution industrielle."
-      ],
-      "explication": "L'Écossais James Watt a perfectionné la machine à vapeur à partir de 1769."
     }
   ],
   "calculs": [],

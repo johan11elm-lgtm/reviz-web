@@ -30,18 +30,14 @@
         "Le RER, train de banlieue d'Île-de-France",
         "Le métro de Londres, ouvert en 1863",
         "Un tramway qui circule dans les rues de la ville",
-        "Des embouteillages à l'heure de pointe",
-        "Une voiture indispensable pour les habitants du périurbain"
+        "Des embouteillages à l'heure de pointe"
       ]
     },
     {
       "nom": "Lire un plan de métro",
       "detail": "Le vocabulaire et les règles pour comprendre un plan de lignes de métro.",
       "cartes": [
-        "Chaque ligne a une couleur et un numéro",
         "Une station est un point sur la ligne",
-        "Une correspondance permet de changer de ligne",
-        "Le terminus est la dernière station d'une ligne",
         "On compte les stations et les changements, pas les centimètres"
       ]
     }
@@ -85,48 +81,7 @@
     }
   ],
   "etiquettes": [],
-  "devinettes": [
-    {
-      "reponse": "Le RER",
-      "acceptees": ["RER", "Le RER", "Un RER"],
-      "indices": [
-        "Je transporte chaque jour des millions d'habitants.",
-        "Je suis le train de banlieue d'une grande région.",
-        "Je circule en Île-de-France."
-      ],
-      "explication": "En Île-de-France, le train de banlieue s'appelle le RER."
-    },
-    {
-      "reponse": "Une migration pendulaire",
-      "acceptees": ["Migration pendulaire", "Une migration pendulaire", "Les migrations pendulaires", "Migrations pendulaires", "Navette", "Une navette", "Trajet domicile-travail", "Le trajet domicile-travail"],
-      "indices": [
-        "Je suis un déplacement.",
-        "Je me répète tous les jours : un aller, puis un retour.",
-        "Je relie le domicile et le lieu de travail."
-      ],
-      "explication": "La migration pendulaire est l'aller-retour quotidien entre le domicile et le travail."
-    },
-    {
-      "reponse": "Un logement social",
-      "acceptees": ["Logement social", "Un logement social", "HLM", "Un HLM", "Les HLM", "Logements sociaux"],
-      "indices": [
-        "Je suis un lieu où l'on habite.",
-        "Mon loyer est modéré.",
-        "L'État ou la commune aide à me construire ; en France, on m'appelle par trois lettres."
-      ],
-      "explication": "Un logement social est un logement à loyer modéré aidé par l'État ou la commune, appelé HLM en France."
-    },
-    {
-      "reponse": "Une correspondance",
-      "acceptees": ["Correspondance", "Une correspondance", "La correspondance", "Les correspondances"],
-      "indices": [
-        "Je suis une station un peu particulière.",
-        "Plusieurs lignes se croisent chez moi.",
-        "On m'utilise pour changer de ligne."
-      ],
-      "explication": "Une correspondance est une station où plusieurs lignes se croisent : on peut y changer de ligne."
-    }
-  ],
+  "devinettes": [],
   "calculs": [],
   "etapes": [
     {

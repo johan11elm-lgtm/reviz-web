@@ -4,22 +4,46 @@
     {
       "nom": "Chiffre des unités",
       "detail": "Le chiffre juste à gauche de la virgule (ou le dernier chiffre d'un entier).",
-      "cartes": ["Le chiffre 5 dans 415,8", "Le chiffre 9 dans 29,03", "Le chiffre 6 dans 36,5", "Le chiffre 2 dans 702,4", "Le chiffre 8 dans 1 478,9"]
+      "cartes": [
+        "Le chiffre 5 dans 415,8",
+        "Le chiffre 9 dans 29,03",
+        "Le chiffre 6 dans 36,5",
+        "Le chiffre 2 dans 702,4",
+        "Le chiffre 8 dans 1 478,9"
+      ]
     },
     {
       "nom": "Chiffre des dixièmes",
       "detail": "Le premier chiffre après la virgule.",
-      "cartes": ["Le chiffre 6 dans 25,634", "Le chiffre 9 dans 3,95", "Le chiffre 2 dans 18,207", "Le chiffre 8 dans 40,81", "Le chiffre 4 dans 106,48"]
+      "cartes": [
+        "Le chiffre 6 dans 25,634",
+        "Le chiffre 9 dans 3,95",
+        "Le chiffre 2 dans 18,207",
+        "Le chiffre 8 dans 40,81",
+        "Le chiffre 4 dans 106,48"
+      ]
     },
     {
       "nom": "Chiffre des centièmes",
       "detail": "Le deuxième chiffre après la virgule.",
-      "cartes": ["Le chiffre 3 dans 7,431", "Le chiffre 5 dans 12,65", "Le chiffre 7 dans 0,372", "Le chiffre 9 dans 58,092", "Le chiffre 1 dans 4,61"]
+      "cartes": [
+        "Le chiffre 3 dans 7,431",
+        "Le chiffre 5 dans 12,65",
+        "Le chiffre 7 dans 0,372",
+        "Le chiffre 9 dans 58,092",
+        "Le chiffre 1 dans 4,61"
+      ]
     },
     {
       "nom": "Chiffre des millièmes",
       "detail": "Le troisième chiffre après la virgule.",
-      "cartes": ["Le chiffre 8 dans 3,148", "Le chiffre 5 dans 0,205", "Le chiffre 7 dans 12,017", "Le chiffre 2 dans 6,402", "Le chiffre 6 dans 9,376"]
+      "cartes": [
+        "Le chiffre 8 dans 3,148",
+        "Le chiffre 5 dans 0,205",
+        "Le chiffre 7 dans 12,017",
+        "Le chiffre 2 dans 6,402",
+        "Le chiffre 6 dans 9,376"
+      ]
     }
   ],
   "causes": [],
@@ -27,42 +51,66 @@
     {
       "consigne": "Quelle est l'écriture du nombre en couleur ?",
       "texte": "Pour écrire un nombre, Zoé a choisi l'écriture [3/10].",
-      "choix": ["Écriture à virgule", "Fraction décimale", "Nombre entier"],
+      "choix": [
+        "Écriture à virgule",
+        "Fraction décimale",
+        "Nombre entier"
+      ],
       "bonne": 1,
       "explication": "3/10 est une fraction dont le dénominateur est 10 : c'est une fraction décimale (3/10 = 0,3)."
     },
     {
       "consigne": "Quelle est l'écriture du nombre en couleur ?",
       "texte": "Sur la copie de Léo, on lit le nombre [0,35].",
-      "choix": ["Écriture à virgule", "Fraction décimale", "Nombre entier"],
+      "choix": [
+        "Écriture à virgule",
+        "Fraction décimale",
+        "Nombre entier"
+      ],
       "bonne": 0,
       "explication": "0,35 s'écrit avec une virgule : c'est l'écriture à virgule (0,35 = 35/100)."
     },
     {
       "consigne": "Quelle est l'écriture du nombre en couleur ?",
       "texte": "Dans le tableau, on trouve la valeur [1 250].",
-      "choix": ["Écriture à virgule", "Fraction décimale", "Nombre entier"],
+      "choix": [
+        "Écriture à virgule",
+        "Fraction décimale",
+        "Nombre entier"
+      ],
       "bonne": 2,
       "explication": "1 250 n'a ni virgule ni barre de fraction : c'est un nombre entier."
     },
     {
       "consigne": "Quelle est l'écriture du nombre en couleur ?",
       "texte": "Maya écrit [27/100] sur son ardoise.",
-      "choix": ["Écriture à virgule", "Fraction décimale", "Nombre entier"],
+      "choix": [
+        "Écriture à virgule",
+        "Fraction décimale",
+        "Nombre entier"
+      ],
       "bonne": 1,
       "explication": "27/100 a pour dénominateur 100 : c'est une fraction décimale (27/100 = 0,27)."
     },
     {
       "consigne": "Quelle est l'écriture du nombre en couleur ?",
       "texte": "La mesure notée par Noé est [4,107].",
-      "choix": ["Écriture à virgule", "Fraction décimale", "Nombre entier"],
+      "choix": [
+        "Écriture à virgule",
+        "Fraction décimale",
+        "Nombre entier"
+      ],
       "bonne": 0,
       "explication": "4,107 s'écrit avec une virgule : c'est l'écriture à virgule (4,107 = 4 107/1 000)."
     },
     {
       "consigne": "Quelle est l'écriture du nombre en couleur ?",
       "texte": "Le résultat du calcul est [7/1 000].",
-      "choix": ["Écriture à virgule", "Fraction décimale", "Nombre entier"],
+      "choix": [
+        "Écriture à virgule",
+        "Fraction décimale",
+        "Nombre entier"
+      ],
       "bonne": 1,
       "explication": "7/1 000 a pour dénominateur 1 000 : c'est une fraction décimale (7/1 000 = 0,007)."
     }
@@ -70,7 +118,12 @@
   "devinettes": [
     {
       "reponse": "Arrondi",
-      "acceptees": ["Arrondi", "Un arrondi", "Valeur approchée", "Approximation"],
+      "acceptees": [
+        "Arrondi",
+        "Un arrondi",
+        "Valeur approchée",
+        "Approximation"
+      ],
       "indices": [
         "Je suis une valeur proche d'un nombre.",
         "Je suis donné à un rang précis, comme le dixième ou le centième.",
@@ -80,7 +133,11 @@
     },
     {
       "reponse": "Abscisse",
-      "acceptees": ["Abscisse", "L'abscisse", "Une abscisse"],
+      "acceptees": [
+        "Abscisse",
+        "L'abscisse",
+        "Une abscisse"
+      ],
       "indices": [
         "Je suis un nombre associé à un point.",
         "Je me lis sur une demi-droite graduée.",
@@ -90,7 +147,12 @@
     },
     {
       "reponse": "Dixième",
-      "acceptees": ["Dixième", "Un dixième", "Le dixième", "Dixièmes"],
+      "acceptees": [
+        "Dixième",
+        "Un dixième",
+        "Le dixième",
+        "Dixièmes"
+      ],
       "indices": [
         "Je suis une partie d'une unité.",
         "Il faut 10 comme moi pour faire une unité.",
@@ -100,7 +162,11 @@
     },
     {
       "reponse": "Partie entière",
-      "acceptees": ["Partie entière", "La partie entière", "Entière"],
+      "acceptees": [
+        "Partie entière",
+        "La partie entière",
+        "Entière"
+      ],
       "indices": [
         "Je suis un morceau d'un nombre décimal.",
         "Je suis écrite à gauche de la virgule.",
@@ -161,15 +227,6 @@
         "Regarde le chiffre juste à sa droite, celui des centièmes",
         "Compare ce chiffre à 5 pour savoir s'il faut arrondir au-dessus",
         "Écris l'arrondi avec un seul chiffre après la virgule"
-      ]
-    },
-    {
-      "titre": "Comparer deux nombres décimaux",
-      "etapes": [
-        "Compare d'abord les parties entières des deux nombres",
-        "Si elles sont égales, compare les dixièmes",
-        "Si les dixièmes sont égaux, compare les centièmes",
-        "Conclus avec le signe < ou >"
       ]
     }
   ]

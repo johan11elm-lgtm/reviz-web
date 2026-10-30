@@ -18,9 +18,7 @@
       "cartes": [
         "Des gratte-ciel remplis de bureaux",
         "Les sièges des grandes entreprises",
-        "Manhattan, au cœur de New York",
-        "La Défense, à l'ouest de Paris",
-        "Souvent situé au centre de la métropole"
+        "La Défense, à l'ouest de Paris"
       ]
     },
     {
@@ -82,35 +80,60 @@
     {
       "consigne": "Quel type d'espace le groupe en couleur décrit-il ?",
       "texte": "Au cœur de New York, [des gratte-ciel de bureaux abritent des sièges d'entreprises].",
-      "choix": ["Le quartier d'affaires", "La banlieue", "Le périurbain", "Le bidonville"],
+      "choix": [
+        "Le quartier d'affaires",
+        "La banlieue",
+        "Le périurbain",
+        "Le bidonville"
+      ],
       "bonne": 0,
       "explication": "Des gratte-ciel de bureaux et des sièges d'entreprises : c'est un quartier d'affaires."
     },
     {
       "consigne": "Quel type d'espace le groupe en couleur décrit-il ?",
       "texte": "Autour de la ville-centre s'étend [un espace bâti en continuité avec elle].",
-      "choix": ["Le quartier d'affaires", "La banlieue", "Le périurbain", "Le bidonville"],
+      "choix": [
+        "Le quartier d'affaires",
+        "La banlieue",
+        "Le périurbain",
+        "Le bidonville"
+      ],
       "bonne": 1,
       "explication": "Un espace bâti en continuité avec la ville-centre, c'est la banlieue."
     },
     {
       "consigne": "Quel type d'espace le groupe en couleur décrit-il ?",
       "texte": "À 40 km de la ville, [des lotissements de maisons, une zone commerciale et des champs] se côtoient.",
-      "choix": ["Le quartier d'affaires", "La banlieue", "Le périurbain", "Le bidonville"],
+      "choix": [
+        "Le quartier d'affaires",
+        "La banlieue",
+        "Le périurbain",
+        "Le bidonville"
+      ],
       "bonne": 2,
       "explication": "Maisons, zones commerciales et champs mêlés : c'est le périurbain."
     },
     {
       "consigne": "Quel type d'espace le groupe en couleur décrit-il ?",
       "texte": "À Dharavi, [des habitations construites sans autorisation et sans égouts] abritent des milliers de personnes.",
-      "choix": ["Le quartier d'affaires", "La banlieue", "Le périurbain", "Le bidonville"],
+      "choix": [
+        "Le quartier d'affaires",
+        "La banlieue",
+        "Le périurbain",
+        "Le bidonville"
+      ],
       "bonne": 3,
       "explication": "Un habitat précaire construit sans autorisation et mal équipé : c'est un bidonville."
     },
     {
       "consigne": "Quel type d'espace le groupe en couleur décrit-il ?",
       "texte": "À l'ouest de Paris, La Défense est [un quartier de tours et de sièges d'entreprises].",
-      "choix": ["Le quartier d'affaires", "La banlieue", "Le périurbain", "Le bidonville"],
+      "choix": [
+        "Le quartier d'affaires",
+        "La banlieue",
+        "Le périurbain",
+        "Le bidonville"
+      ],
       "bonne": 0,
       "explication": "Des tours de bureaux et des sièges d'entreprises : La Défense est un quartier d'affaires."
     }
@@ -118,7 +141,12 @@
   "devinettes": [
     {
       "reponse": "Mégapole",
-      "acceptees": ["Mégapole", "Une mégapole", "Mégapoles", "Megapole"],
+      "acceptees": [
+        "Mégapole",
+        "Une mégapole",
+        "Mégapoles",
+        "Megapole"
+      ],
       "indices": [
         "Je suis une très grande ville.",
         "Tokyo, Delhi et Lagos sont comme moi.",
@@ -128,7 +156,12 @@
     },
     {
       "reponse": "Bidonville",
-      "acceptees": ["Bidonville", "Un bidonville", "Bidonvilles", "Favela"],
+      "acceptees": [
+        "Bidonville",
+        "Un bidonville",
+        "Bidonvilles",
+        "Favela"
+      ],
       "indices": [
         "Je suis un quartier d'une grande ville.",
         "Dharavi, à Mumbai, est comme moi.",
@@ -138,7 +171,12 @@
     },
     {
       "reponse": "Étalement urbain",
-      "acceptees": ["Étalement urbain", "L'étalement urbain", "Etalement urbain", "Étalement"],
+      "acceptees": [
+        "Étalement urbain",
+        "L'étalement urbain",
+        "Etalement urbain",
+        "Étalement"
+      ],
       "indices": [
         "Je fais reculer les champs.",
         "Je me traduis par des lotissements, des routes et des zones d'activités.",
@@ -148,7 +186,12 @@
     },
     {
       "reponse": "Quartier d'affaires",
-      "acceptees": ["Quartier d'affaires", "Le quartier d'affaires", "Quartiers d'affaires", "Centre d'affaires"],
+      "acceptees": [
+        "Quartier d'affaires",
+        "Le quartier d'affaires",
+        "Quartiers d'affaires",
+        "Centre d'affaires"
+      ],
       "indices": [
         "Je suis un quartier d'une métropole.",
         "Manhattan et La Défense sont comme moi.",
@@ -166,15 +209,6 @@
         "Découper le paysage en trois plans",
         "Nommer l'habitat et les éléments de chaque plan",
         "Conclure : dire dans quelle partie de la métropole on se trouve"
-      ]
-    },
-    {
-      "titre": "Du centre vers l'extérieur d'une métropole",
-      "etapes": [
-        "Le centre ancien et le quartier d'affaires",
-        "Les banlieues, bâties en continuité avec la ville",
-        "Le périurbain, mêlé aux champs",
-        "Les espaces ruraux qui entourent la métropole"
       ]
     }
   ]

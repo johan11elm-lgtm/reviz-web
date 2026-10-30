@@ -5,7 +5,6 @@
       "nom": "Les fonctions techniques",
       "detail": "Une fonction technique est une action que l'objet doit réaliser pour assurer sa fonction d'usage, comme produire de la lumière.",
       "cartes": [
-        "Produire de la lumière",
         "Stocker de l'énergie",
         "Allumer ou éteindre la lampe",
         "Freiner le vélo",
@@ -51,42 +50,66 @@
     {
       "consigne": "De quel type est le passage en couleur ?",
       "texte": "Une lampe de poche sert à [éclairer dans l'obscurité].",
-      "choix": ["Fonction d'usage", "Fonction technique", "Solution technique"],
+      "choix": [
+        "Fonction d'usage",
+        "Fonction technique",
+        "Solution technique"
+      ],
       "bonne": 0,
       "explication": "Éclairer dans l'obscurité dit à quoi sert la lampe : c'est sa fonction d'usage."
     },
     {
       "consigne": "De quel type est le passage en couleur ?",
       "texte": "Pour fonctionner, la lampe de poche doit [stocker de l'énergie].",
-      "choix": ["Fonction d'usage", "Fonction technique", "Solution technique"],
+      "choix": [
+        "Fonction d'usage",
+        "Fonction technique",
+        "Solution technique"
+      ],
       "bonne": 1,
       "explication": "Stocker de l'énergie est une action que l'objet doit réaliser : c'est une fonction technique."
     },
     {
       "consigne": "De quel type est le passage en couleur ?",
       "texte": "Pour produire de la lumière, la lampe de poche utilise [une DEL].",
-      "choix": ["Fonction d'usage", "Fonction technique", "Solution technique"],
+      "choix": [
+        "Fonction d'usage",
+        "Fonction technique",
+        "Solution technique"
+      ],
       "bonne": 2,
       "explication": "Une DEL est l'élément choisi pour produire la lumière : c'est une solution technique."
     },
     {
       "consigne": "De quel type est le passage en couleur ?",
       "texte": "Un vélo sert à [se déplacer].",
-      "choix": ["Fonction d'usage", "Fonction technique", "Solution technique"],
+      "choix": [
+        "Fonction d'usage",
+        "Fonction technique",
+        "Solution technique"
+      ],
       "bonne": 0,
       "explication": "Se déplacer dit à quoi sert le vélo pour son utilisateur : c'est sa fonction d'usage."
     },
     {
       "consigne": "De quel type est le passage en couleur ?",
       "texte": "Pour assurer son usage, un vélo doit [freiner].",
-      "choix": ["Fonction d'usage", "Fonction technique", "Solution technique"],
+      "choix": [
+        "Fonction d'usage",
+        "Fonction technique",
+        "Solution technique"
+      ],
       "bonne": 1,
       "explication": "Freiner est une action que le vélo doit réaliser : c'est une fonction technique."
     },
     {
       "consigne": "De quel type est le passage en couleur ?",
       "texte": "Pour stocker de l'énergie, la lampe de poche utilise [des piles].",
-      "choix": ["Fonction d'usage", "Fonction technique", "Solution technique"],
+      "choix": [
+        "Fonction d'usage",
+        "Fonction technique",
+        "Solution technique"
+      ],
       "bonne": 2,
       "explication": "Les piles sont l'élément choisi pour stocker l'énergie : c'est une solution technique."
     }
@@ -94,7 +117,11 @@
   "devinettes": [
     {
       "reponse": "Prototype",
-      "acceptees": ["Prototype", "Le prototype", "Un prototype"],
+      "acceptees": [
+        "Prototype",
+        "Le prototype",
+        "Un prototype"
+      ],
       "indices": [
         "Je suis fabriqué avant l'objet définitif.",
         "Je suis un premier exemplaire.",
@@ -104,7 +131,10 @@
     },
     {
       "reponse": "Cahier des charges",
-      "acceptees": ["Cahier des charges", "Le cahier des charges"],
+      "acceptees": [
+        "Cahier des charges",
+        "Le cahier des charges"
+      ],
       "indices": [
         "On m'écrit avant de fabriquer l'objet.",
         "Je dis ce que l'objet doit faire.",
@@ -114,7 +144,11 @@
     },
     {
       "reponse": "Innovation",
-      "acceptees": ["Innovation", "L'innovation", "Une innovation"],
+      "acceptees": [
+        "Innovation",
+        "L'innovation",
+        "Une innovation"
+      ],
       "indices": [
         "Je peux changer la façon d'utiliser un objet.",
         "Je suis une nouveauté qui améliore un objet.",
@@ -124,7 +158,11 @@
     },
     {
       "reponse": "Draisienne",
-      "acceptees": ["Draisienne", "La draisienne", "Une draisienne"],
+      "acceptees": [
+        "Draisienne",
+        "La draisienne",
+        "Une draisienne"
+      ],
       "indices": [
         "Je permets de me déplacer sans moteur.",
         "Je n'ai pas de pédales.",

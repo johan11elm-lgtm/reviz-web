@@ -27,7 +27,6 @@
       "nom": "Le port, carrefour des échanges",
       "detail": "Le rôle du port : relier la mer, la terre et les différentes parties du monde.",
       "cartes": [
-        "80 % des marchandises du monde voyagent par bateau",
         "Un conteneur passe du navire au train ou au camion",
         "Un fleuve relie le port aux villes de l'intérieur",
         "Le port met en contact la mer et la terre",
@@ -76,7 +75,11 @@
   "devinettes": [
     {
       "reponse": "Shanghai",
-      "acceptees": ["Shanghai", "Shangaï", "Shanghaï"],
+      "acceptees": [
+        "Shanghai",
+        "Shangaï",
+        "Shanghaï"
+      ],
       "indices": [
         "Je suis un grand port d'Asie.",
         "Je me trouve en Chine.",
@@ -86,33 +89,15 @@
     },
     {
       "reponse": "Rotterdam",
-      "acceptees": ["Rotterdam"],
+      "acceptees": [
+        "Rotterdam"
+      ],
       "indices": [
         "Je suis un port du nord-ouest de l'Europe.",
         "Je me trouve aux Pays-Bas.",
         "Je suis le premier port d'Europe."
       ],
       "explication": "Rotterdam, aux Pays-Bas, est le premier port d'Europe."
-    },
-    {
-      "reponse": "L'hinterland",
-      "acceptees": ["Hinterland", "L'hinterland", "Un hinterland", "L'arrière-pays", "Arrière-pays", "Un arrière-pays"],
-      "indices": [
-        "Je suis un espace situé loin de la mer, à l'intérieur des terres.",
-        "Des routes, des voies ferrées et des fleuves me relient à un port.",
-        "Pour Le Havre, je comprends la région parisienne."
-      ],
-      "explication": "L'hinterland est l'arrière-pays qu'un port dessert ; la région parisienne fait partie de celui du Havre."
-    },
-    {
-      "reponse": "Un conteneur",
-      "acceptees": ["Conteneur", "Un conteneur", "Le conteneur", "Les conteneurs", "Container", "Un container"],
-      "indices": [
-        "Je suis une grande boîte métallique.",
-        "J'ai une taille standard, comme des milliers de mes semblables.",
-        "Je passe facilement du bateau au train ou au camion."
-      ],
-      "explication": "Le conteneur est une boîte métallique standard qui passe du bateau au train ou au camion."
     }
   ],
   "calculs": [],

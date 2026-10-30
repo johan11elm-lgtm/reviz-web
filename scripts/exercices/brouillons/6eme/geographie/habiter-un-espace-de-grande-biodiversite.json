@@ -6,9 +6,7 @@
       "detail": "Les caractères naturels de la forêt amazonienne, la plus grande forêt tropicale humide du monde.",
       "cartes": [
         "Une forêt dense, chaude et très arrosée toute l'année",
-        "Environ 5,5 millions de km² de superficie",
         "Le fleuve le plus puissant du monde par son débit",
-        "Environ 10 % des espèces vivantes connues y vivent",
         "Une forêt répartie sur neuf pays et territoires"
       ]
     },
@@ -29,9 +27,7 @@
       "cartes": [
         "Des chercheurs d'or qui fouillent les rivières",
         "Du mercure sert à séparer l'or",
-        "Le mercure empoisonne les poissons et les habitants",
-        "Une pratique souvent illégale dans les rivières",
-        "Les berges des rivières sont détruites"
+        "Le mercure empoisonne les poissons et les habitants"
       ]
     },
     {
@@ -76,7 +72,10 @@
   "devinettes": [
     {
       "reponse": "Biodiversité",
-      "acceptees": ["Biodiversité", "La biodiversité"],
+      "acceptees": [
+        "Biodiversité",
+        "La biodiversité"
+      ],
       "indices": [
         "Je suis très riche dans les forêts tropicales humides.",
         "Je compte les plantes, les animaux et les micro-organismes d'un milieu.",
@@ -86,7 +85,9 @@
     },
     {
       "reponse": "Manaus",
-      "acceptees": ["Manaus"],
+      "acceptees": [
+        "Manaus"
+      ],
       "indices": [
         "Je suis une ville du Brésil.",
         "Je suis située au cœur de la forêt amazonienne.",
@@ -96,7 +97,10 @@
     },
     {
       "reponse": "Orpaillage",
-      "acceptees": ["Orpaillage", "L'orpaillage"],
+      "acceptees": [
+        "Orpaillage",
+        "L'orpaillage"
+      ],
       "indices": [
         "Je me pratique dans les rivières.",
         "Je pollue l'eau au mercure.",
@@ -106,7 +110,11 @@
     },
     {
       "reponse": "Front pionnier",
-      "acceptees": ["Front pionnier", "Le front pionnier", "Un front pionnier"],
+      "acceptees": [
+        "Front pionnier",
+        "Le front pionnier",
+        "Un front pionnier"
+      ],
       "indices": [
         "Je suis une zone qui change vite.",
         "On y défriche de nouvelles terres.",

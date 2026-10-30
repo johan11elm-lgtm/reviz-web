@@ -87,36 +87,49 @@
   "etiquettes": [
     {
       "consigne": "Quel est le rôle du passage en couleur dans cette expérience ?",
-      "texte": "Pour tester le besoin en lumière, Léa prépare deux plantes. [Les deux plantes sont de la même espèce, dans le même pot, avec la même terre.] L'une reste près de la fenêtre, l'autre est enfermée dans un placard.",
-      "choix": ["Le lot témoin", "Le lot privé de l'élément testé", "Une condition gardée identique", "Un résultat observé"],
-      "bonne": 2,
-      "explication": "Tout est identique dans les deux lots, sauf la lumière : on ne change qu'un seul facteur à la fois."
-    },
-    {
-      "consigne": "Quel est le rôle du passage en couleur dans cette expérience ?",
       "texte": "Deux plantes identiques poussent sur du sable lavé, qui n'apporte aucun sel minéral. L'une est arrosée avec de l'eau distillée. [L'autre est arrosée avec de l'eau contenant des sels minéraux.]",
-      "choix": ["Le lot témoin", "Le lot privé de l'élément testé", "Une condition gardée identique", "Un résultat observé"],
+      "choix": [
+        "Le lot témoin",
+        "Le lot privé de l'élément testé",
+        "Une condition gardée identique",
+        "Un résultat observé"
+      ],
       "bonne": 0,
       "explication": "Ce lot reçoit tout ce dont la plante a besoin : c'est le témoin, qui sert de référence pour comparer."
     },
     {
       "consigne": "Quel est le rôle du passage en couleur dans cette expérience ?",
       "texte": "Après une semaine, la plante du placard [a jauni], alors que celle de la fenêtre est restée bien verte.",
-      "choix": ["Le lot témoin", "Le lot privé de l'élément testé", "Une condition gardée identique", "Un résultat observé"],
+      "choix": [
+        "Le lot témoin",
+        "Le lot privé de l'élément testé",
+        "Une condition gardée identique",
+        "Un résultat observé"
+      ],
       "bonne": 3,
       "explication": "Jaunir est ce que l'on observe à la fin de l'expérience : c'est le résultat, qui permet de conclure."
     },
     {
       "consigne": "Quel est le rôle du passage en couleur dans cette expérience ?",
       "texte": "Pour tester le besoin en lumière, Zoé a deux plantes identiques. L'une reste sur le rebord de la fenêtre. [L'autre est enfermée dans un placard.]",
-      "choix": ["Le lot témoin", "Le lot privé de l'élément testé", "Une condition gardée identique", "Un résultat observé"],
+      "choix": [
+        "Le lot témoin",
+        "Le lot privé de l'élément testé",
+        "Une condition gardée identique",
+        "Un résultat observé"
+      ],
       "bonne": 1,
       "explication": "Cette plante est privée de lumière, l'élément testé : c'est le lot qu'on compare au témoin."
     },
     {
       "consigne": "Quel est le rôle du passage en couleur dans cette expérience ?",
       "texte": "Pour tester l'effet des sels minéraux, Tom prépare deux pots. [Il utilise le même sable lavé, la même espèce de plante et la même température dans les deux pots.] Seule l'eau d'arrosage change.",
-      "choix": ["Le lot témoin", "Le lot privé de l'élément testé", "Une condition gardée identique", "Un résultat observé"],
+      "choix": [
+        "Le lot témoin",
+        "Le lot privé de l'élément testé",
+        "Une condition gardée identique",
+        "Un résultat observé"
+      ],
       "bonne": 2,
       "explication": "Ces conditions restent identiques dans les deux pots : seul le facteur testé, les sels minéraux, change."
     }
@@ -124,7 +137,10 @@
   "devinettes": [
     {
       "reponse": "Chlorophylle",
-      "acceptees": ["Chlorophylle", "La chlorophylle"],
+      "acceptees": [
+        "Chlorophylle",
+        "La chlorophylle"
+      ],
       "indices": [
         "Je suis présent dans les parties vertes des plantes.",
         "Je suis un pigment vert.",
@@ -133,18 +149,14 @@
       "explication": "La chlorophylle est le pigment vert des plantes : elle leur permet d'utiliser la lumière."
     },
     {
-      "reponse": "Poils absorbants",
-      "acceptees": ["Poils absorbants", "Les poils absorbants", "Poil absorbant", "Un poil absorbant"],
-      "indices": [
-        "Je suis très fin et très nombreux.",
-        "Je me trouve près du bout des racines.",
-        "C'est par moi que l'eau et les sels minéraux entrent dans la plante."
-      ],
-      "explication": "Les poils absorbants, situés près du bout des racines, prélèvent l'eau et les sels minéraux du sol."
-    },
-    {
       "reponse": "Dioxyde de carbone",
-      "acceptees": ["Dioxyde de carbone", "Le dioxyde de carbone", "CO2", "CO₂", "Gaz carbonique"],
+      "acceptees": [
+        "Dioxyde de carbone",
+        "Le dioxyde de carbone",
+        "CO2",
+        "CO₂",
+        "Gaz carbonique"
+      ],
       "indices": [
         "Je suis un gaz présent dans l'air.",
         "Je suis prélevé par les feuilles de la plante.",
@@ -154,7 +166,12 @@
     },
     {
       "reponse": "Lot témoin",
-      "acceptees": ["Lot témoin", "Le lot témoin", "Témoin", "Le témoin"],
+      "acceptees": [
+        "Lot témoin",
+        "Le lot témoin",
+        "Témoin",
+        "Le témoin"
+      ],
       "indices": [
         "Je fais partie d'une expérience.",
         "Je suis le groupe de plantes qui reçoit tout ce dont elles ont besoin.",

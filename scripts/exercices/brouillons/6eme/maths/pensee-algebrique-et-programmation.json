@@ -51,42 +51,66 @@
     {
       "consigne": "Quel est le rôle du passage en couleur dans ce programme de calcul ?",
       "texte": "On choisit [6], on ajoute 4, puis on multiplie par 2. On obtient 20.",
-      "choix": ["Entrée", "Étape", "Sortie"],
+      "choix": [
+        "Entrée",
+        "Étape",
+        "Sortie"
+      ],
       "bonne": 0,
       "explication": "6 est le nombre choisi au départ : c'est l'entrée du programme. Puis 6 + 4 = 10 et 10 × 2 = 20."
     },
     {
       "consigne": "Quel est le rôle du passage en couleur dans ce programme de calcul ?",
       "texte": "Léa choisit 3, elle ajoute 5, puis elle double le résultat. Elle obtient [16].",
-      "choix": ["Entrée", "Étape", "Sortie"],
+      "choix": [
+        "Entrée",
+        "Étape",
+        "Sortie"
+      ],
       "bonne": 2,
       "explication": "16 est le résultat obtenu à la fin : c'est la sortie. Calcul : 3 + 5 = 8 et 8 × 2 = 16."
     },
     {
       "consigne": "Quel est le rôle du passage en couleur dans ce programme de calcul ?",
       "texte": "Le programme dit : choisir un nombre, [multiplier par 4], puis retirer 3.",
-      "choix": ["Entrée", "Étape", "Sortie"],
+      "choix": [
+        "Entrée",
+        "Étape",
+        "Sortie"
+      ],
       "bonne": 1,
       "explication": "« Multiplier par 4 » est une opération du programme : c'est une étape, à effectuer dans l'ordre."
     },
     {
       "consigne": "Quel est le rôle du passage en couleur dans ce programme de calcul ?",
       "texte": "Au départ, Tom choisit [9] ; il retire 2, puis il multiplie par 3.",
-      "choix": ["Entrée", "Étape", "Sortie"],
+      "choix": [
+        "Entrée",
+        "Étape",
+        "Sortie"
+      ],
       "bonne": 0,
       "explication": "9 est le nombre choisi au départ : c'est l'entrée. Ensuite 9 − 2 = 7 et 7 × 3 = 21."
     },
     {
       "consigne": "Quel est le rôle du passage en couleur dans ce programme de calcul ?",
       "texte": "On choisit 5, on ajoute 2, on multiplie par 4, puis on retire 3. Le résultat est [25].",
-      "choix": ["Entrée", "Étape", "Sortie"],
+      "choix": [
+        "Entrée",
+        "Étape",
+        "Sortie"
+      ],
       "bonne": 2,
       "explication": "25 est le résultat affiché à la fin : c'est la sortie. Calcul : 5 + 2 = 7, 7 × 4 = 28, 28 − 3 = 25."
     },
     {
       "consigne": "Quel est le rôle du passage en couleur dans ce programme de calcul ?",
       "texte": "On choisit 8, puis on [ajoute 6] et on divise par 2.",
-      "choix": ["Entrée", "Étape", "Sortie"],
+      "choix": [
+        "Entrée",
+        "Étape",
+        "Sortie"
+      ],
       "bonne": 1,
       "explication": "« Ajouter 6 » est une opération du programme : c'est une étape. Avec 8, on obtient 14, puis 7."
     }
@@ -94,7 +118,13 @@
   "devinettes": [
     {
       "reponse": "Boucle",
-      "acceptees": ["Boucle", "La boucle", "Une boucle", "Répétition", "La répétition"],
+      "acceptees": [
+        "Boucle",
+        "La boucle",
+        "Une boucle",
+        "Répétition",
+        "La répétition"
+      ],
       "indices": [
         "Je suis une notion de programmation.",
         "Grâce à moi, on écrit une seule fois ce qu'on veut faire plusieurs fois.",
@@ -104,7 +134,13 @@
     },
     {
       "reponse": "Entrée",
-      "acceptees": ["Entrée", "L'entrée", "Une entrée", "Nombre de départ", "Le nombre de départ"],
+      "acceptees": [
+        "Entrée",
+        "L'entrée",
+        "Une entrée",
+        "Nombre de départ",
+        "Le nombre de départ"
+      ],
       "indices": [
         "On me trouve dans tous les programmes de calcul.",
         "Je suis la donnée que l'on fournit au programme avant qu'il commence.",
@@ -114,7 +150,13 @@
     },
     {
       "reponse": "Schéma en barres",
-      "acceptees": ["Schéma en barres", "Le schéma en barres", "Un schéma en barres", "Schéma en barre", "Schéma"],
+      "acceptees": [
+        "Schéma en barres",
+        "Le schéma en barres",
+        "Un schéma en barres",
+        "Schéma en barre",
+        "Schéma"
+      ],
       "indices": [
         "Je suis un dessin qui aide à résoudre un problème.",
         "Je représente les quantités par des rectangles allongés.",
@@ -167,16 +209,5 @@
       "explication": "La boucle répète 5 fois l'instruction « avancer de 4 cases » : 5 × 4 = 20 cases."
     }
   ],
-  "etapes": [
-    {
-      "titre": "Résoudre un problème avec un schéma en barres",
-      "etapes": [
-        "Dessiner une barre pour la plus petite quantité",
-        "Dessiner les autres quantités avec des barres de même longueur",
-        "Partager le total entre toutes les barres",
-        "Calculer chaque quantité à partir d'une barre",
-        "Vérifier le résultat dans l'énoncé"
-      ]
-    }
-  ]
+  "etapes": []
 }

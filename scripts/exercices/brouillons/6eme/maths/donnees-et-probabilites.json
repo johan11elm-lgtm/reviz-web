@@ -29,9 +29,7 @@
       "cartes": [
         "Obtenir pile avec une pièce équilibrée",
         "Obtenir un nombre pair avec un dé équilibré à 6 faces",
-        "Obtenir un nombre plus grand que 3 avec un dé équilibré à 6 faces",
-        "Tirer une bille rouge parmi 5 rouges et 5 bleues",
-        "Tirer un jeton impair parmi les jetons numérotés de 1 à 10"
+        "Obtenir un nombre plus grand que 3 avec un dé équilibré à 6 faces"
       ]
     },
     {
@@ -40,9 +38,7 @@
       "cartes": [
         "Obtenir 5 avec un dé équilibré à 6 faces",
         "Obtenir un nombre plus grand que 5 avec un dé équilibré à 6 faces",
-        "Tirer la bille jaune parmi 6 billes de couleurs différentes dont une jaune",
-        "Tomber sur le seul secteur rouge d'une roue à 6 secteurs égaux",
-        "Tirer le jeton 3 parmi les jetons numérotés de 1 à 6"
+        "Tomber sur le seul secteur rouge d'une roue à 6 secteurs égaux"
       ]
     }
   ],
@@ -51,42 +47,66 @@
     {
       "consigne": "Comment qualifier l'événement en couleur ?",
       "texte": "Avec un dé à 6 faces numérotées de 1 à 6, on veut [obtenir un 8].",
-      "choix": ["Impossible", "Certain", "Ni impossible ni certain"],
+      "choix": [
+        "Impossible",
+        "Certain",
+        "Ni impossible ni certain"
+      ],
       "bonne": 0,
       "explication": "Aucune face ne porte le 8 : l'événement est impossible, sa probabilité est 0."
     },
     {
       "consigne": "Comment qualifier l'événement en couleur ?",
       "texte": "Un sac contient seulement des billes rouges. On veut [tirer une bille rouge].",
-      "choix": ["Impossible", "Certain", "Ni impossible ni certain"],
+      "choix": [
+        "Impossible",
+        "Certain",
+        "Ni impossible ni certain"
+      ],
       "bonne": 1,
       "explication": "Toutes les billes sont rouges : l'événement est certain, sa probabilité est 1."
     },
     {
       "consigne": "Comment qualifier l'événement en couleur ?",
       "texte": "Avec un dé équilibré à 6 faces, on veut [obtenir un nombre pair].",
-      "choix": ["Impossible", "Certain", "Ni impossible ni certain"],
+      "choix": [
+        "Impossible",
+        "Certain",
+        "Ni impossible ni certain"
+      ],
       "bonne": 2,
       "explication": "Le dé peut donner 2, 4 ou 6, mais aussi 1, 3 ou 5 : ce n'est ni impossible ni certain (probabilité 3/6 = 1/2)."
     },
     {
       "consigne": "Comment qualifier l'événement en couleur ?",
       "texte": "Un sac contient 3 billes rouges et 7 billes bleues. On veut [tirer une bille rouge].",
-      "choix": ["Impossible", "Certain", "Ni impossible ni certain"],
+      "choix": [
+        "Impossible",
+        "Certain",
+        "Ni impossible ni certain"
+      ],
       "bonne": 2,
       "explication": "Il y a des billes rouges, donc c'est possible, mais aussi des bleues, donc ce n'est pas certain (probabilité 3/10)."
     },
     {
       "consigne": "Comment qualifier l'événement en couleur ?",
       "texte": "Avec un dé à 6 faces numérotées de 1 à 6, on veut [obtenir un nombre inférieur à 10].",
-      "choix": ["Impossible", "Certain", "Ni impossible ni certain"],
+      "choix": [
+        "Impossible",
+        "Certain",
+        "Ni impossible ni certain"
+      ],
       "bonne": 1,
       "explication": "Toutes les faces portent un nombre inférieur à 10 : l'événement est certain, sa probabilité est 1."
     },
     {
       "consigne": "Comment qualifier l'événement en couleur ?",
       "texte": "Un sac contient des jetons numérotés de 1 à 5. On veut [tirer le jeton 12].",
-      "choix": ["Impossible", "Certain", "Ni impossible ni certain"],
+      "choix": [
+        "Impossible",
+        "Certain",
+        "Ni impossible ni certain"
+      ],
       "bonne": 0,
       "explication": "Aucun jeton ne porte le 12 : l'événement est impossible, sa probabilité est 0."
     }
@@ -94,7 +114,10 @@
   "devinettes": [
     {
       "reponse": "Probabilité",
-      "acceptees": ["Probabilité", "La probabilité"],
+      "acceptees": [
+        "Probabilité",
+        "La probabilité"
+      ],
       "indices": [
         "Je suis un nombre qui ne dépasse jamais 1.",
         "Je vaux 0 pour un événement impossible et 1 pour un événement certain.",
@@ -104,7 +127,10 @@
     },
     {
       "reponse": "Fréquence",
-      "acceptees": ["Fréquence", "La fréquence"],
+      "acceptees": [
+        "Fréquence",
+        "La fréquence"
+      ],
       "indices": [
         "Je suis un nombre que l'on calcule après une série d'essais.",
         "Je suis le nombre de fois où un résultat est obtenu, divisé par le nombre d'essais.",
@@ -114,7 +140,11 @@
     },
     {
       "reponse": "Effectif",
-      "acceptees": ["Effectif", "L'effectif", "Un effectif"],
+      "acceptees": [
+        "Effectif",
+        "L'effectif",
+        "Un effectif"
+      ],
       "indices": [
         "Je suis un nombre que l'on écrit dans un tableau de données.",
         "Je compte combien de fois une valeur apparaît.",
@@ -124,7 +154,12 @@
     },
     {
       "reponse": "Diagramme circulaire",
-      "acceptees": ["Diagramme circulaire", "Un diagramme circulaire", "Graphique circulaire", "Camembert"],
+      "acceptees": [
+        "Diagramme circulaire",
+        "Un diagramme circulaire",
+        "Graphique circulaire",
+        "Camembert"
+      ],
       "indices": [
         "Je suis une façon de représenter des données.",
         "Je ressemble à un disque découpé en parts.",
@@ -140,13 +175,6 @@
       "unite": "%",
       "tolerance": 0,
       "explication": "Il y a 4 + 6 = 10 billes et 4 sont rouges : 4/10 = 0,4 = 40 %."
-    },
-    {
-      "question": "On lance 300 fois un dé équilibré à 6 faces. En utilisant la probabilité d'obtenir un 4, environ combien de fois s'attend-on à l'obtenir ?",
-      "reponse": 50,
-      "unite": "fois",
-      "tolerance": 0,
-      "explication": "La probabilité d'obtenir un 4 est 1/6, et 300 ÷ 6 = 50 : on s'attend à environ 50 fois."
     },
     {
       "question": "Une pièce équilibrée est lancée 20 fois et tombe 12 fois sur pile. Quelle est la fréquence de pile, écrite en nombre décimal ?",

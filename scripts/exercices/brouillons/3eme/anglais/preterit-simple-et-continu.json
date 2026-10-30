@@ -51,42 +51,72 @@
     {
       "consigne": "Quelle forme est en couleur ?",
       "texte": "The Titanic [sank] in 1912.",
-      "choix": ["Prétérit simple affirmatif", "Prétérit en was / were + -ing", "Négation au prétérit simple", "Question au prétérit simple"],
+      "choix": [
+        "Prétérit simple affirmatif",
+        "Prétérit en was / were + -ing",
+        "Négation au prétérit simple",
+        "Question au prétérit simple"
+      ],
       "bonne": 0,
       "explication": "« sank » est le prétérit irrégulier de sink : une action terminée et datée (in 1912)."
     },
     {
       "consigne": "Quelle forme est en couleur ?",
       "texte": "The passengers [were sleeping] when the ship hit the iceberg.",
-      "choix": ["Prétérit simple affirmatif", "Prétérit en was / were + -ing", "Négation au prétérit simple", "Question au prétérit simple"],
+      "choix": [
+        "Prétérit simple affirmatif",
+        "Prétérit en was / were + -ing",
+        "Négation au prétérit simple",
+        "Question au prétérit simple"
+      ],
       "bonne": 1,
       "explication": "« were sleeping » est were + V-ing : l'action de fond, en cours quand le navire heurte l'iceberg."
     },
     {
       "consigne": "Quelle forme est en couleur ?",
       "texte": "They [didn't see] the iceberg in time.",
-      "choix": ["Prétérit simple affirmatif", "Prétérit en was / were + -ing", "Négation au prétérit simple", "Question au prétérit simple"],
+      "choix": [
+        "Prétérit simple affirmatif",
+        "Prétérit en was / were + -ing",
+        "Négation au prétérit simple",
+        "Question au prétérit simple"
+      ],
       "bonne": 2,
       "explication": "« didn't + base verbale » est la négation du prétérit simple."
     },
     {
       "consigne": "Quelle forme est en couleur ?",
       "texte": "[Did the ship reach] New York?",
-      "choix": ["Prétérit simple affirmatif", "Prétérit en was / were + -ing", "Négation au prétérit simple", "Question au prétérit simple"],
+      "choix": [
+        "Prétérit simple affirmatif",
+        "Prétérit en was / were + -ing",
+        "Négation au prétérit simple",
+        "Question au prétérit simple"
+      ],
       "bonne": 3,
       "explication": "« Did + sujet + base verbale » est la question au prétérit simple."
     },
     {
       "consigne": "Quelle forme est en couleur ?",
       "texte": "The ship was sailing fast when it [hit] an iceberg.",
-      "choix": ["Prétérit simple affirmatif", "Prétérit en was / were + -ing", "Négation au prétérit simple", "Question au prétérit simple"],
+      "choix": [
+        "Prétérit simple affirmatif",
+        "Prétérit en was / were + -ing",
+        "Négation au prétérit simple",
+        "Question au prétérit simple"
+      ],
       "bonne": 0,
       "explication": "« hit » est le prétérit simple (hit, hit, hit) : l'événement soudain qui interrompt l'action de fond."
     },
     {
       "consigne": "Quelle forme est en couleur ?",
       "texte": "While the musicians were playing, the ship [was sinking].",
-      "choix": ["Prétérit simple affirmatif", "Prétérit en was / were + -ing", "Négation au prétérit simple", "Question au prétérit simple"],
+      "choix": [
+        "Prétérit simple affirmatif",
+        "Prétérit en was / were + -ing",
+        "Négation au prétérit simple",
+        "Question au prétérit simple"
+      ],
       "bonne": 1,
       "explication": "« was sinking » est was + V-ing : une action qui dure, introduite par while."
     }
@@ -94,7 +124,11 @@
   "devinettes": [
     {
       "reponse": "Titanic",
-      "acceptees": ["Titanic", "Le Titanic", "RMS Titanic"],
+      "acceptees": [
+        "Titanic",
+        "Le Titanic",
+        "RMS Titanic"
+      ],
       "indices": [
         "Je suis un paquebot britannique.",
         "Mon voyage inaugural devait me mener de Southampton à New York.",
@@ -104,7 +138,11 @@
     },
     {
       "reponse": "Iceberg",
-      "acceptees": ["Iceberg", "Un iceberg", "The iceberg"],
+      "acceptees": [
+        "Iceberg",
+        "Un iceberg",
+        "The iceberg"
+      ],
       "indices": [
         "Je suis fait de glace et je flotte sur l'océan.",
         "Je suis un danger pour les navires dans l'Atlantique Nord.",
@@ -114,7 +152,15 @@
     },
     {
       "reponse": "Canot de sauvetage",
-      "acceptees": ["Canot de sauvetage", "Canots de sauvetage", "Un canot de sauvetage", "Lifeboat", "Lifeboats", "Canot", "Chaloupe"],
+      "acceptees": [
+        "Canot de sauvetage",
+        "Canots de sauvetage",
+        "Un canot de sauvetage",
+        "Lifeboat",
+        "Lifeboats",
+        "Canot",
+        "Chaloupe"
+      ],
       "indices": [
         "Je suis une petite embarcation.",
         "Je sers à quitter un navire en danger.",
@@ -124,7 +170,9 @@
     },
     {
       "reponse": "Southampton",
-      "acceptees": ["Southampton"],
+      "acceptees": [
+        "Southampton"
+      ],
       "indices": [
         "Je suis une ville portuaire du Royaume-Uni.",
         "Je suis située sur la côte sud de l'Angleterre.",
@@ -134,15 +182,5 @@
     }
   ],
   "calculs": [],
-  "etapes": [
-    {
-      "titre": "Construire une phrase négative au prétérit simple",
-      "etapes": [
-        "On écrit le sujet en premier",
-        "On ajoute didn't juste après le sujet",
-        "On met le verbe à la base verbale, sans marque du passé",
-        "On termine par le complément"
-      ]
-    }
-  ]
+  "etapes": []
 }

@@ -40,9 +40,7 @@
       "cartes": [
         "Des moqueries répétées dans un groupe de discussion",
         "Des insultes envoyées chaque jour par téléphone",
-        "Une rumeur lancée sur un camarade en ligne",
-        "La diffusion répétée d'images pour humilier quelqu'un",
-        "Aimer ou partager un message qui humilie un camarade"
+        "La diffusion répétée d'images pour humilier quelqu'un"
       ]
     }
   ],
@@ -50,34 +48,20 @@
   "etiquettes": [],
   "devinettes": [
     {
-      "reponse": "CNIL",
-      "acceptees": ["CNIL", "La CNIL", "Commission nationale de l'informatique et des libertés"],
-      "indices": [
-        "Je suis un organisme français.",
-        "J'ai été créée en 1978.",
-        "Mon rôle est de protéger les données personnelles en France."
-      ],
-      "explication": "La CNIL, créée en 1978, veille à la protection des données personnelles en France."
-    },
-    {
       "reponse": "Cyberharcèlement",
-      "acceptees": ["Cyberharcèlement", "Cyber-harcèlement", "Cyber harcèlement", "Harcèlement en ligne", "Harcèlement"],
+      "acceptees": [
+        "Cyberharcèlement",
+        "Cyber-harcèlement",
+        "Cyber harcèlement",
+        "Harcèlement en ligne",
+        "Harcèlement"
+      ],
       "indices": [
         "Je suis fait de moqueries, d'insultes ou de rumeurs.",
         "Je passe par internet ou par téléphone, et je me répète.",
         "On peut m'arrêter en parlant à un adulte de confiance et en appelant le 3018."
       ],
       "explication": "Le cyberharcèlement, ce sont des moqueries, des insultes, des rumeurs ou des images diffusées de façon répétée, par internet ou par téléphone."
-    },
-    {
-      "reponse": "Droit à l'image",
-      "acceptees": ["Droit à l'image", "Le droit à l'image", "Droit image"],
-      "indices": [
-        "Tout le monde me possède, même les enfants.",
-        "Je protège les photos et les vidéos où l'on apparaît.",
-        "Grâce à moi, personne ne peut publier ta photo sans ton accord."
-      ],
-      "explication": "Le droit à l'image permet de refuser qu'on photographie, filme ou publie son image sans son accord."
     }
   ],
   "calculs": [],

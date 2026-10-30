@@ -16,7 +16,6 @@
       "nom": "Les saisons",
       "detail": "Les saisons s'expliquent par l'inclinaison de l'axe de la Terre, pas par sa distance au Soleil.",
       "cartes": [
-        "L'axe de la Terre est penché d'environ 23°",
         "En juin, l'hémisphère Nord est penché vers le Soleil",
         "C'est l'été en France quand c'est l'hiver en Australie",
         "Un hémisphère reçoit les rayons du Soleil plus directement",
@@ -29,9 +28,7 @@
       "cartes": [
         "Un cycle complet de la Lune dure environ 29,5 jours",
         "Nouvelle lune, premier quartier, pleine lune, dernier quartier",
-        "À la nouvelle lune, on ne la voit pas",
-        "À la pleine lune, on voit toute sa moitié éclairée",
-        "La Lune a toujours une moitié éclairée par le Soleil"
+        "À la pleine lune, on voit toute sa moitié éclairée"
       ]
     },
     {
@@ -40,7 +37,6 @@
       "cartes": [
         "Un séisme sous une grande ville menace ses habitants",
         "Séismes, éruptions volcaniques, tempêtes et inondations",
-        "Surveiller, informer et construire des bâtiments adaptés",
         "Un phénomène naturel qui menace des populations",
         "Une inondation qui touche les habitants d'une vallée"
       ]
@@ -51,35 +47,55 @@
     {
       "consigne": "Quel type d'astre le passage en couleur désigne-t-il ?",
       "texte": "Chaque matin, [le Soleil] éclaire la cour de l'école.",
-      "choix": ["Étoile", "Planète", "Satellite naturel"],
+      "choix": [
+        "Étoile",
+        "Planète",
+        "Satellite naturel"
+      ],
       "bonne": 0,
       "explication": "Le Soleil produit sa propre lumière : c'est une étoile."
     },
     {
       "consigne": "Quel type d'astre le passage en couleur désigne-t-il ?",
       "texte": "[La Lune] tourne autour de la Terre en changeant de phase.",
-      "choix": ["Étoile", "Planète", "Satellite naturel"],
+      "choix": [
+        "Étoile",
+        "Planète",
+        "Satellite naturel"
+      ],
       "bonne": 2,
       "explication": "La Lune tourne autour de la Terre : c'est son satellite naturel."
     },
     {
       "consigne": "Quel type d'astre le passage en couleur désigne-t-il ?",
       "texte": "[Saturne] est une géante gazeuse qui tourne autour du Soleil.",
-      "choix": ["Étoile", "Planète", "Satellite naturel"],
+      "choix": [
+        "Étoile",
+        "Planète",
+        "Satellite naturel"
+      ],
       "bonne": 1,
       "explication": "Saturne tourne autour du Soleil sans produire de lumière : c'est une planète gazeuse géante."
     },
     {
       "consigne": "Quel type d'astre le passage en couleur désigne-t-il ?",
       "texte": "[Vénus] brille dans le ciel, mais elle ne produit pas sa propre lumière : elle renvoie celle du Soleil.",
-      "choix": ["Étoile", "Planète", "Satellite naturel"],
+      "choix": [
+        "Étoile",
+        "Planète",
+        "Satellite naturel"
+      ],
       "bonne": 1,
       "explication": "Vénus renvoie la lumière du Soleil et tourne autour de lui : c'est une planète."
     },
     {
       "consigne": "Quel type d'astre le passage en couleur désigne-t-il ?",
       "texte": "[La Terre] possède un satellite naturel, la Lune, qui tourne autour d'elle.",
-      "choix": ["Étoile", "Planète", "Satellite naturel"],
+      "choix": [
+        "Étoile",
+        "Planète",
+        "Satellite naturel"
+      ],
       "bonne": 1,
       "explication": "La Terre tourne autour du Soleil : c'est la 3e planète. Son satellite naturel est la Lune."
     }
@@ -87,7 +103,10 @@
   "devinettes": [
     {
       "reponse": "Soleil",
-      "acceptees": ["Soleil", "Le Soleil"],
+      "acceptees": [
+        "Soleil",
+        "Le Soleil"
+      ],
       "indices": [
         "Je ne suis pas une planète.",
         "Huit planètes tournent autour de moi.",
@@ -97,7 +116,10 @@
     },
     {
       "reponse": "Lune",
-      "acceptees": ["Lune", "La Lune"],
+      "acceptees": [
+        "Lune",
+        "La Lune"
+      ],
       "indices": [
         "Tu me vois souvent la nuit, mais je ne produis pas de lumière.",
         "Je tourne autour de la Terre.",
@@ -106,18 +128,10 @@
       "explication": "La Lune est le satellite naturel de la Terre : elle renvoie la lumière du Soleil et son cycle de phases dure environ 29,5 jours."
     },
     {
-      "reponse": "Rotation",
-      "acceptees": ["Rotation", "La rotation", "Rotation de la Terre"],
-      "indices": [
-        "Je suis un mouvement de la Terre.",
-        "Je dure 24 heures.",
-        "Grâce à moi, la Terre fait un tour sur elle-même et il y a des jours et des nuits."
-      ],
-      "explication": "La rotation est le mouvement de la Terre sur elle-même, en 24 heures ; elle explique l'alternance du jour et de la nuit."
-    },
-    {
       "reponse": "Jupiter",
-      "acceptees": ["Jupiter"],
+      "acceptees": [
+        "Jupiter"
+      ],
       "indices": [
         "Je suis une planète.",
         "Je suis une géante gazeuse.",

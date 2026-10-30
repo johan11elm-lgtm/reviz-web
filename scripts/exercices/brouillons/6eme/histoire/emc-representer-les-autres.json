@@ -5,7 +5,6 @@
       "nom": "Le conseil municipal et le maire",
       "detail": "Les élus de la commune : leur élection, leur mandat et ce dont ils s'occupent.",
       "cartes": [
-        "Élus pour 6 ans par les habitants de la commune",
         "Élit le maire après les élections",
         "Entretenir les écoles maternelles et élémentaires",
         "Tenir l'état civil : naissances, mariages, décès",
@@ -30,8 +29,7 @@
         "Présenter sa candidature",
         "Défendre ses idées avec des arguments pendant la campagne",
         "Voter en secret et en personne",
-        "Compter les bulletins lors du dépouillement",
-        "Annoncer les résultats"
+        "Compter les bulletins lors du dépouillement"
       ]
     },
     {
@@ -51,7 +49,14 @@
   "devinettes": [
     {
       "reponse": "Délégué de classe",
-      "acceptees": ["Délégué de classe", "Déléguée de classe", "Délégué", "Déléguée", "Le délégué", "Délégué de la classe"],
+      "acceptees": [
+        "Délégué de classe",
+        "Déléguée de classe",
+        "Délégué",
+        "Déléguée",
+        "Le délégué",
+        "Délégué de la classe"
+      ],
       "indices": [
         "Les élèves m'élisent au début de l'année, au scrutin secret.",
         "Je représente tous mes camarades, pas seulement mes amis.",
@@ -61,7 +66,11 @@
     },
     {
       "reponse": "Maire",
-      "acceptees": ["Maire", "Le maire", "La maire"],
+      "acceptees": [
+        "Maire",
+        "Le maire",
+        "La maire"
+      ],
       "indices": [
         "Je travaille pour l'intérêt général d'une commune.",
         "Je ne suis pas élu directement par les habitants.",
@@ -71,7 +80,10 @@
     },
     {
       "reponse": "Conseil municipal",
-      "acceptees": ["Conseil municipal", "Le conseil municipal"],
+      "acceptees": [
+        "Conseil municipal",
+        "Le conseil municipal"
+      ],
       "indices": [
         "Je suis une assemblée de la commune.",
         "Les habitants m'élisent pour 6 ans, au suffrage universel direct.",
@@ -81,7 +93,12 @@
     },
     {
       "reponse": "Intérêt général",
-      "acceptees": ["Intérêt général", "L'intérêt général", "Bien commun", "Le bien commun"],
+      "acceptees": [
+        "Intérêt général",
+        "L'intérêt général",
+        "Bien commun",
+        "Le bien commun"
+      ],
       "indices": [
         "Je suis une idée essentielle pour un représentant.",
         "Quand on me sert, on agit pour toute la communauté et pas pour soi.",

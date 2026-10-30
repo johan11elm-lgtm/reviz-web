@@ -8,7 +8,6 @@
         "Un empereur appelé « Fils du Ciel »",
         "Des fonctionnaires lettrés formés aux idées de Confucius",
         "En 221 av. J.-C., Qin Shi Huangdi unifie le pays",
-        "Une dynastie qui règne plus de quatre siècles",
         "Un tombeau gardé par des soldats en terre cuite"
       ]
     },
@@ -76,28 +75,44 @@
     {
       "consigne": "Qui est désigné par le passage en couleur ?",
       "texte": "En 221 av. J.-C., [Qin Shi Huangdi] unifie la Chine.",
-      "choix": ["L'empereur", "Les fonctionnaires lettrés", "Les marchands intermédiaires"],
+      "choix": [
+        "L'empereur",
+        "Les fonctionnaires lettrés",
+        "Les marchands intermédiaires"
+      ],
       "bonne": 0,
       "explication": "Qin Shi Huangdi est le premier empereur de Chine."
     },
     {
       "consigne": "Qui est désigné par le passage en couleur ?",
       "texte": "[Des fonctionnaires lettrés], formés aux idées de Confucius, administrent l'empire.",
-      "choix": ["L'empereur", "Les fonctionnaires lettrés", "Les marchands intermédiaires"],
+      "choix": [
+        "L'empereur",
+        "Les fonctionnaires lettrés",
+        "Les marchands intermédiaires"
+      ],
       "bonne": 1,
       "explication": "Ce sont des fonctionnaires lettrés, formés aux idées de Confucius, qui administrent l'empire des Han."
     },
     {
       "consigne": "Qui est désigné par le passage en couleur ?",
       "texte": "Sur la route, [les Parthes et les marchands indiens] revendent les marchandises plus cher.",
-      "choix": ["L'empereur", "Les fonctionnaires lettrés", "Les marchands intermédiaires"],
+      "choix": [
+        "L'empereur",
+        "Les fonctionnaires lettrés",
+        "Les marchands intermédiaires"
+      ],
       "bonne": 2,
       "explication": "Parthes, Kouchans, marchands indiens et arabes sont des intermédiaires : aucun ne fait tout le trajet."
     },
     {
       "consigne": "Qui est désigné par le passage en couleur ?",
       "texte": "[Le Fils du Ciel] gouverne un immense territoire.",
-      "choix": ["L'empereur", "Les fonctionnaires lettrés", "Les marchands intermédiaires"],
+      "choix": [
+        "L'empereur",
+        "Les fonctionnaires lettrés",
+        "Les marchands intermédiaires"
+      ],
       "bonne": 0,
       "explication": "« Fils du Ciel » est le nom donné à l'empereur de Chine."
     }
@@ -105,7 +120,11 @@
   "devinettes": [
     {
       "reponse": "Qin Shi Huangdi",
-      "acceptees": ["Qin Shi Huangdi", "Shi Huangdi", "Qin Shi Huang"],
+      "acceptees": [
+        "Qin Shi Huangdi",
+        "Shi Huangdi",
+        "Qin Shi Huang"
+      ],
       "indices": [
         "Je suis un souverain de la Chine ancienne.",
         "J'unifie la Chine en 221 av. J.-C.",
@@ -115,7 +134,10 @@
     },
     {
       "reponse": "Soie",
-      "acceptees": ["La soie", "Soie"],
+      "acceptees": [
+        "La soie",
+        "Soie"
+      ],
       "indices": [
         "Je suis un produit de luxe.",
         "Les Chinois gardent secrète ma fabrication.",
@@ -125,7 +147,9 @@
     },
     {
       "reponse": "Confucius",
-      "acceptees": ["Confucius"],
+      "acceptees": [
+        "Confucius"
+      ],
       "indices": [
         "Je suis un penseur de la Chine ancienne.",
         "Mes idées demandent de respecter l'ordre, les ancêtres et l'autorité.",
@@ -135,7 +159,12 @@
     },
     {
       "reponse": "Han",
-      "acceptees": ["Les Han", "La dynastie Han", "Dynastie Han", "Han"],
+      "acceptees": [
+        "Les Han",
+        "La dynastie Han",
+        "Dynastie Han",
+        "Han"
+      ],
       "indices": [
         "Je suis une dynastie chinoise.",
         "Je règne plus de quatre siècles, à la même époque que l'Empire romain.",
@@ -158,13 +187,6 @@
       "unite": "millions",
       "tolerance": 0,
       "explication": "60 + 60 = 120 millions d'habitants."
-    },
-    {
-      "question": "Qin Shi Huangdi unifie la Chine en 221 av. J.-C. et l'empereur envoie Zhang Qian vers l'Asie centrale vers 138 av. J.-C. Combien d'années plus tard ?",
-      "reponse": 83,
-      "unite": "ans",
-      "tolerance": 0,
-      "explication": "221 − 138 = 83 ans."
     },
     {
       "question": "On attribue à Cai Lun l'amélioration du papier vers 105 apr. J.-C. Des envoyés se disant romains arrivent à la cour des Han en 166 apr. J.-C. Combien d'années plus tard ?",

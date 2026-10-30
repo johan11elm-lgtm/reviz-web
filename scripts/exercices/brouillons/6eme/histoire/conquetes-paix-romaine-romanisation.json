@@ -18,7 +18,6 @@
       "cartes": [
         "Une frontière fortifiée gardée par les légions",
         "Le mur d'Hadrien ferme le nord de la Bretagne",
-        "Pendant des siècles, plus de guerre à l'intérieur de l'Empire",
         "Une période calme, du règne d'Auguste au IIe siècle",
         "Le limes longe le Rhin et le Danube"
       ]
@@ -82,35 +81,60 @@
     {
       "consigne": "Quel monument romain le groupe en couleur désigne-t-il ?",
       "texte": "Au centre de la ville, [la place publique entourée de temples] est le cœur de la vie des habitants.",
-      "choix": ["Le forum", "Les thermes", "L'amphithéâtre", "L'aqueduc"],
+      "choix": [
+        "Le forum",
+        "Les thermes",
+        "L'amphithéâtre",
+        "L'aqueduc"
+      ],
       "bonne": 0,
       "explication": "La place publique entourée de temples, au centre de la ville, est le forum."
     },
     {
       "consigne": "Quel monument romain le groupe en couleur désigne-t-il ?",
       "texte": "Les habitants vont se laver dans [les bains publics de la ville].",
-      "choix": ["Le forum", "Les thermes", "L'amphithéâtre", "L'aqueduc"],
+      "choix": [
+        "Le forum",
+        "Les thermes",
+        "L'amphithéâtre",
+        "L'aqueduc"
+      ],
       "bonne": 1,
       "explication": "Les bains publics des Romains sont les thermes."
     },
     {
       "consigne": "Quel monument romain le groupe en couleur désigne-t-il ?",
       "texte": "Les gladiateurs combattent dans [un grand édifice ovale].",
-      "choix": ["Le forum", "Les thermes", "L'amphithéâtre", "L'aqueduc"],
+      "choix": [
+        "Le forum",
+        "Les thermes",
+        "L'amphithéâtre",
+        "L'aqueduc"
+      ],
       "bonne": 2,
       "explication": "Les combats de gladiateurs ont lieu dans l'amphithéâtre."
     },
     {
       "consigne": "Quel monument romain le groupe en couleur désigne-t-il ?",
       "texte": "Le pont du Gard porte [un conduit qui apporte l'eau jusqu'à la ville].",
-      "choix": ["Le forum", "Les thermes", "L'amphithéâtre", "L'aqueduc"],
+      "choix": [
+        "Le forum",
+        "Les thermes",
+        "L'amphithéâtre",
+        "L'aqueduc"
+      ],
       "bonne": 3,
       "explication": "Un conduit qui apporte l'eau dans la ville est un aqueduc : le pont du Gard en porte un."
     },
     {
       "consigne": "Quel monument romain le groupe en couleur désigne-t-il ?",
       "texte": "Près des temples, [la grande place publique] est le centre d'une ville romaine.",
-      "choix": ["Le forum", "Les thermes", "L'amphithéâtre", "L'aqueduc"],
+      "choix": [
+        "Le forum",
+        "Les thermes",
+        "L'amphithéâtre",
+        "L'aqueduc"
+      ],
       "bonne": 0,
       "explication": "La place publique d'une ville romaine, entourée de temples, est le forum."
     }
@@ -118,7 +142,11 @@
   "devinettes": [
     {
       "reponse": "Vercingétorix",
-      "acceptees": ["Vercingétorix", "Vercingetorix", "Vercingétorix le Gaulois"],
+      "acceptees": [
+        "Vercingétorix",
+        "Vercingetorix",
+        "Vercingétorix le Gaulois"
+      ],
       "indices": [
         "Je suis un chef gaulois.",
         "Je suis le chef des Arvernes et j'unis plusieurs peuples gaulois.",
@@ -128,7 +156,11 @@
     },
     {
       "reponse": "Jules César",
-      "acceptees": ["Jules César", "César", "Caesar"],
+      "acceptees": [
+        "Jules César",
+        "César",
+        "Caesar"
+      ],
       "indices": [
         "Je suis un général romain.",
         "Je conquiers la Gaule entre 58 et 51 av. J.-C.",
@@ -138,7 +170,10 @@
     },
     {
       "reponse": "Limes",
-      "acceptees": ["Limes", "Le limes"],
+      "acceptees": [
+        "Limes",
+        "Le limes"
+      ],
       "indices": [
         "Je suis une frontière.",
         "Je suis gardé par les légions.",
@@ -148,7 +183,12 @@
     },
     {
       "reponse": "Gallo-Romains",
-      "acceptees": ["Gallo-Romains", "Les Gallo-Romains", "Gallo-Romain", "Un Gallo-Romain"],
+      "acceptees": [
+        "Gallo-Romains",
+        "Les Gallo-Romains",
+        "Gallo-Romain",
+        "Un Gallo-Romain"
+      ],
       "indices": [
         "Nous vivons en Gaule, il y a près de deux mille ans.",
         "Nous parlons latin et adoptons les villes romaines.",

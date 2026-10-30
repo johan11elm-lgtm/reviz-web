@@ -19,7 +19,6 @@
         "Le delta du Gange, au Bangladesh",
         "Des rizières en terrasses sur les collines",
         "De nombreux paysans sur de petites parcelles",
-        "Une culture qui demande beaucoup de travail à la main",
         "Les deltas fertiles d'Asie du Sud et de l'Est"
       ]
     },
@@ -79,68 +78,7 @@
     }
   ],
   "etiquettes": [],
-  "devinettes": [
-    {
-      "reponse": "Une rizière",
-      "acceptees": [
-        "Rizière",
-        "Une rizière",
-        "La rizière",
-        "Les rizières",
-        "Des rizières"
-      ],
-      "indices": [
-        "Je suis un champ très particulier.",
-        "Je suis inondé d'eau.",
-        "En Asie, je suis souvent aménagé en terrasses sur les collines pour y cultiver une céréale."
-      ],
-      "explication": "Une rizière est un champ inondé où l'on cultive le riz, souvent en terrasses sur les collines."
-    },
-    {
-      "reponse": "L'habitat dispersé",
-      "acceptees": [
-        "Habitat dispersé",
-        "L'habitat dispersé",
-        "Un habitat dispersé",
-        "Dispersé"
-      ],
-      "indices": [
-        "Je suis une manière d'occuper l'espace.",
-        "Je suis fait de fermes ou de maisons isolées.",
-        "Contrairement au village, où les maisons sont rassemblées, je les éparpille dans les champs."
-      ],
-      "explication": "L'habitat dispersé est fait de fermes et de maisons isolées, à l'inverse de l'habitat groupé en villages."
-    },
-    {
-      "reponse": "La Beauce",
-      "acceptees": [
-        "Beauce",
-        "La Beauce"
-      ],
-      "indices": [
-        "Je suis une région agricole.",
-        "Mes immenses champs sont cultivés avec beaucoup de machines et peu d'agriculteurs.",
-        "Je suis une grande plaine de France, cousine du Middle West américain."
-      ],
-      "explication": "La Beauce, en France, est une grande plaine agricole mécanisée : immenses champs, peu d'agriculteurs."
-    },
-    {
-      "reponse": "Un croquis",
-      "acceptees": [
-        "Croquis",
-        "Un croquis",
-        "Le croquis",
-        "Croquis de synthèse",
-        "Un croquis de synthèse"
-      ],
-      "indices": [
-        "Je suis une représentation simplifiée d'un espace.",
-        "J'ai un titre, une légende et des figurés.",
-        "On me dessine soi-même sur un fond de carte pour faire la synthèse d'une leçon."
-      ],
-      "explication": "Un croquis est une représentation simplifiée d'un espace, avec un titre, une légende et des figurés."
-    }
-  ],
+  "devinettes": [],
   "calculs": [],
   "etapes": [
     {

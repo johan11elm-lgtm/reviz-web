@@ -6,7 +6,6 @@
       "detail": "Dire par rapport à quel objet on décrit le mouvement : tout dépend de ce choix.",
       "cartes": [
         "Un passager est immobile par rapport au train",
-        "Un conducteur est immobile par rapport à son volant",
         "Pour un piéton, une voiture qui passe est en mouvement",
         "Un même objet peut être immobile ou en mouvement",
         "Dire qu'un objet bouge n'a pas de sens sans repère"
@@ -16,8 +15,6 @@
       "nom": "Décrire la trajectoire",
       "detail": "Dire quelle est la forme de la ligne suivie par un point de l'objet.",
       "cartes": [
-        "Une bille qui tombe suit une ligne droite",
-        "Un point d'une roue de manège trace un cercle",
         "Un ballon lancé vers un panier décrit une courbe",
         "La ligne formée par les positions successives d'un point",
         "Un skieur qui descend la piste en zigzaguant"
@@ -30,7 +27,6 @@
         "Une voiture démarre au feu vert",
         "Un cycliste freine devant un obstacle",
         "Sur une chronophotographie, les écarts entre positions grandissent",
-        "Les positions photographiées sont toutes également espacées",
         "Une voiture garde la même allure sur l'autoroute"
       ]
     },
@@ -39,10 +35,7 @@
       "detail": "Utiliser la formule v = d ÷ t et ses variantes, avec les bonnes unités et les bonnes conversions.",
       "cartes": [
         "100 m parcourus en 10 s donnent 10 m/s",
-        "On divise la distance parcourue par la durée",
-        "On trouve une distance avec d = v × t",
-        "Pour passer de m/s à km/h, on multiplie par 3,6",
-        "1 h 30 min correspond à 1,5 h dans un calcul"
+        "On divise la distance parcourue par la durée"
       ]
     }
   ],
@@ -51,35 +44,55 @@
     {
       "consigne": "Quelle est la trajectoire du mouvement en couleur ?",
       "texte": "Une bille est lâchée au-dessus du sol. [Elle tombe tout droit.]",
-      "choix": ["Rectiligne", "Circulaire", "Curviligne"],
+      "choix": [
+        "Rectiligne",
+        "Circulaire",
+        "Curviligne"
+      ],
       "bonne": 0,
       "explication": "La bille suit une ligne droite : sa trajectoire est rectiligne."
     },
     {
       "consigne": "Quelle est la trajectoire du mouvement en couleur ?",
       "texte": "Pour marquer un panier, Léo lance son ballon vers l'avant : [il monte en avançant, puis redescend dans le panier].",
-      "choix": ["Rectiligne", "Circulaire", "Curviligne"],
+      "choix": [
+        "Rectiligne",
+        "Circulaire",
+        "Curviligne"
+      ],
       "bonne": 2,
       "explication": "Le ballon suit une ligne courbe, ni droite ni circulaire : sa trajectoire est curviligne."
     },
     {
       "consigne": "Quelle est la trajectoire du mouvement en couleur ?",
       "texte": "Sur un manège, on a peint un point sur le bord d'une roue. [Ce point tourne autour de l'axe de la roue.]",
-      "choix": ["Rectiligne", "Circulaire", "Curviligne"],
+      "choix": [
+        "Rectiligne",
+        "Circulaire",
+        "Curviligne"
+      ],
       "bonne": 1,
       "explication": "Le point trace un cercle autour de l'axe : sa trajectoire est circulaire."
     },
     {
       "consigne": "Quelle est la trajectoire du mouvement en couleur ?",
       "texte": "Dans l'immeuble de Maya, [l'ascenseur monte du rez-de-chaussée au 5e étage.]",
-      "choix": ["Rectiligne", "Circulaire", "Curviligne"],
+      "choix": [
+        "Rectiligne",
+        "Circulaire",
+        "Curviligne"
+      ],
       "bonne": 0,
       "explication": "L'ascenseur se déplace le long d'une droite verticale : sa trajectoire est rectiligne."
     },
     {
       "consigne": "Quelle est la trajectoire du mouvement en couleur ?",
       "texte": "Sur l'horloge de la classe, [le bout de l'aiguille des secondes tourne autour du centre du cadran.]",
-      "choix": ["Rectiligne", "Circulaire", "Curviligne"],
+      "choix": [
+        "Rectiligne",
+        "Circulaire",
+        "Curviligne"
+      ],
       "bonne": 1,
       "explication": "Le bout de l'aiguille trace un cercle autour du centre : sa trajectoire est circulaire."
     }
@@ -87,7 +100,10 @@
   "devinettes": [
     {
       "reponse": "Trajectoire",
-      "acceptees": ["Trajectoire", "La trajectoire"],
+      "acceptees": [
+        "Trajectoire",
+        "La trajectoire"
+      ],
       "indices": [
         "Je suis une ligne.",
         "Je suis formée par les positions successives d'un point de l'objet qui bouge.",
@@ -97,7 +113,11 @@
     },
     {
       "reponse": "Chronophotographie",
-      "acceptees": ["Chronophotographie", "Une chronophotographie", "La chronophotographie"],
+      "acceptees": [
+        "Chronophotographie",
+        "Une chronophotographie",
+        "La chronophotographie"
+      ],
       "indices": [
         "Je suis une seule image qui montre plusieurs positions d'un objet.",
         "Ces positions sont prises à des intervalles de temps égaux.",
@@ -106,18 +126,13 @@
       "explication": "La chronophotographie montre des positions successives d'un objet à intervalles de temps égaux."
     },
     {
-      "reponse": "Objet de référence",
-      "acceptees": ["Objet de référence", "L'objet de référence", "Un objet de référence", "Référence", "La référence", "Repère", "Point de repère"],
-      "indices": [
-        "Je suis un objet que l'on choisit.",
-        "Sans moi, on ne peut pas dire si quelque chose bouge.",
-        "Pour un passager de train, le quai peut être moi."
-      ],
-      "explication": "Un mouvement se décrit toujours par rapport à un objet de référence que l'on choisit."
-    },
-    {
       "reponse": "Vitesse moyenne",
-      "acceptees": ["Vitesse moyenne", "La vitesse moyenne", "Vitesse", "La vitesse"],
+      "acceptees": [
+        "Vitesse moyenne",
+        "La vitesse moyenne",
+        "Vitesse",
+        "La vitesse"
+      ],
       "indices": [
         "Je me mesure en m/s ou en km/h.",
         "On me calcule en divisant une distance par une durée.",

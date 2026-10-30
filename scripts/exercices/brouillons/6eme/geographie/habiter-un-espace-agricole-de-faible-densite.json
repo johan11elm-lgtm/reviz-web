@@ -19,7 +19,6 @@
         "Elle nourrit d'abord la famille de l'agriculteur",
         "Elle est fréquente dans de nombreux pays d'Afrique et d'Asie",
         "Elle utilise très peu de machines",
-        "Ses rendements sont plus faibles",
         "Au Sahel, des paysans cultivent le mil à la main"
       ]
     },
@@ -29,7 +28,6 @@
       "cartes": [
         "Des petits villages éloignés les uns des autres",
         "Les commerces, les médecins et les écoles sont éloignés",
-        "La voiture est indispensable pour se déplacer",
         "Les transports en commun sont rares",
         "Les fermes sont dispersées au milieu des champs"
       ]
@@ -64,47 +62,61 @@
       "carte": "Les services sont parfois rares et éloignés des villages",
       "role": "consequence",
       "explication": "Dans un espace rural peu peuplé, commerces, médecins et écoles sont rares et loin."
-    },
-    {
-      "fait": "la faible densité de population dans les grandes plaines agricoles",
-      "carte": "La voiture est indispensable pour se déplacer",
-      "role": "consequence",
-      "explication": "Les villages sont éloignés et les transports en commun rares : on se déplace en voiture."
     }
   ],
   "etiquettes": [
     {
       "consigne": "Quel type d'agriculture le groupe en couleur décrit-il ?",
       "texte": "Dans la Beauce, un agriculteur [cultive 200 hectares avec un tracteur et une moissonneuse-batteuse].",
-      "choix": ["Agriculture productiviste", "Agriculture vivrière", "Agriculture biologique"],
+      "choix": [
+        "Agriculture productiviste",
+        "Agriculture vivrière",
+        "Agriculture biologique"
+      ],
       "bonne": 0,
       "explication": "De grandes surfaces cultivées avec des machines : c'est une agriculture productiviste."
     },
     {
       "consigne": "Quel type d'agriculture le groupe en couleur décrit-il ?",
       "texte": "Au Sahel, une famille [cultive le mil à la main sur un petit champ pour se nourrir].",
-      "choix": ["Agriculture productiviste", "Agriculture vivrière", "Agriculture biologique"],
+      "choix": [
+        "Agriculture productiviste",
+        "Agriculture vivrière",
+        "Agriculture biologique"
+      ],
       "bonne": 1,
       "explication": "Une petite production, à la main, pour nourrir la famille : c'est une agriculture vivrière."
     },
     {
       "consigne": "Quel type d'agriculture le groupe en couleur décrit-il ?",
       "texte": "Cette ferme [n'utilise ni pesticides ni engrais chimiques de synthèse].",
-      "choix": ["Agriculture productiviste", "Agriculture vivrière", "Agriculture biologique"],
+      "choix": [
+        "Agriculture productiviste",
+        "Agriculture vivrière",
+        "Agriculture biologique"
+      ],
       "bonne": 2,
       "explication": "Refuser pesticides et engrais chimiques de synthèse caractérise l'agriculture biologique."
     },
     {
       "consigne": "Quel type d'agriculture le groupe en couleur décrit-il ?",
       "texte": "Dans le Middle West, d'immenses exploitations [produisent du maïs et du soja avec des machines, des engrais et de l'irrigation].",
-      "choix": ["Agriculture productiviste", "Agriculture vivrière", "Agriculture biologique"],
+      "choix": [
+        "Agriculture productiviste",
+        "Agriculture vivrière",
+        "Agriculture biologique"
+      ],
       "bonne": 0,
       "explication": "Produire en grande quantité grâce aux machines, aux engrais et à l'irrigation : c'est une agriculture productiviste."
     },
     {
       "consigne": "Quel type d'agriculture le groupe en couleur décrit-il ?",
       "texte": "Dans ce village, les paysans [cultivent surtout pour nourrir leur famille, avec très peu de machines].",
-      "choix": ["Agriculture productiviste", "Agriculture vivrière", "Agriculture biologique"],
+      "choix": [
+        "Agriculture productiviste",
+        "Agriculture vivrière",
+        "Agriculture biologique"
+      ],
       "bonne": 1,
       "explication": "Cultiver d'abord pour sa famille, avec peu de machines, c'est l'agriculture vivrière."
     }
@@ -112,7 +124,10 @@
   "devinettes": [
     {
       "reponse": "Beauce",
-      "acceptees": ["Beauce", "La Beauce"],
+      "acceptees": [
+        "Beauce",
+        "La Beauce"
+      ],
       "indices": [
         "Je suis une région agricole de France.",
         "Je suis une grande plaine au sud-ouest de Paris.",
@@ -122,7 +137,11 @@
     },
     {
       "reponse": "Middle West",
-      "acceptees": ["Middle West", "Le Middle West", "Midwest"],
+      "acceptees": [
+        "Middle West",
+        "Le Middle West",
+        "Midwest"
+      ],
       "indices": [
         "Je suis une grande région agricole des États-Unis.",
         "Mes exploitations sont immenses.",
@@ -132,7 +151,12 @@
     },
     {
       "reponse": "Néorural",
-      "acceptees": ["Néorural", "Néoruraux", "Un néorural", "Les néoruraux"],
+      "acceptees": [
+        "Néorural",
+        "Néoruraux",
+        "Un néorural",
+        "Les néoruraux"
+      ],
       "indices": [
         "Je vis à la campagne aujourd'hui.",
         "Avant, je vivais en ville.",
@@ -142,7 +166,11 @@
     },
     {
       "reponse": "Openfield",
-      "acceptees": ["Openfield", "Open field", "Champs ouverts"],
+      "acceptees": [
+        "Openfield",
+        "Open field",
+        "Champs ouverts"
+      ],
       "indices": [
         "Je suis un type de paysage agricole.",
         "Mes champs sont immenses et s'étendent à perte de vue.",

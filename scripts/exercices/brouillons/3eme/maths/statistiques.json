@@ -29,7 +29,6 @@
       "cartes": [
         "Écart entre la plus grande et la plus petite valeur",
         "Pour 14 ; 9 ; 21 ; 6 ; 17, on trouve 15",
-        "Elle indique si les valeurs sont regroupées ou éparpillées",
         "Plus grande valeur 30, plus petite 12 : on trouve 18",
         "Pour 3 ; 5 ; 7 ; 8 ; 12 ; 15, on trouve 12"
       ]
@@ -51,35 +50,48 @@
     {
       "consigne": "Quel indicateur permet de répondre à la question en couleur ?",
       "texte": "Dans une petite entreprise, quatre salaires sont proches de 1 700 € et un seul atteint 9 000 €. [Quel salaire représente le mieux ce que gagne un employé, sans être faussé par le plus gros ?]",
-      "choix": ["La moyenne", "La médiane", "L'étendue", "La fréquence"],
+      "choix": [
+        "La moyenne",
+        "La médiane",
+        "L'étendue",
+        "La fréquence"
+      ],
       "bonne": 1,
       "explication": "Le salaire de 9 000 € tire la moyenne vers le haut, alors que la médiane y résiste : elle représente mieux un salaire typique."
     },
     {
       "consigne": "Quel indicateur permet de répondre à la question en couleur ?",
-      "texte": "Deux élèves ont la même moyenne en maths. [Lequel a les notes les plus proches les unes des autres ?]",
-      "choix": ["La moyenne", "La médiane", "L'étendue", "La fréquence"],
-      "bonne": 2,
-      "explication": "Pour savoir si des notes sont regroupées ou éparpillées, on compare les étendues : la plus petite indique les notes les plus proches."
-    },
-    {
-      "consigne": "Quel indicateur permet de répondre à la question en couleur ?",
       "texte": "Un élève a 12 en maths avec le coefficient 2 et 15 en français avec le coefficient 3. [Quelle note globale obtient-il en tenant compte des coefficients ?]",
-      "choix": ["La moyenne", "La médiane", "L'étendue", "La fréquence"],
+      "choix": [
+        "La moyenne",
+        "La médiane",
+        "L'étendue",
+        "La fréquence"
+      ],
       "bonne": 0,
       "explication": "On calcule une moyenne pondérée : (2 × 12 + 3 × 15) ÷ 5 = 13,8."
     },
     {
       "consigne": "Quel indicateur permet de répondre à la question en couleur ?",
       "texte": "Dans une classe de 25 élèves, 10 viennent à vélo. [Quelle part de la classe vient à vélo ?]",
-      "choix": ["La moyenne", "La médiane", "L'étendue", "La fréquence"],
+      "choix": [
+        "La moyenne",
+        "La médiane",
+        "L'étendue",
+        "La fréquence"
+      ],
       "bonne": 3,
       "explication": "Une part de l'effectif total est une fréquence : 10 ÷ 25 = 0,4, soit 40 %."
     },
     {
       "consigne": "Quel indicateur permet de répondre à la question en couleur ?",
       "texte": "Les températures d'une semaine vont de 8 °C à 21 °C. [Quel écart y a-t-il entre la plus haute et la plus basse ?]",
-      "choix": ["La moyenne", "La médiane", "L'étendue", "La fréquence"],
+      "choix": [
+        "La moyenne",
+        "La médiane",
+        "L'étendue",
+        "La fréquence"
+      ],
       "bonne": 2,
       "explication": "L'écart entre la plus grande et la plus petite valeur est l'étendue : 21 − 8 = 13 °C."
     }
@@ -87,7 +99,10 @@
   "devinettes": [
     {
       "reponse": "Médiane",
-      "acceptees": ["Médiane", "La médiane"],
+      "acceptees": [
+        "Médiane",
+        "La médiane"
+      ],
       "indices": [
         "Je suis un nombre qui résume une série.",
         "Pour me trouver, il faut d'abord ranger les valeurs dans l'ordre croissant.",
@@ -97,7 +112,10 @@
     },
     {
       "reponse": "Étendue",
-      "acceptees": ["Étendue", "L'étendue"],
+      "acceptees": [
+        "Étendue",
+        "L'étendue"
+      ],
       "indices": [
         "Je suis un nombre qui mesure la dispersion.",
         "Je ne dépends que de deux valeurs de la série.",
@@ -107,7 +125,12 @@
     },
     {
       "reponse": "Moyenne pondérée",
-      "acceptees": ["Moyenne pondérée", "La moyenne pondérée", "Moyenne", "La moyenne"],
+      "acceptees": [
+        "Moyenne pondérée",
+        "La moyenne pondérée",
+        "Moyenne",
+        "La moyenne"
+      ],
       "indices": [
         "Je suis un nombre qui résume des notes.",
         "Chaque valeur compte plus ou moins, selon son coefficient.",
@@ -117,7 +140,10 @@
     },
     {
       "reponse": "Fréquence",
-      "acceptees": ["Fréquence", "La fréquence"],
+      "acceptees": [
+        "Fréquence",
+        "La fréquence"
+      ],
       "indices": [
         "Je suis un nombre compris entre 0 et 1.",
         "Je peux aussi m'écrire en pourcentage.",

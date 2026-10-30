@@ -6,7 +6,6 @@
       "detail": "Des objets et des descriptions qui correspondent à un pavé droit : 6 faces rectangulaires, 12 arêtes et 8 sommets.",
       "cartes": [
         "Une boîte à chaussures",
-        "Un paquet de céréales",
         "Un carton de déménagement",
         "Un solide à 8 sommets et 12 arêtes",
         "Un solide limité par 6 rectangles"
@@ -51,42 +50,55 @@
     {
       "consigne": "Comment s'appelle l'élément du solide en couleur ?",
       "texte": "Un pavé droit est limité par 6 rectangles. On observe [l'un de ces rectangles].",
-      "choix": ["Face", "Arête", "Sommet"],
+      "choix": [
+        "Face",
+        "Arête",
+        "Sommet"
+      ],
       "bonne": 0,
       "explication": "Les faces sont les surfaces qui limitent le solide : chaque rectangle est une face."
     },
     {
       "consigne": "Comment s'appelle l'élément du solide en couleur ?",
-      "texte": "Sur un cube, deux faces se rencontrent le long d'une ligne droite. On observe [cette ligne droite].",
-      "choix": ["Face", "Arête", "Sommet"],
-      "bonne": 1,
-      "explication": "Une arête est un segment où deux faces d'un solide se rencontrent."
-    },
-    {
-      "consigne": "Comment s'appelle l'élément du solide en couleur ?",
       "texte": "Un cube a 8 coins. On observe [l'un de ces coins].",
-      "choix": ["Face", "Arête", "Sommet"],
+      "choix": [
+        "Face",
+        "Arête",
+        "Sommet"
+      ],
       "bonne": 2,
       "explication": "Un sommet est un point où se rejoignent plusieurs arêtes : le cube en a 8."
     },
     {
       "consigne": "Comment s'appelle l'élément du solide en couleur ?",
       "texte": "Une pyramide à base carrée repose sur le sol. On observe [le carré du dessous].",
-      "choix": ["Face", "Arête", "Sommet"],
+      "choix": [
+        "Face",
+        "Arête",
+        "Sommet"
+      ],
       "bonne": 0,
       "explication": "La base carrée est une surface plane qui limite le solide : c'est l'une de ses 5 faces."
     },
     {
       "consigne": "Comment s'appelle l'élément du solide en couleur ?",
       "texte": "Dans une pyramide à base carrée, quatre arêtes se rejoignent en haut. On observe [ce point].",
-      "choix": ["Face", "Arête", "Sommet"],
+      "choix": [
+        "Face",
+        "Arête",
+        "Sommet"
+      ],
       "bonne": 2,
       "explication": "Un point où plusieurs arêtes se rejoignent est un sommet."
     },
     {
       "consigne": "Comment s'appelle l'élément du solide en couleur ?",
       "texte": "Une boîte à chaussures a 12 bords droits. On observe [l'un de ces bords].",
-      "choix": ["Face", "Arête", "Sommet"],
+      "choix": [
+        "Face",
+        "Arête",
+        "Sommet"
+      ],
       "bonne": 1,
       "explication": "Chaque bord est un segment où deux faces se rencontrent : c'est une arête, et le pavé droit en a 12."
     }
@@ -94,7 +106,12 @@
   "devinettes": [
     {
       "reponse": "Arête",
-      "acceptees": ["Arête", "L'arête", "Une arête", "Arêtes"],
+      "acceptees": [
+        "Arête",
+        "L'arête",
+        "Une arête",
+        "Arêtes"
+      ],
       "indices": [
         "Je suis un segment.",
         "Un cube en possède 12.",
@@ -104,7 +121,11 @@
     },
     {
       "reponse": "Volume",
-      "acceptees": ["Volume", "Le volume", "Un volume"],
+      "acceptees": [
+        "Volume",
+        "Le volume",
+        "Un volume"
+      ],
       "indices": [
         "Je suis une grandeur.",
         "Je mesure la place occupée par un solide.",
@@ -114,7 +135,11 @@
     },
     {
       "reponse": "Cône",
-      "acceptees": ["Cône", "Le cône", "Un cône"],
+      "acceptees": [
+        "Cône",
+        "Le cône",
+        "Un cône"
+      ],
       "indices": [
         "Je suis un solide qui a une surface courbe.",
         "Je n'ai qu'une seule base, en forme de disque.",

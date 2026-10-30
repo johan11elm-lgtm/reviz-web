@@ -6,7 +6,6 @@
       "detail": "Le retournement d'une figure par rapport à une droite, comme dans un miroir.",
       "cartes": [
         "La figure est retournée comme dans un miroir",
-        "L'axe est la médiatrice du segment [MM']",
         "On plie la feuille et les deux figures se superposent",
         "Le reflet d'un arbre dans l'eau d'un lac calme",
         "Tous les points d'une droite restent à leur place"
@@ -41,8 +40,7 @@
         "Les longueurs sont multipliées par 2 et les aires par 4",
         "M' est sur la droite (OM) et OM' = 3 × OM",
         "(M'N') // (MN) et M'N' = 1,5 × MN",
-        "Avec un rapport négatif, l'image passe de l'autre côté du centre",
-        "Si |k| est plus grand que 1, la figure est agrandie"
+        "Avec un rapport négatif, l'image passe de l'autre côté du centre"
       ]
     }
   ],
@@ -51,43 +49,60 @@
     {
       "consigne": "Quelle transformation décrit le passage en couleur ?",
       "texte": "Dans une rosace, on passe d'un motif au suivant en [tournant de 45° autour du centre].",
-      "choix": ["Une translation", "Une rotation", "Une symétrie axiale", "Une homothétie"],
+      "choix": [
+        "Une translation",
+        "Une rotation",
+        "Une symétrie axiale",
+        "Une homothétie"
+      ],
       "bonne": 1,
       "explication": "Tourner autour d'un centre d'un angle donné, c'est une rotation."
     },
     {
       "consigne": "Quelle transformation décrit le passage en couleur ?",
       "texte": "Pour agrandir une photo sans la déformer, on [multiplie toutes les longueurs par 3 à partir d'un point O].",
-      "choix": ["Une translation", "Une rotation", "Une symétrie axiale", "Une homothétie"],
+      "choix": [
+        "Une translation",
+        "Une rotation",
+        "Une symétrie axiale",
+        "Une homothétie"
+      ],
       "bonne": 3,
       "explication": "Agrandir à partir d'un centre O en multipliant les longueurs par un rapport, c'est une homothétie."
     },
     {
       "consigne": "Quelle transformation décrit le passage en couleur ?",
       "texte": "Sur un plateau de jeu, on [déplace une pièce de 4 cases vers la droite sans la tourner].",
-      "choix": ["Une translation", "Une rotation", "Une symétrie axiale", "Une homothétie"],
+      "choix": [
+        "Une translation",
+        "Une rotation",
+        "Une symétrie axiale",
+        "Une homothétie"
+      ],
       "bonne": 0,
       "explication": "Faire glisser une figure dans une direction, un sens et une longueur donnés, c'est une translation."
     },
     {
       "consigne": "Quelle transformation décrit le passage en couleur ?",
       "texte": "Pour obtenir le reflet d'un arbre dans un lac, on [retourne la figure par rapport à la surface de l'eau].",
-      "choix": ["Une translation", "Une rotation", "Une symétrie axiale", "Une homothétie"],
+      "choix": [
+        "Une translation",
+        "Une rotation",
+        "Une symétrie axiale",
+        "Une homothétie"
+      ],
       "bonne": 2,
       "explication": "Retourner une figure par rapport à une droite, comme dans un miroir, c'est une symétrie axiale."
-    },
-    {
-      "consigne": "Quelle transformation décrit le passage en couleur ?",
-      "texte": "La maquette est [une réduction du bâtiment : chaque longueur est divisée par 10], avec les mêmes angles.",
-      "choix": ["Une translation", "Une rotation", "Une symétrie axiale", "Une homothétie"],
-      "bonne": 3,
-      "explication": "Réduire une figure en multipliant ses longueurs par 0,1 sans changer ses angles, c'est une homothétie."
     }
   ],
   "devinettes": [
     {
       "reponse": "Homothétie",
-      "acceptees": ["Homothétie", "Une homothétie", "L'homothétie"],
+      "acceptees": [
+        "Homothétie",
+        "Une homothétie",
+        "L'homothétie"
+      ],
       "indices": [
         "Je suis une transformation du plan.",
         "Je suis définie par un centre O et un nombre k.",
@@ -97,7 +112,11 @@
     },
     {
       "reponse": "Rotation",
-      "acceptees": ["Rotation", "Une rotation", "La rotation"],
+      "acceptees": [
+        "Rotation",
+        "Une rotation",
+        "La rotation"
+      ],
       "indices": [
         "Je suis une transformation qui conserve les longueurs et les aires.",
         "J'ai un centre et un angle.",
@@ -107,23 +126,17 @@
     },
     {
       "reponse": "Translation",
-      "acceptees": ["Translation", "Une translation", "La translation"],
+      "acceptees": [
+        "Translation",
+        "Une translation",
+        "La translation"
+      ],
       "indices": [
         "Je suis une transformation qui conserve les longueurs et les angles.",
         "Je suis définie par une direction, un sens et une longueur.",
         "Avec moi, si A devient B, alors ABM'M est un parallélogramme."
       ],
       "explication": "Une translation fait glisser la figure : si elle envoie A sur B, alors ABM'M est un parallélogramme."
-    },
-    {
-      "reponse": "Rapport",
-      "acceptees": ["Rapport", "Le rapport", "Rapport de l'homothétie", "Coefficient"],
-      "indices": [
-        "Je suis un nombre.",
-        "Je suis associé à un centre pour définir une homothétie.",
-        "Mon signe indique de quel côté du centre se trouve l'image, et ma valeur sans signe multiplie les longueurs."
-      ],
-      "explication": "Le rapport k d'une homothétie : son signe place l'image d'un côté ou de l'autre du centre, et |k| multiplie les longueurs."
     }
   ],
   "calculs": [

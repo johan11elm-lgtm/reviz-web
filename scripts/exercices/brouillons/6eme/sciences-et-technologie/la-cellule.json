@@ -8,7 +8,6 @@
         "Choisir un échantillon très fin",
         "Mettre une goutte d'eau sur la lame",
         "Poser l'échantillon dans la goutte d'eau",
-        "Recouvrir le tout d'une lamelle",
         "Vérifier qu'il ne reste aucune bulle d'air"
       ]
     },
@@ -51,35 +50,60 @@
     {
       "consigne": "Quel élément de la cellule le passage en couleur désigne-t-il ?",
       "texte": "Dans la feuille d'élodée, on voit [de nombreux petits grains verts].",
-      "choix": ["Membrane", "Noyau", "Paroi", "Chloroplastes"],
+      "choix": [
+        "Membrane",
+        "Noyau",
+        "Paroi",
+        "Chloroplastes"
+      ],
       "bonne": 3,
       "explication": "Les petits grains verts des cellules des parties vertes d'une plante sont des chloroplastes."
     },
     {
       "consigne": "Quel élément de la cellule le passage en couleur désigne-t-il ?",
       "texte": "Autour de la membrane d'une cellule d'oignon, on voit [une enveloppe rigide].",
-      "choix": ["Membrane", "Noyau", "Paroi", "Chloroplastes"],
+      "choix": [
+        "Membrane",
+        "Noyau",
+        "Paroi",
+        "Chloroplastes"
+      ],
       "bonne": 2,
       "explication": "L'enveloppe rigide qui entoure la membrane des cellules végétales est la paroi."
     },
     {
       "consigne": "Quel élément de la cellule le passage en couleur désigne-t-il ?",
       "texte": "Dans une cellule de joue colorée, on distingue [l'élément qui contient les informations qui commandent la cellule].",
-      "choix": ["Membrane", "Noyau", "Paroi", "Chloroplastes"],
+      "choix": [
+        "Membrane",
+        "Noyau",
+        "Paroi",
+        "Chloroplastes"
+      ],
       "bonne": 1,
       "explication": "Le noyau contient les informations qui commandent la cellule."
     },
     {
       "consigne": "Quel élément de la cellule le passage en couleur désigne-t-il ?",
       "texte": "Toute cellule est délimitée par [une fine enveloppe].",
-      "choix": ["Membrane", "Noyau", "Paroi", "Chloroplastes"],
+      "choix": [
+        "Membrane",
+        "Noyau",
+        "Paroi",
+        "Chloroplastes"
+      ],
       "bonne": 0,
       "explication": "La membrane est la fine enveloppe qui délimite la cellule ; toutes les cellules en ont une."
     },
     {
       "consigne": "Quel élément de la cellule le passage en couleur désigne-t-il ?",
       "texte": "Les plantes vertes fabriquent leur matière grâce à la lumière avec [de petits éléments verts de leurs cellules].",
-      "choix": ["Membrane", "Noyau", "Paroi", "Chloroplastes"],
+      "choix": [
+        "Membrane",
+        "Noyau",
+        "Paroi",
+        "Chloroplastes"
+      ],
       "bonne": 3,
       "explication": "Les chloroplastes sont de petits éléments verts qui permettent à la plante de fabriquer sa matière grâce à la lumière."
     }
@@ -87,7 +111,11 @@
   "devinettes": [
     {
       "reponse": "Chloroplaste",
-      "acceptees": ["Chloroplaste", "Chloroplastes", "Un chloroplaste"],
+      "acceptees": [
+        "Chloroplaste",
+        "Chloroplastes",
+        "Un chloroplaste"
+      ],
       "indices": [
         "On ne me trouve que dans certaines cellules.",
         "On me voit dans une feuille d'élodée, mais pas dans l'épiderme d'oignon.",
@@ -97,7 +125,10 @@
     },
     {
       "reponse": "Noyau",
-      "acceptees": ["Noyau", "Le noyau"],
+      "acceptees": [
+        "Noyau",
+        "Le noyau"
+      ],
       "indices": [
         "Je suis présent dans la plupart des cellules, mais pas dans les bactéries.",
         "On me trouve à l'intérieur de la cellule, par exemple dans une cellule de joue.",
@@ -106,18 +137,12 @@
       "explication": "Le noyau contient les informations qui commandent la cellule ; les bactéries n'en ont pas."
     },
     {
-      "reponse": "Paroi",
-      "acceptees": ["Paroi", "La paroi", "Paroi rigide"],
-      "indices": [
-        "Tu ne me trouves pas dans les cellules de ta joue.",
-        "Je suis une enveloppe rigide.",
-        "Je me trouve autour de la membrane des cellules végétales."
-      ],
-      "explication": "La paroi est l'enveloppe rigide qui entoure la membrane des cellules végétales ; les cellules animales n'en ont pas."
-    },
-    {
       "reponse": "Lamelle",
-      "acceptees": ["Lamelle", "La lamelle", "Une lamelle"],
+      "acceptees": [
+        "Lamelle",
+        "La lamelle",
+        "Une lamelle"
+      ],
       "indices": [
         "On me manipule quand on fabrique une préparation pour le microscope.",
         "Je recouvre l'échantillon déposé dans une goutte d'eau.",

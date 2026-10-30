@@ -6,7 +6,6 @@
       "detail": "Le monde grec : des petits États rivaux, des colonies lointaines et la lutte contre les Perses.",
       "cartes": [
         "Une ville et le territoire agricole qui l'entoure",
-        "Des rivalités, parfois des guerres, entre voisines",
         "Des colonies fondées sur les rivages de la Méditerranée",
         "Marseille, fondée vers 600 av. J.-C. par des Phocéens",
         "Marathon, en 490 av. J.-C., face aux Perses"
@@ -51,7 +50,10 @@
   "devinettes": [
     {
       "reponse": "Clisthène",
-      "acceptees": ["Clisthène", "Clisthene"],
+      "acceptees": [
+        "Clisthène",
+        "Clisthene"
+      ],
       "indices": [
         "Je suis un homme politique athénien.",
         "Je réforme Athènes vers 508 av. J.-C.",
@@ -61,7 +63,10 @@
     },
     {
       "reponse": "Périclès",
-      "acceptees": ["Périclès", "Pericles"],
+      "acceptees": [
+        "Périclès",
+        "Pericles"
+      ],
       "indices": [
         "Je suis un homme politique athénien.",
         "Je suis célèbre au Ve siècle av. J.-C.",
@@ -71,7 +76,12 @@
     },
     {
       "reponse": "Ecclésia",
-      "acceptees": ["Ecclésia", "L'Ecclésia", "Ecclesia", "Ekklesia"],
+      "acceptees": [
+        "Ecclésia",
+        "L'Ecclésia",
+        "Ecclesia",
+        "Ekklesia"
+      ],
       "indices": [
         "Je suis une assemblée.",
         "Je me réunis sur la colline de la Pnyx.",
@@ -81,7 +91,9 @@
     },
     {
       "reponse": "Zeus",
-      "acceptees": ["Zeus"],
+      "acceptees": [
+        "Zeus"
+      ],
       "indices": [
         "Je suis un dieu grec.",
         "Je suis le roi des dieux et je règne sur l'Olympe.",

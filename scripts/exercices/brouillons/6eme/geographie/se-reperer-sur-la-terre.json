@@ -41,8 +41,7 @@
         "Paris : 49° Nord et 2° Est",
         "De 0° à 90° vers le Nord ou le Sud",
         "De 0° à 180° vers l'Est ou l'Ouest",
-        "Deux nombres en degrés qui situent un lieu précisément",
-        "Un nombre en degrés toujours suivi d'une direction"
+        "Deux nombres en degrés qui situent un lieu précisément"
       ]
     }
   ],
@@ -51,35 +50,60 @@
     {
       "consigne": "De quel élément de la carte s'agit-il ?",
       "texte": "[Une flèche dessinée dans un coin] montre où est le nord.",
-      "choix": ["Le titre", "La légende", "L'échelle", "L'orientation"],
+      "choix": [
+        "Le titre",
+        "La légende",
+        "L'échelle",
+        "L'orientation"
+      ],
       "bonne": 3,
       "explication": "La flèche qui montre le nord indique l'orientation de la carte."
     },
     {
       "consigne": "De quel élément de la carte s'agit-il ?",
       "texte": "[Le cadre qui explique le sens des couleurs et des symboles] est placé sous la carte.",
-      "choix": ["Le titre", "La légende", "L'échelle", "L'orientation"],
+      "choix": [
+        "Le titre",
+        "La légende",
+        "L'échelle",
+        "L'orientation"
+      ],
       "bonne": 1,
       "explication": "La légende explique les couleurs et les symboles."
     },
     {
       "consigne": "De quel élément de la carte s'agit-il ?",
       "texte": "Sous la carte, on lit [1 cm = 10 km].",
-      "choix": ["Le titre", "La légende", "L'échelle", "L'orientation"],
+      "choix": [
+        "Le titre",
+        "La légende",
+        "L'échelle",
+        "L'orientation"
+      ],
       "bonne": 2,
       "explication": "Le rapport entre la distance sur la carte et la distance réelle, c'est l'échelle."
     },
     {
       "consigne": "De quel élément de la carte s'agit-il ?",
       "texte": "En haut de la carte est écrit [« Les continents et les océans »].",
-      "choix": ["Le titre", "La légende", "L'échelle", "L'orientation"],
+      "choix": [
+        "Le titre",
+        "La légende",
+        "L'échelle",
+        "L'orientation"
+      ],
       "bonne": 0,
       "explication": "Le titre dit ce que la carte représente."
     },
     {
       "consigne": "De quel élément de la carte s'agit-il ?",
       "texte": "Sur cette carte, [une barre de 2 cm correspond à 20 km].",
-      "choix": ["Le titre", "La légende", "L'échelle", "L'orientation"],
+      "choix": [
+        "Le titre",
+        "La légende",
+        "L'échelle",
+        "L'orientation"
+      ],
       "bonne": 2,
       "explication": "Une barre qui relie une longueur sur la carte à une distance réelle, c'est l'échelle."
     }
@@ -87,7 +111,11 @@
   "devinettes": [
     {
       "reponse": "Équateur",
-      "acceptees": ["Équateur", "L'équateur", "Equateur"],
+      "acceptees": [
+        "Équateur",
+        "L'équateur",
+        "Equateur"
+      ],
       "indices": [
         "Je suis une ligne imaginaire.",
         "Ma latitude est 0°.",
@@ -97,7 +125,12 @@
     },
     {
       "reponse": "Méridien de Greenwich",
-      "acceptees": ["Méridien de Greenwich", "Le méridien de Greenwich", "Greenwich", "Méridien origine"],
+      "acceptees": [
+        "Méridien de Greenwich",
+        "Le méridien de Greenwich",
+        "Greenwich",
+        "Méridien origine"
+      ],
       "indices": [
         "Je suis une ligne imaginaire qui relie les deux pôles.",
         "Je passe par un quartier de Londres.",
@@ -107,7 +140,12 @@
     },
     {
       "reponse": "Planisphère",
-      "acceptees": ["Planisphère", "Un planisphère", "Le planisphère", "Mappemonde"],
+      "acceptees": [
+        "Planisphère",
+        "Un planisphère",
+        "Le planisphère",
+        "Mappemonde"
+      ],
       "indices": [
         "Je suis une représentation de la Terre.",
         "Je suis plat, contrairement au globe.",
@@ -117,7 +155,10 @@
     },
     {
       "reponse": "Latitude",
-      "acceptees": ["Latitude", "La latitude"],
+      "acceptees": [
+        "Latitude",
+        "La latitude"
+      ],
       "indices": [
         "Je suis une mesure en degrés.",
         "Je vais de 0° à 90° Nord ou Sud.",

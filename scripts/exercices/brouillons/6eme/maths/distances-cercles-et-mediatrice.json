@@ -8,8 +8,7 @@
         "Le point I du segment [AB] tel que IA = IB",
         "Il partage le segment en deux segments de même longueur",
         "Si AB = 8 cm, il est à 4 cm des extrémités",
-        "Le seul point du segment équidistant des extrémités",
-        "Les deux longueurs égales qu'il crée se codent du même symbole"
+        "Le seul point du segment équidistant des extrémités"
       ]
     },
     {
@@ -18,9 +17,7 @@
       "cartes": [
         "La droite perpendiculaire au segment qui passe par son milieu",
         "Ses points sont tous à égale distance des extrémités",
-        "Si M est sur elle, alors MA = MB",
-        "On la construit avec des arcs de même rayon",
-        "Après le tracé, on vérifie à l'équerre qu'elle est perpendiculaire"
+        "On la construit avec des arcs de même rayon"
       ]
     },
     {
@@ -51,7 +48,12 @@
   "devinettes": [
     {
       "reponse": "Médiatrice",
-      "acceptees": ["La médiatrice", "Une médiatrice", "Mediatrice", "Médiatrice"],
+      "acceptees": [
+        "La médiatrice",
+        "Une médiatrice",
+        "Mediatrice",
+        "Médiatrice"
+      ],
       "indices": [
         "Je suis une droite.",
         "Tous mes points sont à égale distance des deux extrémités d'un segment.",
@@ -61,7 +63,11 @@
     },
     {
       "reponse": "Diamètre",
-      "acceptees": ["Le diamètre", "Un diamètre", "Diamètre"],
+      "acceptees": [
+        "Le diamètre",
+        "Un diamètre",
+        "Diamètre"
+      ],
       "indices": [
         "Je suis un segment.",
         "Je joins deux points d'un cercle.",
@@ -71,7 +77,11 @@
     },
     {
       "reponse": "Disque",
-      "acceptees": ["Le disque", "Un disque", "Disque"],
+      "acceptees": [
+        "Le disque",
+        "Un disque",
+        "Disque"
+      ],
       "indices": [
         "Je suis une surface.",
         "Je suis défini par un centre et un rayon.",
@@ -81,7 +91,11 @@
     },
     {
       "reponse": "Milieu",
-      "acceptees": ["Le milieu", "Un milieu", "Milieu"],
+      "acceptees": [
+        "Le milieu",
+        "Un milieu",
+        "Milieu"
+      ],
       "indices": [
         "Je suis un point.",
         "Je suis situé sur un segment.",

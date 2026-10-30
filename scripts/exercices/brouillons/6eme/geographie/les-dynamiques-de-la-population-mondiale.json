@@ -7,7 +7,6 @@
       "cartes": [
         "Un maçon part gagner sa vie dans un autre pays",
         "Une infirmière accepte un poste dans un hôpital étranger",
-        "Un informaticien est embauché par une entreprise étrangère",
         "Une couturière est engagée dans une usine à l'étranger",
         "Un ouvrier part pour un meilleur salaire en Allemagne"
       ]
@@ -38,7 +37,6 @@
       "nom": "Partir à cause du climat",
       "detail": "Quitter une région devenue trop dure ou trop dangereuse à cause du climat.",
       "cartes": [
-        "Des insulaires quittent leur île que la mer envahit",
         "Des éleveurs quittent leur région après des sécheresses répétées",
         "Des habitants partent après des inondations qui reviennent chaque année",
         "Des sinistrés d'un cyclone quittent définitivement leur région",
@@ -70,75 +68,66 @@
       "carte": "La population mondiale est multipliée par huit depuis 1800",
       "role": "consequence",
       "explication": "Les décès reculent alors que les naissances restent nombreuses : la population augmente très vite."
-    },
-    {
-      "fait": "la baisse de la mortalité",
-      "carte": "Les naissances dépassent largement les décès",
-      "role": "consequence",
-      "explication": "Les décès diminuent alors que la natalité reste forte : l'accroissement naturel devient très positif."
     }
   ],
   "etiquettes": [
     {
       "consigne": "Quelle notion le groupe en couleur illustre-t-il ?",
       "texte": "Dans cette ville, [1 200 bébés sont nés en un an].",
-      "choix": ["Natalité", "Mortalité", "Fécondité", "Accroissement naturel"],
+      "choix": [
+        "Natalité",
+        "Mortalité",
+        "Fécondité",
+        "Accroissement naturel"
+      ],
       "bonne": 0,
       "explication": "Le nombre de naissances sur une année, c'est la natalité."
     },
     {
       "consigne": "Quelle notion le groupe en couleur illustre-t-il ?",
       "texte": "Dans cette ville, [800 personnes sont décédées en un an].",
-      "choix": ["Natalité", "Mortalité", "Fécondité", "Accroissement naturel"],
+      "choix": [
+        "Natalité",
+        "Mortalité",
+        "Fécondité",
+        "Accroissement naturel"
+      ],
       "bonne": 1,
       "explication": "Le nombre de décès sur une année, c'est la mortalité."
     },
     {
       "consigne": "Quelle notion le groupe en couleur illustre-t-il ?",
       "texte": "Dans ce pays, [une femme a en moyenne quatre enfants].",
-      "choix": ["Natalité", "Mortalité", "Fécondité", "Accroissement naturel"],
+      "choix": [
+        "Natalité",
+        "Mortalité",
+        "Fécondité",
+        "Accroissement naturel"
+      ],
       "bonne": 2,
       "explication": "Le nombre moyen d'enfants par femme, c'est la fécondité."
     },
     {
       "consigne": "Quelle notion le groupe en couleur illustre-t-il ?",
       "texte": "Une ville compte 1 200 naissances et 800 décès par an. On calcule [1 200 − 800 = +400].",
-      "choix": ["Natalité", "Mortalité", "Fécondité", "Accroissement naturel"],
+      "choix": [
+        "Natalité",
+        "Mortalité",
+        "Fécondité",
+        "Accroissement naturel"
+      ],
       "bonne": 3,
       "explication": "Naissances moins décès : cette différence est l'accroissement naturel."
-    },
-    {
-      "consigne": "Quelle notion le groupe en couleur illustre-t-il ?",
-      "texte": "Pour que la population se renouvelle, il faut [environ 2,1 enfants par femme].",
-      "choix": ["Natalité", "Mortalité", "Fécondité", "Accroissement naturel"],
-      "bonne": 2,
-      "explication": "Un nombre moyen d'enfants par femme : c'est la fécondité, qui doit atteindre environ 2,1."
     }
   ],
   "devinettes": [
     {
-      "reponse": "Accroissement naturel",
-      "acceptees": ["Accroissement naturel", "L'accroissement naturel", "Solde naturel"],
-      "indices": [
-        "Je suis un nombre qui dit si une population augmente ou diminue.",
-        "On me calcule avec une soustraction.",
-        "Je suis égal aux naissances moins les décès."
-      ],
-      "explication": "L'accroissement naturel est la différence entre les naissances et les décès."
-    },
-    {
-      "reponse": "Fécondité",
-      "acceptees": ["Fécondité", "La fécondité", "Taux de fécondité", "Indice de fécondité"],
-      "indices": [
-        "Je concerne les femmes d'un pays.",
-        "Je suis une moyenne, pas un total.",
-        "Je dois valoir environ 2,1 enfants par femme pour que la population se renouvelle."
-      ],
-      "explication": "La fécondité est le nombre moyen d'enfants par femme."
-    },
-    {
       "reponse": "Exode rural",
-      "acceptees": ["Exode rural", "L'exode rural", "Exode"],
+      "acceptees": [
+        "Exode rural",
+        "L'exode rural",
+        "Exode"
+      ],
       "indices": [
         "Je suis un mouvement d'habitants.",
         "J'alimente la croissance des villes, surtout en Afrique et en Asie.",
@@ -148,7 +137,13 @@
     },
     {
       "reponse": "Réfugié",
-      "acceptees": ["Réfugié", "Un réfugié", "Réfugiés", "Les réfugiés", "Réfugiée"],
+      "acceptees": [
+        "Réfugié",
+        "Un réfugié",
+        "Réfugiés",
+        "Les réfugiés",
+        "Réfugiée"
+      ],
       "indices": [
         "Je suis un migrant international.",
         "Des millions de Syriens sont devenus comme moi depuis 2011.",

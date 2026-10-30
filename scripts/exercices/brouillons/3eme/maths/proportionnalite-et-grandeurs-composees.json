@@ -19,7 +19,6 @@
         "Partager 60 bonbons entre deux amis selon 2 : 3",
         "Une peinture mélange 3 volumes de bleu pour 2 de blanc",
         "Partager 90 € en trois parts selon 1 : 2 : 3",
-        "Additionner 2 et 3 pour compter le nombre de parts",
         "Dans une classe, il y a 3 filles pour 2 garçons"
       ]
     },
@@ -51,35 +50,48 @@
     {
       "consigne": "Quelle grandeur est écrite en couleur ?",
       "texte": "Un cycliste roule à [18 km/h] sur une route plate.",
-      "choix": ["Une vitesse", "Un débit", "Une masse volumique", "Une énergie"],
+      "choix": [
+        "Une vitesse",
+        "Un débit",
+        "Une masse volumique",
+        "Une énergie"
+      ],
       "bonne": 0,
       "explication": "Des kilomètres par heure : c'est une distance divisée par une durée, donc une vitesse."
     },
     {
       "consigne": "Quelle grandeur est écrite en couleur ?",
       "texte": "Une douche fournit [9 L/min] quand on l'ouvre en grand.",
-      "choix": ["Une vitesse", "Un débit", "Une masse volumique", "Une énergie"],
+      "choix": [
+        "Une vitesse",
+        "Un débit",
+        "Une masse volumique",
+        "Une énergie"
+      ],
       "bonne": 1,
       "explication": "Des litres par minute : c'est un volume divisé par une durée, donc un débit."
     },
     {
       "consigne": "Quelle grandeur est écrite en couleur ?",
-      "texte": "Le fer a une masse de [7,8 g/cm³].",
-      "choix": ["Une vitesse", "Un débit", "Une masse volumique", "Une énergie"],
-      "bonne": 2,
-      "explication": "Des grammes par centimètre cube : c'est une masse divisée par un volume, donc une masse volumique."
-    },
-    {
-      "consigne": "Quelle grandeur est écrite en couleur ?",
       "texte": "Un radiateur consomme [6 kWh] en une journée.",
-      "choix": ["Une vitesse", "Un débit", "Une masse volumique", "Une énergie"],
+      "choix": [
+        "Une vitesse",
+        "Un débit",
+        "Une masse volumique",
+        "Une énergie"
+      ],
       "bonne": 3,
       "explication": "Le kWh est une puissance multipliée par une durée : c'est une énergie."
     },
     {
       "consigne": "Quelle grandeur est écrite en couleur ?",
       "texte": "Un train avance à [25 m/s] sur une ligne droite.",
-      "choix": ["Une vitesse", "Un débit", "Une masse volumique", "Une énergie"],
+      "choix": [
+        "Une vitesse",
+        "Un débit",
+        "Une masse volumique",
+        "Une énergie"
+      ],
       "bonne": 0,
       "explication": "Des mètres par seconde : c'est une distance divisée par une durée, donc une vitesse."
     }
@@ -87,7 +99,12 @@
   "devinettes": [
     {
       "reponse": "Coefficient multiplicateur",
-      "acceptees": ["Coefficient multiplicateur", "Le coefficient multiplicateur", "Coefficient", "Le coefficient"],
+      "acceptees": [
+        "Coefficient multiplicateur",
+        "Le coefficient multiplicateur",
+        "Coefficient",
+        "Le coefficient"
+      ],
       "indices": [
         "Je suis un nombre.",
         "On multiplie un prix par moi pour obtenir le nouveau prix après une hausse ou une baisse.",
@@ -97,7 +114,13 @@
     },
     {
       "reponse": "Produit en croix",
-      "acceptees": ["Produit en croix", "Le produit en croix", "Produits en croix", "Règle de trois", "La règle de trois"],
+      "acceptees": [
+        "Produit en croix",
+        "Le produit en croix",
+        "Produits en croix",
+        "Règle de trois",
+        "La règle de trois"
+      ],
       "indices": [
         "Je suis une méthode de calcul.",
         "Je permets de trouver le quatrième nombre d'un tableau de proportionnalité.",
@@ -107,7 +130,12 @@
     },
     {
       "reponse": "Ratio",
-      "acceptees": ["Ratio", "Un ratio", "Le ratio", "Rapport de partage"],
+      "acceptees": [
+        "Ratio",
+        "Un ratio",
+        "Le ratio",
+        "Rapport de partage"
+      ],
       "indices": [
         "Je décris un partage.",
         "On m'écrit avec des nombres séparés par deux points, comme 2 : 3.",
@@ -117,7 +145,11 @@
     },
     {
       "reponse": "Échelle",
-      "acceptees": ["Échelle", "Une échelle", "L'échelle"],
+      "acceptees": [
+        "Échelle",
+        "Une échelle",
+        "L'échelle"
+      ],
       "indices": [
         "Je suis un quotient.",
         "Sur une carte, je compare la distance dessinée à la distance réelle.",

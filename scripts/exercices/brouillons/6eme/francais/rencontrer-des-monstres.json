@@ -41,8 +41,7 @@
         "Laide d'aspect, mais bonne et généreuse",
         "Elle redevient prince grâce à l'amour de Belle",
         "Son auteur est Madame Leprince de Beaumont",
-        "Son histoire nous apprend à ne pas juger sur l'apparence",
-        "Son histoire date de 1757"
+        "Son histoire nous apprend à ne pas juger sur l'apparence"
       ]
     }
   ],
@@ -51,42 +50,72 @@
     {
       "consigne": "Quel outil de description reconnais-tu dans le groupe en couleur ?",
       "texte": "Dans la grotte, ses yeux brillaient [comme des braises].",
-      "choix": ["Comparaison", "Adjectif qualificatif", "Complément du nom", "Mot du vocabulaire de la peur"],
+      "choix": [
+        "Comparaison",
+        "Adjectif qualificatif",
+        "Complément du nom",
+        "Mot du vocabulaire de la peur"
+      ],
       "bonne": 0,
       "explication": "« comme » rapproche les yeux et les braises : c'est une comparaison."
     },
     {
       "consigne": "Quel outil de description reconnais-tu dans le groupe en couleur ?",
       "texte": "Une créature [gigantesque] sortit de la forêt.",
-      "choix": ["Comparaison", "Adjectif qualificatif", "Complément du nom", "Mot du vocabulaire de la peur"],
+      "choix": [
+        "Comparaison",
+        "Adjectif qualificatif",
+        "Complément du nom",
+        "Mot du vocabulaire de la peur"
+      ],
       "bonne": 1,
       "explication": "« gigantesque » est un adjectif qualificatif qui précise le nom « créature »."
     },
     {
       "consigne": "Quel outil de description reconnais-tu dans le groupe en couleur ?",
       "texte": "Le monstre avait des griffes [d'acier].",
-      "choix": ["Comparaison", "Adjectif qualificatif", "Complément du nom", "Mot du vocabulaire de la peur"],
+      "choix": [
+        "Comparaison",
+        "Adjectif qualificatif",
+        "Complément du nom",
+        "Mot du vocabulaire de la peur"
+      ],
       "bonne": 2,
       "explication": "« d'acier » complète le nom « griffes » avec la préposition « de » : c'est un complément du nom."
     },
     {
       "consigne": "Quel outil de description reconnais-tu dans le groupe en couleur ?",
       "texte": "À la vue du monstre, une [terreur] glaciale s'empara de Thésée.",
-      "choix": ["Comparaison", "Adjectif qualificatif", "Complément du nom", "Mot du vocabulaire de la peur"],
+      "choix": [
+        "Comparaison",
+        "Adjectif qualificatif",
+        "Complément du nom",
+        "Mot du vocabulaire de la peur"
+      ],
       "bonne": 3,
       "explication": "« terreur » fait partie du vocabulaire de la peur, avec effroi, épouvante et frisson."
     },
     {
       "consigne": "Quel outil de description reconnais-tu dans le groupe en couleur ?",
       "texte": "Le Minotaure est un monstre [à tête de taureau].",
-      "choix": ["Comparaison", "Adjectif qualificatif", "Complément du nom", "Mot du vocabulaire de la peur"],
+      "choix": [
+        "Comparaison",
+        "Adjectif qualificatif",
+        "Complément du nom",
+        "Mot du vocabulaire de la peur"
+      ],
       "bonne": 2,
       "explication": "« à tête de taureau » complète le nom « monstre » : c'est un complément du nom."
     },
     {
       "consigne": "Quel outil de description reconnais-tu dans le groupe en couleur ?",
       "texte": "Sa voix résonnait [comme le tonnerre].",
-      "choix": ["Comparaison", "Adjectif qualificatif", "Complément du nom", "Mot du vocabulaire de la peur"],
+      "choix": [
+        "Comparaison",
+        "Adjectif qualificatif",
+        "Complément du nom",
+        "Mot du vocabulaire de la peur"
+      ],
       "bonne": 0,
       "explication": "« comme » relie la voix et le tonnerre : c'est une comparaison."
     }
@@ -94,7 +123,9 @@
   "devinettes": [
     {
       "reponse": "Ulysse",
-      "acceptees": ["Ulysse"],
+      "acceptees": [
+        "Ulysse"
+      ],
       "indices": [
         "Je suis un héros de la mythologie grecque.",
         "Face à un géant, je me fais appeler « Personne ».",
@@ -104,7 +135,10 @@
     },
     {
       "reponse": "Minotaure",
-      "acceptees": ["Le Minotaure", "Minotaure"],
+      "acceptees": [
+        "Le Minotaure",
+        "Minotaure"
+      ],
       "indices": [
         "Je suis un monstre hybride.",
         "Je vis enfermé en Crète.",
@@ -114,7 +148,10 @@
     },
     {
       "reponse": "Méduse",
-      "acceptees": ["Méduse", "Gorgone"],
+      "acceptees": [
+        "Méduse",
+        "Gorgone"
+      ],
       "indices": [
         "Je suis une créature de la mythologie grecque.",
         "Mes cheveux sont des serpents.",
@@ -124,7 +161,9 @@
     },
     {
       "reponse": "Quasimodo",
-      "acceptees": ["Quasimodo"],
+      "acceptees": [
+        "Quasimodo"
+      ],
       "indices": [
         "Je suis un personnage de roman du XIXe siècle.",
         "Je suis sonneur de cloches et difforme.",

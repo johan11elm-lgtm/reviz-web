@@ -51,7 +51,10 @@
   "devinettes": [
     {
       "reponse": "Jules Ferry",
-      "acceptees": ["Jules Ferry", "Ferry"],
+      "acceptees": [
+        "Jules Ferry",
+        "Ferry"
+      ],
       "indices": [
         "Des lois portent mon nom.",
         "Elles changent l'école publique à partir de 1881.",
@@ -61,7 +64,11 @@
     },
     {
       "reponse": "Laïcité",
-      "acceptees": ["Laïcité", "La laïcité", "Laicite"],
+      "acceptees": [
+        "Laïcité",
+        "La laïcité",
+        "Laicite"
+      ],
       "indices": [
         "Je suis un principe de la République.",
         "Je sépare l'État et les religions.",
@@ -71,23 +78,17 @@
     },
     {
       "reponse": "Règlement intérieur",
-      "acceptees": ["Règlement intérieur", "Le règlement intérieur", "Règlement"],
+      "acceptees": [
+        "Règlement intérieur",
+        "Le règlement intérieur",
+        "Règlement"
+      ],
       "indices": [
         "Je suis un texte qui s'impose à tous dans le collège.",
         "Je suis voté par le conseil d'administration.",
         "Je fixe les droits, les devoirs, les punitions et les sanctions des élèves."
       ],
       "explication": "Le règlement intérieur fixe les règles de vie du collège ; il est voté par le conseil d'administration."
-    },
-    {
-      "reponse": "Charte de la laïcité",
-      "acceptees": ["Charte de la laïcité", "La Charte de la laïcité", "Charte", "La Charte", "Charte de la laïcité à l'École"],
-      "indices": [
-        "Je suis un texte de 2013.",
-        "Je compte 15 articles.",
-        "Je suis affichée dans les établissements publics pour expliquer les règles aux élèves."
-      ],
-      "explication": "La Charte de la laïcité à l'École, de 2013, compte 15 articles et est affichée dans les établissements publics."
     }
   ],
   "calculs": [],

@@ -51,42 +51,66 @@
     {
       "consigne": "Quelle relation du cours relie directement les données et ce qui est demandé en couleur ?",
       "texte": "ABC est rectangle en A. On connaît BC = 12 cm et l'angle ABC = 40°. [Calculer la longueur AC.]",
-      "choix": ["Cosinus", "Sinus", "Tangente"],
+      "choix": [
+        "Cosinus",
+        "Sinus",
+        "Tangente"
+      ],
       "bonne": 1,
       "explication": "Pour l'angle en B, BC est l'hypoténuse et AC le côté opposé : on utilise le sinus (SOH)."
     },
     {
       "consigne": "Quelle relation du cours relie directement les données et ce qui est demandé en couleur ?",
       "texte": "ABC est rectangle en A. On connaît AB = 6 cm et l'angle ABC = 50°. [Calculer la longueur BC.]",
-      "choix": ["Cosinus", "Sinus", "Tangente"],
+      "choix": [
+        "Cosinus",
+        "Sinus",
+        "Tangente"
+      ],
       "bonne": 0,
       "explication": "Pour l'angle en B, AB est le côté adjacent et BC l'hypoténuse : on utilise le cosinus (CAH)."
     },
     {
       "consigne": "Quelle relation du cours relie directement les données et ce qui est demandé en couleur ?",
       "texte": "ABC est rectangle en A. On connaît AB = 5 cm et AC = 8 cm. [Calculer l'angle ABC.]",
-      "choix": ["Cosinus", "Sinus", "Tangente"],
+      "choix": [
+        "Cosinus",
+        "Sinus",
+        "Tangente"
+      ],
       "bonne": 2,
       "explication": "Pour l'angle en B, AC est le côté opposé et AB le côté adjacent, sans hypoténuse : on utilise la tangente (TOA)."
     },
     {
       "consigne": "Quelle relation du cours relie directement les données et ce qui est demandé en couleur ?",
       "texte": "ABC est rectangle en A. On connaît AC = 7 cm et l'angle ACB = 40°. [Calculer la longueur AB.]",
-      "choix": ["Cosinus", "Sinus", "Tangente"],
+      "choix": [
+        "Cosinus",
+        "Sinus",
+        "Tangente"
+      ],
       "bonne": 2,
       "explication": "Pour l'angle en C, AC est le côté adjacent et AB le côté opposé, sans hypoténuse : on utilise la tangente (TOA)."
     },
     {
       "consigne": "Quelle relation du cours relie directement les données et ce qui est demandé en couleur ?",
       "texte": "ABC est rectangle en A. On connaît AB = 9 cm et BC = 15 cm. [Calculer l'angle ABC.]",
-      "choix": ["Cosinus", "Sinus", "Tangente"],
+      "choix": [
+        "Cosinus",
+        "Sinus",
+        "Tangente"
+      ],
       "bonne": 0,
       "explication": "Pour l'angle en B, AB est le côté adjacent et BC l'hypoténuse : on utilise le cosinus (CAH)."
     },
     {
       "consigne": "Quelle relation du cours relie directement les données et ce qui est demandé en couleur ?",
       "texte": "ABC est rectangle en A. On connaît BC = 15 cm et l'angle ACB = 35°. [Calculer la longueur AB.]",
-      "choix": ["Cosinus", "Sinus", "Tangente"],
+      "choix": [
+        "Cosinus",
+        "Sinus",
+        "Tangente"
+      ],
       "bonne": 1,
       "explication": "Pour l'angle en C, AB est le côté opposé et BC l'hypoténuse : on utilise le sinus (SOH)."
     }
@@ -94,7 +118,10 @@
   "devinettes": [
     {
       "reponse": "Hypoténuse",
-      "acceptees": ["Hypoténuse", "L'hypoténuse"],
+      "acceptees": [
+        "Hypoténuse",
+        "L'hypoténuse"
+      ],
       "indices": [
         "Je suis un côté d'un triangle rectangle.",
         "Je suis toujours le plus long côté.",
@@ -104,7 +131,10 @@
     },
     {
       "reponse": "Cosinus",
-      "acceptees": ["Cosinus", "Le cosinus"],
+      "acceptees": [
+        "Cosinus",
+        "Le cosinus"
+      ],
       "indices": [
         "Je suis un quotient de deux longueurs.",
         "Je suis toujours compris entre 0 et 1 pour un angle aigu.",
@@ -114,7 +144,10 @@
     },
     {
       "reponse": "Tangente",
-      "acceptees": ["Tangente", "La tangente"],
+      "acceptees": [
+        "Tangente",
+        "La tangente"
+      ],
       "indices": [
         "Je relie un angle aigu aux côtés d'un triangle rectangle.",
         "On m'utilise quand l'hypoténuse n'intervient pas.",
@@ -144,13 +177,6 @@
       "unite": "°",
       "tolerance": 0,
       "explication": "AB est le côté adjacent à l'angle en B et BC l'hypoténuse : cos(ABC) = 4 / 8 = 0,5, donc ABC = arccos(0,5) = 60°."
-    },
-    {
-      "question": "À 30 m du pied d'un arbre, on voit son sommet sous un angle de 40° par rapport au sol. Quelle est la hauteur de l'arbre, arrondie au dixième de mètre ?",
-      "reponse": 25.2,
-      "unite": "m",
-      "tolerance": 0,
-      "explication": "Le sol (30 m) est adjacent à l'angle de 40° et la hauteur h est le côté opposé : tan(40°) = h / 30, donc h = 30 × tan(40°) ≈ 30 × 0,839 ≈ 25,2 m."
     },
     {
       "question": "Une échelle de 5 m est appuyée contre un mur vertical. Elle fait un angle de 60° avec le sol horizontal. À quelle hauteur touche-t-elle le mur, arrondie au dixième de mètre ?",

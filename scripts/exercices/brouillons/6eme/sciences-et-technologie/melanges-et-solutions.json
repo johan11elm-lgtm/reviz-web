@@ -17,9 +17,7 @@
       "detail": "On laisse reposer le mélange : les particules solides plus lourdes, d'abord les plus grosses, tombent au fond.",
       "cartes": [
         "On laisse reposer l'eau boueuse",
-        "Les particules solides plus lourdes tombent au fond",
         "On verse le liquide du dessus sans remuer le dépôt",
-        "Elle fait tomber d'abord les grosses particules",
         "Un dépôt de terre se forme au fond du verre"
       ]
     },
@@ -30,8 +28,7 @@
         "Un papier retient les particules solides, le liquide passe",
         "On verse le liquide dans un entonnoir avec un papier",
         "Le sel dissous traverse le papier avec le liquide",
-        "Le liquide obtenu est limpide, mais peut rester un mélange",
-        "Elle retire les particules les plus fines du liquide"
+        "Le liquide obtenu est limpide, mais peut rester un mélange"
       ]
     },
     {
@@ -51,35 +48,55 @@
     {
       "consigne": "Comment classer la substance en couleur ?",
       "texte": "Au laboratoire, on utilise [de l'eau distillée] pour rincer le matériel.",
-      "choix": ["Corps pur", "Mélange homogène", "Mélange hétérogène"],
+      "choix": [
+        "Corps pur",
+        "Mélange homogène",
+        "Mélange hétérogène"
+      ],
       "bonne": 0,
       "explication": "L'eau distillée ne contient que de l'eau : c'est un corps pur."
     },
     {
       "consigne": "Comment classer la substance en couleur ?",
       "texte": "Léa remue [de l'eau avec du sucre] jusqu'à ne plus voir aucun grain.",
-      "choix": ["Corps pur", "Mélange homogène", "Mélange hétérogène"],
+      "choix": [
+        "Corps pur",
+        "Mélange homogène",
+        "Mélange hétérogène"
+      ],
       "bonne": 1,
       "explication": "Le sucre est dissous : on ne voit plus ses grains, c'est un mélange homogène (une solution)."
     },
     {
       "consigne": "Comment classer la substance en couleur ?",
       "texte": "Après la pluie, [l'eau boueuse] du caniveau est toute trouble.",
-      "choix": ["Corps pur", "Mélange homogène", "Mélange hétérogène"],
+      "choix": [
+        "Corps pur",
+        "Mélange homogène",
+        "Mélange hétérogène"
+      ],
       "bonne": 2,
       "explication": "On voit la terre en suspension dans l'eau : au moins deux constituants sont visibles, c'est un mélange hétérogène."
     },
     {
       "consigne": "Comment classer la substance en couleur ?",
       "texte": "Dans la bouteille, [l'eau et l'huile] forment deux couches.",
-      "choix": ["Corps pur", "Mélange homogène", "Mélange hétérogène"],
+      "choix": [
+        "Corps pur",
+        "Mélange homogène",
+        "Mélange hétérogène"
+      ],
       "bonne": 2,
       "explication": "L'eau et l'huile ne sont pas miscibles : on voit deux couches, c'est un mélange hétérogène."
     },
     {
       "consigne": "Comment classer la substance en couleur ?",
       "texte": "[L'eau minérale] est limpide, mais l'étiquette indique des sels minéraux.",
-      "choix": ["Corps pur", "Mélange homogène", "Mélange hétérogène"],
+      "choix": [
+        "Corps pur",
+        "Mélange homogène",
+        "Mélange hétérogène"
+      ],
       "bonne": 1,
       "explication": "L'eau minérale contient des sels minéraux dissous : c'est un mélange, mais on n'en voit pas les constituants, donc il est homogène."
     }
@@ -87,7 +104,10 @@
   "devinettes": [
     {
       "reponse": "Filtrat",
-      "acceptees": ["Filtrat", "Le filtrat"],
+      "acceptees": [
+        "Filtrat",
+        "Le filtrat"
+      ],
       "indices": [
         "On me récupère à la fin d'une séparation.",
         "Je suis le liquide qui a traversé un papier dans un entonnoir.",
@@ -97,7 +117,10 @@
     },
     {
       "reponse": "Solvant",
-      "acceptees": ["Solvant", "Le solvant"],
+      "acceptees": [
+        "Solvant",
+        "Le solvant"
+      ],
       "indices": [
         "Je fais partie d'une solution.",
         "Je suis le liquide dans lequel on dissout une espèce.",
@@ -107,7 +130,11 @@
     },
     {
       "reponse": "Décantation",
-      "acceptees": ["Décantation", "La décantation", "Décanter"],
+      "acceptees": [
+        "Décantation",
+        "La décantation",
+        "Décanter"
+      ],
       "indices": [
         "Je suis une technique de séparation.",
         "Pour me réaliser, il suffit de laisser reposer le mélange.",
@@ -117,7 +144,11 @@
     },
     {
       "reponse": "Évaporation",
-      "acceptees": ["Évaporation", "L'évaporation", "Evaporation"],
+      "acceptees": [
+        "Évaporation",
+        "L'évaporation",
+        "Evaporation"
+      ],
       "indices": [
         "Je suis une technique de séparation.",
         "On me provoque en chauffant un mélange, ou en le laissant au soleil et au vent.",

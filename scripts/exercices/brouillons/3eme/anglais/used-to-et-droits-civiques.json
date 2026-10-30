@@ -41,8 +41,7 @@
         "Today, all passengers sit where they want",
         "I usually walk to school",
         "My cousin plays the piano every evening",
-        "She always takes the bus to work",
-        "Today, children go to the same schools"
+        "She always takes the bus to work"
       ]
     }
   ],
@@ -64,54 +63,66 @@
       "carte": "En 1956, la Cour suprême juge la ségrégation dans les bus contraire à la Constitution",
       "role": "consequence",
       "explication": "Le boycott, qui dure 381 jours, aboutit en 1956 à la décision de la Cour suprême."
-    },
-    {
-      "fait": "le Civil Rights Act de 1964 et le Voting Rights Act de 1965",
-      "carte": "L'essentiel des lois Jim Crow disparaît",
-      "role": "consequence",
-      "explication": "Ces deux lois font tomber l'essentiel des lois qui imposaient la ségrégation."
     }
   ],
   "etiquettes": [
     {
       "consigne": "Quelle structure est en couleur ?",
       "texte": "Black people [used to sit] at the back of the bus.",
-      "choix": ["Used to + base verbale", "Didn't use to ou Did ... use to", "Be used to + V-ing", "Présent simple"],
+      "choix": [
+        "Used to + base verbale",
+        "Didn't use to ou Did ... use to",
+        "Be used to + V-ing",
+        "Présent simple"
+      ],
       "bonne": 0,
       "explication": "« used to + base verbale » décrit une habitude passée qui n'existe plus."
     },
     {
       "consigne": "Quelle structure est en couleur ?",
       "texte": "Black and white children [didn't use to] go to the same schools.",
-      "choix": ["Used to + base verbale", "Didn't use to ou Did ... use to", "Be used to + V-ing", "Présent simple"],
+      "choix": [
+        "Used to + base verbale",
+        "Didn't use to ou Did ... use to",
+        "Be used to + V-ing",
+        "Présent simple"
+      ],
       "bonne": 1,
       "explication": "À la négative, on emploie didn't use to : avec did, used perd son d."
     },
     {
       "consigne": "Quelle structure est en couleur ?",
-      "texte": "I'm [used to getting up] early.",
-      "choix": ["Used to + base verbale", "Didn't use to ou Did ... use to", "Be used to + V-ing", "Présent simple"],
-      "bonne": 2,
-      "explication": "« be used to + V-ing » veut dire « être habitué à » : je suis habitué à me lever tôt."
-    },
-    {
-      "consigne": "Quelle structure est en couleur ?",
       "texte": "Today, all passengers [sit] where they want.",
-      "choix": ["Used to + base verbale", "Didn't use to ou Did ... use to", "Be used to + V-ing", "Présent simple"],
+      "choix": [
+        "Used to + base verbale",
+        "Didn't use to ou Did ... use to",
+        "Be used to + V-ing",
+        "Présent simple"
+      ],
       "bonne": 3,
       "explication": "« sit » est le présent simple : pour une situation d'aujourd'hui, on n'emploie pas used to."
     },
     {
       "consigne": "Quelle structure est en couleur ?",
       "texte": "[Did they use to] go to separate schools?",
-      "choix": ["Used to + base verbale", "Didn't use to ou Did ... use to", "Be used to + V-ing", "Présent simple"],
+      "choix": [
+        "Used to + base verbale",
+        "Didn't use to ou Did ... use to",
+        "Be used to + V-ing",
+        "Présent simple"
+      ],
       "bonne": 1,
       "explication": "À l'interrogative, on emploie Did ... use to : avec did, used perd son d."
     },
     {
       "consigne": "Quelle structure est en couleur ?",
       "texte": "She [is used to speaking] English.",
-      "choix": ["Used to + base verbale", "Didn't use to ou Did ... use to", "Be used to + V-ing", "Présent simple"],
+      "choix": [
+        "Used to + base verbale",
+        "Didn't use to ou Did ... use to",
+        "Be used to + V-ing",
+        "Présent simple"
+      ],
       "bonne": 2,
       "explication": "« is used to + V-ing » veut dire « est habituée à » : elle a l'habitude de parler anglais."
     }
@@ -119,7 +130,10 @@
   "devinettes": [
     {
       "reponse": "Rosa Parks",
-      "acceptees": ["Parks", "Rosa Parks"],
+      "acceptees": [
+        "Parks",
+        "Rosa Parks"
+      ],
       "indices": [
         "Je suis une femme afro-américaine.",
         "J'ai refusé de céder ma place à un passager blanc dans un bus.",
@@ -129,7 +143,12 @@
     },
     {
       "reponse": "Martin Luther King",
-      "acceptees": ["King", "Martin Luther King", "Martin Luther King Jr", "MLK"],
+      "acceptees": [
+        "King",
+        "Martin Luther King",
+        "Martin Luther King Jr",
+        "MLK"
+      ],
       "indices": [
         "Je suis un pasteur américain.",
         "Je défends la non-violence.",
@@ -138,18 +157,10 @@
       "explication": "Martin Luther King, pasteur et défenseur de la non-violence, prononce I Have a Dream à Washington le 28 août 1963."
     },
     {
-      "reponse": "Jim Crow",
-      "acceptees": ["Jim Crow", "Lois Jim Crow", "Les lois Jim Crow", "Loi Jim Crow"],
-      "indices": [
-        "Je suis un ensemble de lois du Sud des États-Unis.",
-        "J'impose des écoles, des places dans les bus et des toilettes séparées pour Noirs et Blancs.",
-        "Le Civil Rights Act de 1964 et le Voting Rights Act de 1965 ont fait tomber l'essentiel de moi."
-      ],
-      "explication": "Les lois Jim Crow imposaient la ségrégation dans le Sud des États-Unis jusqu'aux lois de 1964 et 1965."
-    },
-    {
       "reponse": "Montgomery",
-      "acceptees": ["Montgomery"],
+      "acceptees": [
+        "Montgomery"
+      ],
       "indices": [
         "Je suis une ville des États-Unis.",
         "Je suis située dans l'Alabama.",

@@ -7,7 +7,6 @@
       "cartes": [
         "Une hôtelière installée dans la commune depuis vingt ans",
         "Un pêcheur qui habite le port avec sa famille",
-        "Une institutrice qui enseigne toute l'année à l'école du village",
         "Un restaurateur qui vit sur place à l'année",
         "Une famille dont la maison principale est dans la station"
       ]
@@ -28,10 +27,8 @@
       "detail": "Les personnes qui possèdent un logement dans la station, qu'ils n'occupent qu'une petite partie de l'année.",
       "cartes": [
         "Un couple dont la villa reste fermée presque toute l'année",
-        "Un cadre parisien qui possède un studio vue sur mer",
         "Une retraitée propriétaire d'un appartement qu'elle occupe en août",
-        "Une famille qui a acheté un studio pour ses week-ends",
-        "Un avocat lyonnais héritier d'une villa sur la côte"
+        "Une famille qui a acheté un studio pour ses week-ends"
       ]
     },
     {
@@ -107,35 +104,6 @@
         "Je suis une création de la mission Racine, lancée par l'État en 1963 sur le littoral du Languedoc-Roussillon."
       ],
       "explication": "La Grande-Motte naît de la mission Racine (1963), qui aménage le littoral du Languedoc-Roussillon."
-    },
-    {
-      "reponse": "La saisonnalité",
-      "acceptees": [
-        "Saisonnalité",
-        "La saisonnalité",
-        "Les saisons"
-      ],
-      "indices": [
-        "Je suis un phénomène qui dépend du calendrier.",
-        "Je fais varier l'activité d'une station selon les mois de l'année.",
-        "En été, je multiplie la population ; en hiver, la ville se vide."
-      ],
-      "explication": "La saisonnalité est la variation de l'activité selon les saisons : une station est pleine en été et presque vide en hiver."
-    },
-    {
-      "reponse": "Le Conservatoire du littoral",
-      "acceptees": [
-        "Conservatoire du littoral",
-        "Le Conservatoire du littoral",
-        "Le Conservatoire",
-        "Conservatoire"
-      ],
-      "indices": [
-        "Je suis un organisme créé par l'État français.",
-        "J'ai été créé en 1975.",
-        "J'achète des terrains au bord de la mer pour les protéger."
-      ],
-      "explication": "Le Conservatoire du littoral (1975) achète des terrains pour les protéger de la bétonisation."
     }
   ],
   "calculs": [],

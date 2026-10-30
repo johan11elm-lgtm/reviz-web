@@ -29,9 +29,7 @@
       "cartes": [
         "Des chevaux et des cerfs peints sur une paroi",
         "Un pigment naturel comme l'ocre",
-        "Du charbon de bois pour dessiner en noir",
-        "La grotte Chauvet (Ardèche), d'environ 36 000 ans",
-        "La grotte de Lascaux (Dordogne), d'environ 18 000 ans"
+        "Du charbon de bois pour dessiner en noir"
       ]
     },
     {
@@ -39,8 +37,6 @@
       "detail": "La façon dont les humains du Paléolithique se nourrissent, se déplacent et s'abritent.",
       "cartes": [
         "Suivre le gibier au fil des saisons",
-        "Chasser le mammouth et le renne en période glaciaire",
-        "Pêcher et cueillir des plantes sauvages",
         "Dormir dans une tente de peaux ou sous un rocher",
         "Vivre en petit groupe, sans maison fixe"
       ]
@@ -51,7 +47,9 @@
   "devinettes": [
     {
       "reponse": "Lucy",
-      "acceptees": ["Lucy"],
+      "acceptees": [
+        "Lucy"
+      ],
       "indices": [
         "Je suis un squelette d'australopithèque.",
         "J'ai vécu il y a environ 3,2 millions d'années.",
@@ -61,7 +59,10 @@
     },
     {
       "reponse": "Toumaï",
-      "acceptees": ["Toumaï", "Toumai"],
+      "acceptees": [
+        "Toumaï",
+        "Toumai"
+      ],
       "indices": [
         "Je suis un très vieux fossile d'hominidé.",
         "On m'a trouvé au Tchad, en Afrique.",
@@ -71,23 +72,17 @@
     },
     {
       "reponse": "Homo sapiens",
-      "acceptees": ["Homo sapiens", "Sapiens", "Homo sapiens sapiens"],
+      "acceptees": [
+        "Homo sapiens",
+        "Sapiens",
+        "Homo sapiens sapiens"
+      ],
       "indices": [
         "Je suis une espèce humaine née en Afrique.",
         "Je me suis répandu sur tous les continents, jusqu'en Amérique par la Béringie.",
         "Je suis apparu il y a environ 300 000 ans et c'est mon espèce que tu as aujourd'hui."
       ],
       "explication": "Homo sapiens, notre espèce, apparaît en Afrique il y a environ 300 000 ans puis peuple toute la Terre."
-    },
-    {
-      "reponse": "Lascaux",
-      "acceptees": ["Lascaux", "La grotte de Lascaux", "Grotte de Lascaux"],
-      "indices": [
-        "Je suis célèbre dans le monde entier pour mes peintures préhistoriques.",
-        "Je me trouve en Dordogne.",
-        "Sur mes parois, des chevaux, des aurochs et des cerfs ont été peints il y a environ 18 000 ans."
-      ],
-      "explication": "Lascaux, en Dordogne, est une grotte ornée d'environ 18 000 ans, couverte de chevaux, d'aurochs et de cerfs."
     }
   ],
   "calculs": [

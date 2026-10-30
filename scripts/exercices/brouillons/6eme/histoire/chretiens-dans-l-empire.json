@@ -4,13 +4,7 @@
     {
       "nom": "La vie de Jésus",
       "detail": "Un Juif de Judée, province romaine, prêche, est considéré comme le Messie par ses disciples, puis est crucifié vers l'an 30.",
-      "cartes": [
-        "Un Juif né au début de notre ère",
-        "Il prêche en Galilée et en Judée",
-        "Ponce Pilate le fait crucifier à Jérusalem",
-        "Ses disciples le voient comme le Messie",
-        "La Judée est alors dominée par Rome"
-      ]
+      "cartes": []
     },
     {
       "nom": "La diffusion du christianisme",
@@ -88,42 +82,72 @@
     {
       "consigne": "À quelle étape de l'histoire des chrétiens correspond le passage en couleur ?",
       "texte": "Au début de notre ère, [Jésus prêche en Galilée et en Judée].",
-      "choix": ["La vie de Jésus", "La diffusion du christianisme", "Les persécutions", "La reconnaissance par Rome"],
+      "choix": [
+        "La vie de Jésus",
+        "La diffusion du christianisme",
+        "Les persécutions",
+        "La reconnaissance par Rome"
+      ],
       "bonne": 0,
       "explication": "La prédication de Jésus en Galilée et en Judée appartient à sa vie."
     },
     {
       "consigne": "À quelle étape de l'histoire des chrétiens correspond le passage en couleur ?",
       "texte": "Au Ier siècle, [Paul de Tarse fonde des communautés autour de la Méditerranée].",
-      "choix": ["La vie de Jésus", "La diffusion du christianisme", "Les persécutions", "La reconnaissance par Rome"],
+      "choix": [
+        "La vie de Jésus",
+        "La diffusion du christianisme",
+        "Les persécutions",
+        "La reconnaissance par Rome"
+      ],
       "bonne": 1,
       "explication": "Paul fait connaître le message de Jésus en fondant des communautés : c'est la diffusion du christianisme."
     },
     {
       "consigne": "À quelle étape de l'histoire des chrétiens correspond le passage en couleur ?",
       "texte": "En 64, [Néron s'en prend aux chrétiens après l'incendie de Rome].",
-      "choix": ["La vie de Jésus", "La diffusion du christianisme", "Les persécutions", "La reconnaissance par Rome"],
+      "choix": [
+        "La vie de Jésus",
+        "La diffusion du christianisme",
+        "Les persécutions",
+        "La reconnaissance par Rome"
+      ],
       "bonne": 2,
       "explication": "Néron s'en prend aux chrétiens en 64 : c'est une persécution."
     },
     {
       "consigne": "À quelle étape de l'histoire des chrétiens correspond le passage en couleur ?",
       "texte": "À Lyon, en 177, [l'esclave Blandine meurt en martyre].",
-      "choix": ["La vie de Jésus", "La diffusion du christianisme", "Les persécutions", "La reconnaissance par Rome"],
+      "choix": [
+        "La vie de Jésus",
+        "La diffusion du christianisme",
+        "Les persécutions",
+        "La reconnaissance par Rome"
+      ],
       "bonne": 2,
       "explication": "Blandine est une martyre : elle meurt pour sa foi pendant les persécutions."
     },
     {
       "consigne": "À quelle étape de l'histoire des chrétiens correspond le passage en couleur ?",
       "texte": "En 313, [Constantin accorde la liberté de culte aux chrétiens].",
-      "choix": ["La vie de Jésus", "La diffusion du christianisme", "Les persécutions", "La reconnaissance par Rome"],
+      "choix": [
+        "La vie de Jésus",
+        "La diffusion du christianisme",
+        "Les persécutions",
+        "La reconnaissance par Rome"
+      ],
       "bonne": 3,
       "explication": "La liberté de culte accordée par Constantin est le début de la reconnaissance du christianisme par Rome."
     },
     {
       "consigne": "À quelle étape de l'histoire des chrétiens correspond le passage en couleur ?",
       "texte": "En 380, [Théodose fait du christianisme la religion officielle de l'Empire].",
-      "choix": ["La vie de Jésus", "La diffusion du christianisme", "Les persécutions", "La reconnaissance par Rome"],
+      "choix": [
+        "La vie de Jésus",
+        "La diffusion du christianisme",
+        "Les persécutions",
+        "La reconnaissance par Rome"
+      ],
       "bonne": 3,
       "explication": "Le christianisme devient la religion officielle de l'Empire : c'est l'aboutissement de sa reconnaissance par Rome."
     }
@@ -131,7 +155,11 @@
   "devinettes": [
     {
       "reponse": "Constantin",
-      "acceptees": ["Constantin", "L'empereur Constantin", "Constantin Ier"],
+      "acceptees": [
+        "Constantin",
+        "L'empereur Constantin",
+        "Constantin Ier"
+      ],
       "indices": [
         "Je suis un empereur romain.",
         "Je gouverne l'Empire au IVe siècle.",
@@ -141,7 +169,11 @@
     },
     {
       "reponse": "Théodose",
-      "acceptees": ["Théodose", "L'empereur Théodose", "Théodose Ier"],
+      "acceptees": [
+        "Théodose",
+        "L'empereur Théodose",
+        "Théodose Ier"
+      ],
       "indices": [
         "Je gouverne l'Empire romain à la fin du IVe siècle.",
         "J'interdis les cultes païens en 392.",
@@ -151,7 +183,12 @@
     },
     {
       "reponse": "Paul de Tarse",
-      "acceptees": ["Paul de Tarse", "Paul", "Saint Paul", "L'apôtre Paul"],
+      "acceptees": [
+        "Paul de Tarse",
+        "Paul",
+        "Saint Paul",
+        "L'apôtre Paul"
+      ],
       "indices": [
         "Je voyage beaucoup dans l'Empire romain.",
         "J'écris des lettres aux communautés que j'ai fondées, comme celle de Corinthe.",
@@ -161,7 +198,10 @@
     },
     {
       "reponse": "Blandine",
-      "acceptees": ["Blandine", "Sainte Blandine"],
+      "acceptees": [
+        "Blandine",
+        "Sainte Blandine"
+      ],
       "indices": [
         "Je suis une esclave.",
         "Je suis chrétienne.",

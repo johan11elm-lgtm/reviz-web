@@ -17,7 +17,6 @@
       "detail": "Pour passer l'hiver, les animaux migrent, hibernent, vivent au ralenti ou restent en œufs et en larves ; les végétaux passent l'hiver en graines, en bourgeons ou en bulbes.",
       "cartes": [
         "L'hirondelle part vers l'Afrique à l'automne",
-        "La marmotte et le hérisson dorment tout l'hiver",
         "L'escargot s'enferme dans sa coquille et vit au ralenti",
         "Certains animaux passent l'hiver en œufs ou en larves",
         "Des plantes passent l'hiver en graines ou en bulbes"
@@ -29,7 +28,6 @@
       "cartes": [
         "Le lapin mange l'herbe et le renard mange le lapin",
         "La flèche signifie « est mangé par »",
-        "On commence toujours par un végétal chlorophyllien",
         "Les décomposeurs recyclent les cadavres en sels minéraux",
         "Plusieurs suites mangeur-mangé s'entrecroisent et forment un réseau"
       ]
@@ -82,42 +80,72 @@
     {
       "consigne": "Quel est le rôle de l'être vivant en couleur dans la chaîne alimentaire ?",
       "texte": "Dans la prairie, [l'herbe] fabrique sa matière grâce à la lumière.",
-      "choix": ["Producteur", "Herbivore", "Carnivore", "Décomposeur"],
+      "choix": [
+        "Producteur",
+        "Herbivore",
+        "Carnivore",
+        "Décomposeur"
+      ],
       "bonne": 0,
       "explication": "L'herbe est un végétal chlorophyllien : c'est le producteur, au début de la chaîne."
     },
     {
       "consigne": "Quel est le rôle de l'être vivant en couleur dans la chaîne alimentaire ?",
       "texte": "Dans la prairie, [le lapin] mange de l'herbe.",
-      "choix": ["Producteur", "Herbivore", "Carnivore", "Décomposeur"],
+      "choix": [
+        "Producteur",
+        "Herbivore",
+        "Carnivore",
+        "Décomposeur"
+      ],
       "bonne": 1,
       "explication": "Le lapin mange des végétaux : c'est un consommateur herbivore."
     },
     {
       "consigne": "Quel est le rôle de l'être vivant en couleur dans la chaîne alimentaire ?",
       "texte": "À la tombée de la nuit, [le renard] chasse le lapin.",
-      "choix": ["Producteur", "Herbivore", "Carnivore", "Décomposeur"],
+      "choix": [
+        "Producteur",
+        "Herbivore",
+        "Carnivore",
+        "Décomposeur"
+      ],
       "bonne": 2,
       "explication": "Le renard mange un animal, le lapin : c'est un carnivore."
     },
     {
       "consigne": "Quel est le rôle de l'être vivant en couleur dans la chaîne alimentaire ?",
       "texte": "Dans le sol de la forêt, [certains êtres vivants] transforment les cadavres en sels minéraux pour les plantes.",
-      "choix": ["Producteur", "Herbivore", "Carnivore", "Décomposeur"],
+      "choix": [
+        "Producteur",
+        "Herbivore",
+        "Carnivore",
+        "Décomposeur"
+      ],
       "bonne": 3,
       "explication": "Les décomposeurs recyclent les déchets et les cadavres en sels minéraux."
     },
     {
       "consigne": "Quel est le rôle de l'être vivant en couleur dans la chaîne alimentaire ?",
       "texte": "Dans la mare, [les nénuphars] captent la lumière pour fabriquer leur matière.",
-      "choix": ["Producteur", "Herbivore", "Carnivore", "Décomposeur"],
+      "choix": [
+        "Producteur",
+        "Herbivore",
+        "Carnivore",
+        "Décomposeur"
+      ],
       "bonne": 0,
       "explication": "Les nénuphars sont des végétaux chlorophylliens : ce sont des producteurs."
     },
     {
       "consigne": "Quel est le rôle de l'être vivant en couleur dans la chaîne alimentaire ?",
       "texte": "Dans le jardin, [la coccinelle] mange les pucerons.",
-      "choix": ["Producteur", "Herbivore", "Carnivore", "Décomposeur"],
+      "choix": [
+        "Producteur",
+        "Herbivore",
+        "Carnivore",
+        "Décomposeur"
+      ],
       "bonne": 2,
       "explication": "La coccinelle mange d'autres animaux, les pucerons : c'est un carnivore."
     }
@@ -125,7 +153,11 @@
   "devinettes": [
     {
       "reponse": "Hibernation",
-      "acceptees": ["Hibernation", "L'hibernation", "Hiberner"],
+      "acceptees": [
+        "Hibernation",
+        "L'hibernation",
+        "Hiberner"
+      ],
       "indices": [
         "Je concerne certains animaux pendant l'hiver.",
         "Pendant que je dure, la température de l'animal baisse et son cœur ralentit fortement.",
@@ -135,7 +167,11 @@
     },
     {
       "reponse": "Migration",
-      "acceptees": ["Migration", "La migration", "Migrer"],
+      "acceptees": [
+        "Migration",
+        "La migration",
+        "Migrer"
+      ],
       "indices": [
         "Je concerne surtout des oiseaux.",
         "Je suis un déplacement saisonnier vers une autre région.",
@@ -145,23 +181,18 @@
     },
     {
       "reponse": "Décomposeur",
-      "acceptees": ["Décomposeur", "Décomposeurs", "Un décomposeur", "Le décomposeur"],
+      "acceptees": [
+        "Décomposeur",
+        "Décomposeurs",
+        "Un décomposeur",
+        "Le décomposeur"
+      ],
       "indices": [
         "Je suis un être vivant du milieu.",
         "Je recycle les déchets et les cadavres.",
         "Je les transforme en sels minéraux pour les plantes."
       ],
       "explication": "Les décomposeurs recyclent les déchets et les cadavres en sels minéraux, qui nourrissent les plantes."
-    },
-    {
-      "reponse": "Espèce invasive",
-      "acceptees": ["Espèce invasive", "Une espèce invasive", "Invasive", "Espèces invasives"],
-      "indices": [
-        "Je suis arrivée dans un milieu qui n'est pas le mien.",
-        "Je me répands et je menace les espèces locales.",
-        "Le frelon asiatique est un exemple de ce que je suis."
-      ],
-      "explication": "Une espèce invasive est introduite dans un milieu, s'y répand et menace les espèces locales, comme le frelon asiatique."
     }
   ],
   "calculs": [],

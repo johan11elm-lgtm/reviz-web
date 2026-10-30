@@ -18,9 +18,7 @@
       "cartes": [
         "Les cinq premiers livres sacrés des Juifs",
         "Des livres écrits du VIIIe au IIe siècle av. J.-C.",
-        "Un jour de repos, du vendredi soir au samedi soir",
-        "Un lieu où les croyants viennent prier",
-        "Des maîtres dont les croyants suivent l'enseignement"
+        "Un jour de repos, du vendredi soir au samedi soir"
       ]
     },
     {
@@ -51,7 +49,10 @@
   "devinettes": [
     {
       "reponse": "Moïse",
-      "acceptees": ["Moïse", "Moise"],
+      "acceptees": [
+        "Moïse",
+        "Moise"
+      ],
       "indices": [
         "Selon la Bible, je suis un chef des Hébreux.",
         "Selon la Bible, je les conduis hors d'Égypte.",
@@ -61,7 +62,9 @@
     },
     {
       "reponse": "Abraham",
-      "acceptees": ["Abraham"],
+      "acceptees": [
+        "Abraham"
+      ],
       "indices": [
         "Selon la Bible, je suis un patriarche.",
         "Dieu fait alliance avec moi.",
@@ -70,18 +73,12 @@
       "explication": "Selon la Bible, Dieu fait alliance avec Abraham et lui promet la terre de Canaan."
     },
     {
-      "reponse": "Nabuchodonosor",
-      "acceptees": ["Nabuchodonosor", "Nabuchodonosor II"],
-      "indices": [
-        "Je suis un roi.",
-        "Je règne sur Babylone.",
-        "En 587 av. J.-C., je prends Jérusalem et je détruis le Temple."
-      ],
-      "explication": "Nabuchodonosor, roi de Babylone, prend Jérusalem en 587 av. J.-C., détruit le Temple et déporte des habitants."
-    },
-    {
       "reponse": "Torah",
-      "acceptees": ["Torah", "La Torah", "Thora"],
+      "acceptees": [
+        "Torah",
+        "La Torah",
+        "Thora"
+      ],
       "indices": [
         "Je suis un ensemble de livres.",
         "Je fais partie de la Bible hébraïque.",

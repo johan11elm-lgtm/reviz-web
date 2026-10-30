@@ -51,42 +51,72 @@
     {
       "consigne": "Quel est le temps du verbe en couleur ?",
       "texte": "Hier, nous [sommes allés] au parc.",
-      "choix": ["Passé composé", "Plus-que-parfait", "Impératif présent", "Conditionnel présent"],
+      "choix": [
+        "Passé composé",
+        "Plus-que-parfait",
+        "Impératif présent",
+        "Conditionnel présent"
+      ],
       "bonne": 0,
       "explication": "L'auxiliaire « être » est au présent (sommes) et il est suivi du participe passé « allés » : c'est un passé composé."
     },
     {
       "consigne": "Quel est le temps du verbe en couleur ?",
       "texte": "Quand je suis arrivé, le film [avait commencé].",
-      "choix": ["Passé composé", "Plus-que-parfait", "Impératif présent", "Conditionnel présent"],
+      "choix": [
+        "Passé composé",
+        "Plus-que-parfait",
+        "Impératif présent",
+        "Conditionnel présent"
+      ],
       "bonne": 1,
       "explication": "L'auxiliaire « avoir » est à l'imparfait (avait) et il est suivi du participe passé « commencé » : c'est un plus-que-parfait, le film a commencé avant."
     },
     {
       "consigne": "Quel est le temps du verbe en couleur ?",
       "texte": "[Prends] ton cahier et ouvre-le.",
-      "choix": ["Passé composé", "Plus-que-parfait", "Impératif présent", "Conditionnel présent"],
+      "choix": [
+        "Passé composé",
+        "Plus-que-parfait",
+        "Impératif présent",
+        "Conditionnel présent"
+      ],
       "bonne": 2,
       "explication": "« Prends » exprime un ordre et n'a pas de sujet exprimé : c'est un impératif présent."
     },
     {
       "consigne": "Quel est le temps du verbe en couleur ?",
       "texte": "Je [voudrais] un peu d'eau, s'il vous plaît.",
-      "choix": ["Passé composé", "Plus-que-parfait", "Impératif présent", "Conditionnel présent"],
+      "choix": [
+        "Passé composé",
+        "Plus-que-parfait",
+        "Impératif présent",
+        "Conditionnel présent"
+      ],
       "bonne": 3,
       "explication": "« voudrais » a le radical du futur (voudr-) et la terminaison -ais de l'imparfait : c'est un conditionnel présent, ici pour une demande polie."
     },
     {
       "consigne": "Quel est le temps du verbe en couleur ?",
       "texte": "Tu [avais oublié] ton sac à la maison.",
-      "choix": ["Passé composé", "Plus-que-parfait", "Impératif présent", "Conditionnel présent"],
+      "choix": [
+        "Passé composé",
+        "Plus-que-parfait",
+        "Impératif présent",
+        "Conditionnel présent"
+      ],
       "bonne": 1,
       "explication": "L'auxiliaire « avoir » est à l'imparfait (avais) et il est suivi du participe passé « oublié » : c'est un plus-que-parfait."
     },
     {
       "consigne": "Quel est le temps du verbe en couleur ?",
       "texte": "[Finissez] vos exercices avant de sortir.",
-      "choix": ["Passé composé", "Plus-que-parfait", "Impératif présent", "Conditionnel présent"],
+      "choix": [
+        "Passé composé",
+        "Plus-que-parfait",
+        "Impératif présent",
+        "Conditionnel présent"
+      ],
       "bonne": 2,
       "explication": "« Finissez » donne un ordre et n'a pas de sujet exprimé : c'est un impératif présent, à la 2e personne du pluriel."
     }
@@ -94,7 +124,11 @@
   "devinettes": [
     {
       "reponse": "Plus-que-parfait",
-      "acceptees": ["Plus-que-parfait", "Le plus-que-parfait", "Plus que parfait"],
+      "acceptees": [
+        "Plus-que-parfait",
+        "Le plus-que-parfait",
+        "Plus que parfait"
+      ],
       "indices": [
         "Je suis un temps composé.",
         "Mon auxiliaire est à l'imparfait.",
@@ -104,7 +138,11 @@
     },
     {
       "reponse": "Impératif",
-      "acceptees": ["Impératif", "L'impératif", "Impératif présent"],
+      "acceptees": [
+        "Impératif",
+        "L'impératif",
+        "Impératif présent"
+      ],
       "indices": [
         "Je suis un mode de la conjugaison.",
         "Je n'ai que trois personnes et pas de sujet exprimé.",
@@ -114,23 +152,17 @@
     },
     {
       "reponse": "Auxiliaire",
-      "acceptees": ["Auxiliaire", "Un auxiliaire", "L'auxiliaire"],
+      "acceptees": [
+        "Auxiliaire",
+        "Un auxiliaire",
+        "L'auxiliaire"
+      ],
       "indices": [
         "Je suis un verbe.",
         "Je suis soit « être », soit « avoir ».",
         "Je me place devant le participe passé pour former les temps composés."
       ],
       "explication": "L'auxiliaire (être ou avoir) sert à former les temps composés."
-    },
-    {
-      "reponse": "Conditionnel",
-      "acceptees": ["Conditionnel", "Le conditionnel", "Conditionnel présent"],
-      "indices": [
-        "Je sers à faire une demande polie ou à exprimer un souhait.",
-        "Je me forme sur le radical du futur.",
-        "J'ai les terminaisons de l'imparfait : -ais, -ais, -ait, -ions, -iez, -aient."
-      ],
-      "explication": "Le conditionnel présent se forme avec le radical du futur et les terminaisons de l'imparfait : je chanterais."
     }
   ],
   "calculs": [],

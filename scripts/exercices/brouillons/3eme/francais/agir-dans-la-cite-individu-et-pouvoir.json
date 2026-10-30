@@ -16,7 +16,6 @@
       "nom": "« Liberté » (Éluard)",
       "detail": "Le poème de la Résistance d'Éluard (1942), rythmé par l'anaphore « Sur… » et le refrain « J'écris ton nom ».",
       "cartes": [
-        "Chaque strophe se termine par « J'écris ton nom »",
         "« Sur le sable sur la neige »",
         "Un poème parachuté par les avions alliés",
         "Un poème de 1942 extrait de Poésie et vérité",
@@ -51,53 +50,54 @@
     {
       "consigne": "Quel est le genre de l'œuvre en couleur ?",
       "texte": "Primo Levi publie [Si c'est un homme] en 1947.",
-      "choix": ["Témoignage", "Récit de fiction", "Poésie engagée"],
+      "choix": [
+        "Témoignage",
+        "Récit de fiction",
+        "Poésie engagée"
+      ],
       "bonne": 0,
       "explication": "Primo Levi y raconte sa propre déportation à Auschwitz : c'est un témoignage, un récit à la première personne d'événements vécus."
     },
     {
       "consigne": "Quel est le genre de l'œuvre en couleur ?",
       "texte": "En 1942, Vercors publie [Le Silence de la mer] aux Éditions de Minuit.",
-      "choix": ["Témoignage", "Récit de fiction", "Poésie engagée"],
+      "choix": [
+        "Témoignage",
+        "Récit de fiction",
+        "Poésie engagée"
+      ],
       "bonne": 1,
       "explication": "Vercors invente l'histoire d'une famille qui résiste par le silence : c'est un récit de fiction, pas un témoignage."
     },
     {
       "consigne": "Quel est le genre de l'œuvre en couleur ?",
       "texte": "Éluard écrit [« Liberté »] en 1942.",
-      "choix": ["Témoignage", "Récit de fiction", "Poésie engagée"],
+      "choix": [
+        "Témoignage",
+        "Récit de fiction",
+        "Poésie engagée"
+      ],
       "bonne": 2,
       "explication": "« Liberté » est un poème de la Résistance : il utilise la force des images et du rythme (anaphore, refrain) pour mobiliser. C'est de la poésie engagée."
     },
     {
       "consigne": "Quel est le genre de l'œuvre en couleur ?",
-      "texte": "Aragon rend hommage au groupe Manouchian dans [« L'Affiche rouge »].",
-      "choix": ["Témoignage", "Récit de fiction", "Poésie engagée"],
-      "bonne": 2,
-      "explication": "« L'Affiche rouge » est un poème qui rend hommage aux résistants étrangers fusillés en 1944 : c'est de la poésie engagée."
-    },
-    {
-      "consigne": "Quel est le genre de l'œuvre en couleur ?",
       "texte": "Remarque publie [À l'Ouest rien de nouveau] en 1929.",
-      "choix": ["Témoignage", "Récit de fiction", "Poésie engagée"],
+      "choix": [
+        "Témoignage",
+        "Récit de fiction",
+        "Poésie engagée"
+      ],
       "bonne": 1,
       "explication": "Remarque s'inspire de son expérience mais construit une fiction : c'est un roman, donc un récit de fiction."
     }
   ],
   "devinettes": [
     {
-      "reponse": "Éluard",
-      "acceptees": ["Paul Éluard", "Eluard"],
-      "indices": [
-        "Je suis un poète français du XXe siècle.",
-        "Sous l'Occupation, je publie le recueil Poésie et vérité.",
-        "Mon poème « Liberté » répète « J'écris ton nom » et a été parachuté par des avions."
-      ],
-      "explication": "Paul Éluard est l'auteur de « Liberté » (1942), poème de la Résistance."
-    },
-    {
       "reponse": "Primo Levi",
-      "acceptees": ["Levi"],
+      "acceptees": [
+        "Levi"
+      ],
       "indices": [
         "Je suis un écrivain italien.",
         "J'ai été déporté parce que j'étais juif.",
@@ -107,7 +107,13 @@
     },
     {
       "reponse": "Pseudonyme",
-      "acceptees": ["Un pseudonyme", "Nom de plume", "Un nom de plume", "Faux nom", "Nom d'emprunt"],
+      "acceptees": [
+        "Un pseudonyme",
+        "Nom de plume",
+        "Un nom de plume",
+        "Faux nom",
+        "Nom d'emprunt"
+      ],
       "indices": [
         "Je suis un nom.",
         "Sous l'Occupation, des auteurs me choisissent pour échapper à la répression.",
@@ -117,7 +123,10 @@
     },
     {
       "reponse": "Devoir de mémoire",
-      "acceptees": ["Le devoir de mémoire", "Mémoire"],
+      "acceptees": [
+        "Le devoir de mémoire",
+        "Mémoire"
+      ],
       "indices": [
         "Je suis une obligation morale.",
         "Je demande de transmettre le souvenir des victimes aux générations suivantes.",
