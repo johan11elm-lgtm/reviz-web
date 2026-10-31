@@ -68,6 +68,84 @@ await page.evaluate((data) => {
   localStorage.setItem('reviz-ai-data', JSON.stringify(data))
 }, MOCK_AI_RESPONSE)
 
+// Réviz IA : une vraie conversation (réponse posée par Playwright, rien ne part chez Anthropic).
+const REPONSE_IA = [
+  'Le **théorème de Thalès** sert à calculer une longueur quand deux droites sont parallèles.',
+  '',
+  'Si (MN) // (BC), alors : **AM/AB = AN/AC = MN/BC**',
+  '',
+  'Exemple : AM = 3 cm, AB = 6 cm et BC = 8 cm. Le rapport vaut 3/6 = 1/2, donc **MN = 8 × 1/2 = 4 cm**.',
+  '',
+  'On s’entraîne sur un exercice du brevet ?',
+].join('\n')
+await page.route('**/api/chat', route => route.fulfill({
+  status: 200, contentType: 'text/event-stream',
+  body: [{ meta: { remaining: 9, limit: 10 } }, { text: REPONSE_IA }].map(e => `data: ${JSON.stringify(e)}\n\n`).join('') + 'data: [DONE]\n\n',
+}))
+
+// Scènes jouées (pas seulement une page ouverte).
+const SCENES = {
+  async 'ia-conversation'() {
+    await page.goto('/coach')
+    await page.waitForTimeout(2000)
+    const champ = page.getByPlaceholder('Demande à Réviz IA')
+    await champ.fill('Le théorème de Thalès, ça sert à quoi ?')
+    await champ.press('Enter')
+    await page.waitForTimeout(3000)
+  },
+  async formats() {
+    for (let essai = 0; essai < 12; essai++) {
+      await page.goto('/exercices')
+      await page.waitForTimeout(2200)
+      const t = await page.locator('body').innerText()
+      const fmt = (t.match(/(\S+) · 1 sur/) || [])[1] || 'x'
+      await page.screenshot({ path: `${out}/format-${essai}-${fmt}.png` })
+    }
+  },
+  // Mémory en pleine partie : deux paires trouvées, une carte retournée.
+  async memory() {
+    const PAIRES = [/chloroplaste|organite/i, /autotrophe|propre matière/i, /chlorophylle|pigment/i]
+    for (let essai = 0; essai < 25; essai++) {
+      await page.goto('/exercices')
+      await page.waitForTimeout(2200)
+      if (!/Mémory · 1 sur/.test(await page.locator('body').innerText())) continue
+      const cartes = page.locator('.ex-memo')
+      const textes = []
+      for (let i = 0; i < 6; i += 2) {
+        await cartes.nth(i).click(); await cartes.nth(i + 1).click()
+        textes[i] = await cartes.nth(i).getAttribute('aria-label')
+        textes[i + 1] = await cartes.nth(i + 1).getAttribute('aria-label')
+        await page.waitForTimeout(1300)
+      }
+      const paire = t => PAIRES.findIndex(r => r.test(t))
+      const idx = k => textes.map((t, i) => paire(t) === k ? i : -1).filter(i => i >= 0)
+      for (const k of [0, 2]) {
+        const [a, b] = idx(k)
+        if (await cartes.nth(a).isEnabled()) { await cartes.nth(a).click(); await cartes.nth(b).click(); await page.waitForTimeout(500) }
+      }
+      const [c] = idx(1)
+      if (await cartes.nth(c).isEnabled()) await cartes.nth(c).click()
+      // Les essais pour lire les cartes comptent comme des erreurs : on ne montre que les paires.
+      await page.evaluate(() => { const a = document.querySelector('.ex-aide'); if (a) a.textContent = a.textContent.replace(/ · .*/, '') })
+      await page.waitForTimeout(400)
+      return
+    }
+  },
+  async 'exercice-juste'() {
+    for (let essai = 0; essai < 8; essai++) {
+      await page.goto('/exercices')
+      await page.waitForTimeout(2500)
+      const bonne = page.getByRole('button', { name: /glucose|chlorophylle/i }).first()
+      if (await bonne.count()) {
+        await bonne.click()
+        await page.getByRole('button', { name: 'Valider' }).click()
+        await page.waitForTimeout(1500)
+        return
+      }
+    }
+  },
+}
+
 const demandes = process.argv.slice(3).map(a => a.split(':'))
 const ecrans = demandes.length ? demandes : [
   ['/', 'accueil'], ['/programme', 'programme'], ['/cours', 'cours'], ['/coach', 'reviz-ia'],
@@ -75,8 +153,11 @@ const ecrans = demandes.length ? demandes : [
   ['/battle', 'battle'], ['/scan', 'scan'], ['/resume', 'fiche'], ['/quiz', 'quiz'], ['/flashcards', 'flashcards'],
 ]
 for (const [route, nom] of ecrans) {
-  await page.goto(route)
-  await page.waitForTimeout(2500)
+  if (SCENES[route]) await SCENES[route]()
+  else {
+    await page.goto(route)
+    await page.waitForTimeout(4000)
+  }
   await page.screenshot({ path: `${out}/${nom}.png` })
   console.log('✔', nom, page.url())
 }
