@@ -4,6 +4,7 @@ import { useModalA11y } from '../hooks/useModalA11y';
 import { Mascot } from './Mascot';
 import { sendCoachMessage, CHAT_MAX_MESSAGE_LENGTH } from '../services/chatService';
 import { LimiteAtteinte } from './revizplus/RevizPlusOffre';
+import { ACHAT_DANS_L_APP } from '../utils/achat';
 import { CarteEmail, useEmailAConfirmer } from './CarteEmail';
 import './CoachChat.css';
 import './RevizPlus.css';
@@ -381,7 +382,7 @@ function LimiteAtteinteBouton() {
   const [ouvert, setOuvert] = useState(false);
   return (
     <>
-      <button type="button" className="rv-btn-cta rv-btn-cta--full coach-formules" onClick={() => setOuvert(true)}>50 questions par jour avec Réviz+</button>
+      <button type="button" className="rv-btn-cta rv-btn-cta--full coach-formules" onClick={() => setOuvert(true)}>{ACHAT_DANS_L_APP ? '50 questions par jour avec Réviz+' : 'Mes questions de la semaine'}</button>
       {ouvert && <LimiteAtteinte type="ia" onClose={() => setOuvert(false)} />}
     </>
   );

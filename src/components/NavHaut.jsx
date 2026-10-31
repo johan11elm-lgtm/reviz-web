@@ -4,6 +4,7 @@ import { EtoileIA } from './BottomNav';
 import { Avatar } from './Avatar';
 import { LogoReviz } from './skin/Skin';
 import { AVIS_PROFS_URL, isDecouverte } from '../services/decouverteService';
+import { ACHAT_DANS_L_APP } from '../utils/achat';
 import './NavHaut.css';
 
 // Pages du tunnel (inscription, connexion, essai…) et jeux en plein écran (flashcards, quiz, exercices) : pas de menu.
@@ -71,7 +72,7 @@ export function NavHaut() {
             <span className="nav-haut-ia-libelle">Réviz IA</span>
           </NavLink>
         )}
-        {!isGuest && !hasRevizPlus && (
+        {!isGuest && !hasRevizPlus && ACHAT_DANS_L_APP && (
           <Link to={{ pathname: '/reglages', hash: '#abonnement' }} className="nav-haut-compte nav-haut-abo">
             S’abonner <span className="nav-haut-plus">Réviz+</span>
           </Link>

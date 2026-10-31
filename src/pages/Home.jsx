@@ -444,7 +444,7 @@ export default function Home() {
     <header className="nm-tete">
       <Link to="/" className="nm-tete-logo" aria-label="Réviz"><img src="/logo/pastille.png" width="44" height="44" alt="" /></Link>
       {/* En mode essai, le bandeau juste dessous propose déjà de créer son compte. */}
-      {!isGuest && !hasRevizPlus ? <Link to={{ pathname: '/reglages', hash: '#abonnement' }} className="nm-abo">S’abonner <span>Réviz+</span></Link> : <span />}
+      {!isGuest && !hasRevizPlus && ACHAT_DANS_L_APP ? <Link to={{ pathname: '/reglages', hash: '#abonnement' }} className="nm-abo">S’abonner <span>Réviz+</span></Link> : <span />}
       <Link to="/profil" className="nm-tete-avatar" aria-label={`Mon profil${prenom ? `, ${prenom}` : ''}`}><Avatar size={40} /></Link>
     </header>
   );

@@ -6,4 +6,5 @@
 // -------------------------------------------------------
 import { Capacitor } from '@capacitor/core'
 
-export const ACHAT_DANS_L_APP = !Capacitor.isNativePlatform()
+// VITE_SANS_ACHAT=1 : le web se montre comme l'app iOS (captures de la fiche App Store).
+export const ACHAT_DANS_L_APP = !Capacitor.isNativePlatform() && import.meta.env.VITE_SANS_ACHAT !== '1'

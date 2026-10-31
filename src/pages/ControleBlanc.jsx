@@ -20,6 +20,7 @@ import { jouerSon } from '../utils/sons';
 // Les jeux en plein écran partagent leurs styles (fond, boutons) ; l'épreuve reprend ceux du quiz.
 import './Flashcards.css';
 import './Quiz.css';
+import { ACHAT_DANS_L_APP } from '../utils/achat';
 import './ControleBlanc.css';
 
 const LETTRES = ['A', 'B', 'C', 'D'];
@@ -77,7 +78,9 @@ export default function ControleBlanc() {
           <span className="cb-sur">Contrôle blanc</span>
           <h1 className="cb-titre">Le contrôle blanc fait partie de Réviz+</h1>
           <p className="cb-txt">Ton premier contrôle noté l’a en entier. Pour les suivants, Réviz+ débloque le plan de révision et ses contrôles blancs.</p>
-          <button type="button" className="cb-btn" onClick={() => navigate({ pathname: '/reglages', hash: '#abonnement' })}>Voir Réviz+</button>
+          {ACHAT_DANS_L_APP
+            ? <button type="button" className="cb-btn" onClick={() => navigate({ pathname: '/reglages', hash: '#abonnement' })}>Voir Réviz+</button>
+            : <button type="button" className="cb-btn" onClick={() => navigate('/agenda')}>Retour à l’agenda</button>}
         </div>
       </Cadre>
     );
