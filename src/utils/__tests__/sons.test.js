@@ -84,6 +84,15 @@ describe('Sons de l’app', () => {
     expect(ctx.lances).toHaveLength(1)
   })
 
+  it('app iOS : un fichier servi sans réponse HTTP (statut 0) se joue quand même', async () => {
+    fetch.mockImplementationOnce(async () => ({ ok: false, status: 0, arrayBuffer: async () => new ArrayBuffer(8) }))
+    sons.prechargerSons(['bonne'])
+    await attendre(); await attendre()
+    sons.jouerSon('bonne')
+    expect(fetch).toHaveBeenCalledTimes(1)
+    expect(ctx.lances).toHaveLength(1)
+  })
+
   it('le combo monte do-ré-mi-fa jusqu’au palier, puis sol-la-si-do', () => {
     expect([1, 2, 3, 4].map(sons.demiCombo)).toEqual([0, 2, 4, 5])
     expect([6, 7, 8, 9].map(sons.demiCombo)).toEqual([7, 9, 11, 12])

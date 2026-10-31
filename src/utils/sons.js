@@ -32,7 +32,8 @@ function charger(a, nom) {
   if (tampons.has(nom)) return Promise.resolve(tampons.get(nom));
   if (!enCours.has(nom)) {
     enCours.set(nom, fetch(URLS[nom])
-      .then(r => { if (!r.ok) throw new Error(nom); return r.arrayBuffer(); })
+      // Dans l'app iOS, Capacitor sert les MP3 sans réponse HTTP : statut 0, mais le fichier est là.
+      .then(r => { if (!r.ok && r.status !== 0) throw new Error(nom); return r.arrayBuffer(); })
       .then(octets => decoder(a, octets))
       .then(b => { tampons.set(nom, b); return b; })
       .catch(() => { enCours.delete(nom); return null; })); // réessayé au prochain appel
