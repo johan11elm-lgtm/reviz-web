@@ -46,8 +46,11 @@ bouton mène à une erreur).
 4. **Firebase → Authentication → Sign-in method → Apple** : activer, puis
    renseigner le Services ID, le Team ID, le Key ID et la clé privée. Ces
    informations servent aussi à la révocation à la suppression du compte.
-5. **Xcode** → cible *App* → *Signing & Capabilities* → *+ Capability* →
-   *Sign in with Apple*.
+5. **Xcode** : fait le 31/10 — `ios/App/App/App.entitlements`
+   (`com.apple.developer.applesignin`) est branché sur la cible *App*
+   (Debug et Release) et `.env.ios` active le bouton. Reste à choisir
+   l'équipe dans *Signing & Capabilities* une fois le compte payé.
+   Sans compte payé, la connexion Apple échoue (pas de profil autorisé).
 
 ## Microsoft
 
