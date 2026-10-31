@@ -4,6 +4,7 @@ import { compteVerifie } from './_compteVerifie.js'
 import { consumeQuota, refundQuota, FREE_LIMIT } from './_quota.js'
 import { LANCEMENT_SCAN_LIMIT } from './_lancement.js'
 import { revizPlusOffertServeur } from './_offert.js'
+import { marquerLimite } from './_limiteParent.js'
 
 // Runtime Node (pas edge) : nécessaire pour firebase-admin (quota + auth).
 export const config = { maxDuration: 120 }
@@ -65,7 +66,12 @@ export default async function handler(req, res) {
   if (!isPremium || sansEmail) {
     const offert = await revizPlusOffertServeur()
     const q = await consumeQuota({ db, uid, limit: offert ? LANCEMENT_SCAN_LIMIT : FREE_LIMIT, sansEmail })
-    if (!q.allowed) return q.sansEmail ? res.status(403).send('EMAIL_NOT_VERIFIED') : res.status(429).send('RATE_LIMIT')
+    if (!q.allowed && q.sansEmail) return res.status(403).send('EMAIL_NOT_VERIFIED')
+    if (!q.allowed) {
+      // Le parent en sera prévenu par le cron du soir (api/_limiteParent.js).
+      if (!isPremium && !offert) await marquerLimite({ db, uid, type: 'scan' })
+      return res.status(429).send('RATE_LIMIT')
+    }
     consumed = true
   }
 

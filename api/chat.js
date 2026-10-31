@@ -8,6 +8,7 @@ import { compteVerifie } from './_compteVerifie.js'
 import { consumeChatQuota, refundChatQuota, CHAT_FREE_LIMIT, CHAT_FREE_PERIODE, CHAT_PREMIUM_LIMIT, CHAT_PREMIUM_PERIODE } from './_chatQuota.js'
 import { LANCEMENT_CHAT_LIMIT } from './_lancement.js'
 import { revizPlusOffertServeur } from './_offert.js'
+import { marquerLimite } from './_limiteParent.js'
 
 // Runtime Node (firebase-admin) + streaming SSE : contrairement à /api/analyse
 // (JSON complet à parser → non-streaming), une réponse de chat est du texte
@@ -87,7 +88,11 @@ export default async function handler(req, res) {
   const limit = isPremium ? CHAT_PREMIUM_LIMIT : (offert ? LANCEMENT_CHAT_LIMIT : CHAT_FREE_LIMIT)
   const periode = plus ? CHAT_PREMIUM_PERIODE : CHAT_FREE_PERIODE
   const q = await consumeChatQuota({ db, uid, limit, periode })
-  if (!q.allowed) return res.status(429).send('CHAT_LIMIT')
+  if (!q.allowed) {
+    // Le parent en sera prévenu par le cron du soir (api/_limiteParent.js).
+    if (!plus) await marquerLimite({ db, uid, type: 'ia' })
+    return res.status(429).send('CHAT_LIMIT')
+  }
 
   // 4. Appel Anthropic en streaming. `create` avec stream: true rend la main
   //    une fois les en-têtes reçus : une erreur HTTP lève ici, avant le flux,
