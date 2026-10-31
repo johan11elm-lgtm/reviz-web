@@ -293,7 +293,7 @@ function Detail({ it, ouverture, erreur, grand, onLancer, onScanner }) {
   // Cartes à revoir : seulement une fois les flashcards commencées (sinon toutes comptent).
   const aRevoir = it.state === 'a-revoir' ? it.dueCards : 0;
   const contenu = it.ch.pret
-    ? `${it.ch.flashcards} flashcards · quiz de ${it.ch.quiz} questions · résumé et carte mentale`
+    ? `${it.ch.flashcards} flashcards · exercices en jeu · résumé et carte mentale`
     : 'Ce chapitre arrive bientôt.';
   return (
     <div className={`prg-detail${grand ? ' prg-detail--grand' : ''}`}>
