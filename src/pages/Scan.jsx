@@ -12,6 +12,7 @@ import { getScanStatus } from '../services/scanLimitService';
 import { LESSON_TEXT_MAX_LABEL, isLessonTextTooLong, truncateLessonText } from '../utils/lessonText';
 import { TEINTES, varsTeinte } from '../utils/teinteMatiere';
 import '../components/reviz/HerosMatiere.css';
+import { ACHAT_DANS_L_APP } from '../utils/achat';
 import './Scan.css';
 
 const MIN = 200;
@@ -68,7 +69,7 @@ function Quota({ statut, plus, onOffre, grand }) {
       <span className="sc-segments" aria-hidden="true">
         {Array.from({ length: statut.limit }, (_, i) => <i key={i} className={i < statut.remaining ? 'is-reste' : ''} />)}
       </span>
-      <button type="button" className="sc-lien" onClick={onOffre}>Illimité avec Réviz+<PetitChevron /></button>
+      {ACHAT_DANS_L_APP && <button type="button" className="sc-lien" onClick={onOffre}>Illimité avec Réviz+<PetitChevron /></button>}
     </div>
   );
 }
@@ -206,7 +207,7 @@ export default function Scan() {
           <h1 className="sc-carte-titre">Tu as utilisé tes scans de la semaine.</h1>
           <p className="sc-carte-txt">Ils reviennent lundi.</p>
           <span className="sc-segments sc-segments--large" aria-hidden="true">{Array.from({ length: statut.limit }, (_, i) => <i key={i} />)}</span>
-          <button type="button" className="sc-btn" onClick={() => setOffre(true)}>Scans illimités avec Réviz+</button>
+          {ACHAT_DANS_L_APP && <button type="button" className="sc-btn" onClick={() => setOffre(true)}>Scans illimités avec Réviz+</button>}
           <button type="button" className="sc-btn sc-btn--creme" onClick={() => navigate('/programme')}>Réviser mon programme en attendant</button>
         </div>
         {fenetres}

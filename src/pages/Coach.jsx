@@ -25,6 +25,7 @@ import { TEINTES, teinteMatiere } from '../utils/teinteMatiere';
 import { useIsDesktop } from '../hooks/useMediaQuery';
 import { useModalA11y } from '../hooks/useModalA11y';
 import '../components/RevizPlus.css';
+import { ACHAT_DANS_L_APP } from '../utils/achat';
 import './Coach.css';
 
 const pluriel = (n, mot) => `${n} ${mot}${n > 1 ? 's' : ''}`;
@@ -559,7 +560,7 @@ export default function Coach() {
           <span>{hasRevizPlus ? 'On reprend demain matin.' : semaine ? 'Elles reviennent lundi.' : 'Elles reviennent demain matin.'}</span>
         </span>
       </div>
-      {!hasRevizPlus && <button type="button" className="ia-btn" onClick={() => setOffre(true)}>50 questions par jour avec Réviz+</button>}
+      {!hasRevizPlus && ACHAT_DANS_L_APP && <button type="button" className="ia-btn" onClick={() => setOffre(true)}>50 questions par jour avec Réviz+</button>}
     </div>
   ) : bloqueEmail ? (
     <CarteEmail raison="ia" note={saisie.trim() ? 'Ta question t’attend ici.' : undefined} onConfirme={() => setRefusEmail(false)} />

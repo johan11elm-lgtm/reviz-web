@@ -6,6 +6,7 @@ import { FONDS, TETES } from '../utils/avatars'
 import { choisirAvatar } from '../services/avatarService'
 import { Avatar, useChoixAvatar } from './Avatar'
 import { RevizPlusBadge, RevizPlusSheet } from './RevizPlus'
+import { ACHAT_DANS_L_APP } from '../utils/achat'
 import './Avatar.css'
 
 const Cadenas = () => (
@@ -30,7 +31,7 @@ export function ChoixAvatar({ onClose }) {
     return (
       <li key={t.id}>
         <button type="button" className={`av-choix${choisi ? ' is-choisi' : ''}${ferme ? ' av-choix--ferme' : ''}`} aria-pressed={choisi}
-          aria-label={ferme ? `${t.nom}, avec Réviz+` : t.nom} onClick={() => (ferme ? setOffre(true) : changer({ tete: t.id }))}>
+          aria-label={ferme ? `${t.nom}, avec Réviz+` : t.nom} onClick={() => (ferme ? ACHAT_DANS_L_APP && setOffre(true) : changer({ tete: t.id }))}>
           <Avatar size={68} tete={t} fond={fond} />
           {ferme && <span className="av-cadenas" aria-hidden="true"><Cadenas /></span>}
           <span aria-hidden="true">{t.nom}</span>

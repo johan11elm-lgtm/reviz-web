@@ -28,6 +28,7 @@ import { lireEspaceParent, reglerEspaceParent, couperLiensParent } from '../serv
 import { lectureDysActive, appliquerLecture } from '../utils/lecture';
 import { sonActif, bruitagesActifs } from '../utils/bruitages';
 import { jouerSon } from '../utils/sons';
+import { ACHAT_DANS_L_APP } from '../utils/achat';
 
 const CLASSES_COLLEGE = ['6ème', '5ème', '4ème', '3ème'];
 const classeCourte = c => c?.replace(/ème$/, 'e') ?? '';
@@ -473,7 +474,7 @@ export default function Reglages() {
         <div className="rg-verrou" role="status">
           <b>{themeVerrouille} fait partie de Réviz+.</b>
           <span>Tu peux le découvrir quand tu veux.</span>
-          {!isGuest && VENTES_OUVERTES && <button type="button" className="rg-btn rg-btn--blanc rg-btn--petit" onClick={() => setRevizPlusOuvert(true)}>Voir Réviz+</button>}
+          {!isGuest && VENTES_OUVERTES && ACHAT_DANS_L_APP && <button type="button" className="rg-btn rg-btn--blanc rg-btn--petit" onClick={() => setRevizPlusOuvert(true)}>Voir Réviz+</button>}
         </div>
       )}
     </section>
@@ -496,13 +497,17 @@ export default function Reglages() {
         <>
           <div className="rg-plus-formule">
             <Mascot pose="levelup" size={60} alt="" aria-hidden="true" />
-            <span><b>{nom}</b><span>{prix.montant} {prix.cadence === '/an' ? 'par an' : 'par mois'}</span></span>
+            <span><b>{nom}</b>{ACHAT_DANS_L_APP && <span>{prix.montant} {prix.cadence === '/an' ? 'par an' : 'par mois'}</span>}</span>
           </div>
           {echeance && <div className="rg-plus-echeance"><span>{echeance[0]}</span><b>{echeance[1]}</b></div>}
-          <button type="button" className="rg-btn rg-btn--blanc" onClick={handleManageSubscription} disabled={billingLoading}>
-            {billingLoading ? 'Ouverture…' : 'Gérer mon abonnement'}
-          </button>
-          <p className="rg-note rg-note--centre">S’ouvre sur le portail de paiement sécurisé.</p>
+          {ACHAT_DANS_L_APP && (
+            <>
+              <button type="button" className="rg-btn rg-btn--blanc" onClick={handleManageSubscription} disabled={billingLoading}>
+                {billingLoading ? 'Ouverture…' : 'Gérer mon abonnement'}
+              </button>
+              <p className="rg-note rg-note--centre">S’ouvre sur le portail de paiement sécurisé.</p>
+            </>
+          )}
         </>
       );
     } else if (revizPlusOffert) {
@@ -516,7 +521,7 @@ export default function Reglages() {
             <Mascot pose="trophy" size={60} alt="" aria-hidden="true" />
             <span><b>Réviz+ offert</b><span>{texte}</span></span>
           </div>
-          {VENTES_OUVERTES && fondateurOuvert && (
+          {VENTES_OUVERTES && ACHAT_DANS_L_APP && fondateurOuvert && (
             <>
               <p className="rg-note">Garde ton prix fondateur après le lancement. Rien n’est prélevé avant le {PREMIER_PRELEVEMENT}.</p>
               <button type="button" className="rg-btn" onClick={() => reserver('annuel')} disabled={!!paiement}>
@@ -541,7 +546,7 @@ export default function Reglages() {
             <li><CheckIcon />50 questions à Réviz IA par jour</li>
             <li><CheckIcon />Les {THEMES_PROPOSES.filter(t => t.premium).length} thèmes Réviz+</li>
           </ul>
-          {VENTES_OUVERTES && <button type="button" className="rg-btn" onClick={() => setRevizPlusOuvert(true)}>Découvrir Réviz+</button>}
+          {VENTES_OUVERTES && ACHAT_DANS_L_APP && <button type="button" className="rg-btn" onClick={() => setRevizPlusOuvert(true)}>Découvrir Réviz+</button>}
         </>
       );
     }

@@ -8,6 +8,7 @@ import { useIsDesktop } from '../../hooks/useMediaQuery';
 import { startCheckout } from '../../services/billingService';
 import { FORMULE_PAR_DEFAUT, prixDe } from '../../../api/_prix.js';
 import { tarifFondateurOuvert } from '../../../api/_lancement.js';
+import { ACHAT_DANS_L_APP } from '../../utils/achat';
 import '../reviz/HerosMatiere.css';
 import './RevizPlusOffre.css';
 
@@ -54,6 +55,16 @@ export function DecouvrirRevizPlus({ onClose }) {
   const [erreur, setErreur] = useState('');
   const annuel = prixDe('annuel', fondateur);
   const mensuel = prixDe('mensuel', fondateur);
+  const comparatif = (
+    <table className="rpo-compare">
+      <thead><tr><th scope="col"><span className="rpo-sur">Ce que ça change</span></th><th scope="col">Gratuit</th><th scope="col"><span className="rpo-plus">Réviz+</span></th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Scans de leçons</th><td>5 par semaine</td><td>Illimités</td></tr>
+        <tr><th scope="row">Questions à Réviz IA</th><td>10 par semaine</td><td>50 par jour</td></tr>
+        <tr><th scope="row">Thèmes</th><td>1</td><td>4</td></tr>
+      </tbody>
+    </table>
+  );
 
   async function payer() {
     if (paiement) return;
@@ -67,6 +78,17 @@ export function DecouvrirRevizPlus({ onClose }) {
     }
   }
 
+  if (!ACHAT_DANS_L_APP) {
+    return (
+      <Fenetre label="Réviz+" pose="hello" onClose={onClose}>
+        <h2 className="rpo-titre">Réviz+</h2>
+        <p className="rpo-sous">Pour aller plus loin, quand tu veux.</p>
+        {comparatif}
+        <button type="button" className="rpo-btn" onClick={onClose}>Compris</button>
+      </Fenetre>
+    );
+  }
+
   const options = [
     { id: 'annuel', titre: 'À l’année', prix: annuel, cadence: 'par an', detail: `soit ${annuel.parMois} par mois`, badge: true },
     { id: 'mensuel', titre: 'Au mois', prix: mensuel, cadence: 'par mois', detail: 'sans engagement' },
@@ -76,14 +98,7 @@ export function DecouvrirRevizPlus({ onClose }) {
       <h2 className="rpo-titre">Réviz+</h2>
       <p className="rpo-sous">Pour aller plus loin, quand tu veux.</p>
       {fondateur && <span className="rpo-sceau">Membre fondateur</span>}
-      <table className="rpo-compare">
-        <thead><tr><th scope="col"><span className="rpo-sur">Ce que ça change</span></th><th scope="col">Gratuit</th><th scope="col"><span className="rpo-plus">Réviz+</span></th></tr></thead>
-        <tbody>
-          <tr><th scope="row">Scans de leçons</th><td>5 par semaine</td><td>Illimités</td></tr>
-          <tr><th scope="row">Questions à Réviz IA</th><td>10 par semaine</td><td>50 par jour</td></tr>
-          <tr><th scope="row">Thèmes</th><td>1</td><td>4</td></tr>
-        </tbody>
-      </table>
+      {comparatif}
       <span className="rpo-sur rpo-sur--bloc">Ta formule</span>
       <div className="rpo-formules" role="radiogroup" aria-label="Ta formule">
         {options.map(o => (
@@ -151,8 +166,8 @@ export function LimiteAtteinte({ type = 'scan', limite, abonne = false, offertJu
         ) : <b className="rpo-points-total">{n} sur {n}</b>}
         {abonne && offertJusquau && <p className="rpo-carte-note">Réviz+ t’est offert jusqu’au {offertJusquau} : c’est déjà la limite la plus haute.</p>}
       </div>
-      {!abonne && <button type="button" className="rpo-btn" onClick={() => setOffre(true)}>{l.action}</button>}
-      <button type="button" className={`rpo-btn${abonne ? '' : ' rpo-btn--second'}`} onClick={() => { onClose?.(); navigate('/programme'); }}>{abonne ? 'Réviser mon programme' : 'Réviser mon programme en attendant'}</button>
+      {!abonne && ACHAT_DANS_L_APP && <button type="button" className="rpo-btn" onClick={() => setOffre(true)}>{l.action}</button>}
+      <button type="button" className={`rpo-btn${abonne || !ACHAT_DANS_L_APP ? '' : ' rpo-btn--second'}`} onClick={() => { onClose?.(); navigate('/programme'); }}>{abonne ? 'Réviser mon programme' : 'Réviser mon programme en attendant'}</button>
       <button type="button" className="rpo-lien" onClick={onClose}>Plus tard</button>
     </Fenetre>
   );

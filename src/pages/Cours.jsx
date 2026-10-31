@@ -14,6 +14,7 @@ import { useIsDesktop } from '../hooks/useMediaQuery';
 import '../components/reviz/HerosMatiere.css';
 import './Cours.css';
 import { revenir } from '../utils/navigation';
+import { ACHAT_DANS_L_APP } from '../utils/achat';
 
 const pluriel = (n, mot) => `${n} ${mot}${n > 1 ? 's' : ''}`;
 
@@ -202,7 +203,7 @@ export default function Cours() {
         {Array.from({ length: scan.limit }, (_, i) => <i key={i} className={i < scan.used ? 'is-pris' : ''} />)}
       </span>
       <span className="le-quota-txt">{scan.remaining > 0 ? `${pluriel(scan.remaining, 'scan')} ${scan.remaining > 1 ? 'restants' : 'restant'}${isDesktop ? ' cette semaine' : ''}` : 'Plus de scan cette semaine'}</span>
-      <button type="button" className="le-quota-plus" onClick={() => setOffre(true)}>Illimité avec Réviz+</button>
+      {ACHAT_DANS_L_APP && <button type="button" className="le-quota-plus" onClick={() => setOffre(true)}>Illimité avec Réviz+</button>}
     </div>
   );
   const carteScan = isGuest ? (
