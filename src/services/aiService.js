@@ -9,6 +9,7 @@ import { apiFetch } from './apiClient.js'
 import { MODEL, BRANCH_COLORS, BRANCH_POSITIONS, buildSystemPrompt, buildLessonUserMessage, LESSON_IMAGE_INSTRUCTION } from '../utils/aiPrompts.js'
 import { downscaleDataUrl } from '../utils/downscaleImage.js'
 import { parseLessonJson } from '../utils/lessonSchema.js'
+import { exigerAccordIA } from '../utils/accordIA.js'
 
 const API_URL   = 'https://api.anthropic.com/v1/messages'
 
@@ -99,6 +100,8 @@ export function _parseResult(raw) {
 // Appel via proxy Vercel (production)
 // -------------------------------------------------------
 async function _callProxy(endpoint, payload, onProgress) {
+  // Rien ne part chez Anthropic sans l'accord de l'élève (app iOS, règle 5.1.2(i)).
+  await exigerAccordIA()
   let idToken = null
   try { idToken = await getIdToken() } catch { /* non bloquant */ }
 

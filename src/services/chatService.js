@@ -11,6 +11,7 @@ import { buildChatRequest, buildChatLessonContext, CHAT_MESSAGE_REFUS, CHAT_MAX_
 import { jourParis } from '../utils/retour.js'
 import { traceCarte } from '../utils/agent.js'
 import { memoriserQuotaCoach } from '../utils/revizPlus.js'
+import { exigerAccordIA } from '../utils/accordIA.js'
 
 export { CHAT_MAX_MESSAGE_LENGTH }
 
@@ -101,6 +102,8 @@ async function _fetchWithHeaderTimeout(url, init) {
 }
 
 async function _viaProxy({ lessonId, messages, level, onDelta, onOutil, onCarte, erreurs }) {
+  // Rien ne part chez Anthropic sans l'accord de l'élève (app iOS, règle 5.1.2(i)).
+  await exigerAccordIA()
   const envoyer = idToken => _fetchWithHeaderTimeout('/api/chat', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

@@ -29,6 +29,7 @@ import { lectureDysActive, appliquerLecture } from '../utils/lecture';
 import { sonActif, bruitagesActifs } from '../utils/bruitages';
 import { jouerSon } from '../utils/sons';
 import { ACHAT_DANS_L_APP } from '../utils/achat';
+import { ACCORD_IA_REQUIS, accordIADonne, retirerAccordIA, demanderAccordIA } from '../utils/accordIA';
 
 const CLASSES_COLLEGE = ['6ème', '5ème', '4ème', '3ème'];
 const classeCourte = c => c?.replace(/ème$/, 'e') ?? '';
@@ -294,6 +295,7 @@ export default function Reglages() {
   const [espaceMessage, setEspaceMessage] = useState(null); // { type, texte }
   const [lectureDys, setLectureDys] = useState(lectureDysActive);
   const [sons, setSons] = useState(sonActif);
+  const [accordIA, setAccordIA] = useState(accordIADonne);
   useEffect(() => {
     if (isGuest || !currentUser?.uid) return;
     let vivant = true;
@@ -325,6 +327,12 @@ export default function Reglages() {
     setSons(actif);
     bruitagesActifs(actif);
     if (actif) jouerSon('bonne');
+  }
+
+  // Accord d'envoi à l'IA (app iOS) : le retirer coupe Réviz IA et les scans jusqu'au prochain « J'accepte ».
+  async function basculerAccordIA() {
+    if (accordIA) { retirerAccordIA(); setAccordIA(false); return; }
+    setAccordIA(await demanderAccordIA());
   }
 
   // ── Blocs ──
@@ -408,6 +416,17 @@ export default function Reglages() {
         icone: <SpeakerIcon />, teinte: 'peche', label: 'Bruitages',
         sous: 'Les réponses, le combo, les récompenses, la Battle et les Réviz Games.',
         droite: <Interrupteur checked={sons} onChange={basculerSons} label="Activer les bruitages" />,
+      })}
+    </section>
+  );
+
+  const donneesIA = ACCORD_IA_REQUIS && (
+    <section className="rg-carte" aria-labelledby="rg-ia">
+      <h2 id="rg-ia" className="rg-h2">Réviz IA</h2>
+      {ligne({
+        icone: <ChatIcon />, teinte: 'lavande', label: 'Envoi à l’IA d’Anthropic',
+        sous: 'Tes questions et tes leçons scannées partent chez Claude pour te répondre. Sans accord, Réviz IA et le scan restent fermés.',
+        droite: <Interrupteur checked={accordIA} onChange={basculerAccordIA} label="Autoriser l’envoi à l’IA d’Anthropic" />,
       })}
     </section>
   );
@@ -721,10 +740,10 @@ export default function Reglages() {
         {isDesktop ? (
           <div className="rg-colonnes">
             <div className="rg-colonne">{essai}{compte}{rappels}{espace}{objectif}</div>
-            <div className="rg-colonne">{apparence}{lecture}{sonsCarte}{revizPlus}{informations}</div>
+            <div className="rg-colonne">{apparence}{lecture}{sonsCarte}{donneesIA}{revizPlus}{informations}</div>
           </div>
         ) : (
-          <div className="rg-colonne">{essai}{compte}{rappels}{espace}{objectif}{apparence}{lecture}{sonsCarte}{revizPlus}{informations}</div>
+          <div className="rg-colonne">{essai}{compte}{rappels}{espace}{objectif}{apparence}{lecture}{sonsCarte}{donneesIA}{revizPlus}{informations}</div>
         )}
         {pied}
       </div>

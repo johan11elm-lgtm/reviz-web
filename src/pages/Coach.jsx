@@ -6,6 +6,7 @@ import { useAuth } from '../context/AuthContext';
 import { Mascot } from '../components/Mascot';
 import { BulleReviz } from '../components/reviz/BulleReviz';
 import { DecouvrirRevizPlus } from '../components/revizplus/RevizPlusOffre';
+import { SignalerReponse } from '../components/SignalerReponse';
 import { coachPreview, loadConversation, saveConversation, renderCoachMessage, COACH_ERREURS } from '../components/CoachChat';
 import { sendCoachMessage, CHAT_MAX_MESSAGE_LENGTH } from '../services/chatService';
 import { loadLessons, restoreLesson } from '../services/historyService';
@@ -525,6 +526,7 @@ export default function Coach() {
                 ))}
               </div>
             )}
+            <SignalerReponse reponse={m.content} question={messages[i - 1]?.content} lessonId={leconId} />
             {i === derniere && !enCours && !limite && (
               <div className="ia-relances">
                 {Object.keys(RELANCES).map(r => <button type="button" key={r} className="ia-relance" onClick={() => envoyer(RELANCES[r])}>{r}</button>)}

@@ -1,0 +1,6 @@
+/* Feuille d'accord avant l'envoi à l'IA (AccordIA.jsx), sur le gabarit AnnonceBattle.css. */
+.aia-tete { display: flex; align-items: center; gap: 14px; margin-top: 6px; }
+.aia-titre { margin: 0; font-size: 26px; line-height: 1.15; }
+.ban-feuille--fenetre .aia-titre { font-size: 30px; }
+.aia-note { margin: 0; font-size: 13.5px; line-height: 1.45; color: var(--rv-doux); }
+.aia-note a { color: var(--rv-encre); font-weight: 700; }

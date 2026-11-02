@@ -1,0 +1,23 @@
+/* « Signaler » sous une réponse de Réviz IA (SignalerReponse.jsx) : lien discret, feuille sur le gabarit AnnonceBattle.css. */
+.sig-lien {
+  display: inline-flex; align-items: center; gap: 5px; min-height: 32px; margin-top: 6px; padding: 0 2px;
+  border: 0; background: none; font: inherit; font-size: 13px; font-weight: 600; color: var(--rv-doux); cursor: pointer;
+}
+.sig-lien:hover { color: var(--rv-encre); }
+.sig-merci { margin: 6px 0 0; font-size: 13px; font-weight: 600; color: var(--rv-doux); }
+.sig-titre { font-size: 26px; }
+.sig-raisons { display: flex; flex-direction: column; gap: 8px; }
+.sig-raison {
+  display: flex; align-items: center; gap: 12px; min-height: 52px; padding: 0 16px;
+  border: 1.5px solid var(--rv-ligne); border-radius: 18px; background: var(--rv-carte);
+  font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 600; color: var(--rv-encre); text-align: left; cursor: pointer;
+}
+.sig-raison--choisie { border-color: var(--rv-orange); }
+.sig-rond { flex: none; width: 20px; height: 20px; box-sizing: border-box; border: 2px solid var(--rv-ligne); border-radius: 50%; }
+.sig-raison--choisie .sig-rond { border: 6px solid var(--rv-orange); }
+.sig-precision {
+  width: 100%; box-sizing: border-box; padding: 12px 14px; border: 1.5px solid var(--rv-ligne); border-radius: 16px;
+  background: var(--rv-carte); font: inherit; font-size: 16px; color: var(--rv-encre); resize: none;
+}
+.sig-erreur { margin: 0; font-size: 14px; font-weight: 600; color: var(--rv-rouge-texte, #C0392B); }
+.ban-btn:disabled { opacity: .5; cursor: default; }

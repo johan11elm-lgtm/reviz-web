@@ -6,6 +6,7 @@ import { sendCoachMessage, CHAT_MAX_MESSAGE_LENGTH } from '../services/chatServi
 import { LimiteAtteinte } from './revizplus/RevizPlusOffre';
 import { ACHAT_DANS_L_APP } from '../utils/achat';
 import { CarteEmail, useEmailAConfirmer } from './CarteEmail';
+import { SignalerReponse } from './SignalerReponse';
 import './CoachChat.css';
 import './RevizPlus.css';
 
@@ -23,6 +24,7 @@ export const COACH_ERREURS = {
   UNAUTHORIZED:       'Connexion expirée — reconnecte-toi puis réessaie.',
   EMAIL_NOT_VERIFIED: "Confirme ton email d'abord (le lien qu'on t'a envoyé), puis reviens me voir !",
   LESSON_NOT_FOUND:   'Je ne retrouve plus cette leçon… Réessaie depuis « Mes cours ».',
+  ACCORD_IA_REFUSE:   'Sans ton accord, Réviz IA ne peut pas te répondre. Renvoie ta question quand tu veux.',
   AGENT_SERVEUR:      'Sans leçon, Réviz IA a besoin du serveur : choisis une leçon pour tester en local.',
 };
 
@@ -268,7 +270,10 @@ export function CoachConversation({ lessonId, prefill, className = '' }) {
                 <div className="coach-bubble coach-bubble--user">{m.content}</div>
               </div>
             ) : (
-              <CoachRow key={i}>{renderCoachMessage(m.content)}</CoachRow>
+              <CoachRow key={i}>
+                {renderCoachMessage(m.content)}
+                <SignalerReponse reponse={m.content} question={messages[i - 1]?.content} lessonId={lessonId} className="coach-signaler" />
+              </CoachRow>
             )
           ))}
 

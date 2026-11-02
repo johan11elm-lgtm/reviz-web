@@ -2,9 +2,10 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 
 const add = vi.fn(async () => ({ id: 'x' }))
 const collection = vi.fn(() => ({ add }))
-vi.mock('../_firebaseAdmin.js', () => ({ getDb: () => ({ collection }) }))
+const verifyIdToken = vi.fn(async t => { if (t !== 'jeton-ok') throw new Error('bad'); return { uid: 'eleve1' } })
+vi.mock('../_firebaseAdmin.js', () => ({ getDb: () => ({ collection }), getAuthAdmin: () => ({ verifyIdToken }) }))
 
-const { default: handler, buildAvis, MAX_TEXTE } = await import('../avis.js')
+const { default: handler, buildAvis, buildSignalement, MAX_TEXTE, MAX_REPONSE } = await import('../avis.js')
 
 function mockRes() {
   return {
@@ -128,5 +129,34 @@ describe('handler', () => {
 
     const longue = buildAvis({ profil: 'parent', plait: 'Top', citation: true, signature: 'x'.repeat(200) }).avis
     expect(longue.signature).toHaveLength(60)
+  })
+})
+
+describe('signalement d’une réponse de Réviz IA', () => {
+  it('garde la raison, la question, la réponse et l’élève', () => {
+    expect(buildSignalement({ raison: 'faux', reponse: ' 2 + 2 = 5 ', question: 'Combien font 2 + 2 ?', lessonId: 'l1', device: 'app', prenom: 'Léa' }, 'eleve1', NOW)).toEqual({
+      signalement: { uid: 'eleve1', raison: 'faux', reponse: '2 + 2 = 5', question: 'Combien font 2 + 2 ?', lessonId: 'l1', device: 'app', createdAt: NOW, traite: false },
+    })
+  })
+
+  it('refuse une raison inconnue ou une réponse vide, coupe les textes trop longs', () => {
+    expect(buildSignalement({ raison: 'bof', reponse: 'x' }, 'u')).toEqual({ error: 'RAISON' })
+    expect(buildSignalement({ raison: 'autre', reponse: '   ' }, 'u')).toEqual({ error: 'VIDE' })
+    expect(buildSignalement({ raison: 'autre', reponse: 'a'.repeat(MAX_REPONSE + 50) }, 'u').signalement.reponse).toHaveLength(MAX_REPONSE)
+  })
+
+  it('exige un compte connecté', async () => {
+    const res = mockRes()
+    await handler({ method: 'POST', query: { op: 'signalement' }, body: { raison: 'faux', reponse: 'x', idToken: 'faux' } }, res)
+    expect(res.statusCode).toBe(401)
+    expect(add).not.toHaveBeenCalled()
+  })
+
+  it('enregistre dans signalements', async () => {
+    const res = mockRes()
+    await handler({ method: 'POST', query: { op: 'signalement' }, body: JSON.stringify({ raison: 'choquant', reponse: 'Réponse', idToken: 'jeton-ok' }) }, res)
+    expect(res.statusCode).toBe(204)
+    expect(collection).toHaveBeenCalledWith('signalements')
+    expect(add.mock.calls[0][0]).toMatchObject({ uid: 'eleve1', raison: 'choquant', reponse: 'Réponse' })
   })
 })

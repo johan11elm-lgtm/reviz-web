@@ -264,6 +264,7 @@ export default function Analyse() {
 
   const errorMessages = {
     NON_SCOLAIRE:    { title: "Ça n'a pas l'air d'une leçon", sub: "Je n'y trouve pas de cours. Si c'est bien ta leçon, reprends la photo en cadrant tout le texte, bien à plat." },
+    ACCORD_IA_REFUSE: { title: 'Réviz attend ton accord', sub: 'Pour lire ta leçon, Réviz l’envoie à Claude, l’IA d’Anthropic. Réessaie et accepte quand tu veux.' },
     RATE_LIMIT:      { title: 'Trop de scans d\'un coup', sub: 'Patiente un petit moment, puis réessaie.' },
     NETWORK_ERROR:   { title: 'Pas de connexion', sub: 'Vérifie ta connexion internet et réessaie.' },
     TIMEOUT:         { title: 'Ça a pris trop de temps', sub: 'Vérifie ta connexion et réessaie.' },
@@ -311,7 +312,9 @@ export default function Analyse() {
     lignes: [errInfo.title + (/[.!?]$/.test(errInfo.title) ? '' : '.'), 'Rien de grave, on recommence.'],
     titre: errInfo.title,
     texte: errInfo.sub,
-    action: errInfo.cta ? [errInfo.cta.label, () => navigate(errInfo.cta.to, { replace: true })] : ['Retour au scan', verScan],
+    // Accord refusé : la leçon est toujours là, recharger relance l'analyse (et redemande l'accord).
+    action: error === 'ACCORD_IA_REFUSE' ? ['Réessayer', () => window.location.reload()]
+      : errInfo.cta ? [errInfo.cta.label, () => navigate(errInfo.cta.to, { replace: true })] : ['Retour au scan', verScan],
     // Refus « pas une leçon » : la même leçon existe souvent déjà dans le programme, l'élève révise quand même.
     autre: error === 'NON_SCOLAIRE'
       ? ['Trouver mon chapitre', () => navigate('/programme', { replace: true })]

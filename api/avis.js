@@ -8,8 +8,11 @@
 // déployer. Pas d'adresse IP ni d'identifiant : seulement ce que la
 // personne a écrit, la date, la provenance (affiche, profil…) et le type
 // d'appareil.
+// Greffe ?op=signalement (POST, jeton Firebase) : un élève signale une
+// réponse de Réviz IA (règles 1.2 et 4.7 de l'App Store) ; enregistrée dans
+// signalements/{id} pour relecture, avec la question et la réponse.
 // -------------------------------------------------------
-import { getDb } from './_firebaseAdmin.js'
+import { getDb, getAuthAdmin } from './_firebaseAdmin.js'
 
 export const PROFILS = ['enseignant', 'eleve', 'parent', 'autre']
 export const CONSEILS = ['oui', 'peut-etre', 'non']
@@ -73,6 +76,40 @@ export function buildAvis(body, now = new Date()) {
   return { avis }
 }
 
+export const RAISONS = ['faux', 'choquant', 'hors-sujet', 'autre']
+export const MAX_REPONSE = 6000
+export const MAX_QUESTION = 2000
+
+/** Valide un signalement de réponse de Réviz IA : { signalement } ou { error }. */
+export function buildSignalement(body, uid, now = new Date()) {
+  if (!body || typeof body !== 'object') return { error: 'BAD_BODY' }
+  if (!RAISONS.includes(body.raison)) return { error: 'RAISON' }
+  const reponse = texte(body.reponse, MAX_REPONSE)
+  if (!reponse) return { error: 'VIDE' }
+  const signalement = { uid, raison: body.raison, reponse, createdAt: now, traite: false }
+  const question = texte(body.question, MAX_QUESTION)
+  const precision = texte(body.precision, 500)
+  const lessonId = texte(body.lessonId, 200)
+  if (question) signalement.question = question
+  if (precision) signalement.precision = precision
+  if (lessonId) signalement.lessonId = lessonId
+  if (DEVICES.includes(body.device)) signalement.device = body.device
+  return { signalement }
+}
+
+async function signaler(req, res, body) {
+  let uid
+  try { uid = (await getAuthAdmin().verifyIdToken(body?.idToken)).uid } catch { return res.status(401).json({ error: 'UNAUTHORIZED' }) }
+  const { signalement, error } = buildSignalement(body, uid)
+  if (error) return res.status(400).json({ error })
+  try {
+    await getDb().collection('signalements').add(signalement)
+  } catch {
+    return res.status(500).json({ error: 'SERVER' })
+  }
+  return res.status(204).send('')
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'METHOD_NOT_ALLOWED' })
   let body = req.body
@@ -82,6 +119,8 @@ export default async function handler(req, res) {
   } else if (JSON.stringify(body ?? {}).length > MAX_CORPS) {
     return res.status(413).json({ error: 'TOO_LARGE' })
   }
+
+  if (req.query?.op === 'signalement') return signaler(req, res, body)
 
   const { avis, spam, error } = buildAvis(body)
   if (spam) return res.status(204).send('')

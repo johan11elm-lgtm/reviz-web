@@ -7,6 +7,7 @@ import { entreeSansSession } from './utils/retour'
 import { emailEnAttente } from './services/emailEnAttente';
 import { ErrorBoundary } from './components/ErrorBoundary'
 import { SplashHider } from './components/SplashHider'
+import { AccordIA } from './components/AccordIA'
 import { NavHaut } from './components/NavHaut'
 
 // Ancienne page « chapitres d'une matière » : Programme montre déjà les matières et leur
@@ -168,6 +169,8 @@ export default function App() {
     <ErrorBoundary>
       <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <ScrollToTop />
+        {/* Hors des routes : la demande d'accord survit au passage du scan à l'analyse. */}
+        <AccordIA />
         <Suspense fallback={<LoadingFallback />}>
           <Routes>
             {/* Routes publiques — pas de Firebase chargé */}
