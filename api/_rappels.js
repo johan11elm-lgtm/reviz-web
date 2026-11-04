@@ -107,11 +107,11 @@ const PASTILLE = `${APP}/logo/pastille.png`
 /**
  * Le mail : sujet et HTML (styles en ligne, tableau : les clients mail n'aiment rien d'autre).
  * accord : null (cas général), 'adresse' (moins de 15 ans sans adresse de parent :
- * bouton vers lienAccord, le chapitre en lien secondaire) ou 'attente' (parent
- * prévenu, pas encore d'accord : un encadré le rappelle).
- * @param {{ prenom?: string, titre?: string|null, matiere?: string|null, source?: string|null, lien: string, desabo?: string|null, verifieAdresse?: boolean, accord?: 'adresse'|'attente'|null, lienAccord?: string|null }} p
+ * encadré et lien secondaire vers lienAccord, sous le bouton des exercices) ou
+ * 'attente' (parent prévenu, pas encore d'accord : un encadré le rappelle).
+ * @param {{ prenom?: string, titre?: string|null, matiere?: string|null, source?: string|null, lien: string, desabo?: string|null, accord?: 'adresse'|'attente'|null, lienAccord?: string|null }} p
  */
-export function mailRappelJ1({ prenom, titre = null, matiere = null, source = null, lien, desabo = null, verifieAdresse = false, accord = null, lienAccord = null }) {
+export function mailRappelJ1({ prenom, titre = null, matiere = null, source = null, lien, desabo = null, accord = null, lienAccord = null }) {
   const safeName = escapeHtml(prenomPropre(prenom) || '')
   const safeTitre = titre ? escapeHtml(titre) : null
   const safeMatiere = matiere ? escapeHtml(matiere) : null
@@ -144,26 +144,23 @@ export function mailRappelJ1({ prenom, titre = null, matiere = null, source = nu
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 18px;"><tr><td style="background:${fond}; border-radius:18px; padding:14px 16px; font-family:${POPPINS}; font-size:14px; line-height:1.55; color:${DA.encre};">
             ${txt}
           </td></tr></table>`
-  // Le lien de vérification d'adresse porte toujours sur le bouton principal.
-  // Une ligne discrète sous le bouton, pas un deuxième encadré.
-  const verification = verifieAdresse ? p('Ce lien confirme aussi ton adresse e&#8209;mail : pas besoin de chercher l\'autre mail.', ' margin:-8px 0 18px; text-align:center; font-size:13px; line-height:1.5;') : ''
+  // Les exercices d'abord, toujours ; l'accord du parent vient après, en second.
   const corps = demandeAdresse
     ? `
+          ${p(detail)}
+          ${gros(lien, bouton)}
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 18px;"><tr>
             <td width="64" style="background:${DA.lavande}; border-radius:18px 0 0 18px; padding:14px 0 14px 14px; vertical-align:top;">
               <img src="${EMOTE}" width="50" height="50" alt="" style="display:block; width:50px; height:auto; border:0;">
             </td>
             <td style="background:${DA.lavande}; border-radius:0 18px 18px 0; padding:14px 16px 14px 10px; font-family:${POPPINS}; font-size:15px; line-height:1.55; color:${DA.encre};">
-              <strong>Une chose d'abord :</strong> comme tu as moins de 15 ans, un parent doit dire oui pour que tu gardes ton compte. Tu tapes son adresse, il reçoit un mail avec un bouton. Trente secondes, et tout ce que tu as révisé reste à toi.
+              <strong>Et après :</strong> comme tu as moins de 15 ans, un parent doit dire oui pour que tu gardes ton compte. Tu tapes son adresse, il reçoit un mail avec un bouton. Trente secondes, et tout ce que tu as révisé reste à toi.
             </td>
           </tr></table>
-          ${gros(lienAccord, 'Prévenir un parent')}
-          ${verification}
-          ${p(`<a href="${lien}" style="color:${DA.orangeTexte}; font-weight:700; text-decoration:underline;">${!safeTitre ? 'Ou choisis un chapitre' : scan ? 'Ou reprends ta leçon' : 'Ou fais tes exercices'} tout de suite</a>`, ' text-align:center; font-size:15px;')}`
+          ${p(`<a href="${lienAccord}" style="color:${DA.orangeTexte}; font-weight:700; text-decoration:underline;">Prévenir un parent</a>`, ' text-align:center; font-size:15px;')}`
     : `
           ${p(detail)}
           ${gros(lien, bouton)}
-          ${verification}
           ${accord === 'attente' ? encadre('<strong>Ton parent n\'a pas encore dit oui.</strong> Il a reçu un mail de Réviz avec le bouton «&nbsp;Donner mon autorisation&nbsp;» : montre-le-lui (et regardez dans ses spams s\'il ne le trouve pas). Sans son accord, ton compte sera mis en pause.', DA.peche) : ''}`
   return {
     subject,
@@ -242,12 +239,11 @@ async function derniereLecon(db, uid) {
 /**
  * @param {{
  *   db, envoyer, emailDe:(uid:string)=>Promise<string|null>,
- *   auth?: { listUsers, generateEmailVerificationLink, getUser }|null,
+ *   auth?: { listUsers, getUser }|null,
  *   maintenant?: number, secret?: string, journal?: (m:string)=>void,
  * }} p
- *   auth (firebase-admin) sert à trouver les comptes créés la veille et à
- *   fabriquer le lien de vérification d'adresse ; sans lui, seuls les élèves
- *   à première session sont rappelés, par le lien direct.
+ *   auth (firebase-admin) sert à trouver les comptes créés la veille ; sans
+ *   lui, seuls les élèves à première session sont rappelés.
  * @returns {Promise<{ rappelsJ1: number }>}
  */
 export async function relancerLendemain({ db, envoyer, emailDe, auth = null, maintenant = Date.now(), secret = process.env.CRON_SECRET, journal = m => console.error(m) }) {
@@ -292,24 +288,13 @@ export async function relancerLendemain({ db, envoyer, emailDe, auth = null, mai
       const to = c?.email ?? await emailDe(uid)
       if (!to) continue
       const sujet = sujetRappel(d.premiereSession ?? null, d.premiereSession ? null : await derniereLecon(db, uid))
-      // Le bouton principal : l'écran de l'accord parental, sinon le chapitre.
-      const adresse = formule === 'adresse'
-      let principal = adresse ? LIEN_ACCORD : sujet.lien
-      let verifieAdresse = false
-      if (c && c.emailVerified === false && auth?.generateEmailVerificationLink) {
-        try {
-          principal = await auth.generateEmailVerificationLink(to, { url: principal })
-          verifieAdresse = true
-        } catch (err) {
-          journal(`[rappel-j1] lien de vérification impossible pour ${uid} : ${err?.message || err}`)
-        }
-      }
+      // Le bouton principal : le chapitre, en lien direct (pas de détour par
+      // la vérification Firebase). L'écran de l'accord passe en lien secondaire.
       const desabo = lienDesabo(uid, secret)
       const mail = mailRappelJ1({
-        prenom: d.prenom ?? c?.displayName, ...sujet, desabo, verifieAdresse,
-        lien: adresse ? sujet.lien : principal,
+        prenom: d.prenom ?? c?.displayName, ...sujet, desabo,
         accord: formule === 'libre' ? null : formule,
-        lienAccord: adresse ? principal : null,
+        lienAccord: formule === 'adresse' ? LIEN_ACCORD : null,
       })
       await envoyer({
         from: EXPEDITEUR, to, ...mail,

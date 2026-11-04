@@ -115,15 +115,17 @@ describe('rappel du lendemain (J+1) — première session', () => {
     expect(await relancer()).toEqual({ rappelsJ1: 4 })
     const mails = Object.fromEntries(envoyer.mock.calls.map(c => [c[0].to.split('@')[0], c[0]]))
     expect(Object.keys(mails).sort()).toEqual(['adresse', 'attente', 'autorise', 'sansdoc'])
-    // Sans adresse de parent (ou sans demande enregistrée) : le bouton mène à l'écran de l'accord.
+    // Sans adresse de parent (ou sans demande enregistrée) : les exercices d'abord,
+    // l'écran de l'accord en lien secondaire, sous le bouton.
     for (const m of [mails.adresse, mails.sansdoc]) {
       expect(m.subject).toBe('Le théorème de Pythagore : tu t\'en souviens ?')
-      expect(m.html).toContain(`href="${LIEN_ACCORD}"`)
-      expect(m.html).toContain('Prévenir un parent →')
-      expect(m.html).toContain('un parent doit dire oui')
       expect(m.html).toContain(`href="${LIEN_PYTHAGORE}"`)
-      expect(m.html).toContain('Ou fais tes exercices tout de suite')
-      expect(m.html).not.toContain('Faire mes exercices →')
+      expect(m.html).toContain('Faire mes exercices →')
+      expect(m.html).toContain(`href="${LIEN_ACCORD}"`)
+      expect(m.html).toContain('>Prévenir un parent</a>')
+      expect(m.html).not.toContain('Prévenir un parent →')
+      expect(m.html).toContain('un parent doit dire oui')
+      expect(m.html.indexOf('Faire mes exercices →')).toBeLessThan(m.html.indexOf(LIEN_ACCORD))
     }
     // Parent prévenu, pas encore d'accord : le quiz, et le rappel de la demande.
     expect(mails.attente.html).toContain('Faire mes exercices →')
@@ -136,16 +138,16 @@ describe('rappel du lendemain (J+1) — première session', () => {
     expect(updates.map(u => u.id).sort()).toEqual(['adresse', 'attente', 'autorise', 'sansdoc'])
   })
 
-  it('moins de 15 ans sans adresse de parent et adresse non confirmée : la vérification passe par le bouton de l’accord', async () => {
+  it('moins de 15 ans sans adresse de parent et adresse non confirmée : liens directs, sans détour par Firebase', async () => {
     users.lea = { prenom: 'Léa', birthDate: ENFANT, premiereSession: SESSION }
     consents.lea = { status: 'pending', createdAt: HIER }
     const auth = makeAuth([compte('lea', { emailVerified: false, metadata: { creationTime: new Date(HIER).toUTCString() } })])
     expect(await relancer({ auth })).toEqual({ rappelsJ1: 1 })
-    expect(auth.generateEmailVerificationLink).toHaveBeenCalledWith('lea@test.fr', { url: LIEN_ACCORD })
+    expect(auth.generateEmailVerificationLink).not.toHaveBeenCalled()
     const m = envoyer.mock.calls[0][0]
-    expect(m.html).toContain('href="https://verif.example/?oob=1"')
+    expect(m.html).not.toContain('verif.example')
     expect(m.html).toContain(`href="${LIEN_PYTHAGORE}"`)
-    expect(m.html).toContain('confirme aussi ton adresse')
+    expect(m.html).toContain(`href="${LIEN_ACCORD}"`)
   })
 
   it('leçon scannée : lien vers « Tes leçons scannées »', async () => {
@@ -157,24 +159,14 @@ describe('rappel du lendemain (J+1) — première session', () => {
     expect(m.html).toContain('Reprendre ma leçon')
   })
 
-  it('passe par le lien de vérification Firebase quand l’adresse n’est pas confirmée', async () => {
+  it('adresse non confirmée : le bouton reste le lien direct du chapitre', async () => {
     users.lea = { prenom: 'Léa', birthDate: ADULTE, premiereSession: SESSION }
     const auth = makeAuth([compte('lea', { emailVerified: false, metadata: { creationTime: new Date(HIER).toUTCString() } })])
     expect(await relancer({ auth })).toEqual({ rappelsJ1: 1 })
-    expect(auth.generateEmailVerificationLink).toHaveBeenCalledWith('lea@test.fr', { url: LIEN_PYTHAGORE })
+    expect(auth.generateEmailVerificationLink).not.toHaveBeenCalled()
     const m = envoyer.mock.calls[0][0]
-    expect(m.html).toContain('https://verif.example/?oob=1')
-    expect(m.html).toContain('confirme aussi ton adresse')
-  })
-
-  it('envoie quand même le lien direct si Firebase refuse le lien de vérification', async () => {
-    users.lea = { prenom: 'Léa', birthDate: ADULTE, premiereSession: SESSION }
-    const auth = makeAuth([compte('lea', { emailVerified: false })])
-    auth.generateEmailVerificationLink.mockRejectedValue(new Error('UNAUTHORIZED_DOMAIN'))
-    const journal = vi.fn()
-    expect(await relancer({ auth, journal })).toEqual({ rappelsJ1: 1 })
-    expect(envoyer.mock.calls[0][0].html).toContain(LIEN_PYTHAGORE)
-    expect(journal).toHaveBeenCalledWith(expect.stringContaining('UNAUTHORIZED_DOMAIN'))
+    expect(m.html).toContain(`href="${LIEN_PYTHAGORE}"`)
+    expect(m.html).not.toContain('confirme aussi ton adresse')
   })
 
   it('un échec d’envoi n’arrête pas les autres', async () => {
@@ -231,7 +223,7 @@ describe('rappel du lendemain (J+1) — compte créé la veille sans session', (
     const [enfant, ok] = envoyer.mock.calls.map(c => c[0])
     expect(enfant.to).toBe('enfant@test.fr')
     expect(enfant.html).toContain(`href="${LIEN_ACCORD}"`)
-    expect(enfant.html).toContain('Ou choisis un chapitre tout de suite')
+    expect(enfant.html).toContain('Choisir un chapitre →')
     expect(ok.to).toBe('ok@test.fr')
     expect(ok.html).not.toContain(LIEN_ACCORD)
   })
