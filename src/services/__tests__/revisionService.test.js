@@ -104,6 +104,27 @@ describe('markRevisionDone', () => {
   })
 })
 
+describe('séance d’accueil (sans leçon)', () => {
+  it('note la source « decouverte », ne se range sous aucune leçon, et se complète à la fin', async () => {
+    utilisateur('u9')
+    // Une leçon ouverte avant ne doit pas récupérer la révision.
+    const entry = recordRevision('exercices', { lessonId: null, source: 'decouverte' })
+    expect(entry).toMatchObject({ type: 'exercices', lessonId: null, source: 'decouverte' })
+    expect(entry.chapterId).toBeUndefined()
+    expect(ecrit(`users/u9/revisions/${entry.id}`)).toEqual([entry])
+    await flush()
+    expect(ecrit('users/u9')[0].premiereSession).toMatchObject({ source: 'decouverte' })
+    const fin = markRevisionDone('exercices', { score: 3, total: 3, xp: 30, lessonId: null })
+    expect(fin).toMatchObject({ id: entry.id, score: 3, total: 3, xp: 30 })
+    expect(fin.termineAt).toBeGreaterThan(0)
+  })
+
+  it('une leçon garde sa propre source, même si on en passe une', () => {
+    utilisateur('u10')
+    expect(recordRevision('quiz', { source: 'decouverte' }).source).toBe('programme')
+  })
+})
+
 describe('lierEssai', () => {
   it('note l’identifiant d’essai sur le profil du nouveau compte', () => {
     setActiveUser('u5')

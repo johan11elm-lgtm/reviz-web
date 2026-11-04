@@ -3,8 +3,7 @@
 // propose d'envoyer son score à un parent, et ce mail porte aussi l'accord.
 import { test, expect } from '@playwright/test'
 import { mockApiRoutes, compteRapide, sansDebordement } from './helpers'
-import { construireSeance } from '../src/utils/exercicesChapitre.js'
-import { NB_QUESTIONS_PREMIERE } from '../src/utils/premiereRevision.js'
+import { SEANCE_ACCUEIL } from '../src/utils/seanceAccueil.js'
 import { jouerSeance } from './exercices-aides'
 
 const CAPTURES = process.env.CAPTURES_DIR
@@ -28,14 +27,12 @@ test.describe('Montre ça à tes parents', () => {
     await page.getByRole('button', { name: 'Suivant' }).click()
     await page.getByRole('button', { name: 'C’est parti' }).click()
     await expect(page).toHaveURL(/\/exercices\?premiere=1/, { timeout: 10_000 })
-    // Tout juste, sur une séance tirée avec une graine fixe pour que le test en connaisse les réponses.
-    await page.goto('/exercices?premiere=1&graine=42')
-    const ai = await page.evaluate(() => JSON.parse(localStorage.getItem('reviz-ai-data')))
-    await jouerSeance(page, construireSeance(ai, { graine: 42, nombre: NB_QUESTIONS_PREMIERE }))
+    // Tout juste, sur la séance d'accueil (3 exercices écrits à la main).
+    await jouerSeance(page, SEANCE_ACCUEIL)
 
     const carte = page.locator('.qz-parent')
     await expect(carte.getByText('Montre ça à tes parents')).toBeVisible()
-    await expect(carte.getByText(/Envoie ton 5\/5 à un parent/)).toBeVisible()
+    await expect(carte.getByText(/Envoie ton 3\/3 à un parent/)).toBeVisible()
     await sansDebordement(page, 'fin de séance avec la carte parent')
     if (CAPTURES) await page.waitForTimeout(5000)
     if (CAPTURES) await carte.scrollIntoViewIfNeeded()
@@ -48,12 +45,14 @@ test.describe('Montre ça à tes parents', () => {
     if (CAPTURES) await page.screenshot({ path: `${CAPTURES}/parent-2-envoye-390.png` })
 
     expect(envois).toHaveLength(1)
-    expect(envois[0]).toMatchObject({ parentEmail: 'maman@famille.test', resultat: { score: 5, total: 5 } })
-    expect(envois[0].resultat.chapitre).toMatchObject({ classe: '6ème' })
+    // La séance d'accueil n'a pas de chapitre : le mail donne le score seul.
+    expect(envois[0]).toMatchObject({ parentEmail: 'maman@famille.test', resultat: { score: 3, total: 3 } })
+    expect(envois[0].resultat.chapitre).toBeUndefined()
 
     // L'accueil ne réclame plus l'adresse : la demande est partie.
-    await page.getByRole('button', { name: 'Continuer' }).click()
-    await expect(page).toHaveURL(/\/$/, { timeout: 10_000 })
+    await page.getByRole('button', { name: 'Choisir ma matière' }).click()
+    await expect(page).toHaveURL(/\/programme/, { timeout: 10_000 })
+    await page.goto('/')
     await expect(page.getByText('Montre tes révisions à un parent')).toHaveCount(0)
   })
 })

@@ -108,6 +108,8 @@ export function recordRevision(type, details = {}) {
   const lessonId  = 'lessonId' in details ? details.lessonId : (localStorage.getItem('reviz-current-lesson-id') ?? null)
   const revisions = loadRevisions()
   const { titre, ...ctx } = contexteLecon(lessonId)
+  // Une révision sans leçon peut dire d'où elle vient (la séance d'accueil : « decouverte »).
+  if (!lessonId && details.source) ctx.source = details.source
   const entry = { ...details, id: String(Date.now()), type, lessonId, revisedAt: Date.now(), ...ctx }
   trackStat('revision', { format: type, source: ctx.source, classe: ctx.classe, matiere: ctx.matiere }, essaiPayload(entry))
   revisions.unshift(entry)
@@ -143,10 +145,11 @@ export function recordRevision(type, details = {}) {
  * Révision menée jusqu'au bout (dernière question du quiz, dernière carte) :
  * complète l'entrée ouverte par recordRevision() pour ce format.
  * @param {'flashcards'|'quiz'|'exercices'} type
- * @param {{ score?: number, total?: number, xp?: number, bonnes?: number, comboMax?: number, cartes?: number }} [resultat]
+ * @param {{ score?: number, total?: number, xp?: number, bonnes?: number, comboMax?: number, cartes?: number, lessonId?: string|null }} [resultat]
+ *   lessonId : la leçon de l'entrée à compléter, si ce n'est pas la leçon en cours (null : la séance d'accueil).
  */
 export function markRevisionDone(type, resultat = {}) {
-  const lessonId = localStorage.getItem('reviz-current-lesson-id') ?? null
+  const lessonId = 'lessonId' in resultat ? resultat.lessonId : (localStorage.getItem('reviz-current-lesson-id') ?? null)
   const revisions = loadRevisions()
   const entry = revisions.find(r => r.type === type && r.lessonId === lessonId && !r.termineAt)
   if (!entry || Date.now() - entry.revisedAt > 3 * 60 * 60 * 1000) return null

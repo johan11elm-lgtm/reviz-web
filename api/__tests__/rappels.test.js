@@ -150,6 +150,19 @@ describe('rappel du lendemain (J+1) — première session', () => {
     expect(m.html).toContain(`href="${LIEN_ACCORD}"`)
   })
 
+  it('première session = séance d’accueil (sans chapitre) : le programme, ou la dernière leçon ouverte', async () => {
+    users.zoe = { prenom: 'Zoé', birthDate: ADULTE, premiereSession: { jour: '2026-10-16', source: 'decouverte' } }
+    users.tom = { prenom: 'Tom', birthDate: ADULTE, premiereSession: { jour: '2026-10-16', source: 'decouverte' } }
+    lecons.tom = [{ source: 'programme', chapterId: 'thales', classe: '3ème', matiere: 'Maths', metadata: { title: 'Théorème de Thalès' } }]
+    expect(await relancer()).toEqual({ rappelsJ1: 2 })
+    const mails = Object.fromEntries(envoyer.mock.calls.map(c => [c[0].to.split('@')[0], c[0]]))
+    expect(mails.zoe.subject).toBe('Ton premier chapitre t\'attend')
+    expect(mails.zoe.html).toContain('https://app.revizapp.fr/programme?via=rappel')
+    expect(mails.zoe.html).not.toContain('/cours?via=rappel')
+    expect(mails.tom.subject).toBe('Théorème de Thalès : tu t\'en souviens ?')
+    expect(mails.tom.html).toContain('chapitre=thales')
+  })
+
   it('leçon scannée : lien vers « Tes leçons scannées »', async () => {
     users.scan = { birthDate: ADULTE, premiereSession: { jour: '2026-10-16', source: 'scan', titre: 'Ma leçon', matiere: 'SVT' } }
     await relancer()

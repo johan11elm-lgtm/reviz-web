@@ -2,8 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { hasProgramme } from '../utils/programme';
-import { chapitreDuMoment } from '../utils/premiereRevision';
-import { loadCatalogue, openChapter } from '../services/programmeService';
+import { SEANCE_ACCUEIL } from '../utils/seanceAccueil';
 import { mesurer } from '../services/mesure';
 import { Mascot } from '../components/Mascot';
 import { EntreeEcran, ChoixClasse, LienTexte } from '../components/entree/Entree';
@@ -11,8 +10,10 @@ import './Onboarding.entree.css';
 
 // Découverte (handoff Claude Design du 22/10, écran 8) : une seule fois, avant
 // l'accueil. Trois écrans : Réviz se présente, deux façons de réviser, on commence.
-// Le dernier lance une première révision (séance de 5 exercices sur le chapitre
-// du moment) : finir sur la liste des matières en perdait la moitié (26/10).
+// Le dernier lance une première révision : finir sur la liste des matières en
+// perdait la moitié (26/10). Depuis le 04/11, c'est la séance d'accueil (3 exercices
+// faciles, un par matière, utils/seanceAccueil.js), plus le chapitre de maths du
+// moment, que 39 % quittaient dans les 10 premières secondes.
 // La classe est déjà connue (inscription ou essai) ; si le profil n'en a aucune,
 // on la demande sur le premier écran.
 const ECRANS = {
@@ -36,19 +37,6 @@ export default function Onboarding() {
   const [erreurClasse, setErreurClasse] = useState('');
   const programmePret = hasProgramme(lycee ? niveau : { cycle: 'college', classe: classe ?? '3ème' });
   const classeProgramme = lycee ? '3ème' : (classe ?? '3ème');
-  // Chapitre de la première révision, cherché dès l'arrivée pour l'annoncer sur le dernier écran.
-  const [premiere, setPremiere] = useState(null);
-  const [lancement, setLancement] = useState(false);
-
-  useEffect(() => {
-    if (!programmePret) return undefined;
-    let actif = true;
-    setPremiere(null);
-    loadCatalogue(classeProgramme)
-      .then(cat => { if (actif) setPremiere(chapitreDuMoment(cat)); })
-      .catch(() => {});
-    return () => { actif = false; };
-  }, [programmePret, classeProgramme]);
 
   useEffect(() => {
     if (currentUser && localStorage.getItem(`reviz-onboarded-${currentUser.uid}`)) {
@@ -71,19 +59,10 @@ export default function Onboarding() {
     // La présentation ne reste pas dans l'historique : « Mes leçons » ou un retour ne la rouvrent pas.
     navigate(to, { replace: true });
   }
-  // Ouvre le chapitre comme depuis Programme, puis une séance d'exercices courte. En cas
-  // d'échec (réseau), l'élève arrive quand même sur son programme.
-  async function lancerPremiere() {
-    if (lancement) return;
-    setLancement(true);
-    mesurer('premiere_revision', { etape: 'lancee', matiere: premiere.matiere });
-    try {
-      await openChapter(classeProgramme, premiere.matiere, premiere.chapitre);
-      finir('/exercices?premiere=1');
-    } catch {
-      mesurer('premiere_revision', { etape: 'echec' });
-      finir('/programme');
-    }
+  // La séance d'accueil ne dépend d'aucun chapitre : rien à charger, pas d'échec possible.
+  function lancerPremiere() {
+    mesurer('premiere_revision', { etape: 'lancee', matiere: 'decouverte' });
+    finir('/exercices?premiere=1');
   }
 
   let bulle, carte;
@@ -129,20 +108,13 @@ export default function Onboarding() {
     );
   } else {
     bulle = ['On commence ?', 'Chaque révision compte pour ton niveau et ta série de jours.'];
-    carte = programmePret && premiere ? (
+    carte = programmePret ? (
       <>
         <p className="en-texte onb-texte">
-          Ta première révision : <b>{premiere.chapitre.titre}</b>, en {premiere.matiere.toLowerCase()}. 5 exercices, deux minutes.
+          Pour commencer, <b>{SEANCE_ACCUEIL.length} questions faciles</b>, une minute. Pas besoin d’avoir révisé.
         </p>
-        <button type="button" className="en-btn" onClick={lancerPremiere} disabled={lancement}>
-          {lancement ? 'Un instant…' : 'C’est parti'}
-        </button>
-        <LienTexte onClick={() => finir('/programme')}>ou choisir un autre chapitre</LienTexte>
-      </>
-    ) : programmePret ? (
-      <>
-        <button type="button" className="en-btn" onClick={() => finir('/programme')}>Ouvrir mon programme</button>
-        <LienTexte onClick={() => finir('/scan')}>ou scanner une leçon</LienTexte>
+        <button type="button" className="en-btn" onClick={lancerPremiere}>C’est parti</button>
+        <LienTexte onClick={() => finir('/programme')}>ou choisir un chapitre</LienTexte>
       </>
     ) : (
       <>

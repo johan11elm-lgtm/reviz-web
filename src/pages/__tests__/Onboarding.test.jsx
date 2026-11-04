@@ -67,13 +67,21 @@ describe('<Onboarding />', () => {
     expect(nav).toHaveBeenCalledWith('/', { replace: true })
   })
 
-  it('au collège : le programme de la classe d’abord, le scan ensuite', () => {
+  it('au collège : le dernier écran lance la séance d’accueil, sans chapitre à charger', () => {
     render(<MemoryRouter><Onboarding /></MemoryRouter>)
     allerAuDernierEcran()
     expect(screen.getByText('On commence ? Chaque révision compte pour ton niveau et ta série de jours.')).toBeInTheDocument()
     expect(screen.queryByRole('button', { name: 'Passer' })).not.toBeInTheDocument()
-    fireEvent.click(screen.getByRole('button', { name: /Ouvrir mon programme/ }))
+    expect(screen.getByText(/3\squestions faciles/)).toBeInTheDocument()
+    fireEvent.click(screen.getByRole('button', { name: 'C’est parti' }))
     expect(localStorage.getItem('reviz-onboarded-u1')).toBe('1')
+    expect(nav).toHaveBeenCalledWith('/exercices?premiere=1', { replace: true })
+  })
+
+  it('au collège : on peut aussi choisir un chapitre soi-même', () => {
+    render(<MemoryRouter><Onboarding /></MemoryRouter>)
+    allerAuDernierEcran()
+    fireEvent.click(screen.getByRole('button', { name: 'ou choisir un chapitre' }))
     expect(nav).toHaveBeenCalledWith('/programme', { replace: true })
   })
 

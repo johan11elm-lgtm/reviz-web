@@ -17,7 +17,7 @@ import { PastilleCombo, BilanXp } from '../components/xp/Xp'
 import { gainDeSeance } from '../services/xpService'
 import { xpSeance } from '../utils/xp'
 import { noterErreurs } from '../services/erreursService'
-import { NB_QUESTIONS_PREMIERE } from '../utils/premiereRevision'
+import { SEANCE_ACCUEIL, TITRE_DECOUVERTE, SOURCE_DECOUVERTE } from '../utils/seanceAccueil'
 import { track } from '../services/statsService'
 import { MontreParent } from '../components/MontreParent'
 import { loadLessons } from '../services/historyService'
@@ -46,9 +46,11 @@ export default function Exercices() {
     const g = Number(new URLSearchParams(location.search).get('graine'))
     return Number.isFinite(g) && g > 0 ? g : Date.now()
   })
-  // ?premiere=1 : la première révision, juste après l'inscription (Onboarding) : une séance courte.
+  // ?premiere=1 : la première révision, juste après l'inscription (Onboarding) : la séance
+  // d'accueil, 3 exercices écrits à la main, sans chapitre (utils/seanceAccueil.js).
   const [premiere] = useState(() => new URLSearchParams(location.search).get('premiere') === '1')
-  const seance = useMemo(() => construireSeance(ai, { graine, ...(premiere ? { nombre: NB_QUESTIONS_PREMIERE } : {}) }), [ai, graine, premiere])
+  const seance = useMemo(() => (premiere ? SEANCE_ACCUEIL : construireSeance(ai, { graine })), [ai, graine, premiere])
+  if (premiere) return <Seance key="decouverte" ai={{ metadata: { title: TITRE_DECOUVERTE } }} seance={seance} premiere nouvelle={() => {}} />
   if (!seance.length) {
     // Une leçon trop maigre pour une séance garde son quiz (la séance a remplacé le quiz le 29/10).
     if (ai?.quiz?.length) return <Navigate to={`/quiz?classique=1${premiere ? '&premiere=1' : ''}`} replace state={location.state} />
@@ -73,7 +75,11 @@ function Seance({ ai, seance, premiere, nouvelle }) {
   const uid = currentUser?.uid ?? null
   useEffect(() => { mesurer('format_ouvert', { format: 'exercices' }) }, [])
   const titre = ai?.metadata?.title || 'Ta leçon'
-  const lessonId = useMemo(() => localStorage.getItem('reviz-current-lesson-id'), [])
+  // La séance d'accueil n'a pas de leçon : rien ne doit se ranger sous une leçon ouverte avant.
+  const lessonId = useMemo(() => (premiere ? null : localStorage.getItem('reviz-current-lesson-id')), [premiere])
+  // La révision est notée dès la première réponse (04/11) : un élève qui s'arrête en route
+  // a quand même révisé, pour son compte comme pour le rappel du lendemain.
+  const revisionNotee = useRef(false)
   const iaDispo = !!lessonId && !isGuest
 
   const [idx, setIdx] = useState(0)
@@ -93,6 +99,10 @@ function Seance({ ai, seance, premiere, nouvelle }) {
 
   function valider(juste, details = {}) {
     if (resultat) return
+    if (!revisionNotee.current) {
+      revisionNotee.current = true
+      recordRevision('exercices', { lessonId, ...(premiere ? { source: SOURCE_DECOUVERTE } : {}) })
+    }
     setResultats(rs => rs.map((r, k) => (k === idx ? { juste, ...details } : r)))
     if (juste) combo.bonne()
     else combo.faute()
@@ -103,11 +113,11 @@ function Seance({ ai, seance, premiere, nouvelle }) {
       const total = seance.length
       const { max, paliers } = combo.instantane()
       const g = gainDeSeance(uid, xpSeance({ bonnes: nbJustes, total, paliers }))
-      recordRevision('exercices', { score: nbJustes, total, xp: g.xp, bonnes: nbJustes, comboMax: max })
-      markRevisionDone('exercices', { score: nbJustes, total })
+      // L'entrée ouverte à la première réponse reçoit le score, l'XP et ce que lisent les quêtes.
+      markRevisionDone('exercices', { score: nbJustes, total, xp: g.xp, bonnes: nbJustes, comboMax: max, lessonId })
       // Les questions du quiz jouées dans la séance nourrissent « Refaire mes erreurs » et le défi.
       const qcms = seance.map((e, i) => ({ e, r: resultats[i] })).filter(x => x.e.type === 'qcm')
-      if (qcms.length) noterErreurs(uid, lessonId, qcms.map(x => ({ question: x.e.bulle, correct: x.e.bonne })), qcms.map(x => x.r?.choix))
+      if (qcms.length && lessonId) noterErreurs(uid, lessonId, qcms.map(x => ({ question: x.e.bulle, correct: x.e.bonne })), qcms.map(x => x.r?.choix))
       setGain(g)
       mesurer('exercices_termines', { score: nbJustes, total })
       // La séance a remplacé le quiz : elle compte comme un quiz terminé dans les statistiques d'activation.
@@ -167,7 +177,7 @@ function Seance({ ai, seance, premiere, nouvelle }) {
     )
     const pastilles = (
       <div className="qz-pastilles">
-        <span className="qz-enregistre"><i><Coche taille={12} /></i>{isDesktop ? 'Score enregistré sur la fiche chapitre' : 'Score enregistré'}</span>
+        <span className="qz-enregistre"><i><Coche taille={12} /></i>{isDesktop && !premiere ? 'Score enregistré sur la fiche chapitre' : 'Score enregistré'}</span>
       </div>
     )
     const bilan = <BilanXp gain={gain} uid={uid} />
@@ -206,9 +216,9 @@ function Seance({ ai, seance, premiere, nouvelle }) {
       </section>
     )
     const boutons = premiere ? (
-      // La première révision mène à l'accueil, comme le quiz court d'avant.
+      // Après la séance d'accueil, l'élève choisit sa matière ; le lien du dessous ramène à l'accueil.
       <div className="qz-fin-actions">
-        <button type="button" className="fc-btn fc-btn--orange rv-bandes" onClick={fermer}>Continuer</button>
+        <button type="button" className="fc-btn fc-btn--orange rv-bandes" onClick={() => navigate('/programme', { replace: true })}>Choisir ma matière</button>
       </div>
     ) : (
       <div className="qz-fin-actions">

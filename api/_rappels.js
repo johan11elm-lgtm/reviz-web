@@ -287,7 +287,10 @@ export async function relancerLendemain({ db, envoyer, emailDe, auth = null, mai
       const c = compte ?? (auth?.getUser ? await auth.getUser(uid).catch(() => null) : null)
       const to = c?.email ?? await emailDe(uid)
       if (!to) continue
-      const sujet = sujetRappel(d.premiereSession ?? null, d.premiereSession ? null : await derniereLecon(db, uid))
+      // La séance d'accueil (source « decouverte », src/utils/seanceAccueil.js) n'a pas de
+      // chapitre : le mail se rabat sur la dernière leçon ouverte, sinon sur le programme.
+      const session = d.premiereSession?.source === 'decouverte' ? null : (d.premiereSession ?? null)
+      const sujet = sujetRappel(session, session ? null : await derniereLecon(db, uid))
       // Le bouton principal : le chapitre, en lien direct (pas de détour par
       // la vérification Firebase). L'écran de l'accord passe en lien secondaire.
       const desabo = lienDesabo(uid, secret)
