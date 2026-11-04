@@ -16,7 +16,11 @@ test.describe('Première révision après la découverte', () => {
     const { uid } = await compteRapide(page, { classe: '6ème', birthDate: '2014-03-01', onboarde: false, aller: '/onboarding' })
     expect(uid).toBeTruthy()
 
+    if (CAPTURES) await page.waitForTimeout(2500)
+    if (CAPTURES) await page.screenshot({ path: `${CAPTURES}/0a-bonjour-390.png` })
     await page.getByRole('button', { name: 'Suivant' }).click()
+    if (CAPTURES) await page.waitForTimeout(2500)
+    if (CAPTURES) await page.screenshot({ path: `${CAPTURES}/0b-facons-390.png` })
     await page.getByRole('button', { name: 'Suivant' }).click()
     await expect(page.getByText(/3\squestions faciles/)).toBeVisible({ timeout: 10_000 })
     await expect(page.getByText(/Pas besoin d’avoir révisé\./)).toBeVisible()
