@@ -10,8 +10,8 @@ import './Legal.css';
 const EDITEUR = {
   nom: 'Johan El Mesmoudi',
   statut: 'Entrepreneur individuel',
-  siren: '',      // ex. '123 456 789'
-  adresse: '',    // adresse postale (ou domiciliation)
+  siren: '132 307 398',
+  adresse: '28 rue Victor Hugo, 42700 Firminy',
   mediateur: '',  // médiateur de la consommation : nom + site
 };
 const CONTACT = 'contact@revizapp.fr';
