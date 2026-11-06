@@ -169,6 +169,13 @@
   color: var(--inst-encre);
 }
 
+/* Badge App Store : dessin d'Apple, centré, jamais étiré */
+.inst-badge { display: inline-flex; align-self: center; border-radius: 10px; transition: transform 80ms; }
+.inst-badge img { display: block; width: auto; }
+.inst-badge:active { transform: translateY(2px); }
+.inst-badge:focus-visible { outline: 3px solid var(--inst-encre); outline-offset: 3px; }
+.inst-guide--store { align-items: center; text-align: center; }
+
 /* Installation en un geste (Chrome, Edge) */
 .inst-direct { display: flex; flex-direction: column; gap: 14px; }
 .inst-direct .inst-btn { width: 100%; }

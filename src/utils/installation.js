@@ -1,5 +1,5 @@
 // -------------------------------------------------------
-// Réviz — Installation de la web app (tant qu'on n'est pas sur les stores)
+// Réviz — Installation de la web app (Android, ordinateur ; l'iPhone a l'App Store)
 // Détecte l'appareil pour ouvrir le bon tutoriel, et garde sous la main
 // l'invitation d'installation de Chrome / Edge (beforeinstallprompt) pour
 // proposer une installation en un geste quand le navigateur le permet.

@@ -3,6 +3,7 @@ import { useModalA11y } from '../hooks/useModalA11y';
 import { useInstallation } from '../hooks/useInstallation';
 import { installerDirectement } from '../utils/installation';
 import { track } from '../services/statsService';
+import { APP_STORE_URL } from '../utils/appStore';
 import { Mascot } from './Mascot';
 import {
   ShareIcon, PlusSquareIcon, DotsVerticalIcon, DotsIcon, InstallIcon, CheckIcon, XIcon,
@@ -50,6 +51,38 @@ const NOTES = {
   ordinateur: 'Sur Mac avec Safari : menu Fichier, puis « Ajouter au Dock ».',
 };
 
+/**
+ * Badge officiel « Télécharger dans l'App Store » (Apple Marketing Tools, fr-fr),
+ * servi tel quel : Apple interdit de le redessiner. Sur iPhone, le lien s'ouvre
+ * sur place (Safari, et même le navigateur de TikTok, passent à l'App Store) ;
+ * ailleurs, dans un nouvel onglet.
+ */
+export function BadgeAppStore({ hauteur = 52, source }) {
+  const { plateforme, integre } = useInstallation();
+  const surPlace = plateforme === 'ios';
+  return (
+    <a
+      href={APP_STORE_URL}
+      className="inst-badge"
+      target={surPlace ? undefined : '_blank'}
+      rel="noopener"
+      onClick={() => track('app_store_clic', { source, plateforme, integre: integre || undefined })}
+    >
+      <img src="/badge-app-store.svg" alt="Télécharger Réviz dans l'App Store" style={{ height: hauteur }} />
+    </a>
+  );
+}
+
+/** Onglet iPhone : l'App Store d'abord, l'écran d'accueil depuis Safari ensuite. */
+function AppStoreIphone() {
+  return (
+    <div className="inst-direct">
+      <BadgeAppStore source="guide" />
+      <p className="inst-ou"><span>ou sans l'App Store</span></p>
+    </div>
+  );
+}
+
 /** Carte d'état (menthe : installée ; pêche : navigateur intégré) avec son rond à tranche. */
 export function CarteEtat({ teinte, rond, role, children, className = '' }) {
   return (
@@ -77,6 +110,7 @@ export function InstallerGuide() {
   // Le bouton direct n'a de sens que sur l'appareil qu'on est en train d'utiliser.
   const directIci = directe && onglet === plateforme && onglet !== 'ios';
   // Navigateur intégré d'une autre app (TikTok…) : rien à installer d'ici, on l'explique seul.
+  // Sur iPhone, le lien App Store marche même depuis TikTok : on le propose à la place.
   const bloque = Boolean(integre) && plateforme !== 'ordinateur';
 
   if (installee) {
@@ -86,6 +120,15 @@ export function InstallerGuide() {
           <b className="inst-etat-titre">Réviz est installée.</b>
           <span className="inst-etat-vert">Retrouve-la avec tes applis.</span>
         </CarteEtat>
+      </div>
+    );
+  }
+
+  if (bloque && plateforme === 'ios') {
+    return (
+      <div className="inst-guide inst-guide--store">
+        <BadgeAppStore source="integre" hauteur={56} />
+        <p className="inst-note">Réviz est sur l'App Store : touche le bouton, l'App Store s'ouvre.</p>
       </div>
     );
   }
@@ -122,6 +165,8 @@ export function InstallerGuide() {
         ))}
       </div>
 
+      {onglet === 'ios' && <AppStoreIphone />}
+
       {directIci && (
         <div className="inst-direct">
           <button type="button" className="inst-btn" onClick={installer}>Installer Réviz</button>
@@ -146,7 +191,7 @@ export function InstallerGuide() {
 }
 
 /** Texte d'introduction, commun à la popup et à la page /installer. */
-export const INTRO_INSTALLER = "Réviz n'est pas encore sur les stores : elle s'installe depuis ton navigateur. Ensuite, elle s'ouvre en plein écran depuis son icône.";
+export const INTRO_INSTALLER = "Sur iPhone, Réviz est dans l'App Store. Sur Android et ordinateur, elle s'installe depuis ton navigateur, puis s'ouvre en plein écran depuis son icône.";
 
 /**
  * Popup « Installer Réviz » : feuille du bas sur téléphone (glissable vers le bas),

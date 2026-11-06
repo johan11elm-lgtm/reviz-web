@@ -6,6 +6,7 @@ import { ecouterInstallation } from '../../utils/installation'
 const UA = {
   iphone: 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1',
   android: 'Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36',
+  tiktokAndroid: 'Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36 musical_ly_2024102030 BytedanceWebview/d8a21c6',
   tiktok: 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 musical_ly_41.2.0 BytedanceWebview/d8a21c6',
 }
 
@@ -32,10 +33,32 @@ describe('<InstallerModal />', () => {
     expect(screen.getByRole('tabpanel')).toHaveTextContent('Chrome ou Edge')
   })
 
-  it("prévient qu'on ne peut pas installer depuis le navigateur de TikTok", () => {
+  it("propose l'App Store sur iPhone, avant l'écran d'accueil", () => {
+    surAppareil(UA.iphone)
+    render(<InstallerModal onClose={() => {}} />)
+    const lien = screen.getByRole('link', { name: /App Store/ })
+    expect(lien).toHaveAttribute('href', 'https://apps.apple.com/fr/app/id6829200390')
+    expect(lien).not.toHaveAttribute('target')
+  })
+
+  it("dans TikTok sur iPhone, mène à l'App Store au lieu de bloquer", () => {
     surAppareil(UA.tiktok)
     render(<InstallerModal onClose={() => {}} />)
+    expect(screen.getByRole('link', { name: /App Store/ })).toBeInTheDocument()
+    expect(screen.queryByText(/navigateur de TikTok/)).not.toBeInTheDocument()
+  })
+
+  it("prévient qu'on ne peut pas installer depuis le navigateur de TikTok (Android)", () => {
+    surAppareil(UA.tiktokAndroid)
+    render(<InstallerModal onClose={() => {}} />)
     expect(screen.getByRole('note')).toHaveTextContent('navigateur de TikTok')
+    expect(screen.queryByRole('link', { name: /App Store/ })).not.toBeInTheDocument()
+  })
+
+  it("pas de badge App Store dans l'onglet Android", () => {
+    surAppareil(UA.android)
+    render(<InstallerModal onClose={() => {}} />)
+    expect(screen.queryByRole('link', { name: /App Store/ })).not.toBeInTheDocument()
   })
 
   it('Échap et « Fermer » referment la popup', () => {

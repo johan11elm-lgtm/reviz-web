@@ -11,8 +11,9 @@ import './Installer.css';
 
 /**
  * Page publique du tutoriel d'installation (app.revizapp.fr/installer) :
- * le lien à donner depuis la landing, TikTok ou une affiche, tant que
- * Réviz n'est pas sur les stores. Sans Firebase côté client.
+ * le lien à donner depuis la landing, TikTok ou une affiche. Sur iPhone, il
+ * mène à l'App Store (06/11) ; ailleurs, à l'installation depuis le navigateur.
+ * Sans Firebase côté client.
  * Handoff Claude Design du 22/10 : héros menthe à grain, Réviz à droite du titre,
  * puis le même contenu que la popup (sans « Fermer »).
  */
