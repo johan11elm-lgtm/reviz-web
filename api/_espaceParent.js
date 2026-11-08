@@ -21,6 +21,7 @@ import { JOUR_MS } from '../src/utils/consent.js'
 import { jourParis } from '../src/utils/retour.js'
 import { controlesAVenir, matiereControle } from '../src/utils/agenda.js'
 import { planRevision, etatPreparation } from '../src/utils/planRevision.js'
+import { lienOffrir } from './_demandePlus.js'
 
 export const PORTEE_ESPACE = 'espace-parent'
 export const DUREE_LIEN_MS = 60 * JOUR_MS
@@ -111,6 +112,8 @@ export async function donneesEspaceParent({ db, uid, maintenant = Date.now(), ve
     chapitres,
     controles,
     revizPlus: aRevizPlus(u),
+    // Lien signé pour offrir Réviz+ sans compte (api/_demandePlus.js), si l'élève ne l'a pas.
+    offrir: aRevizPlus(u) ? null : lienOffrir(uid, { maintenant }),
   }
 }
 

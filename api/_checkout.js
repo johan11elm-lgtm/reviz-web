@@ -17,6 +17,56 @@ async function stripePriceId(lookupKey) {
   return data[0]?.id ?? null
 }
 
+/**
+ * Crée la session Stripe Checkout de Réviz+ pour un compte (uid vérifié par l'appelant).
+ * parent : c'est un parent qui paie depuis son e-mail (api/_demandePlus.js) — retour vers
+ * des pages sans connexion, texte au « vous ».
+ * @returns {Promise<string>} l'URL de paiement
+ */
+export async function creerSessionReviz({ uid, email = null, formule, successUrl = null, cancelUrl = null, parent = false }) {
+  // Tarif fondateur : abonnement pris avant la bascule, décidé ici d'après
+  // l'heure du serveur, jamais d'après ce que le client envoie.
+  const fondateur = tarifFondateurOuvert()
+  const price = await stripePriceId(prixDe(formule, fondateur).lookupKey)
+  if (!price) {
+    console.error('[create-checkout] prix introuvable', formule, fondateur)
+    throw new Error('PRICE_NOT_FOUND')
+  }
+  const tu = !parent
+  const session = await stripe.checkout.sessions.create({
+    mode: 'subscription',
+    payment_method_types: ['card'],
+    customer_email: email || undefined,
+    // formule et fondateur aussi sur la session : le webhook les recopie
+    // dans le profil (récapitulatif de l'abonnement dans les Réglages).
+    metadata: { firebaseUid: uid, formule, fondateur: String(fondateur), ...(parent && { payeur: 'parent' }) },
+    subscription_data: {
+      metadata: { firebaseUid: uid, formule, fondateur: String(fondateur), ...(parent && { payeur: 'parent' }) },
+      // Avant la bascule : carte enregistrée, rien de prélevé avant le
+      // 26 octobre (période d'ici là non facturée), puis à chaque échéance.
+      ...(fondateur && {
+        billing_cycle_anchor: Math.floor(Date.parse(FIN_LANCEMENT) / 1000),
+        proration_behavior: 'none',
+      }),
+    },
+    line_items: [{ price, quantity: 1 }],
+    allow_promotion_codes: true,
+    success_url: successUrl ?? `${BASE_URL}/upgrade-success?formule=${formule}${fondateur ? '&fondateur=1' : ''}`,
+    payment_method_collection: 'always',
+    // Rappel des CGV au-dessus du bouton de paiement.
+    custom_text: {
+      submit: {
+        message: fondateur
+          ? `Rien n'est prélevé avant le 26 octobre ; ${tu ? 'tu peux' : 'vous pouvez'} annuler d'ici là depuis les Réglages. Ensuite, renouvellement automatique, résiliable à tout moment. En validant, ${tu ? 'tu acceptes' : 'vous acceptez'} les CGV : ${BASE_URL}/legal/cgv`
+          : `Renouvellement automatique, résiliable à tout moment${tu ? ' depuis les Réglages' : ''}. En validant, ${tu ? 'tu acceptes' : 'vous acceptez'} les CGV : ${BASE_URL}/legal/cgv`,
+      },
+    },
+    cancel_url: cancelUrl ?? `${BASE_URL}/scan?revizplus=annule`,
+    locale: 'fr',
+  })
+  return session.url
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).end()
   // Ventes fermées tant que Stripe n'est pas en réel (api/_lancement.js).
@@ -42,49 +92,10 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Tarif fondateur : abonnement pris avant la bascule, décidé ici d'après
-    // l'heure du serveur, jamais d'après ce que le client envoie.
-    const fondateur = tarifFondateurOuvert()
-    const price = await stripePriceId(prixDe(formule, fondateur).lookupKey)
-    if (!price) {
-      console.error('[create-checkout] prix introuvable', formule, fondateur)
-      return res.status(500).json({ error: 'PRICE_NOT_FOUND' })
-    }
-
-    const session = await stripe.checkout.sessions.create({
-      mode: 'subscription',
-      payment_method_types: ['card'],
-      customer_email: email || undefined,
-      // formule et fondateur aussi sur la session : le webhook les recopie
-      // dans le profil (récapitulatif de l'abonnement dans les Réglages).
-      metadata: { firebaseUid: uid, formule, fondateur: String(fondateur) },
-      subscription_data: {
-        metadata: { firebaseUid: uid, formule, fondateur: String(fondateur) },
-        // Avant la bascule : carte enregistrée, rien de prélevé avant le
-        // 26 octobre (période d'ici là non facturée), puis à chaque échéance.
-        ...(fondateur && {
-          billing_cycle_anchor: Math.floor(Date.parse(FIN_LANCEMENT) / 1000),
-          proration_behavior: 'none',
-        }),
-      },
-      line_items: [{ price, quantity: 1 }],
-      allow_promotion_codes: true,
-      success_url: `${BASE_URL}/upgrade-success?formule=${formule}${fondateur ? '&fondateur=1' : ''}`,
-      payment_method_collection: 'always',
-      // Rappel des CGV au-dessus du bouton de paiement.
-      custom_text: {
-        submit: {
-          message: fondateur
-            ? `Rien n'est prélevé avant le 26 octobre ; tu peux annuler d'ici là depuis les Réglages. Ensuite, renouvellement automatique, résiliable à tout moment. En validant, tu acceptes les CGV : ${BASE_URL}/legal/cgv`
-            : `Renouvellement automatique, résiliable à tout moment depuis les Réglages. En validant, tu acceptes les CGV : ${BASE_URL}/legal/cgv`,
-        },
-      },
-      cancel_url: `${BASE_URL}/scan?revizplus=annule`,
-      locale: 'fr',
-    })
-
-    return res.status(200).json({ url: session.url })
+    const url = await creerSessionReviz({ uid, email, formule })
+    return res.status(200).json({ url })
   } catch (err) {
+    if (err?.message === 'PRICE_NOT_FOUND') return res.status(500).json({ error: 'PRICE_NOT_FOUND' })
     console.error('[create-checkout]', err)
     return res.status(500).json({ error: 'Failed to create checkout session' })
   }

@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo, useRef } from 'react'
 import { useNavigate, useLocation, Navigate } from 'react-router-dom'
 import { fermerVersFiche, versExercice } from '../utils/navigation'
-import { recordRevision, markRevisionDone } from '../services/revisionService'
+import { recordRevision, markRevisionDone, loadRevisions } from '../services/revisionService'
 import { Mascot } from '../components/Mascot'
 import { Etincelles } from '../components/Etincelles'
 import { MissingLessonState } from '../components/MissingLessonState'
@@ -21,6 +21,8 @@ import { SEANCE_ACCUEIL, TITRE_DECOUVERTE, SOURCE_DECOUVERTE } from '../utils/se
 import { track } from '../services/statsService'
 import { MontreParent } from '../components/MontreParent'
 import { loadLessons } from '../services/historyService'
+import { limiteExercicesAtteinte } from '../utils/limiteExercices'
+import { LimiteAtteinte, CadeauEssaiPlus } from '../components/revizplus/RevizPlusOffre'
 // Même écran de jeu que le quiz : fond, barre du haut, feuille de correction, écran de fin.
 import './Flashcards.css'
 import './Quiz.css'
@@ -50,14 +52,53 @@ export default function Exercices() {
   // d'accueil, 3 exercices écrits à la main, sans chapitre (utils/seanceAccueil.js).
   const [premiere] = useState(() => new URLSearchParams(location.search).get('premiere') === '1')
   const seance = useMemo(() => (premiere ? SEANCE_ACCUEIL : construireSeance(ai, { graine })), [ai, graine, premiere])
+  // Gratuit : 3 séances par jour (08/11). La première fois, Réviz+ est offert 7 jours (cadeau).
+  const { currentUser, isGuest, hasRevizPlus } = useAuth()
+  const [cadeau, setCadeau] = useState(null) // fin de l'essai qui vient de s'ouvrir
+  const bloque = useMemo(
+    () => !premiere && !!currentUser && !isGuest && !hasRevizPlus && limiteExercicesAtteinte(loadRevisions()),
+    [graine, premiere, currentUser, isGuest, hasRevizPlus], // eslint-disable-line react-hooks/exhaustive-deps
+  )
   if (premiere) return <Seance key="decouverte" ai={{ metadata: { title: TITRE_DECOUVERTE } }} seance={seance} premiere nouvelle={() => {}} />
+  if (bloque) return <LimiteExercices onCadeau={setCadeau} />
   if (!seance.length) {
     // Une leçon trop maigre pour une séance garde son quiz (la séance a remplacé le quiz le 29/10).
     if (ai?.quiz?.length) return <Navigate to={`/quiz?classique=1${premiere ? '&premiere=1' : ''}`} replace state={location.state} />
     return <MissingLessonState title="Exercices" />
   }
   // Une nouvelle séance repart de zéro (nouvelle graine, nouveaux exercices).
-  return <Seance key={graine} ai={ai} seance={seance} premiere={premiere} nouvelle={() => setGraine(Date.now())} />
+  return (
+    <>
+      <Seance key={graine} ai={ai} seance={seance} premiere={premiere} nouvelle={() => setGraine(Date.now())} />
+      {cadeau && <CadeauEssaiPlus fin={cadeau} onContinuer={() => setCadeau(null)} />}
+    </>
+  )
+}
+
+/**
+ * Limite du jour atteinte : la première fois, le serveur ouvre l'essai Réviz+ de 7 jours
+ * (onCadeau, la séance reprend avec le cadeau par-dessus) ; ensuite, la limite et l'offre.
+ */
+function LimiteExercices({ onCadeau }) {
+  const navigate = useNavigate()
+  const location = useLocation()
+  const { essaiPlusPris, ouvrirEssaiPlus } = useAuth()
+  const [etat, setEtat] = useState(essaiPlusPris ? 'limite' : 'ouverture')
+  // Un seul appel, même quand React rejoue l'effet (mode strict).
+  const appel = useRef(null)
+  useEffect(() => {
+    if (etat !== 'ouverture') return undefined
+    let actif = true
+    appel.current ??= ouvrirEssaiPlus()
+    appel.current.then(r => {
+      if (!actif) return
+      if (r?.nouveau && Number.isFinite(r.fin)) onCadeau(r.fin) // l'essai rend Réviz+ : la séance s'affiche
+      else setEtat('limite')
+    })
+    return () => { actif = false }
+  }, [etat]) // eslint-disable-line react-hooks/exhaustive-deps
+  if (etat === 'ouverture') return <p className="ex-attente" role="status">Un instant…</p>
+  return <LimiteAtteinte type="exercices" onClose={() => fermerVersFiche(navigate, location)} />
 }
 
 /**

@@ -57,14 +57,16 @@ export default async function handler(req, res) {
   // 2. Quota serveur (source de vérité)
   const db = getDb()
   let isPremium = false
+  let profil = null
   try {
     const snap = await db.collection('users').doc(uid).get()
-    isPremium = snap.exists && snap.data().plan === 'premium'
+    profil = snap.exists ? snap.data() : null
+    isPremium = profil?.plan === 'premium'
   } catch { /* quota free par prudence */ }
 
   let consumed = false
   if (!isPremium || sansEmail) {
-    const offert = await revizPlusOffertServeur()
+    const offert = await revizPlusOffertServeur(profil)
     const q = await consumeQuota({ db, uid, limit: offert ? LANCEMENT_SCAN_LIMIT : FREE_LIMIT, sansEmail })
     if (!q.allowed && q.sansEmail) return res.status(403).send('EMAIL_NOT_VERIFIED')
     if (!q.allowed) {

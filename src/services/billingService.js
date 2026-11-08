@@ -42,3 +42,20 @@ export async function startCheckout(formule) {
   if (!res.ok || !data.url) throw new Error(data.error || `HTTP_${res.status}`)
   window.location.href = data.url
 }
+
+/**
+ * L'élève demande Réviz+ à un parent : le parent reçoit un e-mail avec un lien pour l'offrir
+ * (api/_demandePlus.js). Jamais dans l'app iOS (règle 3.1.1).
+ * @throws {Error} 'UNAUTHORIZED' | 'EMAIL_INVALIDE' | 'EMAIL_ELEVE' | 'DEJA_DEMANDE' | 'ABONNE' | 'HTTP_xxx'
+ */
+export async function demanderAuParent(email) {
+  const idToken = await auth.currentUser?.getIdToken().catch(() => null)
+  if (!idToken) throw new Error('UNAUTHORIZED')
+  const res = await apiFetch('/api/track?op=demande-plus', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ idToken, email }),
+  })
+  const data = await res.json().catch(() => ({}))
+  if (!res.ok) throw new Error(data.error || `HTTP_${res.status}`)
+}

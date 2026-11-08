@@ -19,5 +19,5 @@ export function RevizPlusBadge({ onClick, label = 'Réviz+', className = '' }) {
 
 /** « Découvrir Réviz+ » (handoff du 22/10) : comparatif, formule, paiement. */
 export function RevizPlusSheet({ onClose }) {
-  return <DecouvrirRevizPlus onClose={onClose} />;
+  return <DecouvrirRevizPlus lieu="badge" onClose={onClose} />;
 }

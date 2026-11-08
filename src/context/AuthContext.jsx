@@ -35,6 +35,7 @@ import { setChallengeUser } from '../services/challengeService';
 import { setScanLimitUser, setPremiumStatus, setRevizPlusOffert } from '../services/scanLimitService';
 import { estFondateur } from '../utils/revizPlus.js';
 import { lancementOffert } from '../../api/_lancement.js';
+import { finEssaiPlus } from '../../api/_essaiPlus.js';
 import { readSessionCache, writeSessionCache, clearSessionCache, userFromSessionCache } from '../services/sessionCache';
 import { track } from '../services/statsService';
 import { apiFetch, apiUrl } from '../services/apiClient';
@@ -138,6 +139,8 @@ export function AuthProvider({ children }) {
   // Vrai pendant signup() : la fiche n'a pas encore le profil, ce n'est pas un profil incomplet.
   const inscriptionEnCours = useRef(false);
   const [isPremium, setIsPremium] = useState(cached?.isPremium ?? false);
+  // Essai Réviz+ de 7 jours (api/_essaiPlus.js) : fin en ms, ou null s'il n'a jamais été pris.
+  const [essaiFin, setEssaiFin] = useState(null);
   // Récapitulatif de l'abonnement écrit par le webhook Stripe (formule,
   // tarif fondateur, fin de période, annulation programmée) ; null sans abonnement.
   const [abonnement, setAbonnement] = useState(null);
@@ -332,6 +335,7 @@ export function AuthProvider({ children }) {
     bindServicesToUser(g.uid);
     setPremiumStatus(false);
     setIsPremium(false);
+    setEssaiFin(null);
     setConsentBlocked(false);
     setConsent({ status: 'ok', parentEmail: null, joursRestants: null });
     setNeedsProfileSetup(false);
@@ -465,6 +469,7 @@ export function AuthProvider({ children }) {
       setIsPremium(false);
       setPremiumStatus(false);
       setAbonnement(null);
+      setEssaiFin(null);
       setGateUid(null);
       return;
     }
@@ -516,6 +521,7 @@ export function AuthProvider({ children }) {
     setIsPremium(premium);
     setPremiumStatus(premium);
     setAbonnement(lireAbonnement(profile));
+    setEssaiFin(finEssaiPlus(profile));
 
     // Mineur <15 ans : accès ouvert le temps de donner l'email d'un parent
     // puis d'attendre sa réponse ; suspendu à l'issue d'un délai ou en cas de refus.
@@ -601,6 +607,7 @@ export function AuthProvider({ children }) {
       setIsPremium(premium);
       setPremiumStatus(premium);
       setAbonnement(lireAbonnement(userDoc.exists() ? userDoc.data() : null));
+      setEssaiFin(finEssaiPlus(userDoc.exists() ? userDoc.data() : null));
     } catch {
       // ignore
     }
@@ -608,7 +615,29 @@ export function AuthProvider({ children }) {
 
   // Réviz+ offert à tous jusqu'au 25 octobre (même règle que l'API).
   const offert = !isPremium && lancementOffert();
-  setRevizPlusOffert(offert); // simple variable de module, réglée avant le rendu des enfants
+  // Essai de 7 jours en cours (même règle que l'API, api/_offert.js).
+  const essai = !isPremium && essaiFin != null && Date.now() < essaiFin;
+  setRevizPlusOffert(offert || essai); // simple variable de module, réglée avant le rendu des enfants
+
+  // Ouvre l'essai de 7 jours (une seule fois par compte, décidé par le serveur).
+  // Renvoie { fin, nouveau } ou null (invité, abonné, réseau).
+  async function ouvrirEssaiPlus() {
+    if (!auth.currentUser || isPremium) return null;
+    try {
+      const idToken = await auth.currentUser.getIdToken();
+      const res = await apiFetch('/api/track?op=essai-plus', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ idToken }),
+      });
+      if (!res.ok) return null;
+      const data = await res.json();
+      if (Number.isFinite(data?.fin)) setEssaiFin(data.fin);
+      return data;
+    } catch {
+      return null;
+    }
+  }
 
   // Identité stable du value : sans useMemo, chaque render du provider
   // re-rendait tous les consommateurs (~15 pages/composants). Les fonctions
@@ -625,8 +654,12 @@ export function AuthProvider({ children }) {
     isPremium, // abonnement payé (Stripe)
     abonnement,
     // Avantages Réviz+ : abonné, ou offert (à tous pendant le lancement).
-    hasRevizPlus: isPremium || offert,
+    hasRevizPlus: isPremium || offert || essai,
     revizPlusOffert: offert,
+    // Essai Réviz+ de 7 jours : fin si en cours, et s'il a déjà été pris (une fois par compte).
+    essaiPlusFin: essai ? essaiFin : null,
+    essaiPlusPris: essaiFin != null,
+    ouvrirEssaiPlus,
     // Compte créé pendant le lancement (jamais un invité).
     estFondateur: !!currentUser && !currentUser.isGuest && estFondateur(currentUser.metadata?.creationTime),
     isGuest: !!currentUser?.isGuest,
@@ -650,7 +683,7 @@ export function AuthProvider({ children }) {
     corrigerEmail,
     actualiserCompte,
     deleteAccount,
-  }), [currentUser, loading, consentBlocked, consent, needsProfileSetup, isPremium, abonnement, offert, guest, levelTick]);
+  }), [currentUser, loading, consentBlocked, consent, needsProfileSetup, isPremium, abonnement, offert, essai, essaiFin, guest, levelTick]);
 
   // Enfants rendus dès que Firebase a confirmé la session — ou immédiatement
   // depuis le cache local (démarrage optimiste). Sans cache, on attend :

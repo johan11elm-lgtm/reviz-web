@@ -6,13 +6,13 @@ service cloud.firestore {
     // firebase-admin, qui contourne ces règles). Le client ne doit jamais
     // pouvoir les créer ni les modifier — sinon n'importe qui s'auto-attribue premium.
     function billingFields() {
-      return ['plan', 'stripeCustomerId', 'stripeSubscriptionId', 'upgradedAt'];
+      return ['plan', 'stripeCustomerId', 'stripeSubscriptionId', 'upgradedAt', 'essaiPlus'];
     }
     function billingUnchangedOnUpdate() {
       return !request.resource.data.diff(resource.data).affectedKeys().hasAny(billingFields());
     }
     function noBillingOnCreate() {
-      return !request.resource.data.keys().hasAny(['stripeCustomerId', 'stripeSubscriptionId', 'upgradedAt'])
+      return !request.resource.data.keys().hasAny(['stripeCustomerId', 'stripeSubscriptionId', 'upgradedAt', 'essaiPlus'])
         && (!('plan' in request.resource.data) || request.resource.data.plan == 'free');
     }
     // Aura de la Battle : écrite UNIQUEMENT par api/battle-fin.js (firebase-admin),

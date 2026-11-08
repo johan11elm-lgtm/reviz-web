@@ -83,7 +83,7 @@ export default async function handler(req, res) {
 
   // 3. Quota = SOURCE DE VÉRITÉ : 10 par semaine en gratuit, 50 par jour en Réviz+
   //    (offre de lancement comprise), garde-fou coût (api/_chatQuota.js).
-  const offert = !isPremium && await revizPlusOffertServeur()
+  const offert = !isPremium && await revizPlusOffertServeur(userData)
   const plus = isPremium || offert
   const limit = isPremium ? CHAT_PREMIUM_LIMIT : (offert ? LANCEMENT_CHAT_LIMIT : CHAT_FREE_LIMIT)
   const periode = plus ? CHAT_PREMIUM_PERIODE : CHAT_FREE_PERIODE

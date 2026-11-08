@@ -188,7 +188,7 @@ export default function Scan() {
   const inputFichier = <input ref={fichier} type="file" accept="image/*" hidden onChange={e => importer(e.target.files?.[0])} />;
   const fenetres = (
     <>
-      {offre && <DecouvrirRevizPlus onClose={() => setOffre(false)} />}
+      {offre && <DecouvrirRevizPlus lieu="scan" onClose={() => setOffre(false)} />}
       {annule && <ToastPaiementAnnule onClose={fermerAnnule} />}
       {niveauManquant && <NiveauManquant onClose={() => setNiveauManquant(false)} onProfil={() => navigate('/profil')} />}
     </>

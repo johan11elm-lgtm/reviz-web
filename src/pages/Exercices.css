@@ -616,3 +616,6 @@
 @media (prefers-reduced-motion: reduce) {
   .ex-page .ex-carte-coche, .ex-page .ex-passage-tag, .ex-page .ex-devinette li.is-neuf { animation: none; }
 }
+
+/* Limite du jour : le temps que le serveur réponde pour l'essai de 7 jours. */
+.ex-attente { display: grid; place-items: center; min-height: 100dvh; margin: 0; font-weight: 600; color: var(--rv-doux); }

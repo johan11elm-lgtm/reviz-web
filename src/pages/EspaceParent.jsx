@@ -168,10 +168,10 @@ export default function EspaceParent() {
           <h2 id="ep-rp">{d.revizPlus ? 'Réviz+ est actif' : 'Réviz+'}</h2>
           <p>
             {d.revizPlus
-              ? 'Plan de révision pour chaque contrôle, Réviz IA et scans illimités. L’abonnement se gère depuis l’app, dans Réglages.'
-              : 'Un plan de révision pour chaque contrôle, Réviz IA et les scans de leçons sans limite. 6,99 € par mois ou 49 € par an, sans engagement, sans publicité.'}
+              ? 'Exercices illimités, plan de révision pour chaque contrôle, Réviz IA et scans illimités. L’abonnement se gère depuis l’app, dans Réglages.'
+              : 'Exercices sans limite (3 séances par jour en gratuit), un plan de révision pour chaque contrôle, Réviz IA et les scans de leçons sans limite. 6,99 € par mois ou 49 € par an, sans engagement, sans publicité.'}
           </p>
-          {!d.revizPlus && <a className="ep-lien" href="https://revizapp.fr/tarifs">Voir l’offre</a>}
+          {!d.revizPlus && <a className="ep-lien" href={d.offrir || 'https://revizapp.fr/tarifs'}>{d.offrir ? `Offrir Réviz+${d.prenom ? ` à ${d.prenom}` : ''}` : 'Voir l’offre'}</a>}
         </Bloc>
 
         <p className="ep-pied">

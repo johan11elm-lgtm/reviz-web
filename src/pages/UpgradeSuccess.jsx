@@ -6,6 +6,7 @@ import { useAuth } from '../context/AuthContext';
 import { useIsDesktop } from '../hooks/useMediaQuery';
 import { Pantin } from '../components/Pantin';
 import { dateCourte } from '../utils/revizPlus';
+import { mesurer } from '../services/mesure';
 import '../components/reviz/HerosMatiere.css';
 import './UpgradeSuccess.css';
 
@@ -42,6 +43,9 @@ export default function UpgradeSuccess() {
   const [verification, setVerification] = useState(false);
   const prenom = currentUser?.displayName?.split(' ')[0];
   const pantin = useRef(null);
+
+  // Dernière étape du tunnel de vente (voir RevizPlusOffre) : une fois par arrivée.
+  useEffect(() => { mesurer('offre', { etape: 'payee', formule: formule ?? 'inconnue' }); }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Retry refreshPremium si le webhook Stripe n'a pas encore écrit dans
   // Firestore : backoff 2s/4s/8s/16s (~30s couverts) au lieu d'un seul essai —

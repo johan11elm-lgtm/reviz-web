@@ -31,6 +31,9 @@ import { PORTEE_DESABO } from './_bilanParent.js'
 import { ESSAI_ID_RE, CHAPITRE_ID_RE } from '../src/utils/retour.js'
 import { routeAbonnement } from './_push.js'
 import { routeEspaceParent } from './_espaceParent.js'
+import { routeEssaiPlus } from './_essaiPlus.js'
+import { routeDemandePlus } from './_demandePlus.js'
+import { Resend } from 'resend'
 
 export const EVENTS = [
   'essai_demarre', 'compte_cree', 'programme_ouvert', 'chapitre_ouvert', 'revision', 'quiz_termine',
@@ -197,6 +200,18 @@ export default async function handler(req, res) {
   if (req.query?.op === 'push' && (req.method === 'POST' || req.method === 'DELETE')) {
     try { return await routeAbonnement(req, res, { db: getDb(), auth: getAuthAdmin() }) }
     catch (err) { console.error('[push]', err?.message || err); return res.status(500).json({ error: 'INTERNAL' }) }
+  }
+  // Essai Réviz+ de 7 jours, ouvert à la première limite d'exercices (api/_essaiPlus.js).
+  if (req.query?.op === 'essai-plus' && req.method === 'POST') {
+    try { return await routeEssaiPlus(req, res, { db: getDb(), auth: getAuthAdmin() }) }
+    catch (err) { console.error('[essai-plus]', err?.message || err); return res.status(500).json({ error: 'ERREUR' }) }
+  }
+  // L'élève demande Réviz+ à un parent : e-mail avec le lien pour l'offrir (api/_demandePlus.js).
+  if (req.query?.op === 'demande-plus' && req.method === 'POST') {
+    try {
+      const resend = new Resend(process.env.RESEND_API_KEY)
+      return await routeDemandePlus(req, res, { db: getDb(), auth: getAuthAdmin(), envoyer: m => resend.emails.send(m) })
+    } catch (err) { console.error('[demande-plus]', err?.message || err); return res.status(500).json({ error: 'ERREUR' }) }
   }
   // Espace parent : la page /parent (GET, lien signé) et le lien que l'élève partage (POST).
   if ((req.query?.op === 'parent' && req.method === 'GET') || (req.query?.op === 'lien-parent' && req.method === 'POST')) {

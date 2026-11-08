@@ -616,7 +616,7 @@ export default function Coach() {
     <>
       {choix && <ChoixLecon lecons={lecons} activeId={leconId} onSelect={choisir} onClose={() => setChoix(false)} grand={isDesktop} />}
       {histo && <Discussions recents={recents} activeId={cle} onSelect={choisir} onNouvelle={nouvelle} onClose={() => setHisto(false)} />}
-      {offre && <DecouvrirRevizPlus onClose={() => setOffre(false)} />}
+      {offre && <DecouvrirRevizPlus lieu="coach" onClose={() => setOffre(false)} />}
       {ajout && (
         <AjoutControle
           initial={{ matiere: ajout.carte.matiere, date: ajout.carte.date, chapitres: ajout.carte.chapitres, programme: ajout.carte.programme, titre: ajout.carte.chapitres?.length ? '' : ajout.carte.titre }}
