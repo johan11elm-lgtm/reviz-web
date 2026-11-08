@@ -88,12 +88,14 @@ export async function activerPush(emplacement = 'reglages') {
     const permission = Notification.permission === 'granted' ? 'granted' : await Notification.requestPermission()
     if (permission !== 'granted') {
       mesurer('push_refusees', { emplacement })
+      try { window.dispatchEvent(new Event('reviz-push')) } catch { /* rien */ }
       return { ok: false, raison: 'refusees' }
     }
     const abonnement = await abonnementCourant()
     await envoyer({ abonnement: abonnement.toJSON() })
     try { localStorage.setItem(CLE_SYNCHRO, new Date().toISOString().slice(0, 10)) } catch { /* rien */ }
     mesurer('push_activees', { emplacement })
+    try { window.dispatchEvent(new Event('reviz-push')) } catch { /* rien */ }
     return { ok: true }
   } catch {
     return { ok: false, raison: 'erreur' }

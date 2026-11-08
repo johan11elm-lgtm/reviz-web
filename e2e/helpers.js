@@ -362,7 +362,7 @@ export async function lireProfilEmulateur(uid) {
 export async function compteRapide(page, {
   prenom = 'Testeur', classe = '3ème', birthDate = '2009-05-01', email = uniqueEmail('rapide'),
   motDePasse = 'motdepasse123', emailVerifie = true, onboarde = true, annoncesVues = true,
-  consentement, profil = {}, stockage = {}, connecte = true, aller = '/',
+  consentement, profil = {}, stockage = {}, connecte = true, aller = '/', rappelVu = annoncesVues,
 } = {}) {
   const compte = await appelEmulateur(`${AUTH}/identitytoolkit.googleapis.com/v1/accounts:signUp?key=fake`, {
     method: 'POST',
@@ -393,7 +393,7 @@ export async function compteRapide(page, {
   if (connecte) {
     // Le localStorage est par origine : on charge une page de l'app d'abord.
     await page.goto('/connexion')
-    await page.evaluate(({ uid, level, onboarde, annoncesVues, stockage }) => {
+    await page.evaluate(({ uid, level, onboarde, annoncesVues, stockage, rappelVu }) => {
       localStorage.setItem(`reviz-level-${uid}`, JSON.stringify(level))
       if (onboarde) localStorage.setItem(`reviz-onboarded-${uid}`, '1')
       if (annoncesVues) {
@@ -404,11 +404,13 @@ export async function compteRapide(page, {
         localStorage.setItem(`reviz-annonce-jeux-${uid}`, '1')
         localStorage.setItem('reviz-essai-theme-vu', '1')
       }
+      // Rappel de 17 h déjà proposé 3 fois (utils/demandeRappel.js) : ni carte ni fenêtre.
+      if (rappelVu) localStorage.setItem(`reviz-rappel-demande-${uid}`, JSON.stringify({ fois: 3, derniere: Date.now() }))
       for (const [k, v] of Object.entries(stockage)) {
         if (v === null) localStorage.removeItem(k)
         else localStorage.setItem(k, v)
       }
-    }, { uid, level, onboarde, annoncesVues, stockage })
+    }, { uid, level, onboarde, annoncesVues, stockage, rappelVu })
 
     await page.getByLabel('E-mail', { exact: true }).fill(email)
     await page.getByLabel('Mot de passe', { exact: true }).fill(motDePasse)

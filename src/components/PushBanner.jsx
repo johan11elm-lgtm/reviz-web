@@ -19,6 +19,12 @@ export function PushBanner({ className = '' }) {
 
   // Une fois par jour, l'abonnement déjà autorisé est renvoyé au serveur.
   useEffect(() => { if (currentUser && !isGuest) resynchroniserPush(); }, [currentUser, isGuest]);
+  // Réponse donnée ailleurs (fenêtre d'ouverture, fin de séance) : le bandeau se met à jour.
+  useEffect(() => {
+    const maj = () => setEtat(etatPush());
+    window.addEventListener('reviz-push', maj);
+    return () => window.removeEventListener('reviz-push', maj);
+  }, []);
 
   const compte = !!currentUser && !isGuest && !currentUser.isAnonymous;
   if (!compte || etat !== 'proposables' || !loadRevisions().length) return null;

@@ -1,0 +1,11 @@
+/* Rappel de 17 h proposé en fin de séance et à l'ouverture (08/11). */
+.qz-page--fin .fc-ecran > .rd-carte { margin-top: 20px; }
+.rd-carte { border: 2px solid var(--rv-lavande); }
+.rd-carte--fait { border-color: var(--rv-vert-pale); }
+.rd-texte { margin: 8px 0 0; font-size: 15px; line-height: 1.5; color: var(--ch-doux, var(--rv-doux)); }
+.rd-carte--fait .rd-texte { margin: 0; font-weight: 600; color: var(--rv-encre); }
+.rd-actions { display: flex; align-items: center; gap: 12px; margin-top: 14px; flex-wrap: wrap; }
+.rd-btn { flex: none; width: auto; height: 52px; padding: 0 22px; display: inline-flex; align-items: center; justify-content: center; text-decoration: none; }
+.rd-lien { width: auto; margin: 0; }
+.rd-titre-fenetre { margin-top: 8px; }
+.rd-lien-btn { display: flex; align-items: center; justify-content: center; text-decoration: none; }

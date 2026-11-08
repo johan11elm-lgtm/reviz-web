@@ -30,6 +30,7 @@ async function appareilSansSession(page, { uid, classe }) {
       for (const ventes of ['', '-ventes']) localStorage.setItem(`reviz-annonce-revizplus-${phase}${ventes}-${uid}`, '1')
     }
     localStorage.setItem(`reviz-annonce-jeux-${uid}`, '1')
+    localStorage.setItem(`reviz-rappel-demande-${uid}`, JSON.stringify({ fois: 3, derniere: Date.now() }))
     localStorage.setItem('reviz-essai-theme-vu', '1')
   }, { uid, classe })
 }

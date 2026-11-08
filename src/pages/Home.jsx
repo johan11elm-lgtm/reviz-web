@@ -6,6 +6,7 @@ import { GuestBanner } from '../components/GuestBanner';
 import { ConsentBanner } from '../components/ConsentBanner';
 import { EmailBanner } from '../components/EmailBanner';
 import { PushBanner } from '../components/PushBanner';
+import { RappelOuverture } from '../components/RappelDemain';
 import { Mascot } from '../components/Mascot';
 import { Avatar } from '../components/Avatar';
 import { estInstallee } from '../utils/installation';
@@ -104,6 +105,9 @@ export default function Home() {
   const [annonceJeux, setAnnonceJeux] = useState(() => !annonceRevizPlus && !!currentUser?.uid && !annonceJeuxVue(currentUser.uid));
   const { theme, isDark } = useTheme();
   const [essaiTheme, setEssaiTheme] = useState(() => !essaiThemeVu());
+  // Rappel de 17 h proposé à l'ouverture (08/11), jamais en même temps qu'une annonce,
+  // seulement après une première révision ; espacement dans utils/demandeRappel.js.
+  const [rappelOuverture, setRappelOuverture] = useState(() => !annonceRevizPlus && !annonceJeux && loadRevisions().length > 0);
   // Les thèmes Réviz+ sont des thèmes clairs : pas d'invitation à les essayer en sombre.
   const montrerEssai = essaiTheme && hasRevizPlus && !isGuest && !isDark && !themeById(theme)?.premium;
   const [caseChoisie, setCaseChoisie] = useState(null);
@@ -542,6 +546,7 @@ export default function Home() {
       {newBadge && !annonceJeux && <AchievementToast badge={newBadge} onDone={() => setNewBadge(null)} />}
       {annonceRevizPlus && <RevizPlusAnnonce uid={currentUser.uid} onClose={() => setAnnonceRevizPlus(false)} />}
       {annonceJeux && <JeuxAnnonce uid={currentUser.uid} onClose={() => setAnnonceJeux(false)} />}
+      {rappelOuverture && <RappelOuverture onClose={() => setRappelOuverture(false)} />}
 
       <div className="content nm-defile">
         {tete}
