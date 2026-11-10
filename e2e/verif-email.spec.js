@@ -53,10 +53,24 @@ test.describe('Carte d’activation, là où l’e-mail bloque (390 px)', () => 
   test.use({ viewport: { width: 390, height: 844 } })
   test.beforeEach(async ({ page }) => { await mockApiRoutes(page) })
 
-  test('Réviz IA : la carte à la place du champ, avant toute question, puis le champ revient', async ({ page }) => {
-    const { email } = await compteRapide(page, { emailVerifie: false, aller: '/coach' })
+  // Depuis le 10/11 : trois questions d'essai avant la carte (utils/essaiIA.js). Avant, la carte
+  // arrivait avant toute question : 106 élèves refoulés en 10 jours, 20 confirmations.
+  test('Réviz IA, essai pas encore fait : le champ est là, la note compte les questions d’essai', async ({ page }) => {
+    await compteRapide(page, { emailVerifie: false, aller: '/coach' })
+    await expect(page.getByLabel('Ta question à Réviz IA')).toBeVisible()
+    await expect(page.getByText(/3 questions d’essai avant de confirmer ton e-mail/)).toBeVisible()
+    await expect(page.getByRole('region', { name: 'Confirmer ton e-mail' })).toHaveCount(0)
+    await page.screenshot({ path: test.info().outputPath('reviz-ia-essai.png'), animations: 'disabled' })
+  })
+
+  test('Réviz IA, questions d’essai utilisées : la carte à la place du champ, puis le champ revient', async ({ page }) => {
+    const { email, uid } = await compteRapide(page, { emailVerifie: false, stockage: {}, aller: '/' })
+    // Ce que l'appli retient quand le serveur a répondu « plus de question d'essai ».
+    await page.evaluate(u => localStorage.setItem(`reviz-ia-essai-${u}`, '0'), uid)
+    await page.goto('/coach')
     const carte = page.getByRole('region', { name: 'Confirmer ton e-mail' })
-    await expect(carte).toContainText('Confirme ton e-mail pour parler à Réviz IA')
+    await expect(carte).toContainText('Confirme ton e-mail pour continuer avec Réviz IA')
+    await expect(carte).toContainText('Tes questions d’essai sont faites.')
     await expect(carte).toContainText(email)
     await expect(page.getByLabel('Ta question à Réviz IA')).toHaveCount(0)
     await page.screenshot({ path: test.info().outputPath('reviz-ia.png'), animations: 'disabled' })

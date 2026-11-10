@@ -12,6 +12,7 @@ import { jourParis } from '../utils/retour.js'
 import { traceCarte } from '../utils/agent.js'
 import { memoriserQuotaCoach } from '../utils/revizPlus.js'
 import { exigerAccordIA } from '../utils/accordIA.js'
+import { noterEssaiIA } from '../utils/essaiIA.js'
 
 export { CHAT_MAX_MESSAGE_LENGTH }
 
@@ -119,7 +120,11 @@ async function _viaProxy({ lessonId, messages, level, onDelta, onOutil, onCarte,
   if (!response.ok) {
     const body = await response.text().catch(() => '')
     if (response.status === 401) throw new Error('UNAUTHORIZED')
-    if (body === 'EMAIL_NOT_VERIFIED') throw new Error('EMAIL_NOT_VERIFIED')
+    if (body === 'EMAIL_NOT_VERIFIED') {
+      // Questions d'essai utilisées : la carte d'activation s'affichera dès l'ouverture.
+      noterEssaiIA(auth.currentUser?.uid, 0)
+      throw new Error('EMAIL_NOT_VERIFIED')
+    }
     if (body === 'CHAT_LIMIT') throw new Error('CHAT_LIMIT')
     if (response.status === 429 || body === 'RATE_LIMIT') throw new Error('RATE_LIMIT')
     if (body === 'LESSON_NOT_FOUND') throw new Error('LESSON_NOT_FOUND')
@@ -145,6 +150,8 @@ async function _viaProxy({ lessonId, messages, level, onDelta, onOutil, onCarte,
       } else if (event.meta) {
         remaining = event.meta.remaining ?? null
         memoriserQuotaCoach(event.meta.remaining, event.meta.limit, event.meta.periode)
+        // E-mail pas confirmé : ce qu'il reste de questions d'essai (api/_chatQuota.js).
+        if (Number.isInteger(event.meta.avantEmail)) noterEssaiIA(auth.currentUser?.uid, event.meta.avantEmail)
       } else if (event.error) {
         streamError = event.error
       }

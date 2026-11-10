@@ -157,13 +157,45 @@ describe('/api/chat', () => {
     expect(anthropicCreate).not.toHaveBeenCalled()
   })
 
-  it('refuse (403 EMAIL_NOT_VERIFIED) si l\'email n\'est pas vérifié', async () => {
+  it('e-mail pas confirmé : les questions d\'essai passent, et le flux dit combien il en reste', async () => {
     verifyIdToken.mockResolvedValue({ uid: 'u1', email_verified: false })
+    consumeChatQuota.mockResolvedValue({ allowed: true, remaining: 9, avantEmail: 2 })
+    anthropicCreate.mockResolvedValue(flux([{ type: 'content_block_delta', delta: { type: 'text_delta', text: 'Salut' } }]))
+    const res = mockRes()
+    await handler({ method: 'POST', body: VALID_BODY }, res)
+    expect(res.statusCode).toBe(200)
+    expect(consumeChatQuota).toHaveBeenCalledWith(expect.objectContaining({ uid: 'u1', sansEmail: true }))
+    expect(JSON.parse(res.chunks[0].replace(/^data: /, '')).meta).toMatchObject({ remaining: 9, avantEmail: 2 })
+  })
+
+  it('e-mail pas confirmé, questions d\'essai utilisées : 403 EMAIL_NOT_VERIFIED, rien ne part chez Anthropic', async () => {
+    verifyIdToken.mockResolvedValue({ uid: 'u1', email_verified: false })
+    consumeChatQuota.mockResolvedValue({ allowed: false, sansEmail: true, remaining: 0, avantEmail: 0 })
     const res = mockRes()
     await handler({ method: 'POST', body: VALID_BODY }, res)
     expect(res.statusCode).toBe(403)
     expect(res.payload).toBe('EMAIL_NOT_VERIFIED')
-    expect(consumeChatQuota).not.toHaveBeenCalled()
+    expect(anthropicCreate).not.toHaveBeenCalled()
+  })
+
+  it('e-mail confirmé : pas de compte d\'essai, et rien de plus dans le flux', async () => {
+    consumeChatQuota.mockResolvedValue({ allowed: true, remaining: 4 })
+    anthropicCreate.mockResolvedValue(flux([{ type: 'content_block_delta', delta: { type: 'text_delta', text: 'Salut' } }]))
+    const res = mockRes()
+    await handler({ method: 'POST', body: VALID_BODY }, res)
+    expect(consumeChatQuota).toHaveBeenCalledWith(expect.objectContaining({ sansEmail: false }))
+    expect(JSON.parse(res.chunks[0].replace(/^data: /, '')).meta).not.toHaveProperty('avantEmail')
+  })
+
+  it('appel IA en échec avec un e-mail pas confirmé : la question d\'essai est rendue', async () => {
+    verifyIdToken.mockResolvedValue({ uid: 'u1', email_verified: false })
+    consumeChatQuota.mockResolvedValue({ allowed: true, remaining: 9, avantEmail: 2 })
+    anthropicCreate.mockRejectedValue(Object.assign(new Error('boom'), { status: 500 }))
+    refundChatQuota.mockResolvedValue()
+    const res = mockRes()
+    await handler({ method: 'POST', body: VALID_BODY }, res)
+    expect(res.statusCode).toBe(502)
+    expect(refundChatQuota).toHaveBeenCalledWith(expect.objectContaining({ uid: 'u1', sansEmail: true }))
   })
 
   it('refuse (404) si la leçon n\'existe pas chez cet élève', async () => {

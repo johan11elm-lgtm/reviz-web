@@ -236,11 +236,45 @@ describe('<Coach /> — Réviz IA', () => {
     expect(screen.queryByLabelText('Ta question à Réviz IA')).toBeNull()
   })
 
-  it('e-mail pas confirmé : la carte d’activation dès l’ouverture, avec l’adresse et sa messagerie, et la question de l’accueil ne part pas', async () => {
+  it('e-mail pas confirmé, essai pas encore fait : le champ est là, la note compte les questions d’essai, et la question de l’accueil part', async () => {
     auth.user = NON_CONFIRME
+    chat.send.mockResolvedValue({ text: 'Une fraction, c’est une part.', cartes: [] })
+    await act(async () => { renderAvecEtat('/coach', { question: 'c’est quoi une fraction', envoyer: true }) })
+    expect(chat.send).toHaveBeenCalledTimes(1)
+    expect(screen.queryByRole('region', { name: 'Confirmer ton e-mail' })).toBeNull()
+    expect(screen.getByLabelText('Ta question à Réviz IA')).toBeInTheDocument()
+    expect(screen.getByText(/3 questions d’essai avant de confirmer ton e-mail/)).toBeInTheDocument()
+  })
+
+  it('e-mail pas confirmé : la note suit ce que le serveur a répondu (il reste 1 question d’essai)', async () => {
+    auth.user = NON_CONFIRME
+    localStorage.setItem('reviz-ia-essai-u1', '1')
+    renderAt('/coach')
+    expect(screen.getByText(/1 question d’essai avant de confirmer ton e-mail/)).toBeInTheDocument()
+  })
+
+  it('e-mail pas confirmé, la dernière question d’essai vient de partir : la carte remplace le champ après la réponse', async () => {
+    auth.user = NON_CONFIRME
+    localStorage.setItem('reviz-ia-essai-u1', '1')
+    // Le service note ce que dit le serveur (0 question d'essai restante) avant de rendre la réponse.
+    chat.send.mockImplementation(async () => { localStorage.setItem('reviz-ia-essai-u1', '0'); return { text: 'Voilà.', cartes: [] } })
+    renderAt('/coach')
+    fireEvent.change(screen.getByLabelText('Ta question à Réviz IA'), { target: { value: 'une dernière' } })
+    await act(async () => fireEvent.click(screen.getByRole('button', { name: 'Envoyer la question' })))
+    expect(screen.getByText('Voilà.')).toBeInTheDocument()
+    const carte = screen.getByRole('region', { name: 'Confirmer ton e-mail' })
+    expect(carte).toHaveTextContent('Confirme ton e-mail pour continuer avec Réviz IA')
+    expect(carte).toHaveTextContent('Tes questions d’essai sont faites.')
+    expect(screen.queryByLabelText('Ta question à Réviz IA')).toBeNull()
+  })
+
+  it('e-mail pas confirmé, questions d’essai utilisées : la carte d’activation dès l’ouverture, avec l’adresse et sa messagerie, et la question de l’accueil ne part pas', async () => {
+    auth.user = NON_CONFIRME
+    localStorage.setItem('reviz-ia-essai-u1', '0')
     await act(async () => { renderAvecEtat('/coach', { question: 'c’est quoi une fraction', envoyer: true }) })
     expect(chat.send).not.toHaveBeenCalled()
     const carte = screen.getByRole('region', { name: 'Confirmer ton e-mail' })
+    expect(carte).toHaveTextContent('Confirme ton e-mail pour continuer avec Réviz IA')
     expect(carte).toHaveTextContent('lea@gmail.com')
     expect(within(carte).getByRole('link', { name: 'Ouvrir Gmail' })).toHaveAttribute('href', expect.stringContaining('mail.google.com'))
     expect(within(carte).getByRole('button', { name: 'Pas la bonne adresse ? Corriger' })).toBeInTheDocument()

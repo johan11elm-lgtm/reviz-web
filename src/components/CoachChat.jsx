@@ -6,6 +6,7 @@ import { sendCoachMessage, CHAT_MAX_MESSAGE_LENGTH } from '../services/chatServi
 import { LimiteAtteinte } from './revizplus/RevizPlusOffre';
 import { ACHAT_DANS_L_APP } from '../utils/achat';
 import { CarteEmail, useEmailAConfirmer } from './CarteEmail';
+import { essaiIA } from '../utils/essaiIA';
 import { SignalerReponse } from './SignalerReponse';
 import './CoachChat.css';
 import './RevizPlus.css';
@@ -182,7 +183,7 @@ export function coachPreview(lessonId) {
  * @param {string} [className]
  */
 export function CoachConversation({ lessonId, prefill, className = '' }) {
-  const { hasRevizPlus, getUserLevel } = useAuth();
+  const { hasRevizPlus, getUserLevel, currentUser } = useAuth();
 
   const [messages, setMessages] = useState(() => loadConversation(lessonId));
   const [input, setInput]             = useState('');
@@ -190,10 +191,12 @@ export function CoachConversation({ lessonId, prefill, className = '' }) {
   const [isStreaming, setIsStreaming] = useState(false);
   const [error, setError]             = useState(null);
   const [quotaOut, setQuotaOut]       = useState(false);
-  // E-mail pas confirmé (ou refusé par le serveur) : la carte d'activation au lieu de la question.
+  // E-mail pas confirmé : quelques questions d'essai d'abord (utils/essaiIA.js), puis la carte
+  // d'activation au lieu de la question. refusEmail : le serveur vient de refuser.
   const aConfirmer = useEmailAConfirmer();
   const [refusEmail, setRefusEmail]   = useState(false);
-  const bloqueEmail = aConfirmer || refusEmail;
+  const [essai, setEssai]             = useState(() => essaiIA(currentUser?.uid));
+  const bloqueEmail = refusEmail || (aConfirmer && essai.fini);
   const scrollRef = useRef(null);
 
   // Changement de leçon → conversation de cette leçon.
@@ -247,6 +250,7 @@ export function CoachConversation({ lessonId, prefill, className = '' }) {
     } finally {
       setIsStreaming(false);
       setDraft(null);
+      setEssai(essaiIA(currentUser?.uid));
     }
   }
 
@@ -285,7 +289,7 @@ export function CoachConversation({ lessonId, prefill, className = '' }) {
             <div className="coach-notice" role="alert">{error}</div>
           )}
 
-          {bloqueEmail && <CarteEmail raison="ia" className="coach-carte-email" onConfirme={() => setRefusEmail(false)} />}
+          {bloqueEmail && <CarteEmail raison={essai.fini ? 'ia-essai' : 'ia'} className="coach-carte-email" onConfirme={() => setRefusEmail(false)} />}
 
           {quotaOut && (
             <div className="coach-quota">

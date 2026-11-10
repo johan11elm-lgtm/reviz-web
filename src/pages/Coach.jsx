@@ -18,6 +18,7 @@ import { erreursRecentes } from '../services/erreursService';
 import { track } from '../services/statsService';
 import { AjoutControle } from '../components/AjoutControle';
 import { CarteEmail, useEmailAConfirmer } from '../components/CarteEmail';
+import { essaiIA } from '../utils/essaiIA';
 import { SUBJECT_MAP, subjectKey, subjectMascot } from '../utils/subjects';
 import { isProgrammeLessonId } from '../utils/programme';
 import { intituleControle, matiereControle } from '../utils/agenda';
@@ -284,12 +285,13 @@ export default function Coach() {
   const [outil, setOutil] = useState(null); // agent : ce qu'il regarde en ce moment
   const [cartesEnCours, setCartesEnCours] = useState([]);
   const [ajout, setAjout] = useState(null); // carte de contrôle ouverte dans la feuille de l'agenda
-  // E-mail pas confirmé : la carte d'activation prend la place du champ, avant toute question
-  // (2 élèves sur 3 qui essayaient Réviz IA le 29/10 recevaient un refus). refusEmail : le serveur
-  // a refusé alors que l'appli croyait l'e-mail confirmé.
+  // E-mail pas confirmé : quelques questions d'essai d'abord (utils/essaiIA.js), puis la carte
+  // d'activation à la place du champ. Du 31/10 au 09/11, la carte arrivait avant toute question :
+  // 106 élèves refoulés, 20 seulement ont confirmé. refusEmail : le serveur vient de refuser.
   const aConfirmer = useEmailAConfirmer();
   const [refusEmail, setRefusEmail] = useState(false);
-  const bloqueEmail = aConfirmer || refusEmail;
+  const [essai, setEssai] = useState(() => essaiIA(currentUser?.uid));
+  const bloqueEmail = refusEmail || (aConfirmer && essai.fini);
   const fil = useRef(null);
   const champ = useRef(null);
   const enCours = brouillon !== null;
@@ -412,6 +414,7 @@ export default function Coach() {
       setOutil(null);
       setCartesEnCours([]);
       setQuota(quotaCoachDuJour());
+      setEssai(essaiIA(currentUser?.uid));
     }
   }
   // id null (ou AGENT, depuis les discussions) : Réviz IA sur toutes les matières.
@@ -473,9 +476,12 @@ export default function Coach() {
   // Gratuit : 10 questions par semaine ; Réviz+ : 50 par jour (api/_chatQuota.js). Quota pas encore
   // reçu du serveur : la période de l'offre de l'élève.
   const semaine = (quota?.periode ?? (hasRevizPlus ? 'jour' : 'semaine')) === 'semaine';
-  const note = !hasRevizPlus && Number.isFinite(quota?.remaining)
-    ? `${pluriel(quota.remaining, 'question')} ${quota.remaining > 1 ? 'gratuites' : 'gratuite'} ${semaine ? 'cette semaine' : "aujourd'hui"} · Réviz IA peut se tromper`
-    : 'Réviz IA peut se tromper';
+  // E-mail pas confirmé : la note dit ce qu'il reste de l'essai, pour que la carte ne surprenne pas.
+  const note = aConfirmer
+    ? `${pluriel(essai.restant, 'question')} d’essai avant de confirmer ton e-mail · Réviz IA peut se tromper`
+    : !hasRevizPlus && Number.isFinite(quota?.remaining)
+      ? `${pluriel(quota.remaining, 'question')} ${quota.remaining > 1 ? 'gratuites' : 'gratuite'} ${semaine ? 'cette semaine' : "aujourd'hui"} · Réviz IA peut se tromper`
+      : 'Réviz IA peut se tromper';
 
   const accueil = (
     <div className="ia-accueil">
@@ -565,7 +571,7 @@ export default function Coach() {
       {!hasRevizPlus && ACHAT_DANS_L_APP && <button type="button" className="ia-btn" onClick={() => setOffre(true)}>50 questions par jour avec Réviz+</button>}
     </div>
   ) : bloqueEmail ? (
-    <CarteEmail raison="ia" note={saisie.trim() ? 'Ta question t’attend ici.' : undefined} onConfirme={() => setRefusEmail(false)} />
+    <CarteEmail raison={essai.fini ? 'ia-essai' : 'ia'} note={saisie.trim() ? 'Ta question t’attend ici.' : undefined} onConfirme={() => setRefusEmail(false)} />
   ) : (
     <>
       <form className="ia-champ-cadre" onSubmit={e => { e.preventDefault(); envoyer(saisie); }}>

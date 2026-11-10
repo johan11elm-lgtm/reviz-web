@@ -34,6 +34,32 @@ beforeEach(() => {
   }
 })
 
+describe('sendCoachMessage — questions d’essai (e-mail pas confirmé)', () => {
+  beforeEach(() => {
+    localStorage.clear()
+    compte.currentUser.uid = 'u1'
+    compte.currentUser.reload = vi.fn(async () => {}) // toujours pas confirmé
+  })
+
+  it('le flux dit ce qu’il reste de l’essai : l’appli le retient', async () => {
+    api.fetch.mockResolvedValueOnce(flux([{ meta: { remaining: 9, limit: 10, periode: 'semaine', avantEmail: 2 } }, { text: 'Salut' }, '[DONE]']))
+    await sendCoachMessage(ENVOI)
+    expect(localStorage.getItem('reviz-ia-essai-u1')).toBe('2')
+  })
+
+  it('refus EMAIL_NOT_VERIFIED : l’essai est noté comme fini, et le refus remonte', async () => {
+    api.fetch.mockResolvedValue(refus(403, 'EMAIL_NOT_VERIFIED'))
+    await expect(sendCoachMessage(ENVOI)).rejects.toThrow('EMAIL_NOT_VERIFIED')
+    expect(localStorage.getItem('reviz-ia-essai-u1')).toBe('0')
+  })
+
+  it('compte confirmé : rien n’est noté', async () => {
+    api.fetch.mockResolvedValueOnce(flux([{ meta: { remaining: 9, limit: 10, periode: 'semaine' } }, { text: 'Salut' }, '[DONE]']))
+    await sendCoachMessage(ENVOI)
+    expect(localStorage.getItem('reviz-ia-essai-u1')).toBeNull()
+  })
+})
+
 describe('sendCoachMessage — e-mail tout juste confirmé', () => {
   it('refus EMAIL_NOT_VERIFIED alors que le compte vient d’être vérifié : jeton neuf, la question repart', async () => {
     api.fetch.mockResolvedValueOnce(refus(403, 'EMAIL_NOT_VERIFIED')).mockResolvedValueOnce(flux([{ text: 'Allez !' }, '[DONE]']))

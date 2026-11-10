@@ -61,7 +61,9 @@ export default async function handler(req, res) {
     return res.status(401).send('Unauthorized')
   }
   const uid = decoded.uid
-  if (!compteVerifie(decoded)) return res.status(403).send('EMAIL_NOT_VERIFIED')
+  // E-mail pas encore confirmé (cf. _compteVerifie.js) : quelques questions d'essai,
+  // ensuite EMAIL_NOT_VERIFIED (_chatQuota.js, CHAT_SANS_EMAIL).
+  const sansEmail = !compteVerifie(decoded)
 
   // 2. Contexte = la leçon Firestore de CET élève (le client n'envoie qu'un id,
   //    jamais le contenu du system prompt) + plan pour le quota. En agent, pas de
@@ -87,7 +89,8 @@ export default async function handler(req, res) {
   const plus = isPremium || offert
   const limit = isPremium ? CHAT_PREMIUM_LIMIT : (offert ? LANCEMENT_CHAT_LIMIT : CHAT_FREE_LIMIT)
   const periode = plus ? CHAT_PREMIUM_PERIODE : CHAT_FREE_PERIODE
-  const q = await consumeChatQuota({ db, uid, limit, periode })
+  const q = await consumeChatQuota({ db, uid, limit, periode, sansEmail })
+  if (!q.allowed && q.sansEmail) return res.status(403).send('EMAIL_NOT_VERIFIED')
   if (!q.allowed) {
     // Le parent en sera prévenu par le cron du soir (api/_limiteParent.js).
     if (!plus) await marquerLimite({ db, uid, type: 'ia' })
@@ -106,7 +109,7 @@ export default async function handler(req, res) {
       ? requeteAgent(cleanMessages, 0)
       : { ...buildChatRequest({ level, lessonContext: buildChatLessonContext(lessonSnap.data()), messages: cleanMessages, aujourdhui }), stream: true })
   } catch (err) {
-    await refundChatQuota({ db, uid, periode }).catch(() => {})
+    await refundChatQuota({ db, uid, periode, sansEmail }).catch(() => {})
     const status = err?.status
     if (typeof status !== 'number') return res.status(502).send('NETWORK_ERROR')
     if (status === 401 || status === 403) return res.status(502).send('INVALID_API_KEY')
@@ -120,7 +123,8 @@ export default async function handler(req, res) {
   res.setHeader('Content-Type', 'text/event-stream; charset=utf-8')
   res.setHeader('Cache-Control', 'no-cache, no-transform')
   // Premier event : quota restant (affichage client purement informatif).
-  res.write(`data: ${JSON.stringify({ meta: { remaining: q.remaining, limit, periode } })}\n\n`)
+  // avantEmail : questions d'essai qu'il reste à un compte dont l'e-mail n'est pas confirmé.
+  res.write(`data: ${JSON.stringify({ meta: { remaining: q.remaining, limit, periode, ...(sansEmail ? { avantEmail: q.avantEmail } : {}) } })}\n\n`)
 
   const ecrire = evenement => res.write(`data: ${JSON.stringify(evenement)}\n\n`)
   try {

@@ -12,6 +12,8 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 // Ce que l'e-mail débloque, selon l'endroit où l'élève a été arrêté.
 const RAISONS = {
   ia: { titre: 'Confirme ton e-mail pour parler à Réviz IA', sous: 'Un clic sur le lien reçu, et tu peux lui poser ta question.' },
+  // Les questions d'essai sont utilisées (utils/essaiIA.js) : même carte, le texte le dit.
+  'ia-essai': { titre: 'Confirme ton e-mail pour continuer avec Réviz IA', sous: 'Tes questions d’essai sont faites. Un clic sur le lien reçu, et tu continues.' },
   scan: { titre: 'Confirme ton e-mail pour scanner la suite', sous: 'Ta leçon d’essai est faite. Un clic sur le lien reçu, et tu scannes les suivantes.' },
   revizplus: { titre: 'Confirme ton e-mail pour prendre Réviz+', sous: 'Un clic sur le lien reçu, et tu peux continuer.' },
   general: { titre: 'Confirme ton e-mail', sous: 'Il débloque Réviz IA et le scan de tes leçons.' },
@@ -32,7 +34,7 @@ export function useEmailAConfirmer() {
  * Carte d'activation de l'e-mail, posée là où l'e-mail bloque (Réviz IA, scan, Réviz+) : à quelle
  * adresse le lien est parti, ouvrir sa messagerie, renvoyer, et corriger une adresse mal tapée
  * (une sur cinq, octobre 2026). Revient de la messagerie → on revérifie tout seul.
- * @param {'ia'|'scan'|'revizplus'|'general'} raison  ce que l'e-mail débloque ici
+ * @param {'ia'|'ia-essai'|'scan'|'revizplus'|'general'} raison  ce que l'e-mail débloque ici
  * @param {boolean} [nu]           sans le cadre ni le titre (la page a déjà les siens)
  * @param {() => void} [onConfirme] e-mail confirmé (jeton déjà rafraîchi)
  * @param {string} [note]          une ligne de plus sous le texte (« Ta question t'attend »)
