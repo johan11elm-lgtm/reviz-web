@@ -25,6 +25,7 @@
 import { consentGate, JOUR_MS, DELAI_REPONSE_MS } from '../src/utils/consent.js'
 import { jourParis } from '../src/utils/retour.js'
 import { C, POLICE, escapeHtml, prenomPropre, titrePropre, signatureDesabo } from './_rappels.js'
+import { demandeEnCours, jetonDe } from './_accordParent.js'
 
 // Fenêtre d'âge du compte : dès J+3, et jusqu'à la fin du délai pour donner
 // l'adresse d'un parent (un parent donné tard reçoit son bilan plus tard).
@@ -278,7 +279,7 @@ export async function envoyerBilansParent({ db, envoyer, lienAutorisation, lienE
     const gate = consentGate({ under15: true, consent: d, now: maintenant })
     if (gate.blocked) continue
     const enAttente = d.status === 'pending'
-    if (enAttente && !d.token) continue
+    if (enAttente && !demandeEnCours(d)) continue
 
     const uid = doc.ref.parent.parent.id
     try {
@@ -306,7 +307,7 @@ export async function envoyerBilansParent({ db, envoyer, lienAutorisation, lienE
         prenom: u.prenom, classe: u.level?.classe ?? null, depuis, maintenant, resume, desabo,
         espace: lienEspace && u.espaceParent !== false ? lienEspace(uid, u) : null,
         autorisation: enAttente
-          ? { lien: lienAutorisation(d.token, uid), jusquau: (d.firstRequestedAt ?? d.createdAt) + DELAI_REPONSE_MS }
+          ? { lien: lienAutorisation(jetonDe(uid, d, { secret }), uid), jusquau: (d.firstRequestedAt ?? d.createdAt) + DELAI_REPONSE_MS }
           : null,
       })
       const r = await envoyer({

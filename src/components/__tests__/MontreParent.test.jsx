@@ -1,12 +1,15 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { render, screen, fireEvent, waitFor } from '@testing-library/react'
+import { render, screen, fireEvent, waitFor, act } from '@testing-library/react'
 
 const auth = vi.hoisted(() => ({}))
 const envoi = vi.hoisted(() => ({ fn: vi.fn() }))
 vi.mock('../../context/AuthContext', () => ({ useAuth: () => auth }))
+const lien = vi.hoisted(() => ({ fn: vi.fn() }))
 vi.mock('../../services/consentService', () => ({
   sendParentalConsent: (...a) => envoi.fn(...a),
   consentErrorMessage: c => (c === 'PARENT_EMAIL_IS_CHILD' ? "Utilise l'adresse d'un parent, pas la tienne." : 'Impossible d\'envoyer l\'email. Réessaie.'),
+  lienPourParent: (...a) => lien.fn(...a),
+  messagePourParent: r => (r ? `score ${r.score}/${r.total}` : 'sans score'),
 }))
 vi.mock('../../services/statsService', () => ({ track: vi.fn() }))
 vi.mock('../../services/mesure', () => ({ mesurer: vi.fn() }))
@@ -17,9 +20,29 @@ const LECON = { id: 'prog-theoreme-de-thales', chapterId: 'theoreme-de-thales', 
 beforeEach(() => {
   Object.assign(auth, { consent: { status: 'a-fournir', joursRestants: 12 }, isGuest: false, currentUser: { uid: 'u', displayName: 'Léa' }, refreshGate: vi.fn(async () => {}) })
   envoi.fn = vi.fn(async () => ({ ok: true }))
+  // Le lien à partager est préparé à l'affichage de la carte.
+  lien.fn = vi.fn(async () => ({ ok: true, lien: 'https://app.revizapp.fr/api/approve-consent?uid=u&e=1&s=x' }))
 })
 
 describe('<MontreParent />', () => {
+  it('sans l’adresse en tête : le score part par message, avec le lien d’accord', async () => {
+    lien.fn = vi.fn(async () => ({ ok: true, lien: 'https://app.revizapp.fr/api/approve-consent?uid=u&e=1&s=x&n=6&t=7' }))
+    const partage = vi.fn(async () => {})
+    Object.defineProperty(navigator, 'share', { value: partage, configurable: true, writable: true })
+    try {
+      render(<MontreParent score={6} total={7} lecon={LECON} />)
+      // Demandé dès l'affichage, avec le score : au toucher, le partage part sans attendre.
+      await waitFor(() => expect(lien.fn).toHaveBeenCalledWith({ score: 6, total: 7 }))
+      await act(async () => {})
+      fireEvent.click(screen.getByRole('button', { name: /Tu ne connais pas son adresse/ }))
+      await waitFor(() => expect(partage).toHaveBeenCalled())
+      expect(lien.fn).toHaveBeenCalledTimes(1)
+      expect(partage.mock.calls[0][0]).toEqual({ text: 'score 6/7', url: expect.stringContaining('n=6&t=7') })
+      await waitFor(() => expect(screen.getByRole('status')).toHaveTextContent('Ton parent n’a plus qu’à ouvrir le lien'))
+      expect(envoi.fn).not.toHaveBeenCalled()
+    } finally { delete navigator.share }
+  })
+
   it('propose d’envoyer le score à un parent, puis confirme', async () => {
     render(<MontreParent score={6} total={7} lecon={LECON} />)
     expect(screen.getByText('Montre ça à tes parents')).toBeInTheDocument()

@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import { entreeSansSession } from '../utils/retour';
 import { sendParentalConsent, consentErrorMessage } from '../services/consentService';
 import { track } from '../services/statsService';
+import { LienParent } from '../components/LienParent';
 import { EntreeEcran, Champ, Encart, RetourAction, LienTexte, Erreur } from '../components/entree/Entree';
 import './ConsentPending.entree.css';
 
@@ -61,6 +62,7 @@ export default function ConsentPending() {
   const [checking, setChecking] = useState(false);
   const [erreur, setErreur]     = useState('');
   const [attente, setAttente]   = useState(false); // « Toujours en attente… » après vérification
+  const [lienParti, setLienParti] = useState(false); // lien envoyé au parent par message (LienParent)
   // Après un envoi, on montre la confirmation : l'élève entre en cliquant « Commencer à réviser ».
   const confirmer = useRef(false);
 
@@ -172,11 +174,17 @@ export default function ConsentPending() {
       bulle={ecran.bulle} taille={avecChamp ? 'dense' : 'normal'}
       dessous={(
         <>
-          {plusTardPossible && (
+          {plusTardPossible && !lienParti && (
             <button type="button" className="en-btn-second" onClick={plusTard}>
               Plus tard, je révise d’abord
               <small>Il te reste {jours(joursRestants)}</small>
             </button>
+          )}
+          {/* Lien envoyé au parent par message : compte ouvert, on continue ; compte en pause,
+              « vérifier » dès qu'il a répondu (l'accès revient quand il a donné son adresse). */}
+          {lienParti && !accesOuvert && verifier('en-btn-second')}
+          {lienParti && accesOuvert && (
+            <button type="button" className="en-btn" onClick={() => navigate('/', { replace: true })}>Continuer à réviser</button>
           )}
           {peutChanger && <LienTexte onClick={changerAdresse}>Changer d’adresse</LienTexte>}
           {deconnexion}
@@ -191,6 +199,11 @@ export default function ConsentPending() {
             value={parentEmail} erreur={erreur} autoComplete="email"
             onChange={e => { setParentEmail(e.target.value); setErreur(''); }} />
         ) : <Erreur>{erreur}</Erreur>}
+        {/* Pas l'adresse en tête : le lien à envoyer au parent, qui la saisira lui-même. */}
+        {avecChamp && (
+          <LienParent lieu="accord" classeBouton="lp-lien-btn" aide=""
+            libelle="Pas son adresse ? Envoie-lui un lien" onEnvoye={() => setLienParti(true)} />
+        )}
         <button className="en-btn" type="submit" disabled={loading || !parentEmail.trim()}>
           {loading ? 'Envoi…' : ecran.bouton}
         </button>

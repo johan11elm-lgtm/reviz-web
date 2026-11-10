@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { MemoryRouter, Routes, Route, useLocation } from 'react-router-dom'
 
 const auth = { current: null }
@@ -7,7 +7,11 @@ vi.mock('../../context/AuthContext', () => ({ useAuth: () => auth.current }))
 vi.mock('../../services/consentService', () => ({
   sendParentalConsent: vi.fn(async () => ({ ok: true })),
   consentErrorMessage: () => 'erreur',
+  lienPourParent: vi.fn(async () => ({ ok: true, lien: 'https://app.revizapp.fr/api/approve-consent?uid=u1&e=1&s=x' })),
+  messagePourParent: () => 'Coucou',
 }))
+vi.mock('../../services/statsService', () => ({ track: vi.fn() }))
+vi.mock('../../services/mesure', () => ({ mesurer: vi.fn() }))
 vi.mock('../../hooks/useMediaQuery', () => ({ useIsDesktop: () => false }))
 
 const { default: ConsentPending } = await import('../ConsentPending.jsx')
@@ -45,6 +49,37 @@ describe('Écran de l\'email du parent', () => {
     expect(screen.getAllByText(/il te reste 12 jours/i)).toHaveLength(2)
     fireEvent.click(screen.getByRole('button', { name: /plus tard/i }))
     expect(screen.getByText('Accueil')).toBeInTheDocument()
+  })
+
+  it('pas l’adresse en tête : le lien part par message, puis « Continuer à réviser »', async () => {
+    const partage = vi.fn(async () => {})
+    Object.defineProperty(navigator, 'share', { value: partage, configurable: true, writable: true })
+    try {
+      auth.current = connecte({ status: 'a-fournir', parentEmail: null, joursRestants: 12 })
+      monter(<ConsentPending />)
+      fireEvent.click(screen.getByRole('button', { name: /Pas son adresse \? Envoie-lui un lien/ }))
+      await waitFor(() => expect(partage).toHaveBeenCalledWith({ text: 'Coucou', url: expect.stringContaining('approve-consent?uid=u1') }))
+      await waitFor(() => expect(screen.getByRole('status')).toHaveTextContent('Ton parent n’a plus qu’à ouvrir le lien'))
+      // Le lien est parti : plus de « Plus tard », on continue.
+      expect(screen.queryByRole('button', { name: /plus tard/i })).toBeNull()
+      fireEvent.click(screen.getByRole('button', { name: 'Continuer à réviser' }))
+      expect(screen.getByText('Accueil')).toBeInTheDocument()
+    } finally { delete navigator.share }
+  })
+
+  it('compte en pause : le lien part, puis « vérifier » quand le parent a répondu', async () => {
+    const partage = vi.fn(async () => {})
+    Object.defineProperty(navigator, 'share', { value: partage, configurable: true, writable: true })
+    try {
+      auth.current = connecte({ status: 'a-demander', parentEmail: null, joursRestants: null }, true)
+      monter(<ConsentPending />)
+      fireEvent.click(screen.getByRole('button', { name: /Pas son adresse \? Envoie-lui un lien/ }))
+      await waitFor(() => expect(partage).toHaveBeenCalled())
+      const verifier = await screen.findByRole('button', { name: /Il a accepté : vérifier/ })
+      fireEvent.click(verifier)
+      await waitFor(() => expect(auth.current.refreshGate).toHaveBeenCalled())
+      expect(screen.queryByRole('button', { name: 'Continuer à réviser' })).toBeNull()
+    } finally { delete navigator.share }
   })
 
   it('délai écoulé : compte en pause, sans « Plus tard »', () => {

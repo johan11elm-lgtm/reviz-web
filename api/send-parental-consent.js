@@ -6,6 +6,11 @@
 // L'élève utilise déjà l'app : le parent donne son autorisation depuis l'email.
 // Sans autorisation sous 10 jours (src/utils/consent.js), l'accès est suspendu.
 //
+// POST /api/send-parental-consent  Body: { idToken, op: 'lien', resultat? }
+// Rend le lien que l'élève envoie à son parent par message quand il ne connaît
+// pas son adresse (api/_accordParent.js) : le parent la saisit lui-même sur la
+// page de api/approve-consent.js, puis reçoit le même e-mail d'autorisation.
+//
 // GET /api/send-parental-consent (cron Vercel quotidien, voir vercel.json)
 // Relance une fois les parents qui n'ont pas répondu au bout de 2 jours, et
 // relance les élèves qui n'ont pas encore donné l'email d'un parent (« Plus
@@ -18,8 +23,8 @@
 // Vercel peut l'appeler : il envoie CRON_SECRET dans l'en-tête Authorization.
 
 import { Resend } from 'resend';
-import { randomUUID } from 'node:crypto';
 import { getDb, getAuthAdmin } from './_firebaseAdmin.js';
+import { nouvelleDemande, demandeEnCours, jetonDe, lienPartage, scorePartage, MAX_ENVOIS_LIEN } from './_accordParent.js';
 import { DELAI_ADRESSE_MS, DELAI_REPONSE_MS } from '../src/utils/consent.js';
 import { relancerLendemain } from './_rappels.js';
 import { envoyerBilansParent } from './_bilanParent.js';
@@ -89,7 +94,7 @@ async function lireCatalogueEnLigne(classe) {
   return res.ok ? res.json() : null;
 }
 
-const lienAutorisation = (token, uid) => `https://app.revizapp.fr/api/approve-consent?token=${token}&uid=${uid}`;
+export const lienAutorisation = (token, uid) => `https://app.revizapp.fr/api/approve-consent?token=${token}&uid=${uid}`;
 
 /**
  * Email au parent : première demande, ou relance (avec les jours restants).
@@ -163,7 +168,7 @@ export async function relancerParents({ db, envoyer, maintenant = Date.now() }) 
   let relances = 0;
   for (const doc of demandes.docs) {
     const d = doc.data();
-    if (d.status !== 'pending' || !d.token || !d.parentEmail || d.relanceLe) continue;
+    if (d.status !== 'pending' || !demandeEnCours(d) || !d.parentEmail || d.relanceLe) continue;
     const age = maintenant - (d.firstRequestedAt ?? d.createdAt ?? maintenant);
     if (age < RELANCE_APRES_MS || age >= DELAI_REPONSE_MS) continue;
 
@@ -171,7 +176,7 @@ export async function relancerParents({ db, envoyer, maintenant = Date.now() }) 
     const profil = await db.collection('users').doc(uid).get().catch(() => null);
     const mail = mailParent({
       prenom: profil?.exists ? profil.data()?.prenom : null,
-      lien: lienAutorisation(d.token, uid),
+      lien: lienAutorisation(jetonDe(uid, d), uid),
       joursRestants: Math.ceil((DELAI_REPONSE_MS - age) / JOUR_MS),
     });
     try {
@@ -208,6 +213,7 @@ export function mailEleve({ prenom, joursRestants }) {
           </p>
           <p style="color: #444; font-size: 15px; line-height: 1.5;">
             Ça prend 30 secondes : tu tapes son adresse, il reçoit un email avec un bouton pour accepter. Tu gardes tout ce que tu as révisé.
+            Tu ne connais pas son adresse ? Tu peux aussi lui envoyer un lien par message, depuis le même écran.
           </p>
           <a href="https://app.revizapp.fr/consent-pending" style="display: inline-block; background: #1A1A1A; color: white; padding: 14px 28px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 15px;">Donner l'email de mon parent</a>
           <p style="color: #888; font-size: 13px; margin-top: 24px;">
@@ -263,6 +269,56 @@ export async function relancerEleves({ db, envoyer, emailDe, maintenant = Date.n
   return { relancesEleves };
 }
 
+/**
+ * Enregistre une demande d'autorisation et envoie l'e-mail au parent. Sert à la
+ * demande faite par l'élève (il tape l'adresse) comme à celle du lien partagé
+ * (le parent tape la sienne, api/approve-consent.js).
+ * @param {{ db, uid:string, email:string, prenom?:string|null, resultat?:object|null,
+ *   envoyer:(mail:object)=>Promise<any>, maintenant?:number, secret?:string, viaLien?:boolean }} p
+ * @returns {Promise<{ ok?:true, alreadyApproved?:true, rateLimited?:true, tropDEnvois?:true }>}
+ */
+export async function enregistrerDemande({ db, uid, email, prenom = null, resultat = null, envoyer, maintenant = Date.now(), secret = process.env.CRON_SECRET, viaLien = false }) {
+  const docRef = db.collection('users').doc(uid)
+    .collection('parentalConsent').doc('consent');
+  const existing = await docRef.get();
+  const d = existing.exists ? existing.data() : null;
+
+  if (d) {
+    // Déjà approuvé : ne JAMAIS réinitialiser à 'pending' (anti-lockout), ni renvoyer d'email.
+    if (d.status === 'approved') return { alreadyApproved: true };
+    // Throttle anti-spam : un envoi par minute maximum. Uniquement si un
+    // email a réellement été envoyé (demande en cours) : le doc 'pending' posé
+    // au signup (AuthContext) n'en a pas et ne doit pas retarder
+    // le tout premier envoi du tunnel d'inscription.
+    if (demandeEnCours(d) && d.createdAt && maintenant - d.createdAt < RESEND_THROTTLE_MS) return { rateLimited: true };
+    // Le lien partagé circule hors de l'app : nombre d'e-mails plafonné.
+    if (viaLien && (d.lienEnvois ?? 0) >= MAX_ENVOIS_LIEN) return { tropDEnvois: true };
+  }
+
+  const { champs, jeton } = nouvelleDemande(uid, { secret });
+  await docRef.set({
+    parentEmail: email,
+    status: 'pending',
+    ...champs,
+    createdAt: maintenant,
+    // Début du délai de réponse : conservé d'un renvoi à l'autre, sinon
+    // chaque renvoi (ou un refus suivi d'un renvoi) rouvrirait le délai.
+    firstRequestedAt: d?.firstRequestedAt ?? maintenant,
+    // Une seule relance par demande, même si l'élève renvoie entre-temps.
+    ...(d?.relanceLe ? { relanceLe: d.relanceLe } : {}),
+    // Suivi du lien partagé : quand il a été préparé pour l'élève, combien d'e-mails en sont partis.
+    ...(d?.lienCreeLe ? { lienCreeLe: d.lienCreeLe } : {}),
+    ...(viaLien || d?.lienEnvois ? { lienEnvois: (d?.lienEnvois ?? 0) + (viaLien ? 1 : 0) } : {}),
+  });
+
+  await envoyer({
+    from: EXPEDITEUR,
+    to: email,
+    ...mailParent({ prenom, lien: lienAutorisation(jeton, uid), resultat }),
+  });
+  return { ok: true };
+}
+
 export default async function handler(req, res) {
   if (req.method === 'GET') {
     const secret = process.env.CRON_SECRET;
@@ -296,12 +352,13 @@ export default async function handler(req, res) {
   }
   if (req.method !== 'POST') return res.status(405).json({ error: 'METHOD_NOT_ALLOWED' });
 
-  const { idToken, parentEmail, childName, resultat: resultatBrut } = req.body ?? {};
+  const { idToken, parentEmail, childName, resultat: resultatBrut, op } = req.body ?? {};
   if (!idToken) return res.status(401).json({ error: 'UNAUTHORIZED' });
-  if (!parentEmail || !childName) return res.status(400).json({ error: 'MISSING_FIELDS' });
+  const lien = op === 'lien';
+  if (!lien && (!parentEmail || !childName)) return res.status(400).json({ error: 'MISSING_FIELDS' });
 
-  const email = String(parentEmail).trim();
-  if (!/^\S+@\S+\.\S+$/.test(email)) return res.status(400).json({ error: 'INVALID_PARENT_EMAIL' });
+  const email = String(parentEmail ?? '').trim();
+  if (!lien && !/^\S+@\S+\.\S+$/.test(email)) return res.status(400).json({ error: 'INVALID_PARENT_EMAIL' });
 
   // 1. Authentification : l'uid provient du token vérifié, jamais du body.
   let decoded;
@@ -317,53 +374,39 @@ export default async function handler(req, res) {
     return res.status(403).json({ error: 'ANONYMOUS' });
   }
 
+  // Lien à partager : rien n'est envoyé ici, le parent saisira son adresse sur la page du lien.
+  if (lien) {
+    try {
+      const docRef = getDb().collection('users').doc(uid).collection('parentalConsent').doc('consent');
+      const existing = await docRef.get();
+      const d = existing.exists ? existing.data() : null;
+      if (d?.status === 'approved') return res.status(200).json({ ok: true, alreadyApproved: true });
+      const url = lienPartage(uid, { resultat: scorePartage(resultatBrut) });
+      if (!url) return res.status(503).json({ error: 'LIEN_INDISPONIBLE' });
+      // Trace pour la mesure : la première fois que le lien a été préparé pour cet élève (l'app
+      // le demande à l'affichage du bouton, pas au toucher). Seulement si le document existe :
+      // en créer un ici sans date de départ fausserait le délai des 15 jours.
+      if (d && !d.lienCreeLe) await docRef.update({ lienCreeLe: Date.now() }).catch(() => {});
+      return res.status(200).json({ ok: true, lien: url });
+    } catch (err) {
+      console.error('[send-parental-consent:lien]', err?.message || err);
+      return res.status(500).json({ error: 'INTERNAL' });
+    }
+  }
+
   // 2. Effort raisonnable (art. 8(2) RGPD) : le parent ne peut pas être l'enfant.
   if (decoded.email && decoded.email.toLowerCase() === email.toLowerCase()) {
     return res.status(400).json({ error: 'PARENT_EMAIL_IS_CHILD' });
   }
 
   try {
-    const db = getDb();
-    const docRef = db.collection('users').doc(uid)
-      .collection('parentalConsent').doc('consent');
-    const existing = await docRef.get();
-    const d = existing.exists ? existing.data() : null;
-
-    if (d) {
-      // Déjà approuvé : ne JAMAIS réinitialiser à 'pending' (anti-lockout), ni renvoyer d'email.
-      if (d.status === 'approved') {
-        return res.status(200).json({ ok: true, alreadyApproved: true });
-      }
-      // Throttle anti-spam : un envoi par minute maximum. Uniquement si un
-      // email a réellement été envoyé (token présent) — le doc 'pending' posé
-      // au signup (AuthContext) n'a pas de token et ne doit pas retarder
-      // le tout premier envoi du tunnel d'inscription.
-      if (d.token && d.createdAt && Date.now() - d.createdAt < RESEND_THROTTLE_MS) {
-        return res.status(429).json({ error: 'RATE_LIMITED' });
-      }
-    }
-
-    const token = randomUUID();
-    const now = Date.now();
-    await docRef.set({
-      parentEmail: email,
-      status: 'pending',
-      token,
-      createdAt: now,
-      // Début du délai de réponse : conservé d'un renvoi à l'autre, sinon
-      // chaque renvoi (ou un refus suivi d'un renvoi) rouvrirait le délai.
-      firstRequestedAt: d?.firstRequestedAt ?? now,
-      // Une seule relance par demande, même si l'élève renvoie entre-temps.
-      ...(d?.relanceLe ? { relanceLe: d.relanceLe } : {}),
-    });
-
     const resend = new Resend(process.env.RESEND_API_KEY);
-    await resend.emails.send({
-      from: EXPEDITEUR,
-      to: email,
-      ...mailParent({ prenom: childName, lien: lienAutorisation(token, uid), resultat: await resultatQuiz(resultatBrut) }),
+    const r = await enregistrerDemande({
+      db: getDb(), uid, email, prenom: childName, resultat: await resultatQuiz(resultatBrut),
+      envoyer: m => resend.emails.send(m),
     });
-
+    if (r.alreadyApproved) return res.status(200).json({ ok: true, alreadyApproved: true });
+    if (r.rateLimited) return res.status(429).json({ error: 'RATE_LIMITED' });
     return res.status(200).json({ ok: true });
   } catch (err) {
     console.error('[send-parental-consent]', err?.message || err);

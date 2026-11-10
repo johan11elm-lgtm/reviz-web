@@ -42,8 +42,9 @@ export const EVENTS = [
   'battle_creee', 'battle_rejointe', 'battle_terminee', 'battle_revanche', 'battle_compte_propose', 'battle_annonce_cta',
   // Installation de la web app : tutoriel ouvert, installation confirmée par le navigateur.
   'installer_ouvert', 'app_installee',
-  // Autorisation parentale : email du parent envoyé, ou « Plus tard » (15 jours pour le donner).
-  'consent_envoye', 'consent_plus_tard',
+  // Autorisation parentale : email du parent envoyé, ou « Plus tard » (15 jours pour le donner),
+  // ou lien envoyé au parent par message (il y saisit lui-même son adresse).
+  'consent_envoye', 'consent_plus_tard', 'consent_lien',
   // Format mené jusqu'au bout (dernière question du quiz, dernière carte).
   'revision_terminee',
   // Lancement : clic « Scanner une leçon » dans la popup « Réviz+ offert ».

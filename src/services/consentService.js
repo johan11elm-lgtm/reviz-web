@@ -39,3 +39,37 @@ export async function sendParentalConsent(parentEmail, childName, resultat = nul
   }
   return res.json().catch(() => ({ ok: true }))
 }
+
+/**
+ * Le lien que l'élève envoie à son parent par message quand il ne connaît pas
+ * son adresse : le parent la saisit lui-même sur la page du lien, puis reçoit
+ * l'e-mail d'autorisation habituel (api/_accordParent.js). Avec `resultat`
+ * ({ score, total }), la page montre aussi ce score.
+ * @returns {Promise<{ lien?: string, alreadyApproved?: boolean }>}
+ * @throws {Error} avec un code serveur (UNAUTHORIZED, LIEN_INDISPONIBLE, …)
+ */
+export async function lienPourParent(resultat = null) {
+  const idToken = await auth.currentUser?.getIdToken().catch(() => null)
+  if (!idToken) throw new Error('UNAUTHORIZED')
+
+  const res = await apiFetch('/api/send-parental-consent', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ idToken, op: 'lien', ...(resultat ? { resultat: { score: resultat.score, total: resultat.total } } : {}) }),
+  })
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}))
+    throw new Error(body.error || `HTTP_${res.status}`)
+  }
+  const body = await res.json().catch(() => ({}))
+  if (!body.alreadyApproved && !body.lien) throw new Error('LIEN_INDISPONIBLE')
+  return body
+}
+
+/** Le message que l'élève envoie avec le lien, écrit à sa place (il peut le changer). */
+export function messagePourParent(resultat = null) {
+  const debut = resultat
+    ? `Coucou, j'ai eu ${resultat.score}/${resultat.total} à un quiz sur Réviz, l'appli avec laquelle je révise.`
+    : 'Coucou, je révise mes cours avec Réviz.'
+  return `${debut} Comme j'ai moins de 15 ans, il faut l'accord d'un parent pour que je garde mon compte. Ça prend une minute :`
+}

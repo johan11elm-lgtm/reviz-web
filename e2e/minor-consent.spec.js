@@ -5,6 +5,8 @@
 import { test, expect } from '@playwright/test'
 import { mockApiRoutes, signup, ecrireConsentementEmulateur, remplirTunnelInscription, bulleReviz, passerDecouverte, fermerAnnonces, uniqueEmail, compteRapide } from './helpers'
 
+const CAPTURES = process.env.CAPTURES_DIR
+
 // uid de l'élève connecté, lu dans le jeton Firebase de la page (ou dans le cache de session de l'app,
 // écrit une fois le profil lu : on patiente plutôt que d'écrire dans users/undefined).
 async function uidCourant(page) {
@@ -61,6 +63,75 @@ test.describe('Consentement parental (<15 ans)', () => {
     await expect(page.getByRole('button', { name: /Plus tard, je révise d’abord/ })).toBeInViewport()
     await page.getByRole('button', { name: /Plus tard, je révise d’abord/ }).click()
     await expect(page).not.toHaveURL(/\/inscription/)
+  })
+
+  // 10/11 : près de deux élèves de moins de 15 ans sur trois ne donnaient jamais l'adresse d'un
+  // parent (ils ne la connaissent pas). Ils peuvent maintenant lui envoyer un lien par message ;
+  // le parent y saisit lui-même son adresse (api/approve-consent.js).
+  test('petit Android, pas l’adresse en tête : le lien part par message, l’élève entre, puis le parent répond', async ({ page }) => {
+    await page.setViewportSize({ width: 360, height: 640 })
+    // Feuille de partage du téléphone, simulée : on garde ce que l'app lui confie.
+    await page.addInitScript(() => {
+      window.__partages = []
+      navigator.share = async donnees => { window.__partages.push(donnees) }
+    })
+    await mockApiRoutes(page)
+    await page.goto('/inscription')
+    await remplirTunnelInscription(page, { birthDate: '2013-04-10', email: uniqueEmail('lien') })
+    await expect(page.getByLabel('E-mail de ton parent')).toBeVisible()
+    const lien = page.getByRole('button', { name: /Pas son adresse \? Envoie-lui un lien/ })
+    // Les trois sorties se voient sans défiler, clavier fermé.
+    await expect(lien).toBeInViewport()
+    await expect(page.getByRole('button', { name: 'Envoyer et commencer' })).toBeInViewport()
+    await expect(page.getByRole('button', { name: /Plus tard, je révise d’abord/ })).toBeInViewport()
+    if (CAPTURES) await page.screenshot({ path: `${CAPTURES}/lien-1-etape-parent-360.png` })
+
+    await lien.click()
+    await expect(page.getByRole('status').filter({ hasText: 'Ton parent n’a plus qu’à ouvrir le lien' })).toBeVisible()
+    const [partage] = await page.evaluate(() => window.__partages)
+    expect(partage.url).toMatch(/^https:\/\/app\.revizapp\.fr\/api\/approve-consent\?uid=[A-Za-z0-9]+&e=\d+&s=[0-9a-f]{32}$/)
+    expect(partage.text).toContain('moins de 15 ans')
+    // Le lien est parti : plus de « Plus tard », le bouton principal fait entrer.
+    await expect(page.getByRole('button', { name: /Plus tard/ })).toHaveCount(0)
+    if (CAPTURES) await page.screenshot({ path: `${CAPTURES}/lien-2-parti-360.png` })
+    await page.getByRole('button', { name: 'Commencer à réviser' }).click()
+    await expect(page).toHaveURL(/onboarding/, { timeout: 15_000 })
+
+    // Tant que le parent n'a pas répondu : le délai des 15 jours court, l'accueil le rappelle.
+    await passerDecouverte(page)
+    await fermerAnnonces(page)
+    await expect(page.getByText('Montre tes révisions à un parent')).toBeVisible({ timeout: 15_000 })
+
+    // Le parent ouvre le lien et donne son adresse (ce qu'écrit /api/approve-consent) :
+    // la demande est partie, l'accueil attend maintenant son accord.
+    const uid = await uidCourant(page)
+    await ecrireConsentementEmulateur(uid, {
+      status: { stringValue: 'pending' },
+      parentEmail: { stringValue: 'parent@famille.test' },
+      germe: { stringValue: 'a'.repeat(32) },
+      createdAt: { integerValue: String(Date.now()) },
+      firstRequestedAt: { integerValue: String(Date.now()) },
+      lienEnvois: { integerValue: '1' },
+    })
+    await page.reload()
+    await expect(page.getByText('Accord parental en attente')).toBeVisible({ timeout: 15_000 })
+  })
+
+  test('ordinateur, pas de feuille de partage : le lien s’affiche, le message se copie', async ({ page, context }) => {
+    await page.setViewportSize({ width: 1280, height: 800 })
+    await context.grantPermissions(['clipboard-read', 'clipboard-write'])
+    await page.addInitScript(() => { try { delete Navigator.prototype.share } catch { /* absent */ } })
+    await mockApiRoutes(page)
+    await compteRapide(page, { birthDate: '2013-04-10', consentement: null, aller: '/consent-pending' })
+    await expect(page.getByLabel('E-mail de ton parent')).toBeVisible({ timeout: 15_000 })
+    await page.getByRole('button', { name: /Pas son adresse \? Envoie-lui un lien/ }).click()
+    await expect(page.getByLabel('Lien à envoyer à ton parent')).toHaveValue(/approve-consent\?uid=/)
+    if (CAPTURES) await page.screenshot({ path: `${CAPTURES}/lien-3-ordinateur.png` })
+    await page.getByRole('button', { name: 'Copier le message' }).click()
+    await expect(page.getByRole('status').filter({ hasText: 'Message copié' })).toBeVisible()
+    expect(await page.evaluate(() => navigator.clipboard.readText())).toMatch(/^Coucou, je révise mes cours avec Réviz\..*https:\/\/app\.revizapp\.fr\/api\/approve-consent/)
+    await page.getByRole('button', { name: 'Continuer à réviser' }).click()
+    await expect(page).not.toHaveURL(/consent-pending/)
   })
 
   test('l\'email du parent ne peut pas être celui de l\'élève', async ({ page }) => {

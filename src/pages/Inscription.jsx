@@ -5,6 +5,7 @@ import { erreurConnexionSociale } from '../components/SocialLogin';
 import { isUnder15 } from '../utils/levels';
 import { readGuest } from '../services/guestService';
 import { sendParentalConsent, consentErrorMessage } from '../services/consentService';
+import { LienParent } from '../components/LienParent';
 import { track } from '../services/statsService';
 import { suggererEmail, adresseExemple } from '../utils/adresseEmail';
 import {
@@ -64,6 +65,8 @@ export default function Inscription() {
   const [loading, setLoading]             = useState(false);
   const [compteCree, setCompteCree]       = useState(false);
   const [plusTardEnCours, setPlusTardEnCours] = useState(false);
+  // Lien envoyé au parent par message (LienParent) : il reste à entrer dans l'app.
+  const [lienEnvoye, setLienEnvoye] = useState(false);
 
   const { signup, loginWithProvider, refreshGate, currentUser, isGuest } = useAuth();
   // Compte déjà ouvert en arrivant ici (page rechargée en plein tunnel,
@@ -196,6 +199,8 @@ export default function Inscription() {
   }
 
   async function handlePrimary() {
+    // Étape 'parent', lien déjà envoyé par message et pas d'adresse saisie : on entre.
+    if (stepId === 'parent' && lienEnvoye && !parentEmail.trim()) { await entrerApresLien(); return; }
     const e = erreursEtape(stepId);
     if (Object.keys(e).length) { setErreurs(e); return; }
 
@@ -250,6 +255,16 @@ export default function Inscription() {
     navigate('/', { replace: true });
   }
 
+  // Le lien est parti chez le parent : l'élève entre, comme après « Plus tard » (le délai des
+  // 15 jours court tant que le parent n'a pas répondu), mais ce n'est pas compté comme un report.
+  async function entrerApresLien() {
+    setErreurs({});
+    setLoading(true);
+    setPlusTardEnCours(true);
+    await rafraichirGate();
+    navigate('/', { replace: true });
+  }
+
   async function handleProvider(id) {
     setErreurs({});
     setLoading(true);
@@ -275,11 +290,14 @@ export default function Inscription() {
     return <Navigate to="/" replace />;
   }
 
+  // Lien parti chez le parent et champ laissé vide : le bouton principal fait entrer l'élève.
+  const lienSeul = stepId === 'parent' && lienEnvoye && !parentEmail.trim();
+
   const primaryLabel = (() => {
     if (loading && stepId === 'account') return 'Création…';
     if (loading && stepId === 'parent' && !plusTardEnCours) return 'Envoi…';
     if (stepId === 'account') return 'Créer mon compte';
-    if (stepId === 'parent')  return 'Envoyer et commencer';
+    if (stepId === 'parent')  return lienSeul ? 'Commencer à réviser' : 'Envoyer et commencer';
     return 'Continuer';
   })();
 
@@ -362,9 +380,16 @@ export default function Inscription() {
               aide={!erreurs.parent && suggestion(parentEmail, v => { setParentEmail(v); effacer('parent'); })}
               onChange={e => { setParentEmail(e.target.value); effacer('parent'); }}
               autoComplete="email" autoCapitalize="none" enterKeyHint="send" />
+            {/* 10/11 : près de deux élèves sur trois choisissaient « Plus tard » et ne donnaient
+                jamais l'adresse (ils ne la connaissent pas). Sous le champ : envoyer un lien au
+                parent par message ; il y saisit lui-même son adresse. */}
+            <LienParent lieu="inscription" classeBouton="lp-lien-btn" aide=""
+              libelle="Pas son adresse ? Envoie-lui un lien" onEnvoye={() => setLienEnvoye(true)} />
           </>
         ),
-        apres: (
+        // « Plus tard » disparaît une fois le lien parti chez le parent : le bouton principal
+        // devient « Commencer à réviser ».
+        apres: !lienEnvoye && (
           <button type="button" className="en-btn-second" onClick={plusTard} disabled={loading}>
             {plusTardEnCours ? 'Un instant…' : 'Plus tard, je révise d’abord'}
             <small>Il te reste 15 jours</small>

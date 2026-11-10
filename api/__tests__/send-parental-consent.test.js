@@ -3,10 +3,11 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 const verifyIdToken = vi.fn()
 const docGet = vi.fn()
 const docSet = vi.fn()
+const docUpdate = vi.fn()
 const emailsSend = vi.fn()
 
 function makeDb() {
-  const docRef = { get: docGet, set: docSet }
+  const docRef = { get: docGet, set: docSet, update: docUpdate }
   const sub = { doc: () => docRef }
   const userDoc = { collection: () => sub }
   return { collection: () => ({ doc: () => userDoc }) }
@@ -32,8 +33,8 @@ function mockRes() {
 }
 
 beforeEach(() => {
-  verifyIdToken.mockReset(); docGet.mockReset(); docSet.mockReset(); emailsSend.mockReset()
-  docSet.mockResolvedValue(); emailsSend.mockResolvedValue()
+  verifyIdToken.mockReset(); docGet.mockReset(); docSet.mockReset(); docUpdate.mockReset(); emailsSend.mockReset()
+  docSet.mockResolvedValue(); docUpdate.mockResolvedValue(); emailsSend.mockResolvedValue()
 })
 
 describe('send-parental-consent — sécurité', () => {
@@ -162,6 +163,124 @@ describe('send-parental-consent — sécurité', () => {
     await handler({ method: 'POST', body: { idToken: 'ok', parentEmail: 'parent@test.fr', childName: 'Léa' } }, res)
     expect(res.statusCode).toBe(200)
     expect(emailsSend).toHaveBeenCalledWith(expect.objectContaining({ to: 'parent@test.fr' }))
+  })
+})
+
+describe('send-parental-consent — jeton protégé (clé serveur présente)', () => {
+  const avecCle = async fn => {
+    process.env.CRON_SECRET = 'cron-secret'
+    try { await fn() } finally { delete process.env.CRON_SECRET }
+  }
+
+  it('le document garde un germe ; le jeton du lien n’y figure nulle part', () => avecCle(async () => {
+    verifyIdToken.mockResolvedValue({ uid: 'real-uid', email: 'kid@test.fr' })
+    docGet.mockResolvedValue({ exists: false })
+    const res = mockRes()
+    await handler({ method: 'POST', body: { idToken: 'ok', parentEmail: 'parent@test.fr', childName: 'Léa' } }, res)
+    expect(res.statusCode).toBe(200)
+    const doc = docSet.mock.calls[0][0]
+    expect(doc).toMatchObject({ status: 'pending', parentEmail: 'parent@test.fr', token: null })
+    expect(doc.germe).toMatch(/^[0-9a-f]{32}$/)
+    const jeton = emailsSend.mock.calls[0][0].html.match(/approve-consent\?token=([0-9a-f]+)&(?:amp;)?uid=real-uid/)[1]
+    expect(jeton).toHaveLength(32)
+    expect(JSON.stringify(doc)).not.toContain(jeton)
+  }))
+
+  it('throttle (429) aussi quand la demande en cours est un germe', () => avecCle(async () => {
+    verifyIdToken.mockResolvedValue({ uid: 'u1', email: 'kid@test.fr' })
+    docGet.mockResolvedValue({ exists: true, data: () => ({ status: 'pending', germe: 'a'.repeat(32), token: null, createdAt: Date.now() }) })
+    const res = mockRes()
+    await handler({ method: 'POST', body: { idToken: 'ok', parentEmail: 'parent@test.fr', childName: 'Léa' } }, res)
+    expect(res.statusCode).toBe(429)
+    expect(emailsSend).not.toHaveBeenCalled()
+  }))
+
+  it('la relance renvoie le même lien, recalculé depuis le germe', () => avecCle(async () => {
+    const now = 1_800_000_000_000
+    const DAY = 24 * 60 * 60 * 1000
+    const { jetonDe } = await import('../_accordParent.js')
+    const d = { status: 'pending', germe: 'b'.repeat(32), token: null, parentEmail: 'p@f.fr', createdAt: now - 3 * DAY, firstRequestedAt: now - 3 * DAY }
+    const ref = { parent: { parent: { id: 'u1' } }, update: vi.fn(async () => {}) }
+    const db = {
+      collectionGroup: () => ({ get: async () => ({ docs: [{ data: () => d, ref }] }) }),
+      collection: () => ({ doc: () => ({ get: async () => ({ exists: true, data: () => ({ prenom: 'Léa' }) }) }) }),
+    }
+    const envoyer = vi.fn(async () => {})
+    expect(await relancerParents({ db, envoyer, maintenant: now })).toEqual({ relances: 1 })
+    expect(envoyer.mock.calls[0][0].html).toContain(`approve-consent?token=${jetonDe('u1', d)}&uid=u1`)
+    expect(envoyer.mock.calls[0][0].html).not.toContain('b'.repeat(32))
+  }))
+})
+
+describe('send-parental-consent — lien à partager (op: lien)', () => {
+  const avecCle = async fn => {
+    process.env.CRON_SECRET = 'cron-secret'
+    try { await fn() } finally { delete process.env.CRON_SECRET }
+  }
+  const UID = 'AbCdEfGhIjKlMnOpQrStUvWxYz12'
+
+  it('rend un lien signé, sans adresse à fournir, et n’envoie aucun e-mail', () => avecCle(async () => {
+    verifyIdToken.mockResolvedValue({ uid: UID, email: 'kid@test.fr' })
+    docGet.mockResolvedValue({ exists: true, data: () => ({ status: 'pending', createdAt: 1000 }) })
+    const res = mockRes()
+    await handler({ method: 'POST', body: { idToken: 'ok', op: 'lien' } }, res)
+    expect(res.statusCode).toBe(200)
+    const url = new URL(res.payload.lien)
+    expect(url.pathname).toBe('/api/approve-consent')
+    expect(url.searchParams.get('uid')).toBe(UID)
+    const { partageValide } = await import('../_accordParent.js')
+    expect(partageValide(UID, url.searchParams.get('e'), url.searchParams.get('s'))).toBe(true)
+    expect(emailsSend).not.toHaveBeenCalled()
+    expect(docSet).not.toHaveBeenCalled()
+    // La première création est notée, pour mesurer le parcours.
+    expect(docUpdate).toHaveBeenCalledWith({ lienCreeLe: expect.any(Number) })
+  }))
+
+  it('le score à montrer suit le lien ; la trace n’est posée qu’une fois', () => avecCle(async () => {
+    verifyIdToken.mockResolvedValue({ uid: UID, email: 'kid@test.fr' })
+    docGet.mockResolvedValue({ exists: true, data: () => ({ status: 'pending', createdAt: 1000, lienCreeLe: 5 }) })
+    const res = mockRes()
+    await handler({ method: 'POST', body: { idToken: 'ok', op: 'lien', resultat: { score: 4, total: 5 } } }, res)
+    const url = new URL(res.payload.lien)
+    expect(url.searchParams.get('n')).toBe('4')
+    expect(url.searchParams.get('t')).toBe('5')
+    expect(docUpdate).not.toHaveBeenCalled()
+  }))
+
+  it('sans document d’accord (compte Google) : le lien, sans rien écrire', () => avecCle(async () => {
+    verifyIdToken.mockResolvedValue({ uid: UID, email: 'kid@test.fr' })
+    docGet.mockResolvedValue({ exists: false })
+    const res = mockRes()
+    await handler({ method: 'POST', body: { idToken: 'ok', op: 'lien' } }, res)
+    expect(res.payload.lien).toContain('approve-consent?uid=')
+    expect(docUpdate).not.toHaveBeenCalled()
+    expect(docSet).not.toHaveBeenCalled()
+  }))
+
+  it('accord déjà donné : pas de lien', () => avecCle(async () => {
+    verifyIdToken.mockResolvedValue({ uid: UID, email: 'kid@test.fr' })
+    docGet.mockResolvedValue({ exists: true, data: () => ({ status: 'approved' }) })
+    const res = mockRes()
+    await handler({ method: 'POST', body: { idToken: 'ok', op: 'lien' } }, res)
+    expect(res.payload).toEqual({ ok: true, alreadyApproved: true })
+  }))
+
+  it('refuse sans jeton (401), un compte anonyme (403), et sans clé serveur (503)', async () => {
+    let res = mockRes()
+    await handler({ method: 'POST', body: { op: 'lien' } }, res)
+    expect(res.statusCode).toBe(401)
+
+    verifyIdToken.mockResolvedValue({ uid: 'anon', firebase: { sign_in_provider: 'anonymous' } })
+    res = mockRes()
+    await handler({ method: 'POST', body: { idToken: 'ok', op: 'lien' } }, res)
+    expect(res.statusCode).toBe(403)
+
+    verifyIdToken.mockResolvedValue({ uid: UID, email: 'kid@test.fr' })
+    docGet.mockResolvedValue({ exists: false })
+    res = mockRes()
+    await handler({ method: 'POST', body: { idToken: 'ok', op: 'lien' } }, res)
+    expect(res.statusCode).toBe(503)
+    expect(res.payload.error).toBe('LIEN_INDISPONIBLE')
   })
 })
 

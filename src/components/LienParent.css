@@ -1,0 +1,26 @@
+/* « Lui envoyer un lien » (accord parental) : posé dans les écrans d'entrée (.en-*) et en fin de séance. */
+.lp { display: flex; flex-direction: column; gap: 8px; width: 100%; }
+.lp-consigne, .lp-fait { margin: 0; font-size: 15px; font-weight: 600; line-height: 1.4; color: var(--rv-encre); text-align: center; }
+.lp-fait { padding: 12px 14px; border-radius: 14px; background: var(--rv-menthe); color: var(--rv-menthe-encre); }
+.lp-champ {
+  box-sizing: border-box; width: 100%; min-height: 46px; padding: 0 14px;
+  border: 1.5px solid var(--rv-ligne); border-radius: 12px; background: var(--rv-carte);
+  font-family: inherit; font-size: 14px; color: var(--rv-doux);
+}
+.lp-actions { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.lp-lien-btn {
+  align-self: center; padding: 6px 4px; border: 0; background: none; font-family: inherit;
+  font-size: 15px; font-weight: 700; color: var(--rv-orange-texte); text-decoration: underline; text-underline-offset: 3px; cursor: pointer;
+}
+.lp-copier {
+  display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 22px;
+  border: 2px solid var(--rv-encre); border-radius: 999px; background: var(--rv-carte);
+  font-family: inherit; font-size: 15px; font-weight: 700; color: var(--rv-encre); cursor: pointer;
+}
+.lp-copier:active { transform: translateY(1px); }
+.lp-copier:focus-visible, .lp-lien-btn:focus-visible { outline: 3px solid var(--rv-encre); outline-offset: 3px; }
+.lp-erreur { margin: 0; font-size: 14px; font-weight: 600; color: var(--rv-marque-fonce, #B3261E); text-align: center; }
+/* Fin de séance (carte « Montre ça à tes parents ») : le bouton du lien, discret, sous le champ. */
+.qz-parent .lp { margin-top: 12px; }
+.qz-parent .lp-lien-btn { align-self: flex-start; padding-left: 0; text-align: left; }
+.qz-parent .lp-consigne, .qz-parent .lp-fait { text-align: left; }

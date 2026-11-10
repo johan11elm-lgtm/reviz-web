@@ -4,6 +4,7 @@ import { sendParentalConsent, consentErrorMessage } from '../services/consentSer
 import { track } from '../services/statsService';
 import { mesurer } from '../services/mesure';
 import { matiereSlug } from '../utils/programme';
+import { LienParent } from './LienParent';
 
 const masquer = e => e.replace(/^(.)[^@]*(@.*)$/, '$1•••$2');
 
@@ -80,6 +81,10 @@ export function MontreParent({ score, total, lecon = null }) {
         </button>
       </form>
       {erreur && <p className="qz-parent-erreur" role="alert">{erreur}</p>}
+      {/* Il ne connaît pas l'adresse : le même score, envoyé par message avec le lien d'accord. */}
+      <LienParent lieu="fin_seance" resultat={{ score, total }} classeBouton="lp-lien-btn"
+        libelle="Tu ne connais pas son adresse ? Envoie-lui par message" aide=""
+        onEnvoye={() => mesurer('parent_montre', { etape: 'lien' })} />
     </section>
   );
 }

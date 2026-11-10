@@ -57,8 +57,15 @@ export async function mockApiRoutes(page) {
   // Demande au parent : on pose dans l'émulateur ce qu'écrit le serveur
   // (email parti, délai de réponse qui démarre), sans envoyer de mail.
   await page.route('**/api/send-parental-consent', async route => {
-    const { idToken, parentEmail } = route.request().postDataJSON()
+    const { idToken, parentEmail, op, resultat } = route.request().postDataJSON()
     const jeton = JSON.parse(Buffer.from(idToken.split('.')[1], 'base64url').toString())
+    // Lien à envoyer au parent par message : le serveur ne fait que le signer, rien n'est écrit.
+    if (op === 'lien') {
+      const score = resultat ? `&n=${resultat.score}&t=${resultat.total}` : ''
+      return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({
+        ok: true, lien: `https://app.revizapp.fr/api/approve-consent?uid=${jeton.user_id}&e=1900000000&s=${'a'.repeat(32)}${score}`,
+      }) })
+    }
     const maintenant = String(Date.now())
     await ecrireConsentementEmulateur(jeton.user_id, {
       status: { stringValue: 'pending' },
