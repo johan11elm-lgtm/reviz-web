@@ -185,9 +185,17 @@
 .prg-page .pn-tuile-ico { width: 50px; height: 50px; flex: none; border-radius: 12px; background: #F2EBFF; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 .prg-page .pn-tuile--on .pn-tuile-ico { background: #FFE9DF; }
 .prg-page .pn-tuile-txt { display: flex; flex-direction: column; min-width: 0; }
-.prg-page .pn-tuile-nom { font-size: 14.5px; font-weight: 600; line-height: 1.2; overflow-wrap: anywhere; }
+/* Un nom trop long pour la tuile se coupe entre deux syllabes, avec un trait d'union (« Techno-logie »),
+   plus au milieu d'une syllabe (« Technologi / e » sur un écran de 375 px, vu le 10/11). */
+.prg-page .pn-tuile-nom { font-size: 14.5px; font-weight: 600; line-height: 1.2; overflow-wrap: break-word; -webkit-hyphens: auto; hyphens: auto; }
 .prg-page .pn-tuile-pct { margin-top: 2px; font-size: 12.5px; font-weight: 600; color: var(--prg-doux); }
 .prg-page .pn-tuile--on .pn-tuile-pct { color: var(--rv-vif-plein); }
+/* Petits téléphones (iPhone SE et mini, Android de 360 px) : l'image cède 8 px au nom de la matière. */
+@media (max-width: 389px) {
+  .prg-page .pn-tuile { gap: 8px; }
+  .prg-page .pn-tuile-ico { width: 44px; height: 44px; }
+  .prg-page .pn-tuile-nom { font-size: 14px; }
+}
 
 /* ── Chapitres : lignes blanches, rond d'état, chevron ── */
 .prg-page .pn-liste { display: flex; flex-direction: column; gap: 10px; margin: 0; padding: 0; list-style: none; }
