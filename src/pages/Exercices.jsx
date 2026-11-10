@@ -261,6 +261,10 @@ function Seance({ ai, seance, premiere, nouvelle }) {
       // Après la séance d'accueil, l'élève choisit sa matière ; le lien du dessous ramène à l'accueil.
       <div className="qz-fin-actions">
         <button type="button" className="fc-btn fc-btn--orange rv-bandes" onClick={() => navigate('/programme', { replace: true })}>Choisir ma matière</button>
+        {/* En essai, le compte se propose au moment où l'élève vient de réussir quelque chose (10/11). */}
+        {isGuest && (
+          <button type="button" className="fc-btn fc-btn--blanc rv-bandes rv-bandes--clair" onClick={() => { mesurer('essai_compte_cta', { lieu: 'fin_accueil' }); navigate('/inscription') }}>Créer mon compte gratuit</button>
+        )}
       </div>
     ) : (
       <div className="qz-fin-actions">

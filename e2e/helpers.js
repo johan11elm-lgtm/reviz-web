@@ -469,7 +469,10 @@ export function chapitreThales() {
 }
 
 /**
- * Mode essai : /essai, prénom + classe, puis « C'est parti » → l'accueil (popup Réviz Games fermée).
+ * Mode essai : /essai, prénom + classe, puis « C'est parti » → la séance d'accueil (depuis le
+ * 10/11, testée dans premiere-revision.spec.js), refermée ici pour arriver sur l'accueil.
+ * L'annonce Réviz Games, qui n'arrive en essai qu'après une première révision, est notée vue :
+ * elle ne recouvre pas l'accueil plus loin dans les parcours.
  * `aller` : la page où finir ensuite (/programme par défaut, `null` pour rester sur l'accueil).
  */
 export async function entrerEnEssai(page, { prenom = 'Léa', classe = '3ème', aller = '/programme' } = {}) {
@@ -477,8 +480,13 @@ export async function entrerEnEssai(page, { prenom = 'Léa', classe = '3ème', a
   await page.getByLabel('Ton prénom').fill(prenom)
   await page.getByRole('radio', { name: classeCourte(classe), exact: true }).click()
   await page.getByRole('button', { name: /C'est parti/ }).click()
+  await expect(page).toHaveURL(/\/exercices\?premiere=1$/)
+  await page.getByRole('button', { name: 'Fermer' }).click()
   await expect(page).toHaveURL(/\/$/)
-  await fermerAnnonceJeux(page)
+  await page.evaluate(() => {
+    const essai = JSON.parse(localStorage.getItem('reviz-guest') || 'null')
+    if (essai?.uid) localStorage.setItem(`reviz-annonce-jeux-${essai.uid}`, '1')
+  })
   if (!aller) return
   await page.goto(aller)
   await expect(page).toHaveURL(new RegExp(`${aller.replace(/[?]/g, '\\?')}$`))

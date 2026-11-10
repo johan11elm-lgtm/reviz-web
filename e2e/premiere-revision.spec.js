@@ -69,4 +69,58 @@ test.describe('Première révision après la découverte', () => {
     await page.goto('/onboarding')
     await expect(page).toHaveURL(/\/$/, { timeout: 10_000 })
   })
+
+  // Depuis le 10/11 : l'essai sans compte commence lui aussi par la séance d'accueil. Avant, il
+  // ouvrait l'accueil recouvert par l'annonce Réviz Games : un essai sur trois ne faisait que
+  // jouer puis repartait. L'annonce attend maintenant la première révision.
+  test('essai sans compte → séance d’accueil → compte proposé à la fin, annonce des jeux ensuite', async ({ page }) => {
+    await mockApiRoutes(page)
+    await page.goto('/essai')
+    await page.getByLabel('Ton prénom').fill('Léa')
+    await page.getByRole('radio', { name: '5e', exact: true }).click()
+    await page.getByRole('button', { name: /C'est parti/ }).click()
+    await expect(page).toHaveURL(/\/exercices\?premiere=1$/, { timeout: 10_000 })
+    await expect(page.getByText(/Exercices · Découverte/)).toBeVisible()
+
+    for (const [i, ex] of SEANCE_ACCUEIL.entries()) {
+      await expect(page.getByText(`${NOMS[ex.type]} · ${i + 1} sur 3`)).toBeVisible()
+      await jouer(page, ex, { glisser: true, ordinateur: false })
+      if (!SANS_VALIDER.includes(ex.type)) await page.getByRole('button', { name: 'Valider' }).click()
+      await page.locator('.qz-correction').getByRole('button', { name: i === 2 ? /Voir mon score/ : /Exercice suivant/ }).click()
+    }
+    await expect(page.getByText('Séance terminée')).toBeVisible()
+    await expect(page.getByText(/^Ta première révision est faite\./)).toBeVisible()
+    // Le compte se propose ici, sous le bouton principal ; rien pour le parent ni le rappel (pas de compte).
+    await expect(page.getByRole('button', { name: 'Choisir ma matière' })).toBeVisible()
+    const compte = page.getByRole('button', { name: 'Créer mon compte gratuit' })
+    await expect(compte).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Montre ça à tes parents' })).toHaveCount(0)
+    await sansDebordement(page, 'fin de la séance d’accueil en essai')
+    if (CAPTURES) await page.screenshot({ path: `${CAPTURES}/4-fin-essai-390.png`, fullPage: true })
+
+    // Retour à l'accueil : l'élève a révisé, l'annonce Réviz Games peut venir.
+    await page.getByRole('button', { name: 'Retour à l’accueil' }).click()
+    await expect(page).toHaveURL(/\/$/)
+    await expect(page.getByRole('dialog', { name: 'Réviz Games' })).toBeVisible()
+    await page.getByRole('dialog', { name: 'Réviz Games' }).getByRole('button', { name: 'Plus tard' }).click()
+
+    // Et le bouton de fin mène bien à l'inscription, prénom repris.
+    await page.goto('/exercices?premiere=1')
+    await page.getByRole('button', { name: 'Fermer' }).click()
+    await page.goto('/inscription')
+    await expect(page.getByLabel('Ton prénom')).toHaveValue('Léa')
+  })
+
+  test('essai : séance d’accueil refermée sans jouer → accueil sans annonce', async ({ page }) => {
+    await mockApiRoutes(page)
+    await page.goto('/essai')
+    await page.getByLabel('Ton prénom').fill('Léa')
+    await page.getByRole('radio', { name: '3e', exact: true }).click()
+    await page.getByRole('button', { name: /C'est parti/ }).click()
+    await expect(page).toHaveURL(/\/exercices\?premiere=1$/, { timeout: 10_000 })
+    await page.getByRole('button', { name: 'Fermer' }).click()
+    await expect(page).toHaveURL(/\/$/)
+    await expect(page.getByRole('heading', { name: /Salut Léa/ })).toBeVisible()
+    await expect(page.getByRole('dialog')).toHaveCount(0)
+  })
 })

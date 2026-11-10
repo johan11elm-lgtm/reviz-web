@@ -9,6 +9,7 @@ import { erreursDe } from '../services/erreursService';
 import { chapterLessonId } from '../utils/programme';
 import { EntreeEcran, Champ, ChoixClasse, Encart, LienTexte } from '../components/entree/Entree';
 import { revenir } from '../utils/navigation';
+import { mesurer } from '../services/mesure';
 
 /**
  * Mode essai (« sans compte ») : prénom + classe, et l'élève révise son
@@ -104,7 +105,15 @@ export default function Essai() {
     stopDecouverte();
     loginAsGuest({ prenom: p, level: { cycle: 'college', classe, specialites: [] } });
     if (chapitre && classe === classeFiche) ouvrirChapitre();
-    else navigate(matiereFiche ? `/programme?matiere=${matiereFiche}` : '/', { replace: true });
+    else if (matiereFiche) navigate(`/programme?matiere=${matiereFiche}`, { replace: true });
+    else {
+      // Sans fiche ni matière : la séance d'accueil (3 questions faciles), comme après une
+      // inscription. Jusqu'au 10/11, l'essai ouvrait l'accueil, recouvert par l'annonce des
+      // Réviz Games : sur 10 jours, 36 % des essais ne faisaient que jouer (6 % créaient un
+      // compte) et 36 % ne faisaient rien, contre 25 à 32 % de comptes chez ceux qui révisaient.
+      mesurer('premiere_revision', { etape: 'lancee', matiere: 'decouverte' });
+      navigate('/exercices?premiere=1', { replace: true });
+    }
   }
 
   // Redirection automatique en cours ou à venir (effet ci-dessus) : rien à remplir.

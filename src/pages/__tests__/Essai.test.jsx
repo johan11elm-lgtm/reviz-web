@@ -11,6 +11,8 @@ const auth = vi.hoisted(() => ({ loginAsGuest: vi.fn(), currentUser: null, isGue
 vi.mock('../../context/AuthContext', () => ({ useAuth: () => auth }))
 const prog = vi.hoisted(() => ({ loadCatalogue: vi.fn(), openChapter: vi.fn() }))
 vi.mock('../../services/programmeService', () => prog)
+const mesure = vi.hoisted(() => ({ mesurer: vi.fn() }))
+vi.mock('../../services/mesure', () => mesure)
 const THALES = { id: 'theoreme-de-thales', titre: 'Théorème de Thalès', pret: true, quiz: 8 }
 
 const { default: Essai } = await import('../Essai')
@@ -18,7 +20,7 @@ const { default: Essai } = await import('../Essai')
 const renderPage = (url = '/essai') => render(<MemoryRouter initialEntries={[url]}><Essai /></MemoryRouter>)
 
 beforeEach(() => {
-  nav.mockClear(); auth.loginAsGuest.mockClear(); auth.currentUser = null; auth.isGuest = false; localStorage.clear()
+  nav.mockClear(); mesure.mesurer.mockClear(); auth.loginAsGuest.mockClear(); auth.currentUser = null; auth.isGuest = false; localStorage.clear()
   prog.loadCatalogue.mockReset().mockResolvedValue({ matieres: [{ slug: 'maths', matiere: 'Maths', chapitres: [THALES] }] })
   prog.openChapter.mockReset().mockResolvedValue({})
 })
@@ -34,13 +36,15 @@ describe('<Essai /> — mode essai', () => {
     expect(auth.loginAsGuest).not.toHaveBeenCalled()
   })
 
-  it('démarre la session d’essai et ouvre l’accueil', () => {
+  it('démarre la session d’essai et ouvre la séance d’accueil, comme après une inscription', () => {
     renderPage()
     fireEvent.change(screen.getByLabelText('Ton prénom'), { target: { value: 'Léa' } })
     fireEvent.click(screen.getByRole('radio', { name: '3e' }))
     fireEvent.click(screen.getByRole('button', { name: /C'est parti/ }))
     expect(auth.loginAsGuest).toHaveBeenCalledWith({ prenom: 'Léa', level: { cycle: 'college', classe: '3ème', specialites: [] } })
-    expect(nav).toHaveBeenCalledWith('/', { replace: true })
+    expect(nav).toHaveBeenCalledWith('/exercices?premiere=1', { replace: true })
+    expect(nav).toHaveBeenCalledTimes(1)
+    expect(mesure.mesurer).toHaveBeenCalledWith('premiere_revision', { etape: 'lancee', matiere: 'decouverte' })
   })
 
   it('un élève venu d’une fiche publique sans chapitre a sa classe cochée et ouvre la matière', () => {
@@ -50,6 +54,8 @@ describe('<Essai /> — mode essai', () => {
     fireEvent.click(screen.getByRole('button', { name: /C'est parti/ }))
     expect(auth.loginAsGuest).toHaveBeenCalledWith({ prenom: 'Léa', level: { cycle: 'college', classe: '3ème', specialites: [] } })
     expect(nav).toHaveBeenCalledWith('/programme?matiere=maths', { replace: true })
+    // Il a choisi une matière sur le site : pas de séance d'accueil par-dessus.
+    expect(mesure.mesurer).not.toHaveBeenCalled()
   })
 
   it('venu d’une fiche avec son chapitre : le prénom suffit, et la séance d’exercices du chapitre s’ouvre', async () => {
@@ -89,7 +95,7 @@ describe('<Essai /> — mode essai', () => {
     fireEvent.change(screen.getByLabelText('Ton prénom'), { target: { value: 'Léa' } })
     fireEvent.click(screen.getByRole('radio', { name: '4e' }))
     fireEvent.click(screen.getByRole('button', { name: /C'est parti/ }))
-    expect(nav).toHaveBeenCalledWith('/', { replace: true })
+    expect(nav).toHaveBeenCalledWith('/exercices?premiere=1', { replace: true })
   })
 
   it('seulement les classes du collège : Mon programme s’arrête en 3e', () => {

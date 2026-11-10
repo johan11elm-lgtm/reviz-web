@@ -34,9 +34,13 @@ test.describe('Mon programme', () => {
       await page.getByRole('radio', { name: '3e', exact: true }).click()
       await page.getByRole('button', { name: /C'est parti/ }).click()
 
-      // ── Accueil : la popup Réviz Games, puis « Tout voir » → le programme ──
+      // ── La séance d'accueil s'ouvre d'abord (10/11) ; refermée, l'accueil arrive sans annonce
+      //    Réviz Games (elle attend une première révision), puis « Tout voir » → le programme ──
+      await expect(page).toHaveURL(/\/exercices\?premiere=1$/)
+      await page.getByRole('button', { name: 'Fermer' }).click()
       await expect(page).toHaveURL(/\/$/)
-      await fermerAnnonceJeux(page)
+      await expect(page.getByRole('link', { name: 'Tout voir' })).toBeVisible()
+      await expect(page.getByRole('dialog')).toHaveCount(0)
       await page.getByRole('link', { name: 'Tout voir' }).click()
 
       // ── Programme : matières, rappel du mode essai ──

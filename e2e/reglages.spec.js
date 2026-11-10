@@ -257,6 +257,9 @@ test.describe('Réglages : suppression et mode essai', () => {
     await page.getByLabel('Ton prénom').fill('Invité')
     await page.getByRole('radio', { name: '6e', exact: true }).click()
     await page.getByRole('button', { name: 'C\'est parti' }).click()
+    // L'essai commence par la séance d'accueil (10/11) : refermée, l'accueil.
+    await expect(page).toHaveURL(/\/exercices\?premiere=1$/, { timeout: 15_000 })
+    await page.getByRole('button', { name: 'Fermer' }).click()
     await expect(page).toHaveURL(/\/$/, { timeout: 15_000 })
 
     await page.goto('/reglages')

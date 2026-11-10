@@ -102,7 +102,10 @@ export default function Home() {
   const [newBadge, setNewBadge] = useState(null);
   const [annonceRevizPlus, setAnnonceRevizPlus] = useState(() => ACHAT_DANS_L_APP && revizPlusOffert && !isGuest && !!currentUser?.uid && !annonceRevizPlusVue(currentUser.uid));
   // Annonce de la sortie : Réviz Games (celle de la Battle, du 22/10, n'est plus montrée).
-  const [annonceJeux, setAnnonceJeux] = useState(() => !annonceRevizPlus && !!currentUser?.uid && !annonceJeuxVue(currentUser.uid));
+  // En essai, jamais avant une première révision : c'était le premier écran du nouveau venu, et
+  // un essai sur trois ne faisait que jouer puis repartait (10/11).
+  const [annonceJeux, setAnnonceJeux] = useState(() => !annonceRevizPlus && !!currentUser?.uid && !annonceJeuxVue(currentUser.uid)
+    && (!isGuest || loadRevisions().length > 0));
   const { theme, isDark } = useTheme();
   const [essaiTheme, setEssaiTheme] = useState(() => !essaiThemeVu());
   // Rappel de 17 h proposé à l'ouverture (08/11), jamais en même temps qu'une annonce,
