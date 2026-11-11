@@ -35,7 +35,9 @@ import { setChallengeUser } from '../services/challengeService';
 import { setScanLimitUser, setPremiumStatus, setRevizPlusOffert } from '../services/scanLimitService';
 import { estFondateur } from '../utils/revizPlus.js';
 import { lancementOffert } from '../../api/_lancement.js';
-import { finEssaiPlus } from '../../api/_essaiPlus.js';
+import { finPlusOffert, essaiPlusDejaPris } from '../../api/_essaiPlus.js';
+import { parrainageDuProfil } from '../../api/_parrainage.js';
+import { codeParrainEnAttente, oublierCodeParrain } from '../utils/parrainage.js';
 import { readSessionCache, writeSessionCache, clearSessionCache, userFromSessionCache } from '../services/sessionCache';
 import { track } from '../services/statsService';
 import { apiFetch, apiUrl } from '../services/apiClient';
@@ -140,7 +142,13 @@ export function AuthProvider({ children }) {
   const inscriptionEnCours = useRef(false);
   const [isPremium, setIsPremium] = useState(cached?.isPremium ?? false);
   // Essai Réviz+ de 7 jours (api/_essaiPlus.js) : fin en ms, ou null s'il n'a jamais été pris.
+  // Fin de Réviz+ offert : la plus lointaine entre l'essai et les jours de parrainage.
   const [essaiFin, setEssaiFin] = useState(null);
+  // L'essai de 7 jours a-t-il déjà été pris ? (les jours de parrainage ne le consomment pas)
+  const [essaiPris, setEssaiPris] = useState(false);
+  // Parrainage (api/_parrainage.js) : { code, fin, filleuls, utiliseLe } tel que le serveur l'a écrit.
+  const [parrainage, setParrainage] = useState({});
+  const parrainageEnCours = useRef(false);
   // Récapitulatif de l'abonnement écrit par le webhook Stripe (formule,
   // tarif fondateur, fin de période, annulation programmée) ; null sans abonnement.
   const [abonnement, setAbonnement] = useState(null);
@@ -470,6 +478,8 @@ export function AuthProvider({ children }) {
       setPremiumStatus(false);
       setAbonnement(null);
       setEssaiFin(null);
+      setEssaiPris(false);
+      setParrainage({});
       setGateUid(null);
       return;
     }
@@ -521,7 +531,15 @@ export function AuthProvider({ children }) {
     setIsPremium(premium);
     setPremiumStatus(premium);
     setAbonnement(lireAbonnement(profile));
-    setEssaiFin(finEssaiPlus(profile));
+    setEssaiFin(finPlusOffert(profile));
+    setEssaiPris(essaiPlusDejaPris(profile));
+    setParrainage(parrainageDuProfil(profile));
+    // Compte créé avec le lien d'un ami : le code gardé sur l'appareil part au serveur, une fois
+    // le profil enregistré (jamais pendant l'inscription : la fiche n'existe pas encore).
+    if (profile && !pendantInscription && !user.isAnonymous && codeParrainEnAttente()
+      && !Number.isFinite(parrainageDuProfil(profile).utiliseLe)) {
+      appliquerParrainageEnAttente();
+    }
 
     // Mineur <15 ans : accès ouvert le temps de donner l'email d'un parent
     // puis d'attendre sa réponse ; suspendu à l'issue d'un délai ou en cas de refus.
@@ -607,7 +625,10 @@ export function AuthProvider({ children }) {
       setIsPremium(premium);
       setPremiumStatus(premium);
       setAbonnement(lireAbonnement(userDoc.exists() ? userDoc.data() : null));
-      setEssaiFin(finEssaiPlus(userDoc.exists() ? userDoc.data() : null));
+      const profil = userDoc.exists() ? userDoc.data() : null;
+      setEssaiFin(finPlusOffert(profil));
+      setEssaiPris(essaiPlusDejaPris(profil));
+      setParrainage(parrainageDuProfil(profil));
     } catch {
       // ignore
     }
@@ -632,10 +653,61 @@ export function AuthProvider({ children }) {
       });
       if (!res.ok) return null;
       const data = await res.json();
-      if (Number.isFinite(data?.fin)) setEssaiFin(data.fin);
+      if (Number.isFinite(data?.fin)) { setEssaiFin(f => Math.max(f ?? 0, data.fin)); setEssaiPris(true); }
       return data;
     } catch {
       return null;
+    }
+  }
+
+  // Parrainage (api/_parrainage.js) : ?op=parrainage, avec le jeton de l'élève.
+  async function appelParrainage(corps) {
+    const idToken = await auth.currentUser?.getIdToken();
+    if (!idToken) throw new Error('UNAUTHORIZED');
+    const res = await apiFetch('/api/track?op=parrainage', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ idToken, ...corps }),
+    });
+    const data = await res.json().catch(() => ({}));
+    return { ok: res.ok, status: res.status, data };
+  }
+  // Le code de l'élève (créé à la première demande) : { code, filleuls, fin } ou null.
+  async function chargerParrainage() {
+    if (!auth.currentUser || auth.currentUser.isAnonymous) return null;
+    try {
+      const { ok, data } = await appelParrainage({ action: 'code' });
+      if (!ok || !data?.code) return null;
+      setParrainage(p => ({ ...p, code: data.code, filleuls: data.filleuls ?? 0, ...(Number.isFinite(data.fin) ? { fin: data.fin } : {}) }));
+      if (Number.isFinite(data.fin)) setEssaiFin(f => Math.max(f ?? 0, data.fin));
+      return data;
+    } catch {
+      return null;
+    }
+  }
+  // Le code d'un ami : { ok: true, fin } ou { ok: false, erreur, reseau }.
+  async function utiliserCodeParrain(code) {
+    if (!auth.currentUser || auth.currentUser.isAnonymous) return { ok: false, erreur: 'UNAUTHORIZED' };
+    try {
+      const { ok, status, data } = await appelParrainage({ action: 'utiliser', code });
+      if (!ok) return { ok: false, erreur: data?.error ?? `API_${status}`, reseau: status >= 500 };
+      setEssaiFin(f => Math.max(f ?? 0, data.fin));
+      setParrainage(p => ({ ...p, fin: data.fin, utiliseLe: Date.now() }));
+      return { ok: true, fin: data.fin };
+    } catch {
+      return { ok: false, erreur: 'RESEAU', reseau: true };
+    }
+  }
+  // Le code du lien, gardé depuis l'arrivée : envoyé une fois, oublié dès que le serveur a tranché.
+  async function appliquerParrainageEnAttente() {
+    const code = codeParrainEnAttente();
+    if (!code || parrainageEnCours.current) return;
+    parrainageEnCours.current = true;
+    try {
+      const r = await utiliserCodeParrain(code);
+      if (r.ok || !r.reseau) oublierCodeParrain();
+    } finally {
+      parrainageEnCours.current = false;
     }
   }
 
@@ -658,7 +730,11 @@ export function AuthProvider({ children }) {
     revizPlusOffert: offert,
     // Essai Réviz+ de 7 jours : fin si en cours, et s'il a déjà été pris (une fois par compte).
     essaiPlusFin: essai ? essaiFin : null,
-    essaiPlusPris: essaiFin != null,
+    essaiPlusPris: essaiPris,
+    // Parrainage : { code, fin, filleuls, utiliseLe } ; le code se crée à la demande.
+    parrainage,
+    chargerParrainage,
+    utiliserCodeParrain,
     ouvrirEssaiPlus,
     // Compte créé pendant le lancement (jamais un invité).
     estFondateur: !!currentUser && !currentUser.isGuest && estFondateur(currentUser.metadata?.creationTime),
@@ -683,7 +759,7 @@ export function AuthProvider({ children }) {
     corrigerEmail,
     actualiserCompte,
     deleteAccount,
-  }), [currentUser, loading, consentBlocked, consent, needsProfileSetup, isPremium, abonnement, offert, essai, essaiFin, guest, levelTick]);
+  }), [currentUser, loading, consentBlocked, consent, needsProfileSetup, isPremium, abonnement, offert, essai, essaiFin, essaiPris, parrainage, guest, levelTick]);
 
   // Enfants rendus dès que Firebase a confirmé la session — ou immédiatement
   // depuis le cache local (démarrage optimiste). Sans cache, on attend :

@@ -17,6 +17,7 @@ import { useIsDesktop } from '../hooks/useMediaQuery';
 import { useModalA11y } from '../hooks/useModalA11y';
 import { MaSemaine, MaMemoire, MonProgramme } from '../components/moi/MesProgres';
 import { PartageParent } from '../components/moi/PartageParent';
+import { InviterAmi } from '../components/moi/InviterAmi';
 import { hasProgramme, PROGRAMME_FALLBACK } from '../utils/programme';
 import '../components/reviz/HerosMatiere.css';
 import './Profile.css';
@@ -91,7 +92,7 @@ function Feuille({ titre, onClose, grand, children }) {
 export default function Profile() {
   const navigate = useNavigate();
   const isDesktop = useIsDesktop();
-  const { currentUser, getUserLevel, setUserLevel, updateDisplayName, isGuest, hasRevizPlus, isPremium } = useAuth();
+  const { currentUser, getUserLevel, setUserLevel, updateDisplayName, isGuest, hasRevizPlus, isPremium, revizPlusOffert, essaiPlusFin } = useAuth();
   const prenom = currentUser?.displayName?.split(' ')[0] ?? '';
   const niveauScolaire = getUserLevel();
 
@@ -251,7 +252,10 @@ export default function Profile() {
     <button type="button" className="mo-plus" onClick={() => navigate('/reglages')}>
       <Mascot pose="scanphone" size={40} alt="" aria-hidden="true" />
       <span className="mo-plus-txt"><b>Ton Réviz+</b><span>Scans et questions illimités</span></span>
-      <span className="mo-plus-fin">{isPremium ? 'Abonnement actif' : phase === 'prolonge' ? 'Offert pendant le lancement' : `Offert jusqu’au ${DERNIER_JOUR_OFFERT}`}</span>
+      {/* Essai de 7 jours ou jours de parrainage : leur vraie fin (avant le 11/11, la date du lancement s'affichait). */}
+      <span className="mo-plus-fin">{isPremium ? 'Abonnement actif'
+        : !revizPlusOffert && essaiPlusFin ? `Offert jusqu’au ${new Date(essaiPlusFin).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' })}`
+          : phase === 'prolonge' ? 'Offert pendant le lancement' : `Offert jusqu’au ${DERNIER_JOUR_OFFERT}`}</span>
     </button>
   );
   const compte = (
@@ -361,6 +365,7 @@ export default function Profile() {
               {compte}
               {revizPlus}
               <PartageParent />
+              <InviterAmi />
             </div>
           </div>
           <div className="mo-rangee mo-rangee--progres">{semaine}{memoire}{programme}</div>
@@ -396,6 +401,7 @@ export default function Profile() {
           {carteBattle}
           {revizPlus}
         </section>
+        <InviterAmi titre="Tes amis" />
         <section className="mo-section">
           <h2 className="mo-h2">Mon compte</h2>
           <div className="mo-carte">{compte}</div>

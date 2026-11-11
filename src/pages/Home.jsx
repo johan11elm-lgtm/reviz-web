@@ -6,6 +6,7 @@ import { GuestBanner } from '../components/GuestBanner';
 import { ConsentBanner } from '../components/ConsentBanner';
 import { EmailBanner } from '../components/EmailBanner';
 import { PushBanner } from '../components/PushBanner';
+import { ParrainageBanner } from '../components/ParrainageBanner';
 import { RappelOuverture } from '../components/RappelDemain';
 import { Mascot } from '../components/Mascot';
 import { Avatar } from '../components/Avatar';
@@ -434,6 +435,7 @@ export default function Home() {
       <GuestBanner />
       <ConsentBanner />
       <EmailBanner />
+      <ParrainageBanner />
       <PushBanner />
     </div>
   );

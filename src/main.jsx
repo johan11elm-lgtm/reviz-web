@@ -19,6 +19,10 @@ import { ecouterInstallation, detecterPlateforme, brancherHauteurEcran } from '.
 import { ecouterErreurDeChunk } from './utils/rechargement.js'
 import { sombreAuDemarrage } from './utils/themes.js'
 import { appliquerLecture, lectureDysActive } from './utils/lecture'
+import { capterCodeParrain } from './utils/parrainage.js'
+
+// Lien d'un ami (?parrain=CODE) : le code est gardé jusqu'à la création du compte.
+capterCodeParrain()
 
 // Mode dyslexie choisi dans les Réglages : avant le premier affichage.
 appliquerLecture(lectureDysActive())

@@ -3,6 +3,8 @@ import { BoutonInstaller } from '../components/InstallerApp';
 import { EntreeEcran, LienTexte } from '../components/entree/Entree';
 import { readGuest } from '../services/guestService';
 import { readSessionCache } from '../services/sessionCache';
+import { codeParrainEnAttente } from '../utils/parrainage';
+import { PARRAINAGE_JOURS } from '../../api/_parrainage.js';
 import './Welcome.entree.css';
 
 // Bienvenue (handoff Claude Design du 22/10) : un écran court, plus une page vitrine.
@@ -35,6 +37,10 @@ export default function Welcome() {
       <p className="en-texte en-texte--doux">
         Tes leçons deviennent des flashcards, des quiz et des résumés. Et le programme de la 6e à la 3e t’attend déjà.
       </p>
+      {/* Arrivé par le lien d'un ami (api/_parrainage.js) : le cadeau l'attend à la création du compte. */}
+      {codeParrainEnAttente() && (
+        <p className="en-texte wlc-parrain"><b>Invité par un ami</b> : {PARRAINAGE_JOURS}&nbsp;jours de Réviz+ offerts en créant ton compte.</p>
+      )}
       <Link to="/inscription" className="en-btn">Commencer gratuitement</Link>
       <Link to="/essai" className="en-btn-second">Essayer sans compte</Link>
     </EntreeEcran>

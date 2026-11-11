@@ -19,6 +19,8 @@
 //   avec &qui=parent, plus de bilan au parent (api/_bilanParent.js).
 // - ?op=push (POST / DELETE, jeton Firebase) : abonnement aux notifications web
 //   de ce navigateur (api/_push.js).
+// - ?op=parrainage (POST, jeton Firebase) : code de parrainage, et 3 jours de Réviz+ pour
+//   l'élève et l'ami qui l'a invité (api/_parrainage.js).
 // - ?op=parent (GET, lien signé) et ?op=lien-parent (POST, jeton Firebase) :
 //   l'espace parent, ce que l'enfant a révisé et ses contrôles (api/_espaceParent.js).
 // -------------------------------------------------------
@@ -32,6 +34,7 @@ import { ESSAI_ID_RE, CHAPITRE_ID_RE } from '../src/utils/retour.js'
 import { routeAbonnement } from './_push.js'
 import { routeEspaceParent } from './_espaceParent.js'
 import { routeEssaiPlus } from './_essaiPlus.js'
+import { routeParrainage } from './_parrainage.js'
 import { routeDemandePlus } from './_demandePlus.js'
 import { Resend } from 'resend'
 
@@ -206,6 +209,11 @@ export default async function handler(req, res) {
   if (req.query?.op === 'essai-plus' && req.method === 'POST') {
     try { return await routeEssaiPlus(req, res, { db: getDb(), auth: getAuthAdmin() }) }
     catch (err) { console.error('[essai-plus]', err?.message || err); return res.status(500).json({ error: 'ERREUR' }) }
+  }
+  // Parrainage : le code de l'élève, ou celui d'un ami (3 jours de Réviz+ pour les deux, api/_parrainage.js).
+  if (req.query?.op === 'parrainage' && req.method === 'POST') {
+    try { return await routeParrainage(req, res, { db: getDb(), auth: getAuthAdmin() }) }
+    catch (err) { console.error('[parrainage]', err?.message || err); return res.status(500).json({ error: 'ERREUR' }) }
   }
   // L'élève demande Réviz+ à un parent : e-mail avec le lien pour l'offrir (api/_demandePlus.js).
   if (req.query?.op === 'demande-plus' && req.method === 'POST') {

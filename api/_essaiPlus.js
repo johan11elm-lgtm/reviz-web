@@ -21,9 +21,18 @@ export function finEssaiPlus(profil) {
   return Number.isFinite(fin) ? fin : null
 }
 
-/** L'essai est-il en cours ? */
+/**
+ * Fin de Réviz+ offert (ms) : la plus lointaine entre l'essai de 7 jours et les jours gagnés
+ * par parrainage (essaiPlus.parrainage.fin, api/_parrainage.js), ou null.
+ */
+export function finPlusOffert(profil) {
+  const fins = [finEssaiPlus(profil), profil?.essaiPlus?.parrainage?.fin].filter(Number.isFinite)
+  return fins.length ? Math.max(...fins) : null
+}
+
+/** Réviz+ offert en cours (essai ou parrainage) ? */
 export function essaiPlusActif(profil, maintenant = Date.now()) {
-  const fin = finEssaiPlus(profil)
+  const fin = finPlusOffert(profil)
   return fin != null && maintenant < fin
 }
 

@@ -1,0 +1,14 @@
+/* « Invite un ami » dans Moi (components/moi/InviterAmi) : la carte de l'espace parent (PartageParent.css), en menthe. */
+.ia { background: var(--sk-menthe, #CDEFD9); }
+.ia-bilan { display: flex; flex-direction: column; gap: 2px; margin: 0; padding: 10px 12px; border-radius: 14px; background: #fff; font-size: 13.5px; line-height: 1.35; }
+.ia-bilan b { font-size: 14px; font-weight: 800; }
+.ia-bilan span { color: rgba(4,42,101,.72); }
+.ia-lien { align-self: flex-start; padding: 0; border: 0; background: none; font: 700 13.5px 'Poppins', system-ui, sans-serif; color: #042A65; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.ia-lien:focus-visible { outline: 3px solid #042A65; outline-offset: 2px; border-radius: 4px; }
+.ia-saisie { display: flex; flex-direction: column; gap: 6px; }
+.ia-saisie label { font-size: 13px; font-weight: 700; }
+.ia-ligne { display: flex; gap: 8px; }
+.ia-code { flex: 1; min-width: 0; font-size: 15px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #042A65; }
+.ia-code::placeholder { color: rgba(4,42,101,.35); letter-spacing: .12em; }
+.ia-valider { flex: none; height: 40px; }
+.ia-ok { margin: 0; padding: 10px 12px; border-radius: 14px; background: #fff; font-size: 13.5px; font-weight: 700; }
