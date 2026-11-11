@@ -119,7 +119,7 @@ export default function Parents() {
               <p className="pa-aide pa-aide--centre">{nbsp('Paiement sécurisé par Stripe. Résiliable à tout moment.')}</p>
             </form>
           ) : (
-            <section className="pr-carte pa-carte"><p className="pr-carte-texte">{nbsp('Pour offrir Réviz+, rendez-vous sur revizapp.fr/parents depuis un navigateur.')}</p></section>
+            <section className="pr-carte pa-carte"><p className="pr-carte-texte">{nbsp('Réviz+ ne se prend pas dans l’app iPhone.')}</p></section>
           )}
 
           <section className="pr-carte pa-carte" aria-labelledby="pa-comment">
