@@ -1,12 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { doc, setDoc } from 'firebase/firestore';
 import { useAuth } from '../../context/AuthContext';
-import { auth, db } from '../../services/firebaseConfig';
-import { apiFetch } from '../../services/apiClient';
-import { loadRevisions } from '../../services/revisionService';
+import { db } from '../../services/firebaseConfig';
+import { useLigue, oublierLigue } from '../../hooks/useLigue';
 import { mesurer } from '../../services/mesure';
 import { Mascot } from '../Mascot';
-import { NOMS_LIGUES, xpDeLaSemaine, messageLigue, finDeLigue, resultatVu, noterResultatVu } from '../../utils/ligue';
+import { NOMS_LIGUES, messageLigue, finDeLigue, resultatVu, noterResultatVu } from '../../utils/ligue';
 import { nbsp } from '../../utils/typography';
 import './CarteLigue.css';
 
@@ -20,34 +19,21 @@ const VISIBLES = 10;
  */
 export function CarteLigue({ titre }) {
   const { currentUser, isGuest } = useAuth();
-  const [etat, setEtat] = useState({ chargement: true });
   const uid = currentUser?.uid;
-
+  const [etat, setEtat] = useLigue(uid, { actif: !isGuest });
+  const vu = useRef(false);
   useEffect(() => {
-    if (!uid || isGuest) return undefined;
-    let vivant = true;
-    (async () => {
-      try {
-        const idToken = await auth.currentUser?.getIdToken();
-        const res = await apiFetch('/api/track?op=ligue', {
-          method: 'POST', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ idToken, xpSemaine: xpDeLaSemaine(loadRevisions()) }),
-        });
-        const data = await res.json().catch(() => ({}));
-        if (vivant) setEtat(res.ok ? data : { erreur: true });
-        if (res.ok && data.ligue) mesurer('ligue', { etape: 'vue', ligue: data.ligue, rang: data.rang, total: data.total });
-      } catch {
-        if (vivant) setEtat({ erreur: true });
-      }
-    })();
-    return () => { vivant = false; };
-  }, [uid, isGuest]);
+    if (vu.current || !etat.ligue) return;
+    vu.current = true;
+    mesurer('ligue', { etape: 'vue', ligue: etat.ligue, rang: etat.rang, total: etat.total });
+  }, [etat]);
 
   if (!uid || isGuest || etat.chargement || etat.erreur || etat.masquee) return null;
 
   async function masquer() {
     mesurer('ligue', { etape: 'masquee' });
     try { await setDoc(doc(db, 'users', uid), { ligueMasquee: true }, { merge: true }); } catch { /* réessaiera */ }
+    oublierLigue(uid);
     setEtat({ masquee: true });
   }
 

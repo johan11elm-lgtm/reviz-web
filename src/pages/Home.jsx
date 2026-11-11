@@ -10,6 +10,7 @@ import { ParrainageBanner } from '../components/ParrainageBanner';
 import { RappelOuverture } from '../components/RappelDemain';
 import { RetourAbsence } from '../components/RetourAbsence';
 import { LancerConcentration } from '../components/Concentration';
+import { LigneLigue } from '../components/LigneLigue';
 import { retourAProposer } from '../utils/retourAbsence';
 import { Mascot } from '../components/Mascot';
 import { Avatar } from '../components/Avatar';
@@ -472,6 +473,8 @@ export default function Home() {
       {/* Le prénom au surligneur, comme les mots accentués de la landing (choix de Johan, 28/10). */}
       <h1 className="nm-hello">{prenom ? <span>Salut <span className="nm-hello-nom">{prenom}</span> !</span> : 'Salut !'}</h1>
       {!isDesktop && stats}
+      {/* La ligue de la semaine en une ligne (11/11) : elle n'était visible que dans « Moi ». */}
+      {!isDesktop && <LigneLigue />}
     </div>
   );
   // Chercher un chapitre, ou demander à Réviz IA (étape 3 de docs/plan-reviz-ia-agent.md).
@@ -517,7 +520,7 @@ export default function Home() {
   // Colonne de droite (ordinateur), comme l'app Nomad : les chiffres, le prochain contrôle, les indispensables.
   const rail = isDesktop && (
     <aside className="nm-rail" aria-label="En un coup d’œil">
-      <div className="nm-rail-carte">{stats}</div>
+      <div className="nm-rail-carte">{stats}<LigneLigue /></div>
       <section className="nm-rail-section" aria-labelledby="nm-rail-ctrl">
         <h2 id="nm-rail-ctrl" className="nm-rail-titre">Tes prochains contrôles</h2>
         <div className="nm-rail-carte nm-rail-ctrl">

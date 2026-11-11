@@ -57,6 +57,15 @@ test('Moi : la ligue de la semaine, la place et les pseudos', async ({ page }) =
   await sansDebordement(page, 'carte ligue')
   if (CAPTURES) { await page.waitForTimeout(1200); await page.screenshot({ path: `${CAPTURES}/11-ligue-390.png`, animations: 'disabled' }) }
 
+  // Sur l'accueil, la ligue en une ligne, qui mène à « Moi ».
+  await page.goto('/')
+  const ligne = page.getByRole('link', { name: /^Ta ligue Bronze\s: 5e sur 9, montée à 2 places/ })
+  await expect(ligne).toBeVisible({ timeout: 15_000 })
+  await sansDebordement(page, 'ligue sur l’accueil')
+  if (CAPTURES) { await page.waitForTimeout(1200); await page.screenshot({ path: `${CAPTURES}/19-ligue-accueil-390.png`, animations: 'disabled' }) }
+  await ligne.click()
+  await expect(page).toHaveURL(/\/profil/)
+
   // « Ne plus apparaître » : la carte disparaît, et le serveur ne la montre plus.
   await carte.getByRole('button', { name: 'Ne plus apparaître dans les ligues' }).click()
   await expect(carte).toHaveCount(0)
