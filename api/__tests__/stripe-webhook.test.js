@@ -5,6 +5,8 @@ const eventGet = vi.fn()
 const eventSet = vi.fn()
 const userSet = vi.fn()
 const userUpdate = vi.fn()
+const cadeauSet = vi.fn()
+const mailEnvoye = vi.fn(async () => ({}))
 let userFound = true
 
 function makeDb() {
@@ -12,6 +14,9 @@ function makeDb() {
     collection(name) {
       if (name === 'stripeEvents') {
         return { doc: () => ({ get: eventGet, set: eventSet }) }
+      }
+      if (name === 'cadeaux') {
+        return { doc: id => ({ get: async () => ({ exists: false }), set: v => cadeauSet(id, v) }) }
       }
       // users
       return {
@@ -31,6 +36,7 @@ vi.mock('stripe', () => ({
   default: class { constructor() { this.webhooks = { constructEvent } } },
 }))
 vi.mock('../_firebaseAdmin.js', () => ({ getDb: () => makeDb() }))
+vi.mock('resend', () => ({ Resend: class { constructor() { this.emails = { send: mailEnvoye } } } }))
 
 const { default: handler, planForStatus, champsAbonnement } = await import('../stripe-webhook.js')
 
@@ -154,5 +160,21 @@ describe('stripe-webhook — idempotence', () => {
     await handler(makeReq(), res)
     expect(res.statusCode).toBe(400)
     expect(eventSet).not.toHaveBeenCalled()
+  })
+})
+
+describe('stripe-webhook — Réviz+ offert par un parent (cadeau, 11/11)', () => {
+  it('une session cadeau sans élève : le code est enregistré et envoyé au parent', async () => {
+    process.env.CRON_SECRET = 'secret-de-test'
+    process.env.RESEND_API_KEY = 'cle'
+    cadeauSet.mockReset(); mailEnvoye.mockClear()
+    const res = await run({ id: 'e-cadeau', type: 'checkout.session.completed', data: { object: {
+      id: 'cs_test_cadeau_123456789', customer: 'cus_9', subscription: 'sub_9', status: 'complete',
+      metadata: { cadeau: '1', formule: 'annuel', fondateur: 'false' }, customer_details: { email: 'parent@famille.test' },
+    } } })
+    expect(res.statusCode).toBe(200)
+    expect(userSet).not.toHaveBeenCalled()
+    expect(cadeauSet).toHaveBeenCalledWith(expect.stringMatching(/^[A-HJKMNP-Z2-9]{8}$/), expect.objectContaining({ customer: 'cus_9', subscription: 'sub_9', email: 'parent@famille.test' }))
+    expect(mailEnvoye).toHaveBeenCalledWith(expect.objectContaining({ to: 'parent@famille.test', subject: 'Le code Réviz+ de votre enfant' }))
   })
 })

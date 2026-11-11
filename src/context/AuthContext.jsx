@@ -38,6 +38,7 @@ import { lancementOffert } from '../../api/_lancement.js';
 import { finPlusOffert, essaiPlusDejaPris } from '../../api/_essaiPlus.js';
 import { parrainageDuProfil } from '../../api/_parrainage.js';
 import { codeParrainEnAttente, oublierCodeParrain } from '../utils/parrainage.js';
+import { codeCadeauEnAttente, oublierCodeCadeau } from '../utils/cadeau.js';
 import { readSessionCache, writeSessionCache, clearSessionCache, userFromSessionCache } from '../services/sessionCache';
 import { track } from '../services/statsService';
 import { apiFetch, apiUrl } from '../services/apiClient';
@@ -149,6 +150,7 @@ export function AuthProvider({ children }) {
   // Parrainage (api/_parrainage.js) : { code, fin, filleuls, utiliseLe } tel que le serveur l'a écrit.
   const [parrainage, setParrainage] = useState({});
   const parrainageEnCours = useRef(false);
+  const cadeauEnCours = useRef(false);
   // Récapitulatif de l'abonnement écrit par le webhook Stripe (formule,
   // tarif fondateur, fin de période, annulation programmée) ; null sans abonnement.
   const [abonnement, setAbonnement] = useState(null);
@@ -179,6 +181,10 @@ export function AuthProvider({ children }) {
     // mineur en dépend (birthDate), donc on ne le laisse pas en fire-and-forget.
     try {
       await createUserProfile(user.uid, { prenom, email, birthDate, level });
+      // Le profil existe : le code d'un ami ou d'un parent gardé depuis son lien peut partir. Sans
+      // ça, il attendait la prochaine ouverture (le profil, lu pendant l'inscription, était vide).
+      appliquerParrainageEnAttente();
+      appliquerCadeauEnAttente();
     } catch (err) {
       // Best-effort (l'élève entre quand même, le profil se complète à son retour), mais
       // signalé à Sentry : un refus muet a vidé les profils des essais devenus comptes (26-29/10).
@@ -540,6 +546,10 @@ export function AuthProvider({ children }) {
       && !Number.isFinite(parrainageDuProfil(profile).utiliseLe)) {
       appliquerParrainageEnAttente();
     }
+    // Lien d'un parent qui a offert Réviz+ (/parents, api/_cadeau.js) : activé dès que le profil existe.
+    if (profile && !pendantInscription && !user.isAnonymous && codeCadeauEnAttente()) {
+      appliquerCadeauEnAttente();
+    }
 
     // Mineur <15 ans : accès ouvert le temps de donner l'email d'un parent
     // puis d'attendre sa réponse ; suspendu à l'issue d'un délai ou en cas de refus.
@@ -711,6 +721,40 @@ export function AuthProvider({ children }) {
     }
   }
 
+  // Réviz+ offert par un parent (api/_cadeau.js) : { ok: true } ou { ok: false, erreur, reseau }.
+  async function activerCadeau(code) {
+    if (!auth.currentUser || auth.currentUser.isAnonymous) return { ok: false, erreur: 'COMPTE' };
+    try {
+      const idToken = await auth.currentUser.getIdToken();
+      const res = await apiFetch('/api/abonnement?op=cadeau', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'activer', idToken, code }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) return { ok: false, erreur: data?.error ?? `API_${res.status}`, reseau: res.status >= 500 };
+      try { localStorage.setItem(`reviz-cadeau-active-${auth.currentUser.uid}`, localStorage.getItem(`reviz-cadeau-active-${auth.currentUser.uid}`) ?? '1'); } catch { /* rien */ }
+      // Tout de suite, sans attendre une relecture du profil (qui peut croiser une lecture plus ancienne).
+      setIsPremium(true);
+      setPremiumStatus(true);
+      refreshPremium();
+      return { ok: true, formule: data.formule };
+    } catch {
+      return { ok: false, erreur: 'RESEAU', reseau: true };
+    }
+  }
+  async function appliquerCadeauEnAttente() {
+    const code = codeCadeauEnAttente();
+    if (!code || cadeauEnCours.current) return;
+    cadeauEnCours.current = true;
+    try {
+      const r = await activerCadeau(code);
+      if (r.ok || !r.reseau) oublierCodeCadeau();
+    } finally {
+      cadeauEnCours.current = false;
+    }
+  }
+
   // Identité stable du value : sans useMemo, chaque render du provider
   // re-rendait tous les consommateurs (~15 pages/composants). Les fonctions
   // sont recréées à chaque render mais seules celles closant sur un état
@@ -735,6 +779,7 @@ export function AuthProvider({ children }) {
     parrainage,
     chargerParrainage,
     utiliserCodeParrain,
+    activerCadeau,
     ouvrirEssaiPlus,
     // Compte créé pendant le lancement (jamais un invité).
     estFondateur: !!currentUser && !currentUser.isGuest && estFondateur(currentUser.metadata?.creationTime),

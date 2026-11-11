@@ -75,6 +75,8 @@ const ControleBlanc  = lazy(() => import('./pages/ControleBlanc'))
 const Avis           = lazy(() => import('./pages/Avis'))
 const Profs          = lazy(() => import('./pages/Profs'))
 const Installer      = lazy(() => import('./pages/Installer'))
+const Parents        = lazy(() => import('./pages/Parents'))
+const ParentsMerci   = lazy(() => import('./pages/ParentsMerci'))
 const BattleAccueil  = lazy(() => import('./pages/BattleAccueil'))
 const Battle         = lazy(() => import('./pages/Battle'))
 const SimulateurBrevet = lazy(() => import('./pages/SimulateurBrevet'))
@@ -179,6 +181,9 @@ export default function App() {
             <Route path="/avis"        element={<><SplashHider /><Avis /></>} />
             <Route path="/profs"       element={<><SplashHider /><Profs /></>} />
             <Route path="/installer"   element={<><SplashHider /><Installer /></>} />
+            {/* Un parent offre Réviz+ sans compte, puis transmet un code à son enfant (api/_cadeau.js) */}
+            <Route path="/parents"       element={<><SplashHider /><Parents /></>} />
+            <Route path="/parents/merci" element={<><SplashHider /><ParentsMerci /></>} />
             {/* Espace parent : lien signé partagé par l'élève (api/_espaceParent.js), sans compte */}
             <Route path="/parent"      element={<><SplashHider /><EspaceParent /></>} />
             {/* Adresse courte d'une vidéo (revizapp.fr/vf6) → essai sur son chapitre */}

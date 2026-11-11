@@ -6,6 +6,9 @@
 // -------------------------------------------------------
 import Stripe from 'stripe'
 import { getDb } from './_firebaseAdmin.js'
+import { Resend } from 'resend'
+import { enregistrerCadeau, mailCadeau } from './_cadeau.js'
+import { REPONDRE_A } from './_bilanParent.js'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
@@ -94,6 +97,16 @@ export default async function handler(req, res) {
           { merge: true }
         )
         console.log(`[stripe-webhook] User ${uid} upgraded to premium`)
+      } else if (session.metadata?.cadeau === '1') {
+        // Réviz+ offert par un parent sur /parents (api/_cadeau.js) : le code de son enfant, par e-mail aussi.
+        const { code, cadeau, nouveau } = await enregistrerCadeau(db, session)
+        const a = session.customer_details?.email ?? session.customer_email
+        if (nouveau && a && process.env.RESEND_API_KEY) {
+          try {
+            await new Resend(process.env.RESEND_API_KEY).emails.send({ from: 'Réviz <noreply@revizapp.fr>', to: a, replyTo: REPONDRE_A, ...mailCadeau({ code, formule: cadeau.formule }) })
+          } catch (err) { console.error('[stripe-webhook] mail cadeau', err?.message || err) }
+        }
+        console.log(`[stripe-webhook] cadeau ${code} enregistré`)
       }
       break
     }

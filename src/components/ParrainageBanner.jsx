@@ -8,14 +8,24 @@ const jour = ms => new Date(ms).toLocaleDateString('fr-FR', { day: 'numeric', mo
 
 /**
  * Bandeau d'accueil du parrainage (api/_parrainage.js), une fois par bonne nouvelle :
- * le code d'un ami vient d'être accepté, ou un ami s'est inscrit avec le lien de l'élève.
+ * le code d'un ami vient d'être accepté, ou un ami s'est inscrit avec le lien de l'élève ;
+ * et Réviz+ offert par un parent tout juste activé (api/_cadeau.js).
  * Ne rend rien hors de ces moments, donc peut être posé sans condition.
  */
 export function ParrainageBanner() {
   const { currentUser, isGuest, isPremium, parrainage = {} } = useAuth() ?? {};
   const uid = currentUser?.uid;
   const [vu, setVu] = useState(() => (uid ? parrainageVu(uid) : null));
+  const [, majCadeau] = useState(0);
   if (!uid || isGuest || !vu) return null;
+
+  // Réviz+ offert par un parent (api/_cadeau.js) vient d'être activé : annoncé une fois.
+  let cadeau = null;
+  try { cadeau = localStorage.getItem(`reviz-cadeau-active-${uid}`); } catch { /* rien */ }
+  if (cadeau === '1') {
+    const vuCadeau = () => { try { localStorage.setItem(`reviz-cadeau-active-${uid}`, 'vu'); } catch { /* rien */ } majCadeau(n => n + 1); };
+    return <Bandeau teinte="menthe" titre="Réviz+ est activé" suite="un cadeau de ton parent" action={{ onClick: vuCadeau, label: 'Super' }} className="parrainage-banner" />;
+  }
 
   const filleuls = parrainage.filleuls ?? 0;
   const fin = Number.isFinite(parrainage.fin) && parrainage.fin > Date.now() ? parrainage.fin : null;

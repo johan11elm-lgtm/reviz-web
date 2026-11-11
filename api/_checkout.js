@@ -7,7 +7,7 @@ import { compteVerifie } from './_compteVerifie.js'
 import { FORMULES, FORMULE_PAR_DEFAUT, prixDe } from './_prix.js'
 import { VENTES_OUVERTES, FIN_LANCEMENT, tarifFondateurOuvert } from './_lancement.js'
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
+export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
 const BASE_URL = 'https://app.revizapp.fr'
 
@@ -21,9 +21,11 @@ async function stripePriceId(lookupKey) {
  * Crée la session Stripe Checkout de Réviz+ pour un compte (uid vérifié par l'appelant).
  * parent : c'est un parent qui paie depuis son e-mail (api/_demandePlus.js) — retour vers
  * des pages sans connexion, texte au « vous ».
+ * cadeau : un parent paie sur /parents sans élève rattaché (api/_cadeau.js) ; le code de son enfant
+ * rattachera l'abonnement à un compte.
  * @returns {Promise<string>} l'URL de paiement
  */
-export async function creerSessionReviz({ uid, email = null, formule, successUrl = null, cancelUrl = null, parent = false }) {
+export async function creerSessionReviz({ uid, email = null, formule, successUrl = null, cancelUrl = null, parent = false, cadeau = false }) {
   // Tarif fondateur : abonnement pris avant la bascule, décidé ici d'après
   // l'heure du serveur, jamais d'après ce que le client envoie.
   const fondateur = tarifFondateurOuvert()
@@ -39,9 +41,9 @@ export async function creerSessionReviz({ uid, email = null, formule, successUrl
     customer_email: email || undefined,
     // formule et fondateur aussi sur la session : le webhook les recopie
     // dans le profil (récapitulatif de l'abonnement dans les Réglages).
-    metadata: { firebaseUid: uid, formule, fondateur: String(fondateur), ...(parent && { payeur: 'parent' }) },
+    metadata: { ...(uid && { firebaseUid: uid }), formule, fondateur: String(fondateur), ...(parent && { payeur: 'parent' }), ...(cadeau && { cadeau: '1' }) },
     subscription_data: {
-      metadata: { firebaseUid: uid, formule, fondateur: String(fondateur), ...(parent && { payeur: 'parent' }) },
+      metadata: { ...(uid && { firebaseUid: uid }), formule, fondateur: String(fondateur), ...(parent && { payeur: 'parent' }), ...(cadeau && { cadeau: '1' }) },
       // Avant la bascule : carte enregistrée, rien de prélevé avant le
       // 26 octobre (période d'ici là non facturée), puis à chaque échéance.
       ...(fondateur && {

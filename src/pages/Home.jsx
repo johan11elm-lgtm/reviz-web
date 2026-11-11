@@ -439,8 +439,9 @@ export default function Home() {
     <div className="hm-rappels">
       <GuestBanner />
       <ConsentBanner />
-      <EmailBanner />
+      {/* Une bonne nouvelle, annoncée une fois (ami, parent) : avant le rappel d'e-mail, qui revient ensuite. */}
       <ParrainageBanner />
+      <EmailBanner />
       <PushBanner />
     </div>
   );

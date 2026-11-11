@@ -4,6 +4,7 @@ import { EntreeEcran, LienTexte } from '../components/entree/Entree';
 import { readGuest } from '../services/guestService';
 import { readSessionCache } from '../services/sessionCache';
 import { codeParrainEnAttente } from '../utils/parrainage';
+import { codeCadeauEnAttente } from '../utils/cadeau';
 import { PARRAINAGE_JOURS } from '../../api/_parrainage.js';
 import './Welcome.entree.css';
 
@@ -38,7 +39,10 @@ export default function Welcome() {
         Tes leçons deviennent des flashcards, des quiz et des résumés. Et le programme de la 6e à la 3e t’attend déjà.
       </p>
       {/* Arrivé par le lien d'un ami (api/_parrainage.js) : le cadeau l'attend à la création du compte. */}
-      {codeParrainEnAttente() && (
+      {/* Un parent a offert Réviz+ (api/_cadeau.js) : il s'active en créant le compte. */}
+      {codeCadeauEnAttente() ? (
+        <p className="en-texte wlc-parrain"><b>Un parent t’offre Réviz+</b> : crée ton compte gratuit, il s’active tout seul.</p>
+      ) : codeParrainEnAttente() && (
         <p className="en-texte wlc-parrain"><b>Invité par un ami</b> : {PARRAINAGE_JOURS}&nbsp;jours de Réviz+ offerts en créant ton compte.</p>
       )}
       <Link to="/inscription" className="en-btn">Commencer gratuitement</Link>

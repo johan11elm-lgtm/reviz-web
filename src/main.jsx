@@ -20,9 +20,12 @@ import { ecouterErreurDeChunk } from './utils/rechargement.js'
 import { sombreAuDemarrage } from './utils/themes.js'
 import { appliquerLecture, lectureDysActive } from './utils/lecture'
 import { capterCodeParrain } from './utils/parrainage.js'
+import { capterCodeCadeau } from './utils/cadeau.js'
 
-// Lien d'un ami (?parrain=CODE) : le code est gardé jusqu'à la création du compte.
+// Lien d'un ami (?parrain=CODE) ou d'un parent qui offre Réviz+ (?cadeau=CODE) : le code est
+// gardé jusqu'à la création du compte.
 capterCodeParrain()
+capterCodeCadeau()
 
 // Mode dyslexie choisi dans les Réglages : avant le premier affichage.
 appliquerLecture(lectureDysActive())

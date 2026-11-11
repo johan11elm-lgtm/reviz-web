@@ -8,7 +8,7 @@ import { initializeApp, getApps } from 'firebase-admin/app'
 import { getFirestore } from 'firebase-admin/firestore'
 import { getAuth } from 'firebase-admin/auth'
 import { routeParrainage, PARRAINAGE_MS } from '../api/_parrainage.js'
-import { mockApiRoutes, compteRapide, sansDebordement, lireProfilEmulateur } from './helpers'
+import { mockApiRoutes, compteRapide, signup, passerDecouverte, fermerAnnonces, sansDebordement, lireProfilEmulateur } from './helpers'
 
 process.env.FIRESTORE_EMULATOR_HOST ||= '127.0.0.1:8080'
 process.env.FIREBASE_AUTH_EMULATOR_HOST ||= '127.0.0.1:9099'
@@ -65,12 +65,17 @@ test.describe('Parrainage', () => {
     await capture(tom, '03-bienvenue-invite-390')
 
     // Il crée son compte : le code gardé depuis le lien part au serveur dès que le profil existe.
-    const compteTom = await compteRapide(tom, { prenom: 'Tom', birthDate: '2011-02-01' })
+    // Le vrai tunnel d'inscription : le code part dès que le profil est enregistré, sans recharger.
+    await signup(tom, { prenom: 'Tom', birthDate: '2011-02-01' })
+    await expect(tom).toHaveURL(/onboarding/, { timeout: 15_000 })
+    await passerDecouverte(tom)
+    await fermerAnnonces(tom)
+    const uidTom = await tom.evaluate(() => Object.keys(localStorage).find(k => k.startsWith('reviz-onboarded-'))?.slice('reviz-onboarded-'.length))
     const bandeauTom = tom.getByRole('status').filter({ hasText: 'Code de ton ami accepté' })
     await expect(bandeauTom).toBeVisible({ timeout: 15_000 })
     await expect(bandeauTom).toContainText('Réviz+ offert jusqu’au')
     await capture(tom, '04-accueil-tom-390')
-    const profilTom = await lireProfilEmulateur(compteTom.uid)
+    const profilTom = await lireProfilEmulateur(uidTom)
     const finTom = Number(profilTom.essaiPlus.parrainage.fin)
     expect(finTom).toBeGreaterThan(Date.now() + PARRAINAGE_MS - 60_000)
     expect(await tom.evaluate(() => localStorage.getItem('reviz-parrain'))).toBeNull()
