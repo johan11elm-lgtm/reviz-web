@@ -26,6 +26,9 @@ import { consentGate, JOUR_MS, DELAI_REPONSE_MS } from '../src/utils/consent.js'
 import { jourParis } from '../src/utils/retour.js'
 import { C, POLICE, escapeHtml, prenomPropre, titrePropre, signatureDesabo } from './_rappels.js'
 import { demandeEnCours, jetonDe } from './_accordParent.js'
+import { prixDe } from './_prix.js'
+import { tarifFondateurOuvert } from './_lancement.js'
+import { parSemaine } from '../src/utils/remiseQuotas.js'
 
 // Fenêtre d'âge du compte : dès J+3, et jusqu'à la fin du délai pour donner
 // l'adresse d'un parent (un parent donné tard reçoit son bilan plus tard).
@@ -110,11 +113,12 @@ const classeLisible = c => String(c).replace(/^(\d)ème$/, '$1e')
  *   prenom?: string|null, classe?: string|null, depuis: number, maintenant: number,
  *   resume: ReturnType<typeof resumeActivite>,
  *   autorisation?: { lien: string, jusquau: number }|null, desabo?: string|null,
+ *   offrir?: string|null (page « Offrir Réviz+ » de l'enfant, api/_demandePlus.js ; 11/11),
  *   espace?: string|null (lien de l'espace parent, api/_espaceParent.js),
  * }} p
  *   resume.chapitres[].titre : titre de la leçon, lu dans users/{uid}/lessons.
  */
-export function mailBilanParent({ prenom = null, classe = null, depuis, maintenant, resume, autorisation = null, desabo = null, espace = null }) {
+export function mailBilanParent({ prenom = null, classe = null, depuis, maintenant, resume, autorisation = null, desabo = null, espace = null, offrir = null }) {
   const propre = prenomPropre(prenom)
   const nom = propre ? escapeHtml(propre) : 'votre enfant'
   const Nom = propre ? nom : 'Votre enfant'
@@ -179,6 +183,17 @@ export function mailBilanParent({ prenom = null, classe = null, depuis, maintena
             </td></tr></table>
           </td></tr></table>`
 
+  // Réviz+ à offrir (11/11) : discret, jamais en même temps que la demande d'accord.
+  const prixAnnuel = prixDe('annuel', tarifFondateurOuvert())
+  const blocOffrir = !offrir || autorisation ? '' : `
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:4px 0 20px;"><tr><td>
+            ${surtitre('Pour aller plus loin', ' margin:0 0 6px;')}
+            ${p(`Avec Réviz+, ${Nom} a des exercices sans limite et un plan de révision pour chaque contrôle, pour ${prixAnnuel.montant} par an (soit ${parSemaine(prixAnnuel.centimes)} par semaine). Vous pouvez le lui offrir sans créer de compte.`, ' margin:0 0 12px; font-size:15px;')}
+            <table role="presentation" cellpadding="0" cellspacing="0"><tr><td style="border:1.5px solid ${C.encre}; border-radius:12px;">
+              <a href="${escapeHtml(offrir)}" style="display:inline-block; padding:12px 20px; font-family:${POLICE}; font-size:15px; font-weight:700; color:${C.encre}; text-decoration:none;">Offrir Réviz+ à ${escapeHtml(Nom)} →</a>
+            </td></tr></table>
+          </td></tr></table>`
+
   const blocAutorisation = !autorisation ? '' : `
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:8px 0 20px; border:1.5px solid ${C.encre}; border-radius:14px;"><tr><td style="padding:16px 16px 4px;">
             ${surtitre('Il manque votre accord', ` color:${C.encre};`)}
@@ -216,6 +231,7 @@ export function mailBilanParent({ prenom = null, classe = null, depuis, maintena
           ${blocChapitres}
           ${blocEspace}
           ${blocAutorisation}
+          ${blocOffrir}
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:6px 0 22px;"><tr><td style="background:${C.surligneur}; border-radius:14px; padding:16px;">
             ${surtitre('Le coup de pouce qui marche', ` color:${C.encre};`)}
             ${p(`Demandez-lui de vous expliquer ${revise ? 'un de ces chapitres' : 'un chapitre vu en classe cette semaine'} en deux minutes, à table ou en voiture. Redire avec ses mots ce qu'on vient de revoir, c'est la meilleure révision qui soit.`, ' margin:8px 0 10px; font-size:15px;')}
@@ -259,6 +275,7 @@ export async function avecTitres(ref, chapitres) {
  * @param {{
  *   db, envoyer, lienAutorisation: (token:string, uid:string) => string,
  *   lienEspace?: (uid:string, profil:object) => string|null (espace parent, api/_espaceParent.js),
+ *   lienOffrir?: (uid:string) => string|null (page « Offrir Réviz+ », api/_demandePlus.js),
  *   auth?: { getUser }|null, maintenant?: number, secret?: string, journal?: (m:string)=>void,
  * }} p
  *   envoyer : ({ from, to, replyTo, subject, html, headers }) => Promise ; une réponse
@@ -266,7 +283,7 @@ export async function avecTitres(ref, chapitres) {
  *   auth (firebase-admin) écarte les comptes supprimés ou désactivés.
  * @returns {Promise<{ bilansParent: number }>}
  */
-export async function envoyerBilansParent({ db, envoyer, lienAutorisation, lienEspace = null, auth = null, maintenant = Date.now(), secret = process.env.CRON_SECRET, journal = m => console.error(m) }) {
+export async function envoyerBilansParent({ db, envoyer, lienAutorisation, lienEspace = null, lienOffrir = null, auth = null, maintenant = Date.now(), secret = process.env.CRON_SECRET, journal = m => console.error(m) }) {
   // Pas de filtre côté Firestore (même raison que relancerParents : pas d'index à publier).
   const demandes = await db.collectionGroup('parentalConsent').get()
   let bilansParent = 0
@@ -306,6 +323,8 @@ export async function envoyerBilansParent({ db, envoyer, lienAutorisation, lienE
       const mail = mailBilanParent({
         prenom: u.prenom, classe: u.level?.classe ?? null, depuis, maintenant, resume, desabo,
         espace: lienEspace && u.espaceParent !== false ? lienEspace(uid, u) : null,
+        // Rien à offrir à un abonné.
+        offrir: lienOffrir && u.plan !== 'premium' ? lienOffrir(uid) : null,
         autorisation: enAttente
           ? { lien: lienAutorisation(jetonDe(uid, d, { secret }), uid), jusquau: (d.firstRequestedAt ?? d.createdAt) + DELAI_REPONSE_MS }
           : null,

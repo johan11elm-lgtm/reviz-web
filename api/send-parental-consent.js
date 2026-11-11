@@ -31,6 +31,8 @@ import { envoyerBilansParent } from './_bilanParent.js';
 import { envoyerLimitesParent } from './_limiteParent.js';
 import { lienEspaceParent, versionLiens } from './_espaceParent.js';
 import { envoyerNotifs, preparerEnvoi } from './_push.js';
+import { lienOffrir } from './_demandePlus.js'
+import { VENTES_OUVERTES } from './_lancement.js'
 
 export const config = { maxDuration: 60 };
 
@@ -334,7 +336,7 @@ export default async function handler(req, res) {
       const lendemain = await relancerLendemain({ db, envoyer, emailDe, auth: getAuthAdmin() })
         .catch(err => { console.error('[rappel-j1]', err?.message || err); return { rappelsJ1: 0 }; });
       // Après les relances : un parent relancé aujourd'hui n'a pas son bilan le même jour.
-      const bilans = await envoyerBilansParent({ db, envoyer, lienAutorisation, lienEspace: (uid, u) => lienEspaceParent(uid, { version: versionLiens(u) }), auth: getAuthAdmin() })
+      const bilans = await envoyerBilansParent({ db, envoyer, lienAutorisation, lienEspace: (uid, u) => lienEspaceParent(uid, { version: versionLiens(u) }), lienOffrir: VENTES_OUVERTES ? uid => lienOffrir(uid) : null, auth: getAuthAdmin() })
         .catch(err => { console.error('[bilan-parent]', err?.message || err); return { bilansParent: 0 }; });
       // Après le bilan : un parent qui l'a reçu aujourd'hui n'a pas ce mot le même jour.
       const limites = await envoyerLimitesParent({ db, envoyer, auth: getAuthAdmin() })

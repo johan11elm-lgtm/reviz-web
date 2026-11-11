@@ -211,3 +211,18 @@ describe('bilan au parent — contenu', () => {
     expect(signatureValide('autre123456789', t, 's', PORTEE_DESABO)).toBe(false)
   })
 })
+
+describe('bilan parent : Réviz+ à offrir (11/11)', () => {
+  const base = { prenom: 'Léa', classe: '3ème', depuis: Date.parse('2026-11-08T10:00:00Z'), maintenant: Date.parse('2026-11-11T16:00:00Z'), resume: { jours: 2, chapitres: [], parties: 1, exercices: 0, cartes: 0 } }
+  it('un encart discret, avec le lien de la page « Offrir »', () => {
+    const m = mailBilanParent({ ...base, offrir: 'https://app.revizapp.fr/api/abonnement?op=offrir&uid=u&t=x' })
+    expect(m.html).toContain('Offrir Réviz+ à Léa')
+    expect(m.html).toContain('op=offrir&amp;uid=u')
+    expect(m.html).toMatch(/par semaine/)
+  })
+  it('jamais en même temps que la demande d’accord', () => {
+    const m = mailBilanParent({ ...base, offrir: 'https://x/offrir', autorisation: { lien: 'https://x/accord', jusquau: Date.now() + 864e5 } })
+    expect(m.html).not.toContain('Offrir Réviz+')
+    expect(m.html).toContain('Donner mon autorisation')
+  })
+})
