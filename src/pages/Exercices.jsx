@@ -21,6 +21,7 @@ import { noterErreurs } from '../services/erreursService'
 import { SEANCE_ACCUEIL, TITRE_DECOUVERTE, SOURCE_DECOUVERTE } from '../utils/seanceAccueil'
 import { track } from '../services/statsService'
 import { MontreParent } from '../components/MontreParent'
+import { InviterFin } from '../components/InviterFin'
 import { RappelDemain } from '../components/RappelDemain'
 import { loadLessons } from '../services/historyService'
 import { limiteExercicesAtteinte } from '../utils/limiteExercices'
@@ -226,7 +227,8 @@ function Seance({ ai, seance, premiere, nouvelle }) {
     const bilan = <BilanXp gain={gain} uid={uid} />
     // « Montre ça à tes parents » (moins de 15 ans sans adresse de parent), comme à la fin du quiz.
     const lecon = lessonId ? loadLessons().find(l => l.id === lessonId) ?? null : null
-    const montre = <><MontreParent score={nbJustes} total={seance.length} lecon={lecon} /><RappelDemain /></>
+    // « Invite un ami » (11/11) : pas à la séance d'accueil, ni avec « Montre ça à tes parents ».
+    const montre = <><MontreParent score={nbJustes} total={seance.length} lecon={lecon} />{!premiere && <InviterFin score={nbJustes} total={seance.length} />}<RappelDemain /></>
     const recap = (
       <section className="qz-carte" aria-labelledby="ex-titre-seance">
         <div className="qz-carte-tete">

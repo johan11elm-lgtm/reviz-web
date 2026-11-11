@@ -13,6 +13,7 @@ import { RouteSerie } from '../components/reviz/RouteSerie'
 import { MissingLessonState } from '../components/MissingLessonState'
 import { FormatFeedback } from '../components/FormatFeedback'
 import { MontreParent } from '../components/MontreParent'
+import { InviterFin } from '../components/InviterFin'
 import { RappelDemain } from '../components/RappelDemain'
 import { CoachChat } from '../components/CoachChat'
 import { useAuth } from '../context/AuthContext'
@@ -327,7 +328,8 @@ function QuizSession() {
       </section>
     )
     const lecon = coachLessonId ? loadLessons().find(l => l.id === coachLessonId) ?? null : null
-    const montre = <><MontreParent score={nbJustes} total={questions.length} lecon={lecon} /><RappelDemain /></>
+    // « Invite un ami » (11/11) : pas au premier quiz, ni avec « Montre ça à tes parents ».
+    const montre = <><MontreParent score={nbJustes} total={questions.length} lecon={lecon} />{!premiere && <InviterFin score={nbJustes} total={questions.length} />}<RappelDemain /></>
     const boutons = premiere ? (
       <div className="qz-fin-actions">
         <button type="button" className="fc-btn fc-btn--orange rv-bandes" onClick={fermer}>Continuer</button>

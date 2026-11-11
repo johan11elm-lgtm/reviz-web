@@ -9,3 +9,6 @@
 .rd-lien { width: auto; margin: 0; }
 .rd-titre-fenetre { margin-top: 8px; }
 .rd-lien-btn { display: flex; align-items: center; justify-content: center; text-decoration: none; }
+.qz-inviter { border: 2px solid var(--sk-menthe, #CDEFD9); }
+.qz-page--fin .fc-ecran > .qz-inviter { margin-top: 20px; }
+.qz-inviter-ok { margin: 0; font-weight: 700; color: var(--rv-encre); }
