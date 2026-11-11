@@ -8,6 +8,7 @@ import { useIsDesktop } from '../../hooks/useMediaQuery';
 import { startCheckout, demanderAuParent } from '../../services/billingService';
 import { useAuth } from '../../context/AuthContext';
 import { FORMULE_PAR_DEFAUT, prixDe } from '../../../api/_prix.js';
+import { prochaineRemise, dansCombien, parSemaine } from '../../utils/remiseQuotas';
 import { tarifFondateurOuvert } from '../../../api/_lancement.js';
 import { ACHAT_DANS_L_APP } from '../../utils/achat';
 import { mesurer } from '../../services/mesure';
@@ -50,6 +51,16 @@ export function Fenetre({ label, pose, onClose, children }) {
   );
 }
 
+// Le titre reprend ce qui a bloqué l'élève (11/11, repris de Knowunity : un titre par blocage).
+const TITRES = {
+  limite_exercices: ['Continue tes exercices', 'Tes 3 séances du jour sont faites. Avec Réviz+, pas de limite.'],
+  limite_scan: ['Scanne toutes tes leçons', 'Tes 5 scans de la semaine sont faits. Avec Réviz+, pas de limite.'],
+  limite_ia: ['Pose toutes tes questions', 'Tes 10 questions de la semaine sont posées. Avec Réviz+, 50 par jour.'],
+  coach: ['Réviz IA, chaque jour', 'Avec Réviz+, 50 questions par jour au lieu de 10 par semaine.'],
+  scan: ['Scanne sans compter', 'Avec Réviz+, tes scans sont illimités.'],
+};
+const TITRE_PAR_DEFAUT = ['Réviz+', 'Pour aller plus loin, quand tu veux.'];
+
 /** « Découvrir Réviz+ » : ce que ça change, la formule, le paiement. */
 export function DecouvrirRevizPlus({ onClose, lieu = 'autre' }) {
   const navigate = useNavigate();
@@ -61,6 +72,7 @@ export function DecouvrirRevizPlus({ onClose, lieu = 'autre' }) {
   const [erreur, setErreur] = useState('');
   const annuel = prixDe('annuel', fondateur);
   const mensuel = prixDe('mensuel', fondateur);
+  const [titre, sousTitre] = TITRES[lieu] ?? TITRE_PAR_DEFAUT;
   const comparatif = (
     <table className="rpo-compare">
       <thead><tr><th scope="col"><span className="rpo-sur">Ce que ça change</span></th><th scope="col">Gratuit</th><th scope="col"><span className="rpo-plus">Réviz+</span></th></tr></thead>
@@ -98,13 +110,14 @@ export function DecouvrirRevizPlus({ onClose, lieu = 'autre' }) {
   }
 
   const options = [
-    { id: 'annuel', titre: 'À l’année', prix: annuel, cadence: 'par an', detail: `soit ${annuel.parMois} par mois`, badge: true },
+    // Ramené à la semaine (11/11) : moins d'un euro, comme Knowunity l'affiche.
+    { id: 'annuel', titre: 'À l’année', prix: annuel, cadence: 'par an', detail: `soit ${parSemaine(annuel.centimes)} par semaine`, badge: true },
     { id: 'mensuel', titre: 'Au mois', prix: mensuel, cadence: 'par mois', detail: 'sans engagement' },
   ];
   return (
     <Fenetre label="Réviz+" pose="hello" onClose={onClose}>
-      <h2 className="rpo-titre">Réviz+</h2>
-      <p className="rpo-sous">Pour aller plus loin, quand tu veux.</p>
+      <h2 className="rpo-titre">{titre}</h2>
+      <p className="rpo-sous">{sousTitre}</p>
       {fondateur && <span className="rpo-sceau">Membre fondateur</span>}
       {comparatif}
       <span className="rpo-sur rpo-sur--bloc">Ta formule</span>
@@ -163,6 +176,14 @@ export function LimiteAtteinte({ type = 'scan', limite, abonne = false, offertJu
   const [offre, setOffre] = useState(false);
   const l = LIMITES[type];
   const n = limite ?? l.points;
+  // Compte à rebours jusqu'au retour du quota (11/11), mis à jour chaque minute.
+  const [maintenant, setMaintenant] = useState(() => Date.now());
+  useEffect(() => {
+    const t = setInterval(() => setMaintenant(Date.now()), 30_000);
+    return () => clearInterval(t);
+  }, []);
+  const dans = dansCombien(prochaineRemise(type, maintenant), maintenant);
+  const texte = l.texte.replace(/\b(5|10)\b/, String(n)).replace(/(reviennent) (demain|lundi)\./, (_, v) => (dans ? `${v} ${dans}.` : _));
   useEffect(() => { if (!abonne) mesurer('offre', { etape: 'limite', lieu: `limite_${type}` }); }, [abonne, type]);
   if (offre) return <DecouvrirRevizPlus onClose={onClose} lieu={`limite_${type}`} />;
   return (
@@ -173,7 +194,7 @@ export function LimiteAtteinte({ type = 'scan', limite, abonne = false, offertJu
         <Mascot pose={l.pose} size={150} alt="" aria-hidden="true" />
       </div>
       <div className="rpo-carte">
-        <p>{l.texte.replace(/\b(5|10)\b/, String(n))}</p>
+        <p>{texte}</p>
         {n <= 10 ? (
           <div className="rpo-points-ligne">
             <span className={`rpo-points rpo-points--${type}`} aria-hidden="true">{Array.from({ length: n }, (_, i) => <i key={i} />)}</span>

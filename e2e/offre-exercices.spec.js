@@ -63,6 +63,18 @@ test.describe('Limite d\'exercices et essai Réviz+', () => {
     await expect(limite.getByRole('button', { name: 'Exercices illimités avec Réviz+' })).toBeVisible()
     await sansDebordement(page, 'limite')
     await page.screenshot({ path: test.info().outputPath('02-limite.png'), animations: 'disabled' })
+    // Compte à rebours jusqu'au retour des séances (11/11).
+    await expect(limite).toContainText(/Elles reviennent dans \d+\s?h|Elles reviennent dans \d+\s?min/)
+    if (process.env.CAPTURES_DIR) await page.screenshot({ path: `${process.env.CAPTURES_DIR}/05-limite-390.png`, animations: 'disabled' })
+    // L'offre reprend ce qui a bloqué, et l'annuel ramené à la semaine.
+    await limite.getByRole('button', { name: 'Exercices illimités avec Réviz+' }).click()
+    const offreRevizPlus = page.getByRole('dialog', { name: 'Réviz+' })
+    await expect(offreRevizPlus.getByRole('heading', { name: 'Continue tes exercices' })).toBeVisible()
+    await expect(offreRevizPlus).toContainText(/soit 0,\d\d\s€ par semaine/)
+    await sansDebordement(page, 'offre')
+    if (process.env.CAPTURES_DIR) await page.screenshot({ path: `${process.env.CAPTURES_DIR}/06-offre-390.png`, animations: 'disabled' })
+    await page.goto('/exercices?graine=42')
+    await expect(limite).toBeVisible()
 
     await limite.getByRole('button', { name: 'Demander à un parent de me l’offrir' }).click()
     const champ = limite.getByLabel('L’adresse e-mail d’un parent')
