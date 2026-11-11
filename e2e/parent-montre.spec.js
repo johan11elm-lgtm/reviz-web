@@ -2,7 +2,7 @@
 // d'un parent (« Plus tard ») réussit sa première séance d'exercices (le quiz jusqu'au 29/10) ; la fin lui
 // propose d'envoyer son score à un parent, et ce mail porte aussi l'accord.
 import { test, expect } from '@playwright/test'
-import { mockApiRoutes, compteRapide, sansDebordement } from './helpers'
+import { mockApiRoutes, compteRapide, sansDebordement, traverserDecouverte } from './helpers'
 import { SEANCE_ACCUEIL } from '../src/utils/seanceAccueil.js'
 import { jouerSeance } from './exercices-aides'
 
@@ -23,9 +23,7 @@ test.describe('Montre ça à tes parents', () => {
       // « Plus tard » : pas encore d'adresse de parent.
       consentement: { status: 'pending', createdAt: Date.now() },
     })
-    await page.getByRole('button', { name: 'Suivant' }).click()
-    await page.getByRole('button', { name: 'Suivant' }).click()
-    await page.getByRole('button', { name: 'C’est parti' }).click()
+    await traverserDecouverte(page)
     await expect(page).toHaveURL(/\/exercices\?premiere=1/, { timeout: 10_000 })
     // Tout juste, sur la séance d'accueil (3 exercices écrits à la main).
     await jouerSeance(page, SEANCE_ACCUEIL)
@@ -73,9 +71,7 @@ test.describe('Montre ça à tes parents', () => {
       classe: '6ème', birthDate: '2014-03-01', onboarde: false, aller: '/onboarding',
       consentement: { status: 'pending', createdAt: Date.now() },
     })
-    await page.getByRole('button', { name: 'Suivant' }).click()
-    await page.getByRole('button', { name: 'Suivant' }).click()
-    await page.getByRole('button', { name: 'C’est parti' }).click()
+    await traverserDecouverte(page)
     await expect(page).toHaveURL(/\/exercices\?premiere=1/, { timeout: 10_000 })
     await jouerSeance(page, SEANCE_ACCUEIL)
 

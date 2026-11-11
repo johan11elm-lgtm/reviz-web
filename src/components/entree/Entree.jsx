@@ -82,7 +82,8 @@ export function EntreeEcran({ teinte = 'peche', bulle, expression = 'content', g
   const isDesktop = useIsDesktop();
   const [l1, ...suite] = bulle;
   const titre = (
-    <h1 className="en-titre">
+    // La clé suit le texte : quand Réviz répond (découverte), le titre se rejoue.
+    <h1 className="en-titre" key={bulle.join(' ')}>
       {/* La phrase entière pour les lecteurs d'écran ; à l'écran, deux graisses. */}
       <span className="en-titre-sr rv-bulle-sr">{bulle.join(' ')}</span>
       <span className="en-titre-fort" aria-hidden="true">{l1}</span>
@@ -117,7 +118,7 @@ export function EntreeEcran({ teinte = 'peche', bulle, expression = 'content', g
           {progression}
           <div className="en-titre-ligne">
             {titre}
-            <span className="en-titre-emote" aria-hidden="true"><Mascot pose={POSE[expression] ?? 'hello'} size={isDesktop ? 64 : 56} alt="" /></span>
+            <span className="en-titre-emote" aria-hidden="true" key={expression}><Mascot pose={POSE[expression] ?? 'hello'} size={isDesktop ? 64 : 56} alt="" /></span>
           </div>
           {children}
           {dessous && <div className="en-dessous">{dessous}</div>}

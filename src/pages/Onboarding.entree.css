@@ -4,3 +4,59 @@
 .onb-facons { margin: 0; padding: 0; list-style: none; }
 /* Première façon (programme) sur fond pêche, la seconde garde le lavande du kit. */
 .onb-facons .en-facon:first-child img { background: var(--rv-peche-pale); }
+
+/* ── Découverte façon « Knowie » (11/11) : une question par écran, Réviz répond dans son titre ── */
+.onb-ecran { display: flex; flex-direction: column; gap: 16px; }
+
+/* Quand Réviz répond, son titre et son émote changent en douceur. */
+.en--decouverte .en-titre, .en--decouverte .en-titre-emote { animation: onb-dit .32s ease-out both; }
+@keyframes onb-dit { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .en--decouverte .en-titre, .en--decouverte .en-titre-emote { animation: none; }
+}
+
+/* Matières du contrôle : deux colonnes de pastilles, l'émote de la matière en rond. */
+.onb-matieres { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.onb-matiere {
+  display: flex; align-items: center; gap: 10px; min-height: 56px; box-sizing: border-box; padding: 8px 12px;
+  border: 2px solid var(--en-bord); border-radius: 18px; background: var(--rv-carte); box-shadow: 0 4px 0 var(--en-bord);
+  font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 700; color: var(--en-encre); text-align: left;
+  cursor: pointer; transition: transform .1s, box-shadow .1s;
+}
+.onb-matiere:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--en-bord); }
+.onb-matiere:focus-visible { outline: 3px solid var(--en-encre); outline-offset: 2px; }
+.onb-matiere-rond { flex: none; display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: var(--rv-lavande); overflow: hidden; }
+.onb-liens { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+
+/* Contrôle noté */
+.onb-controle { display: flex; flex-direction: column; gap: 2px; padding: 14px 16px; border-radius: 18px; background: var(--rv-lavande); }
+.onb-controle b { font-family: var(--font-display); font-size: 18px; font-weight: 800; letter-spacing: -.02em; color: var(--en-encre); }
+.onb-controle span { font-size: 14px; font-weight: 500; color: var(--en-doux); }
+
+/* Choix à une réponse : de grandes cases, la choisie cerclée d'orange. */
+.onb-choix { display: flex; flex-direction: column; gap: 10px; }
+.onb-option {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  min-height: 56px; box-sizing: border-box; padding: 10px 18px;
+  border: 2px solid var(--en-bord); border-radius: 18px; background: var(--rv-carte); box-shadow: 0 4px 0 var(--en-bord);
+  font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 700; color: var(--en-encre); text-align: left;
+  cursor: pointer; transition: transform .1s, box-shadow .1s, border-color .1s;
+}
+.onb-option:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--en-bord); }
+.onb-option:focus-visible { outline: 3px solid var(--en-encre); outline-offset: 2px; }
+.onb-option.is-choisie { border-color: var(--en-orange); box-shadow: 0 4px 0 var(--en-tranche); }
+.onb-option-niveau { flex: none; padding: 4px 10px; border-radius: 999px; font-size: 13px; font-weight: 700; }
+.onb-option-niveau--moyenne { background: var(--rv-menthe); }
+.onb-option-niveau--progresser { background: var(--rv-peche-pale); }
+.onb-option-niveau--haut { background: var(--rv-lavande); }
+
+/* « C'est prêt » : le plan de départ, une ligne par réponse. */
+.onb-plan { display: flex; flex-direction: column; margin: 0; padding: 0; list-style: none; }
+.onb-plan li { display: flex; align-items: center; gap: 14px; padding: 12px 0; }
+.onb-plan li + li { border-top: 1.5px dashed var(--en-bord); }
+.onb-plan-rond { flex: none; display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 50%; overflow: hidden; }
+.onb-plan-rond--lavande { background: var(--rv-lavande); }
+.onb-plan-rond--peche { background: var(--rv-peche-pale); }
+.onb-plan-rond--menthe { background: var(--rv-menthe); }
+.onb-plan b { display: block; font-family: var(--font-display); font-size: 17px; font-weight: 800; letter-spacing: -.02em; color: var(--en-encre); }
+.onb-plan span { font-size: 14px; line-height: 1.4; color: var(--en-doux); }

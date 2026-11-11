@@ -11,22 +11,71 @@ const CAPTURES = process.env.CAPTURES_DIR
 test.describe('Première révision après la découverte', () => {
   test.use({ viewport: { width: 390, height: 844 } })
 
-  test('découverte → séance d’accueil de 3 exercices → programme', async ({ page }) => {
+  test('découverte (contrôle, blocage, note visée) → séance d’accueil de 3 exercices → programme', async ({ page }) => {
+    // Cinq écrans de découverte, la feuille de l'agenda, puis la séance : plus long que les 30 s par défaut.
+    test.setTimeout(90_000)
     await mockApiRoutes(page)
     const { uid } = await compteRapide(page, { classe: '6ème', birthDate: '2014-03-01', onboarde: false, aller: '/onboarding' })
     expect(uid).toBeTruthy()
 
-    if (CAPTURES) await page.waitForTimeout(2500)
-    if (CAPTURES) await page.screenshot({ path: `${CAPTURES}/0a-bonjour-390.png` })
-    await page.getByRole('button', { name: 'Suivant' }).click()
-    if (CAPTURES) await page.waitForTimeout(2500)
-    if (CAPTURES) await page.screenshot({ path: `${CAPTURES}/0b-facons-390.png` })
-    await page.getByRole('button', { name: 'Suivant' }).click()
+    // Découverte du 11/11 : bonjour, le prochain contrôle, ce qui bloque, la note visée, « C'est prêt ».
+    const titre = () => page.getByRole('heading', { level: 1 })
+    const capture = async nom => {
+      if (!CAPTURES) return
+      await page.waitForTimeout(1500)
+      await page.screenshot({ path: `${CAPTURES}/${nom}-390.png` })
+    }
+    await expect(titre()).toContainText('Trois petites questions d’abord.')
+    await expect(page.getByLabel(/Étape \d sur/)).toHaveCount(0)
+    await capture('0a-bonjour')
+    await page.getByRole('button', { name: 'C’est parti' }).click()
+
+    // Le contrôle : la matière ouvre la feuille de l'agenda, déjà remplie.
+    await expect(titre()).toContainText('Ton prochain contrôle, c’est en quoi')
+    await sansDebordement(page, 'question du contrôle')
+    await capture('0b-controle')
+    await page.getByRole('group', { name: 'Matière du contrôle' }).getByRole('button', { name: 'Maths' }).click()
+    const feuille = page.getByRole('dialog', { name: 'Ajouter un contrôle' })
+    const chapitre = feuille.getByRole('checkbox').first()
+    await expect(chapitre).toBeVisible({ timeout: 10_000 })
+    await chapitre.click()
+    await feuille.locator('.ag-date-tuile').first().click()
+    await capture('0c-feuille')
+    await feuille.getByRole('button', { name: 'Ajouter', exact: true }).click()
+    await expect(titre()).toContainText(/Noté\s: contrôle de maths/)
+    await capture('0d-controle-note')
+    // Il est bien dans l'agenda de l'élève.
+    const agenda = await page.evaluate(u => JSON.parse(localStorage.getItem(`reviz-agenda-${u}`)), uid)
+    expect(agenda.controles).toHaveLength(1)
+    expect(agenda.controles[0].matiere).toBe('maths')
+    await page.getByRole('button', { name: 'Continuer' }).click()
+
+    // Ce qui bloque : Réviz répond au choix.
+    await expect(titre()).toContainText('Qu’est-ce qui te bloque le plus')
+    await capture('0e-blocage')
+    await page.getByRole('radio', { name: 'Retenir mes leçons' }).click()
+    await expect(titre()).toContainText('On mise sur les flashcards et les exercices.')
+    await capture('0f-blocage-reponse')
+    await page.getByRole('button', { name: 'Continuer' }).click()
+
+    // La note visée, en maths.
+    await expect(titre()).toContainText('Tu vises quelle note en maths')
+    await page.getByRole('radio', { name: /Gagner 2 ou 3 points/ }).click()
+    await expect(titre()).toContainText('Objectif faisable.')
+    await sansDebordement(page, 'note visée')
+    await capture('0g-objectif')
+    await page.getByRole('button', { name: 'Continuer' }).click()
+
+    // « C'est prêt » : le plan de départ.
+    await expect(titre()).toContainText('C’est prêt, Testeur.')
+    const plan = page.getByRole('list', { name: 'Ton plan de départ' })
+    await expect(plan).toContainText('Contrôle de maths')
+    await expect(plan).toContainText('Retenir mes leçons')
+    await expect(plan).toContainText('Gagner 2 ou 3 points')
     await expect(page.getByText(/3\squestions faciles/)).toBeVisible({ timeout: 10_000 })
     await expect(page.getByText(/Pas besoin d’avoir révisé\./)).toBeVisible()
     await sansDebordement(page, 'dernier écran de la découverte')
-    if (CAPTURES) await page.waitForTimeout(2500)
-    if (CAPTURES) await page.screenshot({ path: `${CAPTURES}/1-decouverte-390.png` })
+    await capture('1-decouverte')
 
     await page.getByRole('button', { name: 'C’est parti' }).click()
     await expect(page).toHaveURL(/\/exercices\?premiere=1/, { timeout: 10_000 })

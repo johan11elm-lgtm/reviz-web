@@ -241,7 +241,21 @@ export async function verifyEmailAndOnboard(page, email, { garderAnnonce = false
   else await fermerAnnonceJeux(page)
 }
 
-/** Sur /onboarding (découverte de Réviz, trois écrans) : « Passer » mène à l'accueil. */
+/**
+ * Sur /onboarding, jusqu'à la séance d'accueil, au plus court : bonjour, « Pas de contrôle prévu »,
+ * un blocage, une note visée, puis « C'est parti » sur « C'est prêt » (découverte du 11/11).
+ */
+export async function traverserDecouverte(page) {
+  await page.getByRole('button', { name: 'C’est parti' }).click()
+  await page.getByRole('button', { name: 'Pas de contrôle prévu' }).click()
+  await page.getByRole('radio', { name: 'Savoir quoi réviser' }).click()
+  await page.getByRole('button', { name: 'Continuer' }).click()
+  await page.getByRole('radio', { name: /Avoir la moyenne/ }).click()
+  await page.getByRole('button', { name: 'Continuer' }).click()
+  await page.getByRole('button', { name: 'C’est parti' }).click()
+}
+
+/** Sur /onboarding (découverte de Réviz) : « Passer » mène à l'accueil. */
 export async function passerDecouverte(page) {
   await page.getByRole('button', { name: 'Passer' }).click()
   await expect(page).toHaveURL(/\/$/, { timeout: 10_000 })
