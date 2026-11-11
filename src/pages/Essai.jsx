@@ -10,6 +10,7 @@ import { chapterLessonId } from '../utils/programme';
 import { EntreeEcran, Champ, ChoixClasse, Encart, LienTexte } from '../components/entree/Entree';
 import { revenir } from '../utils/navigation';
 import { mesurer } from '../services/mesure';
+import { noterArrivee } from '../utils/arriveeFiche';
 
 /**
  * Mode essai (« sans compte ») : prénom + classe, et l'élève révise son
@@ -47,6 +48,11 @@ export default function Essai() {
   const [classe, setClasse] = useState(classeFiche);
   const [erreurPrenom, setErreurPrenom] = useState('');
   const [erreurClasse, setErreurClasse] = useState('');
+
+  // Gardé aussi pour la découverte, si l'élève crée plutôt un compte (utils/arriveeFiche.js).
+  useEffect(() => {
+    if (chapitreFiche) noterArrivee({ classe: classeFiche, matiere: matiereFiche, chapitre: chapitreFiche });
+  }, [chapitreFiche, classeFiche, matiereFiche]);
 
   useEffect(() => {
     if (!chapitreFiche) return;

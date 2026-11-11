@@ -10,6 +10,8 @@ import { nbsp } from '../utils/typography';
 import { Mascot } from '../components/Mascot';
 import { AjoutControle } from '../components/AjoutControle';
 import { noterDemandeControle, noterControleNote } from '../utils/demandeControle';
+import { arriveeRecente, oublierArrivee } from '../utils/arriveeFiche';
+import { loadCatalogue, openChapter } from '../services/programmeService';
 import { EntreeEcran, ChoixClasse, LienTexte } from '../components/entree/Entree';
 import './Onboarding.entree.css';
 
@@ -75,6 +77,22 @@ export default function Onboarding() {
   const [feuille, setFeuille] = useState(null); // null | { matiere }
   const [blocage, setBlocage] = useState(null);
   const [objectif, setObjectif] = useState(null);
+  // Arrivé par une fiche publique (utils/arriveeFiche.js) : on lui propose de reprendre ce chapitre.
+  const [arrivee, setArrivee] = useState(null); // { matiere, ch } une fois le chapitre trouvé
+  const [ouvertureArrivee, setOuvertureArrivee] = useState(false);
+  useEffect(() => {
+    const a = lycee ? null : arriveeRecente(classeProgramme);
+    if (!a) return undefined;
+    let vivant = true;
+    loadCatalogue(a.classe)
+      .then(c => {
+        const m = c.matieres.find(x => x.slug === a.matiere);
+        const ch = m?.chapitres.find(x => x.id === a.chapitre && x.pret);
+        if (vivant && ch) setArrivee({ matiere: m.matiere, ch });
+      })
+      .catch(() => { /* la séance d'accueil reste proposée */ });
+    return () => { vivant = false; };
+  }, [lycee, classeProgramme]);
 
   useEffect(() => {
     if (currentUser && localStorage.getItem(`reviz-onboarded-${currentUser.uid}`)) {
@@ -106,6 +124,18 @@ export default function Onboarding() {
   function lancerPremiere() {
     mesurer('premiere_revision', { etape: 'lancee', matiere: 'decouverte' });
     finir('/exercices?premiere=1', 'seance');
+  }
+  async function reprendreArrivee() {
+    setOuvertureArrivee(true);
+    mesurer('premiere_revision', { etape: 'lancee', matiere: arrivee.matiere, depuis: 'fiche' });
+    try {
+      await openChapter(classeProgramme, arrivee.matiere, arrivee.ch);
+      oublierArrivee();
+      finir('/exercices', 'fiche');
+    } catch {
+      setOuvertureArrivee(false);
+      lancerPremiere();
+    }
   }
 
   // ── Contrôle : la matière ouvre la feuille de l'agenda, déjà remplie ──
@@ -237,7 +267,17 @@ export default function Onboarding() {
             </li>
           )}
         </ul>
-        {programmePret ? (
+        {programmePret && arrivee ? (
+          <>
+            <p className="en-texte onb-texte">
+              {nbsp('On reprend là où tu étais : ')}<b>{nbsp(arrivee.ch.titre)}</b>{nbsp(', en exercices.')}
+            </p>
+            <button type="button" className="en-btn" onClick={reprendreArrivee} disabled={ouvertureArrivee}>
+              {ouvertureArrivee ? 'Un instant…' : 'Reprendre ce chapitre'}
+            </button>
+            <LienTexte onClick={lancerPremiere}>ou {SEANCE_ACCUEIL.length} questions faciles pour commencer</LienTexte>
+          </>
+        ) : programmePret ? (
           <>
             <p className="en-texte onb-texte">
               Pour commencer, <b>{SEANCE_ACCUEIL.length} questions faciles</b>, une minute. Pas besoin d’avoir révisé.
