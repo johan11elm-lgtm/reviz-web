@@ -7,7 +7,7 @@
 // seulement s'il n'a pas encore révisé ce jour-là (api/_push.js).
 // -------------------------------------------------------
 import { lienChapitre } from './retour.js'
-import { intituleControle } from './agenda.js'
+import { intituleControle, joursEntre } from './agenda.js'
 
 // Clé publique VAPID (la clé privée n'existe que sur Vercel : VAPID_PRIVATE_KEY).
 export const VAPID_PUBLIC_KEY = 'BFPemzHzTsZsn4Kdqqd07dWxbb2mPjNspMm0OC63KRzeF0s6QCVzU3PE3wwscPpajOfCtlQa0ZIDq3gxJuDY8rw'
@@ -18,6 +18,9 @@ export const HEURE_RAPPEL = '17 h'
 // Après ce nombre de notifications d'affilée sans que l'élève revienne, on se
 // tait jusqu'à son prochain retour : un rappel ignoré trois fois n'aide plus.
 export const MAX_SANS_RETOUR = 3
+
+// Un contrôle noté passe devant le reste dès qu'il est à une semaine ou moins.
+export const JOURS_CONTROLE_PROCHE = 7
 
 const APP = 'https://app.revizapp.fr'
 
@@ -44,9 +47,10 @@ function titreCourt(s, max = 60) {
 /**
  * La notification du jour, par ordre de priorité :
  * 1. un contrôle noté pour demain ;
- * 2. la série de la partie du jour, faite hier mais pas encore aujourd'hui ;
- * 3. le dernier chapitre ouvert (quiz direct) ;
- * 4. la partie du jour.
+ * 2. un contrôle noté dans la semaine (2 à 7 jours) : cinq minutes aujourd'hui (11/11) ;
+ * 3. la série de la partie du jour, faite hier mais pas encore aujourd'hui ;
+ * 4. le dernier chapitre ouvert (quiz direct) ;
+ * 5. la partie du jour.
  * Jamais de reproche ni d'urgence inventée : une proposition courte.
  * Le week-end (`aujourdhui` samedi ou dimanche), seulement un contrôle le lendemain : depuis le
  * 11/11, les week-ends ne comptent pas dans la série, on ne relance donc pas pour rien.
@@ -54,12 +58,28 @@ function titreCourt(s, max = 60) {
  * @returns {{ title: string, body: string, url: string, tag: string } | null} null : rien à envoyer
  */
 export function notifDuJour({ agenda = null, jeux = null, lecon = null, hier, demain, aujourdhui = null }) {
-  const controle = (Array.isArray(agenda?.controles) ? agenda.controles : []).find(c => c?.date === demain)
+  const controles = (Array.isArray(agenda?.controles) ? agenda.controles : []).filter(c => typeof c?.date === 'string')
+  const controle = controles.find(c => c.date === demain)
+  // Le week-end, seulement la veille d'un contrôle (la série ne compte pas les week-ends).
   if (!controle && aujourdhui && estWeekend(aujourdhui)) return null
   if (controle) {
     return {
       title: `${intituleControle(controle)} demain`,
       body: controle.titre ? `${titreCourt(controle.titre)}. Dix minutes ce soir, et c'est dans la boîte.` : 'Dix minutes de révision ce soir, et c\'est dans la boîte.',
+      url: `${APP}/agenda?via=push`,
+      tag: 'reviz-controle',
+    }
+  }
+  // Le plus proche des contrôles de la semaine : un élève qui a un contrôle noté revient trois
+  // fois plus le lendemain (relevé du 10/11), encore faut-il le lui rappeler avant la veille.
+  const proche = controles
+    .map(c => ({ c, dans: 1 + joursEntre(demain, c.date) }))
+    .filter(x => x.dans >= 2 && x.dans <= JOURS_CONTROLE_PROCHE)
+    .sort((x, y) => x.dans - y.dans)[0]
+  if (proche) {
+    return {
+      title: `${intituleControle(proche.c)} dans ${proche.dans} jours`,
+      body: proche.c.titre ? `${titreCourt(proche.c.titre)}. Cinq minutes aujourd'hui, et tu prends de l'avance.` : 'Cinq minutes de révision aujourd\'hui, et tu prends de l\'avance.',
       url: `${APP}/agenda?via=push`,
       tag: 'reviz-controle',
     }

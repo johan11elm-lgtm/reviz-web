@@ -20,10 +20,11 @@ import { loadLessons, restoreLesson, syncFromFirestore } from '../services/histo
 import { loadRevisions } from '../services/revisionService';
 import { loadCatalogue } from '../services/programmeService';
 import { agendaLocal, chargerAgenda } from '../services/agendaService';
-import { controlesAVenir, compteARebours, matiereControle, joursEntre, jourIso } from '../utils/agenda';
+import { controlesAVenir, compteARebours, matiereControle, intituleControle, joursEntre, jourIso } from '../utils/agenda';
 import { planRevision } from '../utils/planRevision';
 import { marquerEtape } from '../services/agendaService';
 import { cibleRevision, cibleQuizErreurs } from '../services/controleChapitres';
+import { mesurer } from '../services/mesure';
 import { hasProgramme, PROGRAMME_FALLBACK } from '../utils/programme';
 import { useIsDesktop } from '../hooks/useMediaQuery';
 import { countDueCards } from '../services/srsService';
@@ -231,7 +232,7 @@ export default function Home() {
       const auj = jourIso();
       return planRevision(controle, auj).map((e, i) => {
         const jour = jourDans(Math.max(0, joursEntre(auj, e.jour)));
-        return { id: e.id, quoi: e.quoi, meta: e.retard ? `À rattraper · ${e.detail}` : e.detail, done: Boolean(e.fait), pose: e.pose, jour, titre: `${jour} · ${e.quoi}`, ton: TONS_PLAN[i] };
+        return { id: e.id, quoi: e.quoi, meta: e.retard ? `À rattraper · ${e.detail}` : e.detail, done: Boolean(e.fait), pose: e.pose, jour, titre: `${jour} · ${e.quoi}`, ton: TONS_PLAN[i], etat: e.etat, faitLe: e.fait };
       });
     }
     const ecart = controle ? Math.max(1, controle.jours) : 3;
@@ -299,15 +300,38 @@ export default function Home() {
   }, [uidJeux, allLessons]);
   const lancerDefi = () => { restoreLesson(defi.lessonId); navigate('/quiz?erreurs=1&defi=1&depuis=accueil'); };
 
+  // Un contrôle noté (11/11) : sa tâche du jour passe devant, « Ton contrôle de maths · Dans 3 jours ·
+  // 5 minutes maintenant ». Elle lance l'étape du plan prévue aujourd'hui ; sans étape ce jour-là
+  // (contrôle encore loin, ou étape déjà faite), le chapitre à travailler ; plan terminé, l'agenda.
+  const tacheControle = useMemo(() => {
+    if (!controle) return null;
+    const duJour = plan.find(p => p.etat === 'aujourdhui') ?? null;
+    const fini = plan.every(p => p.done);
+    const faiteAujourdhui = plan.some(p => p.faitLe === jourIso());
+    const intitule = intituleControle(controle);
+    const quoi = fini ? 'plan terminé, tu es prêt'
+      : duJour?.id === 'blanc' ? 'ton contrôle blanc'
+      : duJour?.id === 'quiz' ? 'le quiz du jour'
+      : faiteAujourdhui ? 'étape du jour faite'
+      : '5 minutes maintenant';
+    return { etape: fini ? 'fini' : duJour?.id ?? 'avance', titre: `Ton ${intitule.charAt(0).toLowerCase()}${intitule.slice(1)}`, sous: `${majuscule(controle.quand)} · ${quoi}` };
+  }, [controle, plan]);
+  const lancerControle = async () => {
+    mesurer('controle_tache', { etape: tacheControle.etape, jours: controle.jours });
+    if (tacheControle.etape === 'fini') navigate('/agenda');
+    else if (tacheControle.etape === 'avance') navigate(await cibleRevision(controle));
+    else lancerEtape(tacheControle.etape);
+  };
+
   // « On fait quoi aujourd'hui ? Démarre en un clic » (comme l'accueil de l'app Nomad) : une séance d'exercices,
   // préparer un contrôle (le plan de révision de l'agenda), réviser avec son cours.
+  const exercicesOuDefi = defi
+    ? { id: 'defi', pose: 'quiz', titre: 'Bats ton toi d’hier', sous: `${defi.questions.length} question${defi.questions.length > 1 ? 's ratées' : ' ratée'} hier · ${court(defi.titre, 28)}`, go: lancerDefi }
+    : { id: 'quiz', pose: 'muscu', titre: 'Fais tes exercices', sous: lastLesson?.metadata?.title ? court(lastLesson.metadata.title, 36) : 'Sur un chapitre de ton programme', go: lancerExercices };
   const raccourcis = [
-    defi
-      ? { id: 'defi', pose: 'quiz', titre: 'Bats ton toi d’hier', sous: `${defi.questions.length} question${defi.questions.length > 1 ? 's ratées' : ' ratée'} hier · ${court(defi.titre, 28)}`, go: lancerDefi }
-      : { id: 'quiz', pose: 'muscu', titre: 'Fais tes exercices', sous: lastLesson?.metadata?.title ? court(lastLesson.metadata.title, 36) : 'Sur un chapitre de ton programme', go: lancerExercices },
-    controle
-      ? { id: 'plan', pose: 'examen', titre: 'Mon plan de révision', sous: `${controle.m.label} ${controle.quand}`, go: () => navigate('/agenda') }
-      : { id: 'plan', pose: 'examen', titre: 'Prépare un contrôle', sous: 'Ton plan jusqu’au jour J', go: () => navigate('/agenda') },
+    ...(tacheControle
+      ? [{ id: 'controle', pose: 'examen', titre: tacheControle.titre, sous: tacheControle.sous, go: lancerControle }, exercicesOuDefi]
+      : [exercicesOuDefi, { id: 'plan', pose: 'examen', titre: 'Prépare un contrôle', sous: 'Ton plan jusqu’au jour J', go: () => navigate('/agenda') }]),
     isGuest
       ? { id: 'programme', pose: 'reading', titre: 'Révise ton programme', sous: `Tout le programme de ${classe}`, go: lancerProgramme }
       : { id: 'scan', pose: 'scanphone', titre: 'Révise avec ton cours', sous: 'Prends ta leçon en photo', go: lancerScan },

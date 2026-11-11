@@ -1,0 +1,24 @@
+/* « Ton prochain contrôle, c'est en quoi ? » en fin de séance (11/11). */
+.cd-carte { border: 2px solid var(--rv-peche-pale); }
+.cd-carte--fait { border-color: var(--rv-vert-pale); }
+.cd-matieres { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+/* Chaque pastille s'étire : les rangées finissent au même bord, quelle que soit la largeur de l'écran. */
+.cd-matiere {
+  flex: 1 1 auto; height: 44px; display: inline-flex; align-items: center; gap: 8px; padding: 0 14px 0 7px;
+  border: 0; border-radius: 12px; background: var(--rv-fond);
+  font-family: inherit; font-size: 14px; font-weight: 600; color: var(--rv-encre); cursor: pointer;
+  transition: background .15s ease, transform .1s ease;
+}
+/* Survol à la souris seulement : sur un écran tactile, il resterait collé à la pastille touchée. */
+@media (hover: hover) and (pointer: fine) { .cd-matiere:hover { background: var(--rv-peche-pale); } }
+.cd-matiere:active { transform: scale(.97); }
+.cd-matiere:focus-visible { outline: 3px solid var(--rv-encre); outline-offset: 2px; }
+.cd-matiere-rond { flex: none; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 9px; background: var(--rv-carte); overflow: hidden; }
+.cd-liens { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; margin-top: 12px; }
+.fc-page .cd-lien { width: auto; margin: 0; align-self: auto; }
+.cd-carte .rd-texte b { font-weight: 700; color: var(--rv-encre); }
+.cd-essai { font-weight: 600; color: var(--rv-encre); }
+@media (prefers-reduced-motion: reduce) {
+  .cd-matiere { transition: none; }
+  .cd-matiere:active { transform: none; }
+}

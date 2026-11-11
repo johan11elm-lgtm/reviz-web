@@ -15,6 +15,7 @@ import { FormatFeedback } from '../components/FormatFeedback'
 import { MontreParent } from '../components/MontreParent'
 import { InviterFin } from '../components/InviterFin'
 import { RappelDemain } from '../components/RappelDemain'
+import { ControleDemande } from '../components/ControleDemande'
 import { CoachChat } from '../components/CoachChat'
 import { useAuth } from '../context/AuthContext'
 import { useIsDesktop } from '../hooks/useMediaQuery'
@@ -328,8 +329,9 @@ function QuizSession() {
       </section>
     )
     const lecon = coachLessonId ? loadLessons().find(l => l.id === coachLessonId) ?? null : null
-    // « Invite un ami » (11/11) : pas au premier quiz, ni avec « Montre ça à tes parents ».
-    const montre = <><MontreParent score={nbJustes} total={questions.length} lecon={lecon} />{!premiere && <InviterFin score={nbJustes} total={questions.length} />}<RappelDemain /></>
+    // Une demande à la fois : le contrôle d'abord ; sinon (ou après « Pas de contrôle prévu »),
+    // « Invite un ami » (11/11, jamais à la première séance) et le rappel de 17 h.
+    const montre = <><ControleDemande lieu={premiere ? 'fin_accueil' : 'fin_seance'} apres={<>{!premiere && <InviterFin score={nbJustes} total={questions.length} />}<RappelDemain /></>} /><MontreParent score={nbJustes} total={questions.length} lecon={lecon} /></>
     const boutons = premiere ? (
       <div className="qz-fin-actions">
         <button type="button" className="fc-btn fc-btn--orange rv-bandes" onClick={fermer}>Continuer</button>

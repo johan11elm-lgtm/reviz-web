@@ -23,6 +23,7 @@ import { track } from '../services/statsService'
 import { MontreParent } from '../components/MontreParent'
 import { InviterFin } from '../components/InviterFin'
 import { RappelDemain } from '../components/RappelDemain'
+import { ControleDemande } from '../components/ControleDemande'
 import { loadLessons } from '../services/historyService'
 import { limiteExercicesAtteinte } from '../utils/limiteExercices'
 import { LimiteAtteinte, CadeauEssaiPlus } from '../components/revizplus/RevizPlusOffre'
@@ -225,10 +226,13 @@ function Seance({ ai, seance, premiere, nouvelle }) {
       </div>
     )
     const bilan = <BilanXp gain={gain} uid={uid} />
+    // Le prochain contrôle d'abord (11/11) ; le rappel de 17 h seulement s'il n'y a rien à demander
+    // de ce côté-là, ou après « Pas de contrôle prévu » (une demande à la fois) ; puis
     // « Montre ça à tes parents » (moins de 15 ans sans adresse de parent), comme à la fin du quiz.
     const lecon = lessonId ? loadLessons().find(l => l.id === lessonId) ?? null : null
-    // « Invite un ami » (11/11) : pas à la séance d'accueil, ni avec « Montre ça à tes parents ».
-    const montre = <><MontreParent score={nbJustes} total={seance.length} lecon={lecon} />{!premiere && <InviterFin score={nbJustes} total={seance.length} />}<RappelDemain /></>
+    // Une demande à la fois : le contrôle d'abord ; sinon (ou après « Pas de contrôle prévu »),
+    // « Invite un ami » (11/11, jamais à la première séance) et le rappel de 17 h.
+    const montre = <><ControleDemande lieu={premiere ? 'fin_accueil' : 'fin_seance'} apres={<>{!premiere && <InviterFin score={nbJustes} total={seance.length} />}<RappelDemain /></>} /><MontreParent score={nbJustes} total={seance.length} lecon={lecon} /></>
     const recap = (
       <section className="qz-carte" aria-labelledby="ex-titre-seance">
         <div className="qz-carte-tete">

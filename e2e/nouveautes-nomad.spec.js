@@ -36,10 +36,14 @@ for (const [appareil, viewport] of APPAREILS) {
       await expect(plan.getByText(/^Demain/)).toBeVisible()
       await sansDebordement(page, `agenda ${appareil}`)
 
-      // L'accueil suit le plan : « Ton plan pour … » et un raccourci vers lui.
+      // L'accueil suit le plan : « Ton plan pour … », et la tâche du jour du contrôle en premier
+      // raccourci (11/11). Pas d'étape prévue aujourd'hui : cinq minutes d'avance.
       await page.goto('/')
       await expect(page.getByRole('heading', { name: /^Ton plan pour/ })).toBeVisible()
-      await expect(page.getByRole('group', { name: 'Démarre en un clic' }).getByRole('button', { name: /Mon plan de révision|Contrôle de maths/ })).toBeVisible()
+      const tache = page.getByRole('group', { name: 'Démarre en un clic' }).getByRole('button').first()
+      await expect(tache).toContainText('Ton contrôle de maths')
+      await expect(tache).toContainText('Dans 6 jours · 5 minutes maintenant')
+      await sansDebordement(page, `accueil avec contrôle ${appareil}`)
     })
 
     test('le simulateur du brevet calcule la note, la mention et ce qu’il faut aux épreuves', async ({ page }) => {

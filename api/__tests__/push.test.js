@@ -130,6 +130,24 @@ describe('notifications web — le message du jour', () => {
     expect(n).toMatchObject({ title: 'Contrôle d’anglais demain'.replace('’', "'"), url: 'https://app.revizapp.fr/agenda?via=push', tag: 'reviz-controle' })
     expect(n.body).toContain('Les verbes irréguliers')
   })
+  it('1 bis. un contrôle noté dans la semaine passe avant la série et le chapitre (11/11)', () => {
+    const controles = [
+      { id: 'a', date: '2026-11-20', matiere: 'svt', titre: 'Loin' },
+      { id: 'b', date: '2026-10-30', matiere: 'maths', titre: 'Théorème de Thalès' },
+      { id: 'c', date: '2026-10-20', matiere: 'anglais', titre: 'Passé' },
+    ]
+    const n = notifDuJour({ ...base, agenda: { controles }, jeux: { jours: ['2026-10-25', '2026-10-26'] } })
+    expect(n).toMatchObject({ title: 'Contrôle de maths dans 3 jours', url: 'https://app.revizapp.fr/agenda?via=push', tag: 'reviz-controle' })
+    expect(n.body).toBe("Théorème de Thalès. Cinq minutes aujourd'hui, et tu prends de l'avance.")
+    // Bornes : dans 7 jours oui, dans 8 jours non ; aujourd'hui et hier non plus.
+    const pour = date => notifDuJour({ ...base, agenda: { controles: [{ id: 'x', date, matiere: 'anglais' }] } })
+    expect(pour('2026-11-03')).toMatchObject({ title: "Contrôle d'anglais dans 7 jours", body: "Cinq minutes de révision aujourd'hui, et tu prends de l'avance." })
+    expect(pour('2026-11-04').tag).toBe('reviz-jeux')
+    expect(pour('2026-10-27').tag).toBe('reviz-jeux')
+    expect(pour('2026-10-26').tag).toBe('reviz-jeux')
+    // Demain garde son message, même avec un autre contrôle dans la semaine.
+    expect(notifDuJour({ ...base, agenda: { controles: [...controles, { id: 'd', date: '2026-10-28', matiere: 'histoire' }] } }).title).toBe("Contrôle d'histoire demain")
+  })
   it('2. puis la série de la partie du jour (deux jours au moins, finie hier)', () => {
     expect(notifDuJour({ ...base, jeux: { jours: ['2026-10-24', '2026-10-25', '2026-10-26'] } })).toMatchObject({ title: '3 jours de suite', tag: 'reviz-serie' })
     expect(serieJusqua(['2026-10-25'], '2026-10-26')).toBe(0)
