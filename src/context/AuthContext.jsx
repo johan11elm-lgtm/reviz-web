@@ -151,6 +151,15 @@ export function AuthProvider({ children }) {
   const [parrainage, setParrainage] = useState({});
   const parrainageEnCours = useRef(false);
   const cadeauEnCours = useRef(false);
+  // L'essai que le serveur vient d'ouvrir dans cette session ({ uid, fin }). Un profil lu juste
+  // avant ne le connaît pas encore : sans cette mémoire, la confirmation de la session l'effaçait,
+  // la limite d'exercices revenait le temps d'un deuxième appel et le cadeau clignotait.
+  const essaiOuvert = useRef(null);
+  const finEssaiConnue = (uid, profile) => {
+    const duProfil = finPlusOffert(profile);
+    const ouvert = essaiOuvert.current?.uid === uid ? essaiOuvert.current.fin : null;
+    return ouvert != null && (duProfil == null || ouvert > duProfil) ? ouvert : duProfil;
+  };
   // Récapitulatif de l'abonnement écrit par le webhook Stripe (formule,
   // tarif fondateur, fin de période, annulation programmée) ; null sans abonnement.
   const [abonnement, setAbonnement] = useState(null);
@@ -537,7 +546,7 @@ export function AuthProvider({ children }) {
     setIsPremium(premium);
     setPremiumStatus(premium);
     setAbonnement(lireAbonnement(profile));
-    setEssaiFin(finPlusOffert(profile));
+    setEssaiFin(finEssaiConnue(user.uid, profile));
     setEssaiPris(essaiPlusDejaPris(profile));
     setParrainage(parrainageDuProfil(profile));
     // Compte créé avec le lien d'un ami : le code gardé sur l'appareil part au serveur, une fois
@@ -636,7 +645,7 @@ export function AuthProvider({ children }) {
       setPremiumStatus(premium);
       setAbonnement(lireAbonnement(userDoc.exists() ? userDoc.data() : null));
       const profil = userDoc.exists() ? userDoc.data() : null;
-      setEssaiFin(finPlusOffert(profil));
+      setEssaiFin(finEssaiConnue(auth.currentUser.uid, profil));
       setEssaiPris(essaiPlusDejaPris(profil));
       setParrainage(parrainageDuProfil(profil));
     } catch {
@@ -663,7 +672,11 @@ export function AuthProvider({ children }) {
       });
       if (!res.ok) return null;
       const data = await res.json();
-      if (Number.isFinite(data?.fin)) { setEssaiFin(f => Math.max(f ?? 0, data.fin)); setEssaiPris(true); }
+      if (Number.isFinite(data?.fin)) {
+        essaiOuvert.current = { uid: auth.currentUser?.uid, fin: data.fin };
+        setEssaiFin(f => Math.max(f ?? 0, data.fin));
+        setEssaiPris(true);
+      }
       return data;
     } catch {
       return null;
