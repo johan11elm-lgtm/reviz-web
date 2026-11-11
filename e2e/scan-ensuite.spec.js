@@ -44,4 +44,15 @@ test.describe('Scan : et ensuite ?', () => {
     await expect(page.getByText(/Les idées clés/)).toBeVisible({ timeout: 15_000 })
     expect(JSON.stringify(demandes[0])).toContain('Explique-moi cette leçon simplement')
   })
+
+  test('par la photo : « Et ensuite ? » sur l’écran de vérification', async ({ page }) => {
+    await mockApiRoutes(page)
+    await compteRapide(page, { birthDate: '2011-05-01', aller: '/scan' })
+    const PNG = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=', 'base64')
+    await page.locator('input[type="file"]').first().setInputFiles({ name: 'lecon.png', mimeType: 'image/png', buffer: PNG })
+    await page.getByRole('radiogroup', { name: 'Et ensuite ?' }).getByRole('radio', { name: 'Me tester tout de suite' }).click()
+    await sansDebordement(page, 'vérification de la photo')
+    await page.getByRole('button', { name: 'C’est bon, analyse' }).click()
+    await expect(page).toHaveURL(/\/(exercices|quiz)/, { timeout: 20_000 })
+  })
 })

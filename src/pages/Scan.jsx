@@ -261,6 +261,20 @@ export default function Scan() {
     );
   }
 
+  // « Et ensuite ? » : défini avant les écrans qui l'utilisent (aperçu de la photo, texte collé).
+  const ENSUITES = [
+    { id: 'fiche', label: 'Voir la fiche' },
+    { id: 'tester', label: 'Me tester tout de suite' },
+    ...(isGuest ? [] : [{ id: 'expliquer', label: 'Que Réviz IA m’explique' }]),
+  ];
+  const choixEnsuite = (
+    <div className="sc-ensuite" role="radiogroup" aria-label="Et ensuite ?">
+      <span className="sc-ensuite-titre" aria-hidden="true">Et ensuite ?</span>
+      {ENSUITES.map(o => (
+        <button key={o.id} type="button" role="radio" aria-checked={ensuite === o.id} className={`sc-ensuite-choix${ensuite === o.id ? ' is-choisi' : ''}`} onClick={() => setEnsuite(o.id)}>{o.label}</button>
+      ))}
+    </div>
+  );
   // ── Aperçu ──
   if (ecran === 'apercu' && photo) {
     return (
@@ -303,19 +317,6 @@ export default function Scan() {
           : assez ? <span className="sc-pastille"><i />Assez long</span> : null}
       </div>
       {long && <p className="sc-limite"><b>J’analyse jusqu’ici</b>Ton texte est long : j’analyse les {LESSON_TEXT_MAX_LABEL} premiers caractères.</p>}
-    </div>
-  );
-  const ENSUITES = [
-    { id: 'fiche', label: 'Voir la fiche' },
-    { id: 'tester', label: 'Me tester tout de suite' },
-    ...(isGuest ? [] : [{ id: 'expliquer', label: 'Que Réviz IA m’explique' }]),
-  ];
-  const choixEnsuite = (
-    <div className="sc-ensuite" role="radiogroup" aria-label="Et ensuite ?">
-      <span className="sc-ensuite-titre" aria-hidden="true">Et ensuite ?</span>
-      {ENSUITES.map(o => (
-        <button key={o.id} type="button" role="radio" aria-checked={ensuite === o.id} className={`sc-ensuite-choix${ensuite === o.id ? ' is-choisi' : ''}`} onClick={() => setEnsuite(o.id)}>{o.label}</button>
-      ))}
     </div>
   );
   const boutonAnalyser = (
