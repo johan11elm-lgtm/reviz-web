@@ -45,6 +45,7 @@ import CodeVideo from './pages/CodeVideo'
 // que le démarrage optimiste (cache de session) peigne sans attendre un
 // chunk ni re-rendre l'arbre après une suspension.
 import Home from './pages/Home'
+import { ConcentrationFlottante } from './components/Concentration'
 
 // Pages lazy-loaded
 const Inscription    = lazy(() => import('./pages/Inscription'))
@@ -119,6 +120,8 @@ function AuthRoutes() {
     <>
     <SplashHider />
     <NavHaut />
+    {/* Mode concentration (11/11) : le minuteur suit l'élève dans toutes les pages. */}
+    <ConcentrationFlottante />
     <Routes>
       <Route path="/inscription" element={<Inscription />} />
       <Route path="/connexion"   element={<Connexion />} />

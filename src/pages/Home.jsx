@@ -9,6 +9,7 @@ import { PushBanner } from '../components/PushBanner';
 import { ParrainageBanner } from '../components/ParrainageBanner';
 import { RappelOuverture } from '../components/RappelDemain';
 import { RetourAbsence } from '../components/RetourAbsence';
+import { LancerConcentration } from '../components/Concentration';
 import { retourAProposer } from '../utils/retourAbsence';
 import { Mascot } from '../components/Mascot';
 import { Avatar } from '../components/Avatar';
@@ -116,6 +117,7 @@ export default function Home() {
   // Retour après 3 jours sans réviser (11/11, utils/retourAbsence.js) : avant le rappel, jamais avec une annonce.
   const [retour, setRetour] = useState(() => (!annonceRevizPlus && !annonceJeux && !isGuest
     ? retourAProposer(currentUser?.uid, loadRevisions()) : null));
+  const [concentration, setConcentration] = useState(false);
   const [rappelOuverture, setRappelOuverture] = useState(() => !annonceRevizPlus && !annonceJeux && !retour && loadRevisions().length > 0);
   // Les thèmes Réviz+ sont des thèmes clairs : pas d'invitation à les essayer en sombre.
   const montrerEssai = essaiTheme && hasRevizPlus && !isGuest && !isDark && !themeById(theme)?.premium;
@@ -308,6 +310,8 @@ export default function Home() {
     isGuest
       ? { id: 'programme', pose: 'reading', titre: 'Révise ton programme', sous: `Tout le programme de ${classe}`, go: lancerProgramme }
       : { id: 'scan', pose: 'scanphone', titre: 'Révise avec ton cours', sous: 'Prends ta leçon en photo', go: lancerScan },
+    // Mode concentration (11/11) : un minuteur, puis le bilan de la séance. Avec un compte.
+    ...(isGuest ? [] : [{ id: 'concentration', pose: 'thinking', titre: 'Mode concentration', sous: '15 à 45 minutes, puis ton bilan', go: () => setConcentration(true) }]),
   ];
   const Fleche = () => (
     <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
@@ -562,6 +566,7 @@ export default function Home() {
           aControle={!!controle} onReprendre={lancerExercices} onClose={() => setRetour(null)} />
       )}
       {rappelOuverture && <RappelOuverture onClose={() => setRappelOuverture(false)} />}
+      {concentration && <LancerConcentration onClose={() => setConcentration(false)} />}
 
       <div className="content nm-defile">
         {tete}
