@@ -1,0 +1,9 @@
+/* Accueil du retour (components/RetourAbsence) : les raisons en grandes cases, comme la découverte. */
+.ra-raisons { display: flex; flex-direction: column; gap: 8px; width: 100%; }
+.ra-raison {
+  display: flex; align-items: center; min-height: 52px; box-sizing: border-box; padding: 0 16px;
+  border: 1.5px solid var(--rv-ligne); border-radius: 18px; background: var(--rv-carte);
+  font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 600; color: var(--rv-encre); text-align: left; cursor: pointer;
+}
+.ra-raison:active { transform: translateY(2px); }
+.ra-raison:focus-visible { outline: 3px solid var(--rv-encre); outline-offset: 2px; }

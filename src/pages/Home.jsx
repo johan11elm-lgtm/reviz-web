@@ -8,6 +8,8 @@ import { EmailBanner } from '../components/EmailBanner';
 import { PushBanner } from '../components/PushBanner';
 import { ParrainageBanner } from '../components/ParrainageBanner';
 import { RappelOuverture } from '../components/RappelDemain';
+import { RetourAbsence } from '../components/RetourAbsence';
+import { retourAProposer } from '../utils/retourAbsence';
 import { Mascot } from '../components/Mascot';
 import { Avatar } from '../components/Avatar';
 import { estInstallee } from '../utils/installation';
@@ -111,7 +113,10 @@ export default function Home() {
   const [essaiTheme, setEssaiTheme] = useState(() => !essaiThemeVu());
   // Rappel de 17 h proposé à l'ouverture (08/11), jamais en même temps qu'une annonce,
   // seulement après une première révision ; espacement dans utils/demandeRappel.js.
-  const [rappelOuverture, setRappelOuverture] = useState(() => !annonceRevizPlus && !annonceJeux && loadRevisions().length > 0);
+  // Retour après 3 jours sans réviser (11/11, utils/retourAbsence.js) : avant le rappel, jamais avec une annonce.
+  const [retour, setRetour] = useState(() => (!annonceRevizPlus && !annonceJeux && !isGuest
+    ? retourAProposer(currentUser?.uid, loadRevisions()) : null));
+  const [rappelOuverture, setRappelOuverture] = useState(() => !annonceRevizPlus && !annonceJeux && !retour && loadRevisions().length > 0);
   // Les thèmes Réviz+ sont des thèmes clairs : pas d'invitation à les essayer en sombre.
   const montrerEssai = essaiTheme && hasRevizPlus && !isGuest && !isDark && !themeById(theme)?.premium;
   const [caseChoisie, setCaseChoisie] = useState(null);
@@ -153,7 +158,7 @@ export default function Home() {
     return () => { vivant = false; document.removeEventListener('visibilitychange', maj); };
   }, [uidJeux]);
   // Série avec gel automatique : un jour manqué par semaine ne la casse pas (utils/gamification).
-  const { serie: streak, gels } = useMemo(() => detailSerie([...loadRevisions(), ...jourJeux.jours.map(j => ({ revisedAt: `${j}T12:00:00` }))], 'revisedAt', { gel: true }), [allLessons, jourJeux]);
+  const { serie: streak, gels } = useMemo(() => detailSerie([...loadRevisions(), ...jourJeux.jours.map(j => ({ revisedAt: `${j}T12:00:00` }))], 'revisedAt', { gel: true, weekendLibre: true }), [allLessons, jourJeux]);
   // Le niveau compte l'XP des révisions et des quêtes : il bouge quand une récompense est récupérée.
   const [quetesTick, setQuetesTick] = useState(0);
   useEffect(() => {
@@ -324,7 +329,7 @@ export default function Home() {
 
   const serie = streak > 0 && (
     <span className="hm-serie" aria-label={`${streak} jour${streak > 1 ? 's' : ''} de suite${gels.length ? ', série protégée par un jour gelé' : ''}`}
-      title={gels.length ? 'Un jour manqué cette semaine : ta série est protégée (un jour par semaine).' : undefined}>
+      title={gels.length ? 'Un jour manqué cette semaine : ta série est protégée (un jour par semaine).' : 'Révise chaque jour d’école : les week-ends ne comptent pas.'}>
       <Flamme />{streak}{isDesktop ? ` jour${streak > 1 ? 's' : ''}` : ''}
       {gels.length > 0 && <span className="hm-serie-gel">protégée</span>}
     </span>
@@ -551,6 +556,10 @@ export default function Home() {
       {newBadge && !annonceJeux && <AchievementToast badge={newBadge} onDone={() => setNewBadge(null)} />}
       {annonceRevizPlus && <RevizPlusAnnonce uid={currentUser.uid} onClose={() => setAnnonceRevizPlus(false)} />}
       {annonceJeux && <JeuxAnnonce uid={currentUser.uid} onClose={() => setAnnonceJeux(false)} />}
+      {retour && (
+        <RetourAbsence uid={currentUser.uid} prenom={currentUser.displayName?.split(' ')[0]} jours={retour.jours} repere={retour.repere}
+          aControle={!!controle} onReprendre={lancerExercices} onClose={() => setRetour(null)} />
+      )}
       {rappelOuverture && <RappelOuverture onClose={() => setRappelOuverture(false)} />}
 
       <div className="content nm-defile">

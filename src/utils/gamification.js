@@ -18,24 +18,35 @@ export function computeStreak(items, dateKey = 'scannedAt', options = {}) {
  * La série et les jours gelés. Avec `gel` (comme le bonus de gel automatique de Nomad) : un jour
  * manqué au plus par semaine ne casse pas la série, sans compter dedans ; deux jours manqués
  * d'affilée la cassent toujours. Aujourd'hui pas encore révisé ne casse rien.
+ * Avec `weekendLibre` (11/11, repris de Knowunity : « les week-ends ne comptent pas ») : un samedi
+ * ou un dimanche sans révision ne casse rien et ne coûte pas de gel ; réviser le week-end compte
+ * quand même dans la série.
  * @returns {{ serie: number, gels: string[] }} gels : jours gelés (« JJ/MM/AAAA »), du plus récent
  */
-export function detailSerie(items, dateKey = 'scannedAt', { gel = false, aujourdhui = new Date() } = {}) {
+export function detailSerie(items, dateKey = 'scannedAt', { gel = false, weekendLibre = false, aujourdhui = new Date() } = {}) {
   if (!items.length) return { serie: 0, gels: [] };
   const days = new Set(items.map(l => new Date(l[dateKey]).toLocaleDateString('fr-FR')));
-  const jour = i => {
+  const date = i => {
     const d = new Date(aujourdhui);
     d.setDate(aujourdhui.getDate() - i);
-    return d.toLocaleDateString('fr-FR');
+    return d;
+  };
+  const jour = i => date(i).toLocaleDateString('fr-FR');
+  const libre = i => weekendLibre && [0, 6].includes(date(i).getDay()) && !days.has(jour(i));
+  // Le jour d'école d'avant (les week-ends libres sautés) a-t-il été révisé ?
+  const precedentRevise = i => {
+    let k = i + 1;
+    while (libre(k) && k < i + 3) k++;
+    return days.has(jour(k));
   };
   let streak = 0;
   const gels = [];
   let dernierGel = null;
   for (let i = 0; i < 365; i++) {
     if (days.has(jour(i))) { streak++; continue; }
-    if (i === 0) continue;
+    if (i === 0 || libre(i)) continue;
     // Un jour manqué, gelé si la série continue juste avant et qu'aucun gel n'a servi dans la semaine.
-    const gelPossible = gel && streak > 0 && days.has(jour(i + 1)) && (dernierGel === null || i - dernierGel >= 7);
+    const gelPossible = gel && streak > 0 && precedentRevise(i) && (dernierGel === null || i - dernierGel >= 7);
     if (!gelPossible) break;
     gels.push(jour(i));
     dernierGel = i;
