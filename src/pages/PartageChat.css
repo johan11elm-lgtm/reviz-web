@@ -1,0 +1,13 @@
+/* /partage/:id (pages/PartageChat) : la page des enseignants (Profs.css), avec le fil de la conversation. */
+.pch-hero { padding-bottom: 44px; }
+.pch-carte { display: flex; flex-direction: column; gap: 12px; }
+.pch-carte .pr-carte-texte { margin: 0; }
+.pch-statut { margin: 0 0 14px; font-size: 15px; color: var(--ch-doux); }
+.pch-fil { display: flex; flex-direction: column; gap: 14px; }
+.pch-eleve { align-self: flex-end; max-width: 85%; padding: 10px 14px; border-radius: 18px 18px 4px 18px; background: #042A65; color: #fff; font-size: 15px; line-height: 1.45; white-space: pre-wrap; }
+.pch-reponse { display: flex; gap: 10px; align-items: flex-start; }
+.pch-ia { flex: none; display: flex; width: 36px; height: 36px; align-items: center; justify-content: center; border-radius: 50%; background: var(--rv-lavande); overflow: hidden; }
+.pch-reponse-txt { min-width: 0; font-size: 15px; line-height: 1.5; color: var(--ch-encre); }
+.pch-reponse-txt p { margin: 0 0 8px; }
+.pch-reponse-txt ul { margin: 0 0 8px; padding-left: 20px; }
+.pch-btn { display: flex; align-items: center; justify-content: center; text-decoration: none; }

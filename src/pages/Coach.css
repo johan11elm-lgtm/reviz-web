@@ -463,3 +463,7 @@
 .ia-champ { border-radius: 20px; box-shadow: none; }
 .ia-envoyer { background: var(--rv-vif-plein); color: #fff; }
 .ia-salut { color: #042A65; }
+
+/* Ordinateur : « Partager » en haut à droite de la conversation (11/11). */
+.ia-centre-tete { position: absolute; top: 18px; right: 24px; z-index: 3; }
+.ia-page--grand .ia-centre { position: relative; }

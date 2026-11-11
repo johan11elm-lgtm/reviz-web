@@ -7,6 +7,7 @@ import { Mascot } from '../components/Mascot';
 import { BulleReviz } from '../components/reviz/BulleReviz';
 import { DecouvrirRevizPlus } from '../components/revizplus/RevizPlusOffre';
 import { SignalerReponse } from '../components/SignalerReponse';
+import { PartagerConversation } from '../components/PartagerConversation';
 import { coachPreview, loadConversation, saveConversation, renderCoachMessage, COACH_ERREURS } from '../components/CoachChat';
 import { sendCoachMessage, CHAT_MAX_MESSAGE_LENGTH } from '../services/chatService';
 import { loadLessons, restoreLesson } from '../services/historyService';
@@ -653,6 +654,7 @@ export default function Coach() {
           ) : <p className="ia-recents-vide">Tes discussions apparaîtront ici.</p>}
         </aside>
         <main className={`ia-centre${vide ? ' ia-centre--accueil' : ''}`}>
+          {!isGuest && !vide && <div className="ia-centre-tete"><PartagerConversation messages={messages} titre={titre} /></div>}
           <div className="ia-fil" ref={fil}>{vide ? accueil : conversation}{alerte}</div>
           <div className="ia-pied">{composeur}</div>
         </main>
@@ -669,6 +671,7 @@ export default function Coach() {
         <button type="button" className="ia-rond" onClick={retour} aria-label="Retour"><Retour /></button>
         <Marque />
         <span className="ia-flex" />
+        {!isGuest && <PartagerConversation messages={messages} titre={titre} />}
         <button type="button" className="ia-rond" onClick={() => setHisto(true)} aria-haspopup="dialog" aria-label="Tes discussions"><Horloge /></button>
       </header>
       <main className="ia-fil ia-fil--tel" ref={fil}>{vide ? accueil : conversation}{alerte}</main>
