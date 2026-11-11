@@ -297,7 +297,7 @@
   transition: background .2s;
 }
 .qn-page .qz-choix-btn + .qz-choix-btn { border-top: 1px solid var(--rv-ligne); }
-.qn-page .qz-choix-btn:not(:disabled):hover { background: #FBF8F5; }
+@media (hover: hover) and (pointer: fine) { .qn-page .qz-choix-btn:not(:disabled):hover { background: #FBF8F5; } }
 .qn-page .qz-choix-btn:not(:disabled):active { transform: none; box-shadow: none; background: #F6F0EA; }
 .qn-page .qz-choix-btn:focus-visible { outline: 3px solid #042A65; outline-offset: -3px; }
 .qn-page .qz-lettre { width: 34px; height: 34px; border-radius: 10px; background: #F2EBFF; font-family: inherit; font-size: 14px; font-weight: 700; color: #042A65; }

@@ -39,7 +39,7 @@
 .ban-feuille--fenetre .ban-btn { width: auto; padding: 0 30px; }
 .ban-btn:active { transform: translateY(4px); box-shadow: 0 1px 0 var(--rv-orange-tranche); }
 .ban-plus-tard { min-height: 44px; padding: 0 14px; border: 0; background: none; font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 700; color: var(--rv-doux); cursor: pointer; }
-.ban-plus-tard:hover { color: var(--rv-encre); }
+@media (hover: hover) and (pointer: fine) { .ban-plus-tard:hover { color: var(--rv-encre); } }
 @media (prefers-reduced-motion: reduce) { .ban-voile, .ban-feuille { animation: none; } }
 
 /* ── Sombre : ces pastels gardent leur texte sombre (cf. rv-ilot dans global.css) ── */

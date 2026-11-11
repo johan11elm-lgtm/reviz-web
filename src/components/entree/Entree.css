@@ -295,7 +295,7 @@
 /* Boutons */
 .en-nomad .en-btn { min-height: 52px; border-radius: 14px; background: #042A65; box-shadow: 0 4px 0 #001330; font-size: 16px; }
 .en-nomad .en-btn:active:not(:disabled) { box-shadow: 0 1px 0 #001330; }
-.en-nomad .en-btn:hover:not(:disabled) { background: #0B3A82; }
+@media (hover: hover) and (pointer: fine) { .en-nomad .en-btn:hover:not(:disabled) { background: #0B3A82; } }
 .en-nomad .en-btn-second { min-height: 50px; border: 1.5px solid #042A65; border-radius: 14px; box-shadow: none; color: #042A65; }
 .en-nomad .en-btn-second:active:not(:disabled) { transform: scale(.98); box-shadow: none; }
 .en-nomad .en-ou { color: var(--rv-doux); }

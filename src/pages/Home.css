@@ -361,7 +361,7 @@
   color: #042A65;
   transition: transform .2s;
 }
-.home-page .hm-raccourci:hover .hm-raccourci-fleche { transform: translateX(3px); }
+@media (hover: hover) and (pointer: fine) { .home-page .hm-raccourci:hover .hm-raccourci-fleche { transform: translateX(3px); } }
 
 .home-page .hm-battle {
   position: relative;
@@ -536,7 +536,7 @@
   cursor: pointer;
   transition: width .25s, background .2s;
 }
-.home-page .hm-point-sugg:hover { background: rgba(var(--rv-encre-rgb),.45); }
+@media (hover: hover) and (pointer: fine) { .home-page .hm-point-sugg:hover { background: rgba(var(--rv-encre-rgb),.45); } }
 .home-page .hm-point-sugg--la { width: 24px; background: var(--hm-encre); }
 .home-page .hm-point-sugg:focus-visible { outline: 2px solid var(--hm-encre); outline-offset: 3px; }
 /* Bandeau et carte « thème » : même colonne que la grille des cartes en dessous (1440 px, 56 px de marge). */
@@ -700,7 +700,8 @@
   display: flex; align-items: center; gap: 12px; padding: 10px 12px; border: 0; border-radius: 16px; background: none;
   font: inherit; color: var(--rv-encre); text-align: left; cursor: pointer;
 }
-.home-page .nm-recherche-item:hover, .home-page .nm-recherche-item:focus-visible { background: #F5EFEB; outline: none; }
+.home-page .nm-recherche-item:focus-visible { background: #F5EFEB; outline: none; }
+@media (hover: hover) and (pointer: fine) { .home-page .nm-recherche-item:hover { background: #F5EFEB; outline: none; } }
 .home-page .nm-recherche-item > span { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
 .home-page .nm-recherche-item b { font-size: 15px; font-weight: 700; overflow-wrap: anywhere; }
 .home-page .nm-recherche-item small { font-size: 13px; font-weight: 500; opacity: .7; overflow-wrap: anywhere; }
@@ -773,11 +774,11 @@
   border-radius: 10px; border: 1.5px solid var(--rv-encre); color: var(--rv-encre);
   font-size: 14px; font-weight: 700; text-decoration: none;
 }
-.home-page .nm-rail-btn:hover { background: var(--rv-encre); color: #fff; }
+@media (hover: hover) and (pointer: fine) { .home-page .nm-rail-btn:hover { background: var(--rv-encre); color: #fff; } }
 .home-page .nm-indis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
 .home-page .nm-indis-item { display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: var(--rv-encre); text-decoration: none; text-align: center; }
 .home-page .nm-indis-rond { width: 52px; height: 52px; border-radius: 50%; background: var(--rv-fond); display: flex; align-items: center; justify-content: center; transition: transform .5s var(--rv-ressort); }
-.home-page .nm-indis-item:hover .nm-indis-rond { transform: translateY(-3px); }
+@media (hover: hover) and (pointer: fine) { .home-page .nm-indis-item:hover .nm-indis-rond { transform: translateY(-3px); } }
 .home-page .nm-indis-item:active .nm-indis-rond { transform: scale(.9); transition-duration: .08s; }
 
 /* L'émote se hisse un peu au survol de sa tuile, et retombe en ressort. */

@@ -141,7 +141,7 @@
   cursor: pointer;
 }
 
-.coach-close-btn:hover { background: var(--bg-muted); }
+@media (hover: hover) and (pointer: fine) { .coach-close-btn:hover { background: var(--bg-muted); } }
 
 /* ── Fil de messages ── */
 .coach-messages {

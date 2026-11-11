@@ -112,7 +112,7 @@
   color: var(--prg-encre);
   cursor: pointer;
 }
-.prg-page .pn-resultat:hover:not(:disabled) { background: var(--prg-fond); }
+@media (hover: hover) and (pointer: fine) { .prg-page .pn-resultat:hover:not(:disabled) { background: var(--prg-fond); } }
 .prg-page .pn-resultat:disabled { opacity: .55; cursor: default; }
 .prg-page .pn-resultat:focus-visible { outline: 3px solid var(--rv-encre); outline-offset: -1px; }
 .prg-page .pn-resultat-ico { width: 44px; height: 44px; flex: none; border-radius: 12px; background: #F2EBFF; display: flex; align-items: center; justify-content: center; }

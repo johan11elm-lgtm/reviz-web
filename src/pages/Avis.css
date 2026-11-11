@@ -103,7 +103,7 @@
 .av-champ--signature { gap: 8px; }
 .av-champ--signature .av-label { font-size: 14px; }
 .av-accord-note a { color: var(--av-orange); text-decoration: none; }
-.av-accord-note a:hover { text-decoration: underline; }
+@media (hover: hover) and (pointer: fine) { .av-accord-note a:hover { text-decoration: underline; } }
 
 /* Champ piège : hors de l'écran */
 .av-piege { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }

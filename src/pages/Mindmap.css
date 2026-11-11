@@ -313,7 +313,7 @@
 .cm-panneau .cm-explication { font-size: 18px; }
 .cm-panneau .cm-idees-tete { margin-top: 22px; }
 .cm-panneau .cm-idee { min-height: 58px; gap: 14px; padding: 10px 16px; font-size: 21px; transition: background .15s; }
-.cm-panneau .cm-idee.is-cachee:hover { background: var(--rv-survol, #F3E7DC); }
+@media (hover: hover) and (pointer: fine) { .cm-panneau .cm-idee.is-cachee:hover { background: var(--rv-survol, #F3E7DC); } }
 .cm-panneau .cm-detail-corps > .cm-btn { height: 58px; margin: 18px 0 24px; box-shadow: 0 6px 0 var(--rv-orange-tranche); }
 .cm-panneau .cm-detail-corps > .cm-btn:active { box-shadow: 0 2px 0 var(--rv-orange-tranche); }
 .cm-panneau .rv-bulle-txt { background: var(--rv-fond); box-shadow: none; max-width: 340px; font-size: 23px; padding: 14px 22px; border-radius: 24px; }

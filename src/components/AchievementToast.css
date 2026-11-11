@@ -71,7 +71,7 @@
   border: 0; border-radius: 9px; background: none; color: rgba(255,255,255,.7);
   cursor: pointer;
 }
-.ach-fermer:hover { background: rgba(255,255,255,.12); color: #fff; }
+@media (hover: hover) and (pointer: fine) { .ach-fermer:hover { background: rgba(255,255,255,.12); color: #fff; } }
 .ach-fermer:focus-visible { outline: 2px solid #FF4B0A; outline-offset: 1px; }
 
 /* Temps qui reste : un trait orange qui se vide en bas de la carte */
