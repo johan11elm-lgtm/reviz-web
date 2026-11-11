@@ -8,6 +8,7 @@ import { BulleReviz } from '../components/reviz/BulleReviz';
 import { DecouvrirRevizPlus } from '../components/revizplus/RevizPlusOffre';
 import { SignalerReponse } from '../components/SignalerReponse';
 import { PartagerConversation } from '../components/PartagerConversation';
+import { momentDeLaJournee, SYMBOLES_MATHS, inserer, passageAExpliquer, questionExpliquer } from '../utils/outilsIA';
 import { coachPreview, loadConversation, saveConversation, renderCoachMessage, COACH_ERREURS } from '../components/CoachChat';
 import { sendCoachMessage, CHAT_MAX_MESSAGE_LENGTH } from '../services/chatService';
 import { loadLessons, restoreLesson } from '../services/historyService';
@@ -370,6 +371,28 @@ export default function Coach() {
   }, [saisie]);
 
   const dictee = useDictee(t => setSaisie(s => (s ? `${s} ${t}` : t)));
+  // Petites touches (11/11) : déclarées avant le mur des invités (règles des hooks).
+  const [clavierMaths, setClavierMaths] = useState(false);
+  function insererSymbole(x) {
+    const el = champ.current;
+    const { valeur, curseur } = inserer(saisie, el?.selectionStart, el?.selectionEnd, x);
+    setSaisie(valeur);
+    requestAnimationFrame(() => { el?.focus(); el?.setSelectionRange(curseur, curseur); });
+  }
+  // « Expliquer » sur un mot ou un passage surligné dans une réponse de Réviz IA (11/11).
+  const [surligne, setSurligne] = useState(null); // { passage, x, y }
+  useEffect(() => {
+    const suivre = () => {
+      const sel = window.getSelection?.();
+      const noeud = sel?.anchorNode?.parentElement;
+      const passage = sel && !sel.isCollapsed && noeud?.closest?.('.ia-reponse-txt') ? passageAExpliquer(sel.toString()) : null;
+      if (!passage) { setSurligne(null); return; }
+      const r = sel.getRangeAt(0).getBoundingClientRect();
+      setSurligne({ passage, x: Math.min(Math.max(r.left + r.width / 2, 90), window.innerWidth - 90), y: Math.max(r.top - 8, 60) });
+    };
+    document.addEventListener('selectionchange', suivre);
+    return () => document.removeEventListener('selectionchange', suivre);
+  }, []);
   if (isGuest) {
     return <GuestWall action={"parler à Réviz\u00a0IA"} text="Réviz IA demande un compte. C'est gratuit, et tout ce que tu as révisé en mode essai te suit." />;
   }
@@ -455,7 +478,8 @@ export default function Coach() {
   const titreCourt = titre ? court(titre) : null;
   const c = couleurs(lecon?.metadata.subject);
   const prenom = currentUser?.displayName?.split(' ')[0];
-  const moment = new Date().getHours() >= 17 ? 'ce soir' : "aujourd'hui";
+  // L'accueil suit le moment de la journée (11/11, repris de Knowunity).
+  const moment = momentDeLaJournee();
   const vide = messages.length === 0 && !enCours;
   const apercuAgent = coachPreview(AGENT);
   const recents = [
@@ -608,6 +632,8 @@ export default function Coach() {
               <i style={{ background: lecon ? c.point : 'var(--rv-lavande-point)' }} aria-hidden="true" /><span>{lecon ? majuscule(titreCourt) : 'Mes matières'}</span>
             </button>
             <span className="ia-flex" />
+            {/* Clavier de maths (11/11) : les symboles qu'on ne trouve pas sur un clavier de téléphone. */}
+            <button type="button" className={`ia-micro ia-maths-bouton${clavierMaths ? ' is-ecoute' : ''}`} onClick={() => setClavierMaths(v => !v)} aria-pressed={clavierMaths} aria-label="Clavier de maths">π</button>
             {dictee && (
               <button type="button" className={`ia-micro${dictee.ecoute ? ' is-ecoute' : ''}`} onClick={dictee.basculer} aria-label={dictee.ecoute ? 'Arrêter la dictée' : 'Dicter ta question'} aria-pressed={dictee.ecoute}><Micro /></button>
             )}
@@ -615,12 +641,25 @@ export default function Coach() {
           </div>
         </div>
       </form>
+      {clavierMaths && (
+        <div className="ia-maths" role="group" aria-label="Symboles de maths">
+          {SYMBOLES_MATHS.map(x => (
+            <button key={x} type="button" className="ia-maths-touche" onMouseDown={e => e.preventDefault()} onClick={() => insererSymbole(x)} aria-label={`Insérer ${x}`}>{x}</button>
+          ))}
+        </div>
+      )}
       <p className="ia-note">{isDesktop && vide ? (lecon ? 'Réviz IA connaît ta leçon et t’aide à trouver, sans faire tes devoirs à ta place.' : 'Réviz IA connaît tes contrôles et ton programme, et t’aide à réviser sans faire tes devoirs à ta place.') : note}</p>
     </>
   );
 
   const fenetres = (
     <>
+      {surligne && !enCours && !limite && (
+        <button type="button" className="ia-expliquer" style={{ left: surligne.x, top: surligne.y }} onMouseDown={e => e.preventDefault()}
+          onClick={() => { const q = questionExpliquer(surligne.passage); window.getSelection?.()?.removeAllRanges(); setSurligne(null); envoyer(q); }}>
+          {`Expliquer « ${surligne.passage.length > 24 ? `${surligne.passage.slice(0, 22)}…` : surligne.passage} »`}
+        </button>
+      )}
       {choix && <ChoixLecon lecons={lecons} activeId={leconId} onSelect={choisir} onClose={() => setChoix(false)} grand={isDesktop} />}
       {histo && <Discussions recents={recents} activeId={cle} onSelect={choisir} onNouvelle={nouvelle} onClose={() => setHisto(false)} />}
       {offre && <DecouvrirRevizPlus lieu="coach" onClose={() => setOffre(false)} />}

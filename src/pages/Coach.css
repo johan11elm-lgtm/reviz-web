@@ -467,3 +467,12 @@
 /* Ordinateur : « Partager » en haut à droite de la conversation (11/11). */
 .ia-centre-tete { position: absolute; top: 18px; right: 24px; z-index: 3; }
 .ia-page--grand .ia-centre { position: relative; }
+
+/* Clavier de maths (11/11) : une rangée de symboles sous le champ, qui défile sur téléphone. */
+.ia-maths-bouton { font-family: var(--font-display); font-size: 18px; font-weight: 800; }
+.ia-maths { display: flex; gap: 6px; margin-top: 8px; overflow-x: auto; padding-bottom: 2px; scrollbar-width: none; }
+.ia-maths::-webkit-scrollbar { display: none; }
+.ia-maths-touche { flex: none; min-width: 40px; height: 40px; border: 1.5px solid var(--rv-ligne); border-radius: 12px; background: var(--rv-carte); font: 700 17px 'Poppins', system-ui, sans-serif; color: var(--rv-encre); cursor: pointer; }
+.ia-maths-touche:active { transform: translateY(1px); }
+/* « Expliquer » sur un passage surligné, au-dessus de la sélection. */
+.ia-expliquer { position: fixed; z-index: 60; transform: translate(-50%, -100%); padding: 8px 14px; border: 0; border-radius: 999px; background: #042A65; color: #fff; font: 700 14px 'Poppins', system-ui, sans-serif; box-shadow: 0 6px 18px rgba(4,42,101,.25); white-space: nowrap; cursor: pointer; }
