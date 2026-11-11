@@ -77,7 +77,7 @@ export { intituleChapitres }
  * avec la classe et le nom de la matière dans le programme (« Physique-Chimie ») pour rouvrir
  * leurs contenus ; sans intitulé, ils lui en donnent un. Le plan et le contrôle blanc s'appuient dessus.
  */
-export async function ajouterControle(user, { matiere, titre, date, chapitres = [], classe = null, programme = null }) {
+export async function ajouterControle(user, { matiere, titre, date, chapitres = [], classe = null, programme = null, brevet = false }) {
   const agenda = agendaLocal(user.uid)
   const chs = (chapitres ?? []).filter(c => c?.id).slice(0, 12).map(c => ({ id: String(c.id), titre: String(c.titre ?? '').slice(0, 120), ...(c.scan ? { scan: true } : {}) }))
   const controle = {
@@ -86,6 +86,8 @@ export async function ajouterControle(user, { matiere, titre, date, chapitres = 
     titre: (String(titre ?? '').trim() || intituleChapitres(chs)).slice(0, 80),
     date,
     cree: jourIso(),
+    // Une épreuve écrite du brevet (utils/planBrevet.js) : ne compte pas comme « prochain contrôle ».
+    ...(brevet ? { brevet: true } : {}),
   }
   if (chs.length) Object.assign(controle, { chapitres: chs, classe, programme })
   // On ne garde pas les contrôles passés depuis plus d'un mois.
@@ -93,7 +95,8 @@ export async function ajouterControle(user, { matiere, titre, date, chapitres = 
   const controles = [...agenda.controles.filter(c => c.date >= limite), controle]
   // Le premier contrôle noté a son plan de révision offert en entier (Réviz+). Agenda d'avant le
   // plan (pas encore de planOffert) : c'est le plus proche des contrôles déjà notés qui l'a.
-  const premier = agenda.planOffert ?? controlesAVenir(agenda.controles)[0]?.id ?? controle.id
+  // Les épreuves du brevet ne prennent pas ce plan offert : il revient au prochain vrai contrôle.
+  const premier = agenda.planOffert ?? controlesAVenir(agenda.controles.filter(c => !c.brevet))[0]?.id ?? (brevet ? null : controle.id)
   return enregistrer(user, { ...agenda, controles, planOffert: premier })
 }
 

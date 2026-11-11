@@ -464,6 +464,18 @@ export default function Home() {
     </Link>
   );
 
+  // 3e : le plan brevet prêt à l'emploi (11/11), les chapitres des écrits semaine par semaine.
+  const cartePlanBrevet = classe === '3ème' && (
+    <Link to="/plan-brevet" className="hm-simu hm-simu--plan">
+      <Mascot pose="examen" size={isDesktop ? 96 : 76} alt="" aria-hidden="true" className="hm-simu-mascotte" />
+      <span className="hm-simu-txt">
+        <span className="hm-simu-sur">Brevet 2027</span>
+        <span className="hm-simu-titre">Ton plan brevet</span>
+        <span className="hm-simu-sous">Les chapitres des écrits, quelques-uns chaque semaine.</span>
+      </span>
+    </Link>
+  );
+
   const rappels = (
     <div className="hm-rappels">
       <GuestBanner />
@@ -538,6 +550,7 @@ export default function Home() {
         {carteJeux}
         {carteBattle}
         {carteSimulateur}
+        {cartePlanBrevet}
       </div>
     </section>
   );

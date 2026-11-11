@@ -755,6 +755,9 @@
 .home-page.nm-page--large .nm-une-cartes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
 .home-page.nm-page--large .nm-une-cartes > .hm-jeux { grid-column: 1 / -1; }
 .home-page.nm-page--large .nm-une-cartes > .hm-simu { grid-column: auto; }
+.home-page .hm-simu--plan { background: var(--sk-lavande); }
+.home-page .hm-simu--plan .hm-simu-sur { color: #5B4FC7; }
+.home-page.nm-page--large .nm-une-cartes > .hm-simu--plan { grid-column: 1 / -1; }
 .home-page .nm-rail {
   position: sticky; top: 0; display: flex; flex-direction: column; gap: 16px;
   padding: 16px; border-radius: 22px; background: #E8F1FC;

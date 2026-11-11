@@ -32,7 +32,8 @@ export function lireDemandes(uid) {
  */
 export function peutDemanderControle(uid, agenda, maintenant = Date.now()) {
   if (!uid) return false
-  if (controlesAVenir(agenda?.controles ?? []).length) return false
+  // Les épreuves du brevet (juin) ne comptent pas : on demande quand même le prochain contrôle.
+  if (controlesAVenir((agenda?.controles ?? []).filter(c => !c?.brevet)).length) return false
   const { fois, derniere } = lireDemandes(uid)
   return fois < MAX_DEMANDES && (derniere == null || maintenant - derniere >= ESPACEMENT_MS)
 }

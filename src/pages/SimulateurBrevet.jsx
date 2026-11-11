@@ -165,7 +165,7 @@ export default function SimulateurBrevet() {
           <div className="sb-cote">
             {resultat}
             <div className="sb-suite">
-              <BoutonFleche onClick={() => navigate('/programme')}>Réviser le brevet</BoutonFleche>
+              <BoutonFleche onClick={() => navigate('/plan-brevet')}>Mon plan jusqu’au brevet</BoutonFleche>
               <p className="sb-sources">
                 Simulation indicative : le jury reste souverain. Règles des sessions 2026 et 2027 : note de service
                 du 2 septembre 2025 (BO n° 33), reprise pour 2027 par celle du 11 septembre 2026.
