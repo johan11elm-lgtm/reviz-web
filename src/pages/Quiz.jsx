@@ -176,7 +176,12 @@ function QuizSession() {
   }
   const demanderPourquoi = () => {
     const bonne = q.choices[q.correct], prise = q.choices[choix]
-    setCoach(`Pourquoi « ${prise} » est faux à la question « ${q.question} » ? La bonne réponse est « ${bonne} ».`)
+    const juste = choix === q.correct
+    mesurer('pourquoi', { lieu: 'quiz', verdict: juste ? 'juste' : 'faux' })
+    // Même juste (11/11, repris de Knowunity) : une bonne réponse trouvée au hasard s'explique aussi.
+    setCoach(juste
+      ? `J'ai répondu « ${bonne} » à la question « ${q.question} », et c'est juste. Tu peux m'expliquer pourquoi c'est la bonne réponse ?`
+      : `Pourquoi « ${prise} » est faux à la question « ${q.question} » ? La bonne réponse est « ${bonne} ».`)
   }
 
   // Clavier (ordinateur) : 1-4 ou A-D pour répondre, Entrée pour passer à la suite.
@@ -417,10 +422,10 @@ function QuizSession() {
         <SignalerReponse key={idx} type="quiz" format="qcm" lessonId={coachLessonId} className="qz-signaler" question={q.question}
           reponse={JSON.stringify({ question: q.question, choices: q.choices, correct: q.correct, explanation: q.explanation })} />
       )}
-      {!juste && iaDispo && (
-        <button type="button" className="qz-pourquoi" onClick={demanderPourquoi}>
-          <span className="qz-ia-anneau" aria-hidden="true"><span><Mascot pose="coach" size={30} alt="" /></span></span>
-          Pourquoi ? Demande à Réviz IA
+      {iaDispo && (
+        <button type="button" className={`qz-pourquoi${juste ? ' qz-pourquoi--juste' : ''}`} onClick={demanderPourquoi}>
+          <span className="qz-ia-anneau" aria-hidden="true"><span><Mascot pose="coach" size={juste ? 24 : 30} alt="" /></span></span>
+          {juste ? 'Pourquoi c’est juste ?' : 'Pourquoi ? Demande à Réviz IA'}
         </button>
       )}
       <button type="button" className="qz-suivante rv-bandes" onClick={suivante}>

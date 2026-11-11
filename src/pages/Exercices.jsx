@@ -330,12 +330,18 @@ function Seance({ ai, seance, premiere, nouvelle }) {
       {!isGuest && currentUser && (
         <SignalerReponse key={ex.id} type="exercice" format={ex.type} reponse={JSON.stringify(ex)} question={ex.consigne} lessonId={lessonId} className="qz-signaler" />
       )}
-      {verdict === 'faux' && iaDispo && (
-        <button type="button" className="qz-pourquoi" onClick={() => setCoach(`J'ai raté cet exercice : « ${ex.consigne} — ${ex.bulle} ». La bonne réponse est « ${ex.aRetenir.bonne} ». Tu peux m'expliquer ?`)}>
+      {iaDispo && (verdict === 'faux' ? (
+        <button type="button" className="qz-pourquoi" onClick={() => { mesurer('pourquoi', { lieu: 'exercice', verdict: 'faux', format: ex.type }); setCoach(`J'ai raté cet exercice : « ${ex.consigne} — ${ex.bulle} ». La bonne réponse est « ${ex.aRetenir.bonne} ». Tu peux m'expliquer ?`) }}>
           <span className="qz-ia-anneau" aria-hidden="true"><span><Mascot pose="coach" size={30} alt="" /></span></span>
           Pourquoi ? Demande à Réviz IA
         </button>
-      )}
+      ) : verdict === 'juste' && (
+        // Même juste (11/11, repris de Knowunity) : une bonne réponse trouvée au hasard s'explique aussi.
+        <button type="button" className="qz-pourquoi qz-pourquoi--juste" onClick={() => { mesurer('pourquoi', { lieu: 'exercice', verdict: 'juste', format: ex.type }); setCoach(`J'ai réussi cet exercice : « ${ex.consigne} — ${ex.bulle} ». La bonne réponse est « ${ex.aRetenir.bonne} ». Tu peux m'expliquer pourquoi c'est juste ?`) }}>
+          <span className="qz-ia-anneau" aria-hidden="true"><span><Mascot pose="coach" size={24} alt="" /></span></span>
+          Pourquoi c’est juste ?
+        </button>
+      ))}
       <button type="button" className="qz-suivante rv-bandes" onClick={suivante}>
         {derniere ? 'Voir mon score' : 'Exercice suivant'}<Fleche />{isDesktop && <kbd>Entrée</kbd>}
       </button>

@@ -130,6 +130,9 @@
   color: var(--ch-encre);
   cursor: pointer;
 }
+/* Après une bonne réponse (11/11) : la même porte vers Réviz IA, en retrait derrière « Suivante ». */
+.qz-page .qz-pourquoi--juste { width: auto; height: 40px; padding-right: 14px; background: transparent; box-shadow: inset 0 0 0 1.5px var(--rv-ligne); font-size: 13px; }
+.qz-page .qz-pourquoi--juste .qz-ia-anneau { width: 30px; height: 30px; }
 .qz-page .qz-ia-anneau { width: 38px; height: 38px; flex: none; padding: 2px; box-sizing: border-box; border-radius: 50%; background: conic-gradient(var(--rv-orange), var(--rv-rose), var(--rv-orange)); }
 .qz-page .qz-ia-anneau > span { width: 100%; height: 100%; box-sizing: border-box; border: 2px solid var(--rv-carte); border-radius: 50%; background: var(--rv-carte); display: flex; align-items: center; justify-content: center; overflow: hidden; }
 .qz-page .qz-suivante { flex: none; margin-top: 16px; }
@@ -331,6 +334,7 @@
 .qn-page .qz-correction.is-faux .qz-verdict { background: none; color: #A3172B; }
 .qn-page .qz-correction-txt { margin: 10px 0 0; font-size: 15px; font-weight: 500; line-height: 1.5; color: #042A65; }
 .qn-page .qz-pourquoi { margin-top: 12px; background: #fff; color: #042A65; }
+.qn-page .qz-pourquoi--juste { background: rgba(255,255,255,.6); box-shadow: none; }
 .qn-page .qz-suivante {
   width: 100%;
   height: 54px;

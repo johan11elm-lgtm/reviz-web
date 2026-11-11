@@ -33,7 +33,8 @@ describe('<Quiz /> corrigé', () => {
     fireEvent.click(screen.getByRole('button', { name: /^B : 1/ }))
     expect(screen.getByText('Bonne réponse', { selector: '.qz-verdict' })).toBeInTheDocument()
     expect(screen.getByText('Tout nombre non nul à la puissance 0 vaut 1.')).toBeInTheDocument()
-    expect(screen.queryByRole('button', { name: /Pourquoi/ })).not.toBeInTheDocument()
+    // Même juste, on peut demander pourquoi (11/11), en retrait.
+    expect(screen.getByRole('button', { name: 'Pourquoi c’est juste ?' })).toHaveClass('qz-pourquoi--juste')
     fireEvent.click(screen.getByRole('button', { name: /Question suivante/ }))
     expect(screen.getByText('Question 2 sur 2')).toBeInTheDocument()
   })
