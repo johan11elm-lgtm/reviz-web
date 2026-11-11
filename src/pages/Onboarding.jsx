@@ -9,6 +9,7 @@ import { mesurer } from '../services/mesure';
 import { nbsp } from '../utils/typography';
 import { Mascot } from '../components/Mascot';
 import { AjoutControle } from '../components/AjoutControle';
+import { noterDemandeControle, noterControleNote } from '../utils/demandeControle';
 import { EntreeEcran, ChoixClasse, LienTexte } from '../components/entree/Entree';
 import './Onboarding.entree.css';
 
@@ -117,10 +118,13 @@ export default function Onboarding() {
     mesurer('entree_reponse', { question: 'controle', reponse: 'note', matiere: c.matiere, jours: joursEntre(jourIso(), c.date) });
     setControle(c);
     setFeuille(null);
+    noterControleNote(currentUser?.uid);
   }
   function pasDeControle() {
     mesurer('entree_reponse', { question: 'controle', reponse: 'aucun' });
     setControle('aucun');
+    // Question déjà posée : la carte de fin de séance (ControleDemande) attend 3 jours.
+    noterDemandeControle(currentUser?.uid);
     setStep(s => s + 1);
   }
   function choisir(question, id, set) {
