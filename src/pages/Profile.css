@@ -359,3 +359,4 @@
 .mn-page.mo-page--large .mo-rangee { max-width: 1240px; margin: 28px auto 0; padding: 0 32px; }
 .mn-page.mo-page--large .mo-section { max-width: 1240px; box-sizing: border-box; margin: 32px auto 0; padding: 0 32px; }
 .mn-page .mo-carte--bloc .mo-chiffre .mo-chiffre-icone { width: 32px; height: 32px; justify-content: center; }
+.mo-colonne { display: flex; flex-direction: column; gap: 24px; min-width: 0; }

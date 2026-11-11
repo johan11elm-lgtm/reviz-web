@@ -1,0 +1,22 @@
+/* « Ta ligue » dans Moi (components/moi/CarteLigue) : la couleur de la ligue en bandeau, le classement. */
+.lg { display: flex; flex-direction: column; gap: 12px; padding: 16px; border-radius: 24px; background: var(--rv-carte); box-shadow: inset 0 0 0 1.5px var(--rv-ligne); color: #042A65; }
+.lg-tete { display: flex; align-items: center; gap: 12px; }
+.lg-rond { flex: none; display: flex; align-items: center; justify-content: center; width: 52px; height: 52px; border-radius: 16px; }
+.lg--bronze .lg-rond { background: #F3D9C4; }
+.lg--argent .lg-rond { background: #E1E6EE; }
+.lg--or .lg-rond { background: #F8E4A8; }
+.lg-titres { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.lg-titre { margin: 0; font-family: var(--font-display); font-size: 18px; font-weight: 800; letter-spacing: -.02em; }
+.lg-sous { font-size: 13px; color: rgba(4,42,101,.68); }
+.lg-texte { margin: 0; font-size: 14.5px; line-height: 1.45; color: rgba(4,42,101,.78); }
+.lg-texte b { color: #042A65; }
+.lg-annonce { margin: 0; padding: 10px 12px; border-radius: 14px; background: var(--sk-menthe, #CDEFD9); font-size: 14px; font-weight: 700; }
+.lg-liste { display: flex; flex-direction: column; gap: 4px; margin: 0; padding: 0; list-style: none; }
+.lg-ligne { display: grid; grid-template-columns: 28px 1fr auto; align-items: center; gap: 8px; min-height: 40px; padding: 0 10px; border-radius: 12px; font-size: 14px; }
+.lg-ligne--montee { background: rgba(28,160,90,.08); }
+.lg-ligne--descente { background: rgba(214,74,48,.08); }
+.lg-ligne.is-moi { box-shadow: inset 0 0 0 2px #042A65; }
+.lg-rang { font-weight: 800; text-align: center; }
+.lg-pseudo { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lg-xp { font-weight: 700; font-variant-numeric: tabular-nums; }
+.lg-masquer { align-self: flex-start; padding: 0; border: 0; background: none; font: 600 12.5px 'Poppins', system-ui, sans-serif; color: rgba(4,42,101,.6); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }

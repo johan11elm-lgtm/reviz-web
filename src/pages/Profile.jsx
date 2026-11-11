@@ -19,6 +19,7 @@ import { MaSemaine, MaMemoire, MonProgramme } from '../components/moi/MesProgres
 import { PartageParent } from '../components/moi/PartageParent';
 import { InviterAmi } from '../components/moi/InviterAmi';
 import { CodeCadeau } from '../components/moi/CodeCadeau';
+import { CarteLigue } from '../components/moi/CarteLigue';
 import { hasProgramme, PROGRAMME_FALLBACK } from '../utils/programme';
 import '../components/reviz/HerosMatiere.css';
 import './Profile.css';
@@ -360,7 +361,8 @@ export default function Profile() {
               <h2 className="mo-h3">Mes chiffres</h2>
               {chiffres}
             </div>
-            {carteBattle}
+            {/* La ligue sous la Battle, dans la même colonne : la grille garde ses trois colonnes. */}
+            <div className="mo-colonne">{carteBattle}<CarteLigue /></div>
             <div className="mo-carte mo-carte--bloc">
               <h2 className="mo-h3">Mon compte</h2>
               {compte}
@@ -403,6 +405,7 @@ export default function Profile() {
           {carteBattle}
           {revizPlus}
         </section>
+        <CarteLigue titre="Ta ligue" />
         <InviterAmi titre="Tes amis" />
         <section className="mo-section">
           <h2 className="mo-h2">Mon compte</h2>
