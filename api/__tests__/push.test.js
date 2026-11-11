@@ -180,3 +180,15 @@ describe('notifications web — abonnement', () => {
     expect(await preparerEnvoi({})).toBeNull()
   })
 })
+
+describe('notification du jour : le week-end (11/11)', () => {
+  it('le week-end, seulement un contrôle le lendemain', () => {
+    const base = { hier: '2026-11-13', demain: '2026-11-15', lecon: null, jeux: { jours: ['2026-11-12', '2026-11-13'] } }
+    expect(notifDuJour({ ...base, aujourdhui: '2026-11-14' })).toBeNull() // samedi
+    const dimanche = { hier: '2026-11-14', demain: '2026-11-16', aujourdhui: '2026-11-15' }
+    expect(notifDuJour({ ...dimanche, agenda: { controles: [{ matiere: 'maths', date: '2026-11-16' }] } })).toMatchObject({ tag: 'reviz-controle' })
+    expect(notifDuJour({ ...dimanche, agenda: { controles: [] } })).toBeNull()
+    // En semaine, rien ne change.
+    expect(notifDuJour({ hier: '2026-11-10', demain: '2026-11-12', aujourdhui: '2026-11-11' })).toMatchObject({ tag: 'reviz-jeux' })
+  })
+})

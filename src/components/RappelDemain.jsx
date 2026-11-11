@@ -29,8 +29,8 @@ function useDemande(lieu, condition = true) {
   return { visible, etat };
 }
 
-const TEXTE = `Un petit rappel à ${HEURE_RAPPEL}, seulement les jours où tu n’as pas encore révisé.`;
-const TEXTE_IPHONE = `Ajoute Réviz à ton écran d’accueil : tu pourras recevoir un rappel à ${HEURE_RAPPEL}, seulement les jours où tu n’as pas encore révisé.`;
+const TEXTE = `Un petit rappel à ${HEURE_RAPPEL}, seulement les jours d’école où tu n’as pas encore révisé.`;
+const TEXTE_IPHONE = `Ajoute Réviz à ton écran d’accueil : tu pourras recevoir un rappel à ${HEURE_RAPPEL}, seulement les jours d’école où tu n’as pas encore révisé.`;
 
 function useActivation(lieu) {
   const [reponse, setReponse] = useState(''); // '' | envoi | fait | refuse | plus-tard
@@ -98,7 +98,7 @@ export function RappelOuverture({ onClose }) {
     <Fenetre label="Rappel de révision" pose="hello" onClose={fermer}>
       <h2 className="rpa-titre rd-titre-fenetre">{iphone ? 'Un rappel sur ton iPhone ?' : `Un rappel à ${HEURE_RAPPEL} ?`}</h2>
       <p className="rpa-texte">{fini
-        ? (reponse === 'fait' ? `C’est noté : un rappel à ${HEURE_RAPPEL} les jours où tu n’as pas encore révisé.` : 'Pas de souci. Tu pourras l’activer plus tard dans Réglages.')
+        ? (reponse === 'fait' ? `C’est noté : un rappel à ${HEURE_RAPPEL} les jours d’école où tu n’as pas encore révisé.` : 'Pas de souci. Tu pourras l’activer plus tard dans Réglages.')
         : (iphone ? TEXTE_IPHONE : `${TEXTE} Pour garder ta série sans y penser.`)}</p>
       {!fini && (iphone
         ? <Link to="/installer" className="rpo-btn rd-lien-btn" onClick={() => { mesurer('rappel_installer', { lieu }); onClose?.(); }}>Voir comment</Link>

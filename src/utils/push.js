@@ -21,6 +21,12 @@ export const MAX_SANS_RETOUR = 3
 
 const APP = 'https://app.revizapp.fr'
 
+/** Samedi ou dimanche (« AAAA-MM-JJ ») ? */
+export function estWeekend(jour) {
+  const d = new Date(`${jour}T12:00:00Z`).getUTCDay()
+  return d === 0 || d === 6
+}
+
 /** Jours de suite de la partie du jour, en finissant `jusqua` (AAAA-MM-JJ). */
 export function serieJusqua(jours, jusqua) {
   const set = new Set(Array.isArray(jours) ? jours : [])
@@ -42,11 +48,14 @@ function titreCourt(s, max = 60) {
  * 3. le dernier chapitre ouvert (quiz direct) ;
  * 4. la partie du jour.
  * Jamais de reproche ni d'urgence inventée : une proposition courte.
- * @param {{ agenda?: object, jeux?: object, lecon?: object|null, hier: string, demain: string }} p
- * @returns {{ title: string, body: string, url: string, tag: string }}
+ * Le week-end (`aujourdhui` samedi ou dimanche), seulement un contrôle le lendemain : depuis le
+ * 11/11, les week-ends ne comptent pas dans la série, on ne relance donc pas pour rien.
+ * @param {{ agenda?: object, jeux?: object, lecon?: object|null, hier: string, demain: string, aujourdhui?: string }} p
+ * @returns {{ title: string, body: string, url: string, tag: string } | null} null : rien à envoyer
  */
-export function notifDuJour({ agenda = null, jeux = null, lecon = null, hier, demain }) {
+export function notifDuJour({ agenda = null, jeux = null, lecon = null, hier, demain, aujourdhui = null }) {
   const controle = (Array.isArray(agenda?.controles) ? agenda.controles : []).find(c => c?.date === demain)
+  if (!controle && aujourdhui && estWeekend(aujourdhui)) return null
   if (controle) {
     return {
       title: `${intituleControle(controle)} demain`,

@@ -37,7 +37,7 @@ export function PushBanner({ className = '' }) {
   }
 
   return (
-    <Bandeau teinte="lavande" titre={`Un rappel à ${HEURE_RAPPEL}`} suite="seulement les jours où tu n'as pas encore révisé"
+    <Bandeau teinte="lavande" titre={`Un rappel à ${HEURE_RAPPEL}`} suite="seulement les jours d'école où tu n'as pas encore révisé"
       action={{ onClick: activer, label: 'Activer', etat: envoi }} className={`push-banner ${className}`.trim()} />
   );
 }

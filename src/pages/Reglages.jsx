@@ -373,7 +373,7 @@ export default function Reglages() {
       <h2 id="rg-rappels" className="rg-h2">Rappels</h2>
       {ligne({
         icone: <BellIcon />, teinte: 'peche', label: 'Rappel quotidien',
-        sous: natif ? 'Tous les jours à 18 h 30' : `À ${HEURE_RAPPEL}, les jours où tu n’as pas encore révisé`,
+        sous: natif ? 'Tous les jours à 18 h 30' : `À ${HEURE_RAPPEL}, les jours d’école où tu n’as pas encore révisé`,
         droite: notifsAvailable && !isGuest ? <Interrupteur checked={reminderOn} onChange={handleReminderToggle} label={natif ? 'Activer le rappel de révision quotidien à 18 h 30' : `Activer le rappel de révision à ${HEURE_RAPPEL}`} /> : null,
       })}
       {!natif && isGuest && <p className="rg-note">Crée ton compte pour recevoir un rappel à {HEURE_RAPPEL}.</p>}

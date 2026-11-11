@@ -128,7 +128,9 @@ export async function envoyerNotifs({ db, envoyer, maintenant = Date.now(), jour
 
       const lecons = await ref.collection('lessons').orderBy('scannedAt', 'desc').limit(1).get().catch(() => null)
       const lecon = lecons?.docs?.[0]?.data() ?? null
-      const notif = notifDuJour({ agenda: p.agenda, jeux: p.jeux, lecon, hier, demain })
+      const notif = notifDuJour({ agenda: p.agenda, jeux: p.jeux, lecon, hier, demain, aujourdhui })
+      // Le week-end, sans contrôle le lendemain : rien (les week-ends ne comptent pas dans la série).
+      if (!notif) continue
       const charge = JSON.stringify(notif)
 
       let partie = false
