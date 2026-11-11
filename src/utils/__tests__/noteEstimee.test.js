@@ -52,3 +52,24 @@ describe('note estimée d’un contrôle', () => {
     expect(noteEstimee(controle, revs, T)).toBeNull()
   })
 })
+
+import { objectifNote, noteDeDepart, objectifDeLaDecouverte } from '../noteEstimee'
+describe('note visée de la découverte, en face de la note estimée', () => {
+  it('la moyenne vise 10, « 16 et plus » vise 16', () => {
+    expect(objectifNote('moyenne', 8.5)).toEqual({ cible: 10, atteint: false, ecart: 1.5 })
+    expect(objectifNote('moyenne', 12)).toEqual({ cible: 10, atteint: true, ecart: 0 })
+    expect(objectifNote('haut', 13)).toMatchObject({ cible: 16, ecart: 3 })
+    expect(objectifNote(null, 12)).toBeNull()
+  })
+  it('« Gagner 2 ou 3 points » part de la première note estimée du contrôle', () => {
+    localStorage.clear()
+    expect(noteDeDepart('c1', 11)).toBe(11)
+    expect(noteDeDepart('c1', 12.5)).toBe(11) // gardée la première fois
+    expect(objectifNote('progresser', 12.5, 11)).toEqual({ cible: 13.5, atteint: false, ecart: 1 })
+  })
+  it('lit l’objectif gardé par la découverte', () => {
+    localStorage.setItem('reviz-entree-u1', JSON.stringify({ controle: 'c1', blocage: 'retenir', objectif: 'haut' }))
+    expect(objectifDeLaDecouverte('u1')).toBe('haut')
+    expect(objectifDeLaDecouverte(null)).toBeNull()
+  })
+})

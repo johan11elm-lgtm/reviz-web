@@ -69,3 +69,37 @@ export function noteEstimee(controle, revisions = [], maintenant = Date.now()) {
 
 /** « 12 », « 12,5 » */
 export const ecrireNote = n => String(n).replace('.', ',')
+
+// -------------------------------------------------------
+// La note visée de la découverte (pages/Onboarding.jsx, reviz-entree-<uid>.objectif), reliée à la
+// note estimée (11/11) : « Avoir la moyenne » vise 10, « Viser 16 et plus » vise 16, « Gagner 2 ou
+// 3 points » vise 2,5 points au-dessus de la première note estimée de ce contrôle (gardée sur
+// l'appareil, reviz-note-depart-<id du contrôle>).
+// -------------------------------------------------------
+const CIBLES = { moyenne: 10, haut: 16 }
+export const GAIN_VISE = 2.5
+
+export function objectifDeLaDecouverte(uid) {
+  if (!uid) return null
+  try { return JSON.parse(localStorage.getItem(`reviz-entree-${uid}`) || 'null')?.objectif ?? null } catch { return null }
+}
+
+/** La première note estimée de ce contrôle, gardée la première fois qu'on la voit. */
+export function noteDeDepart(controleId, note) {
+  if (!controleId || !Number.isFinite(note)) return null
+  const cle = `reviz-note-depart-${controleId}`
+  try {
+    const deja = Number(localStorage.getItem(cle))
+    if (localStorage.getItem(cle) != null && Number.isFinite(deja)) return deja
+    localStorage.setItem(cle, String(note))
+  } catch { /* stockage indisponible */ }
+  return note
+}
+
+/** { cible, atteint, ecart } pour l'objectif, ou null sans objectif. */
+export function objectifNote(objectif, note, depart = note) {
+  if (!objectif || !Number.isFinite(note)) return null
+  const cible = objectif === 'progresser' ? Math.min(20, Math.round((depart + GAIN_VISE) * 2) / 2) : CIBLES[objectif]
+  if (!Number.isFinite(cible)) return null
+  return { cible, atteint: note >= cible, ecart: Math.max(0, Math.round((cible - note) * 2) / 2) }
+}

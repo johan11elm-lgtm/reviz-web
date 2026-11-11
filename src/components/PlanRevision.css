@@ -107,3 +107,5 @@
 .pr-note-txt { display: flex; flex-direction: column; gap: 1px; min-width: 0; font-size: 13.5px; line-height: 1.35; color: var(--rv-doux); }
 .pr-note-txt > b { font-size: 14.5px; color: var(--rv-encre); }
 .pr-note--vide { display: block; font-size: 13.5px; color: var(--rv-doux); }
+.pr-objectif { margin-top: 4px; font-size: 13.5px; font-weight: 700; color: var(--rv-encre); }
+.pr-objectif.is-atteint { color: #137A45; }

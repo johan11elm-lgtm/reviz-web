@@ -1,6 +1,7 @@
 import { Mascot } from './Mascot';
 import { planRevision, etatPreparation, planOuvert, quandEtape } from '../utils/planRevision';
-import { noteEstimee, ecrireNote } from '../utils/noteEstimee';
+import { noteEstimee, ecrireNote, objectifDeLaDecouverte, noteDeDepart, objectifNote } from '../utils/noteEstimee';
+import { useAuth } from '../context/AuthContext';
 import { loadRevisions } from '../services/revisionService';
 import { nbsp } from '../utils/typography';
 import './PlanRevision.css';
@@ -18,6 +19,9 @@ export function PlanRevision({ controle, agenda, hasRevizPlus, onLancer, onDeblo
   const etat = etatPreparation(controle, etapes);
   const ouvert = planOuvert(controle, agenda, hasRevizPlus);
   const estimee = noteEstimee(controle, loadRevisions());
+  // La note visée de la découverte, en face de la note estimée (11/11).
+  const { currentUser } = useAuth() ?? {};
+  const objectif = estimee ? objectifNote(objectifDeLaDecouverte(currentUser?.uid), estimee.note, noteDeDepart(controle.id, estimee.note)) : null;
   return (
     <section className={`pr ${className}`} aria-label={`Plan de révision : ${etat.label}`}>
       <div className="pr-tete">
@@ -31,6 +35,11 @@ export function PlanRevision({ controle, agenda, hasRevizPlus, onLancer, onDeblo
             <b>Note estimée</b>
             <span>{nbsp(`D’après ${estimee.seances > 1 ? `tes ${estimee.seances} séances` : 'ta séance'}${estimee.blanc ? ', contrôle blanc compris' : ''}.`)}
               {estimee.conseil && <> {nbsp(`Revois « ${estimee.conseil.titre} » : tu peux viser ${ecrireNote(estimee.conseil.visee)}.`)}</>}</span>
+            {objectif && (
+              <span className={`pr-objectif${objectif.atteint ? ' is-atteint' : ''}`}>{nbsp(objectif.atteint
+                ? `Objectif ${ecrireNote(objectif.cible)}/20 atteint. Garde le rythme.`
+                : `Ton objectif : ${ecrireNote(objectif.cible)}/20. Encore ${ecrireNote(objectif.ecart)} point${objectif.ecart > 1 ? 's' : ''}.`)}</span>
+            )}
           </span>
         </p>
       ) : (
