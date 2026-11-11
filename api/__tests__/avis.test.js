@@ -145,6 +145,19 @@ describe('signalement d’une réponse de Réviz IA', () => {
     expect(buildSignalement({ raison: 'autre', reponse: 'a'.repeat(MAX_REPONSE + 50) }, 'u').signalement.reponse).toHaveLength(MAX_REPONSE)
   })
 
+  it('une question d’exercice ou de quiz : ses propres raisons, son type et son format', () => {
+    const ex = JSON.stringify({ consigne: 'Range les dates', type: 'chronologie' })
+    expect(buildSignalement({ type: 'exercice', raison: 'plusieurs', reponse: ex, format: 'chronologie', question: 'Range les dates' }, 'u', NOW)).toEqual({
+      signalement: { uid: 'u', type: 'exercice', format: 'chronologie', raison: 'plusieurs', reponse: ex, question: 'Range les dates', createdAt: NOW, traite: false },
+    })
+    expect(buildSignalement({ type: 'quiz', raison: 'hors-programme', reponse: 'Q' }, 'u').signalement).toMatchObject({ type: 'quiz', raison: 'hors-programme' })
+    // Les raisons ne se mélangent pas.
+    expect(buildSignalement({ type: 'quiz', raison: 'choquant', reponse: 'Q' }, 'u')).toEqual({ error: 'RAISON' })
+    expect(buildSignalement({ raison: 'plusieurs', reponse: 'R' }, 'u')).toEqual({ error: 'RAISON' })
+    // Un type inconnu reste une réponse de Réviz IA, comme avant.
+    expect(buildSignalement({ type: 'pirate', raison: 'faux', reponse: 'R' }, 'u').signalement.type).toBeUndefined()
+  })
+
   it('exige un compte connecté', async () => {
     const res = mockRes()
     await handler({ method: 'POST', query: { op: 'signalement' }, body: { raison: 'faux', reponse: 'x', idToken: 'faux' } }, res)

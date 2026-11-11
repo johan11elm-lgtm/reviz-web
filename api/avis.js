@@ -77,16 +77,30 @@ export function buildAvis(body, now = new Date()) {
 }
 
 export const RAISONS = ['faux', 'choquant', 'hors-sujet', 'autre']
+// Depuis le 11/11 : une question d'exercice ou de quiz se signale aussi (idée reprise de Knowunity),
+// pour retrouver les questions confuses (17 % relevés à la main le 05/11).
+export const TYPES_SIGNALEMENT = ['ia', 'exercice', 'quiz']
+export const RAISONS_QUESTION = ['confuse', 'plusieurs', 'faux', 'hors-programme', 'trop-dur', 'autre']
 export const MAX_REPONSE = 6000
 export const MAX_QUESTION = 2000
 
-/** Valide un signalement de réponse de Réviz IA : { signalement } ou { error }. */
+/**
+ * Valide un signalement : une réponse de Réviz IA (type 'ia', par défaut), une question d'exercice
+ * ou de quiz (type 'exercice' | 'quiz', `reponse` = la question entière, `format` = son format).
+ * Renvoie { signalement } ou { error }.
+ */
 export function buildSignalement(body, uid, now = new Date()) {
   if (!body || typeof body !== 'object') return { error: 'BAD_BODY' }
-  if (!RAISONS.includes(body.raison)) return { error: 'RAISON' }
+  const type = TYPES_SIGNALEMENT.includes(body.type) ? body.type : 'ia'
+  if (!(type === 'ia' ? RAISONS : RAISONS_QUESTION).includes(body.raison)) return { error: 'RAISON' }
   const reponse = texte(body.reponse, MAX_REPONSE)
   if (!reponse) return { error: 'VIDE' }
   const signalement = { uid, raison: body.raison, reponse, createdAt: now, traite: false }
+  if (type !== 'ia') {
+    signalement.type = type
+    const format = texte(body.format, 40)
+    if (format) signalement.format = format
+  }
   const question = texte(body.question, MAX_QUESTION)
   const precision = texte(body.precision, 500)
   const lessonId = texte(body.lessonId, 200)

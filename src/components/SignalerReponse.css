@@ -21,3 +21,6 @@
 }
 .sig-erreur { margin: 0; font-size: 14px; font-weight: 600; color: var(--rv-rouge-texte, #C0392B); }
 .ban-btn:disabled { opacity: .5; cursor: default; }
+
+/* Dans la correction d’un exercice ou du quiz (11/11) : discret, à gauche, sous l’explication. */
+.qz-signaler { align-self: flex-start; margin-top: 0; }

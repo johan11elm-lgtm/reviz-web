@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { useModalA11y } from '../hooks/useModalA11y';
 import { useIsDesktop } from '../hooks/useMediaQuery';
 import { signalerReponse } from '../services/signalementService';
+import { mesurer } from '../services/mesure';
 import './battle/AnnonceBattle.css';
 import './SignalerReponse.css';
 
@@ -12,6 +13,19 @@ const RAISONS = [
   ['hors-sujet', 'Ça ne répond pas à ma question'],
   ['autre', 'Autre chose'],
 ];
+// Une question d'exercice ou de quiz (11/11, mêmes valeurs que RAISONS_QUESTION dans api/avis.js).
+const RAISONS_QUESTION = [
+  ['confuse', 'La question n’est pas claire'],
+  ['plusieurs', 'Plusieurs réponses sont justes'],
+  ['faux', 'La correction est fausse'],
+  ['hors-programme', 'Ce n’est pas dans mon programme'],
+  ['trop-dur', 'C’est beaucoup trop dur'],
+  ['autre', 'Autre chose'],
+];
+const TEXTES = {
+  ia: { titre: 'Signaler cette réponse', texte: 'Réviz IA peut se tromper. Dis-nous ce qui ne va pas : on relit la réponse et on corrige.', merci: 'Merci, on relit cette réponse.' },
+  question: { titre: 'Signaler cette question', texte: 'Une question mal posée ? Dis-nous ce qui ne va pas : on la relit et on la corrige.', merci: 'Merci, on relit cette question.' },
+};
 
 /**
  * « Signaler » sous une réponse de Réviz IA : l'élève choisit une raison, la réponse part avec
@@ -22,21 +36,23 @@ const RAISONS = [
  * @param {string|null} [lessonId]
  * @param {string} [className]
  */
-export function SignalerReponse({ reponse, question, lessonId = null, className = '' }) {
+export function SignalerReponse({ reponse, question, lessonId = null, className = '', type = 'ia', format }) {
   const [ouvert, setOuvert] = useState(false);
   const [envoye, setEnvoye] = useState(false);
-  if (envoye) return <p className={`sig-merci ${className}`}>Merci, on relit cette réponse.</p>;
+  const textes = TEXTES[type === 'ia' ? 'ia' : 'question'];
+  if (envoye) return <p className={`sig-merci ${className}`} role="status">{textes.merci}</p>;
   return (
     <>
       <button type="button" className={`sig-lien ${className}`} onClick={() => setOuvert(true)}>
         <Drapeau /> Signaler
       </button>
-      {ouvert && <Feuille reponse={reponse} question={question} lessonId={lessonId} onClose={() => setOuvert(false)} onEnvoye={() => { setOuvert(false); setEnvoye(true); }} />}
+      {ouvert && <Feuille {...{ reponse, question, lessonId, type, format, textes }} onClose={() => setOuvert(false)} onEnvoye={() => { setOuvert(false); setEnvoye(true); }} />}
     </>
   );
 }
 
-function Feuille({ reponse, question, lessonId, onClose, onEnvoye }) {
+function Feuille({ reponse, question, lessonId, type, format, textes, onClose, onEnvoye }) {
+  const raisons = type === 'ia' ? RAISONS : RAISONS_QUESTION;
   const isDesktop = useIsDesktop();
   const ref = useModalA11y(onClose);
   const [raison, setRaison] = useState(null);
@@ -49,7 +65,8 @@ function Feuille({ reponse, question, lessonId, onClose, onEnvoye }) {
     setEnCours(true);
     setErreur(null);
     try {
-      await signalerReponse({ raison, reponse, question, precision: precision.trim(), lessonId });
+      await signalerReponse({ raison, reponse, question, precision: precision.trim(), lessonId, ...(type === 'ia' ? {} : { type, format }) });
+      if (type !== 'ia') mesurer('signalement', { type, raison, format });
       onEnvoye();
     } catch (err) {
       setErreur(err.message === 'UNAUTHORIZED' ? 'Reconnecte-toi, puis réessaie.' : 'L’envoi n’a pas marché. Vérifie ta connexion et réessaie.');
@@ -61,10 +78,10 @@ function Feuille({ reponse, question, lessonId, onClose, onEnvoye }) {
     <div className="ban-voile" onClick={onClose}>
       <div className={`ban-feuille${isDesktop ? ' ban-feuille--fenetre' : ''}`} ref={ref} role="dialog" aria-modal="true" aria-labelledby="sig-titre" onClick={e => e.stopPropagation()}>
         {!isDesktop && <span className="ban-poignee" aria-hidden="true" />}
-        <h2 className="ban-titre sig-titre" id="sig-titre">Signaler cette réponse</h2>
-        <p className="ban-texte">Réviz IA peut se tromper. Dis-nous ce qui ne va pas : on relit la réponse et on corrige.</p>
+        <h2 className="ban-titre sig-titre" id="sig-titre">{textes.titre}</h2>
+        <p className="ban-texte">{textes.texte}</p>
         <div className="sig-raisons" role="radiogroup" aria-labelledby="sig-titre">
-          {RAISONS.map(([v, label]) => (
+          {raisons.map(([v, label]) => (
             <button key={v} type="button" role="radio" aria-checked={raison === v} className={`sig-raison${raison === v ? ' sig-raison--choisie' : ''}`} onClick={() => setRaison(v)}>
               <span className="sig-rond" aria-hidden="true" />{label}
             </button>

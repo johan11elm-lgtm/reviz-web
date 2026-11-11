@@ -3,6 +3,7 @@ import { useNavigate, useLocation, Navigate } from 'react-router-dom'
 import { fermerVersFiche, versExercice } from '../utils/navigation'
 import { recordRevision, markRevisionDone, loadRevisions } from '../services/revisionService'
 import { Mascot } from '../components/Mascot'
+import { SignalerReponse } from '../components/SignalerReponse'
 import { Etincelles } from '../components/Etincelles'
 import { MissingLessonState } from '../components/MissingLessonState'
 import { CoachChat } from '../components/CoachChat'
@@ -319,6 +320,10 @@ function Seance({ ai, seance, premiere, nouvelle }) {
       </div>
       {verdict === 'faux' && bonneSeule && <p className="ex-bonne">Bonne réponse : <b>{nbsp(ex.aRetenir.bonne)}</b></p>}
       {ex.explication && <p className="qz-correction-txt">{nbsp(ex.explication)}</p>}
+      {/* Une question mal posée se signale (11/11) : elle part entière, avec son format, pour être relue. */}
+      {!isGuest && currentUser && (
+        <SignalerReponse key={ex.id} type="exercice" format={ex.type} reponse={JSON.stringify(ex)} question={ex.consigne} lessonId={lessonId} className="qz-signaler" />
+      )}
       {verdict === 'faux' && iaDispo && (
         <button type="button" className="qz-pourquoi" onClick={() => setCoach(`J'ai raté cet exercice : « ${ex.consigne} — ${ex.bulle} ». La bonne réponse est « ${ex.aRetenir.bonne} ». Tu peux m'expliquer ?`)}>
           <span className="qz-ia-anneau" aria-hidden="true"><span><Mascot pose="coach" size={30} alt="" /></span></span>

@@ -6,6 +6,7 @@ import { loadLessons } from '../services/historyService'
 import { getCardState, countDueCards } from '../services/srsService'
 import { Pantin } from '../components/Pantin'
 import { Mascot } from '../components/Mascot'
+import { SignalerReponse } from '../components/SignalerReponse'
 import { Etincelles } from '../components/Etincelles'
 import { BulleReviz } from '../components/reviz/BulleReviz'
 import { RouteSerie } from '../components/reviz/RouteSerie'
@@ -407,6 +408,11 @@ function QuizSession() {
         <span className="qz-verdict">{juste ? 'Bonne réponse' : 'Pas tout à fait'}</span>
       </div>
       {q.explanation && <p className="qz-correction-txt">{nbsp(q.explanation)}</p>}
+      {/* Une question mal posée se signale (11/11), entière, pour être relue. */}
+      {!isGuest && currentUser && (
+        <SignalerReponse key={idx} type="quiz" format="qcm" lessonId={coachLessonId} className="qz-signaler" question={q.question}
+          reponse={JSON.stringify({ question: q.question, choices: q.choices, correct: q.correct, explanation: q.explanation })} />
+      )}
       {!juste && iaDispo && (
         <button type="button" className="qz-pourquoi" onClick={demanderPourquoi}>
           <span className="qz-ia-anneau" aria-hidden="true"><span><Mascot pose="coach" size={30} alt="" /></span></span>
