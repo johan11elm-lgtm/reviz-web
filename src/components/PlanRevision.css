@@ -99,3 +99,11 @@
 .pr-go { height: 40px; border-radius: 12px; }
 .pr-debloquer { border-radius: 12px; background: var(--rv-vif-plein); }
 .pr-txt b { line-height: 1.25; }
+
+/* Note estimée (11/11) : le chiffre en grand à gauche, ce sur quoi elle repose et le conseil à droite. */
+.pr-note { display: flex; align-items: center; gap: 12px; margin: 0; padding: 10px 12px; border-radius: 18px; background: var(--rv-carte); box-shadow: inset 0 0 0 1.5px var(--rv-ligne); }
+.pr-note-chiffre { flex: none; display: flex; align-items: baseline; gap: 1px; font-family: var(--font-display); font-size: 15px; font-weight: 800; color: var(--rv-doux); }
+.pr-note-chiffre b { font-size: 30px; letter-spacing: -.03em; color: var(--rv-encre); }
+.pr-note-txt { display: flex; flex-direction: column; gap: 1px; min-width: 0; font-size: 13.5px; line-height: 1.35; color: var(--rv-doux); }
+.pr-note-txt > b { font-size: 14.5px; color: var(--rv-encre); }
+.pr-note--vide { display: block; font-size: 13.5px; color: var(--rv-doux); }

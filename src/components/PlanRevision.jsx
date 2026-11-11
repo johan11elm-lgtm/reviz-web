@@ -1,5 +1,8 @@
 import { Mascot } from './Mascot';
 import { planRevision, etatPreparation, planOuvert, quandEtape } from '../utils/planRevision';
+import { noteEstimee, ecrireNote } from '../utils/noteEstimee';
+import { loadRevisions } from '../services/revisionService';
+import { nbsp } from '../utils/typography';
 import './PlanRevision.css';
 
 /**
@@ -7,17 +10,32 @@ import './PlanRevision.css';
  * sur les points ratés, J-1 contrôle blanc, et où en est l'élève (« Prêt », « En bonne voie »,
  * « Pas encore prêt »). Sans Réviz+, seul le plan du premier contrôle noté est ouvert en entier ;
  * pour les suivants, la première étape seulement, et de quoi débloquer le reste.
+ * Depuis le 11/11, la note estimée d'après les séances (utils/noteEstimee.js), et le chapitre à
+ * revoir pour viser plus haut.
  */
 export function PlanRevision({ controle, agenda, hasRevizPlus, onLancer, onDebloquer, className = '' }) {
   const etapes = planRevision(controle);
   const etat = etatPreparation(controle, etapes);
   const ouvert = planOuvert(controle, agenda, hasRevizPlus);
+  const estimee = noteEstimee(controle, loadRevisions());
   return (
     <section className={`pr ${className}`} aria-label={`Plan de révision : ${etat.label}`}>
       <div className="pr-tete">
         <span className="pr-titre">Ton plan de révision</span>
         <span className={`pr-etat pr-etat--${etat.id}`}>{etat.label}</span>
       </div>
+      {estimee ? (
+        <p className="pr-note">
+          <span className="pr-note-chiffre"><b>{ecrireNote(estimee.note)}</b>/20</span>
+          <span className="pr-note-txt">
+            <b>Note estimée</b>
+            <span>{nbsp(`D’après ${estimee.seances > 1 ? `tes ${estimee.seances} séances` : 'ta séance'}${estimee.blanc ? ', contrôle blanc compris' : ''}.`)}
+              {estimee.conseil && <> {nbsp(`Revois « ${estimee.conseil.titre} » : tu peux viser ${ecrireNote(estimee.conseil.visee)}.`)}</>}</span>
+          </span>
+        </p>
+      ) : (
+        <p className="pr-note pr-note--vide">{nbsp('Fais une séance sur ce contrôle : je t’estime ta note.')}</p>
+      )}
       <ol className="pr-etapes">
         {etapes.map((e, i) => {
           const ferme = !ouvert && i > 0;
