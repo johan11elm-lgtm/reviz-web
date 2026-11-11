@@ -11,6 +11,8 @@
 export const JOUR_MS = 24 * 60 * 60 * 1000
 export const DELAI_ADRESSE_MS = 15 * JOUR_MS
 export const DELAI_REPONSE_MS = 10 * JOUR_MS
+// Affiché avant le bouton de paiement d'un parent : payer vaut accord (api/_accordParent.js).
+export const TEXTE_ACCORD_PAIEMENT = 'En payant, vous confirmez être son parent ou responsable légal et vous autorisez son compte Réviz.'
 
 /**
  * @param {{ under15:boolean, consent:object|null, inscritLe?:number|null, now?:number }} p

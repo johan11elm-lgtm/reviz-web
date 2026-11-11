@@ -66,6 +66,12 @@ export async function mockApiRoutes(page) {
         ok: true, lien: `https://app.revizapp.fr/api/approve-consent?uid=${jeton.user_id}&e=1900000000&s=${'a'.repeat(32)}${score}`,
       }) })
     }
+    // Comme enregistrerDemande (api/send-parental-consent.js) : un accord déjà donné n'est jamais
+    // remis « en attente » (ex. : Réviz+ offert par un parent, activé pendant l'inscription).
+    const existant = await fetch(`http://127.0.0.1:8080/v1/projects/demo-reviz/databases/(default)/documents/users/${jeton.user_id}/parentalConsent/consent`, { headers: { Authorization: 'Bearer owner' } })
+    if (existant.ok && (await existant.json())?.fields?.status?.stringValue === 'approved') {
+      return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ ok: true, alreadyApproved: true }) })
+    }
     const maintenant = String(Date.now())
     await ecrireConsentementEmulateur(jeton.user_id, {
       status: { stringValue: 'pending' },

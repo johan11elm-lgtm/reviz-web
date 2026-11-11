@@ -16,6 +16,7 @@ function fauxDb(initial = {}) {
     chemin: `${col}/${id}`,
     get: async () => ({ exists: docs[`${col}/${id}`] != null, data: () => docs[`${col}/${id}`] }),
     set: async (v, o) => { docs[`${col}/${id}`] = o?.merge ? fusion(docs[`${col}/${id}`], v) : v },
+    collection: sous => ({ doc: id2 => ref(`${col}/${id}/${sous}`, id2) }),
   })
   return {
     docs,
@@ -107,5 +108,32 @@ describe('Réviz+ offert par un parent', () => {
     expect(m.subject).toBe('Le code Réviz+ de votre enfant')
     expect(m.html).toContain('ABCD-EFGH')
     expect(m.html).toContain('https://app.revizapp.fr/?cadeau=ABCDEFGH')
+  })
+})
+
+describe('Réviz+ offert par un parent : le paiement vaut accord parental (11/11)', () => {
+  async function activer(consent) {
+    const db = fauxDb(consent ? { 'users/tom/parentalConsent/consent': consent } : {})
+    const stripe = fauxStripe()
+    await enregistrerCadeau(db, await stripe.checkout.sessions.retrieve(SESSION), { maintenant: T, secret: SECRET })
+    await appel({ action: 'activer', idToken: 'jeton-tom', code: CODE }, { db, stripe })
+    return db.docs['users/tom/parentalConsent/consent']
+  }
+  it('un élève qui attend l’autorisation : accordée, avec l’adresse du parent', async () => {
+    expect(await activer({ status: 'pending', createdAt: T - 1000, germe: 'g' })).toMatchObject({ status: 'approved', approvedAt: T, via: 'paiement', parentEmail: 'parent@famille.test', germe: null, token: null })
+  })
+  it('l’adresse déjà donnée par l’élève est gardée', async () => {
+    expect((await activer({ status: 'pending', parentEmail: 'maman@x.test' })).parentEmail).toBe('maman@x.test')
+  })
+  it('un refus reste un refus ; rien n’est créé pour un élève sans demande', async () => {
+    expect((await activer({ status: 'refused', refusedAt: 1 })).status).toBe('refused')
+    expect(await activer(null)).toBeUndefined()
+  })
+  it('code activé pendant l’inscription, avant la trace « en attente » : accordé d’après la date de naissance', async () => {
+    const db = fauxDb({ 'users/tom': { birthDate: '2014-03-01' } })
+    const stripe = fauxStripe()
+    await enregistrerCadeau(db, await stripe.checkout.sessions.retrieve(SESSION), { maintenant: T, secret: SECRET })
+    await appel({ action: 'activer', idToken: 'jeton-tom', code: CODE }, { db, stripe })
+    expect(db.docs['users/tom/parentalConsent/consent']).toMatchObject({ status: 'approved', via: 'paiement', parentEmail: 'parent@famille.test' })
   })
 })

@@ -9,6 +9,7 @@ import { getDb } from './_firebaseAdmin.js'
 import { Resend } from 'resend'
 import { enregistrerCadeau, mailCadeau } from './_cadeau.js'
 import { REPONDRE_A } from './_bilanParent.js'
+import { accordParPaiement } from './_accordParent.js'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
@@ -97,6 +98,13 @@ export default async function handler(req, res) {
           { merge: true }
         )
         console.log(`[stripe-webhook] User ${uid} upgraded to premium`)
+        // Payé par un parent depuis la page « Offrir » (api/_demandePlus.js) : vaut accord parental.
+        if (session.metadata?.payeur === 'parent') {
+          try {
+            const r = await accordParPaiement(db, uid, { parentEmail: session.customer_details?.email ?? session.customer_email })
+            console.log(`[stripe-webhook] accord parental ${uid} : ${r}`)
+          } catch (err) { console.error('[stripe-webhook] accord parental', err?.message || err) }
+        }
       } else if (session.metadata?.cadeau === '1') {
         // Réviz+ offert par un parent sur /parents (api/_cadeau.js) : le code de son enfant, par e-mail aussi.
         const { code, cadeau, nouveau } = await enregistrerCadeau(db, session)

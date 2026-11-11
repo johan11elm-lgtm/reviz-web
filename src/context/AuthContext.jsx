@@ -751,6 +751,10 @@ export function AuthProvider({ children }) {
       setIsPremium(true);
       setPremiumStatus(true);
       refreshPremium();
+      // Le paiement du parent vaut son accord (api/_accordParent.js) : plus de demande à afficher,
+      // sauf après un refus, qui reste valable.
+      setConsent(c => (c?.status === 'refuse' ? c : { status: 'ok', parentEmail: null, joursRestants: null }));
+      setConsentBlocked(b => (consent?.status === 'refuse' ? b : false));
       return { ok: true, formule: data.formule };
     } catch {
       return { ok: false, erreur: 'RESEAU', reseau: true };

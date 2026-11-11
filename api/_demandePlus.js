@@ -20,7 +20,7 @@
 import { signatureDesabo, signatureValide, escapeHtml, prenomPropre, C, POLICE } from './_rappels.js'
 import { REPONDRE_A } from './_bilanParent.js'
 import { prixDe, FORMULES } from './_prix.js'
-import { JOUR_MS } from '../src/utils/consent.js'
+import { JOUR_MS, TEXTE_ACCORD_PAIEMENT } from '../src/utils/consent.js'
 import { LIMITE_EXERCICES_GRATUIT } from './_essaiPlus.js'
 
 const APP = 'https://app.revizapp.fr'
@@ -237,5 +237,5 @@ export async function routeOffrir(req, res, { db, creerSession, maintenant = Dat
     + texte(`Exercices illimités, scans de leçons illimités et 50 questions par jour à Réviz IA, sur le compte de ${nom}. Le programme reste gratuit.`)
     + formulaire(base, 'annuel', `${annuel.montant} par an`, `soit ${annuel.parMois} par mois`, true)
     + formulaire(base, 'mensuel', `${mensuel.montant} par mois`, 'sans engagement', false)
-    + `<p style="margin:12px 0 0; font-size:13px; line-height:1.5; color:${C.second};">Paiement sécurisé par Stripe. Renouvellement automatique, résiliable à tout moment.</p>`))
+    + `<p style="margin:12px 0 0; font-size:13px; line-height:1.5; color:${C.second};">${TEXTE_ACCORD_PAIEMENT} Paiement sécurisé par Stripe. Renouvellement automatique, résiliable à tout moment.</p>`))
 }

@@ -21,7 +21,8 @@
 // -------------------------------------------------------
 import { randomBytes, randomUUID, timingSafeEqual } from 'node:crypto'
 import { signatureDesabo, signatureValide } from './_rappels.js'
-import { JOUR_MS, DELAI_ADRESSE_MS } from '../src/utils/consent.js'
+import { JOUR_MS, DELAI_ADRESSE_MS, TEXTE_ACCORD_PAIEMENT } from '../src/utils/consent.js'
+import { isUnder15 } from '../src/utils/levels.js'
 
 const APP = 'https://app.revizapp.fr'
 const UID_OK = /^[A-Za-z0-9]{10,128}$/
@@ -103,4 +104,43 @@ export function partageValide(uid, exp, s, { maintenant = Date.now(), secret = p
   const e = Number(exp)
   if (!Number.isInteger(e) || e * 1000 < maintenant || e * 1000 > maintenant + DUREE_PARTAGE_MS + JOUR_MS) return false
   return signatureValide(uid, s, secret, porteePartage(e))
+}
+
+// ── Accord donné en payant (décision de Johan, 11/11) ──────────────────────
+// Un parent qui paie Réviz+ pour son enfant (page « Offrir », /parents) donne son
+// accord : la page de paiement le dit avant le bouton, et la carte bancaire tient
+// lieu de vérification. Seulement pour un élève qui attend une autorisation (le
+// document existe, posé à l'inscription des moins de 15 ans, ou le profil dit moins de
+// 15 ans) : rien n'est créé pour les autres, qui recevraient sinon les e-mails des parents. Un refus reste un refus.
+
+export { TEXTE_ACCORD_PAIEMENT }
+
+/**
+ * @returns {Promise<'accorde'|'deja'|'refuse'|'sans-demande'>}
+ */
+export async function accordParPaiement(db, uid, { parentEmail = null, maintenant = Date.now() } = {}) {
+  if (!uid) return 'sans-demande'
+  const ref = db.collection('users').doc(uid).collection('parentalConsent').doc('consent')
+  const snap = await ref.get()
+  const email = typeof parentEmail === 'string' && parentEmail.includes('@') ? parentEmail.trim().toLowerCase() : null
+  if (!snap.exists) {
+    // Code activé pendant l'inscription, avant que l'app pose sa trace 'pending' : la date de
+    // naissance du profil dit s'il en fallait une. (Les règles interdisent ensuite à l'app de
+    // réécrire le document : l'accord n'est pas écrasé.)
+    const profil = await db.collection('users').doc(uid).get()
+    if (!isUnder15(profil.exists ? profil.data()?.birthDate : null)) return 'sans-demande'
+    await ref.set({ status: 'approved', createdAt: maintenant, approvedAt: maintenant, via: 'paiement', ...(email && { parentEmail: email }) })
+    return 'accorde'
+  }
+  const d = snap.data() ?? {}
+  if (d.status === 'approved') return 'deja'
+  if (d.status === 'refused') return 'refuse'
+  await ref.set({
+    status: 'approved',
+    approvedAt: maintenant,
+    via: 'paiement',
+    ...(!d.parentEmail && email && { parentEmail: email }),
+    ...JETON_CONSOMME,
+  }, { merge: true })
+  return 'accorde'
 }

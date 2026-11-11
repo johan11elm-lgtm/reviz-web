@@ -11,6 +11,7 @@ import { prixDe, FORMULE_PAR_DEFAUT } from '../../api/_prix.js';
 import { tarifFondateurOuvert } from '../../api/_lancement.js';
 import { parSemaine } from '../utils/remiseQuotas';
 import { nbsp } from '../utils/typography';
+import { TEXTE_ACCORD_PAIEMENT } from '../utils/consent';
 import './Profs.css';
 import './Parents.css';
 
@@ -116,7 +117,7 @@ export default function Parents() {
               {etat === 'email' && <p className="pa-erreur" role="alert">Cette adresse ne semble pas valable.</p>}
               {etat === 'erreur' && <p className="pa-erreur" role="alert">Le paiement n’a pas pu s’ouvrir. Réessayez dans un instant.</p>}
               <button type="submit" className="pr-btn pa-btn" disabled={etat === 'envoi'}>{etat === 'envoi' ? 'Ouverture du paiement…' : 'Offrir Réviz+'}</button>
-              <p className="pa-aide pa-aide--centre">{nbsp('Paiement sécurisé par Stripe. Résiliable à tout moment.')}</p>
+              <p className="pa-aide pa-aide--centre">{nbsp(`${TEXTE_ACCORD_PAIEMENT.replace('son compte', 'le compte de votre enfant')} Paiement sécurisé par Stripe. Résiliable à tout moment.`)}</p>
             </form>
           ) : (
             <section className="pr-carte pa-carte"><p className="pr-carte-texte">{nbsp('Réviz+ ne se prend pas dans l’app iPhone.')}</p></section>

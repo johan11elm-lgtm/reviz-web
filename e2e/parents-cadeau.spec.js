@@ -24,7 +24,7 @@ const fauxStripe = {
   checkout: { sessions: { retrieve: async id => ({ id, status: 'complete', payment_status: 'paid', customer: 'cus_e2e', subscription: 'sub_e2e', metadata: { cadeau: '1', formule: 'annuel', fondateur: 'false' }, customer_details: { email: 'parent@famille.test' } }) } },
   subscriptions: { retrieve: async () => ({ status: 'active' }), update: async () => ({}) },
 }
-async function brancherCadeau(page, appels) {
+async function brancherCadeau(page, appels, session = SESSION) {
   await page.addInitScript(() => { try { delete Navigator.prototype.share } catch { /* rien */ } })
   await page.route('**/api/abonnement?op=cadeau', async route => {
     const corps = route.request().postDataJSON()
@@ -33,7 +33,7 @@ async function brancherCadeau(page, appels) {
     let reponse = null
     const res = { status(c) { statut = c; return res }, json(b) { reponse = b; return res } }
     // « Stripe » renvoie tout de suite sur la page de remerciement, comme après un paiement réussi.
-    const creerSession = async () => `/parents/merci?session=${SESSION}`
+    const creerSession = async () => `/parents/merci?session=${session}`
     await routeCadeau({ body: corps }, res, { db: getFirestore(admin), auth: getAuth(admin), stripe: fauxStripe, creerSession })
     return route.fulfill({ status: statut, contentType: 'application/json', body: JSON.stringify(reponse) })
   })
@@ -90,5 +90,42 @@ test('un parent offre Réviz+ sur /parents, son enfant l’active avec le lien',
   expect(await enfant.evaluate(() => localStorage.getItem('reviz-cadeau'))).toBeNull()
   // Une seule activation, dans la même session que l'inscription.
   expect(appelsEnfant.filter(c => c.action === 'activer')).toHaveLength(1)
+  await contexteEnfant.close()
+})
+
+test('moins de 15 ans : le code d’un parent vaut son accord, plus de demande à l’écran', async ({ browser }) => {
+  test.setTimeout(90_000)
+  const session = `cs_test_e2eaccord${Date.now()}x`
+  const contexteParent = await browser.newContext({ viewport: { width: 390, height: 844 } })
+  const parent = await contexteParent.newPage()
+  await brancherCadeau(parent, [], session)
+  await parent.goto('/parents')
+  await expect(parent.getByText('vous confirmez être son parent ou responsable légal', { exact: false })).toBeVisible({ timeout: 15_000 })
+  await parent.getByLabel('Votre adresse e-mail').fill('parent@famille.test')
+  await parent.getByRole('button', { name: 'Offrir Réviz+' }).click()
+  const champ = parent.getByLabel('Le lien à envoyer à votre enfant')
+  await expect(champ).toHaveValue(/\?cadeau=/, { timeout: 15_000 })
+  const lien = new URL(await champ.inputValue())
+  await contexteParent.close()
+
+  const contexteEnfant = await browser.newContext({ viewport: { width: 390, height: 844 } })
+  const enfant = await contexteEnfant.newPage()
+  await mockApiRoutes(enfant)
+  await brancherCadeau(enfant, [], session)
+  await enfant.goto(lien.pathname + lien.search)
+  await expect(enfant.getByText('Un parent t’offre Réviz+')).toBeVisible({ timeout: 15_000 })
+  await signup(enfant, { prenom: 'Inès', birthDate: '2014-03-01', parentEmail: 'maman@famille.test' })
+  await expect(enfant).toHaveURL(/onboarding/, { timeout: 15_000 })
+  await passerDecouverte(enfant)
+  await fermerAnnonces(enfant)
+  await expect(enfant.getByRole('status').filter({ hasText: 'Réviz+ est activé' })).toBeVisible({ timeout: 15_000 })
+  const uid = await enfant.evaluate(() => Object.keys(localStorage).find(k => k.startsWith('reviz-onboarded-'))?.slice('reviz-onboarded-'.length))
+  await expect.poll(async () => (await getFirestore(admin).doc(`users/${uid}/parentalConsent/consent`).get()).data()?.status, { timeout: 15_000 }).toBe('approved')
+  const consent = (await getFirestore(admin).doc(`users/${uid}/parentalConsent/consent`).get()).data()
+  expect(consent).toMatchObject({ via: 'paiement' })
+  await expect(enfant.getByText('Accord parental en attente')).toHaveCount(0)
+  await enfant.reload()
+  await expect(enfant.getByText('Accord parental en attente')).toHaveCount(0)
+  await capture(enfant, '05-accueil-moins-de-15-390')
   await contexteEnfant.close()
 })

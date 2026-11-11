@@ -19,6 +19,7 @@ import { createHmac } from 'node:crypto'
 import { ALPHABET_CADEAU, normaliserCodeCadeau, lienCadeau, ecrireCodeCadeau } from '../src/utils/cadeau.js'
 import { FORMULES } from './_prix.js'
 import { planForStatusCadeau } from './_cadeauPlan.js'
+import { accordParPaiement } from './_accordParent.js'
 
 const APP = 'https://app.revizapp.fr'
 const EMAIL_OK = /^[^\s@<>"']{1,64}@[^\s@<>"']{1,190}\.[a-z]{2,24}$/i
@@ -149,8 +150,12 @@ export async function routeCadeau(req, res, { db, auth, stripe, creerSession, ma
         annuleLe: null,
       }, { merge: true })
       tx.set(cadeauRef, { uid: qui.uid, activeLe: maintenant }, { merge: true })
-      return { status: 200, body: { ok: true, formule: cadeau.formule } }
+      return { status: 200, body: { ok: true, formule: cadeau.formule }, email: cadeau.email ?? null }
     })
+    // Le parent a payé (et l'a confirmé sur /parents) : vaut accord parental pour cet élève.
+    if (resultat.status === 200 && !resultat.body.deja) {
+      await accordParPaiement(db, qui.uid, { parentEmail: resultat.email, maintenant }).catch(err => console.error('[cadeau] accord parental', err?.message || err))
+    }
     // Pour s'y retrouver dans Stripe : l'abonnement porte désormais l'élève.
     if (resultat.status === 200 && !resultat.body.deja && subId && stripe) {
       stripe.subscriptions.update(subId, { metadata: { firebaseUid: qui.uid, payeur: 'parent', cadeau: '1' } }).catch(() => {})
