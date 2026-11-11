@@ -1,0 +1,15 @@
+/* « Explique à voix haute » (components/ExpliqueVoix) : la ligne de la fiche, la feuille de dictée. */
+.ev-ligne { width: 100%; border: 0; font: inherit; text-align: left; cursor: pointer; }
+.ev-rond { flex: none; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: var(--sk-menthe, #CDEFD9); color: #042A65; }
+.ev-bouton { display: inline-flex; align-items: center; gap: 6px; }
+.ev-texte {
+  width: 100%; box-sizing: border-box; padding: 12px 14px; border: 1.5px solid var(--rv-ligne); border-radius: 16px;
+  background: var(--rv-carte); font: inherit; font-size: 16px; line-height: 1.45; color: var(--rv-encre); resize: none;
+}
+.ev-texte:focus-visible { outline: 3px solid var(--rv-encre); outline-offset: 2px; }
+.ev-erreur { margin: 0; font-size: 14px; font-weight: 600; color: #B3261E; }
+.rpo-btn.rpo-btn--second svg { margin-right: 6px; vertical-align: -3px; }
+.ev-ecoute { display: inline-flex; align-items: center; justify-content: center; gap: 10px; }
+.ev-onde { width: 12px; height: 12px; border-radius: 50%; background: #fff; animation: ev-pouls 1s ease-in-out infinite; }
+@keyframes ev-pouls { 0%, 100% { transform: scale(.7); opacity: .7; } 50% { transform: scale(1.15); opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .ev-onde { animation: none; } }

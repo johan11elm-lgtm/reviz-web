@@ -1,3 +1,4 @@
+import { ExpliqueVoix } from '../components/ExpliqueVoix';
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -384,6 +385,8 @@ export default function Analyse() {
   }
   const [question, setQuestion] = useState('');
   const demander = q => navigate(`/coach?lesson=${coachLessonId}`, { state: { question: q } });
+  // « Explique à voix haute » (11/11) : ce que l'élève a dit part tout de suite à Réviz IA.
+  const expliquer = q => navigate(`/coach?lesson=${coachLessonId}`, { state: { question: q, envoyer: true } });
 
   // ── Blocs de la page, façon fiche chapitre de l'app Nomad (29/10) ──
   const boutonRetour = (
@@ -503,6 +506,7 @@ export default function Analyse() {
       </div>
       <div className="ch-ia-suggestions">
         {suggestions.map(q => <button key={q} type="button" className="ch-ia-suggestion" onClick={() => demander(q)}>{q}</button>)}
+        <ExpliqueVoix titre={displayLesson.title} onEnvoyer={expliquer} variante="bouton" />
       </div>
       <form className="ch-ia-champ" onSubmit={e => { e.preventDefault(); if (question.trim()) demander(question.trim()); }}>
         <input value={question} onChange={e => setQuestion(e.target.value)} placeholder="Pose ta question…" aria-label="Ta question à Réviz IA" />
@@ -521,6 +525,7 @@ export default function Analyse() {
       <span className="nf-ligne-fleche" aria-hidden="true"><Fleche taille={16} /></span>
     </Link>
   ));
+  const blocVoix = iaDispo && !isDesktop && <ExpliqueVoix titre={displayLesson.title} onEnvoyer={expliquer} />;
 
   if (noLesson) return <MissingLessonState title="Ta leçon" />;
 
@@ -604,6 +609,7 @@ export default function Analyse() {
             {blocContenus}
             {blocEssentiel}
             {blocIA}
+            {blocVoix}
           </div>
         )}
       </div>
