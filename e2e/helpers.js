@@ -87,6 +87,11 @@ export async function mockApiRoutes(page) {
     const compte = { [jeton.user_id]: anonyme ? { delta: 0, comptee: false, sansCompte: true } : { delta: 130, aura: 130, comptee: true } }
     return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ compte }) })
   })
+  // Ligue (?op=ligue, api/_ligues.js) : appelée par l'accueil et « Moi ». Sous Vite la route
+  // n'existe pas ; par défaut, « pas encore de ligue » (rien d'affiché). ligue.spec.js
+  // branche la vraie route par-dessus.
+  await page.route('**/api/track?op=ligue', route =>
+    route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ attente: true }) }))
   // Ceinture + bretelles : aucun test ne doit jamais atteindre Anthropic.
   await page.route('**/api.anthropic.com/**', route =>
     route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ content: [{ type: 'text', text: JSON.stringify(MOCK_AI_RESPONSE) }] }) }))
