@@ -92,6 +92,8 @@ export default function Scan() {
   const [ecran, setEcran] = useState(restaure && !isDesktop ? 'texte' : 'choix'); // choix | viseur | apercu | texte
   const [texte, setTexte] = useState(() => (restaure && localStorage.getItem('reviz-lesson-text')) || '');
   const [photo, setPhoto] = useState(null);
+  // Ce que l'élève veut faire de sa leçon une fois analysée (11/11, repris du scan à modes de Knowunity).
+  const [ensuite, setEnsuite] = useState('fiche');
   const [camera, setCamera] = useState('starting'); // starting | active | denied | none
   const [aCamera, setACamera] = useState(!isDesktop);
   const [depot, setDepot] = useState(false);
@@ -172,7 +174,7 @@ export default function Scan() {
     localStorage.setItem('reviz-captured-image', photo);
     startAnalysisFromImage(photo, niveau); // l'appel part tout de suite ; la fiche affiche la préparation
     // La fiche remplace le scan : « Mes leçons » de la fiche ne retombe pas sur le viseur.
-    navigate('/analyse', { replace: true, state: { depuisScan: true } });
+    navigate('/analyse', { replace: true, state: { depuisScan: true, ensuite } });
   }
   const long = isLessonTextTooLong(texte);
   const assez = texte.trim().length >= MIN;
@@ -182,7 +184,7 @@ export default function Scan() {
     localStorage.removeItem('reviz-ai-data');
     localStorage.setItem('reviz-lesson-text', t);
     startAnalysis(t, niveau);
-    navigate('/analyse', { replace: true, state: { depuisScan: true } });
+    navigate('/analyse', { replace: true, state: { depuisScan: true, ensuite } });
   }
 
   const inputFichier = <input ref={fichier} type="file" accept="image/*" hidden onChange={e => importer(e.target.files?.[0])} />;
@@ -270,6 +272,7 @@ export default function Scan() {
         <div className="sc-outil">
           <div className="sc-photo"><img src={photo} alt="La photo de ta leçon" /></div>
           <PetitReviz expression="reflechit" lignes={['Tout est bien lisible ?', 'Sinon, reprends-la.']} />
+          {choixEnsuite}
           <div className="sc-deux">
             <button type="button" className="sc-btn sc-btn--blanc" onClick={() => { setPhoto(null); setEcran(aCamera ? 'viseur' : 'choix'); }}>Reprendre</button>
             <button type="button" className="sc-btn" onClick={analyserPhoto}>C’est bon, analyse</button>
@@ -302,6 +305,19 @@ export default function Scan() {
       {long && <p className="sc-limite"><b>J’analyse jusqu’ici</b>Ton texte est long : j’analyse les {LESSON_TEXT_MAX_LABEL} premiers caractères.</p>}
     </div>
   );
+  const ENSUITES = [
+    { id: 'fiche', label: 'Voir la fiche' },
+    { id: 'tester', label: 'Me tester tout de suite' },
+    ...(isGuest ? [] : [{ id: 'expliquer', label: 'Que Réviz IA m’explique' }]),
+  ];
+  const choixEnsuite = (
+    <div className="sc-ensuite" role="radiogroup" aria-label="Et ensuite ?">
+      <span className="sc-ensuite-titre" aria-hidden="true">Et ensuite ?</span>
+      {ENSUITES.map(o => (
+        <button key={o.id} type="button" role="radio" aria-checked={ensuite === o.id} className={`sc-ensuite-choix${ensuite === o.id ? ' is-choisi' : ''}`} onClick={() => setEnsuite(o.id)}>{o.label}</button>
+      ))}
+    </div>
+  );
   const boutonAnalyser = (
     <button type="button" className="sc-btn" disabled={!assez} onClick={analyserTexte}>
       {long ? `Analyser les ${LESSON_TEXT_MAX_LABEL} premiers caractères` : 'Analyser ce texte'}{assez && !long && <Fleche />}
@@ -319,6 +335,7 @@ export default function Scan() {
         <div className="sc-outil">
           <PetitReviz expression="content" lignes={['Colle ta leçon ici.', `${MIN} caractères au moins.`]} />
           {champTexte}
+          {choixEnsuite}
           {boutonAnalyser}
           <button type="button" className="sc-lien sc-lien--centre" onClick={() => setEcran('viseur')}>Prendre une photo plutôt</button>
         </div>
@@ -367,7 +384,7 @@ export default function Scan() {
                 <span><b>Coller le texte</b><span>Au moins {MIN} caractères.</span></span>
               </div>
               {champTexte}
-              <div className="sc-texte-action">{boutonAnalyser}</div>
+              <div className="sc-texte-action">{choixEnsuite}{boutonAnalyser}</div>
             </section>
             <aside className="sc-cote">
               <div className="sc-carte sc-carte--petite">{quota}</div>

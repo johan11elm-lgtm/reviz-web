@@ -260,6 +260,17 @@ export default function Analyse() {
   // Id de la leçon courante — posé par saveLesson() / restoreLesson().
   // Absent sur le mock dev : le coach n'a alors pas de contexte serveur.
   const coachLessonId = localStorage.getItem('reviz-current-lesson-id');
+  // Scan « Et ensuite ? » (11/11) : une fois la leçon prête, on enchaîne sur ce que l'élève a choisi.
+  // L'état de la page est d'abord nettoyé, pour qu'un retour arrière ne relance pas l'enchaînement.
+  const ensuite = location.state?.ensuite;
+  useEffect(() => {
+    if (!lesson || isLoading || !ensuite || ensuite === 'fiche') return;
+    navigate(location.pathname, { replace: true, state: { depuisScan: true } });
+    if (ensuite === 'tester') navigate(lesson.exercicesDispo ? '/exercices' : '/quiz');
+    else if (ensuite === 'expliquer' && coachLessonId && !isGuest) {
+      navigate(`/coach?lesson=${coachLessonId}`, { state: { question: 'Explique-moi cette leçon simplement : les idées clés, en quelques points.', envoyer: true } });
+    }
+  }, [lesson, isLoading, ensuite]); // eslint-disable-line react-hooks/exhaustive-deps
   // Chapitre du programme (pas de scan) : textes adaptés.
   const fromProgramme = isProgrammeLessonId(coachLessonId);
 

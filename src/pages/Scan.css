@@ -289,3 +289,10 @@ button.sc-carte:active { transform: scale(.98); }
 .sn-entete--large .sn-bloc { margin: 0; }
 .sc-page--large .sc-colonnes { margin: 24px auto 0; }
 .sc-page--large .sc-carte--etat { margin: 24px auto 0; }
+
+/* « Et ensuite ? » (11/11) : la fiche, un test tout de suite, ou Réviz IA qui explique. */
+.sc-ensuite { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.sc-ensuite-titre { width: 100%; font-size: 13px; font-weight: 700; color: var(--rv-doux); }
+.sc-ensuite-choix { min-height: 40px; padding: 0 14px; border: 1.5px solid var(--rv-ligne); border-radius: 999px; background: var(--rv-carte); font: 600 14px 'Poppins', system-ui, sans-serif; color: var(--rv-encre); cursor: pointer; }
+.sc-ensuite-choix.is-choisi { border-color: var(--rv-orange); background: var(--rv-peche-pale); }
+.sc-ensuite-choix:focus-visible { outline: 3px solid var(--rv-encre); outline-offset: 2px; }
