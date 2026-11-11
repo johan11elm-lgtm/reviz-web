@@ -1,0 +1,34 @@
+/* Le plan brevet en une carte sur l'accueil de la 3e (components/LignePlanBrevet). */
+.lpb {
+  display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px 12px; align-items: center;
+  padding: 14px; border-radius: 20px; background: #fff;
+  box-shadow: 0 1px 3px rgba(4,42,101,.08), 0 1px 2px rgba(4,42,101,.05);
+}
+.lpb-ico { width: 52px; height: 52px; border-radius: 12px; background: var(--sk-lavande, #F2EBFF); display: flex; align-items: center; justify-content: center; }
+.lpb-txt { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.lpb-titre { font-size: 16px; font-weight: 800; color: var(--rv-encre); text-decoration: none; }
+.lpb-titre::after { content: ' ›'; color: #5B4FC7; }
+.lpb-titre:focus-visible { outline: 3px solid #042A65; outline-offset: 2px; border-radius: 4px; }
+.lpb-resume { font-size: 13.5px; color: var(--rv-doux); }
+.lpb-resume--retard { color: #9A3A0A; }
+.lpb-barre { grid-column: 1 / -1; height: 6px; border-radius: 3px; background: #EEE8F8; overflow: hidden; }
+.lpb-barre > span { display: block; height: 100%; min-width: 6px; border-radius: 3px; background: #5B4FC7; }
+.lpb-btn {
+  grid-column: 1 / -1; display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 14px;
+  border: 0; border-radius: 12px; background: var(--rv-encre); color: #fff;
+  font: inherit; text-align: left; text-decoration: none; cursor: pointer;
+  transition: transform .5s var(--rv-ressort);
+}
+.lpb-btn:active { transform: scale(.97); transition-duration: .08s; }
+.lpb-btn:focus-visible { outline: 3px solid #5B4FC7; outline-offset: 2px; }
+.lpb-btn:disabled { opacity: .7; cursor: default; }
+.lpb-btn-sur { flex: none; font-size: 14px; font-weight: 800; }
+.lpb-btn-ch { min-width: 0; font-size: 14px; font-weight: 500; opacity: .85; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.lpb-btn--lien { justify-content: center; font-size: 14px; font-weight: 700; }
+
+/* Dans la colonne de droite (ordinateur) : la carte blanche du rail, sans double ombre. */
+.nm-rail .lpb { border-radius: 16px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .lpb-btn { transition: none; }
+}

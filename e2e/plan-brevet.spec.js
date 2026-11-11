@@ -13,7 +13,23 @@ for (const [appareil, viewport] of [['390', { width: 390, height: 844 }], ['1280
     await mockApiRoutes(page)
     // Le vrai programme de 3e (public/programme), pour un plan à sa taille réelle.
     await compteRapide(page, { prenom: 'Sami', birthDate: '2011-09-01' })
-    await page.getByRole('link', { name: /Ton plan brevet/ }).click()
+
+    // L'accueil : la ligne du plan, juste sous le bloc du jour (sur ordinateur, dans la colonne de droite).
+    const ligne = page.locator('.lpb')
+    await expect(ligne).toBeVisible({ timeout: 15_000 })
+    await expect(ligne).toContainText(/Cette semaine\s:\s0\ssur\s\d\schapitres/)
+    await expect(ligne.getByRole('button', { name: /^Réviser/ })).toBeVisible()
+    if (appareil === '390') {
+      const [bloc, l] = await Promise.all([page.locator('.nm-bloc').boundingBox(), ligne.boundingBox()])
+      expect(l.y).toBeGreaterThan(bloc.y + bloc.height - 1)
+      expect(l.y - (bloc.y + bloc.height)).toBeLessThan(40)
+    } else {
+      await expect(page.locator('.nm-rail .lpb')).toBeVisible()
+    }
+    await ligne.scrollIntoViewIfNeeded()
+    await capture(page, `plan-brevet-accueil-${appareil}`)
+
+    await ligne.getByRole('link', { name: 'Ton plan brevet' }).click()
     await expect(page).toHaveURL(/\/plan-brevet$/)
     await expect(page.getByRole('heading', { level: 1 })).toContainText('jusqu’au brevet')
     await expect(page.getByText(/^Brevet 2027 · J-\d+$/)).toBeVisible()

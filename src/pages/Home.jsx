@@ -11,6 +11,7 @@ import { RappelOuverture } from '../components/RappelDemain';
 import { RetourAbsence } from '../components/RetourAbsence';
 import { LancerConcentration } from '../components/Concentration';
 import { LigneLigue } from '../components/LigneLigue';
+import { LignePlanBrevet } from '../components/LignePlanBrevet';
 import { retourAProposer } from '../utils/retourAbsence';
 import { Mascot } from '../components/Mascot';
 import { Avatar } from '../components/Avatar';
@@ -576,6 +577,7 @@ export default function Home() {
           )}
         </div>
       </section>
+      <LignePlanBrevet catalogue={catalogue} classe={classe} />
       <section className="nm-rail-section" aria-labelledby="nm-rail-indis">
         <h2 id="nm-rail-indis" className="nm-rail-titre">Tes indispensables</h2>
         <div className="nm-rail-carte nm-indis">
@@ -617,6 +619,8 @@ export default function Home() {
             {recherche}
             {ronds}
             {blocDuJour}
+            {/* 3e : le plan brevet juste sous le bloc du jour (11/11, il était tout en bas, dans « À la une »). */}
+            {!isDesktop && <LignePlanBrevet catalogue={catalogue} classe={classe} />}
             <BlocQuetes uid={uidJeux} />
             {montrerEssai && <ThemeEssai onClose={() => setEssaiTheme(false)} />}
             <div className="nm-carte">{chemin}</div>
