@@ -554,8 +554,9 @@ input, textarea {
 }
 .app--no-halo::before { display: none; }
 
-/* Tablette : container plus large, toujours centré */
-@media (min-width: 431px) and (max-width: 1024px) {
+/* Tablette : container plus large, toujours centré. À partir de 600 px : en dessous, c'est un
+   téléphone (les iPhone Pro Max font 440 px, voir src/utils/ecran.js). */
+@media (min-width: 600px) and (max-width: 1024px) {
   body {
     padding: 20px 0;
   }
@@ -568,8 +569,9 @@ input, textarea {
   }
 }
 
-/* Sur mobile réel : plein écran, sans bordures ni ombre */
-@media (max-width: 430px) {
+/* Sur mobile réel : plein écran, sans bordures ni ombre. Jusqu'à 599 px (11/11) : à 430 px, les
+   iPhone 16 et 17 Pro Max (440 px) et les grands Android affichaient la carte de la tablette. */
+@media (max-width: 599px) {
   html, body, #root {
     width: 100%;
     overflow-x: hidden;
@@ -610,10 +612,10 @@ input, textarea {
 }
 
 /* App native (Capacitor) : toujours plein écran, quelle que soit la
-   largeur — les iPhone Pro Max (440 pt) et iPad tomberaient sinon dans
-   la branche « tablette » ci-dessus (carte centrée, sans safe-area).
+   largeur — un iPad tomberait sinon dans la branche « tablette »
+   ci-dessus (carte centrée, sans safe-area).
    La classe .native est posée sur <html> par src/main.jsx avant le
-   render ; ces règles dupliquent le bloc mobile @media (max-width: 430px)
+   render ; ces règles dupliquent le bloc mobile @media (max-width: 599px)
    et priment sur la branche tablette par spécificité et ordre. */
 html.native, html.native body, html.native #root {
   width: 100%;

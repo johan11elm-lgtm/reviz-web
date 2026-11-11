@@ -131,7 +131,7 @@
 .ag-relier-form { display: flex; flex-direction: column; gap: 8px; }
 .ag-relier-form label { font-size: 13px; font-weight: 600; color: var(--rv-doux); }
 .ag-relier-ligne { display: flex; gap: 8px; }
-.ag-relier-ligne input, .ag-input { flex: 1; min-width: 0; height: 46px; box-sizing: border-box; padding: 0 14px; border: 1.5px solid var(--rv-ligne); border-radius: 14px; background: var(--rv-carte); font: 500 15px 'Poppins', system-ui, sans-serif; color: var(--rv-encre); outline: 0; }
+.ag-relier-ligne input, .ag-input { flex: 1; min-width: 0; height: 46px; box-sizing: border-box; padding: 0 14px; border: 1.5px solid var(--rv-ligne); border-radius: 14px; background: var(--rv-carte); font: 500 16px 'Poppins', system-ui, sans-serif; color: var(--rv-encre); outline: 0; }
 .ag-relier-ligne input:focus, .ag-input:focus { border-color: var(--rv-orange); }
 .ag-relier-ligne .ag-pilule { height: 46px; }
 .ag-erreur { margin: 0; font-size: 13px; font-weight: 600; color: var(--rv-brun-texte); }

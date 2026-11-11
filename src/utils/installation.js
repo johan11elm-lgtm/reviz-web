@@ -4,6 +4,7 @@
 // l'invitation d'installation de Chrome / Edge (beforeinstallprompt) pour
 // proposer une installation en un geste quand le navigateur le permet.
 // -------------------------------------------------------
+import { LARGEUR_MAX_TELEPHONE } from './ecran.js'
 
 /**
  * iPhone / iPad, Android ou ordinateur, d'après le user agent.
@@ -50,7 +51,7 @@ export function brancherHauteurEcran(win = typeof window !== 'undefined' ? windo
   const poser = () => {
     // Téléphone en portrait : l'app installée occupe tout l'écran, sa hauteur est celle de l'écran
     // (pas sur iPad, où l'écran partagé la rend plus petite que l'écran).
-    const telephone = win.innerHeight >= win.innerWidth && win.innerWidth <= 430;
+    const telephone = win.innerHeight >= win.innerWidth && win.innerWidth <= LARGEUR_MAX_TELEPHONE;
     const h = telephone ? Math.max(win.innerHeight, win.screen?.height ?? 0) : win.innerHeight;
     win.document.documentElement.style.setProperty('--hauteur-ecran', `${h}px`);
   };

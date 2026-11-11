@@ -161,8 +161,10 @@
 }
 /* Téléphone : la page est la zone visible (--ia-hauteur, --ia-haut posées par Coach.jsx d'après
    visualViewport) et la barre de saisie est dans le flux, en bas : clavier ouvert, elle reste juste
-   au-dessus. Le fil défile seul et n'a plus à réserver la place de la barre. */
-@media (max-width: 430px) {
+   au-dessus. Le fil défile seul et n'a plus à réserver la place de la barre. Même limite que
+   estTelephone() (src/utils/ecran.js) : à 430 px, un iPhone Pro Max gardait la barre fixée en bas,
+   derrière le clavier. */
+@media (max-width: 599px) {
   .app.ia-page--tel {
     position: fixed;
     left: 0;
@@ -312,7 +314,7 @@
   background: var(--rv-carte);
   color: var(--rv-doux);
 }
-.ia-recherche input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; font: 500 15px 'Poppins', system-ui, sans-serif; color: var(--rv-encre); }
+.ia-recherche input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; font: 500 16px 'Poppins', system-ui, sans-serif; color: var(--rv-encre); }
 .ia-choix-liste { flex: 1; min-height: 0; overflow-y: auto; margin: 0 -20px; padding: 6px 20px calc(24px + env(safe-area-inset-bottom, 0px)); }
 .ia-choix--fenetre .ia-choix-liste { margin: 0 -24px; padding: 6px 24px 24px; }
 .ia-groupe-tete { display: flex; justify-content: space-between; margin: 18px 4px 8px; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--rv-doux); }
