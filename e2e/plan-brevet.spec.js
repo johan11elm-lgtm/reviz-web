@@ -29,7 +29,10 @@ for (const [appareil, viewport] of [['390', { width: 390, height: 844 }], ['1280
     await ligne.scrollIntoViewIfNeeded()
     await capture(page, `plan-brevet-accueil-${appareil}`)
 
-    await ligne.getByRole('link', { name: 'Ton plan brevet' }).click()
+    // Centrée avant le clic : en bas de l'écran, la barre d'onglets passe par-dessus.
+    const lien = ligne.getByRole('link', { name: 'Ton plan brevet' })
+    await lien.evaluate(el => el.scrollIntoView({ block: 'center' }))
+    await lien.click()
     await expect(page).toHaveURL(/\/plan-brevet$/)
     await expect(page.getByRole('heading', { level: 1 })).toContainText('jusqu’au brevet')
     await expect(page.getByText(/^Brevet 2027 · J-\d+$/)).toBeVisible()

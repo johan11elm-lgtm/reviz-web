@@ -45,8 +45,8 @@ export default function Welcome() {
       ) : codeParrainEnAttente() && (
         <p className="en-texte wlc-parrain"><b>Invité par un ami</b> : {PARRAINAGE_JOURS}&nbsp;jours de Réviz+ offerts en créant ton compte.</p>
       )}
-      <Link to="/inscription" className="en-btn">Commencer gratuitement</Link>
-      <Link to="/essai" className="en-btn-second">Essayer sans compte</Link>
+      {/* 11/11 : plus d'essai sans compte. Réviz pose ses questions, le compte vient à la fin (pages/Commencer.jsx). */}
+      <Link to="/commencer" className="en-btn">Commencer gratuitement</Link>
     </EntreeEcran>
   );
 }

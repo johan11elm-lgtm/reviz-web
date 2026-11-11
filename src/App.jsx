@@ -72,6 +72,7 @@ const Coach          = lazy(() => import('./pages/Coach'))
 const Programme      = lazy(() => import('./pages/Programme'))
 const Jeux           = lazy(() => import('./pages/Jeux'))
 const Essai          = lazy(() => import('./pages/Essai'))
+const Commencer      = lazy(() => import('./pages/Commencer'))
 const ControleBlanc  = lazy(() => import('./pages/ControleBlanc'))
 const Avis           = lazy(() => import('./pages/Avis'))
 const Profs          = lazy(() => import('./pages/Profs'))
@@ -127,6 +128,7 @@ function AuthRoutes() {
       <Route path="/inscription" element={<Inscription />} />
       <Route path="/connexion"   element={<Connexion />} />
       <Route path="/essai"       element={<Essai />} />
+      <Route path="/commencer"   element={<Commencer />} />
       <Route path="/consent-pending" element={<ConsentPending />} />
       <Route path="/finish-setup" element={<FinishSetup />} />
       <Route path="/verify-email" element={<PrivateRoute><VerifyEmail /></PrivateRoute>} />

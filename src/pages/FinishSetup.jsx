@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { isUnder15 } from '../utils/levels';
+import { niveauDeLEntree } from '../utils/entreeAttente';
 import { doc, setDoc } from 'firebase/firestore';
 import { db } from '../services/firebaseConfig';
 import { createUserProfile } from '../services/userProfileService';
@@ -33,7 +34,8 @@ export default function FinishSetup() {
   const demanderPrenom = !currentUser.displayName;
   const compteEmail = currentUser.providerData?.some(p => p.providerId === 'password') ?? false;
   const demanderCgu = !compteEmail;
-  const levelConnu = getUserLevel?.();
+  // Classe donnée à l'entrée (pages/Commencer.jsx), avant le compte : pas redemandée.
+  const levelConnu = getUserLevel?.()?.classe ? getUserLevel() : niveauDeLEntree();
   const demanderClasse = !levelConnu?.classe;
   const total = demanderClasse ? 2 : 1;
 

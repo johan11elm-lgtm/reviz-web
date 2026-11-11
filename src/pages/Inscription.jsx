@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import { erreurConnexionSociale } from '../components/SocialLogin';
 import { isUnder15 } from '../utils/levels';
 import { readGuest } from '../services/guestService';
+import { lireEntree, niveauDeLEntree } from '../utils/entreeAttente';
 import { sendParentalConsent, consentErrorMessage } from '../services/consentService';
 import { LienParent } from '../components/LienParent';
 import { track } from '../services/statsService';
@@ -45,11 +46,13 @@ const ECRAN = {
 };
 
 export default function Inscription() {
-  const [prenom, setPrenom]               = useState(() => readGuest()?.prenom ?? '');
+  // Venu de l'entrée (pages/Commencer.jsx) : prénom et classe déjà donnés, le plan attend le compte.
+  const [entree]                          = useState(() => { const e = lireEntree(); return e?.fini && e.prenom ? e : null; });
+  const [prenom, setPrenom]               = useState(() => readGuest()?.prenom ?? entree?.prenom ?? '');
   const [birthDate, setBirthDate]         = useState('');
   const [level, setLevel]                 = useState(() => {
     // Un élève en mode essai arrive avec sa classe déjà connue.
-    const g = readGuest()?.level;
+    const g = readGuest()?.level ?? niveauDeLEntree(entree);
     return g?.cycle && g?.classe
       ? { cycle: g.cycle, classe: g.classe, specialites: g.specialites ?? [] }
       : { cycle: null, classe: null, specialites: [] };
@@ -87,12 +90,13 @@ export default function Inscription() {
   // Une question par écran : prénom, naissance, classe (sauf si connue),
   // compte, puis l'e-mail d'un parent pour les moins de 15 ans.
   const steps = useMemo(() => {
-    const base = ['prenom', 'birthdate'];
+    // Le prénom donné à l'entrée n'est pas redemandé.
+    const base = entree ? ['birthdate'] : ['prenom', 'birthdate'];
     if (!classeConnue) base.push('classe');
     base.push('account');
     if (isUnder15(birthDate)) base.push('parent');
     return base;
-  }, [classeConnue, birthDate]);
+  }, [classeConnue, birthDate, entree]);
 
   // Les réponses ne vivent qu'en mémoire : arrivé au milieu du tunnel sans
   // elles (page rechargée, lien partagé), on repart du début.
@@ -323,10 +327,18 @@ export default function Inscription() {
         ),
       };
       case 'birthdate': return {
-        bulle: ['Quand es-tu né·e ?', 'Pour adapter Réviz à ton âge.'],
+        bulle: entree ? [`On garde ton plan, ${prenom.trim()}.`, 'Quand es-tu né·e ?'] : ['Quand es-tu né·e ?', 'Pour adapter Réviz à ton âge.'],
         corps: (
           <ChampDate value={birthDate} onChange={v => { setBirthDate(v); effacer('naissance'); }}
             erreur={erreurs.naissance} idPrefix="signup-naissance" />
+        ),
+        // Venu de l'entrée, c'est le premier écran de l'inscription : Google et Apple ici.
+        dessous: entree && (
+          <>
+            <Ou />
+            <BoutonsSociaux onLogin={handleProvider} disabled={loading} />
+            {lienConnexion}
+          </>
         ),
       };
       case 'classe': return {

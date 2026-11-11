@@ -55,7 +55,7 @@ test.describe('Lien du rappel J+1', () => {
     const events = suivreTrack(page)
 
     await page.goto(LIEN_CHAPITRE)
-    await page.getByRole('link', { name: "J'ai déjà un compte, je me connecte" }).click()
+    // Depuis le 11/11, plus de formulaire d'essai : le lien mène droit à la connexion.
     await expect(page).toHaveURL(/\/connexion\?next=/)
     await seConnecter(page, compte)
 

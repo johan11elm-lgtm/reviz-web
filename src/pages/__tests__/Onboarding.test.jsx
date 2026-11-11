@@ -185,3 +185,28 @@ describe('<Onboarding />', () => {
     expect(nav).toHaveBeenCalledWith('/', { replace: true })
   })
 })
+
+describe('découverte : réponses données avant le compte (pages/Commencer.jsx)', () => {
+  it('rangées sur le compte, puis la séance d’accueil, sans reposer les questions', async () => {
+    const { waitFor } = await import('@testing-library/react')
+    const agenda = await import('../../services/agendaService')
+    const ajout = vi.spyOn(agenda, 'ajouterControle').mockResolvedValue({ controles: [] })
+    localStorage.clear()
+    nav.mockClear()
+    localStorage.setItem('reviz-entree-attente', JSON.stringify({ le: Date.now(), prenom: 'Léa', classe: '3ème', controle: { matiere: 'maths', titre: 'Thalès', date: dans3jours, chapitres: [] }, blocage: 'retenir', objectif: 'haut', fini: true }))
+    ecrire()
+    expect(screen.getByRole('heading', { level: 1 }).textContent).toContain('Bienvenue, Léa.')
+    await waitFor(() => expect(nav).toHaveBeenCalledWith('/exercices?premiere=1', { replace: true }))
+    expect(ajout).toHaveBeenCalledWith(expect.objectContaining({ uid: 'u1' }), expect.objectContaining({ matiere: 'maths', date: dans3jours }))
+    expect(JSON.parse(localStorage.getItem('reviz-entree-u1'))).toEqual({ controle: 'note', blocage: 'retenir', objectif: 'haut' })
+    expect(localStorage.getItem('reviz-onboarded-u1')).toBe('1')
+    expect(localStorage.getItem('reviz-entree-attente')).toBeNull()
+    ajout.mockRestore()
+  })
+  it('des réponses pas finies (abandon en route) : la découverte habituelle', () => {
+    localStorage.clear()
+    localStorage.setItem('reviz-entree-attente', JSON.stringify({ le: Date.now(), prenom: 'Léa', classe: '3ème' }))
+    ecrire()
+    expect(screen.getByRole('button', { name: 'C’est parti' })).toBeInTheDocument()
+  })
+})

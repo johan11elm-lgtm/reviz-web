@@ -16,11 +16,9 @@ describe('<Welcome />', () => {
     expect(screen.getAllByText(/Révise mieux/i).length).toBeGreaterThan(0)
   })
 
-  it('shows the primary CTA pointing to /inscription', () => {
+  it('le bouton principal ouvre l’entrée, où Réviz pose ses questions avant le compte', () => {
     renderWelcome()
-    const cta = screen.getByRole('link', { name: /Commencer gratuitement/i })
-    expect(cta).toBeInTheDocument()
-    expect(cta).toHaveAttribute('href', '/inscription')
+    expect(screen.getByRole('link', { name: /Commencer gratuitement/i })).toHaveAttribute('href', '/commencer')
   })
 
   it('shows the « J’ai déjà un compte » link pointing to /connexion', () => {
@@ -28,9 +26,9 @@ describe('<Welcome />', () => {
     expect(screen.getByRole('link', { name: /J.ai déjà un compte/i })).toHaveAttribute('href', '/connexion')
   })
 
-  it('shows the « Essayer sans compte » link pointing to /essai', () => {
+  it('plus d’essai sans compte (11/11)', () => {
     renderWelcome()
-    expect(screen.getByRole('link', { name: /Essayer sans compte/i })).toHaveAttribute('href', '/essai')
+    expect(screen.queryByRole('link', { name: /sans compte/i })).toBeNull()
   })
 
   afterEach(() => localStorage.clear())

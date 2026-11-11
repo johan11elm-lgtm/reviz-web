@@ -504,27 +504,24 @@ export function chapitreThales() {
 }
 
 /**
- * Mode essai : /essai, prénom + classe, puis « C'est parti » → la séance d'accueil (depuis le
- * 10/11, testée dans premiere-revision.spec.js), refermée ici pour arriver sur l'accueil.
- * L'annonce Réviz Games, qui n'arrive en essai qu'après une première révision, est notée vue :
- * elle ne recouvre pas l'accueil plus loin dans les parcours.
+ * Mode essai : depuis le 11/11, un nouveau venu ne peut plus en ouvrir (l'entrée pose ses questions
+ * et le compte vient à la fin). Les essais commencés avant restent repris par l'app : on en pose un
+ * sur l'appareil, comme l'aurait fait l'ancien formulaire (services/guestService.js, startGuest).
+ * L'annonce Réviz Games est notée vue : elle ne recouvre pas l'accueil plus loin dans les parcours.
  * `aller` : la page où finir ensuite (/programme par défaut, `null` pour rester sur l'accueil).
  */
 export async function entrerEnEssai(page, { prenom = 'Léa', classe = '3ème', aller = '/programme' } = {}) {
-  await page.goto('/essai')
-  await page.getByLabel('Ton prénom').fill(prenom)
-  await page.getByRole('radio', { name: classeCourte(classe), exact: true }).click()
-  await page.getByRole('button', { name: /C'est parti/ }).click()
-  await expect(page).toHaveURL(/\/exercices\?premiere=1$/)
-  await page.getByRole('button', { name: 'Fermer' }).click()
-  await expect(page).toHaveURL(/\/$/)
-  await page.evaluate(() => {
-    const essai = JSON.parse(localStorage.getItem('reviz-guest') || 'null')
-    if (essai?.uid) localStorage.setItem(`reviz-annonce-jeux-${essai.uid}`, '1')
-  })
-  if (!aller) return
-  await page.goto(aller)
-  await expect(page).toHaveURL(new RegExp(`${aller.replace(/[?]/g, '\\?')}$`))
+  await page.goto('/welcome')
+  await page.evaluate(({ prenom, classe }) => {
+    const uid = `invite-e2e${Math.random().toString(36).slice(2, 10)}`
+    const level = { cycle: 'college', classe, specialites: [] }
+    localStorage.setItem('reviz-guest', JSON.stringify({ uid, prenom, level, createdAt: Date.now() }))
+    localStorage.setItem(`reviz-level-${uid}`, JSON.stringify(level))
+    localStorage.setItem(`reviz-onboarded-${uid}`, '1')
+    localStorage.setItem(`reviz-annonce-jeux-${uid}`, '1')
+  }, { prenom, classe })
+  await page.goto(aller ?? '/')
+  await expect(page).toHaveURL(new RegExp(`${(aller ?? '/').replace(/[?]/g, '\\?')}$`))
 }
 
 /**

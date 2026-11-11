@@ -27,11 +27,11 @@ test.describe('Réviz IA depuis l’accueil — téléphone (390 px)', () => {
     await champ.tap()
     await champ.fill('thalès')
     await expect(page.getByRole('button', { name: /Demander à Réviz IA « thalès »/ })).toBeVisible()
-    await expect(page.getByRole('button', { name: /Le théorème de Thalès/ })).toBeVisible()
+    await expect(page.locator('.nm-recherche-liste').getByRole('button', { name: /Le théorème de Thalès/ })).toBeVisible()
     await page.screenshot({ path: test.info().outputPath('accueil-recherche.png') })
 
     // Un chapitre trouvé s'ouvre sur sa fiche.
-    await page.getByRole('button', { name: /Le théorème de Thalès/ }).tap()
+    await page.locator('.nm-recherche-liste').getByRole('button', { name: /Le théorème de Thalès/ }).tap()
     await expect(page).toHaveURL(/\/analyse/)
 
     // Une question : Entrée l'envoie à Réviz IA, qui répond aussitôt.

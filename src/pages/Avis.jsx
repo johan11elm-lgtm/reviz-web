@@ -161,7 +161,7 @@ export default function Avis() {
       <Link to="/" className="av-logo" aria-label="Réviz, accueil">Réviz</Link>
       {!merci && (depuisAffiche
         ? <Link to="/profs" className="av-barre-lien">Découvrir l'appli</Link>
-        : <Link to="/essai" className="av-barre-lien">Essayer sans compte</Link>)}
+        : <Link to="/commencer" className="av-barre-lien">Essayer Réviz</Link>)}
     </div>
   );
   const titres = (
@@ -181,14 +181,9 @@ export default function Avis() {
   if (merci) {
     const boutons = (
       <div className="av-merci-boutons">
-        {depuisAffiche ? (
-          <>
-            <Link to="/profs" className="av-btn">Découvrir l'appli</Link>
-            <Link to="/essai" className="av-btn av-btn--blanc">Essayer Réviz sans compte</Link>
-          </>
-        ) : (
-          <Link to="/essai" className="av-btn">Essayer Réviz sans compte</Link>
-        )}
+        {depuisAffiche
+          ? <Link to="/profs" className="av-btn">Découvrir l'appli</Link>
+          : <Link to="/commencer" className="av-btn">Essayer Réviz</Link>}
       </div>
     );
     const fete = (

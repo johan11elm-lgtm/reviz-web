@@ -3,7 +3,7 @@
 // après un rechargement (localStorage, profil Firestore, session Firebase), et la déconnexion
 // doit ramener à l'écran d'entrée. Deux compositions : une colonne sur téléphone, deux sur ordinateur.
 import { test, expect } from '@playwright/test'
-import { mockApiRoutes, compteRapide, lireProfilEmulateur, uniqueEmail, cliquerLienNouvelleAdresse } from './helpers'
+import { mockApiRoutes, compteRapide, lireProfilEmulateur, uniqueEmail, cliquerLienNouvelleAdresse, entrerEnEssai } from './helpers'
 import { SOMBRE_DISPONIBLE } from '../src/utils/themes.js'
 
 const APPAREILS = [
@@ -253,14 +253,8 @@ test.describe('Réglages : suppression et mode essai', () => {
   })
 
   test('mode essai : pas de compte à régler, « Quitter le mode essai » ramène à la bienvenue', async ({ page }) => {
-    await page.goto('/essai')
-    await page.getByLabel('Ton prénom').fill('Invité')
-    await page.getByRole('radio', { name: '6e', exact: true }).click()
-    await page.getByRole('button', { name: 'C\'est parti' }).click()
-    // L'essai commence par la séance d'accueil (10/11) : refermée, l'accueil.
-    await expect(page).toHaveURL(/\/exercices\?premiere=1$/, { timeout: 15_000 })
-    await page.getByRole('button', { name: 'Fermer' }).click()
-    await expect(page).toHaveURL(/\/$/, { timeout: 15_000 })
+    // Un essai commencé avant le 11/11 (on ne peut plus en ouvrir).
+    await entrerEnEssai(page, { prenom: 'Invité', classe: '6ème', aller: null })
 
     await page.goto('/reglages')
     await expect(page.getByText('Mode essai', { exact: true })).toBeVisible()

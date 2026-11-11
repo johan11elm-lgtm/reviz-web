@@ -1,27 +1,24 @@
 import { useEffect, useRef, useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Mascot } from '../components/Mascot';
 import { CLASSES_BY_CYCLE } from '../utils/levels';
-import { CLASSES_DECOUVERTE, isDecouverte, startDecouverte, stopDecouverte } from '../services/decouverteService';
+import { CLASSES_DECOUVERTE, isDecouverte, startDecouverte } from '../services/decouverteService';
 import { loadCatalogue, openChapter } from '../services/programmeService';
 import { erreursDe } from '../services/erreursService';
 import { chapterLessonId } from '../utils/programme';
-import { EntreeEcran, Champ, ChoixClasse, Encart, LienTexte } from '../components/entree/Entree';
-import { revenir } from '../utils/navigation';
-import { mesurer } from '../services/mesure';
 import { noterArrivee } from '../utils/arriveeFiche';
 
 /**
- * Mode essai (« sans compte ») : prénom + classe, et l'élève révise son
- * programme tout de suite. Pensé pour le CDI : un poste partagé, pas de
- * cahier, pas d'adresse mail sous la main. La progression reste dans le
- * navigateur et suit l'élève s'il crée un compte plus tard.
- * Design : parcours d'entrée (handoff Claude Design du 22/10), écran 2.
+ * /essai : adresse des liens du site, des fiches, des e-mails et des codes vidéo. Depuis le 11/11,
+ * plus d'essai sans compte : un nouveau venu passe par l'entrée (/commencer), où Réviz pose ses
+ * questions avant le compte. Restent ici : la visite d'un enseignant (/profs, programme sans
+ * compte), le compte déjà connecté venu d'une fiche (son chapitre), et les essais commencés avant
+ * le 11/11 (repris tels quels).
  */
 export default function Essai() {
   const navigate = useNavigate();
   const [params] = useSearchParams();
+  const location = useLocation();
   const { loginAsGuest, currentUser, isGuest } = useAuth();
   // Enseignant arrivé par /profs (affiche) : la classe est déjà choisie,
   // on ouvre directement son programme en mode découverte, sans formulaire.
@@ -38,16 +35,11 @@ export default function Essai() {
     ? params.get('chapitre') : null;
   // undefined : catalogue en cours de lecture ; null : chapitre introuvable.
   const [chapitre, setChapitre] = useState(chapitreFiche ? undefined : null);
-  const [ouverture, setOuverture] = useState(false);
   const ouvert = useRef(false);
   // Essai déjà commencé à l'arrivée (hors visite d'un enseignant) : on le reprend. Refaire le formulaire
   // créerait un nouvel essai vide, et la progression du premier ne serait plus affichée. Pour changer
   // d'élève sur un poste partagé : Réglages → quitter l'essai.
   const dejaInvite = useRef(isGuest && !isDecouverte());
-  const [prenom, setPrenom] = useState('');
-  const [classe, setClasse] = useState(classeFiche);
-  const [erreurPrenom, setErreurPrenom] = useState('');
-  const [erreurClasse, setErreurClasse] = useState('');
 
   // Gardé aussi pour la découverte, si l'élève crée plutôt un compte (utils/arriveeFiche.js).
   useEffect(() => {
@@ -74,7 +66,6 @@ export default function Essai() {
   function ouvrirChapitre() {
     if (ouvert.current) return;
     ouvert.current = true;
-    setOuverture(true);
     const defi = params.get('via') === 'rappel' && erreursDe(currentUser?.uid ?? null, chapterLessonId(chapitre.ch.id)).length > 0;
     openChapter(classeFiche, chapitre.matiere, chapitre.ch)
       .then(() => navigate(defi ? '/quiz?erreurs=1&defi=1&depuis=rappel' : '/exercices', { replace: true }))
@@ -103,71 +94,15 @@ export default function Essai() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  function submit(e) {
-    e.preventDefault();
-    const p = prenom.trim();
-    if (!p) { setErreurPrenom('Entre ton prénom.'); return; }
-    if (!classe) { setErreurClasse('Choisis ta classe.'); return; }
-    stopDecouverte();
-    loginAsGuest({ prenom: p, level: { cycle: 'college', classe, specialites: [] } });
-    if (chapitre && classe === classeFiche) ouvrirChapitre();
-    else if (matiereFiche) navigate(`/programme?matiere=${matiereFiche}`, { replace: true });
-    else {
-      // Sans fiche ni matière : la séance d'accueil (3 questions faciles), comme après une
-      // inscription. Jusqu'au 10/11, l'essai ouvrait l'accueil, recouvert par l'annonce des
-      // Réviz Games : sur 10 jours, 36 % des essais ne faisaient que jouer (6 % créaient un
-      // compte) et 36 % ne faisaient rien, contre 25 à 32 % de comptes chez ceux qui révisaient.
-      mesurer('premiere_revision', { etape: 'lancee', matiere: 'decouverte' });
-      navigate('/exercices?premiere=1', { replace: true });
-    }
-  }
-
-  // Redirection automatique en cours ou à venir (effet ci-dessus) : rien à remplir.
-  const redirige = currentUser && !prenom && ((chapitreFiche && chapitre !== null) || !isGuest || dejaInvite.current);
+  // Redirection automatique en cours ou à venir (effets ci-dessus) : rien à afficher.
+  const redirige = currentUser && ((chapitreFiche && chapitre !== null) || !isGuest || dejaInvite.current);
   if (classeProf || redirige) return <div className="app app--no-halo en-page" />;
 
-  // Venu d'une fiche avec un chapitre trouvé : seulement le prénom, la classe est connue.
-  const quiz = chapitre ? chapitre.ch : null;
-
-  return (
-    <EntreeEcran
-      bulle={quiz ? ['Teste-toi sur ce chapitre.', 'Juste ton prénom avant.'] : ['Essaie sans compte.', "Deux infos, et c'est parti."]}
-      expression="content" geste="coucou"
-      onRetour={() => revenir(navigate, '/welcome')}
-      dessous={(
-        <>
-          <Encart icone="horloge" teinte="lavande">
-            Ta progression reste sur cet appareil. Crée un compte quand tu veux pour la retrouver partout.
-          </Encart>
-          {params.get('via') === 'rappel'
-            // Venu d'un e-mail de Réviz sans être connecté sur cet appareil : son
-            // compte existe déjà, la connexion le ramène sur ce quiz.
-            ? <LienTexte to={`/connexion?next=${encodeURIComponent(window.location.pathname + window.location.search)}`}>J'ai déjà un compte, je me connecte</LienTexte>
-            : <LienTexte to="/inscription">Je préfère créer mon compte</LienTexte>}
-        </>
-      )}
-    >
-      <form className="en-pile" onSubmit={submit} noValidate>
-        {quiz && (
-          <div className="en-tuile">
-            <Mascot pose="quiz" size={52} alt="" aria-hidden="true" />
-            <div>
-              <b>{quiz.titre} ({classeFiche.replace('ème', 'e')})</b>
-              <span>{quiz.quiz} questions corrigées une à une.</span>
-            </div>
-          </div>
-        )}
-        <Champ id="essai-prenom" label="Ton prénom" type="text" placeholder="Lucas" value={prenom}
-          erreur={erreurPrenom} maxLength={30} autoComplete="given-name" autoFocus
-          onChange={e => { setPrenom(e.target.value); setErreurPrenom(''); }} />
-        {!quiz && (
-          <ChoixClasse valeur={classe} erreur={erreurClasse}
-            onChange={c => { setClasse(c); setErreurClasse(''); }} />
-        )}
-        <button type="submit" className="en-btn" disabled={ouverture}>
-          {ouverture ? 'Ouverture du quiz…' : quiz ? 'Lancer le quiz' : "C'est parti"}
-        </button>
-      </form>
-    </EntreeEcran>
-  );
+  // 11/11 : plus d'essai sans compte. Venu d'un e-mail de Réviz (son compte existe) : la connexion,
+  // qui le ramène sur ce quiz. Sinon l'entrée, où Réviz pose ses questions avant le compte ; elle
+  // reprend la classe et le chapitre de la fiche (mêmes paramètres).
+  if (params.get('via') === 'rappel') {
+    return <Navigate to={`/connexion?next=${encodeURIComponent(location.pathname + location.search)}`} replace />;
+  }
+  return <Navigate to={`/commencer${location.search}`} replace />;
 }

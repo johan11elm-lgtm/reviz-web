@@ -21,24 +21,13 @@ async function verifierModeEssai(page) {
 
 test.describe('Mon programme', () => {
   for (const [appareil, viewport] of APPAREILS) {
-    test(`mode essai : prénom + classe, puis un chapitre de 3e révisé sans compte (${appareil})`, async ({ page }) => {
+    test(`mode essai (commencé avant le 11/11) : un chapitre de 3e révisé sans compte (${appareil})`, async ({ page }) => {
       await page.setViewportSize(viewport)
       await mockApiRoutes(page)
       await mockProgramme(page)
 
-      // ── Welcome → essai ──
-      await page.goto('/welcome')
-      await page.getByRole('link', { name: 'Essayer sans compte' }).first().click()
-      await expect(page).toHaveURL(/\/essai/)
-      await page.getByLabel('Ton prénom').fill('Léa')
-      await page.getByRole('radio', { name: '3e', exact: true }).click()
-      await page.getByRole('button', { name: /C'est parti/ }).click()
-
-      // ── La séance d'accueil s'ouvre d'abord (10/11) ; refermée, l'accueil arrive sans annonce
-      //    Réviz Games (elle attend une première révision), puis « Tout voir » → le programme ──
-      await expect(page).toHaveURL(/\/exercices\?premiere=1$/)
-      await page.getByRole('button', { name: 'Fermer' }).click()
-      await expect(page).toHaveURL(/\/$/)
+      // ── Un essai d'avant le 11/11, repris sur l'accueil, puis « Tout voir » → le programme ──
+      await entrerEnEssai(page, { prenom: 'Léa', aller: null })
       await expect(page.getByRole('link', { name: 'Tout voir' })).toBeVisible()
       await expect(page.getByRole('dialog')).toHaveCount(0)
       await page.getByRole('link', { name: 'Tout voir' }).click()

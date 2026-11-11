@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { render, screen, fireEvent, waitFor } from '@testing-library/react'
-import { MemoryRouter } from 'react-router-dom'
+import { render, screen, waitFor } from '@testing-library/react'
+import { MemoryRouter, Routes, Route, useLocation } from 'react-router-dom'
 
 const nav = vi.hoisted(() => vi.fn())
 vi.mock('react-router-dom', async (importOriginal) => ({
@@ -25,59 +25,33 @@ beforeEach(() => {
   prog.openChapter.mockReset().mockResolvedValue({})
 })
 
-describe('<Essai /> — mode essai', () => {
-  it('demande un prénom puis une classe', () => {
-    renderPage()
-    fireEvent.click(screen.getByRole('button', { name: /C'est parti/ }))
-    expect(screen.getByRole('alert')).toHaveTextContent('Entre ton prénom.')
-    fireEvent.change(screen.getByLabelText('Ton prénom'), { target: { value: 'Léa' } })
-    fireEvent.click(screen.getByRole('button', { name: /C'est parti/ }))
-    expect(screen.getByRole('alert')).toHaveTextContent('Choisis ta classe.')
+describe('<Essai /> — depuis le 11/11, plus d’essai sans compte', () => {
+  function Ici() { const l = useLocation(); return <p>{`ICI ${l.pathname}${l.search}`}</p> }
+  const avecRoutes = url => render(
+    <MemoryRouter initialEntries={[url]}>
+      <Routes>
+        <Route path="/essai" element={<Essai />} />
+        <Route path="/commencer" element={<Ici />} />
+        <Route path="/connexion" element={<Ici />} />
+      </Routes>
+    </MemoryRouter>
+  )
+
+  it('un nouveau venu passe par l’entrée, avec les paramètres de la fiche', () => {
+    avecRoutes('/essai?classe=3%C3%A8me&matiere=maths&chapitre=theoreme-de-thales&via=fiche')
+    expect(screen.getByText(/^ICI \/commencer\?classe=3%C3%A8me&matiere=maths&chapitre=theoreme-de-thales&via=fiche$/)).toBeInTheDocument()
     expect(auth.loginAsGuest).not.toHaveBeenCalled()
   })
 
-  it('démarre la session d’essai et ouvre la séance d’accueil, comme après une inscription', () => {
-    renderPage()
-    fireEvent.change(screen.getByLabelText('Ton prénom'), { target: { value: 'Léa' } })
-    fireEvent.click(screen.getByRole('radio', { name: '3e' }))
-    fireEvent.click(screen.getByRole('button', { name: /C'est parti/ }))
-    expect(auth.loginAsGuest).toHaveBeenCalledWith({ prenom: 'Léa', level: { cycle: 'college', classe: '3ème', specialites: [] } })
-    expect(nav).toHaveBeenCalledWith('/exercices?premiere=1', { replace: true })
-    expect(nav).toHaveBeenCalledTimes(1)
-    expect(mesure.mesurer).toHaveBeenCalledWith('premiere_revision', { etape: 'lancee', matiere: 'decouverte' })
+  it('sans paramètre : l’entrée aussi, jamais de formulaire d’essai', () => {
+    avecRoutes('/essai')
+    expect(screen.getByText('ICI /commencer')).toBeInTheDocument()
+    expect(screen.queryByLabelText('Ton prénom')).toBeNull()
   })
 
-  it('un élève venu d’une fiche publique sans chapitre a sa classe cochée et ouvre la matière', () => {
-    renderPage('/essai?classe=3%C3%A8me&matiere=maths&via=pinterest')
-    expect(screen.getByRole('radio', { name: '3e' })).toHaveAttribute('aria-checked', 'true')
-    fireEvent.change(screen.getByLabelText('Ton prénom'), { target: { value: 'Léa' } })
-    fireEvent.click(screen.getByRole('button', { name: /C'est parti/ }))
-    expect(auth.loginAsGuest).toHaveBeenCalledWith({ prenom: 'Léa', level: { cycle: 'college', classe: '3ème', specialites: [] } })
-    expect(nav).toHaveBeenCalledWith('/programme?matiere=maths', { replace: true })
-    // Il a choisi une matière sur le site : pas de séance d'accueil par-dessus.
-    expect(mesure.mesurer).not.toHaveBeenCalled()
-  })
-
-  it('venu d’une fiche avec son chapitre : le prénom suffit, et la séance d’exercices du chapitre s’ouvre', async () => {
-    renderPage('/essai?classe=3%C3%A8me&matiere=maths&chapitre=theoreme-de-thales&via=fiche')
-    expect(await screen.findByText('Teste-toi sur ce chapitre. Juste ton prénom avant.')).toBeInTheDocument()
-    expect(screen.getByText('Théorème de Thalès (3e)')).toBeInTheDocument()
-    expect(screen.queryByRole('radio', { name: '3e' })).not.toBeInTheDocument()
-    fireEvent.change(screen.getByLabelText('Ton prénom'), { target: { value: 'Léa' } })
-    fireEvent.click(screen.getByRole('button', { name: /Lancer le quiz/ }))
-    expect(auth.loginAsGuest).toHaveBeenCalledWith({ prenom: 'Léa', level: { cycle: 'college', classe: '3ème', specialites: [] } })
-    expect(prog.openChapter).toHaveBeenCalledWith('3ème', 'Maths', THALES)
-    await waitFor(() => expect(nav).toHaveBeenCalledWith('/exercices', { replace: true }))
-  })
-
-  it('un chapitre inconnu retombe sur le formulaire habituel et la matière', async () => {
-    renderPage('/essai?classe=3%C3%A8me&matiere=maths&chapitre=inconnu')
-    await waitFor(() => expect(prog.loadCatalogue).toHaveBeenCalled())
-    expect(await screen.findByRole('radio', { name: '3e' })).toHaveAttribute('aria-checked', 'true')
-    fireEvent.change(screen.getByLabelText('Ton prénom'), { target: { value: 'Léa' } })
-    fireEvent.click(screen.getByRole('button', { name: /C'est parti/ }))
-    expect(prog.openChapter).not.toHaveBeenCalled()
-    expect(nav).toHaveBeenCalledWith('/programme?matiere=maths', { replace: true })
+  it('venu d’un e-mail de Réviz (son compte existe) : la connexion, qui le ramène sur le quiz', () => {
+    avecRoutes('/essai?classe=3%C3%A8me&matiere=maths&chapitre=theoreme-de-thales&via=rappel')
+    expect(screen.getByText(/^ICI \/connexion\?next=%2Fessai%3Fclasse/)).toBeInTheDocument()
   })
 
   it('un essai déjà commencé ouvre directement la séance d’exercices du chapitre de la fiche', async () => {
@@ -89,37 +63,12 @@ describe('<Essai /> — mode essai', () => {
     expect(prog.openChapter).toHaveBeenCalledTimes(1)
   })
 
-  it('une matière mal formée ou une classe de lycée dans le lien sont ignorées', () => {
-    renderPage('/essai?classe=Terminale&matiere=../hack')
-    expect(screen.getByRole('radio', { name: '3e' })).toHaveAttribute('aria-checked', 'false')
-    fireEvent.change(screen.getByLabelText('Ton prénom'), { target: { value: 'Léa' } })
-    fireEvent.click(screen.getByRole('radio', { name: '4e' }))
-    fireEvent.click(screen.getByRole('button', { name: /C'est parti/ }))
-    expect(nav).toHaveBeenCalledWith('/exercices?premiere=1', { replace: true })
-  })
-
-  it('seulement les classes du collège : Mon programme s’arrête en 3e', () => {
-    renderPage()
-    expect(screen.getAllByRole('radio').map(r => r.textContent)).toEqual(['6e', '5e', '4e', '3e'])
-    expect(screen.queryByRole('tab', { name: /Lycée/ })).not.toBeInTheDocument()
-  })
-
   it('un enseignant venu de /profs ouvre directement le programme de la classe choisie', () => {
     renderPage('/essai?prof=1&classe=4%C3%A8me')
     expect(auth.loginAsGuest).toHaveBeenCalledWith({ prenom: 'Prof', level: { cycle: 'college', classe: '4ème', specialites: [] } })
     expect(nav).toHaveBeenCalledWith('/programme', { replace: true })
     expect(localStorage.getItem('reviz-decouverte-prof')).toBe('1')
     expect(screen.queryByLabelText('Ton prénom')).not.toBeInTheDocument()
-  })
-
-  it('une classe inconnue retombe sur le formulaire, et un essai d’élève sort du mode découverte', () => {
-    localStorage.setItem('reviz-decouverte-prof', '1')
-    renderPage('/essai?prof=1&classe=CM2')
-    expect(auth.loginAsGuest).not.toHaveBeenCalled()
-    fireEvent.change(screen.getByLabelText('Ton prénom'), { target: { value: 'Léa' } })
-    fireEvent.click(screen.getByRole('radio', { name: '5e' }))
-    fireEvent.click(screen.getByRole('button', { name: /C'est parti/ }))
-    expect(localStorage.getItem('reviz-decouverte-prof')).toBeNull()
   })
 
   it('un essai déjà commencé, sans fiche : on le reprend (l’accueil), pas de nouvel essai vide', () => {

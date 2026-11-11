@@ -193,9 +193,13 @@ function ChoixChapitres({ classe, matiere, choisis, onChange, onChoix, defiler }
 
 // `initial` : { matiere, date } depuis l'agenda ; Réviz IA y ajoute { chapitres, titre, programme }
 // quand l'élève touche « Modifier » sur sa carte (feuille déjà remplie).
-export function AjoutControle({ initial = {}, onClose, onSaved }) {
+/**
+ * `sansCompte` ({ classe, onChoisi }) : avant la création du compte (pages/Commencer.jsx), rien
+ * n'est enregistré ; le contrôle est rendu à `onChoisi` et rangé dans l'agenda une fois le compte créé.
+ */
+export function AjoutControle({ initial = {}, onClose, onSaved, sansCompte = null }) {
   const { currentUser, getUserLevel } = useAuth();
-  const niveau = getUserLevel?.();
+  const niveau = sansCompte ? { cycle: 'college', classe: sansCompte.classe, specialites: [] } : getUserLevel?.();
   // Sans programme pour sa classe (lycée), on ne lui propose pas celui de 3e : ses cours scannés seulement.
   const classe = hasProgramme(niveau) ? niveau.classe : null;
   const [chapitres, setChapitres] = useState(() => initial.chapitres ?? []);
@@ -223,6 +227,7 @@ export function AjoutControle({ initial = {}, onClose, onSaved }) {
   async function enregistrer(e) {
     e.preventDefault();
     if (manque) return;
+    if (sansCompte) { sansCompte.onChoisi({ matiere, titre: titre.trim(), date, chapitres, classe, programme }); return; }
     setEnvoi(true);
     setErreur('');
     try {

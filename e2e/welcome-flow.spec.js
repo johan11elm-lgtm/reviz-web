@@ -17,9 +17,9 @@ for (const [appareil, viewport] of [['téléphone', { width: 390, height: 844 }]
       await expect(cta).toBeVisible()
 
       await cta.click()
-      await expect(page).toHaveURL(/\/inscription/)
-      // Premier écran du tunnel : le prénom.
-      await expect(page.getByLabel('Ton prénom')).toBeVisible()
+      // Depuis le 11/11 : l'entrée, où Réviz pose ses questions avant le compte.
+      await expect(page).toHaveURL(/\/commencer/)
+      await expect(page.getByRole('button', { name: 'C’est parti' })).toBeVisible()
     })
 
     test('user can navigate to the login page from welcome', async ({ page }) => {
@@ -32,12 +32,14 @@ for (const [appareil, viewport] of [['téléphone', { width: 390, height: 844 }]
       await expect(page.getByRole('button', { name: 'Se connecter' })).toBeVisible()
     })
 
-    test('user can try the app without an account, and come back', async ({ page }) => {
+    test('« Commencer gratuitement » ouvre l’entrée (Réviz pose ses questions), et l’on revient', async ({ page }) => {
       await page.goto('/welcome')
+      // Plus d'essai sans compte depuis le 11/11.
+      await expect(page.getByRole('link', { name: /sans compte/i })).toHaveCount(0)
 
-      await page.getByRole('link', { name: /Essayer sans compte/i }).click()
-      await expect(page).toHaveURL(/\/essai/)
-      await expect(page.getByLabel('Ton prénom')).toBeVisible()
+      await page.getByRole('link', { name: /Commencer gratuitement/i }).click()
+      await expect(page).toHaveURL(/\/commencer/)
+      await expect(page.getByRole('heading', { level: 1 })).toContainText('moi c’est Réviz')
 
       // Le retour de l'écran ramène à la bienvenue.
       await page.getByRole('button', { name: 'Retour' }).click()

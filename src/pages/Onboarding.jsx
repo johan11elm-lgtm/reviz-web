@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { hasProgramme } from '../utils/programme';
@@ -13,6 +13,9 @@ import { noterDemandeControle, noterControleNote } from '../utils/demandeControl
 import { arriveeRecente, oublierArrivee } from '../utils/arriveeFiche';
 import { loadCatalogue, openChapter } from '../services/programmeService';
 import { EntreeEcran, ChoixClasse, LienTexte } from '../components/entree/Entree';
+import { BLOCAGES, OBJECTIFS, Choix, PlanDepart, quand, minuscule } from '../components/entree/Decouverte';
+import { lireEntree, oublierEntree } from '../utils/entreeAttente';
+import { ajouterControle } from '../services/agendaService';
 import './Onboarding.entree.css';
 
 // Découverte (handoff Claude Design du 22/10), refaite le 11/11 sur le modèle de l'onboarding
@@ -30,29 +33,9 @@ import './Onboarding.entree.css';
 const ORDRE = ['bonjour', 'controle', 'blocage', 'objectif', 'pret'];
 const QUESTIONS = ['controle', 'blocage', 'objectif'];
 
-export const BLOCAGES = [
-  { id: 'quoi', label: 'Savoir quoi réviser', reponse: ['Je te dis quoi faire chaque jour.', 'Une étape à la fois, jusqu’au contrôle.'] },
-  { id: 'retenir', label: 'Retenir mes leçons', reponse: ['On mise sur les flashcards et les exercices.', 'C’est ce qui fait retenir, pas la relecture.'] },
-  { id: 'comprendre', label: 'Comprendre le cours', reponse: ['Quand tu bloques, Réviz IA t’explique.', 'Pas à pas, sans faire à ta place.'] },
-  { id: 'stress', label: 'Le stress des contrôles', reponse: ['On s’entraîne comme le jour J.', 'Le contrôle te semblera familier.'] },
-  { id: 'motivation', label: 'M’y mettre', reponse: ['Des séances de 5 minutes.', 'Le plus dur, c’est de commencer : on commence petit.'] },
-];
-
-export const OBJECTIFS = [
-  { id: 'moyenne', label: 'Avoir la moyenne', niveau: 'Facile', aide: 'Un premier cap, à ta portée.' },
-  { id: 'progresser', label: 'Gagner 2 ou 3 points', niveau: 'Faisable', aide: 'Un vrai défi, et réaliste.' },
-  { id: 'haut', label: 'Viser 16 et plus', niveau: 'Ambitieux', aide: 'On vise juste et on commence tôt.' },
-];
+export { BLOCAGES, OBJECTIFS };
 
 const court = c => c.replace('ème', 'e');
-const minuscule = t => t.charAt(0).toLowerCase() + t.slice(1);
-
-/** « demain », « jeudi 13 novembre » : le jour du contrôle, dit simplement. */
-function quand(date) {
-  const n = joursEntre(jourIso(), date);
-  return n <= 0 ? 'aujourd’hui' : n === 1 ? 'demain' : jourEnClair(date);
-}
-
 function garderReponses(uid, reponses) {
   if (!uid) return;
   try { localStorage.setItem(`reviz-entree-${uid}`, JSON.stringify(reponses)); } catch { /* stockage indisponible */ }
@@ -94,11 +77,63 @@ export default function Onboarding() {
     return () => { vivant = false; };
   }, [lycee, classeProgramme]);
 
+  // Déjà faite : l'accueil. Mais pas une fois partie d'ici (séance d'accueil, chapitre) : pendant que
+  // la page suivante se charge, la découverte reste affichée, et un compte qui se met à jour (accord
+  // parental d'un moins de 15 ans) la renverrait à l'accueil par-dessus la séance.
+  const partie = useRef(false);
   useEffect(() => {
+    if (partie.current) return;
     if (currentUser && localStorage.getItem(`reviz-onboarded-${currentUser.uid}`)) {
       navigate('/', { replace: true });
     }
   }, [currentUser, navigate]);
+
+  // Réponses données avant le compte (pages/Commencer.jsx, 11/11) : on les range sur le compte
+  // (agenda, réponses) et on lance la séance d'accueil, ou le chapitre de la fiche d'arrivée,
+  // sans reposer les questions.
+  const [attente] = useState(() => {
+    const e = currentUser ? lireEntree() : null;
+    return e?.fini && !localStorage.getItem(`reviz-onboarded-${currentUser.uid}`) ? e : null;
+  });
+  const rangement = useRef(false);
+  useEffect(() => {
+    if (!attente || !currentUser || rangement.current) return;
+    rangement.current = true;
+    partie.current = true;
+    const u = currentUser.uid;
+    (async () => {
+      const c = attente.controle && attente.controle !== 'aucun' ? attente.controle : null;
+      if (c) {
+        try { await ajouterControle(currentUser, c); noterControleNote(u); } catch { /* il le notera dans l'agenda */ }
+      } else if (attente.controle === 'aucun') noterDemandeControle(u);
+      if (attente.classe && !lycee && attente.classe !== niveau?.classe) setUserLevel({ cycle: 'college', classe: attente.classe });
+      localStorage.setItem(`reviz-onboarded-${u}`, '1');
+      garderReponses(u, { controle: c ? 'note' : attente.controle, blocage: attente.blocage, objectif: attente.objectif });
+      mesurer('entree_fin', { raison: 'avant_compte', controle: c ? 'note' : (attente.controle ?? 'sans'), blocage: attente.blocage, objectif: attente.objectif });
+      oublierEntree();
+      // Venu d'une fiche : son chapitre ; sinon la séance d'accueil (3 exercices faciles).
+      const classeA = attente.classe ?? niveau?.classe;
+      const a = classeA ? arriveeRecente(classeA) : null;
+      if (a) {
+        try {
+          const cat = await loadCatalogue(a.classe);
+          const m = cat.matieres.find(x => x.slug === a.matiere);
+          const ch = m?.chapitres.find(x => x.id === a.chapitre && x.pret);
+          if (ch) {
+            mesurer('premiere_revision', { etape: 'lancee', matiere: m.matiere, depuis: 'fiche' });
+            await openChapter(a.classe, m.matiere, ch);
+            oublierArrivee();
+            navigate('/exercices', { replace: true });
+            return;
+          }
+        } catch { /* la séance d'accueil, à la place */ }
+      }
+      mesurer('premiere_revision', { etape: 'lancee', matiere: 'decouverte' });
+      navigate('/exercices?premiere=1', { replace: true });
+    })();
+    // Une seule fois, à l'arrivée du compte.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [attente, currentUser]);
 
   const etape = ORDRE[step];
   const uid = currentUser?.uid;
@@ -114,6 +149,7 @@ export default function Onboarding() {
     setStep(s => Math.min(s + 1, ORDRE.length - 1));
   }
   function finir(to, raison) {
+    partie.current = true;
     if (uid) localStorage.setItem(`reviz-onboarded-${uid}`, '1');
     garderReponses(uid, { controle: noteControle?.id ?? (controle === 'aucun' ? 'aucun' : null), blocage, objectif });
     mesurer('entree_fin', { raison, etape, controle: noteControle ? 'note' : (controle ?? 'sans'), blocage, objectif });
@@ -246,27 +282,7 @@ export default function Onboarding() {
     bulle = [prenom ? `C’est prêt, ${prenom}.` : 'C’est prêt.', 'Voilà ton plan de départ.'];
     carte = (
       <>
-        <ul className="onb-plan" aria-label="Ton plan de départ">
-          <li>
-            <span className="onb-plan-rond onb-plan-rond--lavande" aria-hidden="true"><Mascot pose="pointing" size={34} alt="" /></span>
-            <div>
-              <b>{noteControle ? `${intituleControle(noteControle)} ${quand(noteControle.date)}` : 'Pas encore de contrôle noté'}</b>
-              <span>{noteControle ? `Plan de révision en ${planRevision(noteControle).length} étapes d’ici là.` : 'Note-le dans l’agenda dès que tu le connais : le plan se fait tout seul.'}</span>
-            </div>
-          </li>
-          {choixBlocage && (
-            <li>
-              <span className="onb-plan-rond onb-plan-rond--peche" aria-hidden="true"><Mascot pose="thinking" size={34} alt="" /></span>
-              <div><b>{choixBlocage.label}</b><span>{choixBlocage.reponse[0]}</span></div>
-            </li>
-          )}
-          {choixObjectif && (
-            <li>
-              <span className="onb-plan-rond onb-plan-rond--menthe" aria-hidden="true"><Mascot pose="celebration" size={34} alt="" /></span>
-              <div><b>{choixObjectif.label}</b><span>Objectif {choixObjectif.niveau.toLowerCase()}. On fait le point après chaque séance.</span></div>
-            </li>
-          )}
-        </ul>
+        <PlanDepart controle={noteControle} blocage={blocage} objectif={objectif} />
         {programmePret && arrivee ? (
           <>
             <p className="en-texte onb-texte">
@@ -295,6 +311,14 @@ export default function Onboarding() {
     );
   }
 
+  if (attente) {
+    return (
+      <EntreeEcran bulle={[prenom ? `Bienvenue, ${prenom}.` : 'Bienvenue.', 'Je range ton plan, un instant.']} expression="fier" taille="decouverte">
+        <p className="en-texte onb-texte" role="status">Ton plan est enregistré sur ton compte.</p>
+      </EntreeEcran>
+    );
+  }
+
   // La barre n'apparaît qu'aux trois questions : le bonjour et « C'est prêt » restent une conversation.
   const q = QUESTIONS.indexOf(etape);
   return (
@@ -311,20 +335,5 @@ export default function Onboarding() {
       </EntreeEcran>
       {feuille && <AjoutControle initial={feuille} onClose={() => setFeuille(null)} onSaved={controleNote} />}
     </>
-  );
-}
-
-/** Une question, une réponse : de grandes cases, comme une conversation. */
-function Choix({ nom, options, valeur, onChange, etiquette = false }) {
-  return (
-    <div className="onb-choix" role="radiogroup" aria-label={nom}>
-      {options.map(o => (
-        <button key={o.id} type="button" role="radio" aria-checked={valeur === o.id}
-          className={`onb-option${valeur === o.id ? ' is-choisie' : ''}`} onClick={() => onChange(o.id)}>
-          <span className="onb-option-texte">{o.label}</span>
-          {etiquette && <span className={`onb-option-niveau onb-option-niveau--${o.id}`}>{o.niveau}</span>}
-        </button>
-      ))}
-    </div>
   );
 }
