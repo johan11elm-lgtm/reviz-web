@@ -141,7 +141,7 @@
   cursor: pointer;
 }
 
-.coach-close-btn:hover { background: var(--bg-muted); }
+@media (hover: hover) and (pointer: fine) { .coach-close-btn:hover { background: var(--bg-muted); } }
 
 /* ── Fil de messages ── */
 .coach-messages {
@@ -340,7 +340,7 @@
   background: transparent;
   color: var(--text-primary);
   padding: 0;
-  font-size: 15px;
+  font-size: 16px;
   font-family: inherit;
 }
 .coach-input:focus { outline: none; }

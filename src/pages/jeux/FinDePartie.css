@@ -334,7 +334,7 @@
 .fp-page .fp-actions-ligne--recap { align-self: stretch; margin-top: 12px; }
 
 /* ── Téléphone : page figée sur le petit viewport ; petits écrans (iPhone SE dans Safari) ── */
-@media (max-width: 430px) {
+@media (max-width: 599px) {
   .app.fp-page { height: var(--hauteur-ecran, 100svh); }
 }
 @media (max-height: 700px) {

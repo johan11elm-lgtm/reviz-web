@@ -8,7 +8,7 @@
 .wlc-installer:focus-visible, .wlc-legal a:focus-visible { outline: 3px solid var(--en-encre); outline-offset: 2px; }
 .wlc-legal { font-size: 12px; line-height: 1.6; }
 .wlc-legal a { color: inherit; font-weight: 600; text-decoration: none; }
-.wlc-legal a:hover { text-decoration: underline; }
+@media (hover: hover) and (pointer: fine) { .wlc-legal a:hover { text-decoration: underline; } }
 
 /* Arrivé par le lien d'un ami : le cadeau, en pastille menthe. */
 .wlc-parrain { padding: 10px 14px; border-radius: 16px; background: var(--rv-menthe); font-size: 15px; }

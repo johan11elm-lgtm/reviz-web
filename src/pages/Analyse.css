@@ -203,7 +203,7 @@
   color: #042A65;
   cursor: pointer;
 }
-.analyse-page .nf-chapitre:hover:not(:disabled) { background: var(--rv-fond); }
+@media (hover: hover) and (pointer: fine) { .analyse-page .nf-chapitre:hover:not(:disabled) { background: var(--rv-fond); } }
 .analyse-page .nf-chapitre:disabled { cursor: default; }
 .analyse-page .nf-chapitre:disabled:not(.nf-chapitre--actif) { opacity: .5; }
 .analyse-page .nf-chapitre:focus-visible { outline: 3px solid #042A65; outline-offset: -1px; }

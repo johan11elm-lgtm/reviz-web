@@ -83,7 +83,7 @@
   font-size: 15px;
   cursor: pointer;
 }
-.ill-agrandir:hover { background: var(--bg-hover); }
+@media (hover: hover) and (pointer: fine) { .ill-agrandir:hover { background: var(--bg-hover); } }
 .ill-agrandir:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
 
 .ill-legende-texte {

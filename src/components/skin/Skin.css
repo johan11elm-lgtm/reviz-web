@@ -114,9 +114,9 @@
   color: #fff;
   transition: transform .2s;
 }
-.sk-bouton:hover .sk-bouton-pastille { transform: rotate(45deg); }
+@media (hover: hover) and (pointer: fine) { .sk-bouton:hover .sk-bouton-pastille { transform: rotate(45deg); } }
 .sk-bouton--encre   { background: #042A65; color: #fff; }
-.sk-bouton--encre:hover { background: #0B3A82; }
+@media (hover: hover) and (pointer: fine) { .sk-bouton--encre:hover { background: #0B3A82; } }
 .sk-bouton--blanc   { background: #fff; color: #042A65; }
 .sk-bouton--contour { background: var(--rv-carte); color: var(--rv-encre); border: 1px solid var(--rv-ligne); }
 .sk-bouton--contour .sk-bouton-pastille { background: #EAE8F2; color: #042A65; }

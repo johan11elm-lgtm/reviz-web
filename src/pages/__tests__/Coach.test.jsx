@@ -60,7 +60,7 @@ describe('<Coach /> — Réviz IA', () => {
     const avant = { vv: window.visualViewport, mm: window.matchMedia, h: window.innerHeight }
     Object.defineProperty(window, 'visualViewport', { configurable: true, value: vv })
     Object.defineProperty(window, 'innerHeight', { configurable: true, value: 844 })
-    window.matchMedia = q => ({ matches: q.includes('max-width: 430px'), media: q, addEventListener() {}, removeEventListener() {} })
+    window.matchMedia = q => ({ matches: q.includes('max-width: 599px'), media: q, addEventListener() {}, removeEventListener() {} })
     try {
       const { container } = renderAt('/coach?lesson=l1')
       const page = container.querySelector('.ia-page')

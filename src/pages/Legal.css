@@ -238,7 +238,7 @@
   color: var(--lg-doux);
   text-decoration: none;
 }
-.legal-autres a:hover { color: var(--lg-encre); }
+@media (hover: hover) and (pointer: fine) { .legal-autres a:hover { color: var(--lg-encre); } }
 .legal-autres a:focus-visible { outline: 3px solid var(--lg-encre); outline-offset: 1px; }
 
 .legal-page--large .legal-corps { padding: 0; }

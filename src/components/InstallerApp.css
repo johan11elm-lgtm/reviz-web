@@ -160,7 +160,7 @@
   cursor: pointer;
   transition: background .15s, color .15s;
 }
-.inst-onglet:hover { color: var(--inst-encre); }
+@media (hover: hover) and (pointer: fine) { .inst-onglet:hover { color: var(--inst-encre); } }
 .inst-onglet:focus-visible { outline: 2px solid var(--inst-encre); outline-offset: 1px; }
 .inst-onglet--actif {
   background: var(--rv-carte);

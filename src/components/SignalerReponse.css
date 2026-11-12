@@ -3,7 +3,7 @@
   display: inline-flex; align-items: center; gap: 5px; min-height: 32px; margin-top: 6px; padding: 0 2px;
   border: 0; background: none; font: inherit; font-size: 13px; font-weight: 600; color: var(--rv-doux); cursor: pointer;
 }
-.sig-lien:hover { color: var(--rv-encre); }
+@media (hover: hover) and (pointer: fine) { .sig-lien:hover { color: var(--rv-encre); } }
 .sig-merci { margin: 6px 0 0; font-size: 13px; font-weight: 600; color: var(--rv-doux); }
 .sig-titre { font-size: 26px; }
 .sig-raisons { display: flex; flex-direction: column; gap: 8px; }

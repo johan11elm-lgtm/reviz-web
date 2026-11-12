@@ -30,7 +30,7 @@
 .rv-bell-btn:active { transform: scale(0.94); }
 .rv-bell-btn svg { width: 18px; height: 18px; }
 
-@media (max-width: 430px) {
+@media (max-width: 599px) {
   .rv-bell-btn { width: 36px; height: 36px; }
   .rv-bell-btn svg { width: 17px; height: 17px; }
 }

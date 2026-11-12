@@ -33,7 +33,7 @@
 .av-titre { display: flex; align-items: center; gap: 8px; margin: 18px 2px 10px; font-size: 15px; font-weight: 700; }
 .av-fonds { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; padding: 2px; list-style: none; }
 .av-fond { width: 36px; height: 36px; border: 0; border-radius: 50%; background: var(--av-fond); box-shadow: 0 0 0 2px #fff, 0 1px 4px rgba(4, 42, 101, .2); cursor: pointer; transition: transform .15s; }
-.av-fond:hover { transform: scale(1.08); }
+@media (hover: hover) and (pointer: fine) { .av-fond:hover { transform: scale(1.08); } }
 .av-fond.is-choisi { box-shadow: 0 0 0 2px #fff, 0 0 0 4.5px #042A65; }
 .av-fond:focus-visible { outline: 3px solid #042A65; outline-offset: 4px; }
 .av-grille { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px 8px; margin: 0; padding: 0; list-style: none; }
@@ -43,7 +43,7 @@
   font: 600 12px/1.2 'Poppins', system-ui, sans-serif; color: #042A65; text-align: center; cursor: pointer;
 }
 .av-choix .rv-avatar { width: 100% !important; max-width: 68px; height: auto !important; aspect-ratio: 1; transition: transform .2s cubic-bezier(.34, 1.56, .64, 1); }
-.av-choix:hover .rv-avatar { transform: scale(1.06) rotate(-4deg); }
+@media (hover: hover) and (pointer: fine) { .av-choix:hover .rv-avatar { transform: scale(1.06) rotate(-4deg); } }
 .av-choix.is-choisi { background: #fff; box-shadow: 0 0 0 2px var(--rv-vif-plein); }
 .av-choix:focus-visible { outline: 3px solid #042A65; outline-offset: 2px; }
 /* Têtes Réviz+ sans Réviz+ : un cadenas, et l'offre au toucher. */

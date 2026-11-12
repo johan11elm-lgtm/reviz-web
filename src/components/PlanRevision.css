@@ -73,7 +73,7 @@
   font: 700 14px 'Poppins', system-ui, sans-serif;
   cursor: pointer;
 }
-.pr-go:hover { background: #0B3A82; }
+@media (hover: hover) and (pointer: fine) { .pr-go:hover { background: #0B3A82; } }
 .pr-go:focus-visible, .pr-debloquer:focus-visible { outline: 3px solid var(--rv-encre); outline-offset: 2px; }
 .pr-debloquer {
   align-self: flex-start;

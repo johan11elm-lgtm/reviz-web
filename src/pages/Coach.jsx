@@ -27,6 +27,7 @@ import { intituleControle, matiereControle } from '../utils/agenda';
 import { quotaCoachDuJour } from '../utils/revizPlus';
 import { TEINTES, teinteMatiere } from '../utils/teinteMatiere';
 import { useIsDesktop } from '../hooks/useMediaQuery';
+import { estTelephone } from '../utils/ecran';
 import { useModalA11y } from '../hooks/useModalA11y';
 import '../components/RevizPlus.css';
 import { ACHAT_DANS_L_APP } from '../utils/achat';
@@ -720,8 +721,9 @@ export default function Coach() {
   );
 }
 
-// Téléphone : .app est figé à la hauteur de l'écran (global.css, max-width 430 px), la fenêtre ne défile pas.
-const telephone = () => typeof window !== 'undefined' && window.matchMedia?.('(max-width: 430px)').matches;
+// Téléphone : .app est figé à la hauteur de l'écran (global.css, moins de 600 px, et toute l'app native),
+// la fenêtre ne défile pas.
+const telephone = () => estTelephone();
 // La hauteur de la page sans le clavier : sur iPhone, window.innerHeight rétrécit avec le clavier (c'est la
 // zone visible), pas la hauteur de l'élément racine.
 const hauteurPage = () => Math.max(window.innerHeight, document.documentElement.clientHeight);

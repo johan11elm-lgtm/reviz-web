@@ -35,7 +35,7 @@
 .ag-rebours--mot { font-size: 15px; letter-spacing: -.01em; }
 .ag-prochain-bas { margin-top: 16px; }
 .ag-retirer { flex: none; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border: 0; border-radius: 50%; background: none; color: #B3A898; cursor: pointer; }
-.ag-retirer:hover { background: var(--rv-fond); color: var(--rv-encre); }
+@media (hover: hover) and (pointer: fine) { .ag-retirer:hover { background: var(--rv-fond); color: var(--rv-encre); } }
 .ag-retirer--coin { position: absolute; top: 4px; right: 4px; width: 36px; height: 36px; }
 .ag-rappel { display: flex; align-items: center; gap: 8px; margin: 0; font-size: 13px; font-weight: 500; color: var(--rv-doux); }
 .ag-rappel--tel { margin: 14px 24px 0; }
@@ -131,7 +131,7 @@
 .ag-relier-form { display: flex; flex-direction: column; gap: 8px; }
 .ag-relier-form label { font-size: 13px; font-weight: 600; color: var(--rv-doux); }
 .ag-relier-ligne { display: flex; gap: 8px; }
-.ag-relier-ligne input, .ag-input { flex: 1; min-width: 0; height: 46px; box-sizing: border-box; padding: 0 14px; border: 1.5px solid var(--rv-ligne); border-radius: 14px; background: var(--rv-carte); font: 500 15px 'Poppins', system-ui, sans-serif; color: var(--rv-encre); outline: 0; }
+.ag-relier-ligne input, .ag-input { flex: 1; min-width: 0; height: 46px; box-sizing: border-box; padding: 0 14px; border: 1.5px solid var(--rv-ligne); border-radius: 14px; background: var(--rv-carte); font: 500 16px 'Poppins', system-ui, sans-serif; color: var(--rv-encre); outline: 0; }
 .ag-relier-ligne input:focus, .ag-input:focus { border-color: var(--rv-orange); }
 .ag-relier-ligne .ag-pilule { height: 46px; }
 .ag-erreur { margin: 0; font-size: 13px; font-weight: 600; color: var(--rv-brun-texte); }
@@ -172,7 +172,7 @@
 .ag-cal-grille { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; justify-items: center; }
 .ag-cal-nom { font-size: 12px; font-weight: 700; color: var(--rv-doux); padding-bottom: 4px; }
 .ag-cal-jour { width: 40px; height: 40px; border: 0; border-radius: 50%; background: none; font: 600 15px 'Poppins', system-ui, sans-serif; color: var(--rv-encre); cursor: pointer; }
-.ag-cal-jour:hover:not(:disabled) { background: var(--rv-fond); }
+@media (hover: hover) and (pointer: fine) { .ag-cal-jour:hover:not(:disabled) { background: var(--rv-fond); } }
 .ag-cal-jour.is-weekend { opacity: .55; }
 .ag-cal-jour.is-auj { box-shadow: inset 0 0 0 2px var(--rv-orange); }
 .ag-cal-jour.is-choisi { background: var(--rv-inverse); color:var(--rv-sur-inverse); opacity: 1; }
@@ -226,8 +226,8 @@
 .ag-bloc.is-ctrl { box-shadow: inset 0 0 0 2px var(--rv-orange); }
 .ag-bloc.is-annule { opacity: .5; }
 .ag-bloc-noter { display: none !important; align-items: center; gap: 4px; margin-top: 2px; padding: 2px 8px; border-radius: 999px; background: var(--rv-carte); color: var(--rv-encre) !important; font-weight: 700 !important; width: max-content; }
-.ag-bloc:hover { transform: translateY(-1px); }
-.ag-bloc:hover .ag-bloc-noter { display: inline-flex !important; }
+@media (hover: hover) and (pointer: fine) { .ag-bloc:hover { transform: translateY(-1px); } }
+@media (hover: hover) and (pointer: fine) { .ag-bloc:hover .ag-bloc-noter { display: inline-flex !important; } }
 
 .ag-feuille--fenetre { align-self: center; width: 860px; max-width: calc(100vw - 64px); padding: 26px 28px 24px; border-radius: 28px; box-shadow: 0 30px 80px -20px rgba(var(--rv-encre-rgb),.35); animation: agFenetre .25s cubic-bezier(.3,1.3,.5,1) both; }
 @keyframes agFenetre { from { opacity: 0; transform: translateY(10px) scale(.97); } }
@@ -263,7 +263,7 @@
 .na-page .ag-titre { margin-top: 2px; font-family: inherit; font-size: 30px; letter-spacing: -.01em; color: #042A65; }
 .na-page .ag-ajouter-rond { width: 46px; height: 46px; border-radius: 14px; background: #042A65; color: #fff; box-shadow: none; }
 .na-page .na-ajouter { display: inline-flex; align-items: center; gap: 8px; height: 46px; padding: 0 18px; border: 0; border-radius: 12px; background: #042A65; color: #fff; font: 700 14.5px 'Poppins', system-ui, sans-serif; cursor: pointer; }
-.na-page .na-ajouter:hover { background: #0B3A82; }
+@media (hover: hover) and (pointer: fine) { .na-page .na-ajouter:hover { background: #0B3A82; } }
 .na-page .na-ajouter:focus-visible, .na-page .ag-ajouter-rond:focus-visible { outline: 3px solid var(--rv-vif); outline-offset: 2px; }
 
 /* Bloc pêche de Réviz */
@@ -347,7 +347,7 @@
 /* Chapitres du contrôle, sur sa carte : des puces qui ouvrent leur fiche. */
 .ag-chapitres-du { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
 .ag-puce-chapitre { padding: 6px 10px; border: 0; border-radius: 8px; background: #F2EBFF; font: 600 12.5px 'Poppins', system-ui, sans-serif; color: #042A65; text-align: left; cursor: pointer; }
-.ag-puce-chapitre:hover { background: #E7DEFF; }
+@media (hover: hover) and (pointer: fine) { .ag-puce-chapitre:hover { background: #E7DEFF; } }
 .ag-puce-chapitre:focus-visible { outline: 3px solid var(--rv-vif); outline-offset: 1px; }
 
 /* ═══ Feuille « Ajouter un contrôle » façon app Nomad (29/10) : fond crème, matières en tuiles
@@ -426,4 +426,5 @@
 .ag-feuille-pied { position: sticky; bottom: 0; z-index: 2; padding: 12px 0 calc(16px + env(safe-area-inset-bottom, 0px)); background: var(--rv-fond); box-shadow: 0 -14px 14px -14px rgba(4,42,101,.22); }
 .ag-feuille.ag-feuille--fenetre { padding-bottom: 0; }
 .ag-feuille--fenetre .ag-feuille-pied { padding-bottom: 22px; }
-.ag-cal-jour.is-choisi, .ag-cal-jour.is-choisi:hover { background: #042A65; color: #fff; }
+.ag-cal-jour.is-choisi { background: #042A65; color: #fff; }
+@media (hover: hover) and (pointer: fine) { .ag-cal-jour.is-choisi:hover { background: #042A65; color: #fff; } }
