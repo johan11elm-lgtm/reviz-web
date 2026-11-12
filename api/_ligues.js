@@ -9,7 +9,9 @@
 //
 // Mineurs : chacun n'apparaît que sous un pseudo tiré de son uid (« Hibou malin 42 »), jamais son
 // prénom ; users/{uid}.ligueMasquee = true le retire des ligues. L'XP de la semaine est envoyée par
-// l'app (calculée sur ses révisions) et plafonnée à XP_SEMAINE_MAX (le plafond du jour × 7).
+// l'app (calculée sur ses révisions, que le serveur ne voit pas) : le serveur ne la croit que dans
+// les limites de ce qu'un élève peut faire (xpPlausible) : le plafond du jour × les jours déjà
+// commencés de la semaine, et au plus XP_PAR_MINUTE de plus par minute depuis sa dernière mise à jour.
 //
 //   ?op=ligue (POST, jeton Firebase) { xpSemaine } → { ligue, rang, total, membres, zones, fin }
 //   ligues/{lundi}/membres/{uid} = { ligue, groupe, pseudo, xp, majLe }
@@ -24,7 +26,22 @@ export const LIGUES = ['bronze', 'argent', 'or']
 export const TAILLE_GROUPE = 30
 export const PLACES_MONTEE = 5
 export const PLACES_DESCENTE = 5
-export const XP_SEMAINE_MAX = 500 * 7
+export const XP_JOUR_MAX = 500
+export const XP_SEMAINE_MAX = XP_JOUR_MAX * 7
+// Une séance rapide rapporte au plus ~100 XP en 2 à 3 minutes ; au-delà, l'XP envoyée est bridée.
+export const XP_PAR_MINUTE = 50
+
+/**
+ * L'XP retenue pour la semaine. demande : ce que dit l'app ; semaine : son lundi (AAAA-MM-JJ) ;
+ * avant : { xp, majLe } déjà enregistré cette semaine, ou null.
+ */
+export function xpPlausible(demande, { maintenant, semaine, avant = null }) {
+  const xp = Math.max(0, Math.round(Number(demande) || 0))
+  const jours = Math.min(7, Math.floor((maintenant - minuitParis(semaine)) / 86_400_000) + 1)
+  let max = XP_JOUR_MAX * Math.max(1, jours)
+  if (avant) max = Math.min(max, avant.xp + Math.max(0, (maintenant - (avant.majLe ?? maintenant)) / 60_000) * XP_PAR_MINUTE)
+  return Math.min(xp, Math.floor(max))
+}
 
 const ADJECTIFS = ['malin', 'rapide', 'curieux', 'calme', 'futé', 'vaillant', 'joyeux', 'patient', 'brillant', 'tenace', 'agile', 'sage']
 const ANIMAUX = ['Hibou', 'Renard', 'Panda', 'Lynx', 'Dauphin', 'Koala', 'Faucon', 'Loutre', 'Castor', 'Tigre', 'Manchot', 'Écureuil']
@@ -67,8 +84,6 @@ export async function routeLigue(req, res, { db, auth, maintenant = Date.now() }
     if (d.firebase?.sign_in_provider === 'anonymous') return res.status(409).json({ error: 'COMPTE' })
     uid = d.uid
   } catch { return res.status(401).json({ error: 'UNAUTHORIZED' }) }
-  const xp = Math.max(0, Math.min(XP_SEMAINE_MAX, Math.round(Number(req.body?.xpSemaine) || 0)))
-
   const profil = (await db.collection('users').doc(uid).get()).data() ?? {}
   if (profil.ligueMasquee === true) return res.status(200).json({ masquee: true })
 
@@ -77,6 +92,7 @@ export async function routeLigue(req, res, { db, auth, maintenant = Date.now() }
   const sem = db.collection('ligues').doc(semaine)
   const moiRef = sem.collection('membres').doc(uid)
   let moi = (await moiRef.get()).data()
+  const xp = xpPlausible(req.body?.xpSemaine, { maintenant, semaine, avant: moi ?? null })
 
   if (!moi) {
     if (xp <= 0) return res.status(200).json({ attente: true, fin })

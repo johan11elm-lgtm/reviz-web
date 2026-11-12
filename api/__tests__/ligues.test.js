@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { routeLigue, pseudoLigue, zones, ligueSuivante, TAILLE_GROUPE, XP_SEMAINE_MAX } from '../_ligues.js'
+import { routeLigue, pseudoLigue, zones, ligueSuivante, xpPlausible, TAILLE_GROUPE, XP_JOUR_MAX, XP_PAR_MINUTE } from '../_ligues.js'
 
 // Firestore en mémoire, avec sous-collections, where('==') et transactions.
 function fauxDb(initial = {}) {
@@ -62,9 +62,19 @@ describe('ligues de la semaine', () => {
       { rang: 2, pseudo: pseudoLigue('lea'), xp: 80, moi: true },
     ])
     expect(new Date(r.body.fin).toISOString()).toBe('2026-11-15T23:00:00.000Z')
-    // L'XP ne redescend pas, et elle est plafonnée.
+    // L'XP ne redescend pas, et elle est bridée à ce qu'un élève peut faire.
     expect((await appel(db, 'lea', 50)).body.membres.find(m => m.moi).xp).toBe(80)
-    expect((await appel(db, 'lea', 99_999)).body.membres.find(m => m.moi).xp).toBe(XP_SEMAINE_MAX)
+    expect((await appel(db, 'lea', 99_999, MERCREDI + 5 * 60_000)).body.membres.find(m => m.moi).xp).toBe(80 + 5 * XP_PAR_MINUTE)
+    expect((await appel(db, 'lea', 99_999, MERCREDI + 3 * 3600_000)).body.membres.find(m => m.moi).xp).toBe(3 * XP_JOUR_MAX)
+  })
+  it('XP envoyée par l’app : jamais plus que le plafond du jour × les jours déjà commencés de la semaine', () => {
+    const lundi = Date.parse('2026-11-09T09:00:00+01:00')
+    expect(xpPlausible(99_999, { maintenant: lundi, semaine: '2026-11-09' })).toBe(XP_JOUR_MAX)
+    expect(xpPlausible(99_999, { maintenant: MERCREDI, semaine: '2026-11-09' })).toBe(3 * XP_JOUR_MAX)
+    expect(xpPlausible(120, { maintenant: MERCREDI, semaine: '2026-11-09' })).toBe(120)
+    // Juste après la dernière mise à jour : rien de plus.
+    expect(xpPlausible(900, { maintenant: MERCREDI, semaine: '2026-11-09', avant: { xp: 100, majLe: MERCREDI } })).toBe(100)
+    expect(xpPlausible('n’importe quoi', { maintenant: MERCREDI, semaine: '2026-11-09' })).toBe(0)
   })
   it(`des groupes de ${TAILLE_GROUPE} au plus`, async () => {
     const db = fauxDb()
