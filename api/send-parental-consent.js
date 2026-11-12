@@ -23,6 +23,7 @@
 // Vercel peut l'appeler : il envoie CRON_SECRET dans l'en-tête Authorization.
 
 import { Resend } from 'resend';
+import { envoiBorne, adressesRejetees, BUDGET_PAR_DEFAUT } from './_envoiMails.js';
 import { getDb, getAuthAdmin } from './_firebaseAdmin.js';
 import { nouvelleDemande, demandeEnCours, jetonDe, lienPartage, scorePartage, MAX_ENVOIS_LIEN } from './_accordParent.js';
 import { DELAI_ADRESSE_MS, DELAI_REPONSE_MS } from '../src/utils/consent.js';
@@ -327,7 +328,11 @@ export default async function handler(req, res) {
     if (!secret || req.headers?.authorization !== `Bearer ${secret}`) return res.status(401).json({ error: 'UNAUTHORIZED' });
     try {
       const resend = new Resend(process.env.RESEND_API_KEY);
-      const envoyer = m => resend.emails.send(m);
+      // Borné (api/_envoiMails.js) : le quota de Resend doit laisser passer les e-mails de la soirée.
+      const envoyer = envoiBorne(m => resend.emails.send(m), {
+        budget: Number(process.env.BUDGET_MAILS_CRON) || BUDGET_PAR_DEFAUT,
+        rejetees: await adressesRejetees(),
+      });
       const db = getDb();
       const parents = await relancerParents({ db, envoyer });
       const emailDe = uid => getAuthAdmin().getUser(uid).then(u => u.email || null, () => null);
@@ -346,7 +351,7 @@ export default async function handler(req, res) {
       const push = pousser
         ? await envoyerNotifs({ db, envoyer: pousser }).catch(err => { console.error('[push]', err?.message || err); return { notifs: 0 }; })
         : { notifs: 0, pushSansCle: true };
-      return res.status(200).json({ ...parents, ...eleves, ...lendemain, ...bilans, ...limites, ...push });
+      return res.status(200).json({ ...parents, ...eleves, ...lendemain, ...bilans, ...limites, ...push, emails: envoyer.compte() });
     } catch (err) {
       console.error('[relance-parent]', err?.message || err);
       return res.status(500).json({ error: 'RELANCE_FAILED' });
