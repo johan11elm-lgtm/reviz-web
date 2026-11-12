@@ -41,6 +41,10 @@
 	<string>Réviz utilise l'appareil photo pour scanner tes leçons.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Réviz accède à tes photos pour importer une leçon déjà photographiée.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Réviz utilise le micro quand tu dictes une question ou expliques une leçon à voix haute.</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Réviz transforme ta voix en texte quand tu dictes une question ou expliques une leçon.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
