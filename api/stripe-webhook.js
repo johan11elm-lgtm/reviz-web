@@ -7,7 +7,7 @@
 import Stripe from 'stripe'
 import { getDb } from './_firebaseAdmin.js'
 import { Resend } from 'resend'
-import { enregistrerCadeau, mailCadeau } from './_cadeau.js'
+import { enregistrerCadeau, mailCadeau, noterMailCadeau } from './_cadeau.js'
 import { REPONDRE_A } from './_bilanParent.js'
 import { accordParPaiement } from './_accordParent.js'
 
@@ -98,8 +98,10 @@ export default async function handler(req, res) {
           { merge: true }
         )
         console.log(`[stripe-webhook] User ${uid} upgraded to premium`)
-        // Payé par un parent depuis la page « Offrir » (api/_demandePlus.js) : vaut accord parental.
-        if (session.metadata?.payeur === 'parent') {
+        // Payé par un parent depuis la page « Offrir » (api/_demandePlus.js) : vaut accord parental,
+        // seulement si une carte a vraiment été débitée. Avec un code promo (un mois offert), le
+        // paiement est de 0 € : un élève pourrait le faire lui-même ; l'accord passe alors par le lien.
+        if (session.metadata?.payeur === 'parent' && session.amount_total > 0 && session.payment_status === 'paid') {
           try {
             const r = await accordParPaiement(db, uid, { parentEmail: session.customer_details?.email ?? session.customer_email })
             console.log(`[stripe-webhook] accord parental ${uid} : ${r}`)
@@ -107,11 +109,14 @@ export default async function handler(req, res) {
         }
       } else if (session.metadata?.cadeau === '1') {
         // Réviz+ offert par un parent sur /parents (api/_cadeau.js) : le code de son enfant, par e-mail aussi.
-        const { code, cadeau, nouveau } = await enregistrerCadeau(db, session)
+        // La page de remerciement a souvent déjà écrit le cadeau : on regarde si l'e-mail est parti.
+        const { code, cadeau } = await enregistrerCadeau(db, session)
         const a = session.customer_details?.email ?? session.customer_email
-        if (nouveau && a && process.env.RESEND_API_KEY) {
+        if (!cadeau.mailLe && a && process.env.RESEND_API_KEY) {
           try {
-            await new Resend(process.env.RESEND_API_KEY).emails.send({ from: 'Réviz <noreply@revizapp.fr>', to: a, replyTo: REPONDRE_A, ...mailCadeau({ code, formule: cadeau.formule }) })
+            const { error } = await new Resend(process.env.RESEND_API_KEY).emails.send({ from: 'Réviz <noreply@revizapp.fr>', to: a, replyTo: REPONDRE_A, ...mailCadeau({ code, formule: cadeau.formule }) }) ?? {}
+            if (error) throw new Error(error.message ?? 'Resend')
+            await noterMailCadeau(db, code)
           } catch (err) { console.error('[stripe-webhook] mail cadeau', err?.message || err) }
         }
         console.log(`[stripe-webhook] cadeau ${code} enregistré`)

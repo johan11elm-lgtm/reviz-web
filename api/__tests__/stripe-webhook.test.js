@@ -8,6 +8,7 @@ const userUpdate = vi.fn()
 const cadeauSet = vi.fn()
 const mailEnvoye = vi.fn(async () => ({}))
 let userFound = true
+let cadeauExistant = null // données de cadeaux/{CODE} déjà écrit par la page de remerciement
 const consentGet = vi.fn(async () => ({ exists: true, data: () => ({ status: 'pending' }) }))
 const consentSet = vi.fn(async () => {})
 
@@ -18,7 +19,7 @@ function makeDb() {
         return { doc: () => ({ get: eventGet, set: eventSet }) }
       }
       if (name === 'cadeaux') {
-        return { doc: id => ({ get: async () => ({ exists: false }), set: v => cadeauSet(id, v) }) }
+        return { doc: id => ({ get: async () => (cadeauExistant ? { exists: true, data: () => cadeauExistant } : { exists: false }), set: (v, ...o) => cadeauSet(id, v, ...o) }) }
       }
       // users
       return {
@@ -178,14 +179,35 @@ describe('stripe-webhook — Réviz+ offert par un parent (cadeau, 11/11)', () =
     expect(userSet).not.toHaveBeenCalled()
     expect(cadeauSet).toHaveBeenCalledWith(expect.stringMatching(/^[A-HJKMNP-Z2-9]{8}$/), expect.objectContaining({ customer: 'cus_9', subscription: 'sub_9', email: 'parent@famille.test' }))
     expect(mailEnvoye).toHaveBeenCalledWith(expect.objectContaining({ to: 'parent@famille.test', subject: 'Le code Réviz+ de votre enfant' }))
+    expect(cadeauSet).toHaveBeenCalledWith(expect.any(String), { mailLe: expect.any(Number) }, { merge: true })
+  })
+  it('la page de remerciement est passée avant : l’e-mail part quand même, une seule fois', async () => {
+    process.env.CRON_SECRET = 'secret-test'
+    process.env.RESEND_API_KEY = 're_test'
+    const session = { id: 'cs_test_cadeau_123456789', customer: 'cus_9', subscription: 'sub_9', status: 'complete',
+      metadata: { cadeau: '1', formule: 'annuel', fondateur: 'false' }, customer_details: { email: 'parent@famille.test' } }
+    cadeauExistant = { sessionId: session.id, formule: 'annuel', creeLe: 1 }
+    mailEnvoye.mockClear()
+    await run({ id: 'e-cadeau-2', type: 'checkout.session.completed', data: { object: session } })
+    expect(mailEnvoye).toHaveBeenCalledTimes(1)
+    cadeauExistant = { sessionId: session.id, formule: 'annuel', creeLe: 1, mailLe: 2 }
+    mailEnvoye.mockClear()
+    await run({ id: 'e-cadeau-3', type: 'checkout.session.completed', data: { object: session } })
+    expect(mailEnvoye).not.toHaveBeenCalled()
+    cadeauExistant = null
   })
 })
 
 describe('stripe-webhook — paiement d’un parent = accord parental (11/11)', () => {
   it('payé depuis la page « Offrir » : l’accord est enregistré', async () => {
     consentSet.mockClear()
-    await run({ id: 'e-acc', type: 'checkout.session.completed', data: { object: { metadata: { firebaseUid: 'u1', payeur: 'parent' }, customer: 'cus_1', subscription: 'sub_1', customer_details: { email: 'Parent@Famille.test' } } } })
+    await run({ id: 'e-acc', type: 'checkout.session.completed', data: { object: { metadata: { firebaseUid: 'u1', payeur: 'parent' }, amount_total: 699, payment_status: 'paid', customer: 'cus_1', subscription: 'sub_1', customer_details: { email: 'Parent@Famille.test' } } } })
     expect(consentSet).toHaveBeenCalledWith(expect.objectContaining({ status: 'approved', via: 'paiement', parentEmail: 'parent@famille.test' }), { merge: true })
+  })
+  it('payé à 0 € avec un code promo : Réviz+ oui, accord non (un élève pourrait le faire seul)', async () => {
+    consentSet.mockClear()
+    await run({ id: 'e-promo', type: 'checkout.session.completed', data: { object: { metadata: { firebaseUid: 'u1', payeur: 'parent' }, amount_total: 0, payment_status: 'no_payment_required', customer: 'cus_1', subscription: 'sub_1', customer_details: { email: 'eleve@test.test' } } } })
+    expect(consentSet).not.toHaveBeenCalled()
   })
   it('payé par l’élève lui-même : pas d’accord', async () => {
     consentSet.mockClear()

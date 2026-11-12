@@ -35,7 +35,11 @@ export function codeCadeau(sessionId, secret = process.env.CRON_SECRET) {
 
 const paye = s => s?.metadata?.cadeau === '1' && (s.status === 'complete' || s.payment_status === 'paid' || s.payment_status === 'no_payment_required')
 
-/** Écrit cadeaux/{CODE} pour une session payée (idempotent). Renvoie { code, cadeau }. */
+/**
+ * Écrit cadeaux/{CODE} pour une session payée (idempotent). Renvoie { code, cadeau, nouveau }.
+ * La page de remerciement passe souvent avant le webhook : « nouveau » ne dit donc pas si l'e-mail
+ * est parti ; c'est cadeau.mailLe (voir noterMailCadeau).
+ */
 export async function enregistrerCadeau(db, session, { maintenant = Date.now(), secret } = {}) {
   const code = codeCadeau(session.id, secret)
   const ref = db.collection('cadeaux').doc(code)
@@ -46,6 +50,9 @@ export async function enregistrerCadeau(db, session, { maintenant = Date.now(), 
     subscription: session.subscription ?? null,
     formule: session.metadata?.formule ?? null,
     fondateur: session.metadata?.fondateur === 'true',
+    // Une carte vraiment débitée (pas 0 € avec un code promo) : seule condition pour que le paiement
+    // vaille accord parental à l'activation (un élève peut payer 0 € lui-même).
+    debite: session.amount_total > 0 && session.payment_status === 'paid',
   }
   if (!snap.exists) {
     const email = session.customer_details?.email ?? session.customer_email ?? null
@@ -53,6 +60,11 @@ export async function enregistrerCadeau(db, session, { maintenant = Date.now(), 
     return { code, cadeau: { ...base, creeLe: maintenant }, nouveau: true }
   }
   return { code, cadeau: snap.data(), nouveau: false }
+}
+
+/** Marque l'e-mail du code comme envoyé : le webhook ne l'envoie qu'une fois. */
+export function noterMailCadeau(db, code, maintenant = Date.now()) {
+  return db.collection('cadeaux').doc(code).set({ mailLe: maintenant }, { merge: true })
 }
 
 /** L'e-mail au parent, avec le code et le lien à transmettre. */
@@ -150,10 +162,10 @@ export async function routeCadeau(req, res, { db, auth, stripe, creerSession, ma
         annuleLe: null,
       }, { merge: true })
       tx.set(cadeauRef, { uid: qui.uid, activeLe: maintenant }, { merge: true })
-      return { status: 200, body: { ok: true, formule: cadeau.formule }, email: cadeau.email ?? null }
+      return { status: 200, body: { ok: true, formule: cadeau.formule }, email: cadeau.email ?? null, debite: cadeau.debite === true }
     })
-    // Le parent a payé (et l'a confirmé sur /parents) : vaut accord parental pour cet élève.
-    if (resultat.status === 200 && !resultat.body.deja) {
+    // Le parent a payé (carte débitée) : vaut accord parental pour cet élève.
+    if (resultat.status === 200 && !resultat.body.deja && resultat.debite) {
       await accordParPaiement(db, qui.uid, { parentEmail: resultat.email, maintenant }).catch(err => console.error('[cadeau] accord parental', err?.message || err))
     }
     // Pour s'y retrouver dans Stripe : l'abonnement porte désormais l'élève.

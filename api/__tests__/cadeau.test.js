@@ -34,7 +34,7 @@ const auth = { verifyIdToken: async t => {
 } }
 function fauxStripe({ statut = 'active', session = {} } = {}) {
   return {
-    checkout: { sessions: { retrieve: vi.fn(async id => ({ id, status: 'complete', payment_status: 'paid', customer: 'cus_1', subscription: 'sub_1', metadata: { cadeau: '1', formule: 'annuel', fondateur: 'false' }, customer_details: { email: 'parent@famille.test' }, ...session })) } },
+    checkout: { sessions: { retrieve: vi.fn(async id => ({ id, status: 'complete', payment_status: 'paid', amount_total: 4900, customer: 'cus_1', subscription: 'sub_1', metadata: { cadeau: '1', formule: 'annuel', fondateur: 'false' }, customer_details: { email: 'parent@famille.test' }, ...session })) } },
     subscriptions: { retrieve: vi.fn(async () => ({ status: statut })), update: vi.fn(async () => ({})) },
   }
 }
@@ -112,15 +112,18 @@ describe('Réviz+ offert par un parent', () => {
 })
 
 describe('Réviz+ offert par un parent : le paiement vaut accord parental (11/11)', () => {
-  async function activer(consent) {
+  async function activer(consent, session = {}) {
     const db = fauxDb(consent ? { 'users/tom/parentalConsent/consent': consent } : {})
-    const stripe = fauxStripe()
+    const stripe = fauxStripe({ session })
     await enregistrerCadeau(db, await stripe.checkout.sessions.retrieve(SESSION), { maintenant: T, secret: SECRET })
     await appel({ action: 'activer', idToken: 'jeton-tom', code: CODE }, { db, stripe })
     return db.docs['users/tom/parentalConsent/consent']
   }
   it('un élève qui attend l’autorisation : accordée, avec l’adresse du parent', async () => {
     expect(await activer({ status: 'pending', createdAt: T - 1000, germe: 'g' })).toMatchObject({ status: 'approved', approvedAt: T, via: 'paiement', parentEmail: 'parent@famille.test', germe: null, token: null })
+  })
+  it('payé 0 € avec un code promo : Réviz+ activé, mais pas d’accord (un élève pourrait le faire seul)', async () => {
+    expect((await activer({ status: 'pending', createdAt: T - 1000 }, { amount_total: 0, payment_status: 'no_payment_required' })).status).toBe('pending')
   })
   it('l’adresse déjà donnée par l’élève est gardée', async () => {
     expect((await activer({ status: 'pending', parentEmail: 'maman@x.test' })).parentEmail).toBe('maman@x.test')
