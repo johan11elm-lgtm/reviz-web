@@ -6,12 +6,16 @@ import { initializeApp, getApps } from 'firebase-admin/app'
 import { getFirestore } from 'firebase-admin/firestore'
 import { getAuth } from 'firebase-admin/auth'
 import { routePartage } from '../api/_partageChat.js'
+import { signerReponse } from '../api/_signatureIA.js'
 import { mockApiRoutes, mockProgramme, compteRapide, ouvrirChapitreDuProgramme, sansDebordement } from './helpers'
 
 process.env.FIRESTORE_EMULATOR_HOST ||= '127.0.0.1:8080'
 process.env.FIREBASE_AUTH_EMULATOR_HOST ||= '127.0.0.1:9099'
 const admin = getApps().find(a => a.name === 'e2e-partage') ?? initializeApp({ projectId: 'demo-reviz' }, 'e2e-partage')
 const CAPTURES = process.env.CAPTURES_DIR
+const SECRET = 'secret-e2e'
+/** L'uid d'un jeton de l'émulateur (non signé) : de quoi signer la réponse comme api/chat.js. */
+const uidDuJeton = jeton => JSON.parse(Buffer.from(String(jeton).split('.')[1], 'base64url').toString()).user_id
 
 async function brancherPartage(page) {
   await page.route('**/api/track?op=partage*', async route => {
@@ -19,7 +23,7 @@ async function brancherPartage(page) {
     const url = new URL(req.url())
     let statut = 200, corps = null
     const res = { status(c) { statut = c; return res }, json(b) { corps = b; return res }, setHeader() {} }
-    await routePartage({ method: req.method(), query: Object.fromEntries(url.searchParams), body: req.method() === 'POST' ? req.postDataJSON() : undefined }, res, { db: getFirestore(admin), auth: getAuth(admin) })
+    await routePartage({ method: req.method(), query: Object.fromEntries(url.searchParams), body: req.method() === 'POST' ? req.postDataJSON() : undefined }, res, { db: getFirestore(admin), auth: getAuth(admin), secret: SECRET })
     return route.fulfill({ status: statut, contentType: 'application/json', body: JSON.stringify(corps) })
   })
 }
@@ -31,9 +35,11 @@ test('Léa partage sa conversation, un ami la lit sans compte', async ({ page, b
   await mockApiRoutes(page)
   await mockProgramme(page)
   await brancherPartage(page)
+  // La réponse arrive signée, comme celle de api/chat.js : seule une réponse signée se partage.
+  const REPONSE = 'Le théorème de Thalès relie des **longueurs proportionnelles**.\n- deux droites sécantes\n- deux droites parallèles'
   await page.route('**/api/chat', route => route.fulfill({
     status: 200, contentType: 'text/event-stream',
-    body: [{ meta: { remaining: 9, limit: 10 } }, { text: 'Le théorème de Thalès relie des **longueurs proportionnelles**.\n- deux droites sécantes\n- deux droites parallèles' }]
+    body: [{ meta: { remaining: 9, limit: 10 } }, { text: REPONSE }, { sig: signerReponse(uidDuJeton(route.request().postDataJSON().idToken), REPONSE, SECRET) }]
       .map(e => `data: ${JSON.stringify(e)}\n\n`).join('') + 'data: [DONE]\n\n',
   }))
   await compteRapide(page, { prenom: 'Léa', birthDate: '2011-05-01' })

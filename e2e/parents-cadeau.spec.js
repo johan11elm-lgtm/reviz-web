@@ -21,7 +21,7 @@ async function capture(page, nom, options = {}) {
 
 const SESSION = `cs_test_e2e${Date.now()}abcdef`
 const fauxStripe = {
-  checkout: { sessions: { retrieve: async id => ({ id, status: 'complete', payment_status: 'paid', customer: 'cus_e2e', subscription: 'sub_e2e', metadata: { cadeau: '1', formule: 'annuel', fondateur: 'false' }, customer_details: { email: 'parent@famille.test' } }) } },
+  checkout: { sessions: { retrieve: async id => ({ id, status: 'complete', payment_status: 'paid', amount_total: 4900, customer: 'cus_e2e', subscription: 'sub_e2e', metadata: { cadeau: '1', formule: 'annuel', fondateur: 'false' }, customer_details: { email: 'parent@famille.test' } }) } },
   subscriptions: { retrieve: async () => ({ status: 'active' }), update: async () => ({}) },
 }
 async function brancherCadeau(page, appels, session = SESSION) {
