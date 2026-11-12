@@ -8,8 +8,11 @@
 // partages/{id} = { uid, titre, messages, creeLe, expire } : écrit par le serveur seul. Ni prénom
 // ni pièce jointe : seulement le texte des messages, 20 au plus, 4 000 caractères chacun. Le lien
 // expire au bout de DUREE_JOURS jours ; au plus MAX_PAR_JOUR liens par élève et par jour.
+// Les réponses de Réviz IA ne sont publiées que signées par api/chat.js pour cet élève
+// (api/_signatureIA.js) : sinon on pourrait lui faire dire n'importe quoi sur une page publique.
 // -------------------------------------------------------
 import { randomBytes } from 'node:crypto'
+import { reponseSignee } from './_signatureIA.js'
 
 export const DUREE_JOURS = 30
 export const MAX_MESSAGES = 20
@@ -25,18 +28,29 @@ function texteDe(contenu) {
   return ''
 }
 
-export function nettoyerMessages(messages) {
+/**
+ * Les messages publiables. verifier(texte, sig) : la réponse de Réviz IA est-elle bien la sienne ?
+ * Une réponse non signée (ou retouchée) est retirée, avec la question qui la précède.
+ */
+export function nettoyerMessages(messages, verifier = () => true) {
   if (!Array.isArray(messages)) return []
-  return messages
-    .filter(m => m && (m.role === 'user' || m.role === 'assistant'))
-    .map(m => ({ role: m.role, content: texteDe(m.content).trim().slice(0, MAX_CARACTERES) }))
-    .filter(m => m.content)
-    .slice(-MAX_MESSAGES)
+  const propres = []
+  for (const m of messages) {
+    if (!m || (m.role !== 'user' && m.role !== 'assistant')) continue
+    const texte = texteDe(m.content).trim()
+    if (!texte) continue
+    if (m.role === 'assistant' && !verifier(texte, m.sig)) {
+      if (propres.at(-1)?.role === 'user') propres.pop()
+      continue
+    }
+    propres.push({ role: m.role, content: texte.slice(0, MAX_CARACTERES) })
+  }
+  return propres.slice(-MAX_MESSAGES)
 }
 
 const nouvelId = () => [...randomBytes(12)].map(b => 'abcdefghijklmnopqrstuvwxyz0123456789'[b % 36]).join('')
 
-export async function routePartage(req, res, { db, auth, maintenant = Date.now() }) {
+export async function routePartage(req, res, { db, auth, maintenant = Date.now(), secret = process.env.CRON_SECRET }) {
   if (req.method === 'GET') {
     const id = String(req.query?.id ?? '')
     if (!ID_RE.test(id)) return res.status(404).json({ error: 'INTROUVABLE' })
@@ -53,7 +67,7 @@ export async function routePartage(req, res, { db, auth, maintenant = Date.now()
     if (d.firebase?.sign_in_provider === 'anonymous') return res.status(409).json({ error: 'COMPTE' })
     uid = d.uid
   } catch { return res.status(401).json({ error: 'UNAUTHORIZED' }) }
-  const messages = nettoyerMessages(req.body?.messages)
+  const messages = nettoyerMessages(req.body?.messages, (texte, sig) => reponseSignee(uid, texte, sig, secret))
   if (!messages.some(m => m.role === 'assistant')) return res.status(400).json({ error: 'VIDE' })
   const titre = typeof req.body?.titre === 'string' ? req.body.titre.trim().slice(0, 120) : null
 

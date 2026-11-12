@@ -414,7 +414,7 @@ export default function Coach() {
     setOutil(null);
     setCartesEnCours([]);
     try {
-      const { text, cartes: proposees = [] } = await sendCoachMessage({
+      const { text, cartes: proposees = [], sig } = await sendCoachMessage({
         lessonId: leconId,
         history: historique,
         level: getUserLevel(),
@@ -425,7 +425,7 @@ export default function Coach() {
         erreurs: leconId ? undefined : erreursRecentes(currentUser?.uid),
       });
       proposees.forEach(k => track('ia_carte_proposee', { type: k.type, format: k.format ?? null }));
-      setMessages([...historique, { role: 'assistant', content: text, ...(proposees.length ? { cartes: proposees } : {}) }]);
+      setMessages([...historique, { role: 'assistant', content: text, ...(proposees.length ? { cartes: proposees } : {}), ...(sig ? { sig } : {}) }]);
     } catch (err) {
       if (err.message === 'CHAT_LIMIT') setQuotaOut(true);
       else if (err.message === 'EMAIL_NOT_VERIFIED') setRefusEmail(true);

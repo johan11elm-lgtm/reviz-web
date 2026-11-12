@@ -9,6 +9,7 @@ import { consumeChatQuota, refundChatQuota, CHAT_FREE_LIMIT, CHAT_FREE_PERIODE, 
 import { LANCEMENT_CHAT_LIMIT } from './_lancement.js'
 import { revizPlusOffertServeur } from './_offert.js'
 import { marquerLimite } from './_limiteParent.js'
+import { signerReponse } from './_signatureIA.js'
 
 // Runtime Node (firebase-admin) + streaming SSE : contrairement à /api/analyse
 // (JSON complet à parser → non-streaming), une réponse de chat est du texte
@@ -126,7 +127,12 @@ export default async function handler(req, res) {
   // avantEmail : questions d'essai qu'il reste à un compte dont l'e-mail n'est pas confirmé.
   res.write(`data: ${JSON.stringify({ meta: { remaining: q.remaining, limit, periode, ...(sansEmail ? { avantEmail: q.avantEmail } : {}) } })}\n\n`)
 
-  const ecrire = evenement => res.write(`data: ${JSON.stringify(evenement)}\n\n`)
+  // Le texte envoyé est gardé pour le signer à la fin (partage d'une conversation : api/_signatureIA.js).
+  let texteEnvoye = ''
+  const ecrire = evenement => {
+    if (typeof evenement.text === 'string') texteEnvoye += evenement.text
+    res.write(`data: ${JSON.stringify(evenement)}\n\n`)
+  }
   try {
     if (agent) {
       // Texte, puis { outil } pendant qu'il regarde, et { carte } à valider par l'élève.
@@ -149,6 +155,8 @@ export default async function handler(req, res) {
         }
       }
     }
+    const sig = texteEnvoye.trim() ? signerReponse(uid, texteEnvoye) : null
+    if (sig) res.write(`data: ${JSON.stringify({ sig })}\n\n`)
     res.write('data: [DONE]\n\n')
   } catch {
     // Flux interrompu (réseau ou client parti) : on signale si on peut encore écrire.

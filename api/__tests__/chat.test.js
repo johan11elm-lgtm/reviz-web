@@ -261,6 +261,21 @@ describe('/api/chat', () => {
     expect(joined).not.toContain('sig')
   })
 
+  it('signe la réponse à la fin du flux, pour pouvoir la partager (api/_signatureIA.js)', async () => {
+    const { signerReponse } = await import('../_signatureIA.js')
+    process.env.CRON_SECRET = 'secret-de-test'
+    anthropicCreate.mockResolvedValue(flux([
+      { type: 'content_block_delta', index: 0, delta: { type: 'text_delta', text: 'Salut ' } },
+      { type: 'content_block_delta', index: 0, delta: { type: 'text_delta', text: 'toi !' } },
+      { type: 'message_stop' },
+    ]))
+    const res = mockRes()
+    await handler({ method: 'POST', body: VALID_BODY }, res)
+    const joined = res.chunks.join('')
+    expect(joined).toContain(`data: ${JSON.stringify({ sig: signerReponse('u1', 'Salut toi !', 'secret-de-test') })}\n\ndata: [DONE]`)
+    delete process.env.CRON_SECRET
+  })
+
   it('ajoute une phrase pour l\'élève quand le modèle refuse (stop_reason refusal)', async () => {
     anthropicCreate.mockResolvedValue(flux([
       { type: 'message_delta', delta: { stop_reason: 'refusal' } },

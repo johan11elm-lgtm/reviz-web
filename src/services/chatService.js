@@ -67,7 +67,7 @@ async function _forEachSseEvent(body, onEvent) {
  * @param {(libelle:string) => void} [opts.onOutil]  agent : ce qu'il regarde (« Je regarde ton agenda… »)
  * @param {(cartes:object[]) => void} [opts.onCarte]  agent : les cartes reçues jusque-là
  * @param {object[]} [opts.erreurs]  agent : questions ratées récentes (erreursRecentes)
- * @returns {Promise<{text:string, remaining:number|null, cartes:object[]}>}
+ * @returns {Promise<{text:string, remaining:number|null, cartes:object[], sig?:string|null}>}
  * @throws {Error} CHAT_LIMIT | RATE_LIMIT | UNAUTHORIZED | EMAIL_NOT_VERIFIED |
  *   LESSON_NOT_FOUND | NETWORK_ERROR | TIMEOUT | EMPTY_RESPONSE | AGENT_SERVEUR | API_ERROR_xxx
  */
@@ -134,6 +134,7 @@ async function _viaProxy({ lessonId, messages, level, onDelta, onOutil, onCarte,
   let text = ''
   let remaining = null
   let streamError = null
+  let sig = null // signature du serveur : seule une réponse signée peut être partagée (api/_signatureIA.js)
   const cartes = []
   await _forEachSseEvent(response.body, (payload) => {
     if (payload === '[DONE]') return
@@ -142,6 +143,8 @@ async function _viaProxy({ lessonId, messages, level, onDelta, onOutil, onCarte,
       if (typeof event.text === 'string') {
         text += event.text
         onDelta?.(text)
+      } else if (typeof event.sig === 'string') {
+        sig = event.sig
       } else if (event.carte) {
         cartes.push(event.carte)
         onCarte?.([...cartes])
@@ -160,7 +163,7 @@ async function _viaProxy({ lessonId, messages, level, onDelta, onOutil, onCarte,
 
   if (streamError && !text && !cartes.length) throw new Error(streamError)
   if (!text && !cartes.length) throw new Error('EMPTY_RESPONSE')
-  return { text, remaining, cartes }
+  return { text, remaining, cartes, sig }
 }
 
 // Dev local uniquement : contexte construit depuis le cache local des leçons.

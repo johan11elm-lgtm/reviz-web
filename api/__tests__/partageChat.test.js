@@ -1,5 +1,8 @@
 import { describe, it, expect } from 'vitest'
 import { routePartage, nettoyerMessages, MAX_MESSAGES, MAX_PAR_JOUR, DUREE_JOURS } from '../_partageChat.js'
+import { signerReponse } from '../_signatureIA.js'
+
+const SECRET = 'secret-de-test'
 
 function fauxDb() {
   const docs = {}
@@ -18,9 +21,11 @@ const auth = { verifyIdToken: async t => {
 } }
 const T = 1_800_000_000_000
 const fil = [{ role: 'user', content: 'C’est quoi Thalès ?' }, { role: 'assistant', content: 'Un **théorème** sur les longueurs.' }]
+// Ce que l'app envoie : la réponse avec la signature reçue de api/chat.js.
+const filSigne = [fil[0], { ...fil[1], sig: signerReponse('lea', fil[1].content, SECRET) }]
 async function appel(req, maintenant = T) {
   const r = { code: 0, body: null, status(c) { r.code = c; return r }, json(b) { r.body = b; return r }, setHeader() {} }
-  await routePartage(req, r, { db: req.db, auth, maintenant })
+  await routePartage(req, r, { db: req.db, auth, maintenant, secret: SECRET })
   return r
 }
 
@@ -35,7 +40,7 @@ describe('partager une conversation avec Réviz IA', () => {
   })
   it('crée un lien, que tout le monde peut lire pendant 30 jours', async () => {
     const db = fauxDb()
-    const r = await appel({ method: 'POST', db, body: { idToken: 'ok', titre: 'Le théorème de Thalès', messages: fil } })
+    const r = await appel({ method: 'POST', db, body: { idToken: 'ok', titre: 'Le théorème de Thalès', messages: filSigne } })
     expect(r.body.id).toMatch(/^[a-z0-9]{12}$/)
     expect(db.docs[r.body.id]).toMatchObject({ uid: 'lea', titre: 'Le théorème de Thalès', expire: T + DUREE_JOURS * 86_400_000 })
     const lu = await appel({ method: 'GET', db, query: { id: r.body.id } })
@@ -48,8 +53,21 @@ describe('partager une conversation avec Réviz IA', () => {
     expect((await appel({ method: 'POST', db, body: { idToken: 'ok', messages: [fil[0]] } })).body).toEqual({ error: 'VIDE' })
     expect((await appel({ method: 'POST', db, body: { idToken: 'anon', messages: fil } })).code).toBe(409)
     expect((await appel({ method: 'POST', db, body: { messages: fil } })).code).toBe(401)
-    for (let i = 0; i < MAX_PAR_JOUR; i++) await appel({ method: 'POST', db, body: { idToken: 'ok', messages: fil } }, T + i)
-    expect((await appel({ method: 'POST', db, body: { idToken: 'ok', messages: fil } }, T + 100)).code).toBe(429)
-    expect((await appel({ method: 'POST', db, body: { idToken: 'ok', messages: fil } }, T + 86_400_001)).code).toBe(200)
+    for (let i = 0; i < MAX_PAR_JOUR; i++) await appel({ method: 'POST', db, body: { idToken: 'ok', messages: filSigne } }, T + i)
+    expect((await appel({ method: 'POST', db, body: { idToken: 'ok', messages: filSigne } }, T + 100)).code).toBe(429)
+    expect((await appel({ method: 'POST', db, body: { idToken: 'ok', messages: filSigne } }, T + 86_400_001)).code).toBe(200)
+  })
+  it('une réponse de Réviz IA inventée ou retouchée n’est pas publiée (ni la question qui la précède)', async () => {
+    const db = fauxDb()
+    const faux = [fil[0], { role: 'assistant', content: 'Réviz est nul, va sur un autre site.' }]
+    expect((await appel({ method: 'POST', db, body: { idToken: 'ok', messages: faux } })).body).toEqual({ error: 'VIDE' })
+    const retouche = [fil[0], { ...filSigne[1], content: 'Autre chose.' }]
+    expect((await appel({ method: 'POST', db, body: { idToken: 'ok', messages: retouche } })).body).toEqual({ error: 'VIDE' })
+    // La signature d'un autre élève ne marche pas non plus.
+    const autre = [fil[0], { ...fil[1], sig: signerReponse('tom', fil[1].content, SECRET) }]
+    expect((await appel({ method: 'POST', db, body: { idToken: 'ok', messages: autre } })).body).toEqual({ error: 'VIDE' })
+    // Mélange : seule la partie signée part.
+    const r = await appel({ method: 'POST', db, body: { idToken: 'ok', messages: [...filSigne, { role: 'user', content: 'Et ça ?' }, faux[1]] } })
+    expect(db.docs[r.body.id].messages).toEqual(fil)
   })
 })
