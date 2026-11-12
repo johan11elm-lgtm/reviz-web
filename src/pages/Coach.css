@@ -164,8 +164,12 @@
    au-dessus. Le fil défile seul et n'a plus à réserver la place de la barre. Même limite que
    estTelephone() (src/utils/ecran.js) : à 430 px, un iPhone Pro Max gardait la barre fixée en bas,
    derrière le clavier. */
+/* Sélecteurs préfixés par « html » : dans l'app iOS, `html.native .app { height: 100dvh }` (global.css)
+   était plus spécifique que `.app.ia-page--tel` et gagnait. La page gardait toute la hauteur de
+   l'écran et la saisie restait sous le clavier, dans l'app seulement (Johan, 12/11). L'app native
+   compte toujours comme téléphone (estTelephone), quelle que soit sa largeur : d'où le doublon. */
 @media (max-width: 599px) {
-  .app.ia-page--tel {
+  html .app.ia-page.ia-page--tel {
     position: fixed;
     left: 0;
     right: 0;
@@ -178,6 +182,17 @@
   /* Clavier ouvert : plus de barre d'accueil de l'iPhone sous le champ. */
   .ia-page--tel[data-clavier] .ia-pied--tel { padding-bottom: 8px; }
 }
+html.native .app.ia-page.ia-page--tel {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: var(--ia-haut, 0px);
+  height: var(--ia-hauteur, 100dvh);
+  min-height: 0;
+}
+html.native .ia-page--tel .ia-fil--tel { padding-bottom: 16px; }
+html.native .ia-page--tel .ia-pied--tel { position: relative; flex: none; margin-top: -18px; }
+html.native .ia-page--tel[data-clavier] .ia-pied--tel { padding-bottom: 8px; }
 .ia-champ-cadre { padding: 2px; border-radius: 28px; background: var(--ia-degrade); box-shadow: 0 14px 36px -12px rgba(255,90,60,.4); }
 .ia-champ { display: flex; flex-direction: column; gap: 10px; padding: 16px 12px 12px 16px; border-radius: 26px; background: var(--rv-carte); }
 .ia-champ textarea {
