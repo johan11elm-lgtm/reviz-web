@@ -371,3 +371,10 @@
   .en-autocollants .en-colle, .en-autocollants .en-colle-mot,
   .en-nomad--bienvenue .en-colle-mot--bienvenue, .en-nomad--bienvenue .en-note-colle, .en-nomad--large .en-bienvenue-image { transition: none; }
 }
+
+/* Entrée sans compte : Réviz animé à gauche du titre, comme la mascotte qui parle chez Knowunity.
+   Le pantin déborde de sa boîte (effets, bras levés) : rien n'est coupé. */
+.en-nomad .en-titre-ligne--pantin { align-items: center; gap: 10px; }
+.en-nomad .en-titre-pantin { flex: none; width: 112px; height: 112px; margin: -10px 0 -6px -8px; display: flex; align-items: flex-end; justify-content: center; }
+.en-nomad .en-titre-pantin > * { overflow: visible; }
+.en-nomad--large .en-titre-pantin { width: 150px; height: 150px; margin: -14px 4px -8px -12px; }

@@ -75,12 +75,24 @@ function Autocollants() {
  * @param {Function} [onPasser]            — « Passer » (découverte)
  * @param {{ n: number, total: number, libelle?: boolean }} [etape] — progression
  * @param {boolean} [logo]                 — bienvenue
+ * @param {boolean} [pantin]               — Réviz animé à gauche du titre (il parle, fait des gestes)
+ * @param {object} [pantinRef]             — ref du pantin : { geste(nom), expression(nom), dire(texte) }
  * @param {React.ReactNode} children       — contenu de la carte
  * @param {React.ReactNode} [dessous]      — bas de la carte
  */
-export function EntreeEcran({ teinte = 'peche', bulle, expression = 'content', geste, taille = 'normal', onRetour, onPasser, etape, logo = false, children, dessous }) {
+export function EntreeEcran({ teinte = 'peche', bulle, expression = 'content', geste, taille = 'normal', onRetour, onPasser, etape, logo = false, pantin = false, pantinRef, children, dessous }) {
   const isDesktop = useIsDesktop();
   const [l1, ...suite] = bulle;
+  // Pantin animé en tête de carte (entrée sans compte) : il dit chaque nouveau titre, une fois
+  // le texte posé (pendant la frappe du prénom, le titre change à chaque lettre).
+  const pantinEl = useRef(null);
+  const lierPantin = el => { pantinEl.current = el; if (pantinRef) pantinRef.current = el; };
+  const dit = bulle.join(' ');
+  useEffect(() => {
+    if (!pantin) return undefined;
+    const t = setTimeout(() => pantinEl.current?.dire(dit), 280);
+    return () => clearTimeout(t);
+  }, [pantin, dit]);
   const titre = (
     // La clé suit le texte : quand Réviz répond (découverte), le titre se rejoue.
     <h1 className="en-titre" key={bulle.join(' ')}>
@@ -116,9 +128,14 @@ export function EntreeEcran({ teinte = 'peche', bulle, expression = 'content', g
         <div className="en-carte">
           {tete}
           {progression}
-          <div className="en-titre-ligne">
+          <div className={`en-titre-ligne${pantin ? ' en-titre-ligne--pantin' : ''}`}>
+            {pantin && (
+              <span className="en-titre-pantin" aria-hidden="true">
+                <Pantin ref={lierPantin} size={isDesktop ? 150 : 112} expression={expression} entree={geste} label="Réviz" />
+              </span>
+            )}
             {titre}
-            <span className="en-titre-emote" aria-hidden="true" key={expression}><Mascot pose={POSE[expression] ?? 'hello'} size={isDesktop ? 64 : 56} alt="" /></span>
+            {!pantin && <span className="en-titre-emote" aria-hidden="true" key={expression}><Mascot pose={POSE[expression] ?? 'hello'} size={isDesktop ? 64 : 56} alt="" /></span>}
           </div>
           {children}
           {dessous && <div className="en-dessous">{dessous}</div>}

@@ -34,6 +34,10 @@ const REACTION_CLASSE = {
   '3ème': ['La 3e, l’année du brevet.', 'On le prépare ensemble, pas à pas.'],
 };
 
+// Sa tête quand il répond à ce qui bloque. Pas de réaction à effet (idee, emerveille…) : le moteur
+// garde l'effet en boucle si l'humeur suivante n'a pas de maintien (l'ampoule restait sur l'écran d'après).
+const HUMEUR_BLOCAGE = { stress: 'determine', motivation: 'fier' };
+
 // Le chargement : ce que fait vraiment Réviz avec les réponses, une ligne après l'autre.
 const LIGNES_CHARGEMENT = 4;
 const PAS_CHARGEMENT_MS = 650;
@@ -65,6 +69,11 @@ export default function Commencer() {
   const [lignes, setLignes] = useState(0);
   const [chapitreArrivee, setChapitreArrivee] = useState(null);
   const vu = useRef(new Set());
+  // Réviz animé en tête de carte : il réagit aux réponses par un geste (bras en l'air, petit saut).
+  const pantin = useRef(null);
+  // Le geste part juste après le changement d'humeur de la même réponse, sinon l'humeur
+  // (mains sur les hanches, main au menton) reprend les bras aussitôt.
+  const bouge = nom => { if (nom) setTimeout(() => pantin.current?.geste(nom), 60); };
 
   const etapes = ORDRE.filter(e => !(e === 'classe' && classeLien));
   const etape = etapes[step];
@@ -111,6 +120,13 @@ export default function Commencer() {
     // La classe venue du lien d'une fiche n'a pas d'écran : gardée ici aussi.
     if (etape === 'pret') garderEntree({ fini: true, ...(classe ? { classe } : {}) });
   }, [etape, classe]);
+  // « C'est prêt » : il saute de joie (sauf s'il arrive directement là : son entrée suffit).
+  const premierEcran = useRef(etape);
+  useEffect(() => {
+    if (etape !== 'pret' || premierEcran.current === 'pret') return undefined;
+    const t = setTimeout(() => pantin.current?.geste('saut'), 60);
+    return () => clearTimeout(t);
+  }, [etape]);
 
   // Déjà un compte sur cet appareil : l'accueil. Un essai d'avant le 11/11 : il le reprend.
   if (currentUser && !isGuest) return <Navigate to="/" replace />;
@@ -142,12 +158,14 @@ export default function Commencer() {
     setClasseChoisie(true);
     garderEntree({ classe: c });
     repondre('classe', c);
+    bouge(c === '3ème' ? 'brasEnLair' : 'saut');
   }
   function controleChoisi(c) {
     setControle(c);
     setFeuille(null);
     garderEntree({ controle: c });
     repondre('controle', 'note', { matiere: c.matiere });
+    bouge('saut');
   }
   function pasDeControle() {
     setControle('aucun');
@@ -159,6 +177,7 @@ export default function Commencer() {
     set(id);
     garderEntree({ [question]: id });
     repondre(question, id);
+    if (question === 'objectif') bouge(id === 'haut' ? 'brasEnLair' : id === 'progresser' ? 'saut' : null);
   }
   function creerCompte() {
     mesurer('entree_compte', { etape: 'clic', controle: noteControle ? 'note' : (controle ?? 'sans') });
@@ -238,6 +257,7 @@ export default function Commencer() {
   } else if (etape === 'blocage') {
     if (choixBlocage) {
       bulle = choixBlocage.reponse;
+      expression = HUMEUR_BLOCAGE[choixBlocage.id] ?? 'content';
     } else {
       expression = 'reflechit';
       bulle = controle === 'aucun'
@@ -306,7 +326,9 @@ export default function Commencer() {
       <EntreeEcran
         bulle={bulle.map(nbsp)}
         expression={expression}
-        geste={etape === 'bonjour' ? 'coucou' : undefined}
+        geste={etape === 'bonjour' ? 'coucou' : 'saut'}
+        pantin
+        pantinRef={pantin}
         taille="decouverte"
         etape={q >= 0 ? { n: questions.indexOf(etape) + 1, total: questions.length, libelle: false } : undefined}
         onRetour={etape === 'chargement' ? undefined : reculer}
