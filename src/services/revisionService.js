@@ -7,7 +7,7 @@ import { updateChallengeProgress } from './challengeService'
 import { isGuestUid } from './guestService'
 import { isDecouverte } from './decouverteService'
 import { loadLessons } from './historyService'
-import { planifierRappelLendemain } from './reminderService'
+import { planifierRappelLendemain, noterRevisionDuJour } from './reminderService'
 import { track as trackStat } from './statsService'
 import { jourParis } from '../utils/retour'
 
@@ -130,6 +130,9 @@ export function recordRevision(type, details = {}) {
   const rappel = premierJour => planifierRappelLendemain(
     premierJour === jourParis(new Date(entry.revisedAt)) ? { titre: titre ?? null } : null,
   ).catch(() => {})
+
+  // Rappel du soir (app native) : déjà révisé aujourd'hui, pas de rappel ce soir.
+  noterRevisionDuJour().catch(() => {})
 
   // Firestore write-through (fire-and-forget)
   if (canSync()) {

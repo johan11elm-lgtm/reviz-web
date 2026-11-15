@@ -34,5 +34,5 @@ export function noterDemande(uid, maintenant = Date.now()) {
   try { localStorage.setItem(cle(uid), JSON.stringify({ fois: fois + 1, derniere: maintenant })) } catch { /* stockage indisponible */ }
 }
 
-/** États du navigateur où l'on peut proposer quelque chose (voir etatPush). */
-export const ETATS_PROPOSABLES = ['proposables', 'installer']
+/** États où l'on peut proposer quelque chose (etatPush ; « natif » : app iPhone, voir RappelDemain). */
+export const ETATS_PROPOSABLES = ['proposables', 'installer', 'natif']

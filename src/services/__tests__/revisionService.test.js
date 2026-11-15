@@ -13,7 +13,7 @@ vi.mock('../challengeService', () => ({ updateChallengeProgress: vi.fn() }))
 const trackStat = vi.fn()
 vi.mock('../statsService', () => ({ track: (...a) => trackStat(...a) }))
 const planifierRappelLendemain = vi.fn(async () => {})
-vi.mock('../reminderService', () => ({ planifierRappelLendemain: (...a) => planifierRappelLendemain(...a) }))
+vi.mock('../reminderService', () => ({ planifierRappelLendemain: (...a) => planifierRappelLendemain(...a), noterRevisionDuJour: async () => {} }))
 
 const { recordRevision, markRevisionDone, lierEssai, setActiveUser } = await import('../revisionService')
 const { setActiveUser: setLessonUser } = await import('../historyService')

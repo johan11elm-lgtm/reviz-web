@@ -10,6 +10,7 @@ const { mockIsNative, mockNotif } = vi.hoisted(() => ({
     requestPermissions: vi.fn(),
     schedule:           vi.fn(async () => {}),
     cancel:             vi.fn(async () => {}),
+    getPending:         vi.fn(async () => ({ notifications: [] })),
   },
 }))
 
@@ -25,9 +26,15 @@ async function loadService() {
   return await import('../reminderService.js')
 }
 
+// Lundi 16/11/2026, 10 h (heure locale du test).
+const LUNDI = new Date(2026, 10, 16, 10, 0)
+
 beforeEach(() => {
   localStorage.clear()
   vi.clearAllMocks()
+  vi.useFakeTimers({ toFake: ['Date'] })
+  vi.setSystemTime(LUNDI)
+  mockNotif.getPending.mockResolvedValue({ notifications: [] })
   mockIsNative.mockReturnValue(true)
   mockNotif.checkPermissions.mockResolvedValue({ display: 'granted' })
   mockNotif.requestPermissions.mockResolvedValue({ display: 'granted' })
@@ -51,14 +58,23 @@ describe('enableReminder', () => {
     expect(mockNotif.schedule).not.toHaveBeenCalled()
   })
 
-  it('planifie un rappel quotidien 18h30 et persiste la préférence', async () => {
+  it('pose le rappel de 18 h 30 sur les jours d’école de la semaine, et persiste la préférence', async () => {
     const svc = await loadService()
     const res = await svc.enableReminder(2)
     expect(res.ok).toBe(true)
     expect(svc.isReminderEnabled()).toBe(true)
-    const arg = mockNotif.schedule.mock.calls[0][0].notifications[0]
-    expect(arg.schedule.on).toEqual({ hour: svc.REMINDER_HOUR, minute: svc.REMINDER_MINUTE })
-    expect(arg.body).toContain('2 cartes')
+    const notifs = mockNotif.schedule.mock.calls[0][0].notifications
+    expect(notifs.map(n => n.schedule.at)).toEqual([16, 17, 18, 19, 20].map(j => new Date(2026, 10, j, 18, 30)))
+    expect(notifs.map(n => n.id)).toEqual([1001, 1002, 1003, 1004, 1005])
+    expect(notifs[0].body).toContain('2 cartes')
+  })
+
+  it('en fin de séance, rien ce soir : l’élève vient de réviser', async () => {
+    const svc = await loadService()
+    await svc.enableReminder(0, { faitAujourdhui: true })
+    const notifs = mockNotif.schedule.mock.calls[0][0].notifications
+    expect(notifs[0].schedule.at).toEqual(new Date(2026, 10, 17, 18, 30))
+    expect(notifs).toHaveLength(4)
   })
 
   it('demande la permission si non accordée, puis planifie', async () => {
@@ -76,6 +92,7 @@ describe('enableReminder', () => {
     const res = await svc.enableReminder(0)
     expect(res).toEqual({ ok: false, reason: 'denied' })
     expect(svc.isReminderEnabled()).toBe(false)
+    expect(svc.rappelRefuse()).toBe(true)
     expect(mockNotif.schedule).not.toHaveBeenCalled()
   })
 })
@@ -142,5 +159,45 @@ describe('planifierRappelLendemain', () => {
     const svc = await loadService()
     await svc.planifierRappelLendemain({ titre: 'x' })
     expect(mockNotif.cancel).not.toHaveBeenCalled()
+  })
+})
+
+describe('soirsDeRappel', () => {
+  it('saute le week-end, les soirs passés et les soirs déjà pris', async () => {
+    const svc = await loadService()
+    // Vendredi 20/11 à 19 h : ce soir est passé, samedi et dimanche sautés, mardi pris.
+    const soirs = svc.soirsDeRappel({ maintenant: new Date(2026, 10, 20, 19, 0), occupes: new Set(['2026-11-24']) })
+    expect(soirs).toEqual([23, 25, 26].map(j => new Date(2026, 10, j, 18, 30)))
+  })
+})
+
+describe('un seul rappel par soir', () => {
+  it('le rappel du soir évite la veille d’un contrôle déjà posée', async () => {
+    mockNotif.getPending.mockResolvedValue({ notifications: [
+      { id: 2000, schedule: { at: new Date(2026, 10, 18, 18, 30).toISOString() } },
+      { id: 1003, schedule: { at: new Date(2026, 10, 19, 18, 30).toISOString() } },
+    ] })
+    const svc = await loadService()
+    await svc.enableReminder(0)
+    const jours = mockNotif.schedule.mock.calls[0][0].notifications.map(n => n.schedule.at.getDate())
+    expect(jours).toEqual([16, 17, 19, 20])
+  })
+
+  it('une révision du jour retire le rappel de ce soir', async () => {
+    const svc = await loadService()
+    await svc.enableReminder(0)
+    mockNotif.schedule.mockClear()
+    await svc.noterRevisionDuJour()
+    const notifs = mockNotif.schedule.mock.calls[0][0].notifications
+    expect(notifs[0].schedule.at).toEqual(new Date(2026, 10, 17, 18, 30))
+    mockNotif.schedule.mockClear()
+    await svc.noterRevisionDuJour()
+    expect(mockNotif.schedule).not.toHaveBeenCalled()
+  })
+
+  it('pas de rappel activé : une révision ne pose rien', async () => {
+    const svc = await loadService()
+    await svc.noterRevisionDuJour()
+    expect(mockNotif.schedule).not.toHaveBeenCalled()
   })
 })

@@ -15,18 +15,37 @@ const PREF_KEY = 'reviz-reminder'
 const NOTIF_ID = 1001
 export const REMINDER_HOUR = 18
 export const REMINDER_MINUTE = 30
+export const HEURE_RAPPEL_NATIF = '18 h 30'
+
+// Le rappel du soir n'est plus une notification répétée tous les jours (15/11) : ce sont des
+// notifications posées une par une sur les JOURS_RAPPEL prochains jours, replanifiées à chaque
+// ouverture et à chaque révision. Ainsi : rien le jour où l'élève a déjà révisé, rien le
+// week-end (la série ne le compte pas), rien un soir qui a déjà sa notification (veille de
+// contrôle, lendemain de la première séance), et silence après une semaine sans ouvrir l'app.
+export const JOURS_RAPPEL = 7
+const DAILY_IDS = Array.from({ length: JOURS_RAPPEL }, (_, i) => NOTIF_ID + i)
 
 export function remindersAvailable() {
   return Capacitor.isNativePlatform()
 }
 
-export function isReminderEnabled() {
-  try { return JSON.parse(localStorage.getItem(PREF_KEY) || 'null')?.enabled === true }
-  catch { return false }
+function lirePref() {
+  try { return JSON.parse(localStorage.getItem(PREF_KEY) || 'null') ?? {} }
+  catch { return {} }
 }
 
-function savePref(enabled) {
-  try { localStorage.setItem(PREF_KEY, JSON.stringify({ enabled })) } catch { /* stockage indispo */ }
+export function isReminderEnabled() {
+  return lirePref().enabled === true
+}
+
+function savePref(champs) {
+  try { localStorage.setItem(PREF_KEY, JSON.stringify({ ...lirePref(), ...champs })) } catch { /* stockage indispo */ }
+}
+
+/** « AAAA-MM-JJ » en heure locale (celle des notifications). */
+export function jourLocal(d) {
+  const p = n => String(n).padStart(2, '0')
+  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`
 }
 
 // Corps du rappel selon les cartes dues au moment de la planification.
@@ -39,38 +58,83 @@ export function reminderBody(dueCount) {
   return 'Cinq minutes de révision et ta série continue'
 }
 
-async function scheduleDaily(dueCount) {
+/**
+ * Les soirs où poser le rappel, à 18 h 30, sur les JOURS_RAPPEL prochains jours.
+ * @param {{ maintenant?: Date, faitAujourdhui?: boolean, occupes?: Set<string> }} p
+ *   occupes : jours (« AAAA-MM-JJ ») qui ont déjà une autre notification
+ * @returns {Date[]}
+ */
+export function soirsDeRappel({ maintenant = new Date(), faitAujourdhui = false, occupes = new Set() } = {}) {
+  const soirs = []
+  for (let i = 0; i < JOURS_RAPPEL; i++) {
+    const at = new Date(maintenant.getFullYear(), maintenant.getMonth(), maintenant.getDate() + i, REMINDER_HOUR, REMINDER_MINUTE)
+    if (at <= maintenant) continue
+    if (i === 0 && faitAujourdhui) continue
+    const jour = at.getDay()
+    if (jour === 0 || jour === 6) continue
+    if (occupes.has(jourLocal(at))) continue
+    soirs.push(at)
+  }
+  return soirs
+}
+
+/** Les soirs déjà pris par une autre notification de l'app. */
+async function soirsOccupes() {
+  const occupes = new Set()
+  try {
+    const { notifications = [] } = await LocalNotifications.getPending()
+    for (const n of notifications) {
+      if (DAILY_IDS.includes(Number(n.id))) continue
+      const at = n.schedule?.at ? new Date(n.schedule.at) : null
+      if (at && !Number.isNaN(at.getTime())) occupes.add(jourLocal(at))
+    }
+  } catch { /* liste indisponible : on pose quand même */ }
+  return occupes
+}
+
+async function scheduleDaily(dueCount, maintenant = new Date()) {
+  await LocalNotifications.cancel({ notifications: DAILY_IDS.map(id => ({ id })) }).catch(() => {})
+  const faitAujourdhui = lirePref().faitLe === jourLocal(maintenant)
+  const soirs = soirsDeRappel({ maintenant, faitAujourdhui, occupes: await soirsOccupes() })
+  if (!soirs.length) return
   await LocalNotifications.schedule({
-    notifications: [{
-      id: NOTIF_ID,
+    notifications: soirs.map((at, i) => ({
+      id: DAILY_IDS[i],
       title: "C'est l'heure de réviser",
       body: reminderBody(dueCount),
-      schedule: { on: { hour: REMINDER_HOUR, minute: REMINDER_MINUTE }, allowWhileIdle: true },
-    }],
+      schedule: { at, allowWhileIdle: true },
+    })),
   })
 }
 
 /**
  * Active le rappel quotidien (demande la permission si besoin).
+ * @param {number} [dueCount]
+ * @param {{ faitAujourdhui?: boolean }} [options]  vrai en fin de séance : pas de rappel ce soir
  * @returns {Promise<{ok: boolean, reason?: 'unavailable'|'denied'}>}
  */
-export async function enableReminder(dueCount = 0) {
+export async function enableReminder(dueCount = 0, { faitAujourdhui = false } = {}) {
   if (!remindersAvailable()) return { ok: false, reason: 'unavailable' }
   let perm = await LocalNotifications.checkPermissions()
   if (perm.display !== 'granted') perm = await LocalNotifications.requestPermissions()
   if (perm.display !== 'granted') {
-    savePref(false)
+    savePref({ enabled: false, refuse: true })
     return { ok: false, reason: 'denied' }
   }
+  savePref({ enabled: true, refuse: false, due: dueCount, ...(faitAujourdhui ? { faitLe: jourLocal(new Date()) } : {}) })
   await scheduleDaily(dueCount)
-  savePref(true)
   return { ok: true }
 }
 
+/** L'élève a déjà refusé les notifications sur cet appareil (seuls les Réglages d'iOS les rouvrent). */
+export function rappelRefuse() {
+  return lirePref().refuse === true
+}
+
 export async function disableReminder() {
-  savePref(false)
+  savePref({ enabled: false })
   if (!remindersAvailable()) return
-  try { await LocalNotifications.cancel({ notifications: [{ id: NOTIF_ID }] }) }
+  try { await LocalNotifications.cancel({ notifications: DAILY_IDS.map(id => ({ id })) }) }
   catch { /* rien à annuler */ }
 }
 
@@ -124,24 +188,36 @@ export async function planifierRappelsControles(controles, nommer = intituleCont
     })
     return liste
   })
-  if (!notifications.length) return
+  if (!notifications.length) { await refreshReminder(); return }
   let perm = await LocalNotifications.checkPermissions()
   if (perm.display !== 'granted') perm = await LocalNotifications.requestPermissions()
   if (perm.display !== 'granted') return
   await LocalNotifications.schedule({ notifications })
+  await refreshReminder()
 }
 
 /**
- * À l'ouverture de l'app (natif) : re-planifie le rappel avec un texte à
- * jour (nombre de cartes dues). Jamais bloquant, jamais de prompt.
+ * À l'ouverture de l'app (natif), ou quand un autre rappel vient d'être posé : re-planifie le
+ * rappel du soir avec un texte à jour (nombre de cartes dues). Jamais bloquant, jamais de prompt.
+ * @param {number|null} [dueCount]  null : le dernier nombre connu
  */
-export async function refreshReminder(dueCount = 0) {
+export async function refreshReminder(dueCount = null) {
   if (!remindersAvailable() || !isReminderEnabled()) return
   try {
     const perm = await LocalNotifications.checkPermissions()
     if (perm.display !== 'granted') return
-    await scheduleDaily(dueCount)
+    const due = dueCount ?? lirePref().due ?? 0
+    if (dueCount != null) savePref({ due: dueCount })
+    await scheduleDaily(due)
   } catch { /* le rappel existant reste en place */ }
+}
+
+/** L'élève vient de réviser : pas de rappel ce soir. */
+export async function noterRevisionDuJour(maintenant = new Date()) {
+  if (!remindersAvailable() || !isReminderEnabled()) return
+  if (lirePref().faitLe === jourLocal(maintenant)) return
+  savePref({ faitLe: jourLocal(maintenant) })
+  await refreshReminder()
 }
 
 // --- Email d'un parent pas encore donné (<15 ans, « Plus tard ») ---
@@ -166,7 +242,7 @@ export async function planifierRappelsParent(joursRestants) {
     await LocalNotifications.cancel({
       notifications: PARENT_JOURS_AVANT.map((_, i) => ({ id: PARENT_ID_MIN + i })),
     }).catch(() => {})
-    if (joursRestants == null) return
+    if (joursRestants == null) { await refreshReminder(); return }
     const perm = await LocalNotifications.checkPermissions()
     if (perm.display !== 'granted') return
     const maintenant = new Date()
@@ -176,6 +252,7 @@ export async function planifierRappelsParent(joursRestants) {
       return at > maintenant ? { id: PARENT_ID_MIN + i, ...rappelParent(avant), schedule: { at, allowWhileIdle: true } } : null
     }).filter(Boolean)
     if (notifications.length) await LocalNotifications.schedule({ notifications })
+    await refreshReminder()
   } catch { /* jamais bloquant */ }
 }
 
@@ -198,12 +275,13 @@ export async function planifierRappelLendemain(premiereSession, maintenant = new
   if (!remindersAvailable()) return
   try {
     await LocalNotifications.cancel({ notifications: [{ id: LENDEMAIN_ID }] }).catch(() => {})
-    if (!premiereSession) return
+    if (!premiereSession) { await refreshReminder(); return }
     const perm = await LocalNotifications.checkPermissions()
     if (perm.display !== 'granted') return
     const at = new Date(maintenant.getFullYear(), maintenant.getMonth(), maintenant.getDate() + 1, REMINDER_HOUR, REMINDER_MINUTE)
     await LocalNotifications.schedule({
       notifications: [{ id: LENDEMAIN_ID, ...rappelLendemain(premiereSession.titre), schedule: { at, allowWhileIdle: true } }],
     })
+    await refreshReminder()
   } catch { /* jamais bloquant */ }
 }
