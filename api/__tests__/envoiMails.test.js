@@ -11,6 +11,12 @@ describe('e-mails de la tâche de 17 h : bornés', () => {
     expect(envoyer).toHaveBeenCalledTimes(2)
     expect(e.compte()).toBe(2)
   })
+  it('signale quand le budget est épuisé, pour que les boucles s’arrêtent', async () => {
+    const e = envoiBorne(async () => ({}), { budget: 1 })
+    expect(e.epuise()).toBe(false)
+    await e({ to: 'a@x.fr' })
+    expect(e.epuise()).toBe(true)
+  })
   it('un refus de Resend ({ error }, pas levé par le SDK) devient une erreur', async () => {
     const e = envoiBorne(async () => ({ data: null, error: { message: 'daily_quota_exceeded' } }))
     await expect(e({ to: 'a@x.fr' })).rejects.toThrow('daily_quota_exceeded')

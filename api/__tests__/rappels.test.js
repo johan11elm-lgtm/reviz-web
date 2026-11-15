@@ -78,6 +78,19 @@ beforeEach(() => {
 })
 
 describe('rappel du lendemain (J+1) — première session', () => {
+  it('rien à qui a reçu une notification aujourd’hui (elles partent avant les e-mails)', async () => {
+    users.lea = { prenom: 'Léa', birthDate: ADULTE, premiereSession: SESSION, derniereRevisionAt: HIER, push: { dernierLe: MAINTENANT - H } }
+    expect(await relancer()).toEqual({ rappelsJ1: 0 })
+    expect(envoyer).not.toHaveBeenCalled()
+  })
+  it('budget d’e-mails épuisé : s’arrête sans parcourir les comptes', async () => {
+    users.lea = { prenom: 'Léa', birthDate: ADULTE, premiereSession: SESSION, derniereRevisionAt: HIER }
+    const borne = Object.assign(vi.fn(), { epuise: () => true })
+    const auth = makeAuth([compte('tom')])
+    expect(await relancer({ envoyer: borne, auth })).toEqual({ rappelsJ1: 0 })
+    expect(borne).not.toHaveBeenCalled()
+    expect(auth.listUsers).not.toHaveBeenCalled()
+  })
   it('écrit une fois à l’élève commencé hier, avec le lien du chapitre', async () => {
     users.lea = { prenom: 'Léa', birthDate: ADULTE, premiereSession: SESSION, derniereRevisionAt: HIER }
     expect(await relancer()).toEqual({ rappelsJ1: 1 })

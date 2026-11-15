@@ -170,6 +170,7 @@ export async function relancerParents({ db, envoyer, maintenant = Date.now() }) 
   const demandes = await db.collectionGroup('parentalConsent').get();
   let relances = 0;
   for (const doc of demandes.docs) {
+    if (envoyer.epuise?.()) break;
     const d = doc.data();
     if (d.status !== 'pending' || !demandeEnCours(d) || !d.parentEmail || d.relanceLe) continue;
     const age = maintenant - (d.firstRequestedAt ?? d.createdAt ?? maintenant);
@@ -238,6 +239,7 @@ export async function relancerEleves({ db, envoyer, emailDe, maintenant = Date.n
   const demandes = await db.collectionGroup('parentalConsent').get();
   let relancesEleves = 0;
   for (const doc of demandes.docs) {
+    if (envoyer.epuise?.()) break;
     const d = doc.data();
     if (d.status !== 'pending' || d.parentEmail || !d.createdAt) continue;
     const age = maintenant - d.createdAt;
@@ -334,6 +336,13 @@ export default async function handler(req, res) {
         rejetees: await adressesRejetees(),
       });
       const db = getDb();
+      // Les notifications d'abord : elles ne coûtent rien et ne dépendent pas du quota de Resend.
+      // Jusqu'au 15/11 elles venaient en dernier et la tâche, coupée à 60 s, ne les atteignait
+      // jamais. Le rappel J+1 par e-mail saute ensuite qui a été notifié aujourd'hui.
+      const pousser = await preparerEnvoi();
+      const push = pousser
+        ? await envoyerNotifs({ db, envoyer: pousser }).catch(err => { console.error('[push]', err?.message || err); return { notifs: 0 }; })
+        : { notifs: 0, pushSansCle: true };
       const parents = await relancerParents({ db, envoyer });
       const emailDe = uid => getAuthAdmin().getUser(uid).then(u => u.email || null, () => null);
       const eleves = await relancerEleves({ db, envoyer, emailDe });
@@ -346,11 +355,6 @@ export default async function handler(req, res) {
       // Après le bilan : un parent qui l'a reçu aujourd'hui n'a pas ce mot le même jour.
       const limites = await envoyerLimitesParent({ db, envoyer, auth: getAuthAdmin() })
         .catch(err => { console.error('[limite-parent]', err?.message || err); return { limitesParent: 0 }; });
-      // En dernier : pas de notification à qui a reçu le rappel par e-mail aujourd'hui.
-      const pousser = await preparerEnvoi();
-      const push = pousser
-        ? await envoyerNotifs({ db, envoyer: pousser }).catch(err => { console.error('[push]', err?.message || err); return { notifs: 0 }; })
-        : { notifs: 0, pushSansCle: true };
       return res.status(200).json({ ...parents, ...eleves, ...lendemain, ...bilans, ...limites, ...push, emails: envoyer.compte() });
     } catch (err) {
       console.error('[relance-parent]', err?.message || err);

@@ -147,6 +147,7 @@ export async function envoyerLimitesParent({ db, envoyer, auth = null, maintenan
   const demandes = await db.collectionGroup('parentalConsent').get()
   let limitesParent = 0
   for (const doc of demandes.docs) {
+    if (envoyer.epuise?.()) break
     const d = doc.data()
     if (!d.parentEmail || d.status !== 'approved') continue
     if (d.relanceLe && maintenant - d.relanceLe < JOUR_MS) continue

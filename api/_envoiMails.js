@@ -51,5 +51,8 @@ export function envoiBorne(envoyer, { budget = BUDGET_PAR_DEFAUT, rejetees = new
     return r
   }
   borne.compte = () => envoyes
+  // Budget épuisé : les boucles s'arrêtent au lieu de tenter chaque élève (le 13/11, ces essais
+  // vains faisaient dépasser les 60 s de la tâche, et rien après le rappel J+1 ne partait).
+  borne.epuise = () => envoyes >= budget
   return borne
 }

@@ -4,7 +4,8 @@
   "framework": "vite",
   "functions": {
     "api/battle-fin.js": { "includeFiles": "public/programme/**" },
-    "api/chat.js": { "includeFiles": "public/programme/**" }
+    "api/chat.js": { "includeFiles": "public/programme/**" },
+    "api/send-parental-consent.js": { "maxDuration": 300 }
   },
   "crons": [
     { "path": "/api/battle-nettoyage", "schedule": "0 3 * * *" },

@@ -247,6 +247,7 @@ async function derniereLecon(db, uid) {
  * @returns {Promise<{ rappelsJ1: number }>}
  */
 export async function relancerLendemain({ db, envoyer, emailDe, auth = null, maintenant = Date.now(), secret = process.env.CRON_SECRET, journal = m => console.error(m) }) {
+  if (envoyer.epuise?.()) return { rappelsJ1: 0 }
   const hier = jourParis(new Date(maintenant - JOUR_MS))
   const aujourdhui = jourParis(new Date(maintenant))
 
@@ -278,7 +279,10 @@ export async function relancerLendemain({ db, envoyer, emailDe, auth = null, mai
 
   let rappelsJ1 = 0
   for (const [uid, { ref, d, compte }] of candidats) {
+    if (envoyer.epuise?.()) break
     if (d.rappelJ1Le || d.rappels === false) continue
+    // Notifié aujourd'hui (les notifications partent avant les e-mails) : pas de doublon.
+    if (d.push?.dernierLe && jourParis(new Date(d.push.dernierLe)) === aujourdhui) continue
     if (d.derniereRevisionAt && jourParis(new Date(d.derniereRevisionAt)) === aujourdhui) continue
     if (Array.isArray(d.joursActifs) && d.joursActifs.includes(aujourdhui)) continue
     try {
