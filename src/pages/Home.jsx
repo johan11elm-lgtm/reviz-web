@@ -9,6 +9,7 @@ import { PushBanner } from '../components/PushBanner';
 import { ParrainageBanner } from '../components/ParrainageBanner';
 import { RappelOuverture } from '../components/RappelDemain';
 import { RetourAbsence } from '../components/RetourAbsence';
+import { FinEssaiPlus, finEssaiVue } from '../components/revizplus/RevizPlusOffre';
 import { LancerConcentration } from '../components/Concentration';
 import { LigneLigue } from '../components/LigneLigue';
 import { LignePlanBrevet } from '../components/LignePlanBrevet';
@@ -102,7 +103,7 @@ function useProchainControle(currentUser) {
 }
 
 export default function Home() {
-  const { currentUser, isGuest, getUserLevel, hasRevizPlus, revizPlusOffert, isPremium, essaiPlusFin } = useAuth();
+  const { currentUser, isGuest, getUserLevel, hasRevizPlus, revizPlusOffert, isPremium, essaiPlusFin, essaiPlusPris } = useAuth();
   // App native : la veille de la fin de Réviz+ offert, un rappel à 18 h 30 (annulé s'il paie).
   useEffect(() => { planifierRappelFinEssai(isPremium ? null : essaiPlusFin); }, [isPremium, essaiPlusFin]);
   const navigate = useNavigate();
@@ -123,6 +124,13 @@ export default function Home() {
   const [retour, setRetour] = useState(() => (!annonceRevizPlus && !annonceJeux && !isGuest
     ? retourAProposer(currentUser?.uid, loadRevisions()) : null));
   const [concentration, setConcentration] = useState(false);
+  // Fin de l'essai de 7 jours (17/11) : un écran, une fois, avant toute autre annonce du jour.
+  // essaiPlusPris arrive avec le profil (après le premier rendu) : décidé dans un effet.
+  const [finEssai, setFinEssai] = useState(false);
+  useEffect(() => {
+    if (essaiPlusPris && !hasRevizPlus && !isGuest && currentUser?.uid && !annonceRevizPlus && !annonceJeux
+      && !finEssaiVue(currentUser.uid)) setFinEssai(true);
+  }, [essaiPlusPris, hasRevizPlus, isGuest, currentUser?.uid, annonceRevizPlus, annonceJeux]);
   const [rappelOuverture, setRappelOuverture] = useState(() => !annonceRevizPlus && !annonceJeux && !retour && loadRevisions().length > 0);
   // Les thèmes Réviz+ sont des thèmes clairs : pas d'invitation à les essayer en sombre.
   const montrerEssai = essaiTheme && hasRevizPlus && !isGuest && !isDark && !themeById(theme)?.premium;
@@ -605,11 +613,12 @@ export default function Home() {
       {newBadge && !annonceJeux && <AchievementToast badge={newBadge} onDone={() => setNewBadge(null)} />}
       {annonceRevizPlus && <RevizPlusAnnonce uid={currentUser.uid} onClose={() => setAnnonceRevizPlus(false)} />}
       {annonceJeux && <JeuxAnnonce uid={currentUser.uid} onClose={() => setAnnonceJeux(false)} />}
-      {retour && (
+      {finEssai && <FinEssaiPlus uid={currentUser.uid} onClose={() => setFinEssai(false)} />}
+      {retour && !finEssai && (
         <RetourAbsence uid={currentUser.uid} prenom={currentUser.displayName?.split(' ')[0]} jours={retour.jours} repere={retour.repere}
           aControle={!!controle} onReprendre={lancerExercices} onClose={() => setRetour(null)} />
       )}
-      {rappelOuverture && <RappelOuverture onClose={() => setRappelOuverture(false)} />}
+      {rappelOuverture && !finEssai && !retour && <RappelOuverture onClose={() => setRappelOuverture(false)} />}
       {concentration && <LancerConcentration onClose={() => setConcentration(false)} />}
 
       <div className="content nm-defile">

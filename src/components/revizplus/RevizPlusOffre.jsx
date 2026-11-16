@@ -13,6 +13,7 @@ import { tarifFondateurOuvert } from '../../../api/_lancement.js';
 import { ACHAT_DANS_L_APP } from '../../utils/achat';
 import { mesurer } from '../../services/mesure';
 import { BoltIcon, CameraIcon, ChatIcon } from '../Icons';
+import { PREMIER_ECRIT } from '../../utils/planBrevet';
 import '../RevizPlusAnnonce.css';
 import '../reviz/HerosMatiere.css';
 import './RevizPlusOffre.css';
@@ -38,14 +39,22 @@ const Cadenas = () => (
 export function Fenetre({ label, pose, onClose, children }) {
   const isDesktop = useIsDesktop();
   const ref = useModalA11y(onClose, true);
+  const reviz = pose && <Mascot pose={pose} size={isDesktop ? 128 : 112} alt="" aria-hidden="true" className="rpo-reviz" />;
+  const feuille = (
+    <div className={`rpo-feuille${isDesktop ? ' rpo-feuille--fenetre' : ''}`} ref={ref} role="dialog" aria-modal="true" aria-label={label} onClick={e => e.stopPropagation()}>
+      {!isDesktop && <span className="rpo-poignee" aria-hidden="true" />}
+      {isDesktop && <button type="button" className="rpo-fermer" onClick={onClose} aria-label="Fermer"><Croix /></button>}
+      {isDesktop && reviz}
+      {children}
+    </div>
+  );
+  // Téléphone (17/11) : Réviz dépasse du cadre, hors de la feuille qui défile. Avant, la feuille
+  // ne défilait plus pour la laisser dépasser, et « Passer à Réviz+ » tombait sous l'écran.
   return createPortal(
     <div className="rpo-voile" onClick={onClose}>
-      <div className={`rpo-feuille${isDesktop ? ' rpo-feuille--fenetre' : ''}`} ref={ref} role="dialog" aria-modal="true" aria-label={label} onClick={e => e.stopPropagation()}>
-        {!isDesktop && <span className="rpo-poignee" aria-hidden="true" />}
-        {isDesktop && <button type="button" className="rpo-fermer" onClick={onClose} aria-label="Fermer"><Croix /></button>}
-        {pose && <Mascot pose={pose} size={isDesktop ? 128 : 112} alt="" aria-hidden="true" className="rpo-reviz" />}
-        {children}
-      </div>
+      {!isDesktop && reviz
+        ? <div className="rpo-cadre" onClick={e => e.stopPropagation()}>{reviz}{feuille}</div>
+        : feuille}
     </div>,
     document.body,
   );
@@ -56,10 +65,33 @@ const TITRES = {
   limite_exercices: ['Continue tes exercices', 'Tes 3 séances du jour sont faites. Avec Réviz+, pas de limite.'],
   limite_scan: ['Scanne toutes tes leçons', 'Tes 5 scans de la semaine sont faits. Avec Réviz+, pas de limite.'],
   limite_ia: ['Pose toutes tes questions', 'Tes 10 questions de la semaine sont posées. Avec Réviz+, 50 par jour.'],
+  fin_essai: ['Garde Réviz+', 'Ta semaine offerte est finie. Garde tes exercices sans limite.'],
   coach: ['Réviz IA, chaque jour', 'Avec Réviz+, 50 questions par jour au lieu de 10 par semaine.'],
   scan: ['Scanne sans compter', 'Avec Réviz+, tes scans sont illimités.'],
 };
 const TITRE_PAR_DEFAUT = ['Réviz+', 'Pour aller plus loin, quand tu veux.'];
+
+const JOUR_MS = 86_400_000;
+
+/** Jours avant la première épreuve écrite du brevet (3e seulement), ou null. */
+export function joursAvantBrevet(classe, maintenant = Date.now()) {
+  if (classe !== '3ème') return null;
+  const j = Math.ceil((Date.parse(`${PREMIER_ECRIT}T08:00:00+02:00`) - maintenant) / JOUR_MS);
+  return j > 0 ? j : null;
+}
+
+/**
+ * Pourquoi ce n'est pas gratuit (repris de Knowunity, 17/11) : dit franchement, pour l'élève
+ * et pour le parent qui lit par-dessus l'épaule.
+ */
+function PourquoiPasGratuit() {
+  return (
+    <details className="rpo-pourquoi">
+      <summary>Pourquoi Réviz+ n’est pas gratuit ?</summary>
+      <p>Chaque question à Réviz IA et chaque leçon scannée nous coûtent de l’argent : l’intelligence artificielle se paie à l’usage. La version gratuite reste gratuite, sans publicité et sans revente de tes données. Réviz+ paie le reste, et c’est ce qui nous permet de continuer.</p>
+    </details>
+  );
+}
 
 /** « Découvrir Réviz+ » : ce que ça change, la formule, le paiement. */
 export function DecouvrirRevizPlus({ onClose, lieu = 'autre' }) {
@@ -73,6 +105,11 @@ export function DecouvrirRevizPlus({ onClose, lieu = 'autre' }) {
   const annuel = prixDe('annuel', fondateur);
   const mensuel = prixDe('mensuel', fondateur);
   const [titre, sousTitre] = TITRES[lieu] ?? TITRE_PAR_DEFAUT;
+  // « Pour Alex » (Knowunity) : l'offre s'adresse à l'élève, et en 3e elle rappelle le brevet.
+  const auth = useAuth() ?? {};
+  const prenom = auth.currentUser?.displayName?.split(' ')[0] || '';
+  const brevet = joursAvantBrevet(auth.getUserLevel?.()?.classe);
+  const pour = [prenom && `Pour ${prenom}`, brevet && `brevet dans ${brevet} jours`].filter(Boolean).join(' · ');
   const comparatif = (
     <table className="rpo-compare">
       <thead><tr><th scope="col"><span className="rpo-sur">Ce que ça change</span></th><th scope="col">Gratuit</th><th scope="col"><span className="rpo-plus">Réviz+</span></th></tr></thead>
@@ -116,10 +153,12 @@ export function DecouvrirRevizPlus({ onClose, lieu = 'autre' }) {
   ];
   return (
     <Fenetre label="Réviz+" pose="hello" onClose={onClose}>
+      {pour && <span className="rpo-pour">{pour.charAt(0).toUpperCase() + pour.slice(1)}</span>}
       <h2 className="rpo-titre">{titre}</h2>
       <p className="rpo-sous">{sousTitre}</p>
       {fondateur && <span className="rpo-sceau">Membre fondateur</span>}
       {comparatif}
+      <p className="rpo-preuve">Plus de 1 000 collégiens révisent déjà avec Réviz.</p>
       <span className="rpo-sur rpo-sur--bloc">Ta formule</span>
       <div className="rpo-formules" role="radiogroup" aria-label="Ta formule">
         {options.map(o => (
@@ -136,12 +175,58 @@ export function DecouvrirRevizPlus({ onClose, lieu = 'autre' }) {
         ))}
       </div>
       {fondateur && <p className="rpo-note">Ton prix fondateur reste le même tant que tu restes abonné.</p>}
+      {formule === 'annuel' && <p className="rpo-note">Un an de Réviz+ coûte moins cher que deux heures de cours particulier.</p>}
       {erreur && <p className="rpo-erreur" role="alert">{erreur}</p>}
       <button type="button" className="rpo-btn" onClick={payer} disabled={paiement}>
         {paiement ? <><span className="rpo-anneau" aria-hidden="true" />Ouverture du paiement…</> : 'Passer à Réviz+'}
       </button>
-      <p className="rpo-note rpo-note--centre"><Cadenas />Paiement sécurisé par Stripe. Résiliable à tout moment.</p>
+      <p className="rpo-note rpo-note--centre"><Cadenas />Paiement sécurisé par Stripe. Sans engagement, résiliable à tout moment.</p>
+      <ul className="rpo-rassure" aria-label="Nos engagements">
+        <li><Coche />Sans publicité</li>
+        <li><Coche />Données jamais revendues</li>
+        <li><Coche />Un parent peut l’offrir</li>
+      </ul>
       <DemanderParent lieu={lieu} />
+      <PourquoiPasGratuit />
+    </Fenetre>
+  );
+}
+
+const cleFinEssai = uid => `reviz-fin-essai-vue-${uid}`;
+
+/** L'écran de fin d'essai a-t-il déjà été montré sur cet appareil ? */
+export function finEssaiVue(uid) {
+  try { return localStorage.getItem(cleFinEssai(uid)) === '1'; } catch { return true; }
+}
+
+/**
+ * Fin de l'essai de 7 jours (17/11) : jusqu'ici l'élève retombait sur la limite sans un mot.
+ * Une fois par appareil, au retour sur l'accueil : ce qui revient en gratuit, puis l'offre.
+ */
+export function FinEssaiPlus({ uid, onClose }) {
+  const [offre, setOffre] = useState(false);
+  useEffect(() => {
+    try { localStorage.setItem(cleFinEssai(uid), '1'); } catch { /* stockage indisponible */ }
+    mesurer('offre', { etape: 'fin_essai' });
+  }, [uid]);
+  if (offre) return <DecouvrirRevizPlus lieu="fin_essai" onClose={onClose} />;
+  return (
+    <Fenetre label="Fin de Réviz+ offert" onClose={onClose}>
+      <div className="rpo-panneau rpo-panneau--peche">
+        <span className="ch-grain" aria-hidden="true" />
+        <BulleReviz lignes={['Belle semaine avec toi.', 'On continue ensemble ?']} pointe="droite" className="rpo-bulle" />
+        <Mascot pose="hello" size={150} alt="" aria-hidden="true" />
+      </div>
+      <h2 className="rpa-titre">Ta semaine de Réviz+ est finie</h2>
+      <p className="rpa-texte">Tu gardes tout ce que tu as révisé. La version gratuite reprend ses limites :</p>
+      <ul className="rpa-liste">
+        <li><span className="rpa-rond rpa-rond--menthe" aria-hidden="true"><BoltIcon /></span><b>3 séances d’exercices</b><span>par jour</span></li>
+        <li><span className="rpa-rond rpa-rond--lavande" aria-hidden="true"><CameraIcon /></span><b>5 scans de leçons</b><span>par semaine</span></li>
+        <li><span className="rpa-rond rpa-rond--peche" aria-hidden="true"><ChatIcon /></span><b>10 questions à Réviz IA</b><span>par semaine</span></li>
+      </ul>
+      {ACHAT_DANS_L_APP && <button type="button" className="rpo-btn" onClick={() => setOffre(true)}>Garder Réviz+</button>}
+      <DemanderParent lieu="fin_essai" />
+      <button type="button" className={ACHAT_DANS_L_APP ? 'rpo-lien' : 'rpo-btn'} onClick={onClose}>{ACHAT_DANS_L_APP ? 'Continuer en gratuit' : 'Compris'}</button>
     </Fenetre>
   );
 }

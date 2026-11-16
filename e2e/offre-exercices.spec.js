@@ -91,4 +91,39 @@ test.describe('Limite d\'exercices et essai Réviz+', () => {
     await expect(offre.getByRole('row', { name: /Séances d’exercices 3 par jour Illimitées/ })).toBeVisible()
     await page.screenshot({ path: test.info().outputPath('05-offre.png'), fullPage: true, animations: 'disabled' })
   })
+
+  test('fin de l’essai : un écran sur l’accueil, une fois, puis l’offre', async ({ page }) => {
+    await page.setViewportSize(TELEPHONE)
+    await mockApiRoutes(page)
+    await mockProgramme(page)
+    const passe = Date.now() - 8 * 864e5
+    await compteRapide(page, { prenom: 'Ethan', birthDate: '2011-03-01', profil: { essaiPlus: { debut: passe, fin: passe + 7 * 864e5 } } })
+    const fin = page.getByRole('dialog', { name: 'Fin de Réviz+ offert' })
+    await expect(fin.getByRole('heading', { name: 'Ta semaine de Réviz+ est finie' })).toBeVisible()
+    await expect(fin).toContainText('3 séances d’exercices')
+    await sansDebordement(page, 'fin d’essai')
+    await page.waitForTimeout(2500) // la bulle de Réviz s'écrit lettre à lettre
+    if (process.env.CAPTURES_DIR) await page.screenshot({ path: `${process.env.CAPTURES_DIR}/01-fin-essai-390.png`, animations: 'disabled' })
+    await fin.getByRole('button', { name: 'Garder Réviz+' }).click()
+    const offre = page.getByRole('dialog', { name: 'Réviz+' })
+    await expect(offre.getByRole('heading', { name: 'Garde Réviz+' })).toBeVisible()
+    await expect(offre).toContainText(/Pour Ethan · Brevet dans \d+ jours/i)
+    await expect(offre.getByText('Sans publicité', { exact: true })).toBeVisible()
+    // Sur téléphone, la feuille défile jusqu'au bouton de paiement (sinon il est hors de l'écran).
+    const payer = offre.getByRole('button', { name: 'Passer à Réviz+' })
+    await payer.scrollIntoViewIfNeeded()
+    const boite = await payer.boundingBox()
+    expect(boite.y + boite.height).toBeLessThanOrEqual(844)
+    await sansDebordement(page, 'offre fin d’essai')
+    if (process.env.CAPTURES_DIR) {
+      await page.screenshot({ path: `${process.env.CAPTURES_DIR}/02-offre-haut-390.png`, animations: 'disabled' })
+      // La feuille défile seule : on ouvre l'encart et on descend en bas de la feuille.
+      await offre.evaluate(f => { const d = f.querySelector('details'); d.open = true; d.scrollIntoView({ block: 'end' }) })
+      await page.screenshot({ path: `${process.env.CAPTURES_DIR}/03-offre-bas-390.png`, animations: 'disabled' })
+    }
+    // Une seule fois : au retour sur l'accueil, plus d'écran de fin.
+    await page.goto('/')
+    await expect(page.getByRole('heading', { level: 1 }).first()).toBeVisible()
+    await expect(fin).toHaveCount(0)
+  })
 })

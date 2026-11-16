@@ -5,11 +5,12 @@ import { describe, it, expect, vi, afterEach } from 'vitest'
 import { render, screen, fireEvent } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 
-vi.mock('../../../context/AuthContext', () => ({ useAuth: () => ({ consent: {}, isGuest: false }) }))
+const auth = { consent: {}, isGuest: false }
+vi.mock('../../../context/AuthContext', () => ({ useAuth: () => auth }))
 vi.mock('../../../services/billingService', () => ({ startCheckout: vi.fn(), demanderAuParent: vi.fn() }))
 vi.mock('../../../../api/_lancement.js', async orig => ({ ...(await orig()), tarifFondateurOuvert: () => false }))
 
-const { DecouvrirRevizPlus, LimiteAtteinte } = await import('../RevizPlusOffre')
+const { DecouvrirRevizPlus, LimiteAtteinte, FinEssaiPlus, finEssaiVue, joursAvantBrevet } = await import('../RevizPlusOffre')
 const ecrire = el => render(<MemoryRouter>{el}</MemoryRouter>)
 
 describe('paiement Réviz+', () => {
@@ -48,5 +49,40 @@ describe('paiement Réviz+', () => {
     ecrire(<LimiteAtteinte type="ia" onClose={() => {}} />)
     fireEvent.click(screen.getByRole('button', { name: '50 questions par jour avec Réviz+' }))
     expect(screen.getByRole('heading', { name: 'Pose toutes tes questions' })).toBeInTheDocument()
+  })
+
+  it('l’offre s’adresse à l’élève et rappelle le brevet en 3e', () => {
+    vi.useFakeTimers({ toFake: ['Date'] })
+    vi.setSystemTime(new Date('2026-11-17T12:00:00+01:00'))
+    auth.currentUser = { displayName: 'Ethan Martin' }
+    auth.getUserLevel = () => ({ classe: '3ème' })
+    const { unmount } = ecrire(<DecouvrirRevizPlus lieu="badge" onClose={() => {}} />)
+    expect(screen.getByText('Pour Ethan · brevet dans 219 jours')).toBeInTheDocument()
+    unmount()
+    auth.getUserLevel = () => ({ classe: '5ème' })
+    ecrire(<DecouvrirRevizPlus lieu="badge" onClose={() => {}} />)
+    expect(screen.getByText('Pour Ethan')).toBeInTheDocument()
+    delete auth.currentUser; delete auth.getUserLevel
+  })
+  it('pas de brevet hors 3e ni une fois passé', () => {
+    expect(joursAvantBrevet('4ème')).toBeNull()
+    expect(joursAvantBrevet('3ème', Date.parse('2027-07-01'))).toBeNull()
+  })
+  it('rassure et explique pourquoi ce n’est pas gratuit', () => {
+    ecrire(<DecouvrirRevizPlus lieu="badge" onClose={() => {}} />)
+    expect(screen.getByText('Sans publicité')).toBeInTheDocument()
+    expect(screen.getByText('Pourquoi Réviz+ n’est pas gratuit ?')).toBeInTheDocument()
+    expect(screen.getByText(/moins cher que deux heures de cours particulier/)).toBeInTheDocument()
+    fireEvent.click(screen.getByRole('radio', { name: /Au mois/ }))
+    expect(screen.queryByText(/deux heures de cours particulier/)).not.toBeInTheDocument()
+  })
+  it('fin d’essai : dit ce qui revient, une seule fois, puis mène à l’offre', () => {
+    localStorage.clear()
+    expect(finEssaiVue('u1')).toBe(false)
+    ecrire(<FinEssaiPlus uid="u1" onClose={() => {}} />)
+    expect(screen.getByRole('heading', { name: 'Ta semaine de Réviz+ est finie' })).toBeInTheDocument()
+    expect(finEssaiVue('u1')).toBe(true)
+    fireEvent.click(screen.getByRole('button', { name: 'Garder Réviz+' }))
+    expect(screen.getByRole('heading', { name: 'Garde Réviz+' })).toBeInTheDocument()
   })
 })
