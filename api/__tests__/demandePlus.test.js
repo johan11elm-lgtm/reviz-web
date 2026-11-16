@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
-import { lienOffrir, lienOffrirValide, activiteSemaine, mailDemandePlus, routeDemandePlus, routeOffrir, INTERVALLE_MS } from '../_demandePlus.js'
+import { lienOffrir, lienOffrirValide, activiteSemaine, mailDemandePlus, routeDemandePlus, routeLienPlus, routeOffrir, INTERVALLE_MS } from '../_demandePlus.js'
 
 const SECRET = 'secret-de-test'
 const T = 1_800_000_000_000
@@ -73,6 +73,30 @@ describe('?op=demande-plus', () => {
       expect(r.code).toBe(code)
     }
     expect(envoyer).not.toHaveBeenCalled()
+  })
+})
+
+describe('?op=lien-plus', () => {
+  it('donne le lien signé à l\'élève connecté, sans rien écrire ni bloquer l\'e-mail', async () => {
+    const db = fauxDb({ prenom: 'Lina' })
+    const res = fauxRes()
+    await routeLienPlus({ body: { idToken: 'ok' } }, res, { db, auth, maintenant: T, secret: SECRET })
+    expect(res.code).toBe(200)
+    const lien = new URL(res.body.lien)
+    expect(lienOffrirValide(lien.searchParams.get('u'), lien.searchParams.get('e'), lien.searchParams.get('t'), { maintenant: T, secret: SECRET })).toBe(true)
+    expect(lien.searchParams.get('u')).toBe(UID)
+    expect(db.etat.profil).toEqual({ prenom: 'Lina' })
+  })
+  it('refuse sans jeton, avec un mauvais jeton, et pour un abonné', async () => {
+    let res = fauxRes()
+    await routeLienPlus({ body: {} }, res, { db: fauxDb({}), auth, maintenant: T, secret: SECRET })
+    expect(res.code).toBe(401)
+    res = fauxRes()
+    await routeLienPlus({ body: { idToken: 'faux' } }, res, { db: fauxDb({}), auth, maintenant: T, secret: SECRET })
+    expect(res.code).toBe(401)
+    res = fauxRes()
+    await routeLienPlus({ body: { idToken: 'ok' } }, res, { db: fauxDb({ plan: 'premium' }), auth, maintenant: T, secret: SECRET })
+    expect(res.code).toBe(409)
   })
 })
 

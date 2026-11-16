@@ -59,3 +59,26 @@ export async function demanderAuParent(email) {
   const data = await res.json().catch(() => ({}))
   if (!res.ok) throw new Error(data.error || `HTTP_${res.status}`)
 }
+
+/**
+ * Le lien « Offrir Réviz+ » que l'élève envoie lui-même à un parent, par message
+ * (api/_demandePlus.js, ?op=lien-plus). Jamais dans l'app iOS (règle 3.1.1).
+ * @returns {Promise<string>}
+ * @throws {Error} 'UNAUTHORIZED' | 'ABONNE' | 'LIEN_INDISPONIBLE' | 'HTTP_xxx'
+ */
+export async function lienPourOffrir() {
+  const idToken = await auth.currentUser?.getIdToken().catch(() => null)
+  if (!idToken) throw new Error('UNAUTHORIZED')
+  const res = await apiFetch('/api/track?op=lien-plus', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ idToken }),
+  })
+  const data = await res.json().catch(() => ({}))
+  if (!res.ok) throw new Error(data.error || `HTTP_${res.status}`)
+  if (!data.lien) throw new Error('LIEN_INDISPONIBLE')
+  return data.lien
+}
+
+/** Le message qui part avec le lien, écrit à la place de l'élève (il peut le changer). */
+export const MESSAGE_OFFRIR = 'Coucou, je révise mes cours avec Réviz. Tu pourrais m’offrir Réviz+ pour que je m’entraîne sans limite ? C’est ici, sans créer de compte :'

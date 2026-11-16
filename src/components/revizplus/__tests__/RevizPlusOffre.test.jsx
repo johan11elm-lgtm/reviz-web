@@ -2,15 +2,18 @@
 // semaine, et le compte à rebours jusqu'au retour du quota. (Le DOM de test lit les espaces
 // insécables comme des espaces simples.)
 import { describe, it, expect, vi, afterEach } from 'vitest'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 
 const auth = { consent: {}, isGuest: false }
 vi.mock('../../../context/AuthContext', () => ({ useAuth: () => auth }))
-vi.mock('../../../services/billingService', () => ({ startCheckout: vi.fn(), demanderAuParent: vi.fn() }))
+const lienPourOffrir = vi.fn(async () => 'https://app.revizapp.fr/api/abonnement?op=offrir&u=x')
+vi.mock('../../../services/billingService', () => ({ startCheckout: vi.fn(), demanderAuParent: vi.fn(), lienPourOffrir, MESSAGE_OFFRIR: 'Coucou :' }))
+const mesurer = vi.fn()
+vi.mock('../../../services/mesure', () => ({ mesurer: (...a) => mesurer(...a) }))
 vi.mock('../../../../api/_lancement.js', async orig => ({ ...(await orig()), tarifFondateurOuvert: () => false }))
 
-const { DecouvrirRevizPlus, LimiteAtteinte, FinEssaiPlus, finEssaiVue, joursAvantBrevet } = await import('../RevizPlusOffre')
+const { DecouvrirRevizPlus, LimiteAtteinte, FinEssaiPlus, DemanderParent, finEssaiVue, joursAvantBrevet } = await import('../RevizPlusOffre')
 const ecrire = el => render(<MemoryRouter>{el}</MemoryRouter>)
 
 describe('paiement Réviz+', () => {
@@ -84,5 +87,51 @@ describe('paiement Réviz+', () => {
     expect(finEssaiVue('u1')).toBe(true)
     fireEvent.click(screen.getByRole('button', { name: 'Garder Réviz+' }))
     expect(screen.getByRole('heading', { name: 'Garde Réviz+' })).toBeInTheDocument()
+  })
+})
+
+describe('demander à un parent, par message', () => {
+  const LIEN = 'https://app.revizapp.fr/api/abonnement?op=offrir&u=x'
+  afterEach(() => { delete navigator.share; mesurer.mockClear(); lienPourOffrir.mockClear() })
+
+  it('sur téléphone : le lien part par la feuille de partage, et la demande est mesurée', async () => {
+    const share = vi.fn(async () => {})
+    Object.defineProperty(navigator, 'share', { value: share, configurable: true })
+    ecrire(<DemanderParent lieu="limite_exercices" />)
+    fireEvent.click(screen.getByRole('button', { name: 'Demander à un parent de me l’offrir' }))
+    await waitFor(() => expect(lienPourOffrir).toHaveBeenCalledTimes(1))
+    fireEvent.click(screen.getByRole('button', { name: 'Lui envoyer par message' }))
+    await waitFor(() => expect(share).toHaveBeenCalledWith({ text: 'Coucou :', url: LIEN }))
+    expect(await screen.findByText(/Ton parent n’a plus qu’à ouvrir le lien/)).toBeInTheDocument()
+    expect(mesurer).toHaveBeenCalledWith('offre', { etape: 'demande_parent', lieu: 'limite_exercices', moyen: 'message' })
+    expect(lienPourOffrir).toHaveBeenCalledTimes(1)
+  })
+  it('partage annulé : le lien reste affiché et l’e-mail reste possible', async () => {
+    Object.defineProperty(navigator, 'share', { value: vi.fn(async () => { throw new Error('AbortError') }), configurable: true })
+    ecrire(<DemanderParent lieu="badge" />)
+    fireEvent.click(screen.getByRole('button', { name: 'Demander à un parent de me l’offrir' }))
+    fireEvent.click(await screen.findByRole('button', { name: 'Lui envoyer par message' }))
+    expect(await screen.findByLabelText('Lien à envoyer à ton parent')).toHaveValue(LIEN)
+    expect(screen.getByRole('button', { name: 'Envoyer la demande' })).toBeInTheDocument()
+    expect(mesurer).toHaveBeenCalledWith('offre', { etape: 'demande_parent_annulee', lieu: 'badge' })
+  })
+  it('sur ordinateur : le message se copie', async () => {
+    const writeText = vi.fn(async () => {})
+    Object.defineProperty(navigator, 'clipboard', { value: { writeText }, configurable: true })
+    ecrire(<DemanderParent lieu="badge" />)
+    fireEvent.click(screen.getByRole('button', { name: 'Demander à un parent de me l’offrir' }))
+    fireEvent.click(await screen.findByRole('button', { name: 'Copier le message à lui envoyer' }))
+    await waitFor(() => expect(writeText).toHaveBeenCalledWith(`Coucou : ${LIEN}`))
+    expect(await screen.findByText(/Message copié/)).toBeInTheDocument()
+    expect(mesurer).toHaveBeenCalledWith('offre', { etape: 'demande_parent', lieu: 'badge', moyen: 'copie' })
+  })
+  it('lien indisponible : l’erreur s’affiche, l’e-mail reste', async () => {
+    lienPourOffrir.mockRejectedValue(new Error('HTTP_500'))
+    ecrire(<DemanderParent lieu="badge" />)
+    fireEvent.click(screen.getByRole('button', { name: 'Demander à un parent de me l’offrir' }))
+    fireEvent.click(await screen.findByRole('button', { name: 'Copier le message à lui envoyer' }))
+    expect(await screen.findByRole('alert')).toHaveTextContent('Le lien n’a pas pu être créé')
+    expect(screen.getByLabelText('L’adresse e-mail d’un parent')).toBeInTheDocument()
+    lienPourOffrir.mockImplementation(async () => LIEN)
   })
 })

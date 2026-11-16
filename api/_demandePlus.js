@@ -8,6 +8,9 @@
 // sans compte ni mot de passe. C'est l'élève qui demande : pas de prospection.
 //
 //   ?op=demande-plus (POST, jeton Firebase) → e-mail au parent
+//   ?op=lien-plus (POST, jeton Firebase)    → le même lien, que l'élève envoie lui-même
+//                                              par message (17/11 : il connaît rarement
+//                                              l'adresse e-mail d'un parent)
 //   ?op=offrir (GET, lien signé)            → page « Offrir Réviz+ à X » (ne crée rien :
 //                                              les messageries ouvrent les liens)
 //   ?op=offrir (POST, formulaire de la page) → session Stripe, redirection 303
@@ -169,6 +172,24 @@ export async function routeDemandePlus(req, res, { db, auth, envoyer, maintenant
   if (r?.error) return res.status(502).json({ error: 'ENVOI' })
   await ref.set({ demandePlusLe: maintenant }, { merge: true })
   return res.status(200).json({ ok: true })
+}
+
+/**
+ * ?op=lien-plus (POST { idToken }) : le lien « Offrir Réviz+ » de l'élève connecté, pour
+ * qu'il l'envoie lui-même par message (WhatsApp, SMS…). Aucun e-mail ne part, rien n'est
+ * écrit : le lien est le même que celui de l'e-mail (signé, 30 jours).
+ * 200 { lien } · 401 · 409 ABONNE · 500 CONFIG
+ */
+export async function routeLienPlus(req, res, { db, auth, maintenant = Date.now(), secret = process.env.CRON_SECRET }) {
+  const { idToken } = req.body ?? {}
+  if (!idToken) return res.status(401).json({ error: 'UNAUTHORIZED' })
+  let decoded
+  try { decoded = await auth.verifyIdToken(idToken) } catch { return res.status(401).json({ error: 'UNAUTHORIZED' }) }
+  const snap = await db.collection('users').doc(decoded.uid).get()
+  if (estAbonne(snap.exists ? snap.data() : {})) return res.status(409).json({ error: 'ABONNE' })
+  const lien = lienOffrir(decoded.uid, { maintenant, secret })
+  if (!lien) return res.status(500).json({ error: 'CONFIG' })
+  return res.status(200).json({ lien })
 }
 
 // --- Page « Offrir Réviz+ » (sans compte) ---

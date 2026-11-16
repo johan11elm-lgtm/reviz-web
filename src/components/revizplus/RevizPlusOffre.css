@@ -174,4 +174,8 @@
 .rpo-demande label { font-size: 14px; font-weight: 700; }
 .rpo-demande input { min-height: 48px; padding: 0 14px; border: 1.5px solid var(--rv-ligne); border-radius: 14px; background: var(--rv-fond, #fff); font: inherit; font-size: 16px; color: var(--rv-encre); }
 .rpo-demande input:focus { outline: 2px solid var(--rv-encre); outline-offset: 1px; }
+.rpo-demande-ou { display: flex; align-items: center; gap: 10px; margin-top: 4px; font-size: 13px; font-weight: 600; color: var(--rv-doux); }
+.rpo-demande-ou::before, .rpo-demande-ou::after { content: ''; flex: 1; height: 1px; background: var(--rv-ligne); }
+.rpo-demande .rpo-demande-lien { min-height: 44px; font-size: 14px; color: var(--rv-doux); }
+.rpo-demande-fait { display: flex; flex-direction: column; gap: 4px; }
 .rpo-demande-ok { display: flex; align-items: center; gap: 8px; margin: 0; padding: 12px 14px; border-radius: 16px; background: var(--rv-menthe); font-size: 14px; font-weight: 600; color: #042A65; }

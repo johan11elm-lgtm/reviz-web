@@ -39,7 +39,7 @@ import { routeEssaiPlus } from './_essaiPlus.js'
 import { routeParrainage } from './_parrainage.js'
 import { routeLigue } from './_ligues.js'
 import { routePartage } from './_partageChat.js'
-import { routeDemandePlus } from './_demandePlus.js'
+import { routeDemandePlus, routeLienPlus } from './_demandePlus.js'
 import { envoyeurMail } from './_fournisseurMail.js'
 
 export const EVENTS = [
@@ -234,6 +234,11 @@ export default async function handler(req, res) {
     try {
       return await routeDemandePlus(req, res, { db: getDb(), auth: getAuthAdmin(), envoyer: envoyeurMail() })
     } catch (err) { console.error('[demande-plus]', err?.message || err); return res.status(500).json({ error: 'ERREUR' }) }
+  }
+  // Le même lien, que l'élève envoie lui-même par message (aucun e-mail ne part).
+  if (req.query?.op === 'lien-plus' && req.method === 'POST') {
+    try { return await routeLienPlus(req, res, { db: getDb(), auth: getAuthAdmin() }) }
+    catch (err) { console.error('[lien-plus]', err?.message || err); return res.status(500).json({ error: 'ERREUR' }) }
   }
   // Espace parent : la page /parent (GET, lien signé) et le lien que l'élève partage (POST).
   if ((req.query?.op === 'parent' && req.method === 'GET') || (req.query?.op === 'lien-parent' && req.method === 'POST')) {

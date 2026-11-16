@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 import { Mascot } from '../Mascot';
 import { BulleReviz } from '../reviz/BulleReviz';
 import { useModalA11y } from '../../hooks/useModalA11y';
 import { useIsDesktop } from '../../hooks/useMediaQuery';
-import { startCheckout, demanderAuParent } from '../../services/billingService';
+import { startCheckout, demanderAuParent, lienPourOffrir, MESSAGE_OFFRIR } from '../../services/billingService';
 import { useAuth } from '../../context/AuthContext';
 import { FORMULE_PAR_DEFAUT, prixDe } from '../../../api/_prix.js';
 import { prochaineRemise, dansCombien, parSemaine } from '../../utils/remiseQuotas';
@@ -186,7 +186,7 @@ export function DecouvrirRevizPlus({ onClose, lieu = 'autre' }) {
         <li><Coche />Données jamais revendues</li>
         <li><Coche />Un parent peut l’offrir</li>
       </ul>
-      <DemanderParent lieu={lieu} />
+      <DemanderParent lieu={lieu} enBouton />
       <PourquoiPasGratuit />
     </Fenetre>
   );
@@ -345,19 +345,79 @@ const ERREURS_DEMANDE = {
   ABONNE: 'Tu as déjà Réviz+.',
 };
 
+const peutPartager = () => typeof navigator !== 'undefined' && typeof navigator.share === 'function';
+
 /**
- * « Demander à un parent » (08/11) : le parent reçoit un e-mail avec un lien pour offrir
- * Réviz+, sans compte. Site seulement : l'app iOS ne propose aucun achat (règle 3.1.1).
+ * « Demander à un parent » (08/11) : le parent reçoit un lien pour offrir Réviz+, sans compte.
+ * Site seulement : l'app iOS ne propose aucun achat (règle 3.1.1).
+ * Depuis le 17/11 le lien part d'abord par message (feuille de partage du téléphone :
+ * WhatsApp, SMS…) : un collégien connaît rarement l'adresse e-mail d'un parent, et personne
+ * n'envoyait la demande. L'e-mail reste proposé en dessous. Sur ordinateur, ou si le partage
+ * est annulé, le message se copie.
+ * Le lien est demandé au serveur à l'ouverture du panneau : Safari sur iPhone refuse un
+ * partage lancé trop longtemps après le toucher (attente du réseau).
+ * @param {{ lieu?: string, enBouton?: boolean }} p  enBouton : un vrai bouton plutôt qu'un lien
  */
-export function DemanderParent({ lieu = 'autre' }) {
+export function DemanderParent({ lieu = 'autre', enBouton = false }) {
   const { consent, isGuest } = useAuth();
-  const [etat, setEtat] = useState('ferme'); // ferme | form | envoi | envoye
+  const [etat, setEtat] = useState('ferme'); // ferme | form | envoi | envoye | partage | copie
   const [email, setEmail] = useState(consent?.parentEmail ?? '');
   const [erreur, setErreur] = useState('');
+  const [lien, setLien] = useState(null);
+  const [message, setMessage] = useState(''); // '' | creation | pret | erreur
+  const preparation = useRef(null);
   // L'adresse donnée pour l'accord parental arrive parfois après l'affichage (session en cache).
   const parentEmail = consent?.parentEmail ?? '';
   useEffect(() => { if (parentEmail) setEmail(e => e || parentEmail); }, [parentEmail]);
   if (!ACHAT_DANS_L_APP || isGuest) return null;
+
+  /** Le lien, demandé une seule fois (la promesse est gardée, même en échec on pourra redemander). */
+  function preparer() {
+    preparation.current ??= lienPourOffrir().then(l => { setLien(l); return l; }).catch(err => { preparation.current = null; throw err; });
+    return preparation.current;
+  }
+
+  function ouvrir() {
+    setEtat('form');
+    mesurer('offre', { etape: 'demande_parent_ouverte', lieu });
+    preparer().catch(() => { /* pas de réseau : le lien sera redemandé au toucher */ });
+  }
+
+  async function partager(url) {
+    try {
+      await navigator.share({ text: MESSAGE_OFFRIR, url });
+      mesurer('offre', { etape: 'demande_parent', lieu, moyen: 'message' });
+      setEtat('partage');
+    } catch {
+      // Partage annulé (ou refusé par le navigateur) : le lien reste là, à copier ou à renvoyer.
+      mesurer('offre', { etape: 'demande_parent_annulee', lieu });
+      setMessage('pret');
+    }
+  }
+
+  async function copier(url) {
+    try {
+      await navigator.clipboard.writeText(`${MESSAGE_OFFRIR} ${url}`);
+      mesurer('offre', { etape: 'demande_parent', lieu, moyen: 'copie' });
+      setEtat('copie');
+    } catch { setMessage('pret'); /* presse-papiers refusé : le lien s'affiche, à sélectionner */ }
+  }
+
+  async function parMessage() {
+    setErreur('');
+    let url = lien;
+    if (!url) {
+      setMessage('creation');
+      try { url = await preparer(); } catch (err) {
+        setMessage('erreur');
+        setErreur(ERREURS_DEMANDE[err.message] ?? 'Le lien n’a pas pu être créé. Réessaie dans un instant.');
+        return;
+      }
+      setMessage('');
+    }
+    if (peutPartager()) await partager(url);
+    else await copier(url);
+  }
 
   async function envoyer(e) {
     e.preventDefault();
@@ -365,7 +425,7 @@ export function DemanderParent({ lieu = 'autre' }) {
     setEtat('envoi'); setErreur('');
     try {
       await demanderAuParent(email.trim());
-      mesurer('offre', { etape: 'demande_parent', lieu });
+      mesurer('offre', { etape: 'demande_parent', lieu, moyen: 'mail' });
       setEtat('envoye');
     } catch (err) {
       setErreur(ERREURS_DEMANDE[err.message] ?? 'L’e-mail n’est pas parti. Réessaie dans un moment.');
@@ -375,7 +435,7 @@ export function DemanderParent({ lieu = 'autre' }) {
 
   if (etat === 'ferme') {
     return (
-      <button type="button" className="rpo-lien rpo-lien--parent" onClick={() => { setEtat('form'); mesurer('offre', { etape: 'demande_parent_ouverte', lieu }); }}>
+      <button type="button" className={enBouton ? 'rpo-btn rpo-btn--second' : 'rpo-lien rpo-lien--parent'} onClick={ouvrir}>
         Demander à un parent de me l’offrir
       </button>
     );
@@ -383,14 +443,36 @@ export function DemanderParent({ lieu = 'autre' }) {
   if (etat === 'envoye') {
     return <p className="rpo-demande-ok" role="status"><Coche />C’est parti. Ton parent a reçu un e-mail pour t’offrir Réviz+.</p>;
   }
+  if (etat === 'partage' || etat === 'copie') {
+    return (
+      <div className="rpo-demande-fait">
+        <p className="rpo-demande-ok" role="status"><Coche />
+          {etat === 'copie' ? 'Message copié. Colle-le dans une conversation avec ton parent.' : 'C’est parti. Ton parent n’a plus qu’à ouvrir le lien.'}
+        </p>
+        {lien && (
+          <button type="button" className="rpo-lien" onClick={() => (peutPartager() ? partager(lien) : copier(lien))}>
+            {peutPartager() ? 'Renvoyer le lien' : 'Copier à nouveau'}
+          </button>
+        )}
+      </div>
+    );
+  }
+  const occupe = etat === 'envoi' || message === 'creation';
   return (
     <form className="rpo-demande" onSubmit={envoyer}>
+      <button type="button" className="rpo-btn rpo-btn--second rpo-demande-message" onClick={parMessage} disabled={occupe}>
+        {message === 'creation' ? 'Un instant…' : peutPartager() ? 'Lui envoyer par message' : 'Copier le message à lui envoyer'}
+      </button>
+      {message === 'pret' && lien && (
+        <input className="rpo-demande-lien" readOnly value={lien} aria-label="Lien à envoyer à ton parent" onFocus={e => e.target.select()} />
+      )}
+      <p className="rpo-note">Il reçoit un lien pour t’offrir Réviz+, sans créer de compte.</p>
+      <span className="rpo-demande-ou">ou par e-mail</span>
       <label htmlFor="rpo-demande-email">L’adresse e-mail d’un parent</label>
       <input id="rpo-demande-email" type="email" inputMode="email" autoComplete="off" required
         value={email} onChange={e => setEmail(e.target.value)} placeholder="parent@exemple.fr" disabled={etat === 'envoi'} />
-      <p className="rpo-note">Il reçoit ce que tu as révisé cette semaine et un lien pour t’offrir Réviz+.</p>
       {erreur && <p className="rpo-erreur" role="alert">{erreur}</p>}
-      <button type="submit" className="rpo-btn rpo-btn--second" disabled={etat === 'envoi'}>
+      <button type="submit" className="rpo-btn rpo-btn--second" disabled={occupe}>
         {etat === 'envoi' ? 'Envoi…' : 'Envoyer la demande'}
       </button>
     </form>

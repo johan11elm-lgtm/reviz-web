@@ -56,6 +56,12 @@ test.describe('Limite d\'exercices et essai Réviz+', () => {
       demande = route.request().postDataJSON()
       return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ ok: true }) })
     })
+    // Le lien que l'élève envoie lui-même par message (17/11).
+    let liens = 0
+    await page.route('**/api/track?op=lien-plus', route => {
+      liens += 1
+      return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ lien: 'https://app.revizapp.fr/api/abonnement?op=offrir&u=eleve&e=1&t=x' }) })
+    })
     await page.goto('/exercices?graine=42')
     const limite = page.getByRole('dialog', { name: 'Limite atteinte' })
     await expect(limite).toBeVisible()
@@ -73,12 +79,22 @@ test.describe('Limite d\'exercices et essai Réviz+', () => {
     await expect(offreRevizPlus).toContainText(/soit 0,\d\d\s€ par semaine/)
     await sansDebordement(page, 'offre')
     if (process.env.CAPTURES_DIR) await page.screenshot({ path: `${process.env.CAPTURES_DIR}/06-offre-390.png`, animations: 'disabled' })
+    // Dans l'offre, la demande au parent est un vrai bouton.
+    const demander = offreRevizPlus.getByRole('button', { name: 'Demander à un parent de me l’offrir' })
+    await demander.scrollIntoViewIfNeeded()
+    await expect(demander).toHaveClass(/rpo-btn--second/)
+    if (process.env.CAPTURES_DIR) await page.screenshot({ path: `${process.env.CAPTURES_DIR}/07-offre-bouton-parent-390.png`, animations: 'disabled' })
     await page.goto('/exercices?graine=42')
     await expect(limite).toBeVisible()
 
     await limite.getByRole('button', { name: 'Demander à un parent de me l’offrir' }).click()
     const champ = limite.getByLabel('L’adresse e-mail d’un parent')
     await expect(champ).toHaveValue('parent@famille.test') // l'adresse donnée pour l'accord
+    // D'abord par message (partage du téléphone, ou copie sur ordinateur), l'e-mail en dessous.
+    await expect(limite.getByRole('button', { name: /Lui envoyer par message|Copier le message à lui envoyer/ })).toBeVisible()
+    await expect.poll(() => liens).toBe(1)
+    await sansDebordement(page, 'demande au parent')
+    if (process.env.CAPTURES_DIR) await page.screenshot({ path: `${process.env.CAPTURES_DIR}/08-demande-parent-390.png`, animations: 'disabled' })
     await page.screenshot({ path: test.info().outputPath('03-demande-parent.png'), animations: 'disabled' })
     await limite.getByRole('button', { name: 'Envoyer la demande' }).click()
     await expect(limite.getByRole('status')).toContainText('Ton parent a reçu un e-mail')
