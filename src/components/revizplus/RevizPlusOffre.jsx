@@ -353,13 +353,17 @@ const peutPartager = () => typeof navigator !== 'undefined' && typeof navigator.
  * Depuis le 17/11 le lien part d'abord par message (feuille de partage du téléphone :
  * WhatsApp, SMS…) : un collégien connaît rarement l'adresse e-mail d'un parent, et personne
  * n'envoyait la demande. L'e-mail reste proposé en dessous. Sur ordinateur, ou si le partage
- * est annulé, le message se copie.
+ * est annulé, le message se copie (le navigateur d'un ordinateur a parfois une feuille de
+ * partage, mais elle ne mène pas au téléphone du parent : on ne s'y fie pas).
  * Le lien est demandé au serveur à l'ouverture du panneau : Safari sur iPhone refuse un
  * partage lancé trop longtemps après le toucher (attente du réseau).
  * @param {{ lieu?: string, enBouton?: boolean }} p  enBouton : un vrai bouton plutôt qu'un lien
  */
 export function DemanderParent({ lieu = 'autre', enBouton = false }) {
   const { consent, isGuest } = useAuth();
+  // Le partage est celui du téléphone (WhatsApp, SMS). Sur ordinateur, la feuille de partage
+  // du navigateur ne mène pas au parent : le message se copie.
+  const surTelephone = !useIsDesktop() && peutPartager();
   const [etat, setEtat] = useState('ferme'); // ferme | form | envoi | envoye | partage | copie
   const [email, setEmail] = useState(consent?.parentEmail ?? '');
   const [erreur, setErreur] = useState('');
@@ -415,7 +419,7 @@ export function DemanderParent({ lieu = 'autre', enBouton = false }) {
       }
       setMessage('');
     }
-    if (peutPartager()) await partager(url);
+    if (surTelephone) await partager(url);
     else await copier(url);
   }
 
@@ -450,8 +454,8 @@ export function DemanderParent({ lieu = 'autre', enBouton = false }) {
           {etat === 'copie' ? 'Message copié. Colle-le dans une conversation avec ton parent.' : 'C’est parti. Ton parent n’a plus qu’à ouvrir le lien.'}
         </p>
         {lien && (
-          <button type="button" className="rpo-lien" onClick={() => (peutPartager() ? partager(lien) : copier(lien))}>
-            {peutPartager() ? 'Renvoyer le lien' : 'Copier à nouveau'}
+          <button type="button" className="rpo-lien" onClick={() => (surTelephone ? partager(lien) : copier(lien))}>
+            {surTelephone ? 'Renvoyer le lien' : 'Copier à nouveau'}
           </button>
         )}
       </div>
@@ -461,7 +465,7 @@ export function DemanderParent({ lieu = 'autre', enBouton = false }) {
   return (
     <form className="rpo-demande" onSubmit={envoyer}>
       <button type="button" className="rpo-btn rpo-btn--second rpo-demande-message" onClick={parMessage} disabled={occupe}>
-        {message === 'creation' ? 'Un instant…' : peutPartager() ? 'Lui envoyer par message' : 'Copier le message à lui envoyer'}
+        {message === 'creation' ? 'Un instant…' : surTelephone ? 'Lui envoyer par message' : 'Copier le message à lui envoyer'}
       </button>
       {message === 'pret' && lien && (
         <input className="rpo-demande-lien" readOnly value={lien} aria-label="Lien à envoyer à ton parent" onFocus={e => e.target.select()} />

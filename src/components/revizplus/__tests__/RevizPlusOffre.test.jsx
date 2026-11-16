@@ -1,7 +1,7 @@
 // Paiement Réviz+ (11/11) : le titre reprend ce qui a bloqué l'élève, l'annuel ramené à la
 // semaine, et le compte à rebours jusqu'au retour du quota. (Le DOM de test lit les espaces
 // insécables comme des espaces simples.)
-import { describe, it, expect, vi, afterEach } from 'vitest'
+import { describe, it, expect, vi, afterEach, beforeEach } from 'vitest'
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 
@@ -92,7 +92,11 @@ describe('paiement Réviz+', () => {
 
 describe('demander à un parent, par message', () => {
   const LIEN = 'https://app.revizapp.fr/api/abonnement?op=offrir&u=x'
-  afterEach(() => { delete navigator.share; mesurer.mockClear(); lienPourOffrir.mockClear() })
+  // Écran de téléphone par défaut (le DOM de test se dit large de 1 024 px, donc « ordinateur »).
+  const ecran = large => { window.matchMedia = q => ({ matches: large && q.includes('min-width: 1024px'), addEventListener() {}, removeEventListener() {} }) }
+  const matchMediaAvant = window.matchMedia
+  beforeEach(() => ecran(false))
+  afterEach(() => { delete navigator.share; mesurer.mockClear(); lienPourOffrir.mockClear(); window.matchMedia = matchMediaAvant })
 
   it('sur téléphone : le lien part par la feuille de partage, et la demande est mesurée', async () => {
     const share = vi.fn(async () => {})
@@ -124,6 +128,18 @@ describe('demander à un parent, par message', () => {
     await waitFor(() => expect(writeText).toHaveBeenCalledWith(`Coucou : ${LIEN}`))
     expect(await screen.findByText(/Message copié/)).toBeInTheDocument()
     expect(mesurer).toHaveBeenCalledWith('offre', { etape: 'demande_parent', lieu: 'badge', moyen: 'copie' })
+  })
+  it('sur ordinateur, même si le navigateur sait partager : le message se copie', async () => {
+    const share = vi.fn(async () => {})
+    Object.defineProperty(navigator, 'share', { value: share, configurable: true })
+    const writeText = vi.fn(async () => {})
+    Object.defineProperty(navigator, 'clipboard', { value: { writeText }, configurable: true })
+    ecran(true)
+    ecrire(<DemanderParent lieu="badge" />)
+    fireEvent.click(screen.getByRole('button', { name: 'Demander à un parent de me l’offrir' }))
+    fireEvent.click(await screen.findByRole('button', { name: 'Copier le message à lui envoyer' }))
+    await waitFor(() => expect(writeText).toHaveBeenCalled())
+    expect(share).not.toHaveBeenCalled()
   })
   it('lien indisponible : l’erreur s’affiche, l’e-mail reste', async () => {
     lienPourOffrir.mockRejectedValue(new Error('HTTP_500'))
