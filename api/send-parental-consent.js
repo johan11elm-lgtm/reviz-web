@@ -30,6 +30,7 @@ import { DELAI_ADRESSE_MS, DELAI_REPONSE_MS } from '../src/utils/consent.js';
 import { relancerLendemain } from './_rappels.js';
 import { envoyerBilansParent } from './_bilanParent.js';
 import { envoyerLimitesParent } from './_limiteParent.js';
+import { envoyerFinsEssai } from './_finEssai.js';
 import { lienEspaceParent, versionLiens } from './_espaceParent.js';
 import { envoyerNotifs, preparerEnvoi } from './_push.js';
 import { lienOffrir } from './_demandePlus.js'
@@ -349,13 +350,17 @@ export default async function handler(req, res) {
       // Un échec du rappel J+1 ne doit pas masquer les relances déjà faites.
       const lendemain = await relancerLendemain({ db, envoyer, emailDe, auth: getAuthAdmin() })
         .catch(err => { console.error('[rappel-j1]', err?.message || err); return { rappelsJ1: 0 }; });
+      // Fin de l'essai Réviz+ avant le bilan et la limite : c'est le seul jour possible pour ce mot,
+      // et ces deux-là se taisent le jour où il part.
+      const finsEssai = await envoyerFinsEssai({ db, envoyer, auth: getAuthAdmin(), lienOffrir: VENTES_OUVERTES ? uid => lienOffrir(uid) : null })
+        .catch(err => { console.error('[fin-essai]', err?.message || err); return { finsEssaiParent: 0 }; });
       // Après les relances : un parent relancé aujourd'hui n'a pas son bilan le même jour.
       const bilans = await envoyerBilansParent({ db, envoyer, lienAutorisation, lienEspace: (uid, u) => lienEspaceParent(uid, { version: versionLiens(u) }), lienOffrir: VENTES_OUVERTES ? uid => lienOffrir(uid) : null, auth: getAuthAdmin() })
         .catch(err => { console.error('[bilan-parent]', err?.message || err); return { bilansParent: 0 }; });
       // Après le bilan : un parent qui l'a reçu aujourd'hui n'a pas ce mot le même jour.
       const limites = await envoyerLimitesParent({ db, envoyer, auth: getAuthAdmin() })
         .catch(err => { console.error('[limite-parent]', err?.message || err); return { limitesParent: 0 }; });
-      return res.status(200).json({ ...parents, ...eleves, ...lendemain, ...bilans, ...limites, ...push, emails: envoyer.compte() });
+      return res.status(200).json({ ...parents, ...eleves, ...lendemain, ...finsEssai, ...bilans, ...limites, ...push, emails: envoyer.compte() });
     } catch (err) {
       console.error('[relance-parent]', err?.message || err);
       return res.status(500).json({ error: 'RELANCE_FAILED' });

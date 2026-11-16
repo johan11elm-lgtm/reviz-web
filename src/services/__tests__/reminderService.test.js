@@ -201,3 +201,32 @@ describe('un seul rappel par soir', () => {
     expect(mockNotif.schedule).not.toHaveBeenCalled()
   })
 })
+
+describe('rappel de fin de Réviz+ offert (16/11)', () => {
+  it('se pose la veille du jour de fin, à 18 h 30', async () => {
+    const { planifierRappelFinEssai } = await loadService()
+    const fin = new Date(2026, 10, 19, 14, 0).getTime()
+    await planifierRappelFinEssai(fin)
+    expect(mockNotif.cancel).toHaveBeenCalledWith({ notifications: [{ id: 5000 }] })
+    const n = mockNotif.schedule.mock.calls[0][0].notifications[0]
+    expect(n).toMatchObject({ id: 5000, title: 'Dernier jour de Réviz+ offert' })
+    expect(n.schedule.at).toEqual(new Date(2026, 10, 18, 18, 30))
+  })
+
+  it('annule seulement si la fin est nulle, passée ou si la veille est déjà passée', async () => {
+    const { planifierRappelFinEssai } = await loadService()
+    await planifierRappelFinEssai(null)
+    await planifierRappelFinEssai(new Date(2026, 10, 16, 9, 0).getTime())
+    await planifierRappelFinEssai(new Date(2026, 10, 16, 20, 0).getTime()) // veille = hier soir
+    expect(mockNotif.cancel).toHaveBeenCalledTimes(3)
+    expect(mockNotif.schedule).not.toHaveBeenCalled()
+  })
+
+  it('jamais de demande de permission', async () => {
+    mockNotif.checkPermissions.mockResolvedValue({ display: 'prompt' })
+    const { planifierRappelFinEssai } = await loadService()
+    await planifierRappelFinEssai(new Date(2026, 10, 19, 14, 0).getTime())
+    expect(mockNotif.requestPermissions).not.toHaveBeenCalled()
+    expect(mockNotif.schedule).not.toHaveBeenCalled()
+  })
+})

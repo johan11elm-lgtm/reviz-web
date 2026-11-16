@@ -20,6 +20,7 @@ import { createHash } from 'node:crypto'
 import { isUnder15 } from '../src/utils/levels.js'
 import { jourParis } from '../src/utils/retour.js'
 import { VAPID_PUBLIC_KEY, MAX_SANS_RETOUR, notifDuJour } from '../src/utils/push.js'
+import { essaiFinitBientot } from './_finEssai.js'
 
 const JOUR_MS = 24 * 60 * 60 * 1000
 // Une notification qui n'a pas pu partir dans les 6 h n'a plus de sens (le soir est passé).
@@ -128,7 +129,8 @@ export async function envoyerNotifs({ db, envoyer, maintenant = Date.now(), jour
 
       const lecons = await ref.collection('lessons').orderBy('scannedAt', 'desc').limit(1).get().catch(() => null)
       const lecon = lecons?.docs?.[0]?.data() ?? null
-      const notif = notifDuJour({ agenda: p.agenda, jeux: p.jeux, lecon, hier, demain, aujourdhui })
+      const essaiFinit = p.plan !== 'premium' && essaiFinitBientot(p, maintenant)
+      const notif = notifDuJour({ agenda: p.agenda, jeux: p.jeux, lecon, hier, demain, aujourdhui, essaiFinit })
       // Le week-end, sans contrôle le lendemain : rien (les week-ends ne comptent pas dans la série).
       if (!notif) continue
       const charge = JSON.stringify(notif)

@@ -39,6 +39,16 @@ export function serieJusqua(jours, jusqua) {
   return n
 }
 
+/** Dernier jour de Réviz+ offert : une proposition, pas une alarme. */
+export function notifFinEssai() {
+  return {
+    title: 'Dernier jour de Réviz+ offert',
+    body: 'Tes exercices sont illimités jusqu\'à demain. Une séance de plus ce soir ?',
+    url: `${APP}/exercices?via=push`,
+    tag: 'reviz-essai',
+  }
+}
+
 function titreCourt(s, max = 60) {
   const t = String(s ?? '').replace(/\s+/g, ' ').trim()
   return t.length > max ? `${t.slice(0, max - 1).trimEnd()}…` : t
@@ -47,6 +57,8 @@ function titreCourt(s, max = 60) {
 /**
  * La notification du jour, par ordre de priorité :
  * 1. un contrôle noté pour demain ;
+ * 1 bis. le dernier jour de Réviz+ offert (essai de 7 jours, 16/11), même le week-end :
+ *    sans ce mot, l'élève retombait sur ses 3 séances sans avoir été prévenu ;
  * 2. un contrôle noté dans la semaine (2 à 7 jours) : cinq minutes aujourd'hui (11/11) ;
  * 3. la série de la partie du jour, faite hier mais pas encore aujourd'hui ;
  * 4. le dernier chapitre ouvert (quiz direct) ;
@@ -54,12 +66,13 @@ function titreCourt(s, max = 60) {
  * Jamais de reproche ni d'urgence inventée : une proposition courte.
  * Le week-end (`aujourdhui` samedi ou dimanche), seulement un contrôle le lendemain : depuis le
  * 11/11, les week-ends ne comptent pas dans la série, on ne relance donc pas pour rien.
- * @param {{ agenda?: object, jeux?: object, lecon?: object|null, hier: string, demain: string, aujourdhui?: string }} p
+ * @param {{ agenda?: object, jeux?: object, lecon?: object|null, hier: string, demain: string, aujourdhui?: string, essaiFinit?: boolean }} p
  * @returns {{ title: string, body: string, url: string, tag: string } | null} null : rien à envoyer
  */
-export function notifDuJour({ agenda = null, jeux = null, lecon = null, hier, demain, aujourdhui = null }) {
+export function notifDuJour({ agenda = null, jeux = null, lecon = null, hier, demain, aujourdhui = null, essaiFinit = false }) {
   const controles = (Array.isArray(agenda?.controles) ? agenda.controles : []).filter(c => typeof c?.date === 'string')
   const controle = controles.find(c => c.date === demain)
+  if (!controle && essaiFinit) return notifFinEssai()
   // Le week-end, seulement la veille d'un contrôle (la série ne compte pas les week-ends).
   if (!controle && aujourdhui && estWeekend(aujourdhui)) return null
   if (controle) {

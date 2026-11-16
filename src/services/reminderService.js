@@ -285,3 +285,37 @@ export async function planifierRappelLendemain(premiereSession, maintenant = new
     await refreshReminder()
   } catch { /* jamais bloquant */ }
 }
+
+// --- Dernier jour de Réviz+ offert : identifiant 5000 (16/11) ---
+// Essai de 7 jours (api/_essaiPlus.js) ou jours de parrainage : la veille de la fin,
+// à 18 h 30, un mot pour que l'élève ne retombe pas sur ses 3 séances sans le savoir.
+// Replanifié à chaque passage sur l'accueil ; annulé s'il paie ou si l'offert est fini.
+// Seulement si la permission est déjà accordée : jamais de demande ici.
+const FIN_ESSAI_ID = 5000
+
+export function rappelFinEssai() {
+  return { title: 'Dernier jour de Réviz+ offert', body: 'Tes exercices sont illimités jusqu\'à demain. Une séance de plus ce soir ?' }
+}
+
+/** Le soir (18 h 30, heure de l'appareil) de la veille du jour de fin, ou null s'il est passé. */
+export function soirFinEssai(fin, maintenant = new Date()) {
+  if (!Number.isFinite(fin) || fin <= maintenant.getTime()) return null
+  const f = new Date(fin)
+  const at = new Date(f.getFullYear(), f.getMonth(), f.getDate() - 1, REMINDER_HOUR, REMINDER_MINUTE)
+  return at > maintenant ? at : null
+}
+
+/** @param {number|null} fin  fin de Réviz+ offert (ms), null pour annuler */
+export async function planifierRappelFinEssai(fin, maintenant = new Date()) {
+  if (!remindersAvailable()) return
+  try {
+    await LocalNotifications.cancel({ notifications: [{ id: FIN_ESSAI_ID }] }).catch(() => {})
+    const at = soirFinEssai(fin, maintenant)
+    if (!at) return
+    const perm = await LocalNotifications.checkPermissions()
+    if (perm.display !== 'granted') return
+    await LocalNotifications.schedule({
+      notifications: [{ id: FIN_ESSAI_ID, ...rappelFinEssai(), schedule: { at, allowWhileIdle: true } }],
+    })
+  } catch { /* jamais bloquant */ }
+}

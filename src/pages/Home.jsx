@@ -31,7 +31,7 @@ import { useIsDesktop } from '../hooks/useMediaQuery';
 import { countDueCards } from '../services/srsService';
 import { detailSerie, computeLevel, computeBadges } from '../utils/gamification';
 import { subjectMascot } from '../utils/subjects';
-import { refreshReminder } from '../services/reminderService';
+import { refreshReminder, planifierRappelFinEssai } from '../services/reminderService';
 import { AchievementToast } from '../components/AchievementToast';
 import { JeuxAnnonce, annonceJeuxVue } from '../components/jeux/JeuxAnnonce';
 import { RevizPlusAnnonce, annonceRevizPlusVue } from '../components/RevizPlusAnnonce';
@@ -102,7 +102,9 @@ function useProchainControle(currentUser) {
 }
 
 export default function Home() {
-  const { currentUser, isGuest, getUserLevel, hasRevizPlus, revizPlusOffert } = useAuth();
+  const { currentUser, isGuest, getUserLevel, hasRevizPlus, revizPlusOffert, isPremium, essaiPlusFin } = useAuth();
+  // App native : la veille de la fin de Réviz+ offert, un rappel à 18 h 30 (annulé s'il paie).
+  useEffect(() => { planifierRappelFinEssai(isPremium ? null : essaiPlusFin); }, [isPremium, essaiPlusFin]);
   const navigate = useNavigate();
   const isDesktop = useIsDesktop();
   const [allLessons, setAllLessons] = useState(() => loadLessons());

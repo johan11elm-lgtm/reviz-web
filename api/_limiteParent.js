@@ -162,6 +162,7 @@ export async function envoyerLimitesParent({ db, envoyer, auth = null, maintenan
       if (u.plan === 'premium' || u.bilansParent === false) continue
       if (u.limiteParentLe && maintenant - u.limiteParentLe < INTERVALLE_MS) continue
       if (u.bilanParentLe && maintenant - u.bilanParentLe < JOUR_MS) continue
+      if (u.finEssaiParentLe && maintenant - u.finEssaiParentLe < JOUR_MS) continue
       if (auth?.getUser) {
         const compte = await auth.getUser(uid).catch(() => null)
         if (!compte || compte.disabled) continue

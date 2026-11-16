@@ -210,3 +210,30 @@ describe('notification du jour : le week-end (11/11)', () => {
     expect(notifDuJour({ hier: '2026-11-10', demain: '2026-11-12', aujourdhui: '2026-11-11' })).toMatchObject({ tag: 'reviz-jeux' })
   })
 })
+
+describe('notification du jour : dernier jour de Réviz+ offert (16/11)', () => {
+  const essai = fin => ({ essaiPlus: { debut: fin - 7 * 24 * H, fin, origine: 'limite_exercices' } })
+
+  it('prévient la veille de la fin, avant la série ou le chapitre', async () => {
+    users.lea = { birthDate: ADULTE, jeux: { jours: ['2026-10-25', '2026-10-26'] }, ...essai(MAINTENANT + 20 * H) }
+    pushs.lea = [ABO]
+    expect(await lancer()).toEqual({ notifs: 1, abonnesPush: 1 })
+    expect(JSON.parse(envoyer.mock.calls[0][1])).toMatchObject({ title: 'Dernier jour de Réviz+ offert', url: 'https://app.revizapp.fr/exercices?via=push', tag: 'reviz-essai' })
+  })
+
+  it('rien de spécial si la fin est plus loin, déjà passée, prolongée par le parrainage ou s’il a payé', async () => {
+    users.loin = { birthDate: ADULTE, ...essai(MAINTENANT + 30 * H) }
+    users.passe = { birthDate: ADULTE, ...essai(MAINTENANT - H) }
+    users.parrain = { birthDate: ADULTE, essaiPlus: { debut: MAINTENANT - 6 * 24 * H, fin: MAINTENANT + 20 * H, parrainage: { fin: MAINTENANT + 72 * H } } }
+    users.paye = { birthDate: ADULTE, plan: 'premium', ...essai(MAINTENANT + 20 * H) }
+    for (const u of Object.keys(users)) pushs[u] = [ABO]
+    await lancer()
+    for (const [, charge] of envoyer.mock.calls) expect(JSON.parse(charge).tag).not.toBe('reviz-essai')
+  })
+
+  it('le contrôle de demain passe avant, et l’essai parle même le week-end', () => {
+    const base = { hier: '2026-11-13', demain: '2026-11-15', aujourdhui: '2026-11-14', essaiFinit: true }
+    expect(notifDuJour(base)?.tag).toBe('reviz-essai')
+    expect(notifDuJour({ ...base, agenda: { controles: [{ date: '2026-11-15', matiere: 'maths' }] } })?.tag).toBe('reviz-controle')
+  })
+})

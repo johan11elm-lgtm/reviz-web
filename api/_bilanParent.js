@@ -306,6 +306,8 @@ export async function envoyerBilansParent({ db, envoyer, lienAutorisation, lienE
       if (!profil.exists) continue
       const u = profil.data() ?? {}
       if (u.bilanParentLe || u.bilansParent === false) continue
+      // Le mot de fin d'essai (api/_finEssai.js) est parti aujourd'hui : le bilan attend demain.
+      if (u.finEssaiParentLe && maintenant - u.finEssaiParentLe < JOUR_MS) continue
       const depuis = enMs(u.createdAt)
       if (depuis == null) continue
       const age = maintenant - depuis
