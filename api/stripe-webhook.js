@@ -6,7 +6,7 @@
 // -------------------------------------------------------
 import Stripe from 'stripe'
 import { getDb } from './_firebaseAdmin.js'
-import { Resend } from 'resend'
+import { envoyeurMail } from './_fournisseurMail.js'
 import { enregistrerCadeau, mailCadeau, noterMailCadeau } from './_cadeau.js'
 import { REPONDRE_A } from './_bilanParent.js'
 import { accordParPaiement } from './_accordParent.js'
@@ -114,8 +114,8 @@ export default async function handler(req, res) {
         const a = session.customer_details?.email ?? session.customer_email
         if (!cadeau.mailLe && a && process.env.RESEND_API_KEY) {
           try {
-            const { error } = await new Resend(process.env.RESEND_API_KEY).emails.send({ from: 'Réviz <noreply@revizapp.fr>', to: a, replyTo: REPONDRE_A, ...mailCadeau({ code, formule: cadeau.formule }) }) ?? {}
-            if (error) throw new Error(error.message ?? 'Resend')
+            const { error } = await envoyeurMail()({ from: 'Réviz <noreply@revizapp.fr>', to: a, replyTo: REPONDRE_A, ...mailCadeau({ code, formule: cadeau.formule }) }) ?? {}
+            if (error) throw new Error(error.message ?? 'envoi refusé')
             await noterMailCadeau(db, code)
           } catch (err) { console.error('[stripe-webhook] mail cadeau', err?.message || err) }
         }

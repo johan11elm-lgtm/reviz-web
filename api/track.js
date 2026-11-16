@@ -40,7 +40,7 @@ import { routeParrainage } from './_parrainage.js'
 import { routeLigue } from './_ligues.js'
 import { routePartage } from './_partageChat.js'
 import { routeDemandePlus } from './_demandePlus.js'
-import { Resend } from 'resend'
+import { envoyeurMail } from './_fournisseurMail.js'
 
 export const EVENTS = [
   'essai_demarre', 'compte_cree', 'programme_ouvert', 'chapitre_ouvert', 'revision', 'quiz_termine',
@@ -232,8 +232,7 @@ export default async function handler(req, res) {
   // L'élève demande Réviz+ à un parent : e-mail avec le lien pour l'offrir (api/_demandePlus.js).
   if (req.query?.op === 'demande-plus' && req.method === 'POST') {
     try {
-      const resend = new Resend(process.env.RESEND_API_KEY)
-      return await routeDemandePlus(req, res, { db: getDb(), auth: getAuthAdmin(), envoyer: m => resend.emails.send(m) })
+      return await routeDemandePlus(req, res, { db: getDb(), auth: getAuthAdmin(), envoyer: envoyeurMail() })
     } catch (err) { console.error('[demande-plus]', err?.message || err); return res.status(500).json({ error: 'ERREUR' }) }
   }
   // Espace parent : la page /parent (GET, lien signé) et le lien que l'élève partage (POST).

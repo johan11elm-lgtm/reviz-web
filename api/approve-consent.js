@@ -17,7 +17,7 @@
 //   demande et envoie au parent l'e-mail d'autorisation habituel : c'est toujours
 //   le clic dans cet e-mail qui vaut accord.
 
-import { Resend } from 'resend';
+import { envoyeurMail } from './_fournisseurMail.js';
 import { getDb, getAuthAdmin } from './_firebaseAdmin.js';
 import { jetonValide, JETON_CONSOMME, partageValide, scorePartage, demandeEnCours } from './_accordParent.js';
 import { enregistrerDemande, prenomPourEmail } from './send-parental-consent.js';
@@ -144,8 +144,7 @@ async function envoiPartage(req, res) {
     if (eleve.email && eleve.email.toLowerCase() === email.toLowerCase()) {
       return refaire('C\'est l\'adresse du compte de votre enfant. Indiquez la vôtre.');
     }
-    const resend = new Resend(process.env.RESEND_API_KEY);
-    const r = await enregistrerDemande({ db, uid, email, prenom, resultat: score, envoyer: m => resend.emails.send(m), viaLien: true });
+    const r = await enregistrerDemande({ db, uid, email, prenom, resultat: score, envoyer: envoyeurMail(), viaLien: true });
     if (r.alreadyApproved) {
       return res.status(200).send(page('Déjà accepté', 'Vous avez déjà donné votre accord : votre enfant peut utiliser Réviz.'));
     }

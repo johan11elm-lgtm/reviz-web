@@ -2,7 +2,7 @@
 // POST /api/send-parental-consent
 // Body: { idToken, parentEmail, childName, resultat? } (resultat : score d'un quiz que l'élève montre)
 // L'uid est dérivé du token Firebase vérifié — JAMAIS du body.
-// Génère un token, le stocke dans Firestore, envoie l'email au parent via Resend.
+// Génère un token, le stocke dans Firestore, envoie l'email au parent (Resend, Brevo en secours : api/_fournisseurMail.js).
 // L'élève utilise déjà l'app : le parent donne son autorisation depuis l'email.
 // Sans autorisation sous 10 jours (src/utils/consent.js), l'accès est suspendu.
 //
@@ -22,8 +22,8 @@
 // ici plutôt que dans une 13e fonction (limite du plan Vercel Hobby). Seul
 // Vercel peut l'appeler : il envoie CRON_SECRET dans l'en-tête Authorization.
 
-import { Resend } from 'resend';
-import { envoiBorne, adressesRejetees, BUDGET_PAR_DEFAUT } from './_envoiMails.js';
+import { envoyeurMail } from './_fournisseurMail.js';
+import { envoiBorne, adressesRejetees, BUDGET_PAR_DEFAUT, BUDGET_AVEC_BREVO } from './_envoiMails.js';
 import { getDb, getAuthAdmin } from './_firebaseAdmin.js';
 import { nouvelleDemande, demandeEnCours, jetonDe, lienPartage, scorePartage, MAX_ENVOIS_LIEN } from './_accordParent.js';
 import { DELAI_ADRESSE_MS, DELAI_REPONSE_MS } from '../src/utils/consent.js';
@@ -330,10 +330,10 @@ export default async function handler(req, res) {
     const secret = process.env.CRON_SECRET;
     if (!secret || req.headers?.authorization !== `Bearer ${secret}`) return res.status(401).json({ error: 'UNAUTHORIZED' });
     try {
-      const resend = new Resend(process.env.RESEND_API_KEY);
       // Borné (api/_envoiMails.js) : le quota de Resend doit laisser passer les e-mails de la soirée.
-      const envoyer = envoiBorne(m => resend.emails.send(m), {
-        budget: Number(process.env.BUDGET_MAILS_CRON) || BUDGET_PAR_DEFAUT,
+      // Avec Brevo (api/_fournisseurMail.js), le lot part chez Brevo (300/jour) et Resend reste libre.
+      const envoyer = envoiBorne(envoyeurMail({ lot: true }), {
+        budget: Number(process.env.BUDGET_MAILS_CRON) || (process.env.BREVO_API_KEY ? BUDGET_AVEC_BREVO : BUDGET_PAR_DEFAUT),
         rejetees: await adressesRejetees(),
       });
       const db = getDb();
@@ -416,10 +416,9 @@ export default async function handler(req, res) {
   }
 
   try {
-    const resend = new Resend(process.env.RESEND_API_KEY);
     const r = await enregistrerDemande({
       db: getDb(), uid, email, prenom: childName, resultat: await resultatQuiz(resultatBrut),
-      envoyer: m => resend.emails.send(m),
+      envoyer: envoyeurMail(),
     });
     if (r.alreadyApproved) return res.status(200).json({ ok: true, alreadyApproved: true });
     if (r.rateLimited) return res.status(429).json({ error: 'RATE_LIMITED' });

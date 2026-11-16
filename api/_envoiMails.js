@@ -13,6 +13,8 @@
 // -------------------------------------------------------
 
 export const BUDGET_PAR_DEFAUT = 60
+// Brevo gratuit : 300 par jour ; on garde de la marge pour les secours des envois immédiats.
+export const BUDGET_AVEC_BREVO = 220
 const ETATS_REJETES = new Set(['bounced', 'suppressed', 'complained'])
 const RETENTION_MS = 30 * 86_400_000
 
