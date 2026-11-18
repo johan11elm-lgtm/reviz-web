@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
-import { envoiBorne, adressesRejetees } from '../_envoiMails.js'
+import { envoiBorne, adressesRejetees, adressesBloqueesBrevo } from '../_envoiMails.js'
 
 describe('e-mails de la tâche de 17 h : bornés', () => {
   it('au plus « budget » envois ; au-delà, une erreur (rien n’est noté envoyé)', async () => {
@@ -49,5 +49,60 @@ describe('adresses rejetées, d’après l’historique Resend', () => {
   it('sans clé ou si Resend ne répond pas : personne d’écarté', async () => {
     expect((await adressesRejetees({ cle: '' })).size).toBe(0)
     expect((await adressesRejetees({ cle: 'k', fetch: async () => { throw new Error('réseau') } })).size).toBe(0)
+  })
+})
+
+describe('plafond d’une boucle dans le budget commun (18/11)', () => {
+  it('une boucle plafonnée s’arrête à son plafond et laisse le reste du budget aux suivantes', async () => {
+    const envoyer = vi.fn(async () => ({}))
+    const e = envoiBorne(envoyer, { budget: 5 })
+    const relances = e.plafond(3)
+    for (const a of ['a', 'b', 'c']) await relances({ to: `${a}@x.fr` })
+    expect(relances.epuise()).toBe(true)
+    await expect(relances({ to: 'd@x.fr' })).rejects.toThrow('BUDGET_ATTEINT')
+    expect(e.epuise()).toBe(false)
+    await e({ to: 'fin-essai@x.fr' })
+    await e({ to: 'bilan@x.fr' })
+    expect(e.compte()).toBe(5)
+    expect(envoyer).toHaveBeenCalledTimes(5)
+  })
+  it('le plafond ne dépasse jamais le budget commun', async () => {
+    const e = envoiBorne(async () => ({}), { budget: 1 })
+    const relances = e.plafond(10)
+    await relances({ to: 'a@x.fr' })
+    expect(relances.epuise()).toBe(true)
+    await expect(relances({ to: 'b@x.fr' })).rejects.toThrow('BUDGET_ATTEINT')
+  })
+  it('une adresse rejetée ne consomme pas le plafond', async () => {
+    const e = envoiBorne(async () => ({}), { budget: 5, rejetees: new Set(['mort@x.fr']) })
+    const relances = e.plafond(1)
+    await expect(relances({ to: 'mort@x.fr' })).rejects.toThrow('ADRESSE_REJETEE')
+    expect(relances.compte()).toBe(0)
+    await relances({ to: 'vivant@x.fr' })
+    expect(relances.compte()).toBe(1)
+  })
+  it('un envoi refusé par le fournisseur compte (il a été tenté)', async () => {
+    const e = envoiBorne(async () => ({ error: { message: 'refus' } }), { budget: 5 })
+    const relances = e.plafond(1)
+    await expect(relances({ to: 'a@x.fr' })).rejects.toThrow('refus')
+    expect(relances.epuise()).toBe(true)
+  })
+})
+
+describe('adresses bloquées chez Brevo', () => {
+  const page = contacts => ({ ok: true, json: async () => ({ contacts, count: contacts.length }) })
+  it('lit les contacts bloqués page après page, en minuscules', async () => {
+    const pleine = Array.from({ length: 100 }, (_, i) => ({ email: `X${i}@x.fr` }))
+    const f = vi.fn().mockResolvedValueOnce(page(pleine)).mockResolvedValueOnce(page([{ email: 'Rebond@Y.fr' }]))
+    const r = await adressesBloqueesBrevo({ cle: 'k', fetch: f })
+    expect(r.size).toBe(101)
+    expect(r.has('rebond@y.fr')).toBe(true)
+    expect(f.mock.calls[1][0]).toContain('offset=100')
+    expect(f.mock.calls[0][1].headers['api-key']).toBe('k')
+  })
+  it('sans clé ou si Brevo ne répond pas : personne d’écarté', async () => {
+    expect((await adressesBloqueesBrevo({ cle: '' })).size).toBe(0)
+    expect((await adressesBloqueesBrevo({ cle: 'k', fetch: async () => { throw new Error('réseau') } })).size).toBe(0)
+    expect((await adressesBloqueesBrevo({ cle: 'k', fetch: async () => ({ ok: false }) })).size).toBe(0)
   })
 })

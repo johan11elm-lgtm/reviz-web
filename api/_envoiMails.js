@@ -13,8 +13,16 @@
 // -------------------------------------------------------
 
 export const BUDGET_PAR_DEFAUT = 60
-// Brevo gratuit : 300 par jour ; on garde de la marge pour les secours des envois immédiats.
-export const BUDGET_AVEC_BREVO = 220
+// Brevo gratuit : 300 par jour ; on garde de la marge pour les secours des envois immédiats (qui
+// passent d'abord par Resend, 100 par jour, dont ~40 servis le 17/11). 220 jusqu'au 18/11.
+export const BUDGET_AVEC_BREVO = 270
+// Plafonds des relances (accord parental) dans un passage, avec Brevo (18/11) : le 17/11, relances
+// parents et élèves ont pris les 220 envois à elles seules, et le rappel J+1, la fin d'essai, le bilan
+// J+3 et le mot « limite » ont sauté sans un mot. Ce qui dépasse part au passage suivant.
+export const PLAFOND_RELANCES_PARENTS = 50
+export const PLAFOND_RELANCES_ELEVES = 70
+// Sans Brevo (budget de 60) : la moitié au plus pour chaque relance.
+export const PART_RELANCES_SANS_BREVO = 0.5
 const ETATS_REJETES = new Set(['bounced', 'suppressed', 'complained'])
 const RETENTION_MS = 30 * 86_400_000
 
@@ -56,5 +64,43 @@ export function envoiBorne(envoyer, { budget = BUDGET_PAR_DEFAUT, rejetees = new
   // Budget épuisé : les boucles s'arrêtent au lieu de tenter chaque élève (le 13/11, ces essais
   // vains faisaient dépasser les 60 s de la tâche, et rien après le rappel J+1 ne partait).
   borne.epuise = () => envoyes >= budget
+  /**
+   * Une part du même budget, plafonnée à `max` envois : une boucle volumineuse (les relances) ne peut
+   * plus priver les envois qui viennent après elle. Seuls les vrais envois comptent (une adresse
+   * rejetée ne consomme rien).
+   */
+  borne.plafond = max => {
+    let pris = 0
+    const part = async message => {
+      if (pris >= max) throw new Error('BUDGET_ATTEINT')
+      const avant = envoyes
+      try {
+        return await borne(message)
+      } finally {
+        pris += envoyes - avant
+      }
+    }
+    part.compte = () => pris
+    part.epuise = () => pris >= max || borne.epuise()
+    return part
+  }
   return borne
+}
+
+/** Les adresses que Brevo bloque (rebonds définitifs, désinscriptions, plaintes). Vide si Brevo ne répond pas. */
+export async function adressesBloqueesBrevo({ cle = process.env.BREVO_API_KEY, fetch: f = globalThis.fetch, pagesMax = 20 } = {}) {
+  const bloquees = new Set()
+  if (!cle) return bloquees
+  try {
+    for (let i = 0; i < pagesMax; i++) {
+      const r = await f(`https://api.brevo.com/v3/smtp/blockedContacts?limit=100&offset=${i * 100}`, {
+        headers: { 'api-key': cle, accept: 'application/json' },
+      })
+      if (!r.ok) break
+      const { contacts = [] } = await r.json()
+      for (const c of contacts) if (c?.email) bloquees.add(String(c.email).toLowerCase())
+      if (contacts.length < 100) break
+    }
+  } catch { /* Brevo injoignable : le plafond protège */ }
+  return bloquees
 }

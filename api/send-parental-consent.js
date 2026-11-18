@@ -23,7 +23,7 @@
 // Vercel peut l'appeler : il envoie CRON_SECRET dans l'en-tête Authorization.
 
 import { envoyeurMail } from './_fournisseurMail.js';
-import { envoiBorne, adressesRejetees, BUDGET_PAR_DEFAUT, BUDGET_AVEC_BREVO } from './_envoiMails.js';
+import { envoiBorne, adressesRejetees, adressesBloqueesBrevo, BUDGET_PAR_DEFAUT, BUDGET_AVEC_BREVO, PLAFOND_RELANCES_PARENTS, PLAFOND_RELANCES_ELEVES, PART_RELANCES_SANS_BREVO } from './_envoiMails.js';
 import { getDb, getAuthAdmin } from './_firebaseAdmin.js';
 import { nouvelleDemande, demandeEnCours, jetonDe, lienPartage, scorePartage, MAX_ENVOIS_LIEN } from './_accordParent.js';
 import { DELAI_ADRESSE_MS, DELAI_REPONSE_MS } from '../src/utils/consent.js';
@@ -332,10 +332,17 @@ export default async function handler(req, res) {
     try {
       // Borné (api/_envoiMails.js) : le quota de Resend doit laisser passer les e-mails de la soirée.
       // Avec Brevo (api/_fournisseurMail.js), le lot part chez Brevo (300/jour) et Resend reste libre.
+      const avecBrevo = Boolean(process.env.BREVO_API_KEY);
+      const budget = Number(process.env.BUDGET_MAILS_CRON) || (avecBrevo ? BUDGET_AVEC_BREVO : BUDGET_PAR_DEFAUT);
+      const [rejeteesResend, bloqueesBrevo] = await Promise.all([adressesRejetees(), adressesBloqueesBrevo()]);
       const envoyer = envoiBorne(envoyeurMail({ lot: true }), {
-        budget: Number(process.env.BUDGET_MAILS_CRON) || (process.env.BREVO_API_KEY ? BUDGET_AVEC_BREVO : BUDGET_PAR_DEFAUT),
-        rejetees: await adressesRejetees(),
+        budget,
+        rejetees: new Set([...rejeteesResend, ...bloqueesBrevo]),
       });
+      // Priorités (18/11) : les relances de l'accord parental sont nombreuses (jusqu'à ~200 par jour)
+      // et passaient en premier sans limite. Chacune a désormais son plafond, et le reste du budget
+      // revient aux envois rares qui suivent.
+      const partRelances = n => avecBrevo ? n : Math.floor(budget * PART_RELANCES_SANS_BREVO);
       const db = getDb();
       // Les notifications d'abord : elles ne coûtent rien et ne dépendent pas du quota de Resend.
       // Jusqu'au 15/11 elles venaient en dernier et la tâche, coupée à 60 s, ne les atteignait
@@ -344,23 +351,27 @@ export default async function handler(req, res) {
       const push = pousser
         ? await envoyerNotifs({ db, envoyer: pousser }).catch(err => { console.error('[push]', err?.message || err); return { notifs: 0 }; })
         : { notifs: 0, pushSansCle: true };
-      const parents = await relancerParents({ db, envoyer });
+      // Fin de l'essai Réviz+ en tête des e-mails : c'est le seul jour possible pour ce mot (quelques
+      // envois par jour), et il ne touche que des parents ayant donné leur accord, jamais relancés.
+      // Le bilan et la limite, plus bas, se taisent le jour où il part.
+      const finsEssai = await envoyerFinsEssai({ db, envoyer, auth: getAuthAdmin(), lienOffrir: VENTES_OUVERTES ? uid => lienOffrir(uid) : null })
+        .catch(err => { console.error('[fin-essai]', err?.message || err); return { finsEssaiParent: 0 }; });
+      const parents = await relancerParents({ db, envoyer: envoyer.plafond(partRelances(PLAFOND_RELANCES_PARENTS)) });
       const emailDe = uid => getAuthAdmin().getUser(uid).then(u => u.email || null, () => null);
-      const eleves = await relancerEleves({ db, envoyer, emailDe });
+      const eleves = await relancerEleves({ db, envoyer: envoyer.plafond(partRelances(PLAFOND_RELANCES_ELEVES)), emailDe });
       // Un échec du rappel J+1 ne doit pas masquer les relances déjà faites.
       const lendemain = await relancerLendemain({ db, envoyer, emailDe, auth: getAuthAdmin() })
         .catch(err => { console.error('[rappel-j1]', err?.message || err); return { rappelsJ1: 0 }; });
-      // Fin de l'essai Réviz+ avant le bilan et la limite : c'est le seul jour possible pour ce mot,
-      // et ces deux-là se taisent le jour où il part.
-      const finsEssai = await envoyerFinsEssai({ db, envoyer, auth: getAuthAdmin(), lienOffrir: VENTES_OUVERTES ? uid => lienOffrir(uid) : null })
-        .catch(err => { console.error('[fin-essai]', err?.message || err); return { finsEssaiParent: 0 }; });
       // Après les relances : un parent relancé aujourd'hui n'a pas son bilan le même jour.
       const bilans = await envoyerBilansParent({ db, envoyer, lienAutorisation, lienEspace: (uid, u) => lienEspaceParent(uid, { version: versionLiens(u) }), lienOffrir: VENTES_OUVERTES ? uid => lienOffrir(uid) : null, auth: getAuthAdmin() })
         .catch(err => { console.error('[bilan-parent]', err?.message || err); return { bilansParent: 0 }; });
       // Après le bilan : un parent qui l'a reçu aujourd'hui n'a pas ce mot le même jour.
       const limites = await envoyerLimitesParent({ db, envoyer, auth: getAuthAdmin() })
         .catch(err => { console.error('[limite-parent]', err?.message || err); return { limitesParent: 0 }; });
-      return res.status(200).json({ ...parents, ...eleves, ...lendemain, ...finsEssai, ...bilans, ...limites, ...push, emails: envoyer.compte() });
+      const bilan = { ...parents, ...eleves, ...lendemain, ...finsEssai, ...bilans, ...limites, ...push, emails: envoyer.compte(), budget, budgetEpuise: envoyer.epuise(), adressesEcartees: rejeteesResend.size + bloqueesBrevo.size };
+      // Une ligne par passage dans les journaux de Vercel : jusqu'ici, un budget épuisé coupait la suite sans laisser de trace.
+      console.log('[tache-17h]', JSON.stringify(bilan));
+      return res.status(200).json(bilan);
     } catch (err) {
       console.error('[relance-parent]', err?.message || err);
       return res.status(500).json({ error: 'RELANCE_FAILED' });
