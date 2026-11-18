@@ -619,7 +619,12 @@ input, textarea {
    et priment sur la branche tablette par spécificité et ordre. */
 html.native, html.native body, html.native #root {
   width: 100%;
+  /* clip, pas hidden : « overflow-x: hidden » fait passer overflow-y à auto, donc html, body et
+     #root devenaient des conteneurs défilables (vides). Arrivé en haut ou en bas d'une page, iOS
+     confiait parfois le geste suivant à l'un d'eux et le défilement restait bloqué jusqu'à ce
+     qu'on relève le doigt (Johan, 18/11). hidden reste en repli pour iOS 15. */
   overflow-x: hidden;
+  overflow-x: clip;
   /* Supprime le délai et le zoom du double-tap (complément du viewport natif) */
   touch-action: manipulation;
 }
@@ -635,7 +640,10 @@ html.native .app {
   min-height: unset;
   border-radius: 0;
   box-shadow: none;
+  /* clip : un conteneur « hidden » reste défilable (par le clavier, un focus, un geste capté),
+     et une fois décalé l'élève ne peut plus le remettre en place. */
   overflow: hidden;
+  overflow: clip;
   /* Encoche : prise par l'en-tête de chaque page (voir le bloc téléphone ci-dessus). */
 }
 html.native .bottom-nav {

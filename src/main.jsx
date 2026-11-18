@@ -21,6 +21,7 @@ import { sombreAuDemarrage } from './utils/themes.js'
 import { appliquerLecture, lectureDysActive } from './utils/lecture'
 import { capterCodeParrain } from './utils/parrainage.js'
 import { capterCodeCadeau } from './utils/cadeau.js'
+import { garderLaPageEnPlace } from './utils/pageEnPlace.js'
 
 // Lien d'un ami (?parrain=CODE) ou d'un parent qui offre Réviz+ (?cadeau=CODE) : le code est
 // gardé jusqu'à la création du compte.
@@ -38,6 +39,8 @@ sombreAuDemarrage()
 // éviter tout flash de la carte centrée.
 if (IS_NATIVE) {
   document.documentElement.classList.add('native');
+  // Clavier fermé : la page reprend sa place (sinon défilement « bloqué », 18/11).
+  garderLaPageEnPlace();
   // App native : pas de pinch-zoom ni de double-tap zoom (comportement
   // d'app attendu). Le WEB garde le zoom — accessibilité WCAG 1.4.4 ;
   // en natif, la taille de texte suit les réglages système iOS.
