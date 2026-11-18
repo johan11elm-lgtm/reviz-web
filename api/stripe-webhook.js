@@ -10,6 +10,7 @@ import { envoyeurMail } from './_fournisseurMail.js'
 import { enregistrerCadeau, mailCadeau, noterMailCadeau } from './_cadeau.js'
 import { REPONDRE_A } from './_bilanParent.js'
 import { accordParPaiement } from './_accordParent.js'
+import { appleActif } from './_apple.js'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
@@ -87,6 +88,7 @@ export default async function handler(req, res) {
         await db.collection('users').doc(uid).set(
           {
             plan: 'premium',
+            sourceAbonnement: 'stripe',
             stripeCustomerId: session.customer,
             stripeSubscriptionId: session.subscription,
             subscriptionStatus: 'active',
@@ -129,8 +131,11 @@ export default async function handler(req, res) {
       const sub = event.data.object
       const ref = await userRefByCustomer(db, sub.customer)
       if (ref) {
-        const plan = planForStatus(sub.status)
-        await ref.update({ plan, subscriptionStatus: sub.status, planUpdatedAt: Date.now(), ...champsAbonnement(sub) })
+        let plan = planForStatus(sub.status)
+        // Abonné aussi dans l'app iOS : Apple garde Réviz+ ouvert (api/_apple.js).
+        const parApple = plan === 'free' && await appleActif(db, ref.id)
+        if (parApple) plan = 'premium'
+        await ref.update({ plan, subscriptionStatus: sub.status, planUpdatedAt: Date.now(), ...(parApple ? { sourceAbonnement: 'apple' } : champsAbonnement(sub)) })
         console.log(`[stripe-webhook] customer ${sub.customer} → ${sub.status} → ${plan}`)
       }
       break
@@ -141,7 +146,8 @@ export default async function handler(req, res) {
       const sub = event.data.object
       const ref = await userRefByCustomer(db, sub.customer)
       if (ref) {
-        await ref.update({ plan: 'free', subscriptionStatus: 'canceled', planUpdatedAt: Date.now() })
+        const parApple = await appleActif(db, ref.id)
+        await ref.update({ plan: parApple ? 'premium' : 'free', subscriptionStatus: 'canceled', planUpdatedAt: Date.now(), ...(parApple && { sourceAbonnement: 'apple' }) })
         console.log(`[stripe-webhook] customer ${sub.customer} downgraded to free (deleted)`)
       }
       break

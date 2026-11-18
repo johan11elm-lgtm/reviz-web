@@ -46,7 +46,7 @@ import { xpQuetes, EVENEMENT_QUETES } from '../services/quetesService';
 import { RechercheAccueil } from '../components/RechercheAccueil';
 import { erreursRecentes } from '../services/erreursService';
 import { jourParis } from '../utils/retour';
-import { ACHAT_DANS_L_APP } from '../utils/achat';
+import { ACHAT_DANS_L_APP, ACHAT_STRIPE } from '../utils/achat';
 import './Home.css';
 
 /*
@@ -110,7 +110,7 @@ export default function Home() {
   const isDesktop = useIsDesktop();
   const [allLessons, setAllLessons] = useState(() => loadLessons());
   const [newBadge, setNewBadge] = useState(null);
-  const [annonceRevizPlus, setAnnonceRevizPlus] = useState(() => ACHAT_DANS_L_APP && revizPlusOffert && !isGuest && !!currentUser?.uid && !annonceRevizPlusVue(currentUser.uid));
+  const [annonceRevizPlus, setAnnonceRevizPlus] = useState(() => ACHAT_STRIPE && revizPlusOffert && !isGuest && !!currentUser?.uid && !annonceRevizPlusVue(currentUser.uid));
   // Annonce de la sortie : Réviz Games (celle de la Battle, du 22/10, n'est plus montrée).
   // En essai, jamais avant une première révision : c'était le premier écran du nouveau venu, et
   // un essai sur trois ne faisait que jouer puis repartait (10/11).

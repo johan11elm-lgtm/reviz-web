@@ -73,6 +73,8 @@
 .rpo-anneau { width: 18px; height: 18px; box-sizing: border-box; border: 2.5px solid rgba(255,255,255,.35); border-top-color: #fff; border-radius: 50%; animation: rpoTourne .8s linear infinite; }
 @keyframes rpoTourne { to { transform: rotate(360deg); } }
 .rpo-note { margin: 0; font-size: 13.5px; font-weight: 500; line-height: 1.45; color: var(--rv-doux); }
+.rpo-legal { font-size: 12px; text-align: center; }
+.rpo-legal a { color: inherit; text-decoration: underline; }
 .rpo-note--centre { display: flex; align-items: center; justify-content: center; gap: 6px; text-align: center; }
 .rpo-erreur { margin: 0; padding: 12px 14px; border-radius: 16px; background: var(--rv-rose); font-size: 14px; font-weight: 600; }
 

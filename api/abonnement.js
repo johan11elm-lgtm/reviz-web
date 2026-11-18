@@ -14,6 +14,7 @@ import { routeCadeau } from './_cadeau.js'
 import { routeOffrir } from './_demandePlus.js'
 import { getDb, getAuthAdmin } from './_firebaseAdmin.js'
 import portail from './_billingPortal.js'
+import { routeSynchroApple } from './_apple.js'
 
 export default function handler(req, res) {
   const op = req.query?.op
@@ -25,6 +26,8 @@ export default function handler(req, res) {
       return res.status(500).send('Erreur')
     })
   }
+  // ?op=apple : l'app iOS vient d'acheter ou de restaurer Réviz+ (api/_apple.js).
+  if (op === 'apple') return routeSynchroApple(req, res, { db: getDb(), auth: getAuthAdmin() })
   if (op === 'cadeau' && req.method === 'POST') {
     return routeCadeau(req, res, { db: getDb(), auth: getAuthAdmin(), stripe, creerSession: creerSessionReviz }).catch(err => {
       console.error('[cadeau]', err?.message || err)

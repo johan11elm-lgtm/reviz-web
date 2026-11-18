@@ -6,7 +6,7 @@ import { useIsDesktop } from '../hooks/useMediaQuery';
 import { TEINTES, varsTeinte } from '../utils/teinteMatiere';
 import { apiFetch } from '../services/apiClient';
 import { mesurer } from '../services/mesure';
-import { ACHAT_DANS_L_APP } from '../utils/achat';
+import { ACHAT_STRIPE } from '../utils/achat';
 import { prixDe, FORMULE_PAR_DEFAUT } from '../../api/_prix.js';
 import { tarifFondateurOuvert } from '../../api/_lancement.js';
 import { parSemaine } from '../utils/remiseQuotas';
@@ -97,7 +97,7 @@ export default function Parents() {
             <p className="pr-carte-texte">{nbsp(`Un cours particulier coûte souvent 20 à 40 € de l’heure, pour une seule matière. Réviz+ à l’année : ${annuel.montant}, soit ${parSemaine(annuel.centimes)} par semaine, pour toutes les matières.`)}</p>
           </section>
 
-          {ACHAT_DANS_L_APP ? (
+          {ACHAT_STRIPE ? (
             <form className="pr-carte pa-carte pa-form" aria-labelledby="pa-offrir" onSubmit={offrir} noValidate>
               <h2 id="pa-offrir" className="pr-carte-titre">Votre formule</h2>
               <div className="pa-formules" role="radiogroup" aria-label="Votre formule">

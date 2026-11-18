@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Mascot } from '../Mascot';
 import { BulleReviz } from '../reviz/BulleReviz';
 import { useModalA11y } from '../../hooks/useModalA11y';
@@ -10,7 +10,8 @@ import { useAuth } from '../../context/AuthContext';
 import { FORMULE_PAR_DEFAUT, prixDe } from '../../../api/_prix.js';
 import { prochaineRemise, dansCombien, parSemaine } from '../../utils/remiseQuotas';
 import { tarifFondateurOuvert } from '../../../api/_lancement.js';
-import { ACHAT_DANS_L_APP } from '../../utils/achat';
+import { ACHAT_DANS_L_APP, ACHAT_APPLE, ACHAT_STRIPE } from '../../utils/achat';
+import { formulesApple, acheterApple, restaurerApple } from '../../services/achatApple';
 import { mesurer } from '../../services/mesure';
 import { BoltIcon, CameraIcon, ChatIcon } from '../Icons';
 import { PREMIER_ECRIT } from '../../utils/planBrevet';
@@ -146,6 +147,8 @@ export function DecouvrirRevizPlus({ onClose, lieu = 'autre' }) {
     );
   }
 
+  if (ACHAT_APPLE) return <AchatApple onClose={onClose} lieu={lieu} titre={titre} sousTitre={sousTitre} pour={pour} comparatif={comparatif} />;
+
   const options = [
     // Ramené à la semaine (11/11) : moins d'un euro, comme Knowunity l'affiche.
     { id: 'annuel', titre: 'À l’année', prix: annuel, cadence: 'par an', detail: `soit ${parSemaine(annuel.centimes)} par semaine`, badge: true },
@@ -187,6 +190,128 @@ export function DecouvrirRevizPlus({ onClose, lieu = 'autre' }) {
         <li><Coche />Un parent peut l’offrir</li>
       </ul>
       <DemanderParent lieu={lieu} enBouton />
+      <PourquoiPasGratuit />
+    </Fenetre>
+  );
+}
+
+/**
+ * L'offre dans l'app iOS (18/11) : prix de l'App Store (7,99 €/mois, 54,99 €/an), achat intégré,
+ * « Restaurer » et conditions d'abonnement exigés par Apple (règle 3.1.2). Un collégien dans
+ * un Partage familial déclenche « Demander l'achat » : le parent accepte sur son téléphone.
+ */
+function AchatApple({ onClose, lieu, titre, sousTitre, pour, comparatif }) {
+  const { refreshPremium } = useAuth() ?? {};
+  const [formules, setFormules] = useState(null); // null = chargement
+  const [formule, setFormule] = useState(FORMULE_PAR_DEFAUT);
+  const [etat, setEtat] = useState(''); // '' | achat | restauration | achete | en_attente | rien
+  const [erreur, setErreur] = useState('');
+  const occupe = etat === 'achat' || etat === 'restauration';
+
+  useEffect(() => {
+    let vivant = true;
+    formulesApple()
+      .then(f => { if (vivant) { setFormules(f); if (!f[FORMULE_PAR_DEFAUT]) setFormule(Object.keys(f)[0]); } })
+      .catch(() => { if (vivant) { setFormules({}); setErreur('L’App Store ne répond pas. Réessaie dans un moment.'); } });
+    return () => { vivant = false; };
+  }, []);
+
+  async function acheter() {
+    if (occupe) return;
+    setEtat('achat'); setErreur('');
+    mesurer('offre', { etape: 'caisse', lieu, formule, magasin: 'apple' });
+    try {
+      const r = await acheterApple(formule, formules);
+      if (r === 'achete') {
+        await refreshPremium?.();
+        mesurer('offre', { etape: 'payee', lieu, formule, magasin: 'apple' });
+      }
+      setEtat(r === 'annule' ? '' : r);
+    } catch {
+      setEtat('');
+      setErreur('L’achat n’a pas abouti. Rien n’a été prélevé : réessaie dans un moment.');
+    }
+  }
+
+  async function restaurer() {
+    if (occupe) return;
+    setEtat('restauration'); setErreur('');
+    try {
+      const actif = await restaurerApple();
+      if (actif) await refreshPremium?.();
+      setEtat(actif ? 'achete' : 'rien');
+    } catch {
+      setEtat('');
+      setErreur('La restauration n’a pas abouti. Réessaie dans un moment.');
+    }
+  }
+
+  if (etat === 'achete') {
+    return (
+      <Fenetre label="Réviz+" pose="levelup" onClose={onClose}>
+        <h2 className="rpo-titre">Bienvenue dans Réviz+</h2>
+        <p className="rpo-sous">Exercices, scans et thèmes sans limite, et 50 questions par jour à Réviz IA.</p>
+        <button type="button" className="rpo-btn" onClick={onClose}>C’est parti</button>
+      </Fenetre>
+    );
+  }
+  if (etat === 'en_attente') {
+    return (
+      <Fenetre label="Réviz+" pose="hello" onClose={onClose}>
+        <h2 className="rpo-titre">Demande envoyée</h2>
+        <p className="rpo-sous">Ton parent reçoit la demande sur son téléphone. Dès qu’il l’accepte, Réviz+ s’ouvre ici tout seul.</p>
+        <button type="button" className="rpo-btn" onClick={onClose}>Compris</button>
+      </Fenetre>
+    );
+  }
+
+  const options = [
+    { id: 'annuel', titre: 'À l’année', cadence: 'par an', badge: true,
+      detail: formules?.annuel?.devise === 'EUR' ? `soit ${parSemaine(formules.annuel.centimes)} par semaine` : '' },
+    { id: 'mensuel', titre: 'Au mois', cadence: 'par mois', detail: 'résiliable à tout moment' },
+  ].filter(o => formules?.[o.id]);
+  const choisie = options.find(o => o.id === formule);
+  return (
+    <Fenetre label="Réviz+" pose="hello" onClose={onClose}>
+      {pour && <span className="rpo-pour">{pour.charAt(0).toUpperCase() + pour.slice(1)}</span>}
+      <h2 className="rpo-titre">{titre}</h2>
+      <p className="rpo-sous">{sousTitre}</p>
+      {comparatif}
+      <span className="rpo-sur rpo-sur--bloc">Ta formule</span>
+      {formules === null
+        ? <p className="rpo-note rpo-note--centre"><span className="rpo-anneau" aria-hidden="true" />Prix de l’App Store…</p>
+        : (
+          <div className="rpo-formules" role="radiogroup" aria-label="Ta formule">
+            {options.map(o => (
+              <button key={o.id} type="button" role="radio" aria-checked={formule === o.id} disabled={occupe}
+                className={`rpo-formule${formule === o.id ? ' is-choisie' : ''}`} onClick={() => setFormule(o.id)}>
+                <span className="rpo-radio" aria-hidden="true">{formule === o.id && <Coche />}</span>
+                <span className="rpo-formule-txt">
+                  <b>{o.titre}</b>
+                  {o.badge && <span className="rpo-avantage">Le plus avantageux</span>}
+                  {o.detail && <span>{o.detail}</span>}
+                </span>
+                <span className="rpo-prix"><b>{formules[o.id].prix}</b><span>{o.cadence}</span></span>
+              </button>
+            ))}
+          </div>
+        )}
+      {erreur && <p className="rpo-erreur" role="alert">{erreur}</p>}
+      {etat === 'rien' && <p className="rpo-note" role="status">Aucun abonnement Réviz+ trouvé sur ce compte Apple.</p>}
+      <button type="button" className="rpo-btn" onClick={acheter} disabled={occupe || !choisie}>
+        {etat === 'achat' ? <><span className="rpo-anneau" aria-hidden="true" />Ouverture de l’App Store…</> : 'Passer à Réviz+'}
+      </button>
+      <p className="rpo-note rpo-note--centre"><Cadenas />Paiement par l’App Store. Dans un Partage familial, ton parent valide l’achat sur son téléphone.</p>
+      <p className="rpo-note rpo-legal">
+        {choisie
+          ? `Abonnement de ${choisie.id === 'annuel' ? 'un an' : 'un mois'} à ${formules[choisie.id].prix}, renouvelé automatiquement au même prix, `
+          : 'Abonnement renouvelé automatiquement, '}
+        payé avec le compte Apple. Il se résilie dans Réglages, ton nom, Abonnements, au moins 24 heures avant la fin de la période.
+        {' '}<Link to="/legal/cgu" onClick={onClose}>Conditions d’utilisation</Link> · <Link to="/legal/confidentialite" onClick={onClose}>Confidentialité</Link>
+      </p>
+      <button type="button" className="rpo-lien" onClick={restaurer} disabled={occupe}>
+        {etat === 'restauration' ? 'Recherche…' : 'Restaurer mes achats'}
+      </button>
       <PourquoiPasGratuit />
     </Fenetre>
   );
@@ -373,7 +498,8 @@ export function DemanderParent({ lieu = 'autre', enBouton = false }) {
   // L'adresse donnée pour l'accord parental arrive parfois après l'affichage (session en cache).
   const parentEmail = consent?.parentEmail ?? '';
   useEffect(() => { if (parentEmail) setEmail(e => e || parentEmail); }, [parentEmail]);
-  if (!ACHAT_DANS_L_APP || isGuest) return null;
+  // Le lien mène au paiement Stripe : jamais dans l'app iOS (règle 3.1.1, mineurs).
+  if (!ACHAT_STRIPE || isGuest) return null;
 
   /** Le lien, demandé une seule fois (la promesse est gardée, même en échec on pourra redemander). */
   function preparer() {

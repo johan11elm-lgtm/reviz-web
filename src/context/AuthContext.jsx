@@ -36,6 +36,7 @@ import { setScanLimitUser, setPremiumStatus, setRevizPlusOffert } from '../servi
 import { estFondateur } from '../utils/revizPlus.js';
 import { lancementOffert } from '../../api/_lancement.js';
 import { finPlusOffert, essaiPlusDejaPris } from '../../api/_essaiPlus.js';
+import { preparerAchatApple, oublierAchatApple } from '../services/achatApple';
 import { parrainageDuProfil } from '../../api/_parrainage.js';
 import { codeParrainEnAttente, oublierCodeParrain } from '../utils/parrainage.js';
 import { codeCadeauEnAttente, oublierCodeCadeau } from '../utils/cadeau.js';
@@ -63,6 +64,8 @@ function lireAbonnement(profile) {
     fondateur: profile.fondateur ?? null,
     periodeFin: profile.periodeFin ?? null,
     annuleLe: profile.annuleLe ?? null,
+    // 'apple' : pris dans l'app iOS (api/_apple.js), géré dans les réglages de l'iPhone.
+    source: profile.sourceAbonnement ?? 'stripe',
   };
 }
 
@@ -348,6 +351,7 @@ export function AuthProvider({ children }) {
       setCurrentUser(null);
       return Promise.resolve();
     }
+    oublierAchatApple();
     return signOut(auth);
   }
 
@@ -607,6 +611,8 @@ export function AuthProvider({ children }) {
         }
       }
       bindServicesToUser(user?.uid ?? null);
+      // Achats intégrés (app iOS) : le compte RevenueCat porte l'uid de l'élève.
+      if (user) preparerAchatApple(user.uid);
       setGuest(null);
       // Remplace l'utilisateur issu du cache par le vrai (ou null : session
       // invalide → PrivateRoute redirige vers /welcome).
@@ -784,7 +790,7 @@ export function AuthProvider({ children }) {
     consentBlocked,
     consent,
     needsProfileSetup,
-    isPremium, // abonnement payé (Stripe)
+    isPremium, // abonnement payé (Stripe ou App Store)
     abonnement,
     // Avantages Réviz+ : abonné, ou offert (à tous pendant le lancement).
     hasRevizPlus: isPremium || offert || essai,

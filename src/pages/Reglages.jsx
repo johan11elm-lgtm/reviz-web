@@ -28,7 +28,8 @@ import { lireEspaceParent, reglerEspaceParent, couperLiensParent } from '../serv
 import { lectureDysActive, appliquerLecture } from '../utils/lecture';
 import { sonActif, bruitagesActifs } from '../utils/bruitages';
 import { jouerSon } from '../utils/sons';
-import { ACHAT_DANS_L_APP } from '../utils/achat';
+import { ACHAT_DANS_L_APP, ACHAT_APPLE, ACHAT_STRIPE } from '../utils/achat';
+import { restaurerApple, URL_GERER_APPLE } from '../services/achatApple';
 import { ACCORD_IA_REQUIS, accordIADonne, retirerAccordIA, demanderAccordIA } from '../utils/accordIA';
 
 const CLASSES_COLLEGE = ['6ème', '5ème', '4ème', '3ème'];
@@ -109,7 +110,7 @@ export default function Reglages() {
   const {
     currentUser, isPremium, hasRevizPlus, revizPlusOffert, abonnement, logout, isGuest,
     getUserLevel, setUserLevel, updateDisplayName,
-    updateUserEmail, updateUserPassword, deleteAccount,
+    updateUserEmail, updateUserPassword, deleteAccount, refreshPremium,
   } = useAuth();
 
   const prenom    = currentUser?.displayName ?? '';
@@ -243,6 +244,20 @@ export default function Reglages() {
     } catch {
       setBillingLoading(false);
       setBillingError('Impossible d’ouvrir la gestion de l’abonnement. Réessaie dans un moment.');
+    }
+  }
+  // App iOS : « Restaurer mes achats » (exigé par Apple) pour qui a déjà payé avec son compte Apple.
+  const [restauration, setRestauration] = useState(''); // '' | cours | rien
+  async function restaurer() {
+    if (restauration === 'cours') return;
+    setRestauration('cours'); setBillingError('');
+    try {
+      const actif = await restaurerApple();
+      if (actif) await refreshPremium?.();
+      setRestauration(actif ? '' : 'rien');
+    } catch {
+      setRestauration('');
+      setBillingError('La restauration n’a pas abouti. Réessaie dans un moment.');
     }
   }
   // Avant le 26 : réserver le tarif fondateur pendant l'offre de lancement.
@@ -506,7 +521,8 @@ export default function Reglages() {
   if (!isGuest) {
     let corps;
     if (isPremium) {
-      const fondateur = abonnement?.fondateur ?? (fondateurOuvert || null);
+      const parApple = abonnement?.source === 'apple';
+      const fondateur = parApple ? null : abonnement?.fondateur ?? (fondateurOuvert || null);
       const prix = prixDe(abonnement?.formule, !!fondateur);
       const nom = fondateur ? 'Membre fondateur' : abonnement?.formule === 'mensuel' ? 'Réviz+ mensuel' : 'Réviz+ annuel';
       const echeance = abonnement?.annuleLe ? ['Se termine le', dateCourte(abonnement.annuleLe)]
@@ -516,10 +532,13 @@ export default function Reglages() {
         <>
           <div className="rg-plus-formule">
             <Mascot pose="levelup" size={60} alt="" aria-hidden="true" />
-            <span><b>{nom}</b>{ACHAT_DANS_L_APP && <span>{prix.montant} {prix.cadence === '/an' ? 'par an' : 'par mois'}</span>}</span>
+            <span><b>{nom}</b>{ACHAT_STRIPE && !parApple && <span>{prix.montant} {prix.cadence === '/an' ? 'par an' : 'par mois'}</span>}{parApple && <span>Payé avec l’App Store</span>}</span>
           </div>
           {echeance && <div className="rg-plus-echeance"><span>{echeance[0]}</span><b>{echeance[1]}</b></div>}
-          {ACHAT_DANS_L_APP && (
+          {parApple && (ACHAT_APPLE
+            ? <button type="button" className="rg-btn rg-btn--blanc" onClick={() => window.open(URL_GERER_APPLE, '_blank')}>Gérer dans l’App Store</button>
+            : <p className="rg-note">Ton abonnement se gère sur ton iPhone : Réglages, ton nom, Abonnements.</p>)}
+          {ACHAT_STRIPE && !parApple && (
             <>
               <button type="button" className="rg-btn rg-btn--blanc" onClick={handleManageSubscription} disabled={billingLoading}>
                 {billingLoading ? 'Ouverture…' : 'Gérer mon abonnement'}
@@ -540,7 +559,7 @@ export default function Reglages() {
             <Mascot pose="trophy" size={60} alt="" aria-hidden="true" />
             <span><b>Réviz+ offert</b><span>{texte}</span></span>
           </div>
-          {VENTES_OUVERTES && ACHAT_DANS_L_APP && fondateurOuvert && (
+          {VENTES_OUVERTES && ACHAT_STRIPE && fondateurOuvert && (
             <>
               <p className="rg-note">Garde ton prix fondateur après le lancement. Rien n’est prélevé avant le {PREMIER_PRELEVEMENT}.</p>
               <button type="button" className="rg-btn" onClick={() => reserver('annuel')} disabled={!!paiement}>
@@ -566,6 +585,12 @@ export default function Reglages() {
             <li><CheckIcon />Les {THEMES_PROPOSES.filter(t => t.premium).length} thèmes Réviz+</li>
           </ul>
           {VENTES_OUVERTES && ACHAT_DANS_L_APP && <button type="button" className="rg-btn" onClick={() => setRevizPlusOuvert(true)}>Découvrir Réviz+</button>}
+          {ACHAT_APPLE && (
+            <button type="button" className="rg-lien" onClick={restaurer} disabled={restauration === 'cours'}>
+              {restauration === 'cours' ? 'Recherche…' : 'Restaurer mes achats'}
+            </button>
+          )}
+          {restauration === 'rien' && <p className="rg-note" role="status">Aucun abonnement Réviz+ trouvé sur ce compte Apple.</p>}
         </>
       );
     }

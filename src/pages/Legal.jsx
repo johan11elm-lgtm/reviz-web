@@ -170,6 +170,7 @@ const PAGES = {
 
         <Section title="Paiement">
           <p>Le paiement se fait par carte bancaire via Stripe, prestataire de paiement sécurisé. Pour un abonnement souscrit avant le 26 octobre 2026, rien n'est prélevé à la souscription : la carte est enregistrée et le premier prélèvement a lieu le 26 octobre 2026, puis à chaque échéance (chaque année ou chaque mois à cette date). Après cette date, le premier paiement a lieu à la souscription, puis à chaque échéance.</p>
+          <p><strong>Dans l'application iPhone</strong>, Réviz+ s'achète uniquement par l'App Store, avec le compte Apple : 7,99 € par mois ou 54,99 € par an (prix fixés dans l'App Store, toutes taxes comprises). Apple encaisse le paiement et applique ses propres conditions ; l'abonnement se renouvelle automatiquement au même prix, sauf résiliation au moins 24 heures avant la fin de la période en cours, dans <strong>Réglages → ton nom → Abonnements</strong> sur l'iPhone. Les remboursements d'un achat fait sur l'App Store se demandent à Apple (reportaproblem.apple.com). Un abonnement pris sur l'App Store ou sur le site donne le même Réviz+, sur l'application comme sur le site.</p>
         </Section>
 
         <Section title="Durée, renouvellement et résiliation">

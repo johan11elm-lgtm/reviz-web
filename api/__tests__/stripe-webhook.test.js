@@ -8,6 +8,7 @@ const userUpdate = vi.fn()
 const cadeauSet = vi.fn()
 const mailEnvoye = vi.fn(async () => ({}))
 let userFound = true
+let appleExistant = null // abonnementsApple/{uid} (api/_apple.js)
 let cadeauExistant = null // données de cadeaux/{CODE} déjà écrit par la page de remerciement
 const consentGet = vi.fn(async () => ({ exists: true, data: () => ({ status: 'pending' }) }))
 const consentSet = vi.fn(async () => {})
@@ -18,6 +19,9 @@ function makeDb() {
       if (name === 'stripeEvents') {
         return { doc: () => ({ get: eventGet, set: eventSet }) }
       }
+      if (name === 'abonnementsApple') {
+        return { doc: () => ({ get: async () => (appleExistant ? { exists: true, data: () => appleExistant } : { exists: false }) }) }
+      }
       if (name === 'cadeaux') {
         return { doc: id => ({ get: async () => (cadeauExistant ? { exists: true, data: () => cadeauExistant } : { exists: false }), set: (v, ...o) => cadeauSet(id, v, ...o) }) }
       }
@@ -27,7 +31,7 @@ function makeDb() {
         where: () => ({
           get: async () => ({
             empty: !userFound,
-            docs: userFound ? [{ ref: { update: userUpdate } }] : [],
+            docs: userFound ? [{ ref: { id: 'u1', update: userUpdate } }] : [],
           }),
         }),
       }
@@ -124,6 +128,22 @@ describe('stripe-webhook — autres events', () => {
   it('subscription.deleted déclasse en gratuit', async () => {
     await run({ id: 'e3', type: 'customer.subscription.deleted', data: { object: { customer: 'cus_1' } } })
     expect(userUpdate).toHaveBeenCalledWith(expect.objectContaining({ plan: 'free', subscriptionStatus: 'canceled' }))
+  })
+
+  it('subscription.deleted garde Réviz+ si l\'élève est abonné dans l\'app iOS', async () => {
+    appleExistant = { actif: true, expire: Date.now() + 86_400_000 }
+    try {
+      await run({ id: 'e3b', type: 'customer.subscription.deleted', data: { object: { customer: 'cus_1' } } })
+      expect(userUpdate).toHaveBeenCalledWith(expect.objectContaining({ plan: 'premium', sourceAbonnement: 'apple', subscriptionStatus: 'canceled' }))
+    } finally { appleExistant = null }
+  })
+
+  it('subscription.updated (unpaid) garde Réviz+ si Apple est actif', async () => {
+    appleExistant = { actif: true, expire: Date.now() + 86_400_000 }
+    try {
+      await run({ id: 'e3c', type: 'customer.subscription.updated', data: { object: { customer: 'cus_1', status: 'unpaid' } } })
+      expect(userUpdate).toHaveBeenCalledWith(expect.objectContaining({ plan: 'premium', sourceAbonnement: 'apple' }))
+    } finally { appleExistant = null }
   })
 
   it('invoice.payment_failed NE déclasse PAS (grâce)', async () => {
