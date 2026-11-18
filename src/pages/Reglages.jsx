@@ -253,8 +253,8 @@ export default function Reglages() {
     setRestauration('cours'); setBillingError('');
     try {
       const actif = await restaurerApple();
-      if (actif) await refreshPremium?.();
-      setRestauration(actif ? '' : 'rien');
+      if (actif) { await refreshPremium?.(); navigate('/upgrade-success?magasin=apple&restaure=1'); return; }
+      setRestauration('rien');
     } catch {
       setRestauration('');
       setBillingError('La restauration n’a pas abouti. Réessaie dans un moment.');

@@ -2,7 +2,7 @@
 // (Partage familial), « Restaurer mes achats », et jamais de lien vers le paiement Stripe.
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
-import { MemoryRouter } from 'react-router-dom'
+import { MemoryRouter, Routes, Route, useLocation } from 'react-router-dom'
 
 const refreshPremium = vi.fn(async () => {})
 const auth = { consent: {}, isGuest: false, refreshPremium }
@@ -21,7 +21,8 @@ const restaurerApple = vi.fn()
 vi.mock('../../../services/achatApple', () => ({ formulesApple: () => formulesApple(), acheterApple: (...a) => acheterApple(...a), restaurerApple: () => restaurerApple() }))
 
 const { DecouvrirRevizPlus, DemanderParent } = await import('../RevizPlusOffre')
-const ecrire = el => render(<MemoryRouter>{el}</MemoryRouter>)
+function Bienvenue() { const l = useLocation(); return <p>bienvenue {l.search}</p> }
+const ecrire = el => render(<MemoryRouter><Routes><Route path="/" element={el} /><Route path="/upgrade-success" element={<Bienvenue />} /></Routes></MemoryRouter>)
 
 describe('Réviz+ dans l’app iOS', () => {
   beforeEach(() => { acheterApple.mockReset(); restaurerApple.mockReset(); refreshPremium.mockClear() })
@@ -36,12 +37,16 @@ describe('Réviz+ dans l’app iOS', () => {
     expect(screen.queryByText(/Stripe/)).not.toBeInTheDocument()
   })
 
-  it('achat réussi : Réviz+ relu, écran de bienvenue', async () => {
+  it('achat réussi : Réviz+ relu, page de bienvenue complète (formule et prix App Store)', async () => {
     acheterApple.mockResolvedValue('achete')
-    ecrire(<DecouvrirRevizPlus lieu="coach" onClose={() => {}} />)
+    const onClose = vi.fn()
+    ecrire(<DecouvrirRevizPlus lieu="coach" onClose={onClose} />)
     fireEvent.click(await screen.findByRole('radio', { name: /Au mois/ }))
     fireEvent.click(screen.getByRole('button', { name: 'Passer à Réviz+' }))
-    expect(await screen.findByRole('heading', { name: 'Bienvenue dans Réviz+' })).toBeInTheDocument()
+    const page = await screen.findByText(/^bienvenue/)
+    const q = new URLSearchParams(page.textContent.replace('bienvenue ', ''))
+    expect(Object.fromEntries(q)).toEqual({ magasin: 'apple', formule: 'mensuel', prix: '7,99 €' })
+    expect(onClose).toHaveBeenCalled()
     expect(acheterApple).toHaveBeenCalledWith('mensuel', FORMULES)
     expect(refreshPremium).toHaveBeenCalled()
   })

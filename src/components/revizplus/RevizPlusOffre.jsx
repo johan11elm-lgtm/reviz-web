@@ -202,9 +202,10 @@ export function DecouvrirRevizPlus({ onClose, lieu = 'autre' }) {
  */
 function AchatApple({ onClose, lieu, titre, sousTitre, pour, comparatif }) {
   const { refreshPremium } = useAuth() ?? {};
+  const navigate = useNavigate();
   const [formules, setFormules] = useState(null); // null = chargement
   const [formule, setFormule] = useState(FORMULE_PAR_DEFAUT);
-  const [etat, setEtat] = useState(''); // '' | achat | restauration | achete | en_attente | rien
+  const [etat, setEtat] = useState(''); // '' | achat | restauration | en_attente | rien
   const [erreur, setErreur] = useState('');
   const occupe = etat === 'achat' || etat === 'restauration';
 
@@ -225,6 +226,8 @@ function AchatApple({ onClose, lieu, titre, sousTitre, pour, comparatif }) {
       if (r === 'achete') {
         await refreshPremium?.();
         mesurer('offre', { etape: 'payee', lieu, formule, magasin: 'apple' });
+        bienvenue({ formule, prix: formules?.[formule]?.prix });
+        return;
       }
       setEtat(r === 'annule' ? '' : r);
     } catch {
@@ -233,28 +236,29 @@ function AchatApple({ onClose, lieu, titre, sousTitre, pour, comparatif }) {
     }
   }
 
+  // Après l'achat : la page de bienvenue complète (celle du paiement sur le site), version App Store.
+  function bienvenue({ formule: f, prix, restaure } = {}) {
+    const q = new URLSearchParams({ magasin: 'apple' });
+    if (f) q.set('formule', f);
+    if (prix) q.set('prix', prix);
+    if (restaure) q.set('restaure', '1');
+    onClose?.();
+    navigate(`/upgrade-success?${q}`);
+  }
+
   async function restaurer() {
     if (occupe) return;
     setEtat('restauration'); setErreur('');
     try {
       const actif = await restaurerApple();
-      if (actif) await refreshPremium?.();
-      setEtat(actif ? 'achete' : 'rien');
+      if (actif) { await refreshPremium?.(); bienvenue({ restaure: true }); return; }
+      setEtat('rien');
     } catch {
       setEtat('');
       setErreur('La restauration n’a pas abouti. Réessaie dans un moment.');
     }
   }
 
-  if (etat === 'achete') {
-    return (
-      <Fenetre label="Réviz+" pose="levelup" onClose={onClose}>
-        <h2 className="rpo-titre">Bienvenue dans Réviz+</h2>
-        <p className="rpo-sous">Exercices, scans et thèmes sans limite, et 50 questions par jour à Réviz IA.</p>
-        <button type="button" className="rpo-btn" onClick={onClose}>C’est parti</button>
-      </Fenetre>
-    );
-  }
   if (etat === 'en_attente') {
     return (
       <Fenetre label="Réviz+" pose="hello" onClose={onClose}>

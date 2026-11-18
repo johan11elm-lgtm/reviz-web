@@ -24,6 +24,7 @@ const Icone = ({ d }) => (
 );
 const APPAREIL = 'M4 8.5A2.5 2.5 0 0 1 6.5 6h1.8l1.4-2h4.6l1.4 2h1.8A2.5 2.5 0 0 1 20 8.5v8A2.5 2.5 0 0 1 17.5 19h-11A2.5 2.5 0 0 1 4 16.5zM12 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6z';
 const BULLE = 'M5 5.5h14a1.5 1.5 0 0 1 1.5 1.5v8a1.5 1.5 0 0 1-1.5 1.5H10l-4 3.5v-3.5H5A1.5 1.5 0 0 1 3.5 15V7A1.5 1.5 0 0 1 5 5.5z';
+const ECLAIR = 'M13 3L5 13.5h6L10 21l8-10.5h-6z';
 const PALETTE = 'M12 3.5a8.5 8.5 0 1 0 0 17c1.2 0 1.8-.9 1.4-1.9-.5-1.2.3-2.6 1.6-2.6H17a3.5 3.5 0 0 0 3.5-3.5c0-5-3.8-9-8.5-9zM7.5 12a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3-3.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z';
 const THEMES = ['#2A2D52', '#B2552E', '#3E7A5C', '#7A4688'];
 
@@ -36,7 +37,10 @@ export default function UpgradeSuccess() {
   const navigate = useNavigate();
   const isDesktop = useIsDesktop();
   const [params] = useSearchParams();
-  const fondateur = params.get('fondateur') === '1';
+  // Achat dans l'app iPhone (RevizPlusOffre → AchatApple) : prix et résiliation côté App Store.
+  const apple = params.get('magasin') === 'apple';
+  const restaure = params.get('restaure') === '1';
+  const fondateur = !apple && params.get('fondateur') === '1';
   const formule = FORMULES.includes(params.get('formule')) ? params.get('formule') : null;
   const { currentUser, refreshPremium, isPremium, abonnement } = useAuth();
   const [retriesExhausted, setRetriesExhausted] = useState(false);
@@ -45,7 +49,8 @@ export default function UpgradeSuccess() {
   const pantin = useRef(null);
 
   // Dernière étape du tunnel de vente (voir RevizPlusOffre) : une fois par arrivée.
-  useEffect(() => { mesurer('offre', { etape: 'payee', formule: formule ?? 'inconnue' }); }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  // (L'achat App Store est déjà compté par AchatApple.)
+  useEffect(() => { if (!apple) mesurer('offre', { etape: 'payee', formule: formule ?? 'inconnue' }); }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Retry refreshPremium si le webhook Stripe n'a pas encore écrit dans
   // Firestore : backoff 2s/4s/8s/16s (~30s couverts) au lieu d'un seul essai —
@@ -77,17 +82,22 @@ export default function UpgradeSuccess() {
   }
 
   const f = formule ?? abonnement?.formule ?? 'annuel';
-  const prix = prixDe(f, fondateur || !!abonnement?.fondateur);
+  const parApple = apple || abonnement?.source === 'apple';
+  // Prix de l'App Store tel qu'affiché à l'achat (devise de l'élève) ; ceux du site sinon.
+  const montant = parApple ? params.get('prix') : prixDe(f, fondateur || !!abonnement?.fondateur).montant;
   const echeance = abonnement?.annuleLe ? ['Se termine le', dateCourte(abonnement.annuleLe)]
     : fondateur ? ['Premier prélèvement', PREMIER_PRELEVEMENT]
-    : abonnement?.periodeFin ? ['Prochain prélèvement', dateCourte(abonnement.periodeFin)] : null;
+    : abonnement?.periodeFin ? [parApple ? 'Prochain renouvellement' : 'Prochain prélèvement', dateCourte(abonnement.periodeFin)] : null;
 
   const actif = isPremium;
-  const titre = actif ? (prenom ? `Bienvenue dans Réviz+, ${prenom}.` : 'Bienvenue dans Réviz+.') : (prenom ? `Merci, ${prenom}.` : 'Merci.');
+  const titre = actif && restaure ? (prenom ? `Re-bonjour, ${prenom}.` : 'Re-bonjour.')
+    : actif ? (prenom ? `Bienvenue dans Réviz+, ${prenom}.` : 'Bienvenue dans Réviz+.') : (prenom ? `Merci, ${prenom}.` : 'Merci.');
   const statut = actif ? (
     <div className="ugs-carte ugs-statut">
       <span className="ugs-rond ugs-rond--vert" aria-hidden="true"><Coche /></span>
-      <b>{fondateur ? `Prix fondateur réservé : rien n’est prélevé avant le ${PREMIER_PRELEVEMENT}.` : 'Ton abonnement est actif : tout est débloqué.'}</b>
+      <b>{fondateur ? `Prix fondateur réservé : rien n’est prélevé avant le ${PREMIER_PRELEVEMENT}.`
+        : restaure ? 'Ton abonnement est retrouvé : tout est de nouveau débloqué.'
+        : 'Ton abonnement est actif : tout est débloqué.'}</b>
     </div>
   ) : (
     <div className="ugs-carte ugs-statut" role="status">
@@ -106,14 +116,15 @@ export default function UpgradeSuccess() {
     <>
       <h2 className="ugs-h2">Ce que tu as maintenant</h2>
       <ul className="ugs-carte ugs-liste">
-        <li><span className="ugs-rond ugs-rond--lavande"><Icone d={APPAREIL} /></span><b>Scans de leçons illimités</b></li>
-        <li><span className="ugs-rond ugs-rond--peche"><Icone d={BULLE} /></span><b>50 questions à Réviz IA par jour</b></li>
-        <li><span className="ugs-rond ugs-rond--menthe"><Icone d={PALETTE} /></span><b>3 thèmes de couleur en plus</b>
+        <li><span className="ugs-rond ugs-rond--orange"><Icone d={ECLAIR} /></span><span><b>Séances d’exercices illimitées</b><span>Plus de limite à 3 par jour : enchaîne autant que tu veux.</span></span></li>
+        <li><span className="ugs-rond ugs-rond--lavande"><Icone d={APPAREIL} /></span><span><b>Scans de leçons illimités</b><span>Photographie ton cours : fiche, quiz et exercices à partir de ta leçon.</span></span></li>
+        <li><span className="ugs-rond ugs-rond--peche"><Icone d={BULLE} /></span><span><b>50 questions à Réviz IA par jour</b><span>Au lieu de 10 par semaine : demande une explication dès que tu bloques.</span></span></li>
+        <li><span className="ugs-rond ugs-rond--menthe"><Icone d={PALETTE} /></span><span><b>3 thèmes de couleur en plus</b><span>Abricot, Sauge ou Prune, à choisir dans les Réglages.</span></span>
           <span className="ugs-themes" aria-hidden="true">{THEMES.map(c => <i key={c} style={{ background: c }} />)}</span></li>
       </ul>
       <div className="ugs-carte ugs-formule">
         <span className="ugs-sur">Ta formule</span>
-        <div><span>{f === 'mensuel' ? 'Au mois' : 'À l’année'}</span><b>{prix.montant}</b></div>
+        <div><span>{f === 'mensuel' ? 'Au mois' : 'À l’année'}</span>{montant && <b>{montant}</b>}</div>
         {echeance && <div><span>{echeance[0]}</span><b>{echeance[1]}</b></div>}
       </div>
       <h2 className="ugs-h2">Pour commencer</h2>
@@ -122,7 +133,9 @@ export default function UpgradeSuccess() {
         <Link to="/reglages#themes"><span className="ugs-rond ugs-rond--menthe"><Icone d={PALETTE} /></span><span><b>Choisir mon thème</b><span>Abricot, Sauge ou Prune</span></span><Chevron /></Link>
         <Link to="/coach"><span className="ugs-rond ugs-rond--peche"><Icone d={BULLE} /></span><span><b>Poser une question à Réviz IA</b></span><Chevron /></Link>
       </div>
-      <p className="ugs-note">{fondateur
+      <p className="ugs-note">{parApple
+        ? <>Payé avec ton compte Apple. Résiliable à tout moment dans les réglages de l’iPhone : ton nom, puis Abonnements.</>
+        : fondateur
         ? <>Tu peux annuler avant le {PREMIER_PRELEVEMENT} sans rien payer, depuis les <Link to="/reglages#abonnement">Réglages</Link>.</>
         : <>Résiliable à tout moment depuis les <Link to="/reglages#abonnement">Réglages</Link>.</>}</p>
     </>

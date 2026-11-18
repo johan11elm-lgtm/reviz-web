@@ -34,6 +34,10 @@
 .ugs-liste li { display: flex; align-items: center; gap: 14px; padding: 12px 0; font-size: 15.5px; }
 .ugs-liste li + li { border-top: 1.5px dashed var(--rv-ligne); }
 .ugs-liste b { flex: 1; font-weight: 700; }
+.ugs-liste li > span:not(.ugs-rond):not(.ugs-themes) { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.ugs-liste li > span:not(.ugs-rond):not(.ugs-themes) > span { font-size: 13.5px; line-height: 1.4; color: var(--rv-doux); }
+.ugs-liste .ugs-rond { flex-shrink: 0; align-self: flex-start; }
+.ugs-rond--orange { background: #FFE2CC; color: var(--rv-orange, #E0622F); }
 .ugs-themes { display: flex; gap: 4px; }
 .ugs-themes i { width: 14px; height: 14px; border-radius: 50%; }
 .ugs-formule { display: flex; flex-direction: column; }
@@ -101,6 +105,7 @@
 .ugs-page .ugs-hero-haut { flex-wrap: wrap; position: relative; padding-right: 56px; }
 .ugs-page .ugs-hero-haut .ugs-fermer { position: absolute; top: 0; right: 0; }
 .ugs-page .ugs-sur { opacity: 1; color: #fff; }
+.ugs-page .ugs-formule .ugs-sur { color: var(--rv-doux); }
 .ugs-page .ugs-titre { margin-top: 2px; font-family: inherit; letter-spacing: -.02em; color: #fff; }
 .ugs-page .ugs-fermer { border-radius: 12px; box-shadow: none; }
 .ugs-page .ugs-carte { border-radius: 20px; }
@@ -109,6 +114,7 @@
 .ugs-page .ugs-rond--lavande { background: #F2EBFF; }
 .ugs-page .ugs-rond--peche { background: #FFE9DF; }
 .ugs-page .ugs-rond--menthe { background: #DDF5F4; }
+.ugs-page .ugs-rond--orange { background: #FFE9DF; }
 .ugs-page .ugs-btn { border-radius: 14px; }
 .ugs-page .ugs-btn--second { box-shadow: 0 1px 3px rgba(4,42,101,.12), 0 3px 0 #E6DFD8; }
 /* Ordinateur : le bloc orange à gauche, en carte arrondie au lieu du demi-cercle */
