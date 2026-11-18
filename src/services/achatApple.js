@@ -17,8 +17,18 @@ const CLE = import.meta.env.VITE_REVENUECAT_IOS
 /** L'achat intégré est-il possible ici (app iOS, clé RevenueCat posée) ? */
 export const achatAppleDisponible = () => Capacitor.getPlatform?.() === 'ios' && !!CLE
 
-let module = null
-const plugin = async () => (module ??= (await import('@revenuecat/purchases-capacitor')).Purchases)
+// Le plugin Capacitor est un Proxy qui répond à toute propriété, `then` compris : le renvoyer
+// tel quel d'une fonction async le fait passer pour une promesse qui ne se résout jamais
+// (aucun appel natif ne part). On le garde donc dans une boîte.
+let boite = null
+const charger = async () => (boite ??= { P: (await import('@revenuecat/purchases-capacitor')).Purchases })
+async function avecPlugin(fn) { const { P } = await charger(); return fn(P) }
+
+/** Coupe une attente native trop longue (StoreKit muet, réseau absent). */
+function delai(promesse, ms, code = 'INDISPONIBLE') {
+  let t
+  return Promise.race([promesse, new Promise((_, rej) => { t = setTimeout(() => rej(new Error(code)), ms) })]).finally(() => clearTimeout(t))
+}
 
 let pret = null
 let uidConfigure = null
@@ -29,11 +39,10 @@ export function preparerAchatApple(uid) {
   if (uidConfigure === uid && pret) return pret
   const precedent = pret
   uidConfigure = uid
-  pret = (async () => {
-    const P = await plugin()
+  pret = avecPlugin(async P => {
     if (!precedent) await P.configure({ apiKey: CLE, appUserID: uid })
     else { await precedent.catch(() => {}); await P.logIn({ appUserID: uid }) }
-  })()
+  })
   pret.catch(err => { console.warn('[achat-apple] configuration', err?.message || err); pret = null; uidConfigure = null })
   return pret
 }
@@ -41,15 +50,16 @@ export function preparerAchatApple(uid) {
 /** À la déconnexion : le prochain élève sur ce téléphone ne reprend pas l'achat du précédent. */
 export async function oublierAchatApple() {
   if (!pret) return
-  try { await pret; await (await plugin()).logOut() } catch { /* déjà anonyme */ }
+  try { await pret; await avecPlugin(P => P.logOut()) } catch { /* déjà anonyme */ }
   uidConfigure = null
 }
 
-async function pretPour() {
+/** Prépare RevenueCat pour l'élève connecté puis lance fn(Purchases). */
+async function avecPurchases(fn) {
   const uid = auth.currentUser?.uid
   if (!uid) throw new Error('UNAUTHORIZED')
-  await preparerAchatApple(uid)
-  return plugin()
+  await delai(preparerAchatApple(uid), 15_000)
+  return avecPlugin(fn)
 }
 
 /**
@@ -57,8 +67,8 @@ async function pretPour() {
  * @returns {Promise<Record<'annuel'|'mensuel', { prix: string, centimes: number, devise: string, produit: object }>>}
  */
 export async function formulesApple() {
-  const P = await pretPour()
-  const { products } = await P.getProducts({ productIdentifiers: Object.values(PRODUITS_APPLE), type: 'SUBS' })
+  const { products } = await avecPurchases(P => delai(
+    P.getProducts({ productIdentifiers: Object.values(PRODUITS_APPLE), type: 'SUBS' }), 20_000))
   const formules = {}
   for (const [formule, id] of Object.entries(PRODUITS_APPLE)) {
     const p = products.find(x => x.identifier === id)
@@ -93,11 +103,10 @@ const EN_ATTENTE = '20'
  * @throws {Error} 'UNAUTHORIZED' | 'INDISPONIBLE' | 'ECHEC'
  */
 export async function acheterApple(formule, formules) {
-  const P = await pretPour()
   const produit = formules?.[formule]?.produit
   if (!produit) throw new Error('INDISPONIBLE')
   try {
-    await P.purchaseStoreProduct({ product: produit })
+    await avecPurchases(P => P.purchaseStoreProduct({ product: produit }))
   } catch (err) {
     if (err?.code === ANNULE || err?.userCancelled) return 'annule'
     if (err?.code === EN_ATTENTE) return 'en_attente'
@@ -114,8 +123,7 @@ export async function acheterApple(formule, formules) {
  * @returns {Promise<boolean>} true si Réviz+ est actif après coup
  */
 export async function restaurerApple() {
-  const P = await pretPour()
-  await P.restorePurchases()
+  await avecPurchases(P => P.restorePurchases())
   const r = await synchroniser()
   return r.plan === 'premium'
 }
