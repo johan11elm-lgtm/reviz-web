@@ -56,6 +56,8 @@ export async function oublierAchatApple() {
 
 /** Prépare RevenueCat pour l'élève connecté puis lance fn(Purchases). */
 async function avecPurchases(fn) {
+  // Démarrage optimiste : l'accueil s'affiche avant que Firebase ait rendu la session.
+  if (!auth.currentUser) await delai(auth.authStateReady?.() ?? Promise.resolve(), 10_000, 'UNAUTHORIZED').catch(() => {})
   const uid = auth.currentUser?.uid
   if (!uid) throw new Error('UNAUTHORIZED')
   await delai(preparerAchatApple(uid), 15_000)
