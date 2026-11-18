@@ -214,6 +214,10 @@
   animation: hmFlotte 2.6s ease-in-out infinite;
 }
 @keyframes hmFlotte { 50% { transform: translateY(-4px); } }
+/* App iPhone : pas de flottement en boucle. Quand ce rond entrait à l'écran pendant un lancer,
+   iOS lui créait sa couche et coupait net l'élan du défilement (mesuré le 18/11 : l'accueil
+   s'arrêtait toujours vers 790-830 px, là où le rond apparaît en bas de l'écran). */
+html.native .home-page .hm-case--maintenant .hm-case-rond { animation: none; }
 .home-page .hm-case--choisie:not(.hm-case--maintenant) .hm-case-rond {
   box-shadow: 0 0 0 3px var(--hm-fond), 0 0 0 5px var(--hm-encre), 0 6px 14px -8px rgba(var(--rv-ombre),.4);
 }

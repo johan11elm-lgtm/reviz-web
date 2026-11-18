@@ -677,6 +677,10 @@ html.native .content, html.native .pg-content, html.native .pf-content {
   flex-shrink: 0;
   transform: translateY(0);
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Couche gardée en permanence : sur iPhone, à la fin de l'animation qui cache ou ré-affiche
+     la barre (0,3 s), iOS refaisait sa couche et coupait net l'élan du défilement de la page
+     (mesuré le 18/11 : arrêt à la milliseconde de la fin de l'animation). */
+  will-change: transform;
 }
 
 .bottom-nav--hidden {
