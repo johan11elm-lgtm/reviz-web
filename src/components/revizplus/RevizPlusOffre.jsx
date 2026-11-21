@@ -69,6 +69,7 @@ const TITRES = {
   fin_essai: ['Garde Réviz+', 'Ta semaine offerte est finie. Garde tes exercices sans limite.'],
   coach: ['Réviz IA, chaque jour', 'Avec Réviz+, 50 questions par jour au lieu de 10 par semaine.'],
   scan: ['Scanne sans compter', 'Avec Réviz+, tes scans sont illimités.'],
+  paiement_annule: ['On réessaie', 'Si c’est la carte d’un parent, garde son téléphone à portée de main pour valider.'],
 };
 const TITRE_PAR_DEFAUT = ['Réviz+', 'Pour aller plus loin, quand tu veux.'];
 
@@ -425,19 +426,29 @@ export function LimiteAtteinte({ type = 'scan', limite, abonne = false, offertJu
   );
 }
 
-/** Retour de Stripe sans payer : un petit mot calme, qui part seul après 5 s. */
-export function ToastPaiementAnnule({ onClose }) {
-  useEffect(() => {
-    const t = setTimeout(onClose, 5000);
-    return () => clearTimeout(t);
-  }, [onClose]);
-  return createPortal(
-    <div className="rpo-toast" role="status">
-      <span className="rpo-toast-rond" aria-hidden="true"><Mascot pose="pointing" size={56} alt="" /></span>
-      <span><b>Pas de souci.</b>Réviz+ reste là si tu changes d’avis.</span>
-      <button type="button" className="rpo-toast-fermer" onClick={onClose} aria-label="Fermer"><Croix /></button>
-    </div>,
-    document.body,
+/**
+ * Retour de Stripe sans payer (21/11). Souvent, c'est l'élève qui a lancé le paiement avec la
+ * carte d'un parent : la banque demande une validation sur le téléphone du parent, et le
+ * paiement échoue. On ne devine pas qui tient le téléphone : réessayer (le parent est là) ou
+ * envoyer le lien au parent (il paie de chez lui). Rien ne part sans un toucher.
+ */
+export function PaiementPasAbouti({ onClose }) {
+  const [offre, setOffre] = useState(false);
+  useEffect(() => { mesurer('offre', { etape: 'paiement_annule' }); }, []);
+  if (offre) return <DecouvrirRevizPlus lieu="paiement_annule" onClose={onClose} />;
+  return (
+    <Fenetre label="Paiement pas terminé" onClose={onClose}>
+      <div className="rpo-panneau rpo-panneau--peche">
+        <span className="ch-grain" aria-hidden="true" />
+        <BulleReviz lignes={['Pas de souci.', 'Rien n’a été prélevé.']} pointe="droite" className="rpo-bulle" />
+        <Mascot pose="pointing" size={150} alt="" aria-hidden="true" />
+      </div>
+      <h2 className="rpa-titre">Le paiement n’est pas allé au bout</h2>
+      <p className="rpa-texte">Si c’est la carte d’un parent, sa banque demande souvent de valider sur son téléphone. Il peut payer de chez lui avec un lien.</p>
+      <DemanderParent lieu="paiement_annule" enBouton />
+      <button type="button" className="rpo-btn rpo-btn--second" onClick={() => setOffre(true)}>Réessayer</button>
+      <button type="button" className="rpo-lien" onClick={onClose}>Plus tard</button>
+    </Fenetre>
   );
 }
 

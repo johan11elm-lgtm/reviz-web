@@ -13,7 +13,7 @@ const mesurer = vi.fn()
 vi.mock('../../../services/mesure', () => ({ mesurer: (...a) => mesurer(...a) }))
 vi.mock('../../../../api/_lancement.js', async orig => ({ ...(await orig()), tarifFondateurOuvert: () => false }))
 
-const { DecouvrirRevizPlus, LimiteAtteinte, FinEssaiPlus, DemanderParent, finEssaiVue, joursAvantBrevet } = await import('../RevizPlusOffre')
+const { DecouvrirRevizPlus, LimiteAtteinte, FinEssaiPlus, PaiementPasAbouti, DemanderParent, finEssaiVue, joursAvantBrevet } = await import('../RevizPlusOffre')
 const ecrire = el => render(<MemoryRouter>{el}</MemoryRouter>)
 
 describe('paiement Réviz+', () => {
@@ -87,6 +87,16 @@ describe('paiement Réviz+', () => {
     expect(finEssaiVue('u1')).toBe(true)
     fireEvent.click(screen.getByRole('button', { name: 'Garder Réviz+' }))
     expect(screen.getByRole('heading', { name: 'Garde Réviz+' })).toBeInTheDocument()
+  })
+  it('paiement pas terminé : rien ne part tout seul, réessayer ou envoyer le lien au parent', () => {
+    mesurer.mockClear()
+    ecrire(<PaiementPasAbouti onClose={() => {}} />)
+    expect(screen.getByRole('heading', { name: 'Le paiement n’est pas allé au bout' })).toBeInTheDocument()
+    expect(mesurer).toHaveBeenCalledWith('offre', { etape: 'paiement_annule' })
+    expect(mesurer).not.toHaveBeenCalledWith('offre', expect.objectContaining({ etape: 'demande_parent' }))
+    expect(screen.getByRole('button', { name: 'Demander à un parent de me l’offrir' })).toBeInTheDocument()
+    fireEvent.click(screen.getByRole('button', { name: 'Réessayer' }))
+    expect(screen.getByRole('heading', { name: 'On réessaie' })).toBeInTheDocument()
   })
 })
 

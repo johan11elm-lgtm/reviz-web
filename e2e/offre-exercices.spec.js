@@ -143,3 +143,29 @@ test.describe('Limite d\'exercices et essai Réviz+', () => {
     await expect(fin).toHaveCount(0)
   })
 })
+
+test.describe('Retour de Stripe sans payer', () => {
+  test('réessayer ou envoyer le lien à un parent, rien ne part tout seul', async ({ page }) => {
+    const demandes = []
+    await page.setViewportSize(TELEPHONE)
+    await mockApiRoutes(page)
+    await mockProgramme(page)
+    await page.route('**/api/track?op=lien-plus', route => {
+      demandes.push(route.request().url())
+      return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ lien: 'https://app.revizapp.fr/api/abonnement?op=offrir&u=x' }) })
+    })
+    await compteRapide(page, { birthDate: '2013-03-01', profil: {}, aller: '/programme' })
+    await page.goto('/scan?revizplus=annule')
+    const fenetre = page.getByRole('dialog', { name: 'Paiement pas terminé' })
+    await expect(fenetre).toBeVisible()
+    await expect(fenetre).toContainText('Rien n’a été prélevé.')
+    await expect(page).toHaveURL(/\/scan$/)
+    expect(demandes).toHaveLength(0)
+    await expect(fenetre).toContainText('Rien n’a été prélevé.', { timeout: 5000 })
+    await page.waitForTimeout(3500)
+    await sansDebordement(page, 'paiement pas terminé')
+    await page.screenshot({ path: test.info().outputPath('paiement-pas-termine.png'), animations: 'disabled' })
+    await fenetre.getByRole('button', { name: 'Réessayer' }).click()
+    await expect(page.getByRole('dialog', { name: 'Réviz+' })).toContainText('On réessaie')
+  })
+})

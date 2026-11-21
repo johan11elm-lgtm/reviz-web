@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import { useIsDesktop } from '../hooks/useMediaQuery';
 import { useModalA11y } from '../hooks/useModalA11y';
 import { Mascot } from '../components/Mascot';
-import { DecouvrirRevizPlus, ToastPaiementAnnule } from '../components/revizplus/RevizPlusOffre';
+import { DecouvrirRevizPlus, PaiementPasAbouti } from '../components/revizplus/RevizPlusOffre';
 import { RevizPlusBadge } from '../components/RevizPlus';
 import { BottomNav } from '../components/BottomNav';
 import { startAnalysis, startAnalysisFromImage } from '../services/aiService';
@@ -98,7 +98,7 @@ export default function Scan() {
   const [aCamera, setACamera] = useState(!isDesktop);
   const [depot, setDepot] = useState(false);
   const [offre, setOffre] = useState(false);
-  // Retour de Stripe sans payer (api/_checkout.js) : un petit mot, puis l'adresse redevient propre.
+  // Retour de Stripe sans payer (api/_checkout.js) : réessayer ou envoyer le lien à un parent, puis l'adresse redevient propre.
   const [annule, setAnnule] = useState(() => params.get('revizplus') === 'annule');
   const fermerAnnule = useCallback(() => setAnnule(false), []);
   useEffect(() => {
@@ -191,7 +191,7 @@ export default function Scan() {
   const fenetres = (
     <>
       {offre && <DecouvrirRevizPlus lieu="scan" onClose={() => setOffre(false)} />}
-      {annule && <ToastPaiementAnnule onClose={fermerAnnule} />}
+      {annule && <PaiementPasAbouti onClose={fermerAnnule} />}
       {niveauManquant && <NiveauManquant onClose={() => setNiveauManquant(false)} onProfil={() => navigate('/profil')} />}
     </>
   );

@@ -1,4 +1,4 @@
-/* Réviz+ (handoff Claude Design du 22/10) : feuille Découvrir, limites atteintes, toast annulé. */
+/* Réviz+ (handoff Claude Design du 22/10) : feuille Découvrir, limites atteintes, paiement pas terminé. */
 .rpo-voile { position: fixed; inset: 0; z-index: 400; display: flex; align-items: flex-end; justify-content: center; background: rgba(var(--rv-voile-rgb),.42); animation: rpoFondu .2s both; }
 @keyframes rpoFondu { from { opacity: 0; } }
 .rpo-feuille {
@@ -97,17 +97,6 @@
 .rpo-points--ia { gap: 7px; }
 .rpo-points--ia i { width: 13px; height: 13px; }
 
-/* Toast annulé */
-.rpo-toast {
-  position: fixed; z-index: 450; left: 16px; right: 16px; bottom: calc(104px + env(safe-area-inset-bottom, 0px));
-  display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 24px; background: var(--rv-carte); box-shadow: 0 14px 36px rgba(var(--rv-ombre-2),.22);
-  animation: rpoMonteToast .3s cubic-bezier(.3,1.2,.5,1) both;
-}
-@keyframes rpoMonteToast { from { opacity: 0; transform: translateY(20px); } }
-.rpo-toast-rond { flex: none; display: flex; align-items: center; justify-content: center; width: 62px; height: 62px; overflow: hidden; border-radius: 50%; background: var(--rv-peche-pale); }
-.rpo-toast > span:nth-child(2) { flex: 1; display: flex; flex-direction: column; font-size: 14px; color: var(--rv-doux); }
-.rpo-toast b { font-family: var(--font-display); font-size: 18px; font-weight: 800; color: var(--rv-encre); }
-.rpo-toast-fermer { flex: none; display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 0; border-radius: 50%; background: var(--rv-fond); color: var(--rv-encre); cursor: pointer; }
 /* 17/11 : « Pour Alex », preuve, rassurance et « pourquoi pas gratuit » (repris de Knowunity). */
 .rpo-pour { align-self: flex-start; font-size: 13px; font-weight: 700; color: var(--rv-orange-texte); }
 .rpo-preuve { margin: 0; font-size: 13.5px; font-weight: 600; color: var(--rv-doux); text-align: center; }
@@ -120,19 +109,15 @@
 .rpo-pourquoi summary::after { content: '+'; margin-left: auto; font-size: 20px; font-weight: 600; color: var(--rv-doux); }
 .rpo-pourquoi[open] summary::after { content: '–'; }
 .rpo-pourquoi p { margin: 8px 0 2px; font-size: 14px; font-weight: 500; line-height: 1.5; color: var(--rv-doux); }
-@media (min-width: 1024px) {
-  .rpo-toast { left: 50%; right: auto; bottom: 40px; width: 460px; transform: translateX(-50%); animation: none; }
-}
 @media (prefers-reduced-motion: reduce) {
-  .rpo-voile, .rpo-feuille, .rpo-toast, .rpo-anneau { animation: none; }
+  .rpo-voile, .rpo-feuille, .rpo-anneau { animation: none; }
 }
 
 /* ── Sombre : ces pastels gardent leur texte sombre (cf. rv-ilot dans global.css) ── */
 :root[data-theme="dark"] .rpo-sceau,
 :root[data-theme="dark"] .rpo-erreur,
 :root[data-theme="dark"] .rpo-panneau--lavande,
-:root[data-theme="dark"] .rpo-panneau--peche,
-:root[data-theme="dark"] .rpo-toast-rond {
+:root[data-theme="dark"] .rpo-panneau--peche {
   --rv-encre: #042A65; --rv-encre-rgb: 27,26,35; --rv-doux: #6E675B; --rv-doux-rgb: 110,103,91;
   --rv-carte: #fff; --rv-carte-rgb: 255,255,255; --rv-carte-haute: #fff; --rv-ligne: #EADBCB; --rv-piste: #F3E6D8;
   --rv-orange-texte: #C25407; --rv-vert-texte: #1F8A52; --rv-brun-texte: #8F3E05;
@@ -163,13 +148,6 @@
 .rpo-panneau--lavande, .rpo-panneau--peche { background: #B9A6FB; }
 .rpo-carte { border-radius: 18px; box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 1px 2px rgba(4,42,101,.06); }
 .rpo-erreur { border-radius: 12px; background: #FFE5E8; color: #A3172B; }
-.rpo-toast-rond { background: #F2EBFF; }
-/* « Pas de souci » après un paiement annulé : même famille que le badge débloqué. */
-.rpo-toast { border-radius: 20px; background: #042A65; box-shadow: 0 18px 40px -12px rgba(4,42,101,.55); }
-.rpo-toast > span:nth-child(2) { color: rgba(255,255,255,.78); }
-.rpo-toast b { font-family: inherit; color: #fff; }
-.rpo-toast-rond { width: 56px; height: 56px; border: 3px solid #FF4B0A; box-sizing: border-box; background: #B9A6FB; }
-.rpo-toast-fermer { border-radius: 9px; background: rgba(255,255,255,.12); color: #fff; }
 
 /* « Demander à un parent » (08/11) */
 .rpo-demande { display: flex; flex-direction: column; gap: 8px; padding: 14px; border-radius: 20px; background: var(--rv-carte); box-shadow: 0 1px 3px rgba(4,42,101,.1); }
