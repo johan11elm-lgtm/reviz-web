@@ -21,8 +21,39 @@ import { isUnder15 } from '../src/utils/levels.js'
 import { jourParis } from '../src/utils/retour.js'
 import { VAPID_PUBLIC_KEY, MAX_SANS_RETOUR, notifDuJour } from '../src/utils/push.js'
 import { essaiFinitBientot } from './_finEssai.js'
+import { BLACK_FRIDAY, blackFridayEnCours } from './_offres.js'
 
 const JOUR_MS = 24 * 60 * 60 * 1000
+
+// Black Friday (api/_offres.js) : la notification du jour est remplacée deux fois, le premier
+// et le dernier jour, pour les élèves sans Réviz+ payé. Web seulement (l'app iOS n'a pas de push
+// distant) ; mêmes garde-fous que d'habitude (âge, accord parental, silence après les échecs).
+const BF = BLACK_FRIDAY.remises
+const JOURS_BLACK_FRIDAY = {
+  '2026-11-27': {
+    title: 'Black Friday sur Réviz+',
+    annuel: `Réviz+ à ${BF.annuel.montant} la 1re année au lieu de 49 €, jusqu'à lundi. Exercices et scans illimités.`,
+    pass: `Le Pass brevet à ${BF.pass.montant} au lieu de 29 €, jusqu'à lundi : Réviz+ jusqu'au brevet, payé une fois.`,
+  },
+  '2026-11-30': {
+    title: 'Dernier jour du Black Friday',
+    annuel: `Réviz+ à ${BF.annuel.montant} la 1re année, seulement jusqu'à ce soir minuit.`,
+    pass: `Le Pass brevet à ${BF.pass.montant}, seulement jusqu'à ce soir minuit.`,
+  },
+}
+
+/** La notification Black Friday de ce jour pour ce profil, ou null. */
+export function notifBlackFriday(p, aujourdhui, maintenant = Date.now()) {
+  const n = JOURS_BLACK_FRIDAY[aujourdhui]
+  if (!n || !blackFridayEnCours(maintenant) || p?.plan === 'premium') return null
+  const pass = (p?.level?.classe ?? p?.classe) === '3ème'
+  return {
+    title: n.title,
+    body: pass ? n.pass : n.annuel,
+    url: 'https://app.revizapp.fr/?via=push&offre=black_friday',
+    tag: 'reviz-black-friday',
+  }
+}
 // Une notification qui n'a pas pu partir dans les 6 h n'a plus de sens (le soir est passé).
 const TTL_S = 6 * 60 * 60
 const ENDPOINT_RE = /^https:\/\/[a-z0-9.-]+(:\d+)?\/\S{1,2000}$/i
@@ -130,7 +161,7 @@ export async function envoyerNotifs({ db, envoyer, maintenant = Date.now(), jour
       const lecons = await ref.collection('lessons').orderBy('scannedAt', 'desc').limit(1).get().catch(() => null)
       const lecon = lecons?.docs?.[0]?.data() ?? null
       const essaiFinit = p.plan !== 'premium' && essaiFinitBientot(p, maintenant)
-      const notif = notifDuJour({ agenda: p.agenda, jeux: p.jeux, lecon, hier, demain, aujourdhui, essaiFinit })
+      const notif = notifBlackFriday(p, aujourdhui, maintenant) ?? notifDuJour({ agenda: p.agenda, jeux: p.jeux, lecon, hier, demain, aujourdhui, essaiFinit })
       // Le week-end, sans contrôle le lendemain : rien (les week-ends ne comptent pas dans la série).
       if (!notif) continue
       const charge = JSON.stringify(notif)

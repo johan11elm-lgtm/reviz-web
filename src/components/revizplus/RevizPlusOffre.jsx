@@ -431,6 +431,7 @@ export function offreDuMoment({ classe, finEssaiJusquau, apple, maintenant = Dat
       return { raison: 'fin_essai', jusquau: fe.jusquau, titre: `Ton 1er mois de Réviz+ à ${apple.mensuel.promo.priceString}`,
         texte: `Au lieu de ${apple.mensuel.prix}, ${reste(fe.jusquau)}.`, bouton: `Garder Réviz+ à ${apple.mensuel.promo.priceString}`, prix: apple.mensuel.promo.priceString, base: apple.mensuel.prix };
     }
+    if (passPropose(classe, maintenant) && apple.pass) return cartePass(apple.pass.prix, classe, maintenant);
     return null;
   }
   const bf = remiseAffichee('annuel', { maintenant });
@@ -446,8 +447,18 @@ export function offreDuMoment({ classe, finEssaiJusquau, apple, maintenant = Dat
     return { raison: 'fin_essai', jusquau: fe.jusquau, titre: `Ton 1er mois de Réviz+ à ${fe.montant}`,
       texte: `Au lieu de ${prixDe('mensuel').montant}, ${reste(fe.jusquau)}.`, bouton: `Garder Réviz+ à ${fe.montant}`, prix: fe.montant, base: prixDe('mensuel').montant };
   }
+  if (passPropose(classe, maintenant)) return cartePass(PASS_BREVET.montant, classe, maintenant);
   return null;
 }
+
+/** En 3e, hors promo : le Pass brevet reste proposé sur l'accueil, plus calmement. */
+function cartePass(prix, classe, maintenant) {
+  const j = joursAvantBrevet(classe, maintenant);
+  return { raison: 'pass', jusquau: PASS_BREVET.fin, titre: 'Réviz+ jusqu’au brevet',
+    texte: `${prix} une seule fois, sans abonnement${j ? `. Le brevet est dans ${j} jours.` : '.'}`, bouton: 'Voir le Pass brevet' };
+}
+
+const SURTITRES = { black_friday: 'Black Friday', fin_essai: 'Pour toi', pass: 'Spécial 3e' };
 
 /**
  * Carte de l'accueil pendant une offre (26/11) : Black Friday pour tous les élèves sans Réviz+
@@ -463,17 +474,99 @@ export function CarteOffreDuMoment({ classe }) {
   if (!visible) return null;
   return (
     <>
-      <section className="rpo-carte-offre" aria-label={offre.raison === 'black_friday' ? 'Black Friday' : 'Offre de fin d’essai'}>
-        <Mascot pose="celebration" size={76} alt="" aria-hidden="true" />
+      <section className={`rpo-carte-offre rpo-carte-offre--${offre.raison}`} aria-label={SURTITRES[offre.raison]}>
+        <Mascot pose={offre.raison === 'pass' ? 'graduation' : 'celebration'} size={76} alt="" aria-hidden="true" />
         <div>
-          <span className="rpo-carte-offre-sur">{offre.raison === 'black_friday' ? 'Black Friday' : 'Pour toi'}</span>
+          <span className="rpo-carte-offre-sur">{SURTITRES[offre.raison]}</span>
           <b>{offre.titre}</b>
           <p>{offre.texte}</p>
-          <button type="button" className="rpo-btn" onClick={() => setOuverte(true)}>Voir l’offre</button>
+          <button type="button" className="rpo-btn" onClick={() => setOuverte(true)}>{offre.bouton}</button>
         </div>
       </section>
       {ouverte && <DecouvrirRevizPlus lieu={offre.raison} onClose={() => setOuverte(false)} />}
     </>
+  );
+}
+
+const cleBlackFriday = uid => `reviz-black-friday-2026-${uid}`;
+
+/** La fenêtre du Black Friday a-t-elle déjà été montrée sur cet appareil ? */
+export function blackFridayVu(uid) {
+  try { return localStorage.getItem(cleBlackFriday(uid)) === '1'; } catch { return true; }
+}
+
+/**
+ * Black Friday (27-30/11) : une fenêtre à l'ouverture de l'app, une fois par élève, avant toute
+ * autre annonce. Pensée pour convertir : le prix et l'économie en gros, la date de fin, une seule
+ * action principale (qui ouvre directement le paiement sur le site), et « demander à un parent »
+ * juste en dessous, puisque c'est souvent lui qui paie. En 3e, le Pass brevet ; sinon l'annuel.
+ * Sur iPhone, les prix d'Apple, et rien si App Store Connect ne propose pas l'offre.
+ */
+export function AnnonceBlackFriday({ uid, classe, onClose }) {
+  const navigate = useNavigate();
+  const apple = usePrixApple();
+  const [offre, setOffre] = useState(false);
+  const [paiement, setPaiement] = useState(false);
+  const [erreur, setErreur] = useState('');
+  const pass = passPropose(classe) && !ACHAT_APPLE;
+  const formule = pass ? 'pass' : 'annuel';
+  const site = pass
+    ? { prix: BLACK_FRIDAY.remises.pass.montant, base: PASS_BREVET.montant, quoi: 'Réviz+ jusqu’au brevet', detail: 'payé une seule fois, sans abonnement' }
+    : { prix: BLACK_FRIDAY.remises.annuel.montant, base: prixDe('annuel').montant, quoi: 'Réviz+ pendant un an', detail: 'la 1re année, puis résiliable à tout moment' };
+  const prix = apple === undefined ? site
+    : apple?.annuel?.intro ? { prix: apple.annuel.intro.prix, base: apple.annuel.prix, quoi: 'Réviz+ pendant un an', detail: 'la 1re année, puis résiliable à tout moment' } : null;
+  // Le profil arrive parfois après l'ouverture : un abonné ne voit jamais la promo.
+  const { isPremium } = useAuth() ?? {};
+  const ouverte = !isPremium && blackFridayEnCours() && (apple === undefined || apple === null || !!prix);
+  useEffect(() => {
+    if (!ouverte) { onClose(); return; }
+    if (!prix) return; // prix de l'App Store en cours de lecture
+    try { localStorage.setItem(cleBlackFriday(uid), '1'); } catch { /* stockage indisponible */ }
+    mesurer('offre', { etape: 'vue', lieu: 'black_friday_annonce', formule });
+  }, [ouverte, !!prix]); // eslint-disable-line react-hooks/exhaustive-deps
+  if (!ouverte || !prix) return null;
+  if (offre) return <DecouvrirRevizPlus lieu="black_friday" onClose={onClose} />;
+
+  async function profiter() {
+    if (ACHAT_APPLE) { setOffre(true); return; }
+    if (paiement) return;
+    setPaiement(true); setErreur('');
+    mesurer('offre', { etape: 'caisse', lieu: 'black_friday_annonce', formule });
+    try {
+      await startCheckout(formule); // redirection pleine page en cas de succès
+    } catch (err) {
+      setPaiement(false);
+      if (err.message === 'EMAIL_NOT_VERIFIED') { onClose(); navigate('/verify-email', { state: { raison: 'revizplus' } }); }
+      else setErreur('Impossible d’ouvrir le paiement. Réessaie dans un moment.');
+    }
+  }
+
+  return (
+    <Fenetre label="Black Friday" onClose={onClose}>
+      <div className="rpo-bf">
+        <span className="ch-grain" aria-hidden="true" />
+        <div className="rpo-bf-txt">
+          <span className="rpo-bf-sur">Black Friday</span>
+          <b className={`rpo-bf-prix${prix.prix.length > 5 ? ' rpo-bf-prix--long' : ''}`}>{prix.prix}</b>
+          <span className="rpo-bf-base">au lieu de <s>{prix.base}</s></span>
+        </div>
+        <Mascot pose="celebration" size={132} alt="" aria-hidden="true" />
+      </div>
+      <h2 className="rpa-titre">{prix.quoi}</h2>
+      <p className="rpa-texte">{prix.detail.charAt(0).toUpperCase() + prix.detail.slice(1)}. Jusqu’au {BLACK_FRIDAY.dernierJour} à minuit.</p>
+      <ul className="rpa-liste">
+        <li><span className="rpa-rond rpa-rond--menthe" aria-hidden="true"><BoltIcon /></span><b>Exercices illimités</b><span>au lieu de 3 séances par jour</span></li>
+        <li><span className="rpa-rond rpa-rond--lavande" aria-hidden="true"><CameraIcon /></span><b>Scans de leçons illimités</b><span>au lieu de 5 par semaine</span></li>
+        <li><span className="rpa-rond rpa-rond--peche" aria-hidden="true"><ChatIcon /></span><b>Réviz IA chaque jour</b><span>50 questions par jour au lieu de 10 par semaine</span></li>
+      </ul>
+      {erreur && <p className="rpo-erreur" role="alert">{erreur}</p>}
+      <button type="button" className="rpo-btn" onClick={profiter} disabled={paiement}>
+        {paiement ? <><span className="rpo-anneau" aria-hidden="true" />Ouverture du paiement…</> : `J’en profite à ${prix.prix}`}
+      </button>
+      <DemanderParent lieu="black_friday_annonce" enBouton />
+      <button type="button" className="rpo-lien" onClick={() => setOffre(true)}>Voir toutes les formules</button>
+      <button type="button" className="rpo-lien" onClick={onClose}>Plus tard</button>
+    </Fenetre>
   );
 }
 

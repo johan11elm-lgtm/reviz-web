@@ -9,7 +9,8 @@ import { PushBanner } from '../components/PushBanner';
 import { ParrainageBanner } from '../components/ParrainageBanner';
 import { RappelOuverture } from '../components/RappelDemain';
 import { RetourAbsence } from '../components/RetourAbsence';
-import { FinEssaiPlus, finEssaiVue, CarteOffreDuMoment } from '../components/revizplus/RevizPlusOffre';
+import { FinEssaiPlus, finEssaiVue, CarteOffreDuMoment, AnnonceBlackFriday, blackFridayVu } from '../components/revizplus/RevizPlusOffre';
+import { blackFridayEnCours } from '../../api/_offres.js';
 import { LancerConcentration } from '../components/Concentration';
 import { LigneLigue } from '../components/LigneLigue';
 import { LignePlanBrevet } from '../components/LignePlanBrevet';
@@ -110,28 +111,31 @@ export default function Home() {
   const isDesktop = useIsDesktop();
   const [allLessons, setAllLessons] = useState(() => loadLessons());
   const [newBadge, setNewBadge] = useState(null);
-  const [annonceRevizPlus, setAnnonceRevizPlus] = useState(() => ACHAT_STRIPE && revizPlusOffert && !isGuest && !!currentUser?.uid && !annonceRevizPlusVue(currentUser.uid));
+  // Black Friday (27-30/11) : une fenêtre à l'ouverture, une fois, avant toute autre annonce.
+  const [annonceBF, setAnnonceBF] = useState(() => blackFridayEnCours() && ACHAT_DANS_L_APP && !isGuest && !isPremium
+    && !!currentUser?.uid && (!blackFridayVu(currentUser.uid) || new URLSearchParams(window.location.search).get('offre') === 'black_friday'));
+  const [annonceRevizPlus, setAnnonceRevizPlus] = useState(() => !annonceBF && ACHAT_STRIPE && revizPlusOffert && !isGuest && !!currentUser?.uid && !annonceRevizPlusVue(currentUser.uid));
   // Annonce de la sortie : Réviz Games (celle de la Battle, du 22/10, n'est plus montrée).
   // En essai, jamais avant une première révision : c'était le premier écran du nouveau venu, et
   // un essai sur trois ne faisait que jouer puis repartait (10/11).
-  const [annonceJeux, setAnnonceJeux] = useState(() => !annonceRevizPlus && !!currentUser?.uid && !annonceJeuxVue(currentUser.uid)
+  const [annonceJeux, setAnnonceJeux] = useState(() => !annonceBF && !annonceRevizPlus && !!currentUser?.uid && !annonceJeuxVue(currentUser.uid)
     && (!isGuest || loadRevisions().length > 0));
   const { theme, isDark } = useTheme();
   const [essaiTheme, setEssaiTheme] = useState(() => !essaiThemeVu());
   // Rappel de 17 h proposé à l'ouverture (08/11), jamais en même temps qu'une annonce,
   // seulement après une première révision ; espacement dans utils/demandeRappel.js.
   // Retour après 3 jours sans réviser (11/11, utils/retourAbsence.js) : avant le rappel, jamais avec une annonce.
-  const [retour, setRetour] = useState(() => (!annonceRevizPlus && !annonceJeux && !isGuest
+  const [retour, setRetour] = useState(() => (!annonceBF && !annonceRevizPlus && !annonceJeux && !isGuest
     ? retourAProposer(currentUser?.uid, loadRevisions()) : null));
   const [concentration, setConcentration] = useState(false);
   // Fin de l'essai de 7 jours (17/11) : un écran, une fois, avant toute autre annonce du jour.
   // essaiPlusPris arrive avec le profil (après le premier rendu) : décidé dans un effet.
   const [finEssai, setFinEssai] = useState(false);
   useEffect(() => {
-    if (essaiPlusPris && !hasRevizPlus && !isGuest && currentUser?.uid && !annonceRevizPlus && !annonceJeux
+    if (essaiPlusPris && !hasRevizPlus && !isGuest && currentUser?.uid && !annonceBF && !annonceRevizPlus && !annonceJeux
       && !finEssaiVue(currentUser.uid)) setFinEssai(true);
-  }, [essaiPlusPris, hasRevizPlus, isGuest, currentUser?.uid, annonceRevizPlus, annonceJeux]);
-  const [rappelOuverture, setRappelOuverture] = useState(() => !annonceRevizPlus && !annonceJeux && !retour && loadRevisions().length > 0);
+  }, [essaiPlusPris, hasRevizPlus, isGuest, currentUser?.uid, annonceBF, annonceRevizPlus, annonceJeux]);
+  const [rappelOuverture, setRappelOuverture] = useState(() => !annonceBF && !annonceRevizPlus && !annonceJeux && !retour && loadRevisions().length > 0);
   // Les thèmes Réviz+ sont des thèmes clairs : pas d'invitation à les essayer en sombre.
   const montrerEssai = essaiTheme && hasRevizPlus && !isGuest && !isDark && !themeById(theme)?.premium;
   const [caseChoisie, setCaseChoisie] = useState(null);
@@ -611,6 +615,7 @@ export default function Home() {
   return (
     <div className={`app app--no-halo home-page nm-page${isDesktop ? ' app--large nm-page--large' : ''}`} style={style}>
       {newBadge && !annonceJeux && <AchievementToast badge={newBadge} onDone={() => setNewBadge(null)} />}
+      {annonceBF && <AnnonceBlackFriday uid={currentUser.uid} classe={getUserLevel()?.classe} onClose={() => setAnnonceBF(false)} />}
       {annonceRevizPlus && <RevizPlusAnnonce uid={currentUser.uid} onClose={() => setAnnonceRevizPlus(false)} />}
       {annonceJeux && <JeuxAnnonce uid={currentUser.uid} onClose={() => setAnnonceJeux(false)} />}
       {finEssai && <FinEssaiPlus uid={currentUser.uid} onClose={() => setFinEssai(false)} />}
@@ -627,11 +632,11 @@ export default function Home() {
           <div className="nm-principal">
             {rappels}
             {salut}
+            {/* Black Friday, 48 h après la fin de l'essai, ou le Pass en 3e (26/11) : en haut du fil, visible sans défiler. */}
+            <CarteOffreDuMoment classe={getUserLevel()?.classe} />
             {recherche}
             {ronds}
             {blocDuJour}
-            {/* Black Friday, ou 48 h après la fin de l'essai (26/11) : une carte dans le fil. */}
-            <CarteOffreDuMoment classe={getUserLevel()?.classe} />
             {/* 3e : le plan brevet juste sous le bloc du jour (11/11, il était tout en bas, dans « À la une »). */}
             {!isDesktop && <LignePlanBrevet catalogue={catalogue} classe={classe} />}
             <BlocQuetes uid={uidJeux} />

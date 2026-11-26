@@ -23,6 +23,9 @@
 // Vercel peut l'appeler : il envoie CRON_SECRET dans l'en-tête Authorization.
 
 import { finirPassExpires } from './_passFin.js';
+import { envoyerBlackFridayParents } from './_blackFridayParent.js';
+// Mails du Black Friday par passage du cron (le quota quotidien est partagé, voir BUDGET_*).
+const PLAFOND_BLACK_FRIDAY = 60;
 import { envoyeurMail } from './_fournisseurMail.js';
 import { envoiBorne, adressesRejetees, adressesBloqueesBrevo, BUDGET_PAR_DEFAUT, BUDGET_AVEC_BREVO, PLAFOND_RELANCES_PARENTS, PLAFOND_RELANCES_ELEVES, PART_RELANCES_SANS_BREVO } from './_envoiMails.js';
 import { getDb, getAuthAdmin } from './_firebaseAdmin.js';
@@ -371,7 +374,11 @@ export default async function handler(req, res) {
       // Après le bilan : un parent qui l'a reçu aujourd'hui n'a pas ce mot le même jour.
       const limites = await envoyerLimitesParent({ db, envoyer, auth: getAuthAdmin() })
         .catch(err => { console.error('[limite-parent]', err?.message || err); return { limitesParent: 0 }; });
-      const bilan = { ...passFin, ...parents, ...eleves, ...lendemain, ...finsEssai, ...bilans, ...limites, ...push, emails: envoyer.compte(), budget, budgetEpuise: envoyer.epuise(), adressesEcartees: rejeteesResend.size + bloqueesBrevo.size };
+      // Black Friday (27-30/11, api/_blackFridayParent.js) : une fois par parent, en dernier (après les
+      // mails attendus : relances, bilans, limites) et plafonné ; le reste part les jours suivants.
+      const blackFriday = await envoyerBlackFridayParents({ db, envoyer: envoyer.plafond(PLAFOND_BLACK_FRIDAY), auth: getAuthAdmin(), lienOffrir: VENTES_OUVERTES ? uid => lienOffrir(uid) : null })
+        .catch(err => { console.error('[black-friday]', err?.message || err); return { blackFridayParents: 0 }; });
+      const bilan = { ...passFin, ...blackFriday, ...parents, ...eleves, ...lendemain, ...finsEssai, ...bilans, ...limites, ...push, emails: envoyer.compte(), budget, budgetEpuise: envoyer.epuise(), adressesEcartees: rejeteesResend.size + bloqueesBrevo.size };
       // Une ligne par passage dans les journaux de Vercel : jusqu'ici, un budget épuisé coupait la suite sans laisser de trace.
       console.log('[tache-17h]', JSON.stringify(bilan));
       return res.status(200).json(bilan);

@@ -171,3 +171,20 @@
 .rpo-carte-offre p { margin: 0 0 8px; font-size: 14px; font-weight: 500; line-height: 1.4; color: #4A4A5A; }
 .rpo-carte-offre .rpo-btn { align-self: flex-start; min-height: 42px; padding: 0 18px; font-size: 15px; }
 :root[data-theme="dark"] .rpo-carte-offre { --rv-encre: #042A65; }
+
+/* Black Friday (27-30/11) : le prix d'abord, en très gros, sur l'encre de la marque. */
+.rpo-bf { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 150px; padding: 18px 12px 18px 20px; border-radius: 20px; background: #042A65; color: #fff; overflow: hidden; }
+.rpo-bf-txt { display: flex; flex-direction: column; gap: 2px; z-index: 1; }
+.rpo-bf-sur { align-self: flex-start; padding: 4px 10px; border-radius: 8px; background: var(--rv-vif-plein, #D8400A); font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.rpo-bf-prix { margin-top: 6px; font-size: 52px; font-weight: 800; line-height: 1; letter-spacing: -.03em; }
+.rpo-bf-base { font-size: 15px; font-weight: 600; opacity: .8; }
+.rpo-bf-base s { text-decoration-thickness: 2px; }
+.rpo-bf .rv-mascot, .rpo-bf img { flex-shrink: 0; z-index: 1; }
+.rpo-carte-offre--pass { background: #E8E4FD; }
+.rpo-carte-offre--pass .rpo-carte-offre-sur { color: #4A3AA8; }
+.rpo-carte-offre--black_friday { background: #042A65; color: #fff; }
+.rpo-carte-offre--black_friday b { color: #fff; }
+.rpo-carte-offre--black_friday p { color: rgba(255,255,255,.82); }
+.rpo-carte-offre--black_friday .rpo-carte-offre-sur { color: #FFB28A; }
+.rpo-bf-prix { white-space: nowrap; }
+.rpo-bf-prix--long { font-size: 40px; }
