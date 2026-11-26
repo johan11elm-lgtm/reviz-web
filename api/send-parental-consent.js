@@ -22,6 +22,7 @@
 // ici plutôt que dans une 13e fonction (limite du plan Vercel Hobby). Seul
 // Vercel peut l'appeler : il envoie CRON_SECRET dans l'en-tête Authorization.
 
+import { finirPassExpires } from './_passFin.js';
 import { envoyeurMail } from './_fournisseurMail.js';
 import { envoiBorne, adressesRejetees, adressesBloqueesBrevo, BUDGET_PAR_DEFAUT, BUDGET_AVEC_BREVO, PLAFOND_RELANCES_PARENTS, PLAFOND_RELANCES_ELEVES, PART_RELANCES_SANS_BREVO } from './_envoiMails.js';
 import { getDb, getAuthAdmin } from './_firebaseAdmin.js';
@@ -347,6 +348,8 @@ export default async function handler(req, res) {
       // Les notifications d'abord : elles ne coûtent rien et ne dépendent pas du quota de Resend.
       // Jusqu'au 15/11 elles venaient en dernier et la tâche, coupée à 60 s, ne les atteignait
       // jamais. Le rappel J+1 par e-mail saute ensuite qui a été notifié aujourd'hui.
+      // Pass brevet arrivés à leur fin (api/_passFin.js) : avant le reste, sans e-mail.
+      const passFin = await finirPassExpires({ db }).catch(err => { console.error('[pass]', err?.message || err); return { passFinis: 0 }; });
       const pousser = await preparerEnvoi();
       const push = pousser
         ? await envoyerNotifs({ db, envoyer: pousser }).catch(err => { console.error('[push]', err?.message || err); return { notifs: 0 }; })
@@ -368,7 +371,7 @@ export default async function handler(req, res) {
       // Après le bilan : un parent qui l'a reçu aujourd'hui n'a pas ce mot le même jour.
       const limites = await envoyerLimitesParent({ db, envoyer, auth: getAuthAdmin() })
         .catch(err => { console.error('[limite-parent]', err?.message || err); return { limitesParent: 0 }; });
-      const bilan = { ...parents, ...eleves, ...lendemain, ...finsEssai, ...bilans, ...limites, ...push, emails: envoyer.compte(), budget, budgetEpuise: envoyer.epuise(), adressesEcartees: rejeteesResend.size + bloqueesBrevo.size };
+      const bilan = { ...passFin, ...parents, ...eleves, ...lendemain, ...finsEssai, ...bilans, ...limites, ...push, emails: envoyer.compte(), budget, budgetEpuise: envoyer.epuise(), adressesEcartees: rejeteesResend.size + bloqueesBrevo.size };
       // Une ligne par passage dans les journaux de Vercel : jusqu'ici, un budget épuisé coupait la suite sans laisser de trace.
       console.log('[tache-17h]', JSON.stringify(bilan));
       return res.status(200).json(bilan);

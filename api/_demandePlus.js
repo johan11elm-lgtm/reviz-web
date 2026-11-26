@@ -23,6 +23,7 @@
 import { signatureDesabo, signatureValide, escapeHtml, prenomPropre, C, POLICE } from './_rappels.js'
 import { REPONDRE_A } from './_bilanParent.js'
 import { prixDe, FORMULES } from './_prix.js'
+import { PASS_BREVET, BLACK_FRIDAY, passPropose, remiseDe } from './_offres.js'
 import { JOUR_MS, TEXTE_ACCORD_PAIEMENT } from '../src/utils/consent.js'
 import { LIMITE_EXERCICES_GRATUIT } from './_essaiPlus.js'
 
@@ -241,9 +242,9 @@ export async function routeOffrir(req, res, { db, creerSession, maintenant = Dat
     return res.status(200).send(pageParent(`${nom} a déjà Réviz+`, texte('Rien à faire : Réviz+ est déjà actif sur son compte.')))
   }
   if (req.method === 'POST') {
-    const formule = FORMULES.includes(f) ? f : 'annuel'
+    const formule = [...FORMULES, PASS_BREVET.formule].includes(f) ? f : 'annuel'
     try {
-      const url = await creerSession({ uid, formule, parent: true, successUrl: `${base}&etape=merci`, cancelUrl: `${base}&etape=annule` })
+      const url = await creerSession({ uid, formule, profil: u, parent: true, successUrl: `${base}&etape=merci`, cancelUrl: `${base}&etape=annule` })
       res.setHeader?.('Location', url)
       return res.status(303).send('')
     } catch (err) {
@@ -253,10 +254,18 @@ export async function routeOffrir(req, res, { db, creerSession, maintenant = Dat
   }
   const annuel = prixDe('annuel', false)
   const mensuel = prixDe('mensuel', false)
+  // Black Friday, fin d'essai (api/_offres.js) : le prix remisé, recalculé au paiement.
+  const r = formule => remiseDe(formule, { profil: u, maintenant })
+  const prixAvec = (formule, base, cadence) => (r(formule) ? `${r(formule).montant} ${r(formule).detail} <span style="font-weight:500; text-decoration:line-through; opacity:.7;">${base}</span>` : `${base} ${cadence}`)
+  const pass = passPropose(u.level?.classe ?? u.classe, maintenant)
+  const bandeau = r('annuel')?.raison === 'black_friday' || (pass && r('pass'))
+    ? texte(`<b>Black Friday</b> : prix réduits jusqu'au ${BLACK_FRIDAY.dernierJour}.`) : ''
   const annule = etape === 'annule' ? texte('<b>Pas de souci</b>, rien n\'a été prélevé.') : ''
   return res.status(200).send(pageParent(`Offrir Réviz+ à ${nom}`, annule
     + texte(`Exercices illimités, scans de leçons illimités et 50 questions par jour à Réviz IA, sur le compte de ${nom}. Le programme reste gratuit.`)
-    + formulaire(base, 'annuel', `${annuel.montant} par an`, `soit ${annuel.parMois} par mois`, true)
-    + formulaire(base, 'mensuel', `${mensuel.montant} par mois`, 'sans engagement', false)
-    + `<p style="margin:12px 0 0; font-size:13px; line-height:1.5; color:${C.second};">${TEXTE_ACCORD_PAIEMENT} Paiement sécurisé par Stripe. Renouvellement automatique, résiliable à tout moment.</p>`))
+    + bandeau
+    + (pass ? formulaire(base, 'pass', `Pass brevet : ${prixAvec('pass', PASS_BREVET.montant, 'une fois')}`, `jusqu'au ${PASS_BREVET.finTexte}, sans abonnement`, true) : '')
+    + formulaire(base, 'annuel', prixAvec('annuel', annuel.montant, 'par an'), r('annuel') ? `puis ${annuel.montant} par an` : `soit ${annuel.parMois} par mois`, !pass)
+    + formulaire(base, 'mensuel', prixAvec('mensuel', mensuel.montant, 'par mois'), r('mensuel') ? `puis ${mensuel.montant} par mois` : 'sans engagement', false)
+    + `<p style="margin:12px 0 0; font-size:13px; line-height:1.5; color:${C.second};">${TEXTE_ACCORD_PAIEMENT} Paiement sécurisé par Stripe. Abonnements renouvelés automatiquement, résiliables à tout moment${pass ? " ; le Pass brevet se paie une seule fois" : ""}.</p>`))
 }

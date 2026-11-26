@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { FORMULES, prixDe } from '../../api/_prix.js';
+import { PASS_BREVET } from '../../api/_offres.js';
 import { PREMIER_PRELEVEMENT } from '../../api/_lancement.js';
 import { useAuth } from '../context/AuthContext';
 import { useIsDesktop } from '../hooks/useMediaQuery';
@@ -41,7 +42,7 @@ export default function UpgradeSuccess() {
   const apple = params.get('magasin') === 'apple';
   const restaure = params.get('restaure') === '1';
   const fondateur = !apple && params.get('fondateur') === '1';
-  const formule = FORMULES.includes(params.get('formule')) ? params.get('formule') : null;
+  const formule = [...FORMULES, 'pass'].includes(params.get('formule')) ? params.get('formule') : null;
   const { currentUser, refreshPremium, isPremium, abonnement } = useAuth();
   const [retriesExhausted, setRetriesExhausted] = useState(false);
   const [verification, setVerification] = useState(false);
@@ -84,8 +85,11 @@ export default function UpgradeSuccess() {
   const f = formule ?? abonnement?.formule ?? 'annuel';
   const parApple = apple || abonnement?.source === 'apple';
   // Prix de l'App Store tel qu'affiché à l'achat (devise de l'élève) ; ceux du site sinon.
-  const montant = parApple ? params.get('prix') : prixDe(f, fondateur || !!abonnement?.fondateur).montant;
-  const echeance = abonnement?.annuleLe ? ['Se termine le', dateCourte(abonnement.annuleLe)]
+  // Prix réellement payé quand une remise s'appliquait (Black Friday, fin d'essai : api/_offres.js).
+  const pass = f === 'pass';
+  const montant = params.get('prix') || (parApple ? null : pass ? PASS_BREVET.montant : prixDe(f, fondateur || !!abonnement?.fondateur).montant);
+  const echeance = pass ? ['Réviz+ jusqu’au', dateCourte(abonnement?.passJusquau ?? PASS_BREVET.fin)]
+    : abonnement?.annuleLe ? ['Se termine le', dateCourte(abonnement.annuleLe)]
     : fondateur ? ['Premier prélèvement', PREMIER_PRELEVEMENT]
     : abonnement?.periodeFin ? [parApple ? 'Prochain renouvellement' : 'Prochain prélèvement', dateCourte(abonnement.periodeFin)] : null;
 
@@ -97,6 +101,7 @@ export default function UpgradeSuccess() {
       <span className="ugs-rond ugs-rond--vert" aria-hidden="true"><Coche /></span>
       <b>{fondateur ? `Prix fondateur réservé : rien n’est prélevé avant le ${PREMIER_PRELEVEMENT}.`
         : restaure ? 'Ton abonnement est retrouvé : tout est de nouveau débloqué.'
+        : pass ? 'Ton Pass brevet est actif : tout est débloqué jusqu’au brevet.'
         : 'Ton abonnement est actif : tout est débloqué.'}</b>
     </div>
   ) : (
@@ -124,7 +129,7 @@ export default function UpgradeSuccess() {
       </ul>
       <div className="ugs-carte ugs-formule">
         <span className="ugs-sur">Ta formule</span>
-        <div><span>{f === 'mensuel' ? 'Au mois' : 'À l’année'}</span>{montant && <b>{montant}</b>}</div>
+        <div><span>{pass ? 'Pass brevet' : f === 'mensuel' ? 'Au mois' : 'À l’année'}</span>{montant && <b>{montant}</b>}</div>
         {echeance && <div><span>{echeance[0]}</span><b>{echeance[1]}</b></div>}
       </div>
       <h2 className="ugs-h2">Pour commencer</h2>

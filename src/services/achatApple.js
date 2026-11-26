@@ -5,12 +5,15 @@
 // RevenueCat garde les reçus et prévient le serveur (api/revenuecat-webhook.js), qui
 // écrit users/{uid}.plan comme le fait Stripe : l'app ne s'accorde jamais Réviz+ seule.
 // Le compte RevenueCat porte l'uid Firebase (appUserID), pour retrouver l'élève.
-// Prix fixés dans App Store Connect (18/11) : 7,99 €/mois, 54,99 €/an.
+// Prix fixés dans App Store Connect : les mêmes que sur le site depuis le 26/11 (6,99 €/mois,
+// 49 €/an, Pass brevet 29 €). Black Friday = offre de lancement datée sur l'annuel ; fin d'essai =
+// offre promotionnelle du mensuel (OFFRE_FIN_ESSAI.offreApple), signée par RevenueCat.
 // -------------------------------------------------------
 import { Capacitor } from '@capacitor/core'
 import { auth } from './firebaseConfig'
 import { apiFetch } from './apiClient.js'
-import { PRODUITS_APPLE } from '../../api/_apple.js'
+import { PRODUITS_APPLE, PRODUIT_PASS_APPLE } from '../../api/_apple.js'
+import { OFFRE_FIN_ESSAI } from '../../api/_offres.js'
 
 const CLE = import.meta.env.VITE_REVENUECAT_IOS
 
@@ -69,15 +72,39 @@ async function avecPurchases(fn) {
  * @returns {Promise<Record<'annuel'|'mensuel', { prix: string, centimes: number, devise: string, produit: object }>>}
  */
 export async function formulesApple() {
-  const { products } = await avecPurchases(P => delai(
-    P.getProducts({ productIdentifiers: Object.values(PRODUITS_APPLE), type: 'SUBS' }), 20_000))
+  const [abonnements, pass] = await avecPurchases(P => Promise.all([
+    delai(P.getProducts({ productIdentifiers: Object.values(PRODUITS_APPLE), type: 'SUBSCRIPTION' }), 20_000),
+    // Le Pass brevet (non renouvelable) : son absence ne bloque pas les abonnements.
+    delai(P.getProducts({ productIdentifiers: [PRODUIT_PASS_APPLE], type: 'NON_SUBSCRIPTION' }), 20_000).catch(() => ({ products: [] })),
+  ]))
+  const products = [...(abonnements?.products ?? []), ...(pass?.products ?? [])]
   const formules = {}
-  for (const [formule, id] of Object.entries(PRODUITS_APPLE)) {
+  for (const [formule, id] of [...Object.entries(PRODUITS_APPLE), ['pass', PRODUIT_PASS_APPLE]]) {
     const p = products.find(x => x.identifier === id)
-    if (p) formules[formule] = { prix: p.priceString, centimes: Math.round(p.price * 100), devise: p.currencyCode, produit: p }
+    if (!p) continue
+    formules[formule] = {
+      prix: p.priceString, centimes: Math.round(p.price * 100), devise: p.currencyCode, produit: p,
+      // Offre de lancement (Black Friday sur l'annuel) : Apple l'applique seule aux nouveaux abonnés.
+      intro: p.introPrice ? { prix: p.introPrice.priceString, centimes: Math.round(p.introPrice.price * 100) } : null,
+      // Offre promotionnelle de fin d'essai (mensuel), si App Store Connect la propose.
+      promo: (p.discounts ?? []).find(d => d.identifier === OFFRE_FIN_ESSAI.offreApple) ?? null,
+    }
   }
   if (!formules.annuel && !formules.mensuel) throw new Error('INDISPONIBLE')
   return formules
+}
+
+/** Le prix de lancement s'applique-t-il encore à cet élève (jamais abonné à ce produit) ? */
+export async function introEligible(formules) {
+  const ids = Object.values(formules ?? {}).filter(f => f.intro).map(f => f.produit.identifier)
+  if (!ids.length) return {}
+  try {
+    const r = await avecPurchases(P => delai(P.checkTrialOrIntroductoryPriceEligibility({ productIdentifiers: ids }), 10_000))
+    // INTRO_ELIGIBILITY_STATUS : 2 = éligible (0 inconnu, 1 non éligible, 3 pas d'offre).
+    return Object.fromEntries(ids.map(id => [id, r?.[id]?.status === 2 || r?.[id]?.status === 0]))
+  } catch {
+    return Object.fromEntries(ids.map(id => [id, true]))
+  }
 }
 
 /** Demande au serveur de relire l'abonnement chez RevenueCat (déblocage immédiat, restauration). */
@@ -104,11 +131,16 @@ const EN_ATTENTE = '20'
  * @returns {Promise<'achete'|'annule'|'en_attente'>}
  * @throws {Error} 'UNAUTHORIZED' | 'INDISPONIBLE' | 'ECHEC'
  */
-export async function acheterApple(formule, formules) {
+export async function acheterApple(formule, formules, { promo = false } = {}) {
   const produit = formules?.[formule]?.produit
   if (!produit) throw new Error('INDISPONIBLE')
+  const remise = promo ? formules?.[formule]?.promo : null
   try {
-    await avecPurchases(P => P.purchaseStoreProduct({ product: produit }))
+    await avecPurchases(async P => {
+      // Offre de fin d'essai : RevenueCat signe l'offre promotionnelle, puis Apple l'applique.
+      const offre = remise ? await delai(P.getPromotionalOffer({ product: produit, discount: remise }), 15_000).catch(() => null) : null
+      return offre ? P.purchaseDiscountedProduct({ product: produit, discount: offre }) : P.purchaseStoreProduct({ product: produit })
+    })
   } catch (err) {
     if (err?.code === ANNULE || err?.userCancelled) return 'annule'
     if (err?.code === EN_ATTENTE) return 'en_attente'

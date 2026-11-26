@@ -26,6 +26,12 @@ function fauxDb(profils = {}) {
 const abonne = (produit, s) => ({ subscriptions: { [produit]: { store: 'app_store', is_sandbox: false, ...s } } })
 
 describe('etatApple', () => {
+  it('Pass brevet acheté dans l’App Store → actif jusqu’au 10 juillet 2027', () => {
+    const e = etatApple({ non_subscriptions: { 'com.reviz.app.passbrevet': [{ id: 'x', store: 'app_store', is_sandbox: false }] } }, MAINTENANT)
+    expect(e).toMatchObject({ actif: true, formule: 'pass', expire: Date.parse('2027-07-10T23:59:59+02:00'), annule: false })
+    expect(etatApple({ non_subscriptions: { 'com.reviz.app.passbrevet': [{ id: 'x', store: 'app_store' }] } }, Date.parse('2027-07-12T00:00:00Z')).actif).toBe(false)
+  })
+
   it('abonnement en cours → actif, formule et fin', () => {
     const e = etatApple(abonne(PRODUITS_APPLE.annuel, { expires_date: iso(MAINTENANT + 30 * JOUR) }), MAINTENANT)
     expect(e).toMatchObject({ actif: true, formule: 'annuel', expire: MAINTENANT + 30 * JOUR, annule: false })

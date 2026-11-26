@@ -16,6 +16,48 @@ vi.mock('../../../../api/_lancement.js', async orig => ({ ...(await orig()), tar
 const { DecouvrirRevizPlus, LimiteAtteinte, FinEssaiPlus, PaiementPasAbouti, DemanderParent, finEssaiVue, joursAvantBrevet } = await import('../RevizPlusOffre')
 const ecrire = el => render(<MemoryRouter>{el}</MemoryRouter>)
 
+describe('offres du 26/11 : Pass brevet, Black Friday, fin d’essai', () => {
+  afterEach(() => { vi.useRealTimers(); delete auth.getUserLevel; delete auth.offreFinEssaiJusquau })
+
+  it('en 3e, le Pass brevet est proposé et choisi d’abord', () => {
+    vi.useFakeTimers({ toFake: ['Date'] })
+    vi.setSystemTime(new Date('2026-11-26T12:00:00+01:00'))
+    auth.getUserLevel = () => ({ classe: '3ème' })
+    ecrire(<DecouvrirRevizPlus lieu="coach" onClose={() => {}} />)
+    expect(screen.getByRole('radio', { name: /Jusqu’au brevet/ })).toHaveAttribute('aria-checked', 'true')
+    expect(screen.getByText('29 €')).toBeInTheDocument()
+    expect(screen.getByText(/rien à résilier/)).toBeInTheDocument()
+  })
+
+  it('en 4e, pas de Pass brevet', () => {
+    auth.getUserLevel = () => ({ classe: '4ème' })
+    ecrire(<DecouvrirRevizPlus lieu="coach" onClose={() => {}} />)
+    expect(screen.queryByRole('radio', { name: /Jusqu’au brevet/ })).not.toBeInTheDocument()
+  })
+
+  it('Black Friday : bandeau, annuel à 29 € la 1re année au lieu de 49 €', () => {
+    vi.useFakeTimers({ toFake: ['Date'] })
+    vi.setSystemTime(new Date('2026-11-28T12:00:00+01:00'))
+    ecrire(<DecouvrirRevizPlus lieu="black_friday" onClose={() => {}} />)
+    expect(screen.getByRole('note')).toHaveTextContent('Black Friday')
+    expect(screen.getByRole('radio', { name: /À l’année/ })).toHaveTextContent('la 1re année, au lieu de 49 €')
+    expect(screen.getByRole('radio', { name: /À l’année/ })).toHaveTextContent('29 €')
+    expect(screen.getByText('Ensuite 49 € par an, résiliable à tout moment.')).toBeInTheDocument()
+  })
+
+  it('fin d’essai : le mensuel à 2,99 € est présenté d’abord', () => {
+    const t = Date.parse('2026-11-26T12:00:00+01:00')
+    vi.useFakeTimers({ toFake: ['Date'] })
+    vi.setSystemTime(new Date(t))
+    auth.offreFinEssaiJusquau = t + 30 * 3_600_000
+    ecrire(<DecouvrirRevizPlus lieu="fin_essai" onClose={() => {}} />)
+    const mensuel = screen.getByRole('radio', { name: /Au mois/ })
+    expect(mensuel).toHaveAttribute('aria-checked', 'true')
+    expect(mensuel).toHaveTextContent('2,99 €')
+    expect(screen.getByRole('note')).toHaveTextContent('encore 30 h')
+  })
+})
+
 describe('paiement Réviz+', () => {
   afterEach(() => vi.useRealTimers())
 
@@ -29,6 +71,8 @@ describe('paiement Réviz+', () => {
     expect(screen.getByRole('heading', { name: 'Réviz+' })).toBeInTheDocument()
   })
   it('l’annuel ramené à la semaine', () => {
+    vi.useFakeTimers({ toFake: ['Date'] })
+    vi.setSystemTime(new Date('2026-11-26T12:00:00+01:00')) // hors Black Friday
     ecrire(<DecouvrirRevizPlus lieu="coach" onClose={() => {}} />)
     expect(screen.getByText('soit 0,94 € par semaine')).toBeInTheDocument()
   })
@@ -72,6 +116,8 @@ describe('paiement Réviz+', () => {
     expect(joursAvantBrevet('3ème', Date.parse('2027-07-01'))).toBeNull()
   })
   it('rassure et explique pourquoi ce n’est pas gratuit', () => {
+    vi.useFakeTimers({ toFake: ['Date'] })
+    vi.setSystemTime(new Date('2026-11-26T12:00:00+01:00')) // hors Black Friday
     ecrire(<DecouvrirRevizPlus lieu="badge" onClose={() => {}} />)
     expect(screen.getByText('Sans publicité')).toBeInTheDocument()
     expect(screen.getByText('Pourquoi Réviz+ n’est pas gratuit ?')).toBeInTheDocument()

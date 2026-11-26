@@ -18,7 +18,7 @@ const FORMULES = {
 const formulesApple = vi.fn(async () => FORMULES)
 const acheterApple = vi.fn()
 const restaurerApple = vi.fn()
-vi.mock('../../../services/achatApple', () => ({ formulesApple: () => formulesApple(), acheterApple: (...a) => acheterApple(...a), restaurerApple: () => restaurerApple() }))
+vi.mock('../../../services/achatApple', () => ({ formulesApple: () => formulesApple(), acheterApple: (...a) => acheterApple(...a), restaurerApple: () => restaurerApple(), introEligible: async () => ({}) }))
 
 const { DecouvrirRevizPlus, DemanderParent } = await import('../RevizPlusOffre')
 function Bienvenue() { const l = useLocation(); return <p>bienvenue {l.search}</p> }
@@ -47,7 +47,7 @@ describe('Réviz+ dans l’app iOS', () => {
     const q = new URLSearchParams(page.textContent.replace('bienvenue ', ''))
     expect(Object.fromEntries(q)).toEqual({ magasin: 'apple', formule: 'mensuel', prix: '7,99 €' })
     expect(onClose).toHaveBeenCalled()
-    expect(acheterApple).toHaveBeenCalledWith('mensuel', FORMULES)
+    expect(acheterApple).toHaveBeenCalledWith('mensuel', FORMULES, { promo: false })
     expect(refreshPremium).toHaveBeenCalled()
   })
 
@@ -72,7 +72,7 @@ describe('Réviz+ dans l’app iOS', () => {
     restaurerApple.mockResolvedValue(false)
     ecrire(<DecouvrirRevizPlus lieu="coach" onClose={() => {}} />)
     fireEvent.click(await screen.findByRole('button', { name: 'Restaurer mes achats' }))
-    expect(await screen.findByText('Aucun abonnement Réviz+ trouvé sur ce compte Apple.')).toBeInTheDocument()
+    expect(await screen.findByText('Aucun achat Réviz+ trouvé sur ce compte Apple.')).toBeInTheDocument()
   })
 
   it('App Store injoignable : message, pas de bouton actif', async () => {

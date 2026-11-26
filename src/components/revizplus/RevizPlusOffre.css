@@ -159,3 +159,15 @@
 .rpo-demande .rpo-demande-lien { min-height: 44px; font-size: 14px; color: var(--rv-doux); }
 .rpo-demande-fait { display: flex; flex-direction: column; gap: 4px; }
 .rpo-demande-ok { display: flex; align-items: center; gap: 8px; margin: 0; padding: 12px 14px; border-radius: 16px; background: var(--rv-menthe); font-size: 14px; font-weight: 600; color: #042A65; }
+
+/* 26/11 : offre du moment (Black Friday, fin d'essai). Une ligne encre, sans compte à rebours. */
+.rpo-bandeau { align-self: stretch; display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 0; padding: 10px 14px; border-radius: 12px; background: #042A65; color: #fff; font-size: 13.5px; font-weight: 600; }
+.rpo-bandeau b { font-weight: 800; letter-spacing: .01em; }
+.rpo-bandeau span { opacity: .85; text-align: right; }
+.rpo-carte-offre { display: flex; align-items: center; gap: 14px; padding: 16px; border-radius: 20px; background: #FFE8D6; color: #042A65; box-shadow: 0 1px 3px rgba(4,42,101,.1); }
+.rpo-carte-offre > div { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0; }
+.rpo-carte-offre-sur { font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #B83706; }
+.rpo-carte-offre b { font-size: 17px; font-weight: 800; line-height: 1.25; }
+.rpo-carte-offre p { margin: 0 0 8px; font-size: 14px; font-weight: 500; line-height: 1.4; color: #4A4A5A; }
+.rpo-carte-offre .rpo-btn { align-self: flex-start; min-height: 42px; padding: 0 18px; font-size: 15px; }
+:root[data-theme="dark"] .rpo-carte-offre { --rv-encre: #042A65; }

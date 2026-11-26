@@ -159,6 +159,13 @@ describe('stripe-webhook — autres events', () => {
     )
   })
 
+  it('Pass brevet : Réviz+ jusqu’au 10 juillet 2027, sans abonnement', async () => {
+    await run({ id: 'e8', type: 'checkout.session.completed', data: { object: { mode: 'payment', metadata: { firebaseUid: 'u1', formule: 'pass' }, customer: 'cus_1', subscription: null } } })
+    const champs = userSet.mock.calls.at(-1)[0]
+    expect(champs).toMatchObject({ plan: 'premium', formule: 'pass', passJusquau: Date.parse('2027-07-10T23:59:59+02:00'), stripeCustomerId: 'cus_1' })
+    expect(champs).not.toHaveProperty('stripeSubscriptionId')
+  })
+
   it('checkout.session.completed garde la formule et le tarif fondateur', async () => {
     await run({ id: 'e7', type: 'checkout.session.completed', data: { object: { metadata: { firebaseUid: 'u1', formule: 'mensuel', fondateur: 'true' }, customer: 'cus_1', subscription: 'sub_1' } } })
     expect(userSet).toHaveBeenCalledWith(

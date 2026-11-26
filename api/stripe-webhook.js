@@ -11,6 +11,7 @@ import { enregistrerCadeau, mailCadeau, noterMailCadeau } from './_cadeau.js'
 import { REPONDRE_A } from './_bilanParent.js'
 import { accordParPaiement } from './_accordParent.js'
 import { appleActif } from './_apple.js'
+import { PASS_BREVET } from './_offres.js'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
@@ -40,6 +41,27 @@ export function champsAbonnement(sub) {
   return champs
 }
 
+/** Ce que le Pass brevet écrit sur le profil : Réviz+ jusqu'à PASS_BREVET.fin, rien à renouveler. */
+export function champsPass(session, maintenant = Date.now()) {
+  return {
+    plan: 'premium',
+    sourceAbonnement: 'stripe',
+    formule: PASS_BREVET.formule,
+    passJusquau: PASS_BREVET.fin,
+    periodeFin: PASS_BREVET.fin,
+    annuleLe: null,
+    subscriptionStatus: 'active',
+    ...(session.customer && { stripeCustomerId: session.customer }),
+    upgradedAt: maintenant,
+  }
+}
+
+/** Le profil a-t-il un Pass brevet encore valable ? */
+function passEnCours(doc, maintenant = Date.now()) {
+  const p = doc?.data?.() ?? null
+  return Number(p?.passJusquau) > maintenant
+}
+
 async function getRawBody(req) {
   const chunks = []
   for await (const chunk of req) {
@@ -48,11 +70,12 @@ async function getRawBody(req) {
   return Buffer.concat(chunks)
 }
 
-async function userRefByCustomer(db, customerId) {
+/** Le profil (instantané Firestore : .ref, .data()) qui porte ce client Stripe, ou null. */
+async function userByCustomer(db, customerId) {
   const snap = await db.collection('users')
     .where('stripeCustomerId', '==', customerId)
     .get()
-  return snap.empty ? null : snap.docs[0].ref
+  return snap.empty ? null : snap.docs[0]
 }
 
 export default async function handler(req, res) {
@@ -84,7 +107,12 @@ export default async function handler(req, res) {
     case 'checkout.session.completed': {
       const session = event.data.object
       const uid = session.metadata?.firebaseUid
-      if (uid) {
+      // Pass brevet (api/_offres.js) : paiement unique, Réviz+ jusqu'au brevet, pas d'abonnement.
+      const pass = session.mode === 'payment' && session.metadata?.formule === PASS_BREVET.formule
+      if (uid && pass) {
+        await db.collection('users').doc(uid).set(champsPass(session), { merge: true })
+        console.log(`[stripe-webhook] User ${uid} : Pass brevet`)
+      } else if (uid) {
         await db.collection('users').doc(uid).set(
           {
             plan: 'premium',
@@ -100,6 +128,8 @@ export default async function handler(req, res) {
           { merge: true }
         )
         console.log(`[stripe-webhook] User ${uid} upgraded to premium`)
+      }
+      if (uid) {
         // Payé par un parent depuis la page « Offrir » (api/_demandePlus.js) : vaut accord parental,
         // seulement si une carte a vraiment été débitée. Avec un code promo (un mois offert), le
         // paiement est de 0 € : un élève pourrait le faire lui-même ; l'accord passe alors par le lien.
@@ -129,9 +159,15 @@ export default async function handler(req, res) {
     // Changement de statut d'abonnement (renouvellement, impayé, reprise…)
     case 'customer.subscription.updated': {
       const sub = event.data.object
-      const ref = await userRefByCustomer(db, sub.customer)
+      const doc = await userByCustomer(db, sub.customer)
+      const ref = doc?.ref
       if (ref) {
         let plan = planForStatus(sub.status)
+        // Pass brevet en cours : un ancien abonnement qui s'arrête ne le reprend pas.
+        if (plan === 'free' && passEnCours(doc)) {
+          await ref.update({ subscriptionStatus: 'active', planUpdatedAt: Date.now() })
+          break
+        }
         // Abonné aussi dans l'app iOS : Apple garde Réviz+ ouvert (api/_apple.js).
         const parApple = plan === 'free' && await appleActif(db, ref.id)
         if (parApple) plan = 'premium'
@@ -144,8 +180,10 @@ export default async function handler(req, res) {
     // Abonnement supprimé / définitivement annulé
     case 'customer.subscription.deleted': {
       const sub = event.data.object
-      const ref = await userRefByCustomer(db, sub.customer)
+      const doc = await userByCustomer(db, sub.customer)
+      const ref = doc?.ref
       if (ref) {
+        if (passEnCours(doc)) break
         const parApple = await appleActif(db, ref.id)
         await ref.update({ plan: parApple ? 'premium' : 'free', subscriptionStatus: 'canceled', planUpdatedAt: Date.now(), ...(parApple && { sourceAbonnement: 'apple' }) })
         console.log(`[stripe-webhook] customer ${sub.customer} downgraded to free (deleted)`)

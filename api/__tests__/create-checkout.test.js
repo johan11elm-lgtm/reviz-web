@@ -5,9 +5,10 @@ const getUser = vi.fn()
 const sessionsCreate = vi.fn()
 const pricesList = vi.fn()
 
+const profilFirestore = vi.hoisted(() => ({ valeur: null }))
 vi.mock('../_firebaseAdmin.js', () => ({
   getAuthAdmin: () => ({ verifyIdToken, getUser }),
-  getDb: () => ({}),
+  getDb: () => ({ collection: () => ({ doc: () => ({ get: async () => (profilFirestore.valeur ? { exists: true, data: () => profilFirestore.valeur } : { exists: false }) }) }) }),
 }))
 vi.mock('stripe', () => ({
   default: class { constructor() { this.checkout = { sessions: { create: sessionsCreate } }; this.prices = { list: pricesList } } },
@@ -136,6 +137,62 @@ describe('create-checkout — formules et tarif fondateur', () => {
     await handler({ method: 'POST', body: { idToken: 'good' } }, res)
     expect(res.statusCode).toBe(500)
     expect(res.payload.error).toBe('PRICE_NOT_FOUND')
+    expect(sessionsCreate).not.toHaveBeenCalled()
+  })
+})
+
+describe('create-checkout — Pass brevet et remises (26/11)', () => {
+  const H = 3_600_000
+  beforeEach(() => {
+    verifyIdToken.mockReset(); sessionsCreate.mockReset(); pricesList.mockReset()
+    verifyIdToken.mockResolvedValue({ uid: 'u1', email: 'eleve@test.fr', email_verified: true })
+    pricesList.mockImplementation(async ({ lookup_keys }) => ({ data: [{ id: `price_${lookup_keys[0]}` }] }))
+    sessionsCreate.mockResolvedValue({ url: 'https://checkout.stripe.test/s' })
+    reglage.fondateur = false
+    profilFirestore.valeur = null
+    vi.useRealTimers()
+  })
+  const envoyee = () => sessionsCreate.mock.calls[0][0]
+
+  it('Pass brevet : paiement unique, métadonnées pour le webhook, pas d’abonnement', async () => {
+    vi.useFakeTimers({ now: Date.parse('2026-11-26T12:00:00+01:00'), toFake: ['Date'] })
+    const res = mockRes()
+    await handler({ method: 'POST', body: { idToken: 'good', formule: 'pass' } }, res)
+    expect(res.statusCode).toBe(200)
+    expect(envoyee()).toMatchObject({ mode: 'payment', line_items: [{ price: 'price_revizplus_pass_brevet', quantity: 1 }], allow_promotion_codes: true })
+    expect(envoyee().metadata).toMatchObject({ firebaseUid: 'u1', formule: 'pass' })
+    expect(envoyee().subscription_data).toBeUndefined()
+    expect(envoyee().success_url).toContain('formule=pass')
+  })
+
+  it('Black Friday : coupon sur l’annuel et sur le Pass, prix payé dans le retour', async () => {
+    vi.useFakeTimers({ now: Date.parse('2026-11-28T12:00:00+01:00'), toFake: ['Date'] })
+    await handler({ method: 'POST', body: { idToken: 'good', formule: 'annuel' } }, mockRes())
+    expect(envoyee().discounts).toEqual([{ coupon: 'bf2026-annuel' }])
+    expect(envoyee().allow_promotion_codes).toBeUndefined()
+    expect(envoyee().success_url).toContain('prix=29%20%E2%82%AC')
+    sessionsCreate.mockClear()
+    await handler({ method: 'POST', body: { idToken: 'good', formule: 'pass' } }, mockRes())
+    expect(envoyee().discounts).toEqual([{ coupon: 'bf2026-pass' }])
+  })
+
+  it('fin d’essai : coupon du mensuel lu dans le profil Firestore, jamais dans la requête', async () => {
+    const t = Date.parse('2026-11-26T12:00:00+01:00')
+    vi.useFakeTimers({ now: t, toFake: ['Date'] })
+    await handler({ method: 'POST', body: { idToken: 'good', formule: 'mensuel', remise: 'fin_essai' } }, mockRes())
+    expect(envoyee().discounts).toBeUndefined()
+    sessionsCreate.mockClear()
+    profilFirestore.valeur = { essaiPlus: { fin: t - 2 * H } }
+    await handler({ method: 'POST', body: { idToken: 'good', formule: 'mensuel' } }, mockRes())
+    expect(envoyee().discounts).toEqual([{ coupon: 'fin-essai-mensuel' }])
+    expect(envoyee().metadata.remise).toBe('fin_essai')
+  })
+
+  it('après le brevet, le Pass ne se vend plus (410)', async () => {
+    vi.useFakeTimers({ now: Date.parse('2027-07-11T12:00:00+02:00'), toFake: ['Date'] })
+    const res = mockRes()
+    await handler({ method: 'POST', body: { idToken: 'good', formule: 'pass' } }, res)
+    expect(res.statusCode).toBe(410)
     expect(sessionsCreate).not.toHaveBeenCalled()
   })
 })

@@ -11,10 +11,11 @@ import { FORMULE_PAR_DEFAUT, prixDe } from '../../../api/_prix.js';
 import { prochaineRemise, dansCombien, parSemaine } from '../../utils/remiseQuotas';
 import { tarifFondateurOuvert } from '../../../api/_lancement.js';
 import { ACHAT_DANS_L_APP, ACHAT_APPLE, ACHAT_STRIPE } from '../../utils/achat';
-import { formulesApple, acheterApple, restaurerApple } from '../../services/achatApple';
+import { formulesApple, acheterApple, restaurerApple, introEligible } from '../../services/achatApple';
 import { mesurer } from '../../services/mesure';
 import { BoltIcon, CameraIcon, ChatIcon } from '../Icons';
 import { PREMIER_ECRIT } from '../../utils/planBrevet';
+import { PASS_BREVET, BLACK_FRIDAY, passPropose, remiseAffichee, tempsRestant, blackFridayEnCours } from '../../../api/_offres.js';
 import '../RevizPlusAnnonce.css';
 import '../reviz/HerosMatiere.css';
 import './RevizPlusOffre.css';
@@ -67,6 +68,7 @@ const TITRES = {
   limite_scan: ['Scanne toutes tes leçons', 'Tes 5 scans de la semaine sont faits. Avec Réviz+, pas de limite.'],
   limite_ia: ['Pose toutes tes questions', 'Tes 10 questions de la semaine sont posées. Avec Réviz+, 50 par jour.'],
   fin_essai: ['Garde Réviz+', 'Ta semaine offerte est finie. Garde tes exercices sans limite.'],
+  black_friday: ['Black Friday', 'Réviz+ à prix réduit jusqu’au lundi 30 novembre.'],
   coach: ['Réviz IA, chaque jour', 'Avec Réviz+, 50 questions par jour au lieu de 10 par semaine.'],
   scan: ['Scanne sans compter', 'Avec Réviz+, tes scans sont illimités.'],
   paiement_annule: ['On réessaie', 'Si c’est la carte d’un parent, garde son téléphone à portée de main pour valider.'],
@@ -95,22 +97,61 @@ function PourquoiPasGratuit() {
   );
 }
 
+/**
+ * Bandeau de l'offre du moment (26/11) : Black Friday, ou 48 h après la fin de l'essai.
+ * Dit franchement jusqu'à quand, sans compte à rebours qui clignote.
+ */
+export function BandeauOffre({ remise }) {
+  if (!remise) return null;
+  const quand = remise.raison === 'black_friday'
+    ? `Jusqu’au ${BLACK_FRIDAY.dernierJour}`
+    : `Offre de fin d’essai, ${tempsRestant(remise.jusquau) ?? 'aujourd’hui'}`;
+  return (
+    <p className="rpo-bandeau" role="note">
+      <b>{remise.raison === 'black_friday' ? 'Black Friday' : 'Pour toi'}</b>
+      <span>{quand}</span>
+    </p>
+  );
+}
+
+/** Les formules à proposer : le Pass brevet en 3e, l'annuel, le mensuel, avec la remise du moment. */
+export function formulesProposees({ classe, annuel, mensuel, finEssaiJusquau, fondateur = false, maintenant = Date.now() }) {
+  const r = f => remiseAffichee(f, { finEssaiJusquau, fondateur, maintenant });
+  const options = [];
+  if (passPropose(classe, maintenant) && !fondateur) {
+    options.push({ id: 'pass', titre: 'Jusqu’au brevet', prix: { montant: PASS_BREVET.montant, centimes: PASS_BREVET.centimes }, cadence: 'une fois',
+      detail: `paiement unique, jusqu’au ${PASS_BREVET.finTexte}`, remise: r('pass'), badge: 'Spécial 3e' });
+  }
+  options.push(
+    // Ramené à la semaine (11/11) : moins d'un euro, comme Knowunity l'affiche.
+    { id: 'annuel', titre: 'À l’année', prix: annuel, cadence: 'par an', detail: `soit ${parSemaine(annuel.centimes)} par semaine`, remise: r('annuel'), badge: options.length ? null : 'Le plus avantageux' },
+    { id: 'mensuel', titre: 'Au mois', prix: mensuel, cadence: 'par mois', detail: 'sans engagement', remise: r('mensuel') },
+  );
+  return options;
+}
+
 /** « Découvrir Réviz+ » : ce que ça change, la formule, le paiement. */
 export function DecouvrirRevizPlus({ onClose, lieu = 'autre' }) {
   const navigate = useNavigate();
   // Tunnel de vente (PostHog) : offre vue → caisse ouverte → payée (UpgradeSuccess).
   useEffect(() => { mesurer('offre', { etape: 'vue', lieu, achat: ACHAT_DANS_L_APP }); }, [lieu]);
   const fondateur = tarifFondateurOuvert();
-  const [formule, setFormule] = useState(FORMULE_PAR_DEFAUT);
+  const auth = useAuth() ?? {};
+  const classe = auth.getUserLevel?.()?.classe;
+  // En 3e, le Pass brevet d'abord (26/11) : un paiement, rien à résilier, ce que préfère un parent.
+  const [formule, setFormule] = useState(() => (
+    passPropose(classe) && !fondateur ? 'pass'
+      // Fin d'essai : le 1er mois à 2,99 € est l'offre faite à l'élève, on la présente d'abord.
+      : remiseAffichee('mensuel', { finEssaiJusquau: auth.offreFinEssaiJusquau, fondateur })?.raison === 'fin_essai' ? 'mensuel'
+      : FORMULE_PAR_DEFAUT));
   const [paiement, setPaiement] = useState(false);
   const [erreur, setErreur] = useState('');
   const annuel = prixDe('annuel', fondateur);
   const mensuel = prixDe('mensuel', fondateur);
   const [titre, sousTitre] = TITRES[lieu] ?? TITRE_PAR_DEFAUT;
   // « Pour Alex » (Knowunity) : l'offre s'adresse à l'élève, et en 3e elle rappelle le brevet.
-  const auth = useAuth() ?? {};
   const prenom = auth.currentUser?.displayName?.split(' ')[0] || '';
-  const brevet = joursAvantBrevet(auth.getUserLevel?.()?.classe);
+  const brevet = joursAvantBrevet(classe);
   const pour = [prenom && `Pour ${prenom}`, brevet && `brevet dans ${brevet} jours`].filter(Boolean).join(' · ');
   const comparatif = (
     <table className="rpo-compare">
@@ -148,16 +189,14 @@ export function DecouvrirRevizPlus({ onClose, lieu = 'autre' }) {
     );
   }
 
-  if (ACHAT_APPLE) return <AchatApple onClose={onClose} lieu={lieu} titre={titre} sousTitre={sousTitre} pour={pour} comparatif={comparatif} />;
+  if (ACHAT_APPLE) return <AchatApple onClose={onClose} lieu={lieu} titre={titre} sousTitre={sousTitre} pour={pour} comparatif={comparatif} classe={classe} finEssaiJusquau={auth.offreFinEssaiJusquau} />;
 
-  const options = [
-    // Ramené à la semaine (11/11) : moins d'un euro, comme Knowunity l'affiche.
-    { id: 'annuel', titre: 'À l’année', prix: annuel, cadence: 'par an', detail: `soit ${parSemaine(annuel.centimes)} par semaine`, badge: true },
-    { id: 'mensuel', titre: 'Au mois', prix: mensuel, cadence: 'par mois', detail: 'sans engagement' },
-  ];
+  const options = formulesProposees({ classe, annuel, mensuel, finEssaiJusquau: auth.offreFinEssaiJusquau, fondateur });
+  const remiseVue = options.find(o => o.id === formule)?.remise ?? options.find(o => o.remise)?.remise ?? null;
   return (
     <Fenetre label="Réviz+" pose="hello" onClose={onClose}>
       {pour && <span className="rpo-pour">{pour.charAt(0).toUpperCase() + pour.slice(1)}</span>}
+      <BandeauOffre remise={remiseVue} />
       <h2 className="rpo-titre">{titre}</h2>
       <p className="rpo-sous">{sousTitre}</p>
       {fondateur && <span className="rpo-sceau">Membre fondateur</span>}
@@ -171,20 +210,22 @@ export function DecouvrirRevizPlus({ onClose, lieu = 'autre' }) {
             <span className="rpo-radio" aria-hidden="true">{formule === o.id && <Coche />}</span>
             <span className="rpo-formule-txt">
               <b>{o.titre}</b>
-              {o.badge && <span className="rpo-avantage">Le plus avantageux</span>}
-              <span>{o.detail}</span>
+              {o.badge && <span className="rpo-avantage">{o.badge}</span>}
+              <span>{o.remise ? `${o.remise.detail}, au lieu de ${o.prix.montant}` : o.detail}</span>
             </span>
-            <span className="rpo-prix"><b>{o.prix.montant}</b><span>{o.cadence}</span></span>
+            <span className="rpo-prix"><b>{o.remise?.montant ?? o.prix.montant}</b><span>{o.cadence}</span></span>
           </button>
         ))}
       </div>
       {fondateur && <p className="rpo-note">Ton prix fondateur reste le même tant que tu restes abonné.</p>}
-      {formule === 'annuel' && <p className="rpo-note">Un an de Réviz+ coûte moins cher que deux heures de cours particulier.</p>}
+      {formule === 'pass' && <p className="rpo-note">Payé une fois : pas d’abonnement, rien à résilier. Réviz+ s’arrête tout seul après le brevet.</p>}
+      {formule === 'annuel' && <p className="rpo-note">{options.find(o => o.id === 'annuel')?.remise ? `Ensuite ${annuel.montant} par an, résiliable à tout moment.` : 'Un an de Réviz+ coûte moins cher que deux heures de cours particulier.'}</p>}
+      {formule === 'mensuel' && options.find(o => o.id === 'mensuel')?.remise && <p className="rpo-note">Ensuite {mensuel.montant} par mois, résiliable à tout moment.</p>}
       {erreur && <p className="rpo-erreur" role="alert">{erreur}</p>}
       <button type="button" className="rpo-btn" onClick={payer} disabled={paiement}>
         {paiement ? <><span className="rpo-anneau" aria-hidden="true" />Ouverture du paiement…</> : 'Passer à Réviz+'}
       </button>
-      <p className="rpo-note rpo-note--centre"><Cadenas />Paiement sécurisé par Stripe. Sans engagement, résiliable à tout moment.</p>
+      <p className="rpo-note rpo-note--centre"><Cadenas />{formule === 'pass' ? 'Paiement sécurisé par Stripe. Une seule fois, sans renouvellement.' : 'Paiement sécurisé par Stripe. Sans engagement, résiliable à tout moment.'}</p>
       <ul className="rpo-rassure" aria-label="Nos engagements">
         <li><Coche />Sans publicité</li>
         <li><Coche />Données jamais revendues</li>
@@ -197,41 +238,67 @@ export function DecouvrirRevizPlus({ onClose, lieu = 'autre' }) {
 }
 
 /**
- * L'offre dans l'app iOS (18/11) : prix de l'App Store (7,99 €/mois, 54,99 €/an), achat intégré,
- * « Restaurer » et conditions d'abonnement exigés par Apple (règle 3.1.2). Un collégien dans
- * un Partage familial déclenche « Demander l'achat » : le parent accepte sur son téléphone.
+ * L'offre dans l'app iOS (18/11) : prix de l'App Store, achat intégré, « Restaurer » et conditions
+ * d'abonnement exigés par Apple (règle 3.1.2). Un collégien dans un Partage familial déclenche
+ * « Demander l'achat » : le parent accepte sur son téléphone.
+ * Depuis le 26/11, les mêmes offres que le site : Pass brevet en 3e (achat non renouvelable),
+ * Black Friday (offre de lancement datée de l'annuel, appliquée par Apple), fin d'essai (offre
+ * promotionnelle du mensuel). Les remises affichées viennent d'App Store Connect, jamais de l'app.
  */
-function AchatApple({ onClose, lieu, titre, sousTitre, pour, comparatif }) {
+function AchatApple({ onClose, lieu, titre, sousTitre, pour, comparatif, classe, finEssaiJusquau }) {
   const { refreshPremium } = useAuth() ?? {};
   const navigate = useNavigate();
   const [formules, setFormules] = useState(null); // null = chargement
+  const [eligible, setEligible] = useState({}); // produit → offre de lancement encore possible
   const [formule, setFormule] = useState(FORMULE_PAR_DEFAUT);
   const [etat, setEtat] = useState(''); // '' | achat | restauration | en_attente | rien
   const [erreur, setErreur] = useState('');
   const occupe = etat === 'achat' || etat === 'restauration';
+  const finEssai = remiseAffichee('mensuel', { finEssaiJusquau })?.raison === 'fin_essai';
 
   useEffect(() => {
     let vivant = true;
     formulesApple()
-      .then(f => { if (vivant) { setFormules(f); if (!f[FORMULE_PAR_DEFAUT]) setFormule(Object.keys(f)[0]); } })
+      .then(f => {
+        if (!vivant) return;
+        setFormules(f);
+        const premiere = passPropose(classe) && f.pass ? 'pass' : finEssai && f.mensuel?.promo ? 'mensuel' : f[FORMULE_PAR_DEFAUT] ? FORMULE_PAR_DEFAUT : Object.keys(f)[0];
+        setFormule(premiere);
+        introEligible(f).then(e => { if (vivant) setEligible(e); });
+      })
       .catch(() => { if (vivant) { setFormules({}); setErreur('L’App Store ne répond pas. Réessaie dans un moment.'); } });
     return () => { vivant = false; };
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  /** Le prix remisé qu'Apple appliquera à cette formule, ou null. */
+  function remiseApple(id) {
+    const f = formules?.[id];
+    if (!f) return null;
+    if (f.intro && blackFridayEnCours() && eligible[f.produit.identifier] !== false) {
+      return { prix: f.intro.prix, detail: id === 'annuel' ? 'la 1re année' : 'pour commencer', raison: 'black_friday' };
+    }
+    if (id === 'mensuel' && finEssai && f.promo) return { prix: f.promo.priceString, detail: 'le 1er mois', raison: 'fin_essai' };
+    return null;
+  }
 
   async function acheter() {
     if (occupe) return;
     setEtat('achat'); setErreur('');
-    mesurer('offre', { etape: 'caisse', lieu, formule, magasin: 'apple' });
+    const promo = remiseApple(formule)?.raison === 'fin_essai';
+    mesurer('offre', { etape: 'caisse', lieu, formule, magasin: 'apple', ...(promo && { remise: 'fin_essai' }) });
     try {
-      const r = await acheterApple(formule, formules);
+      const r = await acheterApple(formule, formules, { promo });
       if (r === 'achete') {
         await refreshPremium?.();
         mesurer('offre', { etape: 'payee', lieu, formule, magasin: 'apple' });
-        bienvenue({ formule, prix: formules?.[formule]?.prix });
+        bienvenue({ formule, prix: remiseApple(formule)?.prix ?? formules?.[formule]?.prix });
         return;
       }
+      // 26/11 : ce qui se passe après la caisse n'était pas mesuré (annulation ou attente du parent).
+      mesurer('offre', { etape: r === 'annule' ? 'caisse_annulee' : 'caisse_en_attente', lieu, formule, magasin: 'apple' });
       setEtat(r === 'annule' ? '' : r);
-    } catch {
+    } catch (err) {
+      mesurer('offre', { etape: 'caisse_echec', lieu, formule, magasin: 'apple', raison: err?.message ?? 'inconnue' });
       setEtat('');
       setErreur('L’achat n’a pas abouti. Rien n’a été prélevé : réessaie dans un moment.');
     }
@@ -271,14 +338,19 @@ function AchatApple({ onClose, lieu, titre, sousTitre, pour, comparatif }) {
   }
 
   const options = [
-    { id: 'annuel', titre: 'À l’année', cadence: 'par an', badge: true,
+    ...(passPropose(classe) ? [{ id: 'pass', titre: 'Jusqu’au brevet', cadence: 'une fois', badge: 'Spécial 3e',
+      detail: `paiement unique, jusqu’au ${PASS_BREVET.finTexte}` }] : []),
+    { id: 'annuel', titre: 'À l’année', cadence: 'par an', badge: passPropose(classe) ? null : 'Le plus avantageux',
       detail: formules?.annuel?.devise === 'EUR' ? `soit ${parSemaine(formules.annuel.centimes)} par semaine` : '' },
     { id: 'mensuel', titre: 'Au mois', cadence: 'par mois', detail: 'résiliable à tout moment' },
   ].filter(o => formules?.[o.id]);
   const choisie = options.find(o => o.id === formule);
+  const remiseChoisie = choisie && remiseApple(choisie.id);
+  const bandeau = options.map(o => remiseApple(o.id)).find(Boolean);
   return (
     <Fenetre label="Réviz+" pose="hello" onClose={onClose}>
       {pour && <span className="rpo-pour">{pour.charAt(0).toUpperCase() + pour.slice(1)}</span>}
+      {bandeau && <BandeauOffre remise={bandeau.raison === 'black_friday' ? { raison: 'black_friday' } : { raison: 'fin_essai', jusquau: finEssaiJusquau }} />}
       <h2 className="rpo-titre">{titre}</h2>
       <p className="rpo-sous">{sousTitre}</p>
       {comparatif}
@@ -287,31 +359,35 @@ function AchatApple({ onClose, lieu, titre, sousTitre, pour, comparatif }) {
         ? <p className="rpo-note rpo-note--centre"><span className="rpo-anneau" aria-hidden="true" />Prix de l’App Store…</p>
         : (
           <div className="rpo-formules" role="radiogroup" aria-label="Ta formule">
-            {options.map(o => (
-              <button key={o.id} type="button" role="radio" aria-checked={formule === o.id} disabled={occupe}
-                className={`rpo-formule${formule === o.id ? ' is-choisie' : ''}`} onClick={() => setFormule(o.id)}>
-                <span className="rpo-radio" aria-hidden="true">{formule === o.id && <Coche />}</span>
-                <span className="rpo-formule-txt">
-                  <b>{o.titre}</b>
-                  {o.badge && <span className="rpo-avantage">Le plus avantageux</span>}
-                  {o.detail && <span>{o.detail}</span>}
-                </span>
-                <span className="rpo-prix"><b>{formules[o.id].prix}</b><span>{o.cadence}</span></span>
-              </button>
-            ))}
+            {options.map(o => {
+              const r = remiseApple(o.id);
+              return (
+                <button key={o.id} type="button" role="radio" aria-checked={formule === o.id} disabled={occupe}
+                  className={`rpo-formule${formule === o.id ? ' is-choisie' : ''}`} onClick={() => setFormule(o.id)}>
+                  <span className="rpo-radio" aria-hidden="true">{formule === o.id && <Coche />}</span>
+                  <span className="rpo-formule-txt">
+                    <b>{o.titre}</b>
+                    {o.badge && <span className="rpo-avantage">{o.badge}</span>}
+                    {(r || o.detail) && <span>{r ? `${r.detail}, au lieu de ${formules[o.id].prix}` : o.detail}</span>}
+                  </span>
+                  <span className="rpo-prix"><b>{r?.prix ?? formules[o.id].prix}</b><span>{o.cadence}</span></span>
+                </button>
+              );
+            })}
           </div>
         )}
       {erreur && <p className="rpo-erreur" role="alert">{erreur}</p>}
-      {etat === 'rien' && <p className="rpo-note" role="status">Aucun abonnement Réviz+ trouvé sur ce compte Apple.</p>}
+      {etat === 'rien' && <p className="rpo-note" role="status">Aucun achat Réviz+ trouvé sur ce compte Apple.</p>}
       <button type="button" className="rpo-btn" onClick={acheter} disabled={occupe || !choisie}>
         {etat === 'achat' ? <><span className="rpo-anneau" aria-hidden="true" />Ouverture de l’App Store…</> : 'Passer à Réviz+'}
       </button>
       <p className="rpo-note rpo-note--centre"><Cadenas />Paiement par l’App Store. Dans un Partage familial, ton parent valide l’achat sur son téléphone.</p>
       <p className="rpo-note rpo-legal">
-        {choisie
-          ? `Abonnement de ${choisie.id === 'annuel' ? 'un an' : 'un mois'} à ${formules[choisie.id].prix}, renouvelé automatiquement au même prix, `
-          : 'Abonnement renouvelé automatiquement, '}
-        payé avec le compte Apple. Il se résilie dans Réglages, ton nom, Abonnements, au moins 24 heures avant la fin de la période.
+        {!choisie ? 'Abonnement renouvelé automatiquement, '
+          : choisie.id === 'pass' ? `Pass brevet à ${remiseChoisie?.prix ?? formules.pass.prix}, payé une fois, sans renouvellement : Réviz+ jusqu’au ${PASS_BREVET.finTexte}, `
+          : remiseChoisie ? `${remiseChoisie.prix} ${remiseChoisie.detail}, puis abonnement de ${choisie.id === 'annuel' ? 'un an' : 'un mois'} à ${formules[choisie.id].prix}, renouvelé automatiquement, `
+          : `Abonnement de ${choisie.id === 'annuel' ? 'un an' : 'un mois'} à ${formules[choisie.id].prix}, renouvelé automatiquement au même prix, `}
+        payé avec le compte Apple.{choisie?.id !== 'pass' && ' Il se résilie dans Réglages, ton nom, Abonnements, au moins 24 heures avant la fin de la période.'}
         {' '}<Link to="/legal/cgu" onClick={onClose}>Conditions d’utilisation</Link> · <Link to="/legal/confidentialite" onClick={onClose}>Confidentialité</Link>
       </p>
       <button type="button" className="rpo-lien" onClick={restaurer} disabled={occupe}>
@@ -319,6 +395,43 @@ function AchatApple({ onClose, lieu, titre, sousTitre, pour, comparatif }) {
       </button>
       <PourquoiPasGratuit />
     </Fenetre>
+  );
+}
+
+/**
+ * Carte de l'accueil pendant une offre (26/11) : Black Friday pour tous les élèves sans Réviz+
+ * payé, ou les 48 h de l'offre de fin d'essai. Dans le fil, pas en fenêtre : rien n'interrompt.
+ */
+export function CarteOffreDuMoment({ classe }) {
+  const { isPremium, isGuest, offreFinEssaiJusquau } = useAuth() ?? {};
+  const [ouverte, setOuverte] = useState(false);
+  const bf = remiseAffichee('annuel');
+  const finEssai = remiseAffichee('mensuel', { finEssaiJusquau: offreFinEssaiJusquau });
+  const remise = bf?.raison === 'black_friday' ? bf : finEssai;
+  const lieu = remise?.raison === 'black_friday' ? 'black_friday' : 'fin_essai';
+  useEffect(() => { if (remise && !isPremium && !isGuest && ACHAT_DANS_L_APP) mesurer('offre', { etape: 'carte', lieu }); }, [!!remise, lieu]); // eslint-disable-line react-hooks/exhaustive-deps
+  if (!remise || isPremium || isGuest || !ACHAT_DANS_L_APP) return null;
+  const pass = remise.raison === 'black_friday' && passPropose(classe);
+  const titre = remise.raison === 'black_friday'
+    ? (pass ? `Pass brevet à ${BLACK_FRIDAY.remises.pass.montant}` : `Réviz+ à ${remise.montant} la 1re année`)
+    : `Ton 1er mois de Réviz+ à ${remise.montant}`;
+  const texte = remise.raison === 'black_friday'
+    ? (pass ? `Réviz+ jusqu’au brevet, payé une fois, au lieu de ${PASS_BREVET.montant}. Jusqu’au ${BLACK_FRIDAY.dernierJour}.`
+      : `Au lieu de ${prixDe('annuel').montant}. Jusqu’au ${BLACK_FRIDAY.dernierJour}.`)
+    : `Au lieu de ${prixDe('mensuel').montant}, ${tempsRestant(remise.jusquau) ?? 'aujourd’hui'}.`;
+  return (
+    <>
+      <section className="rpo-carte-offre" aria-label={remise.raison === 'black_friday' ? 'Black Friday' : 'Offre de fin d’essai'}>
+        <Mascot pose="celebration" size={76} alt="" aria-hidden="true" />
+        <div>
+          <span className="rpo-carte-offre-sur">{remise.raison === 'black_friday' ? 'Black Friday' : 'Pour toi'}</span>
+          <b>{titre}</b>
+          <p>{texte}</p>
+          <button type="button" className="rpo-btn" onClick={() => setOuverte(true)}>Voir l’offre</button>
+        </div>
+      </section>
+      {ouverte && <DecouvrirRevizPlus lieu={lieu} onClose={() => setOuverte(false)} />}
+    </>
   );
 }
 
@@ -335,6 +448,9 @@ export function finEssaiVue(uid) {
  */
 export function FinEssaiPlus({ uid, onClose }) {
   const [offre, setOffre] = useState(false);
+  const { offreFinEssaiJusquau } = useAuth() ?? {};
+  // 48 h pour garder Réviz+ avec le 1er mois réduit (26/11, api/_offres.js).
+  const remise = remiseAffichee('mensuel', { finEssaiJusquau: offreFinEssaiJusquau });
   useEffect(() => {
     try { localStorage.setItem(cleFinEssai(uid), '1'); } catch { /* stockage indisponible */ }
     mesurer('offre', { etape: 'fin_essai' });
@@ -354,7 +470,8 @@ export function FinEssaiPlus({ uid, onClose }) {
         <li><span className="rpa-rond rpa-rond--lavande" aria-hidden="true"><CameraIcon /></span><b>5 scans de leçons</b><span>par semaine</span></li>
         <li><span className="rpa-rond rpa-rond--peche" aria-hidden="true"><ChatIcon /></span><b>10 questions à Réviz IA</b><span>par semaine</span></li>
       </ul>
-      {ACHAT_DANS_L_APP && <button type="button" className="rpo-btn" onClick={() => setOffre(true)}>Garder Réviz+</button>}
+      {ACHAT_DANS_L_APP && remise && <p className="rpa-texte"><b>Pour toi, {tempsRestant(remise.jusquau) ?? 'aujourd’hui'} :</b> le 1er mois de Réviz+ à {remise.montant} au lieu de {prixDe('mensuel').montant}.</p>}
+      {ACHAT_DANS_L_APP && <button type="button" className="rpo-btn" onClick={() => setOffre(true)}>{remise ? `Garder Réviz+ à ${remise.montant}` : 'Garder Réviz+'}</button>}
       <DemanderParent lieu="fin_essai" />
       <button type="button" className={ACHAT_DANS_L_APP ? 'rpo-lien' : 'rpo-btn'} onClick={onClose}>{ACHAT_DANS_L_APP ? 'Continuer en gratuit' : 'Compris'}</button>
     </Fenetre>

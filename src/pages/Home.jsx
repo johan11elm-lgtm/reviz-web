@@ -9,7 +9,7 @@ import { PushBanner } from '../components/PushBanner';
 import { ParrainageBanner } from '../components/ParrainageBanner';
 import { RappelOuverture } from '../components/RappelDemain';
 import { RetourAbsence } from '../components/RetourAbsence';
-import { FinEssaiPlus, finEssaiVue } from '../components/revizplus/RevizPlusOffre';
+import { FinEssaiPlus, finEssaiVue, CarteOffreDuMoment } from '../components/revizplus/RevizPlusOffre';
 import { LancerConcentration } from '../components/Concentration';
 import { LigneLigue } from '../components/LigneLigue';
 import { LignePlanBrevet } from '../components/LignePlanBrevet';
@@ -630,6 +630,8 @@ export default function Home() {
             {recherche}
             {ronds}
             {blocDuJour}
+            {/* Black Friday, ou 48 h après la fin de l'essai (26/11) : une carte dans le fil. */}
+            <CarteOffreDuMoment classe={getUserLevel()?.classe} />
             {/* 3e : le plan brevet juste sous le bloc du jour (11/11, il était tout en bas, dans « À la une »). */}
             {!isDesktop && <LignePlanBrevet catalogue={catalogue} classe={classe} />}
             <BlocQuetes uid={uidJeux} />

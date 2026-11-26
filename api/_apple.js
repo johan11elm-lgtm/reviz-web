@@ -11,12 +11,17 @@
 // On ne déclasse que ce qu'Apple a donné : un abonné Stripe ou un cadeau n'est jamais touché.
 // -------------------------------------------------------
 
+import { PASS_BREVET } from './_offres.js'
+
 // Identifiants des abonnements dans App Store Connect (groupe « Reviz+ », 18/11/2026).
 export const PRODUITS_APPLE = {
   annuel: 'com.reviz.app.plus.annuel',
   mensuel: 'com.reviz.app.plus.mensuel',
 }
 const FORMULE_DU_PRODUIT = Object.fromEntries(Object.entries(PRODUITS_APPLE).map(([f, id]) => [id, f]))
+// Pass brevet (26/11, api/_offres.js) : abonnement NON renouvelable, payé une fois, valable
+// jusqu'à PASS_BREVET.fin. RevenueCat le range dans non_subscriptions.
+export const PRODUIT_PASS_APPLE = PASS_BREVET.produitApple
 
 export const COLLECTION_APPLE = 'abonnementsApple'
 
@@ -37,6 +42,18 @@ export function etatApple(subscriber, maintenant = Date.now()) {
     const rembourse = ms(s.refunded_at)
     const fin = rembourse ?? Math.max(ms(s.expires_date) ?? 0, ms(s.grace_period_expires_date) ?? 0)
     if (!meilleur || fin > meilleur.fin) meilleur = { produit, s, fin, rembourse }
+  }
+  // Pass brevet : un achat App Store suffit, jusqu'à la date fixe du Pass.
+  const achatsPass = (subscriber?.non_subscriptions?.[PRODUIT_PASS_APPLE] ?? []).filter(a => !a?.store || a.store === 'app_store')
+  if (achatsPass.length && (!meilleur || PASS_BREVET.fin > meilleur.fin)) {
+    return {
+      actif: maintenant < PASS_BREVET.fin,
+      formule: PASS_BREVET.formule,
+      produit: PRODUIT_PASS_APPLE,
+      expire: PASS_BREVET.fin,
+      annule: false,
+      sandbox: achatsPass.some(a => a?.is_sandbox),
+    }
   }
   if (!meilleur) return null
   const { produit, s, fin, rembourse } = meilleur
@@ -91,6 +108,7 @@ export async function appliquerApple(db, uid, etat, maintenant = Date.now()) {
         periodeFin: etat.expire,
         annuleLe: etat.annule ? etat.expire : null,
         planUpdatedAt: maintenant,
+        ...(etat.formule === PASS_BREVET.formule && { passJusquau: etat.expire }),
       }
       if (p.plan !== 'premium') champs.upgradedAt = maintenant
       tx.set(userRef, champs, { merge: true })

@@ -1,3 +1,4 @@
+import { PASS_BREVET } from '../../api/_offres.js';
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { UserIcon, MailIcon, KeyIcon, BellIcon, LockIcon, CheckIcon, LogOutIcon, InstallIcon, ChatIcon, SpeakerIcon } from '../components/Icons';
@@ -524,21 +525,23 @@ export default function Reglages() {
       const parApple = abonnement?.source === 'apple';
       const fondateur = parApple ? null : abonnement?.fondateur ?? (fondateurOuvert || null);
       const prix = prixDe(abonnement?.formule, !!fondateur);
-      const nom = fondateur ? 'Membre fondateur' : abonnement?.formule === 'mensuel' ? 'Réviz+ mensuel' : 'Réviz+ annuel';
-      const echeance = abonnement?.annuleLe ? ['Se termine le', dateCourte(abonnement.annuleLe)]
+      const pass = abonnement?.formule === 'pass';
+      const nom = pass ? 'Pass brevet' : fondateur ? 'Membre fondateur' : abonnement?.formule === 'mensuel' ? 'Réviz+ mensuel' : 'Réviz+ annuel';
+      const echeance = pass ? ['Réviz+ jusqu’au', dateCourte(abonnement.passJusquau ?? PASS_BREVET.fin)]
+        : abonnement?.annuleLe ? ['Se termine le', dateCourte(abonnement.annuleLe)]
         : fondateurOuvert ? ['Premier prélèvement', PREMIER_PRELEVEMENT]
         : abonnement?.periodeFin ? ['Prochaine échéance', dateCourte(abonnement.periodeFin)] : null;
       corps = (
         <>
           <div className="rg-plus-formule">
             <Mascot pose="levelup" size={60} alt="" aria-hidden="true" />
-            <span><b>{nom}</b>{ACHAT_STRIPE && !parApple && <span>{prix.montant} {prix.cadence === '/an' ? 'par an' : 'par mois'}</span>}{parApple && <span>Payé avec l’App Store</span>}</span>
+            <span><b>{nom}</b>{pass ? <span>Payé une fois, sans renouvellement</span> : ACHAT_STRIPE && !parApple && <span>{prix.montant} {prix.cadence === '/an' ? 'par an' : 'par mois'}</span>}{parApple && !pass && <span>Payé avec l’App Store</span>}</span>
           </div>
           {echeance && <div className="rg-plus-echeance"><span>{echeance[0]}</span><b>{echeance[1]}</b></div>}
-          {parApple && (ACHAT_APPLE
+          {parApple && !pass && (ACHAT_APPLE
             ? <button type="button" className="rg-btn rg-btn--blanc" onClick={() => window.open(URL_GERER_APPLE, '_blank')}>Gérer dans l’App Store</button>
             : <p className="rg-note">Ton abonnement se gère sur ton iPhone : Réglages, ton nom, Abonnements.</p>)}
-          {ACHAT_STRIPE && !parApple && (
+          {ACHAT_STRIPE && !parApple && !pass && (
             <>
               <button type="button" className="rg-btn rg-btn--blanc" onClick={handleManageSubscription} disabled={billingLoading}>
                 {billingLoading ? 'Ouverture…' : 'Gérer mon abonnement'}

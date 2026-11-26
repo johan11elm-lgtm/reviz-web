@@ -36,6 +36,7 @@ import { setScanLimitUser, setPremiumStatus, setRevizPlusOffert } from '../servi
 import { estFondateur } from '../utils/revizPlus.js';
 import { lancementOffert } from '../../api/_lancement.js';
 import { finPlusOffert, essaiPlusDejaPris } from '../../api/_essaiPlus.js';
+import { offreFinEssaiJusquau } from '../../api/_offres.js';
 import { preparerAchatApple, oublierAchatApple } from '../services/achatApple';
 import { parrainageDuProfil } from '../../api/_parrainage.js';
 import { codeParrainEnAttente, oublierCodeParrain } from '../utils/parrainage.js';
@@ -57,13 +58,20 @@ export function useAuth() {
 
 // Rattache les services locaux (clés localStorage par utilisateur) à un uid.
 /** Champs d'abonnement du profil Firestore (api/stripe-webhook.js). */
+/** Réviz+ payé : abonnement, ou Pass brevet pas encore fini (api/_offres.js). */
+export function premiumDuProfil(profile, maintenant = Date.now()) {
+  if (profile?.plan !== 'premium') return false;
+  return !(profile.formule === 'pass' && Number(profile.passJusquau) <= maintenant);
+}
+
 function lireAbonnement(profile) {
-  if (profile?.plan !== 'premium') return null;
+  if (!premiumDuProfil(profile)) return null;
   return {
     formule: profile.formule ?? null,
     fondateur: profile.fondateur ?? null,
     periodeFin: profile.periodeFin ?? null,
     annuleLe: profile.annuleLe ?? null,
+    passJusquau: profile.passJusquau ?? null,
     // 'apple' : pris dans l'app iOS (api/_apple.js), géré dans les réglages de l'iPhone.
     source: profile.sourceAbonnement ?? 'stripe',
   };
@@ -150,6 +158,8 @@ export function AuthProvider({ children }) {
   const [essaiFin, setEssaiFin] = useState(null);
   // L'essai de 7 jours a-t-il déjà été pris ? (les jours de parrainage ne le consomment pas)
   const [essaiPris, setEssaiPris] = useState(false);
+  // Offre de fin d'essai (1er mois réduit pendant 48 h, api/_offres.js) : jusqu'à quand, ou null.
+  const [finEssaiOffre, setFinEssaiOffre] = useState(null);
   // Parrainage (api/_parrainage.js) : { code, fin, filleuls, utiliseLe } tel que le serveur l'a écrit.
   const [parrainage, setParrainage] = useState({});
   const parrainageEnCours = useRef(false);
@@ -498,6 +508,7 @@ export function AuthProvider({ children }) {
       setAbonnement(null);
       setEssaiFin(null);
       setEssaiPris(false);
+      setFinEssaiOffre(null);
       setParrainage({});
       setGateUid(null);
       return;
@@ -546,12 +557,13 @@ export function AuthProvider({ children }) {
     // Récompenses de quêtes récupérées sur un autre appareil.
     reprendreQuetesDuProfil(user.uid, profile?.quetes);
 
-    const premium = profile?.plan === 'premium';
+    const premium = premiumDuProfil(profile);
     setIsPremium(premium);
     setPremiumStatus(premium);
     setAbonnement(lireAbonnement(profile));
     setEssaiFin(finEssaiConnue(user.uid, profile));
     setEssaiPris(essaiPlusDejaPris(profile));
+    setFinEssaiOffre(offreFinEssaiJusquau(profile));
     setParrainage(parrainageDuProfil(profile));
     // Compte créé avec le lien d'un ami : le code gardé sur l'appareil part au serveur, une fois
     // le profil enregistré (jamais pendant l'inscription : la fiche n'existe pas encore).
@@ -646,13 +658,14 @@ export function AuthProvider({ children }) {
     if (!auth.currentUser) return;
     try {
       const userDoc = await getDoc(doc(db, 'users', auth.currentUser.uid));
-      const premium = userDoc.exists() && userDoc.data()?.plan === 'premium';
+      const premium = userDoc.exists() && premiumDuProfil(userDoc.data());
       setIsPremium(premium);
       setPremiumStatus(premium);
       setAbonnement(lireAbonnement(userDoc.exists() ? userDoc.data() : null));
       const profil = userDoc.exists() ? userDoc.data() : null;
       setEssaiFin(finEssaiConnue(auth.currentUser.uid, profil));
       setEssaiPris(essaiPlusDejaPris(profil));
+      setFinEssaiOffre(offreFinEssaiJusquau(profil));
       setParrainage(parrainageDuProfil(profil));
     } catch {
       // ignore
@@ -798,6 +811,7 @@ export function AuthProvider({ children }) {
     // Essai Réviz+ de 7 jours : fin si en cours, et s'il a déjà été pris (une fois par compte).
     essaiPlusFin: essai ? essaiFin : null,
     essaiPlusPris: essaiPris,
+    offreFinEssaiJusquau: finEssaiOffre,
     // Parrainage : { code, fin, filleuls, utiliseLe } ; le code se crée à la demande.
     parrainage,
     chargerParrainage,
@@ -827,7 +841,7 @@ export function AuthProvider({ children }) {
     corrigerEmail,
     actualiserCompte,
     deleteAccount,
-  }), [currentUser, loading, consentBlocked, consent, needsProfileSetup, isPremium, abonnement, offert, essai, essaiFin, essaiPris, parrainage, guest, levelTick]);
+  }), [currentUser, loading, consentBlocked, consent, needsProfileSetup, isPremium, abonnement, offert, essai, essaiFin, essaiPris, finEssaiOffre, parrainage, guest, levelTick]);
 
   // Enfants rendus dès que Firebase a confirmé la session — ou immédiatement
   // depuis le cache local (démarrage optimiste). Sans cache, on attend :
