@@ -18,7 +18,7 @@ const FORMULES = {
 const formulesApple = vi.fn(async () => FORMULES)
 const acheterApple = vi.fn()
 const restaurerApple = vi.fn()
-vi.mock('../../../services/achatApple', () => ({ formulesApple: () => formulesApple(), acheterApple: (...a) => acheterApple(...a), restaurerApple: () => restaurerApple(), introEligible: async () => ({}) }))
+vi.mock('../../../services/achatApple', () => ({ formulesApple: () => formulesApple(), acheterApple: (...a) => acheterApple(...a), restaurerApple: () => restaurerApple(), introEligible: async () => ({}), formulesAppleEnCache: () => formulesApple() }))
 
 const { DecouvrirRevizPlus, DemanderParent } = await import('../RevizPlusOffre')
 function Bienvenue() { const l = useLocation(); return <p>bienvenue {l.search}</p> }
@@ -85,5 +85,31 @@ describe('Réviz+ dans l’app iOS', () => {
   it('pas de « demander à un parent » par lien (paiement Stripe)', () => {
     const { container } = ecrire(<DemanderParent lieu="coach" enBouton />)
     expect(container).toBeEmptyDOMElement()
+  })
+})
+
+describe('offre du moment dans l’app iOS : les prix de l’App Store, jamais ceux du site', async () => {
+  const { offreDuMoment } = await import('../RevizPlusOffre')
+  const BF = Date.parse('2026-11-28T12:00:00+01:00')
+  const APPLE = {
+    annuel: { prix: '54,99 €', intro: { prix: '32,99 €' } },
+    mensuel: { prix: '7,99 €', promo: { identifier: 'fin_essai_299', priceString: '3,49 €' } },
+  }
+
+  it('Black Friday : le prix de lancement d’Apple', () => {
+    expect(offreDuMoment({ classe: '3ème', apple: APPLE, maintenant: BF })).toMatchObject({ raison: 'black_friday', titre: 'Réviz+ à 32,99 € la 1re année', texte: expect.stringContaining('Au lieu de 54,99 €') })
+  })
+  it('sans offre de lancement dans App Store Connect, aucune carte', () => {
+    expect(offreDuMoment({ apple: { annuel: { prix: '54,99 €' } }, maintenant: BF })).toBeNull()
+    expect(offreDuMoment({ apple: null, maintenant: BF })).toBeNull()
+  })
+  it('fin d’essai : l’offre promotionnelle d’Apple', () => {
+    const t = Date.parse('2026-11-26T12:00:00+01:00')
+    expect(offreDuMoment({ apple: APPLE, finEssaiJusquau: t + 5 * 3_600_000, maintenant: t })).toMatchObject({ raison: 'fin_essai', bouton: 'Garder Réviz+ à 3,49 €', base: '7,99 €' })
+    expect(offreDuMoment({ apple: { mensuel: { prix: '7,99 €' } }, finEssaiJusquau: t + 5 * 3_600_000, maintenant: t })).toBeNull()
+  })
+  it('sur le site : les prix du site', () => {
+    expect(offreDuMoment({ classe: '4ème', apple: undefined, maintenant: BF })).toMatchObject({ titre: 'Réviz+ à 29 € la 1re année' })
+    expect(offreDuMoment({ classe: '3ème', apple: undefined, maintenant: BF })).toMatchObject({ titre: 'Pass brevet à 19 €' })
   })
 })

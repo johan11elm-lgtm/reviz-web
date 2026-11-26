@@ -11,7 +11,7 @@ import { FORMULE_PAR_DEFAUT, prixDe } from '../../../api/_prix.js';
 import { prochaineRemise, dansCombien, parSemaine } from '../../utils/remiseQuotas';
 import { tarifFondateurOuvert } from '../../../api/_lancement.js';
 import { ACHAT_DANS_L_APP, ACHAT_APPLE, ACHAT_STRIPE } from '../../utils/achat';
-import { formulesApple, acheterApple, restaurerApple, introEligible } from '../../services/achatApple';
+import { formulesApple, formulesAppleEnCache, acheterApple, restaurerApple, introEligible } from '../../services/achatApple';
 import { mesurer } from '../../services/mesure';
 import { BoltIcon, CameraIcon, ChatIcon } from '../Icons';
 import { PREMIER_ECRIT } from '../../utils/planBrevet';
@@ -398,6 +398,57 @@ function AchatApple({ onClose, lieu, titre, sousTitre, pour, comparatif, classe,
   );
 }
 
+/** Dans l'app iOS : les prix de l'App Store (null le temps de les lire, {} si l'App Store ne répond pas). */
+function usePrixApple() {
+  const [formules, setFormules] = useState(null);
+  useEffect(() => {
+    if (!ACHAT_APPLE) return undefined;
+    let vivant = true;
+    formulesAppleEnCache().then(f => { if (vivant) setFormules(f); }).catch(() => { if (vivant) setFormules({}); });
+    return () => { vivant = false; };
+  }, []);
+  return ACHAT_APPLE ? formules : undefined;
+}
+
+/**
+ * L'offre du moment, avec les prix du bon magasin : ceux du site (api/_offres.js), ou ceux de
+ * l'App Store dans l'app iOS, plus chers (commission d'Apple). Sur iPhone, une offre n'existe que
+ * si App Store Connect la propose vraiment (offre de lancement de l'annuel, offre promotionnelle
+ * du mensuel) : jamais un prix annoncé qu'Apple n'appliquerait pas.
+ * @returns {{ raison: 'black_friday'|'fin_essai', titre: string, texte: string, bouton: string, jusquau: number } | null}
+ */
+export function offreDuMoment({ classe, finEssaiJusquau, apple, maintenant = Date.now() }) {
+  const reste = j => tempsRestant(j, maintenant) ?? 'aujourd’hui';
+  const finEssai = remiseAffichee('mensuel', { finEssaiJusquau, maintenant });
+  const fe = finEssai?.raison === 'fin_essai' ? finEssai : null;
+  if (apple !== undefined) {
+    if (!apple) return null;
+    if (blackFridayEnCours(maintenant) && apple.annuel?.intro) {
+      return { raison: 'black_friday', jusquau: BLACK_FRIDAY.fin, titre: `Réviz+ à ${apple.annuel.intro.prix} la 1re année`,
+        texte: `Au lieu de ${apple.annuel.prix}. Jusqu’au ${BLACK_FRIDAY.dernierJour}.`, bouton: 'Voir l’offre' };
+    }
+    if (fe && apple.mensuel?.promo) {
+      return { raison: 'fin_essai', jusquau: fe.jusquau, titre: `Ton 1er mois de Réviz+ à ${apple.mensuel.promo.priceString}`,
+        texte: `Au lieu de ${apple.mensuel.prix}, ${reste(fe.jusquau)}.`, bouton: `Garder Réviz+ à ${apple.mensuel.promo.priceString}`, prix: apple.mensuel.promo.priceString, base: apple.mensuel.prix };
+    }
+    return null;
+  }
+  const bf = remiseAffichee('annuel', { maintenant });
+  if (bf?.raison === 'black_friday') {
+    const pass = passPropose(classe, maintenant);
+    return pass
+      ? { raison: 'black_friday', jusquau: BLACK_FRIDAY.fin, titre: `Pass brevet à ${BLACK_FRIDAY.remises.pass.montant}`,
+        texte: `Réviz+ jusqu’au brevet, payé une fois, au lieu de ${PASS_BREVET.montant}. Jusqu’au ${BLACK_FRIDAY.dernierJour}.`, bouton: 'Voir l’offre' }
+      : { raison: 'black_friday', jusquau: BLACK_FRIDAY.fin, titre: `Réviz+ à ${bf.montant} la 1re année`,
+        texte: `Au lieu de ${prixDe('annuel').montant}. Jusqu’au ${BLACK_FRIDAY.dernierJour}.`, bouton: 'Voir l’offre' };
+  }
+  if (fe) {
+    return { raison: 'fin_essai', jusquau: fe.jusquau, titre: `Ton 1er mois de Réviz+ à ${fe.montant}`,
+      texte: `Au lieu de ${prixDe('mensuel').montant}, ${reste(fe.jusquau)}.`, bouton: `Garder Réviz+ à ${fe.montant}`, prix: fe.montant, base: prixDe('mensuel').montant };
+  }
+  return null;
+}
+
 /**
  * Carte de l'accueil pendant une offre (26/11) : Black Friday pour tous les élèves sans Réviz+
  * payé, ou les 48 h de l'offre de fin d'essai. Dans le fil, pas en fenêtre : rien n'interrompt.
@@ -405,32 +456,23 @@ function AchatApple({ onClose, lieu, titre, sousTitre, pour, comparatif, classe,
 export function CarteOffreDuMoment({ classe }) {
   const { isPremium, isGuest, offreFinEssaiJusquau } = useAuth() ?? {};
   const [ouverte, setOuverte] = useState(false);
-  const bf = remiseAffichee('annuel');
-  const finEssai = remiseAffichee('mensuel', { finEssaiJusquau: offreFinEssaiJusquau });
-  const remise = bf?.raison === 'black_friday' ? bf : finEssai;
-  const lieu = remise?.raison === 'black_friday' ? 'black_friday' : 'fin_essai';
-  useEffect(() => { if (remise && !isPremium && !isGuest && ACHAT_DANS_L_APP) mesurer('offre', { etape: 'carte', lieu }); }, [!!remise, lieu]); // eslint-disable-line react-hooks/exhaustive-deps
-  if (!remise || isPremium || isGuest || !ACHAT_DANS_L_APP) return null;
-  const pass = remise.raison === 'black_friday' && passPropose(classe);
-  const titre = remise.raison === 'black_friday'
-    ? (pass ? `Pass brevet à ${BLACK_FRIDAY.remises.pass.montant}` : `Réviz+ à ${remise.montant} la 1re année`)
-    : `Ton 1er mois de Réviz+ à ${remise.montant}`;
-  const texte = remise.raison === 'black_friday'
-    ? (pass ? `Réviz+ jusqu’au brevet, payé une fois, au lieu de ${PASS_BREVET.montant}. Jusqu’au ${BLACK_FRIDAY.dernierJour}.`
-      : `Au lieu de ${prixDe('annuel').montant}. Jusqu’au ${BLACK_FRIDAY.dernierJour}.`)
-    : `Au lieu de ${prixDe('mensuel').montant}, ${tempsRestant(remise.jusquau) ?? 'aujourd’hui'}.`;
+  const apple = usePrixApple();
+  const offre = offreDuMoment({ classe, finEssaiJusquau: offreFinEssaiJusquau, apple });
+  const visible = !!offre && !isPremium && !isGuest && ACHAT_DANS_L_APP;
+  useEffect(() => { if (visible) mesurer('offre', { etape: 'carte', lieu: offre.raison }); }, [visible, offre?.raison]); // eslint-disable-line react-hooks/exhaustive-deps
+  if (!visible) return null;
   return (
     <>
-      <section className="rpo-carte-offre" aria-label={remise.raison === 'black_friday' ? 'Black Friday' : 'Offre de fin d’essai'}>
+      <section className="rpo-carte-offre" aria-label={offre.raison === 'black_friday' ? 'Black Friday' : 'Offre de fin d’essai'}>
         <Mascot pose="celebration" size={76} alt="" aria-hidden="true" />
         <div>
-          <span className="rpo-carte-offre-sur">{remise.raison === 'black_friday' ? 'Black Friday' : 'Pour toi'}</span>
-          <b>{titre}</b>
-          <p>{texte}</p>
+          <span className="rpo-carte-offre-sur">{offre.raison === 'black_friday' ? 'Black Friday' : 'Pour toi'}</span>
+          <b>{offre.titre}</b>
+          <p>{offre.texte}</p>
           <button type="button" className="rpo-btn" onClick={() => setOuverte(true)}>Voir l’offre</button>
         </div>
       </section>
-      {ouverte && <DecouvrirRevizPlus lieu={lieu} onClose={() => setOuverte(false)} />}
+      {ouverte && <DecouvrirRevizPlus lieu={offre.raison} onClose={() => setOuverte(false)} />}
     </>
   );
 }
@@ -449,8 +491,10 @@ export function finEssaiVue(uid) {
 export function FinEssaiPlus({ uid, onClose }) {
   const [offre, setOffre] = useState(false);
   const { offreFinEssaiJusquau } = useAuth() ?? {};
-  // 48 h pour garder Réviz+ avec le 1er mois réduit (26/11, api/_offres.js).
-  const remise = remiseAffichee('mensuel', { finEssaiJusquau: offreFinEssaiJusquau });
+  // 48 h pour garder Réviz+ avec le 1er mois réduit (26/11, api/_offres.js), au prix du bon magasin.
+  const apple = usePrixApple();
+  const offreDuJour = offreDuMoment({ finEssaiJusquau: offreFinEssaiJusquau, apple });
+  const remise = offreDuJour?.raison === 'fin_essai' ? offreDuJour : null;
   useEffect(() => {
     try { localStorage.setItem(cleFinEssai(uid), '1'); } catch { /* stockage indisponible */ }
     mesurer('offre', { etape: 'fin_essai' });
@@ -470,8 +514,8 @@ export function FinEssaiPlus({ uid, onClose }) {
         <li><span className="rpa-rond rpa-rond--lavande" aria-hidden="true"><CameraIcon /></span><b>5 scans de leçons</b><span>par semaine</span></li>
         <li><span className="rpa-rond rpa-rond--peche" aria-hidden="true"><ChatIcon /></span><b>10 questions à Réviz IA</b><span>par semaine</span></li>
       </ul>
-      {ACHAT_DANS_L_APP && remise && <p className="rpa-texte"><b>Pour toi, {tempsRestant(remise.jusquau) ?? 'aujourd’hui'} :</b> le 1er mois de Réviz+ à {remise.montant} au lieu de {prixDe('mensuel').montant}.</p>}
-      {ACHAT_DANS_L_APP && <button type="button" className="rpo-btn" onClick={() => setOffre(true)}>{remise ? `Garder Réviz+ à ${remise.montant}` : 'Garder Réviz+'}</button>}
+      {ACHAT_DANS_L_APP && remise && <p className="rpa-texte"><b>Pour toi, {tempsRestant(remise.jusquau) ?? 'aujourd’hui'} :</b> le 1er mois de Réviz+ à {remise.prix} au lieu de {remise.base}.</p>}
+      {ACHAT_DANS_L_APP && <button type="button" className="rpo-btn" onClick={() => setOffre(true)}>{remise ? remise.bouton : 'Garder Réviz+'}</button>}
       <DemanderParent lieu="fin_essai" />
       <button type="button" className={ACHAT_DANS_L_APP ? 'rpo-lien' : 'rpo-btn'} onClick={onClose}>{ACHAT_DANS_L_APP ? 'Continuer en gratuit' : 'Compris'}</button>
     </Fenetre>

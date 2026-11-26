@@ -5,9 +5,11 @@
 // RevenueCat garde les reçus et prévient le serveur (api/revenuecat-webhook.js), qui
 // écrit users/{uid}.plan comme le fait Stripe : l'app ne s'accorde jamais Réviz+ seule.
 // Le compte RevenueCat porte l'uid Firebase (appUserID), pour retrouver l'élève.
-// Prix fixés dans App Store Connect : les mêmes que sur le site depuis le 26/11 (6,99 €/mois,
-// 49 €/an, Pass brevet 29 €). Black Friday = offre de lancement datée sur l'annuel ; fin d'essai =
-// offre promotionnelle du mensuel (OFFRE_FIN_ESSAI.offreApple), signée par RevenueCat.
+// Prix fixés dans App Store Connect (18/11) : un peu plus chers que sur le site pour couvrir la
+// commission d'Apple (7,99 €/mois, 54,99 €/an). Mêmes offres que le site (26/11), à leurs prix
+// App Store : Black Friday = offre de lancement datée sur l'annuel ; fin d'essai = offre
+// promotionnelle du mensuel (OFFRE_FIN_ESSAI.offreApple), signée par RevenueCat ; Pass brevet =
+// abonnement non renouvelable. L'app n'écrit jamais un prix iPhone : elle lit ceux d'Apple.
 // -------------------------------------------------------
 import { Capacitor } from '@capacitor/core'
 import { auth } from './firebaseConfig'
@@ -92,6 +94,14 @@ export async function formulesApple() {
   }
   if (!formules.annuel && !formules.mensuel) throw new Error('INDISPONIBLE')
   return formules
+}
+
+let formulesEnCache = null;
+
+/** formulesApple(), demandé une seule fois par lancement (carte de l'accueil, fin d'essai). */
+export function formulesAppleEnCache() {
+  formulesEnCache ??= formulesApple().catch(err => { formulesEnCache = null; throw err; });
+  return formulesEnCache;
 }
 
 /** Le prix de lancement s'applique-t-il encore à cet élève (jamais abonné à ce produit) ? */
